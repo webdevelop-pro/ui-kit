@@ -1,0 +1,184 @@
+<script lang="ts" setup>
+import { withDefaults, computed } from 'vue';
+
+const props = withDefaults(defineProps<{
+		tag?: 'button' | 'a' | 'router-link';
+		size?: 'large' | 'medium' | 'small' | 'x-small';
+		variant?: 'outlined' | 'link';
+		color?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+		block?: boolean;
+		disabled?: boolean;
+		loading?: boolean;
+		squared?: boolean;
+		pill?: boolean;
+		iconPlacement?: 'none' | 'left' | 'right' | 'both';
+	}>(),
+	{
+		size: 'medium',
+		color: 'primary',
+		tag: 'button',
+		iconPlacement: 'none',
+	});
+
+	const btnClasses = computed(() => {
+		let classes = `is--color-${props.color} `;
+		classes += `is--size-${props.size} `;
+		classes += `is--variant-${props.variant} `;
+		classes += `is--icon-placement-${props.iconPlacement} `;
+		return classes;
+	});
+
+</script>
+
+<template>
+  <component
+    :is="tag"
+    class="base-button"
+    :class="[btnClasses, {'is--block': props.block, 'is--disabled': props.disabled, 'is--squared': squared && !pill, 'is--pill': pill && !squared}]"
+    :disabled="loading"
+  >
+    <div
+      class="base-button__content"
+    >
+      <slot>Button</slot>
+    </div>
+  </component>
+</template>
+
+<style lang="sass">
+@import 'variables'
+.base-button
+	display: inline-flex
+	justify-content: center
+	align-items: center
+	border: unset
+	font-family: $base-button-font-family
+	height: $base-button-height
+	color: $base-button-color
+	background-color: transparent
+	border-radius: $base-button-border-radius
+	padding: $base-button-padding
+	font-size: $base-button-font-size
+	cursor: pointer
+	position: relative
+	transition: all .3s
+	&__content
+		transition: opacity .3s
+		display: flex
+		align-items: center
+		justify-content: center
+		flex-shrink: 0
+	&.is--icon-placement-both
+		svg,
+		img
+			&:first-child
+				margin-right: $base-button-icon-margin
+			&:last-child
+				margin-left: $base-button-icon-margin
+	&.is--icon-placement-left
+		svg,
+		img
+			margin-right: $base-button-icon-margin
+	&.is--icon-placement-right
+		svg,
+		img
+			margin-left: $base-button-icon-margin
+	&.is--icon-placement-none
+		svg,
+		img
+			margin: 0
+	&.is--block
+		width: 100%
+	&.is--squared
+		border-radius: 0
+	&.is--pill
+		border-radius: $base-button-pill
+	&.is--disabled
+		opacity: 0.3
+		pointer-events: none
+	&.is--size-large
+		height: $base-button-large-height
+		padding: $base-button-large-padding
+	&.is--size-small
+		height: $base-button-small-height
+		padding: $base-button-small-padding
+	&.is--size-x-small
+		height: $base-button-x-small-height
+		padding: $base-button-x-small-padding
+	&.is--color-primary
+		background-color: $base-button-primary-color
+		&:hover
+			background-color: rgba($base-button-primary-color, 0.8)
+	&.is--color-secondary
+		background-color: $base-button-secondary-color
+		&:hover
+			background-color: rgba($base-button-secondary-color, 0.8)
+	&.is--color-success
+		background-color: $base-button-success-color
+		&:hover
+			background-color: rgba($base-button-success-color, 0.8)
+	&.is--color-warning
+		background-color: $base-button-warning-color
+		&:hover
+			background-color: rgba($base-button-warning-color, 0.8)
+	&.is--color-danger
+		background-color: $base-button-danger-color
+		&:hover
+			background-color: rgba($base-button-danger-color, 0.8)
+	&.is--variant-outlined
+		background-color: transparent
+		border-style: solid
+		border-width: $base-button-border-width
+		&.is--color-primary
+			border-color: $base-button-primary-color
+			color: $base-button-primary-color
+			&:hover
+				background-color: rgba($base-button-primary-color, 0.5)
+				color: $base-button-color
+		&.is--color-secondary
+			border-color: $base-button-secondary-color
+			color: $base-button-secondary-color
+			&:hover
+				background-color: rgba($base-button-secondary-color, 0.5)
+				color: $base-button-color
+		&.is--color-success
+			border-color: $base-button-success-color
+			color: $base-button-success-color
+			&:hover
+				background-color: rgba($base-button-success-color, 0.5)
+				color: $base-button-color
+		&.is--color-warning
+			border-color: $base-button-warning-color
+			color: $base-button-warning-color
+			&:hover
+				background-color: rgba($base-button-warning-color, 0.5)
+				color: $base-button-color
+		&.is--color-danger
+			border-color: $base-button-danger-color
+			color: $base-button-danger-color
+			&:hover
+				background-color: rgba($base-button-danger-color, 0.5)
+				color: $base-button-color
+	&.is--variant-link
+		background-color: transparent
+		&.is--color-primary
+			color: $base-button-primary-color
+			&:hover
+				background-color: rgba($base-button-primary-color, 0.1)
+		&.is--color-secondary
+			color: $base-button-secondary-color
+			&:hover
+				background-color: rgba($base-button-secondary-color, 0.1)
+		&.is--color-success
+			color: $base-button-success-color
+			&:hover
+				background-color: rgba($base-button-success-color, 0.1)
+		&.is--color-warning
+			color: $base-button-warning-color
+			&:hover
+				background-color: rgba($base-button-warning-color, 0.1)
+		&.is--color-danger
+			color: $base-button-danger-color
+			&:hover
+				background-color: rgba($base-button-danger-color, 0.1)
+</style>
