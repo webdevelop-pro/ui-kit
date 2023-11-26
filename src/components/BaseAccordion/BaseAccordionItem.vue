@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { withDefaults, defineAsyncComponent } from 'vue';
+import { withDefaults } from 'vue';
 import {
   VueCollapsiblePanel,
 } from '@dafcoe/vue-collapsible-panel';
