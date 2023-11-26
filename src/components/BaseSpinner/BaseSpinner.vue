@@ -1,86 +1,76 @@
+<script lang="ts" setup>
+import { computed } from 'vue';
+
+const props = defineProps<{
+	show: boolean,
+	opaque?: boolean,
+	full?: boolean,
+	small?: boolean,
+}>();
+
+const svgViewBox = computed(() => {
+	if (props.small) {
+		return '21.904761904761905 21.904761904761905 43.80952380952381 43.80952380952381';
+	}
+	return '22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715';
+});
+
+const circleSizeAttrs = computed(() => {
+	if (props.small) {
+		return {
+			cx: 43.80952380952381,
+			cy: 43.80952380952381,
+			strokeWidth: 3.8095238095238093,
+		};
+	}
+	return {
+		cx: 45.714285714285715,
+		cy: 45.714285714285715,
+		strokeWidth: 5.714285714285714,
+	};
+});
+
+</script>
 <template>
-	<transition
-		name="fade"
-	>
-		<div
-			v-show="show"
-			class="BaseSpinner spinner"
-			:class="{ 'is--opaque': opaque, 'is--full': full, 'is--small': small, }"
-		>
-			<!-- eslint-disable vuejs-accessibility/aria-props -->
-			<div
-				role="progressbar"
-				aria-valuemin="0"
-				aria-valuemax="100"
-				aria-progressbar-name="progressbar"
-				aria-label="Base Spinner"
-				class="spinner__container"
-			>
-				<!-- eslint-enable -->
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					:viewBox="svgViewBox"
-					style="transform: rotate(0deg);"
-				>
-					<circle
-						fill="transparent"
-						r="20"
-						stroke-dasharray="125.664"
-						stroke-dashoffset="125.66370614359172px"
-						class="spinner__overlay"
-						v-bind="circleSizeAttrs"
-					/>
-				</svg>
-				<div class="spinner__info" />
-			</div>
-		</div>
-	</transition>
+  <transition
+    name="fade"
+  >
+    <div
+      v-show="props.show"
+      class="BaseSpinner spinner"
+      :class="{ 'is--opaque': props.opaque, 'is--full': props.full, 'is--small': props.small, }"
+    >
+      <!-- eslint-disable vuejs-accessibility/aria-props -->
+      <div
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-progressbar-name="progressbar"
+        aria-label="Base Spinner"
+        class="spinner__container"
+      >
+        <!-- eslint-enable -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          :viewBox="svgViewBox"
+          style="transform: rotate(0deg);"
+        >
+          <circle
+            fill="transparent"
+            r="20"
+            stroke-dasharray="125.664"
+            stroke-dashoffset="125.66370614359172px"
+            class="spinner__overlay"
+            v-bind="circleSizeAttrs"
+          />
+        </svg>
+        <div class="spinner__info" />
+      </div>
+    </div>
+  </transition>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from 'vue';
-
-export default defineComponent({
-	name: 'BaseSpinner',
-	props: {
-		show: Boolean,
-		opaque: Boolean,
-		full: Boolean,
-		small: Boolean,
-	},
-	setup(props) {
-		const svgViewBox = computed(() => {
-			if (props.small) {
-				return '21.904761904761905 21.904761904761905 43.80952380952381 43.80952380952381';
-			}
-			return '22.857142857142858 22.857142857142858 45.714285714285715 45.714285714285715';
-		});
-		
-		const circleSizeAttrs = computed(() => {
-			if (props.small) {
-				return {
-					cx: 43.80952380952381,
-					cy: 43.80952380952381,
-					strokeWidth: 3.8095238095238093,
-				};
-			}
-			return {
-				cx: 45.714285714285715,
-				cy: 45.714285714285715,
-				strokeWidth: 5.714285714285714,
-			};
-		});
-		
-		return {
-			svgViewBox,
-			circleSizeAttrs,
-		};
-	},
-});
-</script>
-
 <style lang="sass">
-@import '~Styles/_variables'
 .spinner
 	position: absolute
 	width: 100%
@@ -94,7 +84,7 @@ export default defineComponent({
 	display: flex
 	align-items: center
 	justify-content: center
-	color: $boulder
+	color: #343D45
 	&.is--opaque
 		background-color: #fff
 	&.is--full

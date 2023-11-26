@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { UiKit } from "./components/UiKit";
+import { UiKit } from "@/components/UiKit";
 </script>
 
 <template>
-	<UiKit />
+  <UiKit />
 </template>
 
-<style scoped>
+<style lang="sass">
+@import 'styles/index.scss'
 </style>

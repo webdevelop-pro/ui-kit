@@ -1,25 +1,26 @@
 <script lang="ts" setup>
-import { withDefaults, computed } from 'vue';
-
-const props = withDefaults(defineProps<{
-		tag?: 'button' | 'a' | 'router-link';
-		size?: 'large' | 'medium' | 'small' | 'x-small';
-		variant?: 'outlined' | 'link';
-		color?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
-		block?: boolean;
-		disabled?: boolean;
-		loading?: boolean;
-		squared?: boolean;
-		pill?: boolean;
-		iconPlacement?: 'none' | 'left' | 'right' | 'both';
-	}>(),
-	{
+	import { withDefaults, computed } from 'vue';
+	import BaseSpinner from '@/components/BaseSpinner';
+	
+	interface Props {
+		tag?: 'button' | 'a' | 'router-link'
+		size?: 'large' | 'medium' | 'small' | 'x-small'
+		variant?: 'outlined' | 'link'
+		color?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger'
+		block?: boolean
+		disabled?: boolean
+		loading?: boolean
+		squared?: boolean
+		pill?: boolean
+		iconPlacement?: 'none' | 'left' | 'right' | 'both'
+	}
+	const props = withDefaults(defineProps<Props>(), {
 		size: 'medium',
 		color: 'primary',
 		tag: 'button',
 		iconPlacement: 'none',
-	});
-
+	})
+	
 	const btnClasses = computed(() => {
 		let classes = `is--color-${props.color} `;
 		classes += `is--size-${props.size} `;
@@ -42,6 +43,11 @@ const props = withDefaults(defineProps<{
     >
       <slot>Button</slot>
     </div>
+	  <BaseSpinner
+		  v-if="loading"
+		  show
+		  small
+	  />
   </component>
 </template>
 
@@ -53,6 +59,7 @@ const props = withDefaults(defineProps<{
 	align-items: center
 	border: unset
 	font-family: $base-button-font-family
+	font-weight: 400
 	height: $base-button-height
 	color: $base-button-color
 	background-color: transparent
