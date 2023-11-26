@@ -52,7 +52,7 @@
 </template>
 
 <style lang="sass" scoped>
-@import 'variables'
+@import 'index.sass'
 .base-button
 	display: inline-flex
 	justify-content: center
