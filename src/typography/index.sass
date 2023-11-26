@@ -1,0 +1,93 @@
+@import '@/styles/_mixins.sass'
+
+html,
+body
+  -webkit-overflow-scrolling: touch
+  color: #1a1a1a
+p
+  +font(400)
+  font-size: inherit
+  line-height: inherit
+  font-style: normal
+p,
+span,
+div
+  &.is--small-text
+    +font(400)
+    color: #48535C
+    font-size: 12px
+    line-height: 17px
+em,
+i
+  +font(400)
+  font-style: italic
+strong, b
+  +font(700)
+  color: #1a1a1a
+
+h1, h2, h3, h4, h5, h6
+  color: #1a1a1a
+sup
+  font-size: 100%
+
+h1
+  +font(700)
+  font-size: 40px
+  line-height: 56px
+  margin-bottom: 15px
+  @media screen and (max-width: 767px)
+    font-size: 30px
+    line-height: 40px
+h2
+  +font(700)
+  font-size: 32px
+  line-height: 45px
+  margin: 0
+  margin-bottom: 15px
+  @media screen and (max-width: 767px)
+    font-size: 25px
+    line-height: 35px
+h3
+  +font(500)
+  margin: 0
+  font-size: 24px
+  line-height: 33.6px
+  margin-bottom: 15px
+  @media screen and (max-width: 767px)
+    font-size: 20px
+    line-height: 28px
+    margin-bottom: 10px
+h4
+  +font(500)
+  font-size: 20px
+  line-height: 28px
+  margin: 0
+  margin-bottom: 15px
+  @media screen and (max-width: 767px)
+    font-size: 18px
+    line-height: 28px
+    margin-bottom: 10px
+h5
+  +font(500)
+  font-size: 16px
+  line-height: 22px
+  margin: 0
+h6
+  +font(500)
+  font-size: 14px
+  line-height: 19.6px
+  margin: 0
+
+// H - titles by class
+.is--h1__title
+  @extend h1
+.is--h2__title
+  @extend h2
+.is--h3__title
+  @extend h3
+.is--h4__title
+  @extend h4
+.is--h5__title
+  @extend h5
+.is--h6__title
+  @extend h6
