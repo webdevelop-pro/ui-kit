@@ -51,7 +51,7 @@
   </component>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import 'variables'
 .base-button
 	display: inline-flex
@@ -76,23 +76,23 @@
 		justify-content: center
 		flex-shrink: 0
 	&.is--icon-placement-both
-		svg,
-		img
+		:deep(svg),
+		:deep(img)
 			&:first-child
 				margin-right: $base-button-icon-margin
 			&:last-child
 				margin-left: $base-button-icon-margin
 	&.is--icon-placement-left
-		svg,
-		img
+		:deep(svg),
+		:deep(img)
 			margin-right: $base-button-icon-margin
 	&.is--icon-placement-right
-		svg,
-		img
+		:deep(svg),
+		:deep(img)
 			margin-left: $base-button-icon-margin
 	&.is--icon-placement-none
-		svg,
-		img
+		:deep(svg),
+		:deep(img)
 			margin: 0
 	&.is--block
 		width: 100%
