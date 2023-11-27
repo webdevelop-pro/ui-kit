@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineAsyncComponent, computed, Component } from 'vue'
+import { defineAsyncComponent, Component } from 'vue'
 const props = defineProps<{
 	name: string,
 }>();
