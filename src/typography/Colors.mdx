@@ -6,28 +6,41 @@ import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
 
 <ColorPalette>
   <ColorItem
-    title="theme.color.greyscale"
-    subtitle="Some of the greys"
-    colors={{ White: '#FFFFFF', Alabaster: '#F8F8F8', Concrete: '#F3F3F3' }}
+		title="Primary"
+		colors={{ Primary: '#004FFF', PrimaryDark: '#0042D4', PrimaryLight: '#ECF8FF'}}
   />
+
   <ColorItem
-    title="theme.color.primary"
-    subtitle="Coral"
-    colors={{ WildWatermelon: '#FF4785' }}
+		title="Secondary"
+		colors={{ Secondary: '#3DDC97', SecondaryDark: '#36BE83', SecondaryLight: '#D9FFEE'}}
   />
+
+	<ColorItem
+		title="Red"
+		colors={{ Red: '#FF7070', RedDark: '#FF3B3B', RedLight: '#FFF1F1'}}
+	/>
+	<ColorItem
+		title="Purple"
+		colors={{ Purple: '#6F3DFD', PurpleDark: '#5014D0', PurpleLight: '#F8F5FF'}}
+	/>
+	<ColorItem
+		title="Yellow"
+		colors={{ Yellow: '#FFC24D', YellowDark: '#F1AF32', YellowLight: '#FFF7E8'}}
+	/>
+
   <ColorItem
-    title="theme.color.secondary"
-    subtitle="Ocean"
-    colors={{ DodgerBlue: '#1EA7FD' }}
-  />
-  <ColorItem
-    title="theme.color.positive"
-    subtitle="Green"
-    colors={{
-      Apple: 'rgba(102,191,60,1)',
-      Apple80: 'rgba(102,191,60,.8)',
-      Apple60: 'rgba(102,191,60,.6)',
-      Apple30: 'rgba(102,191,60,.3)',
-    }}
+	title="White to Black"
+	colors={{
+	  White: '#FFFFFF',
+	  'Gray-10': '#e9ecef',
+	  'Gray-20': '#dee2e6',
+	  'Gray-30': '#ced4da',
+	  'Gray-40': '#adb5bd',
+	  'Gray-50': '#6c757d',
+	  'Gray-60': '#495057',
+	  'Gray-70': '#333333',
+	  'Gray-80': '#343a40',
+	  Black: '#12161F'
+	}}
   />
 </ColorPalette>
