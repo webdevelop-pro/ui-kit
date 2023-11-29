@@ -77,8 +77,8 @@ export const StyleVariables: StoryFn = {
       `<pre>
         $table-thead-background-color: $gray-30
         $table-tbody-tr-border-bottom-color: $gray-20
-        $table-tbody-tr-td-background-color: $alabaster
-        $table-tbody-td-background-color: $primary
+        $table-tbody-tr-td-background-color: $gray-10
+        $table-tbody-td-background-color: $black
         $table-tbody-td-hover-background-color: $gray-20
         
         $table-th-td-font-size: 14px

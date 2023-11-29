@@ -1,13 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap')
 
+@font-face
+  font-family: 'Avenir'
+  font-weight: 300
+  src: url('@/assets/fonts/AvenirLight.ttf') format('truetype')
+
+@font-face
+  font-family: 'Avenir'
+  font-weight: 350
+  src: url('@/assets/fonts/AvenirRegular.ttf') format('truetype')
+
+@font-face
+  font-family: 'Avenir'
+  font-weight: 400
+  src: url('@/assets/fonts/AvenirBook.ttf') format('truetype')
+
+@font-face
+  font-family: 'Avenir'
+  font-weight: 800
+  src: url('@/assets/fonts/AvenirHeavy.ttf') format('truetype')
+
+@font-face
+  font-family: 'Avenir'
+  font-weight: 900
+  src: url('@/assets/fonts/AvenirBlack.ttf') format('truetype')
+
 @import '@/styles/_mixins.sass'
+@import '@/styles/_colors.sass'
 
 html,
 body
   -webkit-overflow-scrolling: touch
-  color: #1a1a1a
+  color: $black
 p
-  +font(400)
+  +font(350)
   font-size: inherit
   line-height: inherit
   font-style: normal
@@ -16,69 +42,60 @@ span,
 div
   &.is--small-text
     +font(400)
-    color: #48535C
     font-size: 12px
-    line-height: 17px
+    line-height: 18px
 em,
 i
-  +font(400)
+  +font(300)
   font-style: italic
 strong, b
-  +font(700)
-  color: #1a1a1a
+  +font(800)
 
-h1, h2, h3, h4, h5, h6
-  color: #1a1a1a
 sup
   font-size: 100%
 
 h1
-  +font(700)
-  font-size: 40px
-  line-height: 56px
-  margin-bottom: 15px
+  +font(900)
+  font-size: 44px
+  line-height: 66px
   @media screen and (max-width: 767px)
     font-size: 30px
     line-height: 40px
 h2
-  +font(700)
-  font-size: 32px
-  line-height: 45px
-  margin: 0
-  margin-bottom: 15px
+  +font(900)
+  font-size: 34px
+  line-height: 51px
   @media screen and (max-width: 767px)
     font-size: 25px
     line-height: 35px
 h3
-  +font(500)
+  +font(900)
   margin: 0
   font-size: 24px
-  line-height: 33.6px
-  margin-bottom: 15px
+  line-height: 36px
   @media screen and (max-width: 767px)
     font-size: 20px
     line-height: 28px
-    margin-bottom: 10px
+  &.is--subheading
+    +font(350)
 h4
-  +font(500)
+  +font(800)
   font-size: 20px
-  line-height: 28px
-  margin: 0
-  margin-bottom: 15px
+  line-height: 30px
   @media screen and (max-width: 767px)
     font-size: 18px
     line-height: 28px
-    margin-bottom: 10px
+  &.is--subheading
+    +font(350)
 h5
-  +font(500)
+  +font(800)
   font-size: 16px
-  line-height: 22px
-  margin: 0
+  line-height: 24px
+
 h6
-  +font(500)
+  +font(800)
   font-size: 14px
-  line-height: 19.6px
-  margin: 0
+  line-height: 21px
 
 // H - titles by class
 .is--h1__title

@@ -32,7 +32,7 @@ const Template: StoryFn<typeof BaseAccordionItem> = args => ({
   setup() {
     return { args };
   },
-  template: `<div style="display: flex; padding: 10px" :style="{background: args.color === 'white' ? '#235C45' : 'white'}">
+  template: `<div style="display: flex; padding: 10px" :style="{background: args.color === 'white' ? '#36BE83' : 'white'}">
   <div style="width: 100%">
     <BaseAccordion >
       <BaseAccordionItem v-bind="args">
@@ -89,10 +89,10 @@ export const StyleVariables: StoryFn = {
         $border-color: $gray-30
         $border-color-white: $gray-10
         $white-color: $white
-        $white-link-color: $alabaster
-        $link-color: $secondary
+        $white-link-color: $gray-10
+        $link-color: $primary
         
-        $open-close-icon-fill: $primary
+        $open-close-icon-fill: $black
         </pre>`
   }),
 };
