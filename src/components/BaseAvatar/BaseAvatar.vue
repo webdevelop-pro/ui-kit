@@ -49,6 +49,8 @@ const shortTitle = computed(() => {
 	font-size: $avatar-font-size
 	background: $avatar-background
 	border: $avatar-border
+	border-radius: $avatar-border-radius
+	font-weight: 800
 	&.is--rounded
 		border-radius: 100px
 	&.is--large
