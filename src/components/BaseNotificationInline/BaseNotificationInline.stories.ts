@@ -23,7 +23,7 @@ const Template: StoryFn<typeof BaseNotificationInline> = args => ({
     return { args };
   },
   template: `<div style="display: flex"><BaseNotificationInline v-bind="args">
-    <template v-slot:default><span v-html="args.defaultSlotContent"></template>
+    <template v-slot:default><span v-html="args.defaultSlotContent" /></template>
   </BaseNotificationInline></div>`,
 });
 
