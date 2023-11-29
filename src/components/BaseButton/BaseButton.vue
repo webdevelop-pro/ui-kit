@@ -115,23 +115,23 @@
 	&.is--color-primary
 		background-color: $base-button-primary-color
 		&:hover
-			background-color: rgba($base-button-primary-color, 0.8)
+			background-color: $base-button-primary-hover-color
 	&.is--color-secondary
 		background-color: $base-button-secondary-color
 		&:hover
-			background-color: rgba($base-button-secondary-color, 0.8)
+			background-color: $base-button-secondary-hover-color
 	&.is--color-success
 		background-color: $base-button-success-color
 		&:hover
-			background-color: rgba($base-button-success-color, 0.8)
+			background-color: $base-button-success-hover-color
 	&.is--color-warning
 		background-color: $base-button-warning-color
 		&:hover
-			background-color: rgba($base-button-warning-color, 0.8)
+			background-color: $base-button-warning-hover-color
 	&.is--color-danger
 		background-color: $base-button-danger-color
 		&:hover
-			background-color: rgba($base-button-danger-color, 0.8)
+			background-color: $base-button-danger-hover-color
 	&.is--variant-outlined
 		background-color: transparent
 		border-style: solid

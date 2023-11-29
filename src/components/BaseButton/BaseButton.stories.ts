@@ -137,9 +137,9 @@ export const StyleVariables: StoryFn = {
   render: () => ({
     template:
       `<pre>
-        $base-button-font-family: sans-serif
+        $base-button-font-family: 'Avenir'
         $base-button-font-size: 16px
-        $base-button-color: white
+        $base-button-color: $white
         $base-button-height: 40px
         $base-button-padding: 0 15px
         $base-button-icon-margin: 5px
@@ -157,11 +157,16 @@ export const StyleVariables: StoryFn = {
         $base-button-small-padding: 0 10px
         $base-button-x-small-padding: 0 6px
         
-        $base-button-primary-color: #0d6efd
-        $base-button-secondary-color: #adb5bd
-        $base-button-success-color: #198754
-        $base-button-warning-color: #ffc107
-        $base-button-danger-color: #dc3545
+        $base-button-primary-color: $primary
+        $base-button-primary-hover-color: $primary-dark
+        $base-button-secondary-color: $gray-40
+        $base-button-secondary-hover-color: $gray-50
+        $base-button-success-color: $secondary
+        $base-button-success-hover-color: $secondary-dark
+        $base-button-warning-color: $yellow
+        $base-button-warning-hover-color: $yellow-dark
+        $base-button-danger-color: $red
+        $base-button-danger-hover-color: $red-dark
         </pre>`
   }),
 };
