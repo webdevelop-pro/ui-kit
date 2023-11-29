@@ -29,7 +29,7 @@ export const StyleVariables: StoryFn = {
       `<pre>
         $pagination-border-top-color: $gray-20
         $pagination-padding-left: 16px
-        $pagination-count-of-items-color: $primary
+        $pagination-count-of-items-color: $black
         $pagination-button-border-left-color: $gray-20
         
         $pagination-count-of-items-font-size: 14px

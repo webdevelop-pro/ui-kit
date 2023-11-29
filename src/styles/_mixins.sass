@@ -14,8 +14,7 @@ $base-size: 16
 @function isImportant($important)
   @return #{if($important, '!important', '')}
 
-@mixin font($weight, $family: 'Roboto', $important: false)
+@mixin font($weight, $family: 'Avenir', $important: false)
   font-family: $family isImportant($important)
   font-style: normal
   font-weight: $weight
-  letter-spacing: 0.3px

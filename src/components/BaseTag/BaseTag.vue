@@ -42,12 +42,12 @@ withDefaults(defineProps<{
 		border-radius: $base-tag-round-border-radius
 	&.is--strong-text
 		#{$root}__text
-			+font(500)
+			+font(800)
 	&.is--white-text
 		color: $base-tag-white-text-color
 	&__text
 		font-size: $base-tag-font-size
-		+font(400)
+		+font(350)
 		line-height: $base-tag-line-height
 	&.is--icon
 		padding-left: $base-tag-icon-padding-left

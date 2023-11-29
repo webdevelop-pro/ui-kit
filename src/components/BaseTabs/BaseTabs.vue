@@ -79,7 +79,7 @@ function onItemClick(tab: Tab) {
     &:after
       display: none
       content: attr(title)
-      +font(500)
+      +font(400)
       height: 0
       overflow: hidden
       visibility: hidden
@@ -102,7 +102,7 @@ function onItemClick(tab: Tab) {
       &.is--top-line
         background-color: $item-top-line-active-background-color
       .base-tabs__item-label
-        +font(500)
+        +font(400)
         color: $item-top-line-active-label-color
       .base-tabs__item-sub-title
         background-color: $item-top-line-active-sub-title-background-color
@@ -110,7 +110,7 @@ function onItemClick(tab: Tab) {
       &:before
         background-color: $item-top-line-active-before-background-color
   &__item-label
-    +font(400)
+    +font(350)
     font-size: 14px
     line-height: 19.6px
     color: $item-label-color
@@ -119,8 +119,8 @@ function onItemClick(tab: Tab) {
     background-color: $item-sub-title-background-color
     color: $item-sub-title-color
     font-size: 12px
-    line-height: 16.8px
-    +font(400)
+    line-height: 19px
+    +font(350)
     margin-left: 8px
     height: 19px
     min-width: 19px

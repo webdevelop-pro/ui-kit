@@ -40,7 +40,7 @@ export const StyleVariables: StoryFn = {
   render: () => ({
     template:
       `<pre>
-        $notification-inline-color: $primary
+        $notification-inline-color: $black
         $notification-inline-margin: 3px 0 20px
         $notification-inline-font-size: 14px
         $notification-inline-line-height: 19px
@@ -52,15 +52,15 @@ export const StyleVariables: StoryFn = {
         $notification-inline-margin-left: 15px
         
         $notification-inline-link-color: $secondary
-        $notification-inline-error-background-color: #ffcccc
-        $notification-inline-error-color: #ff3333
+        $notification-inline-error-background-color: $red-light
+        $notification-inline-error-color: $red
         
         
-        $notification-inline-warning-background-color: #fff2e6
-        $notification-inline-warning-color: #ffa64d
+        $notification-inline-warning-background-color: $yellow-light
+        $notification-inline-warning-color: $yellow
         
-        $notification-inline-success-background-color: #e6ffe6
-        $notification-inline-success-color: #00802b
+        $notification-inline-success-background-color: $secondary-light
+        $notification-inline-success-color: $secondary-dark
         </pre>`
   }),
 };

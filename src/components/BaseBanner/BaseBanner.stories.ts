@@ -61,9 +61,9 @@ export const StyleVariables: StoryFn = {
 				
 				$base-banner-error-background-color: $red
 				
-				$base-banner-warning-background-color: $orange
+				$base-banner-warning-background-color: $yellow-dark
 				
-				$base-banner-info-background-color: $blue
+				$base-banner-info-background-color: $primary-dark
       </pre>`
 	}),
 };

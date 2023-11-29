@@ -22,14 +22,14 @@
 		<br>
 		<header>
 			<h1>Heading h1 with Subtitle</h1>
-			<p>
+			<h3 class="is--subheading">
 				Important lessongs learned from building 10 products on my own in 2 years
-			</p>
+			</h3>
 		</header>
 		<br>
 		<header>
 			<h1>Heading h2 with h4 Subtitle</h1>
-			<h4>
+			<h4 class="is--subheading">
 				Important lessongs learned from building 10 products on my own in 2 years
 			</h4>
 		</header>
@@ -58,7 +58,7 @@
 </template>
 
 <style lang="sass" scoped>
-@import '@/typography/index.sass'
+@import '@/styles/_fonts.sass'
 .typography-system
 	width: 100%
 	&__row

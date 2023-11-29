@@ -70,16 +70,16 @@ export const Default = Template.bind({});
 Default.args = { background: '#F2F4F5', defaultSlotContent: 'text' };
 
 export const WithIcon = Template.bind({});
-WithIcon.args = { background: '#ffffcc', defaultSlotContent: 'Open', showIcon: true };
+WithIcon.args = { background: '#FFC24D', defaultSlotContent: 'Open', showIcon: true };
 
 export const Round = Template.bind({});
-Round.args = { background: '#80aaff', defaultSlotContent: 'New', round: true };
+Round.args = { background: '#D9FFEE', defaultSlotContent: 'New', round: true };
 
 export const StrongText = Template.bind({});
-StrongText.args = { background: '#ff8080', defaultSlotContent: 'Strong text', strongText: true };
+StrongText.args = { background: '#FFF1F1', defaultSlotContent: 'Strong text', strongText: true };
 
 export const WhiteTextColor = Template.bind({});
-WhiteTextColor.args = { background: '#235C45', defaultSlotContent: 'White text', whiteTextColor: true };
+WhiteTextColor.args = { background: '#004FFF', defaultSlotContent: 'White text', whiteTextColor: true };
 
 export const StyleVariables: StoryFn = {
   render: () => ({
