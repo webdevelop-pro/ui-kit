@@ -5,13 +5,14 @@
 	interface Props {
 		tag?: 'button' | 'a' | 'router-link'
 		size?: 'large' | 'medium' | 'small' | 'x-small'
-		variant?: 'outlined' | 'link' | 'icon-only'
+		variant?: 'outlined' | 'link'
 		color?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger'
 		block?: boolean
 		disabled?: boolean
 		loading?: boolean
 		squared?: boolean
 		pill?: boolean
+		iconOnly?: boolean
 		iconPlacement?: 'none' | 'left' | 'right' | 'both'
 	}
 	const props = withDefaults(defineProps<Props>(), {
@@ -35,7 +36,7 @@
   <component
     :is="tag"
     class="base-button"
-    :class="[btnClasses, {'is--block': props.block, 'is--disabled': props.disabled, 'is--squared': squared && !pill, 'is--pill': pill && !squared}]"
+    :class="[btnClasses, {'is--block': props.block, 'is--icon-only': iconOnly, 'is--disabled': props.disabled, 'is--squared': squared && !pill, 'is--pill': pill && !squared}]"
     :disabled="loading"
   >
     <div
@@ -194,15 +195,15 @@
 			color: $base-button-danger-color
 			&:hover
 				background-color: rgba($base-button-danger-color, 0.1)
-	&.is--variant-icon-only
+	&.is--icon-only
 		padding: $base-button-icon-only-padding
-		height: $base-button-icon-only-height
-		width: $base-button-icon-only-height
+		height: $base-button-icon-only-size
+		width: $base-button-icon-only-size
 		&.is--size-large
-			height: $base-button-icon-only-large-height
-			width: $base-button-icon-only-large-height
+			height: $base-button-icon-only-large-size
+			width: $base-button-icon-only-large-size
 		&.is--size-small
-			height: $base-button-icon-only-small-height
-			width: $base-button-icon-only-small-height
+			height: $base-button-icon-only-small-size
+			width: $base-button-icon-only-small-size
 			padding: $base-button-icon-only-small-padding
 </style>

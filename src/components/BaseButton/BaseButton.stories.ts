@@ -115,11 +115,12 @@ export const DisabledState: StoryFn = {
 export const IconOnly: StoryFn = {
   render: () => ({
     components: { BaseButton },
-    template: '<BaseButton variant="outlined" color="primary"><svg width="16" height="16" fill="#000" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">\n      <path d="M8.92308 2.92308V2H7.07692V2.92308V7.07692H2.92308H2V8.92308H2.92308H7.07692V13.0769V14H8.92308V13.0769V8.92308H13.0769H14V7.07692H13.0769H8.92308V2.92308Z"/>\n    </svg></BaseButton>' +
-      '<BaseButton style="margin-left: 5px" variant="outlined" color="secondary"><svg width="16" height="16" fill="#000" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">\n      <path d="M8.92308 2.92308V2H7.07692V2.92308V7.07692H2.92308H2V8.92308H2.92308H7.07692V13.0769V14H8.92308V13.0769V8.92308H13.0769H14V7.07692H13.0769H8.92308V2.92308Z"/>\n    </svg></BaseButton>'+
-      '<BaseButton style="margin-left: 5px" variant="outlined" color="success"><svg width="16" height="16" fill="#000" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">\n      <path d="M8.92308 2.92308V2H7.07692V2.92308V7.07692H2.92308H2V8.92308H2.92308H7.07692V13.0769V14H8.92308V13.0769V8.92308H13.0769H14V7.07692H13.0769H8.92308V2.92308Z"/>\n    </svg></BaseButton>' +
-      '<BaseButton style="margin-left: 5px" variant="outlined" color="warning"><svg width="16" height="16" fill="#000" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">\n      <path d="M8.92308 2.92308V2H7.07692V2.92308V7.07692H2.92308H2V8.92308H2.92308H7.07692V13.0769V14H8.92308V13.0769V8.92308H13.0769H14V7.07692H13.0769H8.92308V2.92308Z"/>\n    </svg></BaseButton>' +
-      '<BaseButton style="margin-left: 5px" variant="outlined" color="danger"><svg width="16" height="16" fill="#000" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">\n      <path d="M8.92308 2.92308V2H7.07692V2.92308V7.07692H2.92308H2V8.92308H2.92308H7.07692V13.0769V14H8.92308V13.0769V8.92308H13.0769H14V7.07692H13.0769H8.92308V2.92308Z"/>\n    </svg></BaseButton>',
+    template: '<BaseButton size="large" iconOnly color="primary"><svg width="16" height="16" fill="#000" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">\n      <path d="M8.92308 2.92308V2H7.07692V2.92308V7.07692H2.92308H2V8.92308H2.92308H7.07692V13.0769V14H8.92308V13.0769V8.92308H13.0769H14V7.07692H13.0769H8.92308V2.92308Z"/>\n    </svg></BaseButton>' +
+      '<BaseButton style="margin-left: 5px" iconOnly variant="outlined"  color="success"><svg width="16" height="16" fill="#000" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">\n      <path d="M8.92308 2.92308V2H7.07692V2.92308V7.07692H2.92308H2V8.92308H2.92308H7.07692V13.0769V14H8.92308V13.0769V8.92308H13.0769H14V7.07692H13.0769H8.92308V2.92308Z"/>\n    </svg></BaseButton>'+
+      '<BaseButton style="margin-left: 5px" iconOnly variant="link" size="small" color="success"><svg width="16" height="16" fill="#000" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">\n      <path d="M8.92308 2.92308V2H7.07692V2.92308V7.07692H2.92308H2V8.92308H2.92308H7.07692V13.0769V14H8.92308V13.0769V8.92308H13.0769H14V7.07692H13.0769H8.92308V2.92308Z"/>\n    </svg></BaseButton>' +
+      '<BaseButton style="margin-left: 5px" iconOnly variant="outlined" size="large" pill color="warning"><svg width="16" height="16" fill="#000" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">\n      <path d="M8.92308 2.92308V2H7.07692V2.92308V7.07692H2.92308H2V8.92308H2.92308H7.07692V13.0769V14H8.92308V13.0769V8.92308H13.0769H14V7.07692H13.0769H8.92308V2.92308Z"/>\n    </svg></BaseButton>' +
+      '<BaseButton style="margin-left: 5px" iconOnly variant="primary" pill color="danger"><svg width="16" height="16" fill="#000" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">\n      <path d="M8.92308 2.92308V2H7.07692V2.92308V7.07692H2.92308H2V8.92308H2.92308H7.07692V13.0769V14H8.92308V13.0769V8.92308H13.0769H14V7.07692H13.0769H8.92308V2.92308Z"/>\n    </svg></BaseButton>' +
+      '<BaseButton style="margin-left: 5px" iconOnly variant="link" size="small" pill color="primary"><svg width="16" height="16" fill="#000" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">\n      <path d="M8.92308 2.92308V2H7.07692V2.92308V7.07692H2.92308H2V8.92308H2.92308H7.07692V13.0769V14H8.92308V13.0769V8.92308H13.0769H14V7.07692H13.0769H8.92308V2.92308Z"/>\n</svg></BaseButton>'
   }),
 };
 
@@ -138,24 +139,33 @@ export const StyleVariables: StoryFn = {
     template:
       `<pre>
         $base-button-font-family: 'Avenir'
-        $base-button-font-size: 16px
+        $base-button-font-size: 14px
+        $base-button-font-weight: 800
+        $base-button-line-height: 21px
         $base-button-color: $white
-        $base-button-height: 40px
-        $base-button-padding: 0 15px
-        $base-button-icon-margin: 5px
+        $base-button-height: 37px
+        $base-button-padding: 0 16px
+        $base-button-icon-margin: 6px
         $base-button-pill: 30px
         $base-button-border-radius: 2px
-        $base-button-border-width: 2px
-        $base-button-large-font-size: 16px
+        $base-button-border-width: 1px
+        $base-button-box-shadow: 0px 3px 4px -2px rgba(18, 22, 31, 0.15)
+        $base-button-icon-only-size: 38px
         
         $base-button-large-height: 45px
-        $base-button-small-height: 30px
+        $base-button-large-padding: 0 20px
+        $base-button-icon-only-large-size: 48px
+        
+        $base-button-small-height: 32px
+        $base-button-small-padding: 0 12px
+        $base-button-small-font-size: 14px
+        $base-button-icon-only-small-size: 30px
+        
+        $base-button-x-small-padding: 0 6px
         $base-button-x-small-height: 26px
         
-        
-        $base-button-large-padding: 0 30px
-        $base-button-small-padding: 0 10px
-        $base-button-x-small-padding: 0 6px
+        $base-button-icon-only-padding: 9px
+        $base-button-icon-only-small-padding: 7px
         
         $base-button-primary-color: $primary
         $base-button-primary-hover-color: $primary-dark
