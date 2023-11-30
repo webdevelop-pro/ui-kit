@@ -27,7 +27,7 @@ audit)
   ;;
 
 build)
-  yarn build
+  yarn build-storybook
   ;;
 
 
