@@ -22,7 +22,7 @@ const meta: Meta<typeof BaseButton> = {
       control: { type: 'select' },
     },
     variant: {
-      options: ['default', 'outlined', 'link'],
+      options: ['default', 'outlined', 'link', 'icon-only'],
       control: { type: 'select' },
     },
   },

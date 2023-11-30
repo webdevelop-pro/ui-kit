@@ -5,7 +5,7 @@
 	interface Props {
 		tag?: 'button' | 'a' | 'router-link'
 		size?: 'large' | 'medium' | 'small' | 'x-small'
-		variant?: 'outlined' | 'link'
+		variant?: 'outlined' | 'link' | 'icon-only'
 		color?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger'
 		block?: boolean
 		disabled?: boolean
@@ -59,7 +59,8 @@
 	align-items: center
 	border: unset
 	font-family: $base-button-font-family
-	font-weight: 400
+	line-height: $base-button-line-height
+	font-weight: $base-button-font-weight
 	height: $base-button-height
 	color: $base-button-color
 	background-color: transparent
@@ -69,6 +70,9 @@
 	cursor: pointer
 	position: relative
 	transition: all .3s
+	box-shadow: $base-button-box-shadow
+	&:hover
+		box-shadow: none
 	&__content
 		transition: opacity .3s
 		display: flex
@@ -109,6 +113,7 @@
 	&.is--size-small
 		height: $base-button-small-height
 		padding: $base-button-small-padding
+		font-size: $base-button-small-font-size
 	&.is--size-x-small
 		height: $base-button-x-small-height
 		padding: $base-button-x-small-padding
@@ -168,6 +173,7 @@
 				color: $base-button-color
 	&.is--variant-link
 		background-color: transparent
+		box-shadow: none
 		&.is--color-primary
 			color: $base-button-primary-color
 			&:hover
@@ -188,4 +194,15 @@
 			color: $base-button-danger-color
 			&:hover
 				background-color: rgba($base-button-danger-color, 0.1)
+	&.is--variant-icon-only
+		padding: $base-button-icon-only-padding
+		height: $base-button-icon-only-height
+		width: $base-button-icon-only-height
+		&.is--size-large
+			height: $base-button-icon-only-large-height
+			width: $base-button-icon-only-large-height
+		&.is--size-small
+			height: $base-button-icon-only-small-height
+			width: $base-button-icon-only-small-height
+			padding: $base-button-icon-only-small-padding
 </style>
