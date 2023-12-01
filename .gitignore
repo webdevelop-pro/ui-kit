@@ -25,4 +25,5 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
+storybook-static/
 /compilation-stats.json
