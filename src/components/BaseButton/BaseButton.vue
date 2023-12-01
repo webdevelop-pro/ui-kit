@@ -128,8 +128,10 @@
 			background-color: $base-button-secondary-hover-color
 	&.is--color-success
 		background-color: $base-button-success-color
+		color: $base-button-success-text-color
 		&:hover
 			background-color: $base-button-success-hover-color
+			color: $base-button-success-text-color
 	&.is--color-warning
 		background-color: $base-button-warning-color
 		&:hover
@@ -146,31 +148,29 @@
 			border-color: $base-button-primary-color
 			color: $base-button-primary-color
 			&:hover
-				background-color: rgba($base-button-primary-color, 0.5)
+				background-color: $base-button-primary-color
 				color: $base-button-color
 		&.is--color-secondary
 			border-color: $base-button-secondary-color
 			color: $base-button-secondary-color
 			&:hover
-				background-color: rgba($base-button-secondary-color, 0.5)
+				background-color: $base-button-secondary-color
 				color: $base-button-color
 		&.is--color-success
 			border-color: $base-button-success-color
-			color: $base-button-success-color
 			&:hover
-				background-color: rgba($base-button-success-color, 0.5)
-				color: $base-button-color
+				background-color: $base-button-success-color
 		&.is--color-warning
 			border-color: $base-button-warning-color
 			color: $base-button-warning-color
 			&:hover
-				background-color: rgba($base-button-warning-color, 0.5)
+				background-color: $base-button-warning-color
 				color: $base-button-color
 		&.is--color-danger
 			border-color: $base-button-danger-color
 			color: $base-button-danger-color
 			&:hover
-				background-color: rgba($base-button-danger-color, 0.5)
+				background-color: $base-button-danger-color
 				color: $base-button-color
 	&.is--variant-link
 		background-color: transparent

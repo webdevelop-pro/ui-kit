@@ -47,7 +47,7 @@ withDefaults(defineProps<{
 		color: $base-tag-white-text-color
 	&__text
 		font-size: $base-tag-font-size
-		+font(350)
+		+font(400)
 		line-height: $base-tag-line-height
 	&.is--icon
 		padding-left: $base-tag-icon-padding-left

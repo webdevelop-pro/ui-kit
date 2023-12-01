@@ -110,7 +110,7 @@ function onItemClick(tab: Tab) {
       &:before
         background-color: $item-top-line-active-before-background-color
   &__item-label
-    +font(350)
+    +font(400)
     font-size: 14px
     line-height: 19.6px
     color: $item-label-color
@@ -120,7 +120,7 @@ function onItemClick(tab: Tab) {
     color: $item-sub-title-color
     font-size: 12px
     line-height: 19px
-    +font(350)
+    +font(400)
     margin-left: 8px
     height: 19px
     min-width: 19px

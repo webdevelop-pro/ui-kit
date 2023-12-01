@@ -1,29 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap')
 
 @font-face
-  font-family: 'Avenir'
-  font-weight: 300
-  src: url('@/assets/fonts/AvenirLight.ttf') format('truetype')
-
-@font-face
-  font-family: 'Avenir'
-  font-weight: 350
-  src: url('@/assets/fonts/AvenirRegular.ttf') format('truetype')
-
-@font-face
-  font-family: 'Avenir'
-  font-weight: 400
-  src: url('@/assets/fonts/AvenirBook.ttf') format('truetype')
-
-@font-face
-  font-family: 'Avenir'
-  font-weight: 800
-  src: url('@/assets/fonts/AvenirHeavy.ttf') format('truetype')
-
-@font-face
-  font-family: 'Avenir'
+  font-family: Avenir
+  font-style: normal
   font-weight: 900
-  src: url('@/assets/fonts/AvenirBlack.ttf') format('truetype')
+  font-display: swap
+  src: url("@/assets/Avenir-Black/Avenir-Black.woff2") format("woff2")
+
+@font-face
+  font-family: Avenir
+  font-style: normal
+  font-weight: 800
+  font-display: swap
+  src: url("@/assets/Avenir-Heavy/Avenir-Heavy.woff2") format("woff2")
+
+@font-face
+  font-family: Avenir
+  font-style: normal
+  font-weight: 300
+  font-display: swap
+  src: url("@/assets/Avenir-Light/Avenir-Light.woff2") format("woff2")
+
+@font-face
+  font-family: Avenir
+  font-style: normal
+  font-weight: 400
+  font-display: swap
+  src: url("@/assets/Avenir-Book/Avenir-Book.woff2") format("woff2")
+
 
 @import '@/styles/_mixins.sass'
 @import '@/styles/_colors.sass'
@@ -34,7 +38,7 @@ body
   color: $black
   font-family: 'Avenir'
 p
-  +font(350)
+  +font(400)
   font-size: inherit
   line-height: inherit
   font-style: normal
@@ -51,6 +55,9 @@ i
   font-style: italic
 strong, b
   +font(800)
+  &.is--small-text
+    font-size: 12px
+    line-height: 18px
 
 sup
   font-size: 100%
@@ -78,7 +85,7 @@ h3
     font-size: 20px
     line-height: 28px
   &.is--subheading
-    +font(350)
+    +font(400)
 h4
   +font(800)
   font-size: 20px
@@ -87,7 +94,7 @@ h4
     font-size: 18px
     line-height: 28px
   &.is--subheading
-    +font(350)
+    +font(400)
 h5
   +font(800)
   font-size: 16px
