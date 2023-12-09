@@ -1,0 +1,241 @@
+<script lang="ts" setup>
+import { computed, ref, watch, withDefaults, ObjectDirective } from 'vue';
+
+interface Props {
+	placeholder?: string
+	modelValue?: string
+	type?: string
+	isError?: boolean
+	disallowSpecialChars?: boolean
+	disallowNumbers?: boolean
+	allowIntegerOnly?: boolean
+	allowChars?: string[]
+	disallowChars?: string[]
+	append?: boolean
+	prepend?: boolean
+	readonly?: boolean
+	disabled?: boolean
+	autoFocused?: boolean
+	size?: 'large' | 'medium' | 'small'
+}
+
+const props = withDefaults(defineProps<Props>(), {
+	modelValue: '',
+	type: 'text',
+	size: 'medium'
+})
+
+const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>();
+
+const localValue = ref('');
+const focused = ref(false);
+
+function getEscapedRegExp(str: string) {
+	// If you need to use any of the special characters literally (actually searching for a "*", for instance),
+	// you must escape it by putting a backslash in front of it.
+	// eslint-disable-next-line no-useless-escape
+	return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+}
+
+const specialCharacters = computed(() => {
+	// depending on props we are adding or removing characters
+	let charsString = '';
+	if (props.disallowSpecialChars) charsString += '@&#+$~%^:*?<>{}[]!)(_/\\|=`;"';
+	if (props.disallowNumbers) charsString += '0123456789';
+	if (props.disallowChars) charsString += props.disallowChars;
+	if (props.allowChars) {
+		[...charsString].forEach((char) => {
+			charsString = charsString.replace(char, '');
+		});
+	}
+	return getEscapedRegExp(charsString);
+});
+// create regex from characters what to exclude
+const disallowCharsRegex = computed(() => new RegExp(`[${specialCharacters.value}]`, 'g'));
+
+function onFilterSpecialCharsKeyDown(event: KeyboardEvent) {
+	// function to exclude characters on typing
+	if (specialCharacters.value.includes(event.key)) {
+		event.preventDefault();
+	}
+}
+
+function onFilterSpecialCharsBeforeInput(event: InputEvent) {
+	if (disallowCharsRegex.value.test(event.data || '')) {
+		event.preventDefault();
+	}
+}
+
+function onIntegerKeyDown(event: KeyboardEvent) {
+	if (['.', ',', '+', '-', 'e', 'E'].includes(event.key)) {
+		event.preventDefault();
+	}
+}
+
+function onIntegerBeforeInput(event: InputEvent) {
+	if (event.data === '.') event.preventDefault();
+}
+
+function onBeforeInput(event: InputEvent) {
+	if (props.allowIntegerOnly) onIntegerBeforeInput(event);
+	onFilterSpecialCharsBeforeInput(event);
+}
+
+function onKeyDown(event: KeyboardEvent) {
+	if (props.allowIntegerOnly) onIntegerKeyDown(event);
+	onFilterSpecialCharsKeyDown(event);
+}
+
+function onInput(value: string) {
+	// characters to check to replace
+	const charsToCheck = props.allowIntegerOnly ? /^0+|\D+/g : disallowCharsRegex.value;
+	// set filtered value
+	localValue.value = value.replace(charsToCheck, '');
+	emit('update:modelValue', localValue.value);
+}
+
+function onInputEvent() {
+	onInput(localValue.value);
+}
+
+// On user paste from buffer
+function onPaste(event: ClipboardEvent) {
+	const clipboardData = event?.clipboardData?.getData('text/plain');
+	const clipboardDataTrimmed = String(clipboardData)
+		.replace(/\t/g, ' ')
+		.replace(/ {2,}/g, ' ')
+		.trim();
+	// wait until variable changed
+	setTimeout(() => onInput(clipboardDataTrimmed));
+}
+
+function onFocus() {
+	focused.value = true;
+}
+
+function onBlur() {
+	focused.value = false;
+}
+
+const vFocus = (el: HTMLElement, value: boolean | undefined) => value && el.focus();
+
+// check modelValue data
+if (props.modelValue !== '') onInput(props.modelValue);
+watch(() => props.modelValue, () => onInput(props.modelValue));
+</script>
+
+<template>
+	<div
+		class="BaseFormInput base-form-input"
+		:class="{'is--error': isError, 'is--focused': focused, 'is--readonly': readonly, 'is--disabled': disabled}"
+	>
+		<span
+			v-if="append"
+			class="base-form-input__append"
+		>
+			<slot name="append" />
+		</span>
+		<input
+			v-model="localValue"
+			v-focus="autoFocused"
+			class="base-form-input__input"
+			:placeholder="placeholder"
+			:type="type"
+			:title="localValue"
+			tabindex="0"
+			v-bind="$attrs"
+			@input="onInputEvent"
+			@paste="onPaste"
+			@keydown="onKeyDown"
+			@beforeinput="onBeforeInput"
+			@focus="onFocus"
+			@blur="onBlur"
+		>
+		<span
+			v-if="prepend"
+			class="base-form-input__prepend"
+		>
+			<slot name="prepend" />
+		</span>
+	</div>
+</template>
+
+<style lang="sass">
+@import 'index.sass'
+.base-form-input
+	color: $input-color
+	caret-color: $input-caret-color
+	background-color: white
+	font-size: $input-font-size
+	line-height: $input-line-height
+	font-weight: $input-font-weight
+	font-family: $input-font-family
+	padding: $input-padding
+	margin: 0
+	-webkit-appearance: none
+	display: flex
+	align-items: center
+	width: 100%
+	position: relative
+	border: $input-border
+	border-radius: $input-border-radius
+	height: $input-height
+	&.is--focused
+		border-color: $input-border-focus-color
+	&.is--error
+		border-color: $input-border-error-color
+
+	&.is--readonly
+		border-radius: 0
+		border-left: none
+		border-right: none
+		border-top: none
+		pointer-events: none
+	&.is--disabled
+		opacity: 0.3
+		pointer-events: none
+	&__input
+		padding: 0
+		border: none
+		color: inherit
+		font-size: inherit
+		font-weight: inherit
+		font-family: inherit
+		line-height: inherit
+		background-color: transparent
+		width: 100%
+		position: relative
+		z-index: 2
+
+		&:focus
+			outline: none
+
+		&::placeholder
+			opacity: 1
+			color: $input-placeholder-color
+
+	&__append,
+	&__prepend
+		color: inherit
+		font-size: inherit
+		font-weight: inherit
+		font-family: inherit
+		line-height: inherit
+		width: 20px
+		height: 100%
+		display: flex
+		align-items: center
+		margin-right: 8px
+		position: relative
+		z-index: 2
+		> div
+			width: 20px
+			height: 20px
+		svg
+			width: 20px
+			height: 20px
+			fill: inherit
+	&__prepend
+		margin-right: 0
+		margin-left: 8px
+</style>
