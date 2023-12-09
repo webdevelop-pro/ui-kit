@@ -127,7 +127,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 <template>
 	<div
 		class="BaseFormInput base-form-input"
-		:class="{'is--error': isError, 'is--focused': focused, 'is--readonly': readonly, 'is--disabled': disabled}"
+		:class="[`is--size-${size}`, {'is--error': isError, 'is--focused': focused, 'is--readonly': readonly, 'is--disabled': disabled}]"
 	>
 		<span
 			v-if="append"
@@ -184,7 +184,14 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 		border-color: $input-border-focus-color
 	&.is--error
 		border-color: $input-border-error-color
-
+	&.is--size-large
+		height: $input-large-size-height
+		font-size: $input-large-size-font-size
+		line-height: $input-large-size-line-height
+	&.is--size-small
+		height: $input-small-size-height
+		font-size: $input-small-size-font-size
+		line-height: $input-small-size-line-height
 	&.is--readonly
 		border-radius: 0
 		border-left: none
