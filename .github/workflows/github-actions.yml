@@ -35,7 +35,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=ui-kit --commit-dirty true --branch dev --commit-hash "${{ github.sha }}" --commit-message "${{ github.sha }}"
+          command: pages publish "./dist" --project-name=ui-kit
 
       - name: Purge cache
         uses: jakejarvis/cloudflare-purge-action@master
