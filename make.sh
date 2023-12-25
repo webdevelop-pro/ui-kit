@@ -7,6 +7,7 @@ SERVICE=ui-kit
 case $1 in
 
 install)
+  yarn set version stable
   yarn install
   ;;
 

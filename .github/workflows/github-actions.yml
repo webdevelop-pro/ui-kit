@@ -22,12 +22,12 @@ jobs:
       - name: Set Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: 20.4.0
+          node-version: 20.6.1
 
       - name: Build
         id: build
         run: |
-          yarn install
+          ./make.sh install
           ./make.sh build
 
       - name: Deploy
@@ -35,7 +35,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=ui-kit --commit-dirty true --branch main --commit-hash "${{ github.sha }}" --commit-message "${{ github.sha }}"
+          command: pages deploy dist --project-name=ui-kit --commit-dirty true --branch dev --commit-hash "${{ github.sha }}" --commit-message "${{ github.sha }}"
 
       - name: Purge cache
         uses: jakejarvis/cloudflare-purge-action@master
