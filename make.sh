@@ -28,7 +28,7 @@ audit)
   ;;
 
 build)
-  yarn build-storybook
+  yarn build
   ;;
 
 deploy-dev)
