@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 	import { withDefaults, computed } from 'vue';
-	import BaseSpinner from '@/components/BaseSpinner';
+	import BaseSpinner from 'UiKit/components/BaseSpinner';
 	
 	interface Props {
 		tag?: 'button' | 'a' | 'router-link'
