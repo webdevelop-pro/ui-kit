@@ -5,28 +5,28 @@
   font-style: normal
   font-weight: 900
   font-display: swap
-  src: url("@/assets/fonts/Avenir-Black/Avenir-Black.woff2") format("woff2")
+  src: url("UiKit/assets/fonts/Avenir-Black/Avenir-Black.woff2") format("woff2")
 
 @font-face
   font-family: Avenir
   font-style: normal
   font-weight: 800
   font-display: swap
-  src: url("@/assets/fonts/Avenir-Heavy/Avenir-Heavy.woff2") format("woff2")
+  src: url("UiKit/assets/fonts/Avenir-Heavy/Avenir-Heavy.woff2") format("woff2")
 
 @font-face
   font-family: Avenir
   font-style: normal
   font-weight: 300
   font-display: swap
-  src: url("@/assets/fonts/Avenir-Light/Avenir-Light.woff2") format("woff2")
+  src: url("UiKit/assets/fonts/Avenir-Light/Avenir-Light.woff2") format("woff2")
 
 @font-face
   font-family: Avenir
   font-style: normal
   font-weight: 400
   font-display: swap
-  src: url("@/assets/fonts/Avenir-Book/Avenir-Book.woff2") format("woff2")
+  src: url("UiKit/assets/fonts/Avenir-Book/Avenir-Book.woff2") format("woff2")
 
 
 @import 'UiKit/styles/_mixins.sass'
@@ -67,15 +67,15 @@ h1
   font-size: 44px
   line-height: 66px
   @media screen and (max-width: 767px)
-    font-size: 30px
-    line-height: 40px
+    font-size: 38px
+    line-height: 57px
 h2
   +font(900)
   font-size: 34px
   line-height: 51px
   @media screen and (max-width: 767px)
-    font-size: 25px
-    line-height: 35px
+    font-size: 28px
+    line-height: 42px
 h3
   +font(900)
   margin: 0
@@ -118,3 +118,55 @@ h6
   @extend h5
 .is--h6__title
   @extend h6
+
+.is--display-1
+  +font(900)
+  font-size: 100px
+  line-height: 100px
+  @media screen and (max-width: 767px)
+    font-size: 50px
+    line-height: 75px
+.is--display-2
+  +font(900)
+  font-size: 50px
+  line-height: 75px
+  @media screen and (max-width: 767px)
+    font-size: 44px
+    line-height: 66px
+.is--subheading-1
+  +font(350)
+  font-size: 24px
+  line-height: 36px
+  @media screen and (max-width: 767px)
+    font-size: 20px
+    line-height: 28px
+.is--subheading-2
+  +font(350)
+  font-size: 20px
+  line-height: 30px
+  @media screen and (max-width: 767px)
+    font-size: 18px
+    line-height: 28px
+.is--body
+  +font(400)
+  font-size: 16px
+  line-height: 26px
+.is--body-italic
+  @extend .is--body
+  font-style: italic
+.is--small
+  +font(500)
+  font-size: 12px
+  line-height: 18px
+.is--small-2
+  +font(800)
+  font-size: 12px
+  line-height: 18px
+.is--link-1
+  +font(800)
+  font-size: 16px
+  line-height: 26px
+.is--link-2
+  +font(800)
+  font-size: 12px
+  line-height: 18px
