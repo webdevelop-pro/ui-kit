@@ -1,5 +1,5 @@
 <script lang="ts" setup="">
-import { BaseSvgIcon } from '@/components/BaseSvgIcon'
+import { BaseSvgIcon } from 'UiKit/components/BaseSvgIcon'
 
 withDefaults(defineProps<{
 	type?: 'error' | 'warning' | 'success';

@@ -16,7 +16,7 @@ function getIconNameFromPath(path: string) {
 }
 
 function createIconMap() {
-	const importGlob = import.meta.glob('@/assets/**/*.svg')
+	const importGlob = import.meta.glob('UiKit/assets/**/*.svg')
 	const iconMap = new Map<string, { loader: () => Promise<Component> }>([])
 	
 	for (const path in importGlob) {

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, withDefaults } from 'vue';
-import BaseFormCheckbox from '@/components/BaseFormCheckbox';
+import BaseFormCheckbox from 'UiKit/components/BaseFormCheckbox';
 
 const props = withDefaults(defineProps<{
 	options: string[],
