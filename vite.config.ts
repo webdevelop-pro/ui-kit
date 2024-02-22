@@ -9,7 +9,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // "@": join(__dirname, "src"),
-      '@': path.resolve(__dirname, './src')
+      'UiKit': path.resolve(__dirname, './src')
     }
   },
 })

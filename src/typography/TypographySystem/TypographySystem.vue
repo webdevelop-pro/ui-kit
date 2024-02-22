@@ -60,7 +60,7 @@
 </template>
 
 <style lang="sass" scoped>
-@import '@/styles/_fonts.sass'
+@import 'UiKit/styles/_fonts.sass'
 .typography-system
 	width: 100%
 	&__row

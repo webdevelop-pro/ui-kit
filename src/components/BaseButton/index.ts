@@ -1,4 +1,4 @@
-import BaseFormInput from './BaseFormInput.vue';
+import BaseButton from './BaseButton.vue';
 
-export { BaseFormInput };
-export default BaseFormInput;
+export { BaseButton };
+export default BaseButton;
