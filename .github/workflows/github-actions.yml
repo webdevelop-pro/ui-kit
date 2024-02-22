@@ -27,7 +27,6 @@ jobs:
       - name: Build
         id: build
         run: |
-          yarn set version 3.8.0
           ./make.sh install
           ./make.sh build
 

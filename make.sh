@@ -7,7 +7,7 @@ SERVICE=ui-kit
 case $1 in
 
 install)
-  yarn set version stable
+  yarn set version 3.8.0
   yarn install
   ;;
 
