@@ -74,6 +74,7 @@
 	box-shadow: $base-button-box-shadow
 	&:hover
 		box-shadow: none
+		color: $base-button-hover-color
 	&__content
 		transition: opacity .3s
 		display: flex
@@ -111,6 +112,8 @@
 	&.is--size-large
 		height: $base-button-large-height
 		padding: $base-button-large-padding
+		font-size: $base-button-large-font-size
+		line-height: $base-button-large-line-height
 	&.is--size-small
 		height: $base-button-small-height
 		padding: $base-button-small-padding
@@ -124,8 +127,10 @@
 			background-color: $base-button-primary-hover-color
 	&.is--color-secondary
 		background-color: $base-button-secondary-color
+		color: $base-button-secondary-text-color
 		&:hover
 			background-color: $base-button-secondary-hover-color
+			color: $base-button-secondary-text-hover-color
 	&.is--color-success
 		background-color: $base-button-success-color
 		color: $base-button-success-text-color
@@ -178,7 +183,7 @@
 		&.is--color-primary
 			color: $base-button-primary-color
 			&:hover
-				background-color: rgba($base-button-primary-color, 0.1)
+				background-color: $base-button-primary-light-color
 		&.is--color-secondary
 			color: $base-button-secondary-color
 			&:hover
