@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
 
-const props = defineProps<{
-  data: [object, any[]];
-}>();
+const props = defineProps({
+  data: {
+    type: Object,
+    required: true,
+  },
+});
 
 onMounted(() => {
   const script = document.createElement('script');
@@ -12,3 +15,5 @@ onMounted(() => {
   document.body.appendChild(script);
 });
 </script>
+
+<template />
