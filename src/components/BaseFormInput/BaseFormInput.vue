@@ -117,7 +117,8 @@ function onBlur() {
 	focused.value = false;
 }
 
-const vFocus = (el: HTMLElement, value: boolean | undefined) => value && el.focus();
+// TODO: this has to be worked on as it gives bug in chrome on click
+// const vFocus = (el: HTMLElement, value: boolean | undefined) => value && el.focus();
 
 // check modelValue data
 if (props.modelValue !== '') onInput(props.modelValue);
@@ -137,7 +138,6 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 		</span>
 		<input
 			v-model="localValue"
-			v-focus="autoFocused"
 			class="base-form-input__input"
 			:placeholder="placeholder"
 			:type="type"
