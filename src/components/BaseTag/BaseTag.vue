@@ -7,17 +7,21 @@ withDefaults(defineProps<{
 	strongText?: boolean;
 	whiteTextColor?: boolean;
 	background?: string;
+	tag?: string;
 }>(), {
 	background: '#F2F4F5',
+	tag: 'div',
 });
 
 </script>
 
 <template>
-	<div
+	<component
+	    :is="tag"
 		class="BaseTag base-tag"
 		:style="{ background: background }"
 		:class="{'is--round': round, 'is--white-text': whiteTextColor, 'is--strong-text': strongText, 'is--icon': showIcon}"
+		v-bind="$attrs"
 	>
 		<div class="base-tag__icon-wrapper">
 			<slot name="icon" />
@@ -25,7 +29,7 @@ withDefaults(defineProps<{
 		<p class="base-tag__text">
 			<slot />
 		</p>
-	</div>
+	</component>
 </template>
 
 <style lang="sass" scoped>
