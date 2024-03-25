@@ -72,6 +72,7 @@
 	position: relative
 	transition: all .3s
 	box-shadow: $base-button-box-shadow
+	letter-spacing: 0.3px
 	&:hover
 		box-shadow: none
 		color: $base-button-hover-color

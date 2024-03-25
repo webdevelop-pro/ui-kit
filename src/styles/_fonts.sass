@@ -5,7 +5,7 @@
   font-style: normal
   font-weight: 900
   font-display: swap
-  src: url("UiKit/assets/fonts/Avenir-Black/Avenir-Black.woff2") format("woff2")
+  src: url("UiKit/assets/fonts/Avenir-Black/Avenir-Black.woff2") format("woff2"), url("UiKit/assets/fonts/Avenir-Black/Avenir-Black.woff") format("woff"), url("UiKit/assets/fonts/Avenir-Black/Avenir-Black.ttf") format("truetype")
 
 @font-face
   font-family: Avenir
@@ -19,14 +19,28 @@
   font-style: normal
   font-weight: 300
   font-display: swap
-  src: url("UiKit/assets/fonts/Avenir-Light/Avenir-Light.woff2") format("woff2")
+  src: url("UiKit/assets/fonts/Avenir-Light/Avenir-Light.woff2") format("woff2"), url("UiKit/assets/fonts/Avenir-Light/Avenir-Light.woff") format("woff"), url("UiKit/assets/fonts/Avenir-Light/Avenir-Light.ttf") format("truetype")
 
 @font-face
   font-family: Avenir
   font-style: normal
   font-weight: 400
   font-display: swap
-  src: url("UiKit/assets/fonts/Avenir-Book/Avenir-Book.woff2") format("woff2")
+  src: url("UiKit/assets/fonts/Avenir-Book/Avenir-Book.woff2") format("woff2"), url("UiKit/assets/fonts/Avenir-Book/Avenir-Book.woff") format("woff"), url("UiKit/assets/fonts/Avenir-Book/Avenir-Book.ttf") format("truetype")
+
+@font-face
+  font-family: Avenir
+  font-style: normal
+  font-weight: 500
+  font-display: swap
+  src: url("UiKit/assets/fonts/Avenir-Roman/Avenir-Roman.woff2") format("woff2"), url("UiKit/assets/fonts/Avenir-Roman/Avenir-Roman.woff") format("woff"), url("UiKit/assets/fonts/Avenir-Roman/Avenir-Roman.ttf") format("truetype")
+
+@font-face
+  font-family: Avenir
+  font-style: normal
+  font-weight: 600
+  font-display: swap
+  src: url("UiKit/assets/fonts/Avenir-Medium/Avenir-Medium.woff2") format("woff2"), url("UiKit/assets/fonts/Avenir-Medium/Avenir-Medium.woff") format("woff"), url("UiKit/assets/fonts/Avenir-Medium/Avenir-Medium.ttf") format("truetype")
 
 
 @import 'UiKit/styles/_mixins.sass'
@@ -96,7 +110,6 @@ h5
   +font(800)
   font-size: 16px
   line-height: 24px
-
 h6
   +font(800)
   font-size: 14px
@@ -128,14 +141,15 @@ h6
     font-size: 44px
     line-height: 66px
 .is--subheading-1
-  +font(350)
+  +font(300)
   font-size: 24px
   line-height: 36px
+  letter-spacing: 0.1px
   @media screen and (max-width: 767px)
     font-size: 20px
     line-height: 30px
 .is--subheading-2
-  +font(350)
+  +font(300)
   font-size: 20px
   line-height: 30px
   // @media screen and (max-width: 767px)

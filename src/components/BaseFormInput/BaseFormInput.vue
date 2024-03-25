@@ -165,7 +165,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 .base-form-input
 	color: $input-color
 	caret-color: $input-caret-color
-	background-color: white
+	background-color: $input-background-color
 	font-size: $input-font-size
 	line-height: $input-line-height
 	font-weight: $input-font-weight
@@ -220,6 +220,10 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 		&::placeholder
 			opacity: 1
 			color: $input-placeholder-color
+			font-size: inherit
+			font-weight: inherit
+			font-family: inherit
+			line-height: inherit
 
 	&__append,
 	&__prepend
