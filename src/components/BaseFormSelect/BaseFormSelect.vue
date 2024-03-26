@@ -140,7 +140,7 @@ function onSearch(searchString: string) {
 	<v-select
 		ref="selectComponent"
 		class="BaseFormSelect base-select"
-		:class="[`is--select-${size}`, { 'is--error': isError, 'is--disabled': disabled, 'is--readonly': readonly, 'is--append': slots.append }]"
+		:class="[`is--select-${size}`, { 'is--error': isError, 'is--disabled': disabled, 'is--readonly': readonly, 'is--append': slots.append, 'is--focused': isFocused }]"
 		:options="sortedOptions"
 		:searchable="searchable"
 		:clearable="false"
@@ -178,6 +178,7 @@ function onSearch(searchString: string) {
 	font-size: $select-font-size
 	font-family: $select-font-family
 	font-weight: $select-font-weight
+	background: $select-background-color
 	&.is--select-large
 		:deep(.vs__dropdown-toggle)
 			height: $select-large-height
@@ -186,6 +187,9 @@ function onSearch(searchString: string) {
 			height: $select-height
 		.base-select__append
 			height: $select-height
+	&.is--focused
+		:deep(.vs__dropdown-toggle)
+			border-color: $select-border-focus-color
 	&.is--error
 		:deep(.vs__dropdown-toggle)
 			border-color: $select-border-error-color
