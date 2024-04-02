@@ -125,7 +125,9 @@ function onKeyDown(event: KeyboardEvent) {
 
 function onInput(value: string) {
 	// characters to check to replace
-	const charsToCheck = props.allowIntegerOnly ? /^0+|\D+/g : disallowCharsRegex.value;
+	// const charsToCheck = props.allowIntegerOnly ? /^0+|\D+/g : disallowCharsRegex.value;
+	const charsToCheck = props.allowIntegerOnly ? /[^\d]/g : disallowCharsRegex.value;
+
 	// set filtered value
 	localValue.value = String(value).replace(charsToCheck, '');
 	if (props.mask) localValue.value = mask.masked(localValue.value);
