@@ -6,6 +6,7 @@ const props = defineProps<{
 	options?: Array<boolean|string|number>,
 	hasAsterisk?: boolean,
 	id?: string,
+	isError?: boolean
 	name?: string,
 	labelBold?: boolean,
 	labelCenter?: boolean,
@@ -53,7 +54,8 @@ function onChange(event: Event) {
       'is--label-center': labelCenter,
       'is--checked': modelValue,
       'is--readonly': readonly,
-      'is--disabled': disabled
+      'is--disabled': disabled,
+	  'is--error': isError,
     }"
 	>
 		<label
@@ -105,7 +107,7 @@ function onChange(event: Event) {
 	
 	&__label
 		display: flex
-		align-items: center
+		// align-items: center
 	
 	&__item-input
 		display: flex
@@ -121,7 +123,7 @@ function onChange(event: Event) {
 	&__text
 		align-items: center
 		cursor: pointer
-		display: inline-flex
+		display: inline-block
 		font-family: $checkbox-label-font-family
 		font-weight: $checkbox-label-font-weight
 		font-size: $checkbox-label-font-size
@@ -130,16 +132,19 @@ function onChange(event: Event) {
 	
 	&__icon-wrap
 		border: $checkbox-border
+		border-radius: $checkbox-border-radius
 		flex-shrink: 0
 		width: $checkbox-size
 		height: $checkbox-size
-		margin-right: 10px
+		margin-right: 8px
 		position: relative
 		background-color: #fff
 		display: flex
 		flex-direction: row
 		justify-content: center
 		align-items: center
+		top: 1px
+		overflow: hidden
 	
 	&__icon
 		fill: $checkbox-checked-fill
@@ -150,15 +155,23 @@ function onChange(event: Event) {
 	&.is--checked
 		#{$root}__icon
 			opacity: 1
+		#{$root}__icon-wrap
+			border-color: $checkbox-checked-border-color
 	
 	&__required
 		color: $checkbox-asterisk-color
 	
-	&.is--readonly,
+	&.is--readonly
+		pointer-events: none
 	&.is--disabled
 		pointer-events: none
 		opacity: .3
 	
 	&__input:focus + #{$root}__icon-wrap
 		outline: none !important
+
+	
+	&.is--error
+		#{$root}__icon-wrap
+			border-color: $checkbox-error-border-color
 </style>

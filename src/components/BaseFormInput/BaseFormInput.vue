@@ -24,7 +24,7 @@ interface Props {
 	readonly?: boolean
 	disabled?: boolean
 	autoFocused?: boolean
-    dataTestid: string
+    dataTestid?: string
 	size?: 'large' | 'medium' | 'small'
 }
 
@@ -234,9 +234,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 		line-height: $input-small-size-line-height
 	&.is--readonly
 		border-radius: 0
-		border-left: none
-		border-right: none
-		border-top: none
+		border: none
 		pointer-events: none
 	&.is--disabled
 		opacity: 0.3

@@ -2,6 +2,9 @@
 import { computed, ref, withDefaults, h, useSlots } from 'vue';
 import VSelect from 'vue-select';
 
+// IMPORTANT: before using this component you need to install library
+// type in the terminal: yarn add vue-select@beta
+
 type ObjectOptionValue = string | number | boolean;
 type ObjectOption = Record<string, ObjectOptionValue>
 
