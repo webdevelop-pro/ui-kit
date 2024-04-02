@@ -12,6 +12,7 @@ const props = defineProps<{
 	labelCenter?: boolean,
 	readonly?: boolean,
 	disabled?: boolean,
+    dataTestid?: string
 }>();
 const emit = defineEmits<{
 	(e: 'update:modelValue', value: boolean|string|number): void,
@@ -68,6 +69,7 @@ function onChange(event: Event) {
 				tabindex="0"
 				class="base-form-checkbox__input"
 				v-bind="$attrs"
+      			:data-testid="dataTestid"
 				type="checkbox"
 				@change="onChange"
 			>
