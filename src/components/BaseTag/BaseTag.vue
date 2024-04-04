@@ -59,6 +59,7 @@ const tagClasses = computed(() => {
 		padding: $base-tag-small-padding
 		#{$root}__text
 			font-weight: $base-tag-small-font-weight
+			color: $base-tag-small-color
 	&.is--round
 		border-radius: $base-tag-round-border-radius
 	&.is--strong-text

@@ -334,11 +334,12 @@ export default defineComponent({
     display: none;
     padding: 8px;
     /* Small */
-    box-shadow: 0px 2px 3px -2px rgba(18, 22, 31, 0.15), 0px 2px 5px 1px rgba(18, 22, 31, 0.03);
+    box-shadow: $box-shadow-small;
     border-radius: 2px;
     background: $gray-10;
     opacity: 0;
     transition: opacity 0.3s;
+    color: $black;
 
     h2, h3, h4, h5, h6 {
       color: $white;

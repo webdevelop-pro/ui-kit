@@ -64,6 +64,7 @@ function onItemClick(tab: Tab) {
   display: flex
   flex-direction: row
   width: 100%
+  gap: $tabs-gap
   &.is--bottom-line
     border-bottom: solid 2px $tabs-bottom-line-color
   &__item
