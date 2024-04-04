@@ -40,7 +40,7 @@ function onItemClick(tab: Tab) {
         :tab="tab"
       >
         <span
-          class="base-tabs__item-label"
+          class="base-tabs__item-label is--h5__title"
           :title="tab.label"
         >
           {{ tab.label }}
@@ -68,7 +68,7 @@ function onItemClick(tab: Tab) {
     border-bottom: solid 2px $tabs-bottom-line-color
   &__item
     cursor: pointer
-    padding: 14px 16px
+    padding: $item-top-line-item-padding
     background: $item-top-line-background-color
     position: relative
     display: flex
@@ -102,17 +102,16 @@ function onItemClick(tab: Tab) {
       &.is--top-line
         background-color: $item-top-line-active-background-color
       .base-tabs__item-label
-        +font(400)
         color: $item-top-line-active-label-color
       .base-tabs__item-sub-title
         background-color: $item-top-line-active-sub-title-background-color
         color: $item-top-line-active-sub-title-color
       &:before
         background-color: $item-top-line-active-before-background-color
+    &:hover
+      .base-tabs__item-label
+        color: $item-label-hover-color
   &__item-label
-    +font(400)
-    font-size: 14px
-    line-height: 19.6px
     color: $item-label-color
     flex-shrink: 0
   &__item-sub-title

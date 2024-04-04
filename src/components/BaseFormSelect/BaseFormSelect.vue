@@ -50,6 +50,7 @@ const props = withDefaults(defineProps<{
 	isError?: boolean;
 	readonly?: boolean,
 	disabled?: boolean,
+	dropdownAbsolute?: boolean,
 }>(), {
 	itemLabel: 'label',
 	itemValue: 'value',
@@ -143,7 +144,14 @@ function onSearch(searchString: string) {
 	<v-select
 		ref="selectComponent"
 		class="BaseFormSelect base-select"
-		:class="[`is--select-${size}`, { 'is--error': isError, 'is--disabled': disabled, 'is--readonly': readonly, 'is--append': slots.append, 'is--focused': isFocused }]"
+		:class="[`is--select-${size}`, {
+			'is--error': isError,
+			'is--disabled': disabled,
+			'is--readonly': readonly,
+			'is--append': slots.append,
+			'is--focused': isFocused,
+			'is--dropdown-absolute': dropdownAbsolute,
+		}]"
 		:options="sortedOptions"
 		:searchable="searchable"
 		:clearable="false"
@@ -212,6 +220,12 @@ function onSearch(searchString: string) {
 	&.is--append
 		:deep(.vs__dropdown-toggle)
 			padding-left: 43px
+	&.is--dropdown-absolute
+		position: relative
+		:deep(.vs__dropdown-menu)
+			position: absolute
+			top: 100%
+			width: 100%
 	&__append
 		position: absolute
 		left: 15px
