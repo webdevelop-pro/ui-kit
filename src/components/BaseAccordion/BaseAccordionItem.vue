@@ -4,6 +4,9 @@ import {
   VueCollapsiblePanel,
 } from '@dafcoe/vue-collapsible-panel';
 
+// IMPORTANT: before using this component you need to install library
+// type in the terminal: yarn add @dafcoe/vue-collapsible-panel
+
 withDefaults(defineProps<{
   /**
    * by default - small, can be: large | small
@@ -80,6 +83,9 @@ withDefaults(defineProps<{
     justify-content: space-between
     padding-right: 16px
     cursor: pointer
+  :deep(.vcp__header-title)
+    width: 100%
+    padding-right: 16px
   &.vcp--expanded
     .base-accordion-item__open-close-icon
       :deep(svg)
@@ -144,12 +150,16 @@ withDefaults(defineProps<{
       width: inherit
       height: inherit
       +mt(.2s)
+
+  :deep(.slide-enter-active),
+  :deep(.slide-leave-active),
+  :deep(.slide-reverse-leave-active)
+    transition: height 0.3s ease, opacity 0.3s ease, transform 0.3s ease
   :deep(.slide-enter-active)
     overflow: hidden
   :deep(.slide-leave-active),
   :deep(.slide-reverse-leave-active)
     transform: translateX(0) !important
-    transition: height 0.3s ease
     position: relative !important
     opacity: 1 !important
     overflow: hidden

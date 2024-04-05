@@ -1,11 +1,19 @@
 <script lang="ts" setup>
 import { computed, ref, watch, withDefaults, ObjectDirective } from 'vue';
+import { MaskTokens } from 'maska/dist/types/tokens';
+import { Mask, vMaska } from 'maska';
+
+// IMPORTANT: before using this component you need to install maska
+// type in the terminal yarn add masks
 
 interface Props {
 	placeholder?: string
 	modelValue?: string
 	type?: string
 	isError?: boolean
+	mask?: string
+	maskTokens?: MaskTokens
+	moneyFormat?: boolean
 	disallowSpecialChars?: boolean
 	disallowNumbers?: boolean
 	allowIntegerOnly?: boolean
@@ -16,6 +24,7 @@ interface Props {
 	readonly?: boolean
 	disabled?: boolean
 	autoFocused?: boolean
+    dataTestid?: string
 	size?: 'large' | 'medium' | 'small'
 }
 
@@ -25,10 +34,38 @@ const props = withDefaults(defineProps<Props>(), {
 	size: 'medium'
 })
 
+const moneyFormatOptions = {
+      maska: '0',
+      reversed: true,
+      tokens: '0:d:multiple|9:d:optional',
+      preProcess: (val: string) => val.replace(/[$,]/g, ''),
+      postProcess: (val: string) => {
+        if (!val) return '';
+
+        const sub = 3 - (val.includes('.') ? val.length - val.indexOf('.') : 0);
+
+        return Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+        }).format(+val)
+          .slice(0, sub ? -sub : undefined);
+      },
+    }
+
 const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>();
 
 const localValue = ref('');
 const focused = ref(false);
+
+const mask = new Mask({
+	mask: props.mask,
+	tokens: props.maskTokens,
+})
+const unmaskedLocalValue = computed(() => mask.unmasked(localValue.value));
+const returnValue = computed(() => (
+	(!props.mask || props.maskTokens) ? localValue.value : unmaskedLocalValue.value
+))
+const maskOptions = computed(() => (props.moneyFormat ? moneyFormatOptions : null));
 
 function getEscapedRegExp(str: string) {
 	// If you need to use any of the special characters literally (actually searching for a "*", for instance),
@@ -88,10 +125,13 @@ function onKeyDown(event: KeyboardEvent) {
 
 function onInput(value: string) {
 	// characters to check to replace
-	const charsToCheck = props.allowIntegerOnly ? /^0+|\D+/g : disallowCharsRegex.value;
+	// const charsToCheck = props.allowIntegerOnly ? /^0+|\D+/g : disallowCharsRegex.value;
+	const charsToCheck = props.allowIntegerOnly ? /[^\d]/g : disallowCharsRegex.value;
+
 	// set filtered value
-	localValue.value = value.replace(charsToCheck, '');
-	emit('update:modelValue', localValue.value);
+	localValue.value = String(value).replace(charsToCheck, '');
+	if (props.mask) localValue.value = mask.masked(localValue.value);
+	emit('update:modelValue', returnValue.value);
 }
 
 function onInputEvent() {
@@ -117,7 +157,8 @@ function onBlur() {
 	focused.value = false;
 }
 
-const vFocus = (el: HTMLElement, value: boolean | undefined) => value && el.focus();
+// TODO: this has to be worked on as it gives bug in chrome on click
+// const vFocus = (el: HTMLElement, value: boolean | undefined) => value && el.focus();
 
 // check modelValue data
 if (props.modelValue !== '') onInput(props.modelValue);
@@ -137,13 +178,14 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 		</span>
 		<input
 			v-model="localValue"
-			v-focus="autoFocused"
+			v-maska:[maskOptions]
 			class="base-form-input__input"
 			:placeholder="placeholder"
 			:type="type"
 			:title="localValue"
 			tabindex="0"
 			v-bind="$attrs"
+      		:data-testid="dataTestid"
 			@input="onInputEvent"
 			@paste="onPaste"
 			@keydown="onKeyDown"
@@ -165,7 +207,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 .base-form-input
 	color: $input-color
 	caret-color: $input-caret-color
-	background-color: white
+	background-color: $input-background-color
 	font-size: $input-font-size
 	line-height: $input-line-height
 	font-weight: $input-font-weight
@@ -194,9 +236,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 		line-height: $input-small-size-line-height
 	&.is--readonly
 		border-radius: 0
-		border-left: none
-		border-right: none
-		border-top: none
+		border: none
 		pointer-events: none
 	&.is--disabled
 		opacity: 0.3
@@ -220,6 +260,10 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 		&::placeholder
 			opacity: 1
 			color: $input-placeholder-color
+			font-size: inherit
+			font-weight: inherit
+			font-family: inherit
+			line-height: inherit
 
 	&__append,
 	&__prepend

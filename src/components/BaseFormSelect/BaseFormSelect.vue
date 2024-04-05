@@ -2,6 +2,9 @@
 import { computed, ref, withDefaults, h, useSlots } from 'vue';
 import VSelect from 'vue-select';
 
+// IMPORTANT: before using this component you need to install library
+// type in the terminal: yarn add vue-select@beta
+
 type ObjectOptionValue = string | number | boolean;
 type ObjectOption = Record<string, ObjectOptionValue>
 
@@ -47,6 +50,7 @@ const props = withDefaults(defineProps<{
 	isError?: boolean;
 	readonly?: boolean,
 	disabled?: boolean,
+	dropdownAbsolute?: boolean,
 }>(), {
 	itemLabel: 'label',
 	itemValue: 'value',
@@ -140,7 +144,14 @@ function onSearch(searchString: string) {
 	<v-select
 		ref="selectComponent"
 		class="BaseFormSelect base-select"
-		:class="[`is--select-${size}`, { 'is--error': isError, 'is--disabled': disabled, 'is--readonly': readonly, 'is--append': slots.append }]"
+		:class="[`is--select-${size}`, {
+			'is--error': isError,
+			'is--disabled': disabled,
+			'is--readonly': readonly,
+			'is--append': slots.append,
+			'is--focused': isFocused,
+			'is--dropdown-absolute': dropdownAbsolute,
+		}]"
 		:options="sortedOptions"
 		:searchable="searchable"
 		:clearable="false"
@@ -178,6 +189,7 @@ function onSearch(searchString: string) {
 	font-size: $select-font-size
 	font-family: $select-font-family
 	font-weight: $select-font-weight
+	background: $select-background-color
 	&.is--select-large
 		:deep(.vs__dropdown-toggle)
 			height: $select-large-height
@@ -186,6 +198,9 @@ function onSearch(searchString: string) {
 			height: $select-height
 		.base-select__append
 			height: $select-height
+	&.is--focused
+		:deep(.vs__dropdown-toggle)
+			border-color: $select-border-focus-color
 	&.is--error
 		:deep(.vs__dropdown-toggle)
 			border-color: $select-border-error-color
@@ -205,6 +220,12 @@ function onSearch(searchString: string) {
 	&.is--append
 		:deep(.vs__dropdown-toggle)
 			padding-left: 43px
+	&.is--dropdown-absolute
+		position: relative
+		:deep(.vs__dropdown-menu)
+			position: absolute
+			top: 100%
+			width: 100%
 	&__append
 		position: absolute
 		left: 15px

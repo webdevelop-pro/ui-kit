@@ -4,6 +4,7 @@ import { BaseSvgIcon } from 'UiKit/components/BaseSvgIcon'
 withDefaults(defineProps<{
 	type?: 'error' | 'warning' | 'success';
 	show?: boolean;
+	icon?: boolean;
 }>(), {
 	type: 'error',
 });
@@ -19,19 +20,19 @@ withDefaults(defineProps<{
 	>
 		<p class="notification-inline__body">
 			<BaseSvgIcon
-				v-if="type === 'error'"
+				v-if="(type === 'error') && icon"
 				class="svg-icon notification-inline__icon"
 				alt="exclamation-circle-icon"
 				name="fa-circle-exclamation"
 			/>
 			<BaseSvgIcon
-				v-else-if="type === 'warning'"
+				v-else-if="(type === 'warning') && icon"
 				alt="info-circle-icon"
 				class="svg-icon notification-inline__icon"
 				name="fa-triangle-exclamation"
 			/>
 			<BaseSvgIcon
-				v-else
+				v-else-if="icon"
 				alt="info-circle-icon"
 				class="svg-icon notification-inline__icon"
 				name="fa-circle-check"
