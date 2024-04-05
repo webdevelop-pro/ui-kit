@@ -4,7 +4,7 @@ import { MaskTokens } from 'maska/dist/types/tokens';
 import { Mask, vMaska } from 'maska';
 
 // IMPORTANT: before using this component you need to install maska
-// type in the terminal yarn add masks
+// type in the terminal yarn add maska
 
 interface Props {
 	placeholder?: string
