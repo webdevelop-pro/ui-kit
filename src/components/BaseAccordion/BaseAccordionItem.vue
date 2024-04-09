@@ -2,10 +2,10 @@
 import { withDefaults } from 'vue';
 import {
   VueCollapsiblePanel,
-} from '@dafcoe/vue-collapsible-panel';
+} from '@swoga/vue-collapsible-panel';
 
 // IMPORTANT: before using this component you need to install library
-// type in the terminal: yarn add @dafcoe/vue-collapsible-panel
+// type in the terminal: yarn add @swoga/vue-collapsible-panel
 
 withDefaults(defineProps<{
   /**
@@ -93,6 +93,12 @@ withDefaults(defineProps<{
         +mt(.2s)
     :deep(.vcp__body)
       height: 0
+      background-color: $accordion-item-active-content-background
+    :deep(.vcp__header)
+      background-color: $accordion-item-active-header-background
+      box-shadow: $accordion-item-active-header-box-shadow
+      z-index: 1
+      position: relative
   &__title-text
     padding: 12px 16px
     margin-bottom: 0

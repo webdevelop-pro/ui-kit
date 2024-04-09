@@ -8,7 +8,7 @@ type FormRadioOption = {
 };
 
 const props = withDefaults(defineProps<{
-	modelValue: string | string[] | number[]
+	modelValue: string | string[] | number[] | boolean
 	options?: Record<string | number, unknown> | string[] | FormRadioOption[],
 	row?: boolean,
 	disabled?: boolean,
