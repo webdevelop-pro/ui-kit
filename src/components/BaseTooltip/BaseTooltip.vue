@@ -295,6 +295,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@import 'index.sass';
 .wd-tooltip {
   $root: &;
 

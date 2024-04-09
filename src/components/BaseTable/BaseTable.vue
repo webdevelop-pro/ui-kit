@@ -45,14 +45,16 @@ withDefaults(defineProps<{
 		th
 			background: $table-thead-background-color
 			+font(500)
+			color: $table-tbody-th-color
 
-	:deep(td),
 	:deep(th)
-		font-size: $table-th-td-font-size
-		line-height: $table-th-td-line-height
-		padding: $table-th-td-padding
-		+font(400)
+		font-size: $table-th-font-size
+		line-height: $table-th-line-height
+		padding: $table-th-padding
+		+font(800)
 		text-align: left
+		@media screen and (max-width: 768)
+			padding: $table-th-padding-mobile
 
 	:deep(tbody)
 		border-style: none !important
@@ -64,6 +66,13 @@ withDefaults(defineProps<{
 			td
 				background: $table-tbody-tr-td-background-color
 				+mt(.3s)
+				font-size: $table-td-font-size
+				line-height: $table-td-line-height
+				padding: $table-td-padding
+				+font(400)
+				text-align: left
+				@media screen and (max-width: 768)
+					padding: $table-td-padding-mobile
 			&:hover
 				td
 					background: $table-tbody-td-hover-background-color

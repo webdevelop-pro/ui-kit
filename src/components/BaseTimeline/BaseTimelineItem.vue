@@ -1,7 +1,11 @@
 <template>
   <div
     class="BaseTimelineItem timelines-items"
-    :class="{ 'is--first': infoFirst, 'is--finish': infoFinish }"
+    :class="{
+      'is--first': infoFirst,
+      'is--finish': infoFinish,
+      'is--dark': dark,
+    }"
   >
     <div
       class="circle"
@@ -46,6 +50,7 @@ export default defineComponent({
     title: {
       type: String,
     },
+    dark: Boolean,
   },
 });
 </script>
@@ -110,7 +115,7 @@ export default defineComponent({
     .circle {
       width: 42px;
       height: 42px;
-      top: 32px;
+      top: calc(var(--top) - 10px);
       left: -11px;
       border-width: 1px;
       span {
@@ -131,6 +136,18 @@ export default defineComponent({
       border-width: 12px;
       span {
         display: none;
+      }
+    }
+  }
+  &.is--dark {
+    .circle {
+      background-color: $black;
+    }
+  }
+  &.is--dark.is--first {
+    .circle {
+      span {
+        background-color: $black;
       }
     }
   }
