@@ -131,7 +131,7 @@ function onInput(value: string) {
 	// set filtered value
 	localValue.value = String(value).replace(charsToCheck, '');
 	if (props.mask) localValue.value = mask.masked(localValue.value);
-	emit('update:modelValue', returnValue.value);
+	emit('update:modelValue', returnValue.value.trim());
 }
 
 function onInputEvent() {
