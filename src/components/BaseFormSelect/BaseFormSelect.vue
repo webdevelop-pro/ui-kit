@@ -226,6 +226,7 @@ function onSearch(searchString: string) {
 			position: absolute
 			top: 100%
 			width: 100%
+			z-index: 10
 	&__append
 		position: absolute
 		left: 15px
