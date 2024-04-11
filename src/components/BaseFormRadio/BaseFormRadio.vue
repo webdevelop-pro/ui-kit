@@ -91,7 +91,7 @@ function getLabelValue(option: string | number | FormRadioOption) {
 					tabindex="1"
 					class="base-form-radio__input"
 					v-bind="$attrs"
-					@change="$emit('update:modelValue', $event.target.value)"
+					@change="$emit('update:modelValue', selectedOption);"
 				>
 				<label
 					:for="index"

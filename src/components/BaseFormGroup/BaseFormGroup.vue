@@ -4,7 +4,7 @@ import {
 } from 'vue';
 import get from 'lodash/get';
 import merge from 'lodash/merge';
-import { resolveRef } from '@/helpers/validation/general';
+import { toRaw } from 'vue';
 
 const props = defineProps<{
   label?: string;
@@ -18,19 +18,40 @@ const props = defineProps<{
 
 const schema = ref();
 
-function extractFieldName(path: string): string | null {
-  const parts = path.split('/');
-  if (parts.length > 1) return parts[parts.length - 1];
-  if (parts.length === 1) return parts[0];
-  return null;
+function resolveRef(ref, schema) {
+    const refPath = ref.replace('#/', '').split('/');
+    let currentSchema = schema;
+    return get(currentSchema, refPath.join('.'));
+}
+
+function isFieldRequiredInSchema(fieldName, schema) {
+    return schema.required ? schema.required.includes(fieldName) : false;
+}
+
+function getFieldSchema(path, ref, schema) {
+  if (!path || !ref) return undefined;
+    const objectFromRefPath = resolveRef(ref, schema);
+    const pathSegments = path.split('.');
+    const firstChild = pathSegments.shift();
+    const restSegments = pathSegments.join('.');
+    const segment0Property = objectFromRefPath.properties[firstChild];
+    if (segment0Property?.$ref) {
+      return getFieldSchema(restSegments, segment0Property.$ref, schema);
+    }
+    return objectFromRefPath;
+}
+
+function isFieldRequiredAtPath(path, schema) {
+    const parentSchema = getFieldSchema(path, schema.$ref, schema);
+    if (!parentSchema) return false;
+    const fieldName = path.split('.').pop();
+    return isFieldRequiredInSchema(fieldName, parentSchema);
 }
 
 const required = computed(() => {
-  if (!props.path) return false;
-  const fieldName = extractFieldName(props.path);
-  const schemaObject = resolveRef(schema.value);
+  if (!props.path || !schema.value) return false;
   // eslint-disable-next-line
-  return schemaObject?.required?.includes(fieldName);
+  return isFieldRequiredAtPath(props.path, schema.value);
 });
 
 const errorText = computed(() => {
@@ -45,7 +66,9 @@ const errorText = computed(() => {
 const isError = computed(() => (errorText.value.length > 0));
 
 watch(() => [props.schemaBack, props.schemaFront], () => {
-  schema.value = merge(props.schemaBack, props.schemaFront);
+  const schema1 = structuredClone(toRaw(props.schemaBack))
+  const schema2 = structuredClone(toRaw(props.schemaFront))
+  schema.value = merge(schema1, schema2);
 }, { immediate: true, deep: true });
 </script>
 
