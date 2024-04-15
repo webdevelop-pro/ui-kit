@@ -140,7 +140,6 @@ function onChange(event: Event) {
 		height: $checkbox-size
 		margin-right: 8px
 		position: relative
-		background-color: #fff
 		display: flex
 		flex-direction: row
 		justify-content: center
