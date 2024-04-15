@@ -47,7 +47,7 @@ defineEmits<{
 .base-form-textarea
 	color: $textarea-color
 	caret-color: $textarea-caret-color
-	background-color: white
+	background-color: $textarea-background-color
 	font-size: $textarea-font-size
 	line-height: $textarea-line-height
 	font-weight: $textarea-font-weight
@@ -75,7 +75,6 @@ defineEmits<{
 		line-height: inherit
 		background-color: transparent
 		width: 100% !important
-		min-height: 200px
 		position: relative
 		z-index: 2
 		padding: $textarea-padding
