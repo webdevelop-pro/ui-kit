@@ -14,6 +14,7 @@ const props = defineProps<{
   schemaBack?: object;
   schemaFront?: object;
   errorText?: string[];
+  required?: boolean;
 }>();
 
 const schema = ref();
@@ -49,6 +50,7 @@ function isFieldRequiredAtPath(path, schema) {
 }
 
 const required = computed(() => {
+  if (props.required) return true;
   if (!props.path || !schema.value) return false;
   // eslint-disable-next-line
   return isFieldRequiredAtPath(props.path, schema.value);
