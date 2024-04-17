@@ -166,7 +166,8 @@ function onChange(event: Event) {
 		pointer-events: none
 	&.is--disabled
 		pointer-events: none
-		opacity: .3
+		#{$root}__icon-wrap
+			opacity: .3
 	
 	&__input:focus + #{$root}__icon-wrap
 		outline: none !important
