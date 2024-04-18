@@ -2,12 +2,17 @@
 import { Navigation } from 'swiper';
 import { Swiper } from 'swiper/vue';
 
-const breakpoints = {
-  767: {
-    slidesPerView: 2,
-    spaceBetween: 30,
-  },
-};
+defineProps({
+  breakpoints: {
+    type: Object,
+    default: {
+      767: {
+        slidesPerView: 2,
+        spaceBetween: 30,
+      },
+    }
+  }
+})
 
 const modules = [Navigation];
 
@@ -63,14 +68,14 @@ const modules = [Navigation];
 }
 .swiper-button-prev {
   right: 51px;
-  background-image: url("@/assets/images/icons/arrow-left-primary.svg");
+  background-image: url("UiKit/assets/arrow-left-primary.svg");
   background-repeat: no-repeat;
   background-size: 20px;
   background-position: center;
 }
 .swiper-button-next {
   right: -3px;
-  background-image: url("@/assets/images/icons/arrow-right-primary.svg");
+  background-image: url("UiKit/assets/arrow-right-primary.svg");
   background-repeat: no-repeat;
   background-size: 20px;
   background-position: center;
