@@ -52,7 +52,10 @@ const moneyFormatOptions = {
       },
     }
 
-const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>();
+const emit = defineEmits<{
+	(e: 'update:modelValue', value: string): void,
+	(e: 'enter'): void,
+}>();
 
 const localValue = ref('');
 const focused = ref(false);
@@ -192,6 +195,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 			@beforeinput="onBeforeInput"
 			@focus="onFocus"
 			@blur="onBlur"
+			@keypress.enter="emit('enter')"
 		>
 		<span
 			v-if="prepend"
