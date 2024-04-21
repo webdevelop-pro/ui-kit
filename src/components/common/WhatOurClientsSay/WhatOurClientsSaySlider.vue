@@ -59,6 +59,9 @@ import SliderWithPaginationAutoPlay from 'UiKit/components/common/SliderWithPagi
     flex-direction: column;
     border-radius: 2px;
     background: $yellow-light;
+    @include media-gte(tablet) {
+      height: 196px;
+    }
   }
 }
 

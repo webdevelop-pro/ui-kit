@@ -190,7 +190,7 @@
 			&:hover
 				background-color: rgba($base-button-secondary-color, 0.1)
 		&.is--color-success
-			color: $base-button-success-color
+			color: $base-button-success-text-color
 			&:hover
 				background-color: rgba($base-button-success-color, 0.1)
 		&.is--color-warning

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Navigation } from 'swiper';
+import { Navigation } from 'swiper/modules';
 import { Swiper } from 'swiper/vue';
 
 defineProps({
