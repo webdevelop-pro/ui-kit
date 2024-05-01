@@ -86,47 +86,40 @@ onBeforeUnmount(() => {
   </div>
 </template>
 
-<style lang="scss" scoped>
-.slider-with-pagination-auto-play {
-  position: relative;
+<style lang="sass" scoped>
+.slider-with-pagination-auto-play
+  position: relative
 
-  &__item {
-    top: 0;
-    left: 0;
-    width: 100%;
+  &__item
+    top: 0
+    left: 0
+    width: 100%
 
-    &.is--active {
-      position: relative;
-      transition: opacity 3s ease;
-    }
-  }
+    &.is--active
+      position: relative
+      transition: opacity 3s ease
 
-  &__pagination {
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
-    justify-content: center;
-    margin-top: 35px;
-  }
+  &__pagination
+    display: flex
+    flex-direction: row
+    gap: 4px
+    justify-content: center
+    margin-top: 35px
 
-  &__pagination-item {
-    width: 31px;
-    height: 2px;
-    background-color: $gray-30;
-    cursor: pointer;
+  &__pagination-item
+    width: 31px
+    height: 2px
+    background-color: $gray-30
+    cursor: pointer
 
-    &.is--active {
-      background-color: v-bind(activecolor);
-    }
-  }
-}
+    &.is--active
+      background-color: v-bind(activecolor)
+
 .fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
+.fade-leave-active
+  transition: opacity 0.5s ease
 
 .fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+.fade-leave-to
+  opacity: 0
 </style>

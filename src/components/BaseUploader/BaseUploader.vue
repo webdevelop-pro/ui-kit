@@ -167,89 +167,73 @@ const removeFile = (index: number) => {
     </div>
 </template>
 
-<style lang="scss" scoped>
-.base-uploader {
-  $root: &;
+<style lang="sass" scoped>
+.base-uploader
+  $root: &
 
-  &__dropzone {
-    display: flex;
-    padding: 32px 12px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    align-self: stretch;
-    border-radius: 2px;
-    border: 1px dashed $gray-40;
-    background: $gray-10;
-    &.is--dragging {
-      border-color: $primary;
-    }
+  &__dropzone
+    display: flex
+    padding: 32px 12px
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 12px
+    align-self: stretch
+    border-radius: 2px
+    border: 1px dashed $gray-40
+    background: $gray-10
+    &.is--dragging
+      border-color: $primary
 
-    &.is--error {
-      border-color: $red;
-    }
+    &.is--error
+      border-color: $red
 
-    &.is--files {
-      padding: 32px 12px 12px 12px;
-    }
+    &.is--files
+      padding: 32px 12px 12px 12px
 
-    &.is--disabled {
-      opacity: 0.3;
-    }
-  }
+    &.is--disabled
+      opacity: 0.3
 
-  input[type="file"] {
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    width: 1px;
-    height: 1px;
-  }
+  input[type="file"]
+    opacity: 0
+    overflow: hidden
+    position: absolute
+    width: 1px
+    height: 1px
 
-  &__label {
-    color: $gray-60;
-  }
+  &__label
+    color: $gray-60
 
-  &__file-button {
-    #{$root}__dropzone.is--files & {
-      margin-bottom: 32px;
-    }
-  }
+  &__file-button
+    #{$root}__dropzone.is--files &
+      margin-bottom: 32px
 
-  &__preview {
-    width: 100%;
-  }
+  &__preview
+    width: 100%
 
-  &__preview-card {
-    width: 100%;
-    display: flex;
-    border-top: 1px solid $gray-20;
-    padding: 12px;
-    align-items: center;
-    gap: 12px;
-    justify-content: space-between;
-  }
+  &__preview-card
+    width: 100%
+    display: flex
+    border-top: 1px solid $gray-20
+    padding: 12px
+    align-items: center
+    gap: 12px
+    justify-content: space-between
 
-  &__preview-card-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: $gray-80;
-  }
+  &__preview-card-info
+    display: flex
+    align-items: center
+    gap: 12px
+    color: $gray-80
 
-  &__preview-card-remove {
-    cursor: pointer;
-  }
+  &__preview-card-remove
+    cursor: pointer
 
-  &__comment {
-    color: $gray-70;
-    margin-top: 4px;
-  }
+  &__comment
+    color: $gray-70
+    margin-top: 4px
 
-  &__error {
-    margin-top: 4px;
-    color: $red;
-  }
-}
+  &__error
+    margin-top: 4px
+    color: $red
 </style>

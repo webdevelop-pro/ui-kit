@@ -140,53 +140,44 @@ watch(() => props.items, () => {
   </div>
 </template>
 
-<style lang="scss" scoped>
-.base-filter {
-  $root: &;
+<style lang="sass" scoped>
+.base-filter
+  --base-filter-dropdown--min-width: 150px
 
-  --base-filter-dropdown--min-width: 150px;
+  position: relative
 
-  position: relative;
+  &__button-icon
+    color: inherit
 
-  &__button-icon {
-    color: inherit;
-  }
+  &__dropdown
+    position: absolute
+    top: 100%
+    left: 0
+    min-width: var(--base-filter-dropdown--min-width)
+    width: fit-content
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    background-color: $gray-10
+    box-shadow: $box-shadow-small
+    z-index: 2
 
-  &__dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: var(--base-filter-dropdown--min-width);
-    width: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    background-color: $gray-10;
-    box-shadow: $box-shadow-small;
-    z-index: 2;
-  }
+  &__cta
+    display: flex
+    padding: 12px
+    flex-direction: column
+    align-items: flex-start
+    gap: 4px
+    align-self: stretch
 
-  &__cta {
-    display: flex;
-    padding: 12px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    align-self: stretch;
-  }
+  &__title
+    color: $gray-70
+    padding: 12px 12px 2px 12px
+    text-transform: capitalize
 
-  &__title {
-    color: $gray-70;
-    padding: 12px 12px 2px 12px;
-    text-transform: capitalize;
-  }
+  &__group
+    width: 100%
 
-  &__group {
-    width: 100%;
-  }
-
-  &__checkbox-group {
-    width: 100%;
-  }
-}
+  &__checkbox-group
+    width: 100%
 </style>

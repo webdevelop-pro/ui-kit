@@ -39,36 +39,29 @@ defineProps({
   </section>
 </template>
 
-<style lang="scss" scoped>
-.base-breadcrumbs {
-  $root: &;
+<style lang="sass" scoped>
+.base-breadcrumbs
+  $root: &
 
-  &__container {
-    gap: 8px;
-    display: flex;
-    flex-wrap: wrap;
-  }
+  &__container
+    gap: 8px
+    display: flex
+    flex-wrap: wrap
 
-  &__item {
-    color: $black;
-  }
+  &__item
+    color: $black
 
-  &__divider {
-    color: $gray-50;
-  }
+  &__divider
+    color: $gray-50
 
-  &__item-wrap {
-    gap: 8px;
-    display: flex;
+  &__item-wrap
+    gap: 8px
+    display: flex
 
-    &:last-of-type {
-      #{$root}__item {
-        color: $gray-50;
-      }
-      #{$root}__divider {
-        display: none;
-      }
-    }
-  }
-}
+    &:last-of-type
+      #{$root}__item
+        color: $gray-50
+
+      #{$root}__divider
+        display: none
 </style>

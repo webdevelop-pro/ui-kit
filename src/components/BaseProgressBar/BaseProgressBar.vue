@@ -32,35 +32,29 @@ const progress = computed(() => {
   </section>
 </template>
 
-<style lang="scss" scoped>
-.base-progressbar {
-  $root: &;
+<style lang="sass" scoped>
+.base-progressbar
+  width: 100%
+  display: flex
+  flex-direction: column
+  justify-content: flex-end
+  align-items: flex-start
+  gap: 8px
+  flex: 1 0 0
 
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
-  gap: 8px;
-  flex: 1 0 0;
+  &__top
+    color: $secondary-dark
 
-  &__top {
-    color: $secondary-dark;
-  }
+  &__progress
+    display: flex
+    align-items: flex-end
+    align-self: stretch
+    height: 3px
+    flex: 1 0 0
+    border-radius: 2px
+    background: $gray-30
 
-  &__progress {
-    display: flex;
-    align-items: flex-end;
-    align-self: stretch;
-    height: 3px;
-    flex: 1 0 0;
-    border-radius: 2px;
-    background: $gray-30;
-  }
-
-  &__progress-bar {
-    height: 3px;
-    background: $secondary;
-  }
-}
+  &__progress-bar
+    height: 3px
+    background: $secondary
 </style>

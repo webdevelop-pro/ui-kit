@@ -1,13 +1,9 @@
 
-export interface IHomeTopSlider {
-  id: number;
-  text1: string;
-  author1: string;
-  text2: string;
-  author2: string;
-}
+export const WhatOurClientsSayTitle = 'What Our Clients Have to Say';
+export const WhatOurClientsSayText = 'From small businesses to large enterprises, our software solutions have helped many clients'
+  + 'streamline their operations, boost productivity, and achieve their goals.';
 
-export const slider = [
+export const WhatOurClientsSaySlider = [
   {
     id: 1,
     text1: '“The development work delivered by Webdevelop PRO completely exceeded the '

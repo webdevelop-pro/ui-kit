@@ -294,107 +294,87 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="sass">
 @import 'index.sass';
-.wd-tooltip {
-  $root: &;
+.wd-tooltip
+  $root: &
 
-  display: inline-flex;
+  display: inline-flex
 
-  &.is-block {
-    display: block;
-  }
+  &.is-block
+    display: block
 
-  &__activator {
-    display: flex;
-    cursor: default;
+  &__activator
+    display: flex
+    cursor: default
 
-    &.is-bordered {
-      border-bottom: 1px dashed $gray-10;
-    }
+    &.is-bordered
+      border-bottom: 1px dashed $gray-10
 
-    &.is-solid.is-bordered {
-      border-bottom: 1px solid white;
-    }
-  }
+    &.is-solid.is-bordered
+      border-bottom: 1px solid white
 
-  &__arrow {
-    position: fixed;
-    z-index: 1;
-    width: 0;
-    height: 0;
-    border-color: $gray-10;
-    border-style: solid;
-    border-right-color: transparent;
-    border-left-color: transparent;
-  }
+  &__arrow
+    position: fixed
+    z-index: 1
+    width: 0
+    height: 0
+    border-color: $gray-10
+    border-style: solid
+    border-right-color: transparent
+    border-left-color: transparent
 
-  &__content {
-    position: fixed;
-    z-index: $wd-z-index-tooltip;
-    display: none;
-    padding: 8px;
-    /* Small */
-    box-shadow: $box-shadow-small;
-    border-radius: 2px;
-    background: $gray-10;
-    opacity: 0;
-    transition: opacity 0.3s;
-    color: $black;
+  &__content
+    position: fixed
+    z-index: $wd-z-index-tooltip
+    display: none
+    padding: 8px
+    box-shadow: $box-shadow-small
+    border-radius: 2px
+    background: $gray-10
+    opacity: 0
+    transition: opacity 0.3s
+    color: $black
 
-    h2, h3, h4, h5, h6 {
-      color: $white;
-    }
+    h2, h3, h4, h5, h6
+      color: $white
 
-    &.is-top {
-      #{$root}__arrow {
-        border-width: 5px 5px 0;
-        border-bottom-color: transparent;
-      }
-    }
+    &.is-top
+      #{$root}__arrow
+        border-width: 5px 5px 0
+        border-bottom-color: transparent
 
-    &.is-bottom {
-      #{$root}__arrow {
-        border-width: 0 5px 5px;
-        border-top-color: transparent;
-      }
-    }
+    &.is-bottom
+      #{$root}__arrow
+        border-width: 0 5px 5px
+        border-top-color: transparent
 
-    &.is-active {
-      display: block;
-    }
+    &.is-active
+      display: block
 
-    &.is-show {
-      opacity: 1;
-    }
+    &.is-show
+      opacity: 1
 
-    &.is-critical {
-      color: $white;
-      background-color: $red;
+    &.is-critical
+      color: $white
+      background-color: $red
 
-      #{$root}__arrow {
-        border-color: $red;
-        border-right-color: transparent;
-        border-left-color: transparent;
-      }
-    }
+      #{$root}__arrow
+        border-color: $red
+        border-right-color: transparent
+        border-left-color: transparent
 
-    &.is-blue {
-      font-size: 13px;
-      color: $white;
-      background-color: #091844;
+    &.is-blue
+      font-size: 13px
+      color: $white
+      background-color: #091844
 
-      #{$root}__arrow {
-        border-color: #091844;
-        border-right-color: transparent;
-        border-left-color: transparent;
-      }
-    }
+      #{$root}__arrow
+        border-color: #091844
+        border-right-color: transparent
+        border-left-color: transparent
 
-    &.is-small-text {
-      font-size: 13px;
-      line-height: 19px;
-    }
-  }
-}
+    &.is-small-text
+      font-size: 13px
+      line-height: 19px
 </style>

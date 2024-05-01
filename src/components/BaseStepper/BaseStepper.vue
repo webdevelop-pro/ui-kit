@@ -68,113 +68,91 @@ function onItemClick(step: Step, index: number) {
 	</div>
 </template>
 
-<style lang="scss" scoped>
-.base-stepper {
-	$root: &;
+<style lang="sass" scoped>
+.base-stepper
+	$root: &
 
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
-	border-radius: 2px;
+	display: flex
+	flex-direction: column
+	justify-content: center
+	align-items: flex-start
+	border-radius: 2px
 
-	&__step {
-		display: flex;
-		height: 90px;
-		align-items: flex-start;
-		gap: 8px;
-	}
+	&__step
+		display: flex
+		height: 90px
+		align-items: flex-start
+		gap: 8px
 
-	&__step-point {
-		display: flex;
-		width: 24px;
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 8px;
-		align-self: stretch;
-		flex: 1 0 0;
-		position: relative;
+	&__step-point
+		display: flex
+		width: 24px
+		flex-direction: column
+		align-items: flex-start
+		gap: 8px
+		align-self: stretch
+		flex: 1 0 0
+		position: relative
 
-		&::after {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			height: calc(100% - 24px);
-			right: 50%;
-			transform: translateX(-50%);
-			width: 1px;
-			background: $gray-30;
-		}
-	}
+		&::after
+			content: ''
+			position: absolute
+			bottom: 0
+			height: calc(100% - 24px)
+			right: 50%
+			transform: translateX(-50%)
+			width: 1px
+			background: $gray-30
 
-	&__label {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-	}
+	&__label
+		display: flex
+		flex-direction: column
+		align-items: flex-start
 
-	&__circle {
-		display: flex;	
-		width: 24px;
-		height: 24px;
-		align-items: flex-start;
-		gap: 10px;
-		border-radius: 100%;
-		border: 5px solid $gray-30;
-	}
+	&__circle
+		display: flex
+		width: 24px
+		height: 24px
+		align-items: flex-start
+		gap: 10px
+		border-radius: 100%
+		border: 5px solid $gray-30
 
-	&__label-step {
-		color: $gray-60;
-	}
+	&__label-step
+		color: $gray-60
 
-	&__label-title {
-		color: $gray-80;
-	}
+	&__label-title 
+		color: $gray-80
 
-	&__check-icon {
+	&__check-icon
 		display: none
-	}
 
+	.is--last
+		#{$root}__step
+			height: auto
 
-	.is--last {
-		#{$root}__step {
-			height: auto;
-		}
-		#{$root}__step-point {
-			&::after {
-				display: none;
-			}
-		}
-	}
+		#{$root}__step-point
+			&::after
+				display: none
 
-	.is--active {
-		#{$root}__circle {
+	.is--active
+		#{$root}__circle
 			border-color: $primary
-		}
-		#{$root}__label-step {
-			color: $primary;
-		}
-	}
+		#{$root}__label-step
+			color: $primary
 
-	.is--completed {
-		cursor: pointer;
+	.is--completed
+		cursor: pointer
 
-		&:hover {
-			#{$root}__label-step {
-				color: $primary;
-			}
-		}
+		&:hover
+			#{$root}__label-step
+				color: $primary
 
-		#{$root}__circle {
-			border-color: $primary;
-			background: $primary;
-			color: $white;
-		}
+		#{$root}__circle
+			border-color: $primary
+			background: $primary
+			color: $white
 
-		#{$root}__check-icon {
-			display: block;
-		}
-	}
-}
-	
+		#{$root}__check-icon
+			display: block
 </style>

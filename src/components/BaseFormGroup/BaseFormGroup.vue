@@ -105,37 +105,31 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
   </div>
 </template>
 
-<style lang="scss" scoped>
-.base-form-group {
-  display: flex;
-  flex-direction: column;
-  position: relative;
+<style lang="sass" scoped>
+.base-form-group
+  display: flex
+  flex-direction: column
+  position: relative
 
-  &__label {
-    display: inline-block;
-    position: relative;
-    color: $gray-70;
-    text-align: left;
-    margin-bottom: 8px;
-  }
+  &__label
+    display: inline-block
+    position: relative
+    color: $gray-70
+    text-align: left
+    margin-bottom: 8px
 
-  &__label-link {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
+  &__label-link
+    position: absolute
+    right: 0
+    top: 0
 
-  &__label-required {
-    color: $wd-color-red;
-  }
+  &__label-required
+    color: $wd-color-red
 
-  &__error {
-    margin-top: 4px;
-    color: $red-dark;
-  }
+  &__error
+    margin-top: 4px
+    color: $red-dark
 
-  &__input {
-    width: 100%;
-  }
-}
+  &__input
+    width: 100%
 </style>

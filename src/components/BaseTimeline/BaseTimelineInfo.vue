@@ -77,137 +77,109 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="sass" scoped>
 
-.timeline-info {
-  $root: &;
+.timeline-info
+  $root: &
 
-  flex-direction: column;
-  padding: 40px !important;
-  position: relative;
-  @include media-lte(tablet) {
-    // padding-left: 30px;
-    // padding-right: 25px;
-  }
+  flex-direction: column
+  padding: 40px !important
+  position: relative
 
-  .description {
-    border-top: 1px dashed rgba(51,51,51,0.1);
-    margin-top: 15px;
-    padding-top: 20px;
-    p {
-      font-size: 14px;
-      line-height: 24px;
-    }
-  }
-  .duration {
-    p {
-      margin-bottom: 0;
-      strong {
-        color: $primary;
-      }
-    }
-  }
+  .description
+    border-top: 1px dashed rgba(51,51,51,0.1)
+    margin-top: 15px
+    padding-top: 20px
+    p
+      font-size: 14px
+      line-height: 24px
+  .duration
+    p
+      margin-bottom: 0
+      strong
+        color: $primary
 
-  &__header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    padding-bottom: 15px;
-    border-bottom: 1px dashed rgba(51,51,51,.1);
-    @include media-lte(tablet) {
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-    }
-    .circle {
-      width: 12px;
-      height: 12px;
-      border-radius: 100px;
-      background-color: $primary;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      left: 15px;
-      top: 50px;
-      opacity: 0;
-      @include media-lte(tablet) {
-        left: 10px;
-      }
-      span {
-        width: 4px;
-        height: 4px;
-        background-color: $white;
-        border-radius: 100px;
-      }
-    }
-    .title {
-      @include media-lte(tablet) {
-        margin-bottom: 10px;
-      }
-    }
-  }
+  &__header
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    margin-bottom: 10px
+    padding-bottom: 15px
+    border-bottom: 1px dashed rgba(51,51,51,.1)
+    @include media-lte(tablet)
+      flex-direction: column
+      justify-content: flex-start
+      align-items: flex-start
 
-  &.timelines-inner {
-    margin-bottom: 32px;
-    color: $gray-80;
-    &::before {
-      content: "";
-      position: absolute;
-      left: 20px;
-      bottom: -32px;
-      width: 2px;
-      height: 32px;
-      background-color: $gray-40;
-      @include media-lte(tablet) {
-        left: 15px;
-      }
-    }
+    .circle
+      width: 12px
+      height: 12px
+      border-radius: 100px
+      background-color: $primary
+      display: flex
+      flex-direction: row
+      justify-content: center
+      align-items: center
+      position: absolute
+      left: 15px
+      top: 50px
+      opacity: 0
+      @include media-lte(tablet)
+        left: 10px
 
-    #{$root}__header {
-      .circle {
-        opacity: 1;
-      }
-    }
+      span
+        width: 4px
+        height: 4px
+        background-color: $white
+        border-radius: 100px
 
-    &:last-child {
-      margin-bottom: 0;
-      &::before {
-        display: none;
-      }
-    }
-  }
+    .title
+      @include media-lte(tablet)
+        margin-bottom: 10px
 
-  &__explanation {
-    text-align: right;
-    font-size: 14px;
-    line-height: 24px;
-    a {
-      border-bottom: 1px dotted primary;
-      color: $black;
-    }
-  }
+  &.timelines-inner
+    margin-bottom: 32px
+    color: $gray-80
+    &::before
+      content: ""
+      position: absolute
+      left: 20px
+      bottom: -32px
+      width: 2px
+      height: 32px
+      background-color: $gray-40
+      @include media-lte(tablet)
+        left: 15px
 
-  &.is--finish:last-of-type {
-    background-color: $primary;
-    color: $white;
-    .duration {
-      strong {
-        color: $white;
-      }
-    }
-    .timeline-info__header {
-      border-color: $white;
-      .circle{
-        background-color: $white;
-        span {
-          background-color: $primary;
-        }
-      }
-    }
-  }
-}
+    #{$root}__header
+      .circle
+        opacity: 1
+
+    &:last-child
+      margin-bottom: 0
+      &::before
+        display: none
+
+  &__explanation
+    text-align: right
+    font-size: 14px
+    line-height: 24px
+    a
+      border-bottom: 1px dotted primary
+      color: $black
+
+  &.is--finish:last-of-type
+    background-color: $primary
+    color: $white
+    .duration
+      strong
+        color: $white
+
+    .timeline-info__header
+      border-color: $white
+      .circle
+        background-color: $white
+        span
+          background-color: $primary
 </style>

@@ -29,24 +29,19 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-.timelines-content {
-  width: 100%;
-  max-width: 740px;
-  margin: 108px auto 0;
-  position: relative;
-  @include media-lte(tablet) {
-    margin: 80px auto 0;
-  }
+<style lang="sass" scoped>
+.timelines-content
+  width: 100%
+  max-width: 740px
+  margin: 108px auto 0
+  position: relative
+  @include media-lte(tablet)
+    margin: 80px auto 0
 
-  &__title {
-    margin-bottom: 20px;
-    color: $black;
-  }
-}
+  &__title
+    margin-bottom: 20px
+    color: $black
 
-.timelines-container {
-  position: relative;
-}
-
+.timelines-container
+  position: relative
 </style>

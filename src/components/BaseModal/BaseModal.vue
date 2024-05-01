@@ -32,65 +32,54 @@
 
 <script lang="ts" src="./BaseModal.component.ts"></script>
 
-<style lang="scss">
-.wd-modal-base {
-  $root: &;
+<style lang="sass">
+.wd-modal-base
+  $root: &
 
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: $wd-z-index-modal;
-  display: table;
-  width: 100%;
-  height: 100%;
+  position: fixed
+  top: 0
+  left: 0
+  z-index: $wd-z-index-modal
+  display: table
+  width: 100%
+  height: 100%
 
-  &__backdrop {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba($wd-color-text-black, 0.2);
+  &__backdrop
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    background: rgba($wd-color-text-black, 0.2)
 
-    &.is-backdrop-close {
-      cursor: pointer;
-    }
+    &.is-backdrop-close
+      cursor: pointer
 
-    .app-modal-root + .app-modal-root & {
-      background-color: transparent;
-    }
-  }
+    .app-modal-root + .app-modal-root &
+      background-color: transparent
 
-  &__wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
-    padding: 50px 0;
-    overflow: auto;
+  &__wrapper
+    display: flex
+    flex-wrap: wrap
+    align-items: center
+    justify-content: center
+    width: 100vw
+    height: calc(var(--vh, 1vh) * 100)
+    padding: 50px 0
+    overflow: auto
 
-    @include media-lt(tablet) {
-      padding: 0;
-    }
+    @include media-lt(tablet)
+      padding: 0
 
-    &.is-maximized {
-      padding: 0;
-      #{$root}__container {
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
+    &.is-maximized
+      padding: 0
+      #{$root}__container
+        width: 100%
+        height: 100%
 
-  &__container {
-    position: relative;
+  &__container
+    position: relative
 
-    @include media-lt(tablet) {
-      width: 100%;
-    }
-  }
-}
+    @include media-lt(tablet)
+      width: 100%
 </style>
-./BaseModal.component.js./BaseModal.component.js

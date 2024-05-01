@@ -1,6 +1,18 @@
 <script setup lang="ts">
-import { slider } from './utils';
+import { PropType } from 'vue';
 import SliderWithPaginationAutoPlay from 'UiKit/components/common/SliderWithPaginationAutoPlay.vue';
+
+export interface IWhatOurClientsSaySlider {
+  id: number;
+  text1: string;
+  author1: string;
+  text2: string;
+  author2: string;
+}
+
+defineProps({
+  slider: Array as PropType<IWhatOurClientsSaySlider[]>,
+});
 
 </script>
 
@@ -35,43 +47,36 @@ import SliderWithPaginationAutoPlay from 'UiKit/components/common/SliderWithPagi
   </SliderWithPaginationAutoPlay>
 </template>
 
-<style lang="scss" scoped>
-.what-our-clients-say-slider {
+<style lang="sass" scoped>
+.what-our-clients-say-slider
 
-  &__item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 8px;
-    align-self: stretch;
-  }
+  &__item
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: flex-start
+    gap: 8px
+    align-self: stretch
 
-  &__text {
-    color: $gray-80;
-    font-style: italic;
-  }
+  &__text
+    color: $gray-80
+    font-style: italic
 
-  &__item-card {
-    display: flex;
-    padding: 20px;
-    align-self: stretch;
-    flex-direction: column;
-    border-radius: 2px;
-    background: $yellow-light;
-    @include media-gte(tablet) {
-      height: 196px;
-    }
-  }
-}
+  &__item-card
+    display: flex
+    padding: 20px
+    align-self: stretch
+    flex-direction: column
+    border-radius: 2px
+    background: $yellow-light
+    @include media-gte(tablet)
+      height: 196px
 
 .fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
+.fade-leave-active
+  transition: opacity 0.5s ease
 
 .fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+.fade-leave-to
+  opacity: 0
 </style>
