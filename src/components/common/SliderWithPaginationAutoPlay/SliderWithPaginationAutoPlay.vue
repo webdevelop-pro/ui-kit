@@ -87,6 +87,7 @@ onBeforeUnmount(() => {
 </template>
 
 <style lang="sass" scoped>
+@import 'index.sass'
 .slider-with-pagination-auto-play
   position: relative
 

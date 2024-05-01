@@ -32,6 +32,7 @@ defineProps({
 </template>
 
 <style lang="sass" scoped>
+@import 'index.sass'
 .what-our-clients-say
 
   &__container
@@ -39,7 +40,7 @@ defineProps({
     align-items: center
     gap: 80px
     align-self: stretch
-    @include media-lte(tablet)
+    @media screen and (max-width: 767px)
       flex-direction: column-reverse
       justify-content: center
       align-items: flex-start
@@ -51,7 +52,7 @@ defineProps({
     align-items: center
     gap: 8px
     width: 49%
-    @include media-lte(tablet)
+    @media screen and (max-width: 767px)
       width: 100%
 
   &__right
@@ -60,7 +61,7 @@ defineProps({
     flex-direction: column
     align-items: flex-start
     flex: 1 0 0
-    @include media-lte(tablet)
+    @media screen and (max-width: 767px)
       width: 100%
 
   &__title

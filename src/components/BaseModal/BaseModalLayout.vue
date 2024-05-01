@@ -118,6 +118,7 @@ export default defineComponent({
 </script>
 
 <style lang="sass">
+@import 'index.sass'
 $box-shadow: 0 5px 15px rgb(0 0 0 / 50%),
   0 4px 70px 10px rgb(17 41 124 / 35%),
   10px 10px 20px rgb(31 63 174 / 2%),
@@ -156,7 +157,7 @@ $box-shadow: 0 5px 15px rgb(0 0 0 / 50%),
     right: 8px
     top: 8px
 
-  @include media-lte(tablet)
+  @media screen and (max-width: 767px)
     &.is-mobile-full-screen
       width: 100vw
       height: 100%
@@ -184,7 +185,7 @@ $box-shadow: 0 5px 15px rgb(0 0 0 / 50%),
     &__footer
       padding: 20px 15px 10px 15px
 
-  @include media-gt(tablet)
+  @media screen and (min-width: 767px)
     width: 500px
     border-radius: 2px
 
@@ -226,7 +227,7 @@ $box-shadow: 0 5px 15px rgb(0 0 0 / 50%),
         z-index: 2
         display: none
 
-        @include media-lt(tablet)
+        @media screen and (max-width: 767px)
           display: block
 
     #{$root}__circle
@@ -270,7 +271,7 @@ $box-shadow: 0 5px 15px rgb(0 0 0 / 50%),
     &.is-lined
       border-top-color: #1a327c
 
-    @include media-lte(tablet)
+    @media screen and (max-width: 767px)
       &.is-lined-mobile
         border-top-color: $wd-color-grey-0
 
@@ -299,7 +300,7 @@ $box-shadow: 0 5px 15px rgb(0 0 0 / 50%),
     font-weight: 500
     color: #798dca
 
-    @include media-gte(tablet)
+    @media screen and (min-width: 767px)
       font-size: 16px
 
   &__default-button
@@ -310,6 +311,6 @@ $box-shadow: 0 5px 15px rgb(0 0 0 / 50%),
     color: #fff
     background: linear-gradient(180deg, #13296d 0%, rgba(19, 41, 109, 1) 100%)
 
-    @include media-gt(tablet)
+    @media screen and (min-width: 767px)
       border-radius: 37px
 </style>

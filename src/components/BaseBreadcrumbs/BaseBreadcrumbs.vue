@@ -40,6 +40,7 @@ defineProps({
 </template>
 
 <style lang="sass" scoped>
+@import 'index.sass'
 .base-breadcrumbs
   $root: &
 

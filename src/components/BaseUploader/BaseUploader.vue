@@ -168,6 +168,7 @@ const removeFile = (index: number) => {
 </template>
 
 <style lang="sass" scoped>
+@import 'index.sass'
 .base-uploader
   $root: &
 

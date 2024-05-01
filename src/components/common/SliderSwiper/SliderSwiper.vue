@@ -32,12 +32,13 @@ const modules = [Navigation];
 </template>
 
 <style lang="sass">
+@import 'index.sass'
 .slider-swiper
   display: flex
   flex-direction: row
   position: relative
 
-  @include media-lte(tablet)
+  @media screen and (max-width: 767px)
     margin-top: 55px
 
   .swiper-wrapper

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
-import SliderWithPaginationAutoPlay from 'UiKit/components/common/SliderWithPaginationAutoPlay.vue';
+import SliderWithPaginationAutoPlay from 'UiKit/components/common/SliderWithPaginationAutoPlay/SliderWithPaginationAutoPlay.vue';
 
 export interface IWhatOurClientsSaySlider {
   id: number;
@@ -48,6 +48,7 @@ defineProps({
 </template>
 
 <style lang="sass" scoped>
+@import 'index.sass'
 .what-our-clients-say-slider
 
   &__item
@@ -69,7 +70,7 @@ defineProps({
     flex-direction: column
     border-radius: 2px
     background: $yellow-light
-    @include media-gte(tablet)
+    @media screen and (min-width: 767px)
       height: 196px
 
 .fade-enter-active,

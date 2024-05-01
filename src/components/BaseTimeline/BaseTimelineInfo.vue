@@ -78,7 +78,7 @@ export default defineComponent({
 </script>
 
 <style lang="sass" scoped>
-
+@import 'index.sass'
 .timeline-info
   $root: &
 
@@ -107,7 +107,7 @@ export default defineComponent({
     margin-bottom: 10px
     padding-bottom: 15px
     border-bottom: 1px dashed rgba(51,51,51,.1)
-    @include media-lte(tablet)
+    @media screen and (max-width: 767px)
       flex-direction: column
       justify-content: flex-start
       align-items: flex-start
@@ -125,7 +125,7 @@ export default defineComponent({
       left: 15px
       top: 50px
       opacity: 0
-      @include media-lte(tablet)
+      @media screen and (max-width: 767px)
         left: 10px
 
       span
@@ -135,7 +135,7 @@ export default defineComponent({
         border-radius: 100px
 
     .title
-      @include media-lte(tablet)
+      @media screen and (max-width: 767px)
         margin-bottom: 10px
 
   &.timelines-inner
@@ -149,7 +149,7 @@ export default defineComponent({
       width: 2px
       height: 32px
       background-color: $gray-40
-      @include media-lte(tablet)
+      @media screen and (max-width: 767px)
         left: 15px
 
     #{$root}__header

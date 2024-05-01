@@ -106,6 +106,7 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
 </template>
 
 <style lang="sass" scoped>
+@import 'index.sass'
 .base-form-group
   display: flex
   flex-direction: column

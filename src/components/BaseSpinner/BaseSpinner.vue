@@ -71,6 +71,7 @@ const circleSizeAttrs = computed(() => {
 </template>
 
 <style lang="sass">
+@import 'index.sass'
 .spinner
 	position: absolute
 	width: 100%

@@ -33,6 +33,7 @@ const progress = computed(() => {
 </template>
 
 <style lang="sass" scoped>
+@import 'index.sass'
 .base-progressbar
   width: 100%
   display: flex

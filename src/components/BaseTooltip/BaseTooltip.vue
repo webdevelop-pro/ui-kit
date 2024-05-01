@@ -295,7 +295,7 @@ export default defineComponent({
 </script>
 
 <style lang="sass">
-@import 'index.sass';
+@import 'index.sass'
 .wd-tooltip
   $root: &
 
@@ -326,7 +326,7 @@ export default defineComponent({
 
   &__content
     position: fixed
-    z-index: $wd-z-index-tooltip
+    z-index: 1000
     display: none
     padding: 8px
     box-shadow: $box-shadow-small

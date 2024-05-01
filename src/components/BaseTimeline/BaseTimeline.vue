@@ -30,12 +30,13 @@ export default defineComponent({
 </script>
 
 <style lang="sass" scoped>
+@import 'index.sass'
 .timelines-content
   width: 100%
   max-width: 740px
   margin: 108px auto 0
   position: relative
-  @include media-lte(tablet)
+  @media screen and (max-width: 767px)
     margin: 80px auto 0
 
   &__title

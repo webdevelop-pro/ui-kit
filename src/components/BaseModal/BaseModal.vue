@@ -33,6 +33,7 @@
 <script lang="ts" src="./BaseModal.component.ts"></script>
 
 <style lang="sass">
+@import 'index.sass'
 .wd-modal-base
   $root: &
 
@@ -68,7 +69,7 @@
     padding: 50px 0
     overflow: auto
 
-    @include media-lt(tablet)
+    @media screen and (max-width: 767px)
       padding: 0
 
     &.is-maximized
@@ -80,6 +81,6 @@
   &__container
     position: relative
 
-    @include media-lt(tablet)
+    @media screen and (max-width: 767px)
       width: 100%
 </style>

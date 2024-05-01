@@ -56,6 +56,7 @@ export default defineComponent({
 </script>
 
 <style lang="sass" scoped>
+@import 'index.sass'
 .timelines-items
   --top: 42px
 
@@ -66,7 +67,7 @@ export default defineComponent({
   left: 0
   top: 0
   height: 100%
-  @include media-lte(tablet)
+  @media screen and (max-width: 767px)
     padding-bottom: 35px
     margin-left: 8px
 
@@ -156,7 +157,7 @@ export default defineComponent({
   opacity: 1
   z-index: 2
   margin-right: 55px
-  @include media-lte(tablet)
+  @media screen and (max-width: 767px)
     margin-right: 25px
 
   span
@@ -198,7 +199,7 @@ export default defineComponent({
       width: 2px
       height: 12px
       background-color: #9cb9fc
-      @include media-lte(tablet)
+      @media screen and (max-width: 767px)
         left: 15px
 
     &__header

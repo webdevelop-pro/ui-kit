@@ -141,6 +141,7 @@ watch(() => props.items, () => {
 </template>
 
 <style lang="sass" scoped>
+@import 'index.sass'
 .base-filter
   --base-filter-dropdown--min-width: 150px
 
