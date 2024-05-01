@@ -44,7 +44,6 @@ withDefaults(defineProps<{
 	:deep(thead)
 		th
 			background: $table-thead-background-color
-			+font(500)
 			color: $table-tbody-th-color
 
 	:deep(th)
