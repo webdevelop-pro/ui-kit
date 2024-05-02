@@ -1,21 +1,47 @@
+<script setup lang="ts">
+import { computed } from 'vue';
+import BaseTimelineCircle from './BaseTimelineCircle.vue';
+
+interface Props {
+  type?: 'active' | 'complete' | 'not-complete'
+  variant?: 'primary' | 'inner' | 'highlight'
+  circleType?: 'active' | 'not-complete' | 'complete' | 'highlight'
+  line: 'regular' | 'hidden'
+  title?: string
+  duration?: string
+  active?: boolean
+  to: [Boolean, Object],
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  type: 'active',
+  variant: 'primary',
+  circleType: 'active',
+  line: 'regular',
+})
+
+const btnClasses = computed(() => {
+  let classes = `is--type-${props.type} `;
+  classes += `is--variant-${props.variant} `;
+  classes += `is--circle-type-${props.circleType} `;
+  classes += `is--line-${props.line} `;
+  return classes;
+});
+</script>
+
 <template>
   <div
-    class="BaseTimelineItem timelines-items"
-    :class="{
-      'is--first': infoFirst,
-      'is--finish': infoFinish,
-      'is--dark': dark,
-    }"
+    class="BaseTimelineItem base-timeline-item"
+    :class="[btnClasses, { 'is--title': title }]"
   >
-    <div
-      class="circle"
-      :class="{ 'is-active': active }"
-    >
-      <span />
-    </div>
+    <BaseTimelineCircle
+      :type="circleType"
+      class="base-timeline-item__circle"
+    />
+
     <div
       v-if="title"
-      class="timelines-items__step"
+      class="base-timeline-item__step"
     >
       <component
         :is="to ? 'router-link' : 'h6'"
@@ -25,39 +51,19 @@
         {{ title }}
       </component>
     </div>
+
     <div
       v-if="$slots.default"
-      class="items timelines-items__items"
+      class="items base-timeline-item__items"
     >
       <slot />
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import {
-  defineComponent,
-} from 'vue';
-
-
-export default defineComponent({
-  name: 'WdTimelineItem',
-  props: {
-    to: [Boolean, Object],
-    active: Boolean,
-    infoFirst: Boolean,
-    infoFinish: Boolean,
-    title: {
-      type: String,
-    },
-    dark: Boolean,
-  },
-});
-</script>
-
 <style lang="sass" scoped>
 @import 'index.sass'
-.timelines-items
+.base-timeline-item
   --top: 42px
 
   $root: &
@@ -74,16 +80,19 @@ export default defineComponent({
   &::before
     content: ""
     position: absolute
-    top: var(--top)
-    left: 9px
+    top: calc(var(--top) + 24px)
+    left: 11px
     z-index: 1
     width: 2px
-    height: 100%
-    background-color: rgba($gray-40,0.6)
+    height: calc(100% - 24px)
+    background-color: $gray-30
 
-  &:last-child
+  &.is--line-regular:last-child
     &::before
       display: none
+  &.is--line-hidden:last-child
+    &::before
+      background: linear-gradient($gray-30, rgba($gray-30, 0)) !important
 
   &__items
     margin-left: 50px
@@ -93,7 +102,7 @@ export default defineComponent({
     flex-direction: row
     align-items: center
     position: relative
-    margin-bottom: 15px
+    // margin-bottom: 15px
     .step
       font-weight: 800
       font-size: 14px
@@ -106,108 +115,12 @@ export default defineComponent({
       &:hover
         color: $primary
 
-  &.is--first
-    .circle
-      width: 42px
-      height: 42px
-      top: calc(var(--top) - 10px)
-      left: -11px
-      border-width: 1px
-      span
-        width: 20px
-        height: 20px
-        border-radius: 100%
-        border: 7px solid $primary
-        background-color: $white
+  &__circle
+    top: var(--top)
+    position: absolute
 
-  &.is--finish
-    .circle
-      width: 32px
-      height: 32px
-      top: 35px
-      left: -8px
-      border-width: 12px
-      span
-        display: none
-
-  &.is--dark
-    .circle
-      background-color: $black
-
-  &.is--dark.is--first
-    .circle
-      span
-        background-color: $black
-
-
-.circle
-  width: 24px
-  height: 24px
-  border-radius: 100%
-  border: 3px solid $primary
-  background-color: $white
-  display: flex
-  flex-direction: row
-  justify-content: center
-  flex-shrink: 0
-  align-items: center
-  position: absolute
-  left: -3px
-  top: var(--top)
-  opacity: 1
-  z-index: 2
-  margin-right: 55px
-  @media screen and (max-width: 767px)
-    margin-right: 25px
-
-  span
-    width: 6px
-    height: 6px
-    background-color: $primary
-    border-radius: 100%
-
-  &.is-active
-    width: 20px
-    height: 20px
-    background-color: $primary
-    position: relative
-    transition: .3s
+  &.is--circle-type-highlight
     &::before
-      content: ""
-      position: absolute
-      left: -13px
-      top: -13px
-      width: 42px
-      height: 42px
-      background-color: $primary
-      opacity: 0.08
-      border-radius: 100px
-
-    span
-      width: 6px
-      height: 6px
-      background-color: $white
-
-.timelines-inner
-  .timeline-info
-    margin-bottom: 12px
-    &::before
-      content: ""
-      position: absolute
-      left: 20px
-      bottom: -12px
-      width: 2px
-      height: 12px
-      background-color: #9cb9fc
-      @media screen and (max-width: 767px)
-        left: 15px
-
-    &__header
-      .circle
-        opacity: 1
-
-    &:last-child
-      margin-bottom: 0
-      &::before
-        display: none
+      top: calc(var(--top) + 32px)
+      height: calc(100% - 32px)
 </style>

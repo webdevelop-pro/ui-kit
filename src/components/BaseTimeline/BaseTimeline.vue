@@ -1,9 +1,18 @@
+<script setup lang="ts">
+  defineProps({
+    title: {
+      type: String,
+      required: false,
+    },
+  })
+</script>
+
 <template>
-  <div class="BaseTimeline timelines-container timelines">
-    <div class="timelines-content">
+  <div class="BaseTimeline base-timeline">
+    <div class="base-timeline__content">
       <h3
         v-if="title"
-        class="timelines-content__title"
+        class="base-timeline__title"
       >
         {{ title }}
       </h3>
@@ -12,37 +21,20 @@
   </div>
 </template>
 
-<script lang="ts">
-import {
-  defineComponent,
-} from 'vue';
-
-
-export default defineComponent({
-  name: 'WdTimeline',
-  props: {
-    title: {
-      type: String,
-      required: false,
-    },
-  },
-});
-</script>
-
 <style lang="sass" scoped>
 @import 'index.sass'
-.timelines-content
-  width: 100%
-  max-width: 740px
-  margin: 108px auto 0
+.base-timeline
   position: relative
-  @media screen and (max-width: 767px)
-    margin: 80px auto 0
 
   &__title
     margin-bottom: 20px
     color: $black
 
-.timelines-container
-  position: relative
+  &__content
+    width: 100%
+    max-width: 740px
+    margin: 108px auto 0
+    position: relative
+    @media screen and (max-width: 767px)
+      margin: 80px auto 0
 </style>
