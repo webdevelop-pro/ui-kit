@@ -44,7 +44,7 @@ function onUpdate(option: string, checked: boolean) {
 	</div>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .base-form-checkbox-group
 	$root: &
 	width: 100%

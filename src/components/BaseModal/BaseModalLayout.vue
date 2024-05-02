@@ -1,3 +1,31 @@
+<script lang="ts" setup>
+import BaseButton from 'UiKit/components/BaseButton/BaseButton.vue';
+
+defineProps({
+  title: String,
+  titleBold: Boolean,
+  titleLeft: Boolean,
+  subtitle: String,
+  headerLined: Boolean,
+  fullWidthHeader: Boolean,
+  circle: Boolean,
+  dark: Boolean,
+  footerUp: Boolean,
+  footerLined: Boolean,
+  contentNoPadding: Boolean,
+  closable: {
+    type: Boolean,
+    default: true,
+  },
+  mobileFullScreen: {
+    type: Boolean,
+    default: true,
+  },
+});
+
+defineEmits(['close']);
+</script>
+
 <template>
   <div
     :class="[{
@@ -82,42 +110,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import BaseButton from 'UiKit/components/BaseButton/BaseButton.vue';
-
-export default defineComponent({
-  name: 'WdModalLayout',
-  inheritAttrs: false,
-  components: {
-    BaseButton,
-  },
-  props: {
-    title: String,
-    titleBold: Boolean,
-    titleLeft: Boolean,
-    subtitle: String,
-    headerLined: Boolean,
-    fullWidthHeader: Boolean,
-    circle: Boolean,
-    dark: Boolean,
-    footerUp: Boolean,
-    footerLined: Boolean,
-    contentNoPadding: Boolean,
-    closable: {
-      type: Boolean,
-      default: true,
-    },
-    mobileFullScreen: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  emits: ['close'],
-});
-</script>
-
-<style lang="sass">
+<style lang="sass" scoped>
 @import 'index.sass'
 $box-shadow: 0 5px 15px rgb(0 0 0 / 50%),
   0 4px 70px 10px rgb(17 41 124 / 35%),

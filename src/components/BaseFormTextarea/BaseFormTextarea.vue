@@ -42,7 +42,7 @@ defineEmits<{
 	</div>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import 'index.sass'
 .base-form-textarea
 	color: $textarea-color

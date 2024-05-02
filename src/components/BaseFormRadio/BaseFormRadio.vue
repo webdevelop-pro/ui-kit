@@ -104,7 +104,7 @@ function getLabelValue(option: string | number | FormRadioOption) {
 	</div>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import 'index.sass'
 .base-form-radio
 	$root: &

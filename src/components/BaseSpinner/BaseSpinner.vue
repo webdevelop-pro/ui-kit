@@ -70,7 +70,7 @@ const circleSizeAttrs = computed(() => {
   </transition>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import 'index.sass'
 .spinner
 	position: absolute

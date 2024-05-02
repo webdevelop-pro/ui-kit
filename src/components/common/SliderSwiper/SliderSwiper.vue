@@ -30,7 +30,7 @@ const modules = [Navigation];
     <slot />
   </Swiper>
 </template>
-
+// scoped cannot add
 <style lang="sass">
 @import 'index.sass'
 .slider-swiper

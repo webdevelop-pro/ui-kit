@@ -56,7 +56,7 @@ watch(() => model.value, () => {
 	</div>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import 'index.sass'
 .base-form-input-search
 	&__search-icon

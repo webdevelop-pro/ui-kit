@@ -31,8 +31,8 @@ const btnClasses = computed(() => {
       class="base-timeline-card__header"
     >
       <BaseTimelineCircle
-        v-if="variant === 'inner'"
-        :type="(variant === 'highlight') ? 'inner-highlight' : 'inner'"
+        v-if="(variant === 'inner') || (variant === 'inner-highlight')"
+        :type="(variant === 'inner') ? 'inner' : 'inner-highlight'"
         class="base-timeline-card__circle"
       />
 
@@ -118,6 +118,7 @@ const btnClasses = computed(() => {
   &.is--variant-inner-highlight
     background-color: $primary-dark
     color: $gray-10
+
     &::before // inner lines between cards
       content: ""
       position: absolute

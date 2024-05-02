@@ -102,7 +102,7 @@ function onChange(event: Event) {
 	</div>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import 'index.sass'
 .base-form-checkbox
 	$root: &

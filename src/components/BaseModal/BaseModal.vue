@@ -32,7 +32,7 @@
 
 <script lang="ts" src="./BaseModal.component.ts"></script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import 'index.sass'
 .wd-modal-base
   $root: &
