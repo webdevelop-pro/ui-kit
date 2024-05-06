@@ -23,27 +23,40 @@ defineProps({
     :autoplay="false"
     active-color="#F1AF32"
   >
-    <div
-      class="what-our-clients-say-slider__item is--card"
-      v-bind="active"
-    >
-      <div class="what-our-clients-say-slider__item-card">
-        <p class="what-our-clients-say-slider__text">
-          {{ active?.text1 }}
-        </p>
-        <div class="what-our-clients-say-slider__author is--h5__title">
-          {{ active?.author1 }}
+      <div
+        class="what-our-clients-say-slider__item is--card"
+      >
+        <div class="what-our-clients-say-slider__item-card">
+          <transition
+            name="fade"
+            mode="out-in"
+          >
+          <div :key="active.id" v-bind="active">
+            <p :key="active.id" class="what-our-clients-say-slider__text">
+              {{ active?.text1 }}
+            </p>
+            <div :key="active.id" class="what-our-clients-say-slider__author is--h5__title">
+              {{ active?.author1 }}
+            </div>
+          </div>
+          </transition>
+        </div>
+        <div class="what-our-clients-say-slider__item-card">
+          <transition
+            name="fade"
+            mode="out-in"
+          >
+          <div :key="active.id" v-bind="active">
+            <p :key="active.id" class="what-our-clients-say-slider__text">
+              {{ active?.text2 }}
+            </p>
+            <div :key="active.id" class="what-our-clients-say-slider__author is--h5__title">
+              {{ active?.author2 }}
+            </div>
+          </div>
+          </transition>
         </div>
       </div>
-      <div class="what-our-clients-say-slider__item-card">
-        <p class="what-our-clients-say-slider__text">
-          {{ active?.text2 }}
-        </p>
-        <div class="what-our-clients-say-slider__author is--h5__title">
-          {{ active?.author2 }}
-        </div>
-      </div>
-    </div>
   </SliderWithPaginationAutoPlay>
 </template>
 
@@ -58,6 +71,13 @@ defineProps({
     align-items: flex-start
     gap: 8px
     align-self: stretch
+    top: 0
+    left: 0
+    width: 100%
+
+    &.is--active
+      position: relative
+      transition: opacity 3s ease
 
   &__text
     color: $gray-80
@@ -80,4 +100,13 @@ defineProps({
 .fade-enter-from,
 .fade-leave-to
   opacity: 0
+
+.transition-translate-right
+  &-enter-active,
+  &-leave-active
+    transition: transform 0.2s ease
+
+  &-enter-from,
+  &-leave-to
+    transform: translateX(100%)
 </style>

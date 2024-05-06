@@ -63,25 +63,19 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="SliderWithPaginationAutoPlay slider-with-pagination-auto-play">
-    <transition
-      name="fade"
-      mode="out-in"
-    >
-      <div
-        :key="active.id"
-        class="slider-with-pagination-auto-play__item"
-      >
-        <slot v-bind="active" />
-      </div>
-    </transition>
+    <slot v-bind="active" />
     <div class="slider-with-pagination-auto-play__pagination">
       <div
         v-for="item in slider"
         :key="item.id"
-        class="slider-with-pagination-auto-play__pagination-item"
-        :class="{ 'is--active': item.id === activeElementId }"
+        class="slider-with-pagination-auto-play__pagination-item-wrap"
         @click="changeSlide(item.id)"
-      />
+      >
+        <div
+          class="slider-with-pagination-auto-play__pagination-item"
+          :class="{ 'is--active': item.id === activeElementId }"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -91,30 +85,24 @@ onBeforeUnmount(() => {
 .slider-with-pagination-auto-play
   position: relative
 
-  &__item
-    top: 0
-    left: 0
-    width: 100%
-
-    &.is--active
-      position: relative
-      transition: opacity 3s ease
-
   &__pagination
     display: flex
     flex-direction: row
     gap: 4px
     justify-content: center
-    margin-top: 35px
+    margin-top: 25px
 
   &__pagination-item
     width: 31px
     height: 2px
     background-color: $gray-30
-    cursor: pointer
 
     &.is--active
       background-color: v-bind(activecolor)
+
+  &__pagination-item-wrap
+    padding: 9px 0
+    cursor: pointer
 
 .fade-enter-active,
 .fade-leave-active

@@ -147,7 +147,7 @@
 		&:hover
 			background-color: $base-button-danger-hover-color
 	&.is--variant-outlined
-		background-color: transparent
+		background-color: $white
 		border-style: solid
 		border-width: $base-button-border-width
 		&.is--color-primary
