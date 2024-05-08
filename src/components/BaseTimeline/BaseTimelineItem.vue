@@ -6,11 +6,11 @@ interface Props {
   type?: 'active' | 'complete' | 'not-complete'
   variant?: 'primary' | 'inner' | 'highlight'
   circleType?: 'active' | 'not-complete' | 'complete' | 'highlight'
-  line: 'regular' | 'hidden'
+  line?: 'regular' | 'hidden'
   title?: string
   duration?: string
   active?: boolean
-  to: [Boolean, Object],
+  to?: [Boolean, Object],
 }
 
 const props = withDefaults(defineProps<Props>(), {

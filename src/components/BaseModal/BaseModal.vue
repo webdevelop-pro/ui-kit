@@ -40,7 +40,7 @@
   position: fixed
   top: 0
   left: 0
-  z-index: $wd-z-index-modal
+  z-index: 11000
   display: table
   width: 100%
   height: 100%

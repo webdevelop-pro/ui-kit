@@ -125,7 +125,7 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
     top: 0
 
   &__label-required
-    color: $wd-color-red
+    color: $red
 
   &__error
     margin-top: 4px

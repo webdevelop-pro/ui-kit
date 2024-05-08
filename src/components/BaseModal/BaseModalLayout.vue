@@ -112,20 +112,14 @@ defineEmits(['close']);
 
 <style lang="sass" scoped>
 @import 'index.sass'
-$box-shadow: 0 5px 15px rgb(0 0 0 / 50%),
-  0 4px 70px 10px rgb(17 41 124 / 35%),
-  10px 10px 20px rgb(31 63 174 / 2%),
-  13px 2px 6px rgb(31 63 174 / 2%),
-  7px 0 50px rgb(31 63 174 / 2%)
-
 .wd-modal-layout
   $root: &
 
   display: flex
   flex-direction: column
   padding-bottom: 15px
-  color: $wd-color-text
-  background: $wd-color-modal-bg
+  color: $black
+  background: $white
   position: relative
 
   &__header
@@ -137,7 +131,7 @@ $box-shadow: 0 5px 15px rgb(0 0 0 / 50%),
     justify-content: space-between
 
     &.is-lined
-      border-bottom-color: $wd-color-grey-0
+      border-bottom-color: $gray-10
 
     &.is-full-width
       margin: 0
@@ -207,7 +201,7 @@ $box-shadow: 0 5px 15px rgb(0 0 0 / 50%),
         width: 100%
         height: calc(100% - 95px)
         content: ""
-        background: $wd-color-modal-bg
+        background: $white
         border-bottom-right-radius: 37px
         border-bottom-left-radius: 37px
 
@@ -244,7 +238,7 @@ $box-shadow: 0 5px 15px rgb(0 0 0 / 50%),
         height: 105px
         content: ""
         border-radius: 50%
-        box-shadow: 0 0 0 9999px $wd-color-modal-bg
+        box-shadow: 0 0 0 9999px $white
 
       &::after
         position: absolute
@@ -266,7 +260,7 @@ $box-shadow: 0 5px 15px rgb(0 0 0 / 50%),
 
     @media screen and (max-width: 767px)
       &.is-lined-mobile
-        border-top-color: $wd-color-grey-0
+        border-top-color: $gray-10
 
   &__main
     display: flex
