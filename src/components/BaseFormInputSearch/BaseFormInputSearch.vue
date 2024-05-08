@@ -61,7 +61,7 @@ watch(() => model.value, () => {
 .base-form-input-search
 	&__search-icon
 		width: 20px
-		color: $gray-80
+		color: $gray-70
 	&__close-icon
 		width: 10px !important
 		color: $gray-80

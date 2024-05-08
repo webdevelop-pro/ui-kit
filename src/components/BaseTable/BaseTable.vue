@@ -1,10 +1,18 @@
 <script lang="ts" setup="">
+import { computed } from 'vue';
 
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
 	fixedHeader?: boolean;
 	height?: string,
+	size: 'large' | 'small'
 }>(), {
 	height: '100%',
+	size: 'large',
+});
+
+const btnClasses = computed(() => {
+	let classes = `is--size-${props.size} `;
+	return classes;
 });
 
 </script>
@@ -12,7 +20,7 @@ withDefaults(defineProps<{
 <template>
 	<div
 		class="BaseTable base-table"
-		:class="{'is--fixed-header': fixedHeader}"
+		:class="[btnClasses, { 'is--fixed-header': fixedHeader }]"
 		:style="{'height': height}"
 	>
 		<table class="base-table__table">

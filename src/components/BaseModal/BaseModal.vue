@@ -51,7 +51,7 @@
     right: 0
     bottom: 0
     left: 0
-    background: rgba($wd-color-text-black, 0.2)
+    background: rgba(18, 22, 31, 0.40)
 
     &.is-backdrop-close
       cursor: pointer
