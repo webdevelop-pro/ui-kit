@@ -44,14 +44,23 @@ function onUpdate(option: string, checked: boolean) {
 	</div>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .base-form-checkbox-group
 	$root: &
+	width: 100%
+
+	--base-form-checkbox-group-item--padding: 12px 12px
+	--base-form-checkbox-group-item--background-color: #E9ECEF
 	
 	display: flex
 	flex-direction: column
 	align-items: flex-start
 	
 	&__item
-		margin: 10px 0
+		padding: var(--base-form-checkbox-group-item--padding)
+		width: 100%
+		cursor: pointer
+		transition: all 0.2s ease 
+		&:hover
+			background: var(--base-form-checkbox-group-item--background-color)
 </style>

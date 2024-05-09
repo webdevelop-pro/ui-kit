@@ -8,7 +8,7 @@ type FormRadioOption = {
 };
 
 const props = withDefaults(defineProps<{
-	modelValue: string | string[] | number[]
+	modelValue: string | string[] | number[] | boolean
 	options?: Record<string | number, unknown> | string[] | FormRadioOption[],
 	row?: boolean,
 	disabled?: boolean,
@@ -91,7 +91,7 @@ function getLabelValue(option: string | number | FormRadioOption) {
 					tabindex="1"
 					class="base-form-radio__input"
 					v-bind="$attrs"
-					@change="$emit('update:modelValue', $event.target.value)"
+					@change="$emit('update:modelValue', selectedOption);"
 				>
 				<label
 					:for="index"
@@ -104,7 +104,7 @@ function getLabelValue(option: string | number | FormRadioOption) {
 	</div>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import 'index.sass'
 .base-form-radio
 	$root: &

@@ -52,7 +52,10 @@ const moneyFormatOptions = {
       },
     }
 
-const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>();
+const emit = defineEmits<{
+	(e: 'update:modelValue', value: string): void,
+	(e: 'enter'): void,
+}>();
 
 const localValue = ref('');
 const focused = ref(false);
@@ -131,7 +134,7 @@ function onInput(value: string) {
 	// set filtered value
 	localValue.value = String(value).replace(charsToCheck, '');
 	if (props.mask) localValue.value = mask.masked(localValue.value);
-	emit('update:modelValue', returnValue.value);
+	emit('update:modelValue', returnValue.value.trim());
 }
 
 function onInputEvent() {
@@ -192,6 +195,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 			@beforeinput="onBeforeInput"
 			@focus="onFocus"
 			@blur="onBlur"
+			@keypress.enter="emit('enter')"
 		>
 		<span
 			v-if="prepend"
@@ -202,7 +206,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 	</div>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import 'index.sass'
 .base-form-input
 	color: $input-color

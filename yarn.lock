@@ -1439,16 +1439,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dafcoe/vue-collapsible-panel@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "@dafcoe/vue-collapsible-panel@npm:0.2.0"
-  dependencies:
-    "@types/uuid": ^8.3.0
-    uuid: ^8.3.2
-  checksum: 470017c8058a4e4cdc40b0d2e42593ec0cf3177707977809a21c9f5fd34590600f8518fb0abbf50c533837b57362da20662efafbd924e9944e74b0c6bc485572
-  languageName: node
-  linkType: hard
-
 "@discoveryjs/json-ext@npm:^0.5.3":
   version: 0.5.7
   resolution: "@discoveryjs/json-ext@npm:0.5.7"
@@ -3442,6 +3432,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swoga/vue-collapsible-panel@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "@swoga/vue-collapsible-panel@npm:0.3.0"
+  dependencies:
+    "@types/uuid": ^8.3.0
+    uuid: ^8.3.2
+  checksum: a47725f514ff1c488040992c5ac5245a0bd7d714792f0ac6e588e0480c932b587d3769dd0fed42b990b819573d4f65aebed53e3aa5463f2666c8d48c58fc2a4c
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:^9.0.0":
   version: 9.3.4
   resolution: "@testing-library/dom@npm:9.3.4"
@@ -3822,6 +3822,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/web-bluetooth@npm:^0.0.20":
+  version: 0.0.20
+  resolution: "@types/web-bluetooth@npm:0.0.20"
+  checksum: d6d61da683e876e8995ac57e2e5229d829d0f536deb3568d4430898fc626ebcb7e065fe7f655ac6a5205702f7f7049e6335abe689cd5291241eef6e39e8a4371
+  languageName: node
+  linkType: hard
+
 "@types/yargs-parser@npm:*":
   version: 21.0.3
   resolution: "@types/yargs-parser@npm:21.0.3"
@@ -4013,6 +4020,34 @@ __metadata:
   version: 3.4.19
   resolution: "@vue/shared@npm:3.4.19"
   checksum: 676c2ec007efc5963a37811e1991f7a114ea603d52721feb59e6c1ac119127d1bdf80c57b09b32a53bb803922edc50e3753d847e800e16018a80fc5f9b84fcf5
+  languageName: node
+  linkType: hard
+
+"@vueuse/core@npm:^10.9.0":
+  version: 10.9.0
+  resolution: "@vueuse/core@npm:10.9.0"
+  dependencies:
+    "@types/web-bluetooth": ^0.0.20
+    "@vueuse/metadata": 10.9.0
+    "@vueuse/shared": 10.9.0
+    vue-demi: ">=0.14.7"
+  checksum: 6d26660e4e88e2e6b34f84cb832d919d296a198e6c7f8ef93fb5d0442b53ba3872c617c1144190328992b44dde33a8e249b3182ac35128d460a457488a6df940
+  languageName: node
+  linkType: hard
+
+"@vueuse/metadata@npm:10.9.0":
+  version: 10.9.0
+  resolution: "@vueuse/metadata@npm:10.9.0"
+  checksum: e381d3134e1a5965e157503ddb1187f671316386ab0c779d3fc1b9c91d6658086c417414f4642554382ac43fd800d7565f5f25824b678433f937a917e931387e
+  languageName: node
+  linkType: hard
+
+"@vueuse/shared@npm:10.9.0":
+  version: 10.9.0
+  resolution: "@vueuse/shared@npm:10.9.0"
+  dependencies:
+    vue-demi: ">=0.14.7"
+  checksum: e6fc1e04aa63ead37694b5543cacd8c1b55ade5ce7416699302a4db5e5c3c083b7ecda9156445e07a477eb86664740d368a03584b55859dbe0cf0abbec3e21ab
   languageName: node
   linkType: hard
 
@@ -4373,7 +4408,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "base-components@workspace:."
   dependencies:
-    "@dafcoe/vue-collapsible-panel": ^0.2.0
     "@storybook/addon-essentials": ^7.6.17
     "@storybook/addon-interactions": ^7.6.17
     "@storybook/addon-links": ^7.6.17
@@ -4381,13 +4415,16 @@ __metadata:
     "@storybook/testing-library": ^0.2.2
     "@storybook/vue3": ^7.6.17
     "@storybook/vue3-vite": ^7.6.17
+    "@swoga/vue-collapsible-panel": ^0.3.0
     "@vitejs/plugin-vue": ^5.0.4
     "@vue/compiler-core": ^3.4.19
+    "@vueuse/core": ^10.9.0
     maska: ^2.1.11
     react: ^18.2.0
     react-dom: ^18.2.0
     sass: ^1.71.1
     storybook: ^7.6.17
+    swiper: ^11.1.1
     typescript: ^5.3.3
     vite: ^5.1.4
     vite-svg-loader: ^5.1.0
@@ -9445,6 +9482,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"swiper@npm:^11.1.1":
+  version: 11.1.1
+  resolution: "swiper@npm:11.1.1"
+  checksum: fb3b12034f94036a32c3d229cc2a630d281d56100ec78f948a69d7a49892f6c744291e2a2c6ed89c0058dcb8718c24cc8535194c4a1e42f4de4f59c961472ee1
+  languageName: node
+  linkType: hard
+
 "synchronous-promise@npm:^2.0.15":
   version: 2.0.17
   resolution: "synchronous-promise@npm:2.0.17"
@@ -10024,6 +10068,22 @@ vue-component-type-helpers@latest:
   version: 1.8.27
   resolution: "vue-component-type-helpers@npm:1.8.27"
   checksum: 71245a41a19c9e30af4a46e2a7b3a3caedc28cbafdfb6536b65ff5165347829d83756737d4770018ee92ea90803a5e6a8d42844d380c9de39b7652853fb20543
+  languageName: node
+  linkType: hard
+
+"vue-demi@npm:>=0.14.7":
+  version: 0.14.7
+  resolution: "vue-demi@npm:0.14.7"
+  peerDependencies:
+    "@vue/composition-api": ^1.0.0-rc.1
+    vue: ^3.0.0-0 || ^2.6.0
+  peerDependenciesMeta:
+    "@vue/composition-api":
+      optional: true
+  bin:
+    vue-demi-fix: bin/vue-demi-fix.js
+    vue-demi-switch: bin/vue-demi-switch.js
+  checksum: 6819b1cd52355047ae899d7cdfa32f1b00e806e6c67455601d33ab0226f3172c48a5f6c3d547cb7fa32925b3b7100448bf18f98ea4d5f8bc4b9d28ae005a805d
   languageName: node
   linkType: hard
 

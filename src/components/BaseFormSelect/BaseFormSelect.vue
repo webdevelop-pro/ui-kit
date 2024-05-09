@@ -226,6 +226,7 @@ function onSearch(searchString: string) {
 			position: absolute
 			top: 100%
 			width: 100%
+			z-index: 10
 	&__append
 		position: absolute
 		left: 15px
@@ -242,7 +243,7 @@ function onSearch(searchString: string) {
 		display: flex
 		align-items: center
 		justify-content: space-between
-		padding: 8px 15px
+		padding: 12.5px 12px
 		height: $select-height
 		.vs__selected-options
 			display: flex
@@ -259,16 +260,24 @@ function onSearch(searchString: string) {
 			outline: none
 			background: none
 			box-shadow: none
+			color: inherit
+			font-size: inherit
+			font-weight: inherit
+			font-family: inherit
+			line-height: inherit
 			width: 0
 			max-width: 100%
 			flex-grow: 1
 			z-index: 1
-			color: inherit
 			appearance: none
 			padding: 0
 			&::placeholder
 				color: $select-placeholder-color
-				line-height: 22px
+				font-size: inherit
+				font-weight: inherit
+				font-family: inherit
+				line-height: inherit
+				opacity: 1
 		.vs__open-indicator
 			background-image: url(./arrow.svg)
 			width: 16px

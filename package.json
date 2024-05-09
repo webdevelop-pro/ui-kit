@@ -12,9 +12,11 @@
     "build": "storybook build -o dist/"
   },
   "dependencies": {
-    "@dafcoe/vue-collapsible-panel": "^0.2.0",
+    "@swoga/vue-collapsible-panel": "^0.3.0",
     "@vue/compiler-core": "^3.4.19",
+    "@vueuse/core": "^10.9.0",
     "sass": "^1.71.1",
+    "swiper": "^11.1.1",
     "vite-svg-loader": "^5.1.0",
     "vue": "^3.4.19",
     "vue-select": "^4.0.0-beta.6"

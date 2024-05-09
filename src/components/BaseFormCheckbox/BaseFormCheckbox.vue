@@ -102,7 +102,7 @@ function onChange(event: Event) {
 	</div>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import 'index.sass'
 .base-form-checkbox
 	$root: &
@@ -140,7 +140,6 @@ function onChange(event: Event) {
 		height: $checkbox-size
 		margin-right: 8px
 		position: relative
-		background-color: #fff
 		display: flex
 		flex-direction: row
 		justify-content: center
@@ -167,7 +166,8 @@ function onChange(event: Event) {
 		pointer-events: none
 	&.is--disabled
 		pointer-events: none
-		opacity: .3
+		#{$root}__icon-wrap
+			opacity: .3
 	
 	&__input:focus + #{$root}__icon-wrap
 		outline: none !important

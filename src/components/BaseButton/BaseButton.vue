@@ -147,7 +147,7 @@
 		&:hover
 			background-color: $base-button-danger-hover-color
 	&.is--variant-outlined
-		background-color: transparent
+		background-color: $white
 		border-style: solid
 		border-width: $base-button-border-width
 		&.is--color-primary
@@ -190,7 +190,7 @@
 			&:hover
 				background-color: rgba($base-button-secondary-color, 0.1)
 		&.is--color-success
-			color: $base-button-success-color
+			color: $base-button-success-text-color
 			&:hover
 				background-color: rgba($base-button-success-color, 0.1)
 		&.is--color-warning

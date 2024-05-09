@@ -1,0 +1,112 @@
+<script setup lang="ts">
+import { PropType } from 'vue';
+import SliderWithPaginationAutoPlay from 'UiKit/components/common/SliderWithPaginationAutoPlay/SliderWithPaginationAutoPlay.vue';
+
+export interface IWhatOurClientsSaySlider {
+  id: number;
+  text1: string;
+  author1: string;
+  text2: string;
+  author2: string;
+}
+
+defineProps({
+  slider: Array as PropType<IWhatOurClientsSaySlider[]>,
+});
+
+</script>
+
+<template>
+  <SliderWithPaginationAutoPlay
+    v-slot="active"
+    :slider="slider"
+    :autoplay="false"
+    active-color="#F1AF32"
+  >
+      <div
+        class="what-our-clients-say-slider__item is--card"
+      >
+        <div class="what-our-clients-say-slider__item-card">
+          <transition
+            name="fade"
+            mode="out-in"
+          >
+          <div :key="active.id" v-bind="active">
+            <p :key="active.id" class="what-our-clients-say-slider__text">
+              {{ active?.text1 }}
+            </p>
+            <div :key="active.id" class="what-our-clients-say-slider__author is--h5__title">
+              {{ active?.author1 }}
+            </div>
+          </div>
+          </transition>
+        </div>
+        <div class="what-our-clients-say-slider__item-card">
+          <transition
+            name="fade"
+            mode="out-in"
+          >
+          <div :key="active.id" v-bind="active">
+            <p :key="active.id" class="what-our-clients-say-slider__text">
+              {{ active?.text2 }}
+            </p>
+            <div :key="active.id" class="what-our-clients-say-slider__author is--h5__title">
+              {{ active?.author2 }}
+            </div>
+          </div>
+          </transition>
+        </div>
+      </div>
+  </SliderWithPaginationAutoPlay>
+</template>
+
+<style lang="sass" scoped>
+@import 'index.sass'
+.what-our-clients-say-slider
+
+  &__item
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: flex-start
+    gap: 8px
+    align-self: stretch
+    top: 0
+    left: 0
+    width: 100%
+
+    &.is--active
+      position: relative
+      transition: opacity 3s ease
+
+  &__text
+    color: $gray-80
+    font-style: italic
+
+  &__item-card
+    display: flex
+    padding: 20px
+    align-self: stretch
+    flex-direction: column
+    border-radius: 2px
+    background: $yellow-light
+    @media screen and (min-width: 767px)
+      height: 196px
+
+.fade-enter-active,
+.fade-leave-active
+  transition: opacity 0.5s ease
+
+.fade-enter-from,
+.fade-leave-to
+  opacity: 0
+
+.transition-translate-right
+  &-enter-active,
+  &-leave-active
+    transition: transform 0.2s ease
+
+  &-enter-from,
+  &-leave-to
+    transform: translateX(100%)
+</style>
