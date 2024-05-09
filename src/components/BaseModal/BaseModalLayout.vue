@@ -21,6 +21,7 @@ defineProps({
     type: Boolean,
     default: true,
   },
+  fullScreen: Boolean,
 });
 
 defineEmits(['close']);
@@ -32,6 +33,7 @@ defineEmits(['close']);
       'is-circle': circle,
       'is-dark': dark,
       'is-mobile-full-screen': mobileFullScreen,
+      'is--full-screen': fullScreen,
     }, $attrs.class]"
     :style="$attrs.style"
     class="wd-modal-layout"
@@ -121,6 +123,10 @@ defineEmits(['close']);
   color: $black
   background: $white
   position: relative
+
+  &.is--full-screen
+    width: 100%
+    min-height: 100%
 
   &__header
     display: flex
