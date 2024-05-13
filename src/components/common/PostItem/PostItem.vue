@@ -7,6 +7,7 @@ const props = defineProps({
     type: Object as PropType<IMarkdownOptions>,
     required: true,
   },
+  defaultRoute: String,
   small: Boolean,
 });
 
@@ -15,12 +16,14 @@ const month = computed(() => String(new Date(props.data.date).toLocaleString('en
 const year = computed(() => String(new Date(props.data.date).getFullYear()));
 
 const componentName = computed(() => ((props.data.slug || props.data.route) ? 'router-link' : 'div'));
+const route = computed(() => (props.data.route ? props.data.route : props.defaultRoute));
+
 </script>
 
 <template>
   <component
     :is="componentName"
-    :to="{ name: data.route, params: { slug: data.slug } }"
+    :to="{ name: route, params: { slug: data.slug } }"
     v-bind="$attrs"
     class="post-item"
     :class="{ 'is--small': small }"
@@ -79,7 +82,7 @@ const componentName = computed(() => ((props.data.slug || props.data.route) ? 'r
   border-top: 1px solid $gray-40
   flex-direction: row
   cursor: pointer
-  @include media-gte(tablet)
+  @media screen and (min-width: 767px)
     &:hover
       background-color: $white
 
@@ -90,7 +93,7 @@ const componentName = computed(() => ((props.data.slug || props.data.route) ? 'r
     border: none
     justify-content: flex-start
 
-  @include media-lte(tablet)
+  @media screen and (max-width: 767px)
     flex-direction: column
     flex-wrap: wrap
     align-items: flex-start
@@ -117,14 +120,14 @@ const componentName = computed(() => ((props.data.slug || props.data.route) ? 'r
     align-items: center
     color: $gray-70
 
-    @include media-gte(tablet)
+    @media screen and (min-width: 767px)
       #{$root}:not(.is--small) &
         flex-basis: 140px
 
     #{$root}.is--small &
       margin-bottom: 12px
 
-    @include media-lte(tablet)
+    @media screen and (max-width: 767px)
       margin-bottom: 12px
 
   &__details
@@ -135,8 +138,8 @@ const componentName = computed(() => ((props.data.slug || props.data.route) ? 'r
     justify-content: center
     #{$root}.is--small &
       order: 2
-
-    @include media-lte(tablet)
+    
+    @media screen and (max-width: 767px)
       order: 2
 
     #{$root}__name
@@ -169,7 +172,8 @@ const componentName = computed(() => ((props.data.slug || props.data.route) ? 'r
     width: 188px
     height: 125px
     flex-shrink: 0
-    @include media-lte(tablet)
+    
+    @media screen and (max-width: 767px)
       order: 1
       width: 100%
       margin-bottom: 15px
@@ -188,7 +192,7 @@ const componentName = computed(() => ((props.data.slug || props.data.route) ? 'r
 
 </style>
 
-<style lang="scss">
+<style lang="sass">
 .post-item
   &__image
     img
