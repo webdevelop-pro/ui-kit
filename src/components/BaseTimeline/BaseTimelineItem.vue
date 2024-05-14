@@ -41,12 +41,12 @@ const btnClasses = computed(() => {
 
     <div
       v-if="title"
-      class="base-timeline-item__step"
+      class="base-timeline-item__step-wrap"
     >
       <component
         :is="to ? 'router-link' : 'h6'"
         :to="to"
-        class="step"
+        class="base-timeline-item__step is--h6__title"
       >
         {{ title }}
       </component>
@@ -97,23 +97,17 @@ const btnClasses = computed(() => {
   &__items
     margin-left: 50px
 
-  &__step
+  &__step-wrap
     display: flex
     flex-direction: row
     align-items: center
     position: relative
-    // margin-bottom: 15px
-    .step
-      font-weight: 800
-      font-size: 14px
-      line-height: 19px
-      letter-spacing: 2.5px
-      text-transform: uppercase
-      color: $black
+    margin-bottom: 16px
+    margin-left: 50px
 
-    a.step
-      &:hover
-        color: $primary
+  &__step
+    text-transform: uppercase
+    color: $primary
 
   &__circle
     top: var(--top)
