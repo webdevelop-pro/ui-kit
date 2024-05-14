@@ -20,6 +20,10 @@ withDefaults(defineProps<{
    * opened by default if true
    */
   expanded?: boolean;
+  /**
+   * header background
+   */
+  transparent?: boolean;
 }>(), {
   size: 'small',
   color: 'primary',
@@ -31,7 +35,7 @@ withDefaults(defineProps<{
 <template>
   <VueCollapsiblePanel
     class="BaseAccordionItem base-accordion-item"
-    :class="[`is--${size}`, `is--${color}`]"
+    :class="[`is--${size}`, `is--${color}`, { 'is--transparent': transparent }]"
     :expanded="expanded"
   >
     <template #title>
@@ -94,11 +98,20 @@ withDefaults(defineProps<{
     :deep(.vcp__body)
       height: 0
       background-color: $accordion-item-active-content-background
+  
+  &:not(.is--transparent).vcp--expanded
     :deep(.vcp__header)
       background-color: $accordion-item-active-header-background
       box-shadow: $accordion-item-active-header-box-shadow
       z-index: 1
       position: relative
+  &.is--transparent.vcp--expanded
+    :deep(.vcp__header)
+      background-color: $accordion-item-active-content-background
+  &.is--transparent
+    &:hover
+      :deep(.vcp__header)
+        background-color: $accordion-item-active-content-background
   &__title-text
     padding: 12px 16px
     margin-bottom: 0
