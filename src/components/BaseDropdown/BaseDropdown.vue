@@ -14,10 +14,10 @@ onClickOutside(target, () => {
 
 <template>
   <div
-    ref="target"
     class="BaseDropdown base-dropdown"
   >
     <div
+      ref="target"
       class="base-dropdown__selected"
       :class="{ 'is-active': isActive }"
       @click="isActive = !isActive"

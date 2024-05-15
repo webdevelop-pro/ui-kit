@@ -4,7 +4,7 @@ import { computed } from 'vue';
 const props = withDefaults(defineProps<{
 	fixedHeader?: boolean;
 	height?: string,
-	size: 'large' | 'small'
+	size?: 'large' | 'small'
 }>(), {
 	height: '100%',
 	size: 'large',
