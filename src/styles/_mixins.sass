@@ -14,7 +14,9 @@ $base-size: 16
 @function isImportant($important)
   @return #{if($important, '!important', '')}
 
-@mixin font($weight, $family: 'Avenir', $important: false)
+$familyValue: 'Avenir', arial, helvetica, sans-serif
+
+@mixin font($weight, $family: $familyValue, $important: false)
   font-family: $family isImportant($important)
   font-style: normal
   font-weight: $weight
