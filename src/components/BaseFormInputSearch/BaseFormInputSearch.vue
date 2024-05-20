@@ -19,6 +19,9 @@ const onClearClick = () => {
 watch(() => model.value, () => {
     emit('@update:modelValue', model.value);
 });
+watch(() => props.modelValue, () => {
+    model.value = props.modelValue;
+});
 </script>
 
 <template>

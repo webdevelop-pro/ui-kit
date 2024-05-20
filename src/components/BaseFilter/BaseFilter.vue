@@ -9,6 +9,7 @@ export interface IBaseFilter {
   value: string;
   title: string;
   options: string[];
+  model: string[];
 }
 
 const props = defineProps({
@@ -23,19 +24,12 @@ const emits = defineEmits(['apply']);
 const showDropdown = ref(false);
 const target = ref(null);
 const selectedFilters = ref(0);
-const itemsFormatted = ref();
-
-const updateItemsFormatted = () => {
-  itemsFormatted.value = props.items.map((item) => ({
-    ...item,
-    model: [],
-  }))
-};
+const itemsInner = ref();
 
 const updateFilters = () => {
   selectedFilters.value = 0;
-  itemsFormatted.value.reduce((countLocal, item) => {
-    selectedFilters.value = selectedFilters.value + item.model.length
+  itemsInner.value?.reduce((countLocal, item) => {
+    selectedFilters.value = selectedFilters.value + item.model?.length
     return selectedFilters.value
   }, 0)
 };
@@ -49,23 +43,30 @@ const close = () => {
 };
 
 const onApplyClick = () => {
-  emits('apply', itemsFormatted.value);
+  emits('apply', itemsInner.value);
   updateFilters();
   close();
 };
 
+const onClear = () => {
+  itemsInner.value?.forEach((item) => { item.model = [] });
+};
+
 const onClearClick = () => {
-  updateItemsFormatted();
+  onClear();
   updateFilters();
-  emits('apply');
+  emits('apply', itemsInner.value);
   close();
 };
 
 onClickOutside(target, () => close())
 
 watch(() => props.items, () => {
-  updateItemsFormatted()
-}, { immediate: true });
+  console.log(props.items)
+  itemsInner.value = props.items;
+  selectedFilters.value = 0;
+  updateFilters();
+}, { immediate: true, deep: true });
 </script>
 
 <template>
@@ -101,7 +102,7 @@ watch(() => props.items, () => {
       >
 
         <div
-          v-for="(item, index) in itemsFormatted"
+          v-for="(item, index) in itemsInner"
           :key="index"
           class="base-filter__group"
         >
@@ -130,7 +131,7 @@ watch(() => props.items, () => {
             variant="link"
             block
             class="base-filter__button"
-            @click="onClearClick"
+            @click.stop="onClearClick"
           >
             Clear Selected
           </BaseButton>
