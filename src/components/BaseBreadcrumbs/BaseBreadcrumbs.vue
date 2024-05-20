@@ -4,6 +4,7 @@ import { PropType } from 'vue';
 export interface IBreadcrumb {
   name: string;
   routeName?: string;
+  params?: object;
 }
 
 defineProps({
@@ -24,7 +25,7 @@ defineProps({
       >
         <component
           :is="item.routeName ? 'router-link' : 'span'"
-          :to="{ name: item.routeName }"
+          :to="{ name: item.routeName, params: item.params }"
           class="base-breadcrumbs__item"
         >
           <span class="is--h6__title">
