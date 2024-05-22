@@ -62,7 +62,6 @@ const onClearClick = () => {
 onClickOutside(target, () => close())
 
 watch(() => props.items, () => {
-  console.log(props.items)
   itemsInner.value = props.items;
   selectedFilters.value = 0;
   updateFilters();

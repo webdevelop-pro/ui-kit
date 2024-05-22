@@ -86,4 +86,11 @@ const btnClasses = computed(() => {
 					+mt(.3s)
 		td
 			color: $table-tbody-td-color
+	
+	&.is--size-small
+		:deep(tbody)
+			td
+				padding: $table-td-padding-small
+		:deep(th)
+			padding: $table-th-padding-small
 </style>

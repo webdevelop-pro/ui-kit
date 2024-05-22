@@ -65,6 +65,9 @@ const btnClasses = computed(() => {
 @import 'index.sass'
 .base-timeline-item
   --top: 42px
+  --normal-circle-height: 24px
+  --highlight-circle-bigger: 8px
+  --highlight-circle-height: calc(var(--normal-circle-height) + var(--highlight-circle-bigger))
 
   $root: &
 
@@ -80,11 +83,21 @@ const btnClasses = computed(() => {
   &::before
     content: ""
     position: absolute
-    top: calc(var(--top) + 24px)
+    top: calc(var(--top) + var(--normal-circle-height))
     left: 11px
     z-index: 1
     width: 2px
-    height: calc(100% - 24px)
+    height: calc(100% - var(--top) - var(--normal-circle-height) - (2 * var(--highlight-circle-bigger)))
+    background-color: $gray-30
+
+  &::after
+    content: ""
+    position: absolute
+    top: -16px // -(2 * var(--highlight-circle-bigger))
+    left: 11px
+    z-index: 1
+    width: 2px
+    height: calc(var(--top) + (2 * var(--highlight-circle-bigger)))
     background-color: $gray-30
 
   &.is--line-regular:last-child
@@ -93,6 +106,9 @@ const btnClasses = computed(() => {
   &.is--line-hidden:last-child
     &::before
       background: linear-gradient($gray-30, rgba($gray-30, 0)) !important
+  &:first-child
+    &::after
+      display: none
 
   &__items
     margin-left: 50px
@@ -115,6 +131,24 @@ const btnClasses = computed(() => {
 
   &.is--circle-type-highlight
     &::before
-      top: calc(var(--top) + 32px)
-      height: calc(100% - 32px)
+      top: calc(var(--top) + var(--highlight-circle-height))
+      height: calc(100% - var(--top) - var(--highlight-circle-height) - var(--highlight-circle-bigger))
+    &::after
+      height: calc(var(--top) + var(--highlight-circle-bigger))
+
+  &.is--title
+    &::before
+      top: var(--normal-circle-height)
+      height: calc(100% - var(--normal-circle-height) - var(--highlight-circle-bigger))
+    &::after
+      height: calc(2 * var(--highlight-circle-bigger))
+    #{$root}__circle
+      top: 0
+  
+  &.is--title.is--circle-type-highlight
+    &::before
+      top: var(--highlight-circle-height)
+      height: calc(100% - var(--highlight-circle-height))
+    &::after
+      height: var(--highlight-circle-bigger)
 </style>

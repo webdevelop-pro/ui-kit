@@ -41,6 +41,7 @@ const btnClasses = computed(() => {
   border-style: solid
   gap: 10px
   border-radius: 100%
+  z-index: 2
 
   &.is--type-inner
     width: 9px
