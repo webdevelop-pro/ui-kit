@@ -49,7 +49,7 @@ function onUpdate(option: string, checked: boolean) {
 	$root: &
 	width: 100%
 
-	--base-form-checkbox-group-item--padding: 12px 12px
+	--base-form-checkbox-group-item--padding: 15px 12px
 	--base-form-checkbox-group-item--background-color: #E9ECEF
 	
 	display: flex

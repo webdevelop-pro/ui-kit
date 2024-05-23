@@ -160,7 +160,8 @@ watch(() => props.items, () => {
     flex-direction: column
     align-items: flex-start
     background-color: $gray-10
-    box-shadow: $box-shadow-small
+    border: 1px solid $gray-20
+    box-shadow: $box-shadow-medium
     z-index: 2
 
   &__cta
@@ -181,4 +182,9 @@ watch(() => props.items, () => {
 
   &__checkbox-group
     width: 100%
+    :deep(.base-form-checkbox)
+      &.is--checked
+        .base-form-checkbox__text
+          color: $primary
+          font-weight: 600
 </style>

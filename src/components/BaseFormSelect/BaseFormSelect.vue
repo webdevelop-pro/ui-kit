@@ -123,8 +123,9 @@ function findOptionsBySearchString(searchString: string) {
 			.find((item: string) => String(item).toLowerCase() === searchString.toLowerCase());
 	}
 	return (sortedOptions.value as ObjectOption[])
-		.find(item => String(item[props.itemValue]).toLowerCase() === searchString.toLowerCase()
-			|| item[props.itemLabel] === searchString.toLowerCase());
+		// .find(item => String(item[props.itemValue]).toLowerCase() === searchString.toLowerCase()
+		// 	|| item[props.itemLabel] === searchString.toLowerCase());
+		.find(item => item[props.itemLabel] === searchString.toLowerCase());
 }
 
 // On user input search
@@ -227,6 +228,10 @@ function onSearch(searchString: string) {
 			top: 100%
 			width: 100%
 			z-index: 10
+	&.vs--unsearchable
+		:deep(.vs__dropdown-toggle),
+		:deep(.vs__search)
+			cursor: pointer !important
 	&__append
 		position: absolute
 		left: 15px
@@ -289,21 +294,25 @@ function onSearch(searchString: string) {
 	:deep(.vs__dropdown-menu)
 		padding-left: 0
 		list-style-type: none
-		padding: 8px 0
 		background-color: $select-menu-background
 		border: $select-menu-border
 		box-shadow: $select-menu-box-shadow
 		border-radius: $select-menu-border-radius
+		max-height: $select-menu-max-height
+		overflow: scroll
 	:deep(.vs__dropdown-option)
 		font-family: $select-menu-option-font-family
 		color: $select-menu-option-color
-		padding: 12px 16px
+		padding: 12px
 		cursor: pointer
 		font-size: $select-menu-option-font-size
+		line-height: $select-menu-option-line-height
 		&.vs__dropdown-option--highlight
 			background-color: $select-menu-option-highlight-color
 		&.vs__dropdown-option--selected
 			color: $select-menu-option-selected-color
+			font-size: $select-menu-option-selected-font-size
+			font-weight: $select-menu-option-selected-font-weight
 	&.vs--open
 		&.is--error
 			:deep(.vs__dropdown-toggle)
@@ -319,6 +328,7 @@ function onSearch(searchString: string) {
 				opacity: 0
 			:deep(.vs__search)
 				width: 100%
+			
 	&__no-options
 		padding: 15px
 </style>

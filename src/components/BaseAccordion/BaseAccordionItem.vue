@@ -135,7 +135,7 @@ withDefaults(defineProps<{
       color: $white-color
       :deep(a)
         color: $white-link-color
-        +font(400)
+        +font(600)
         border-bottom: solid 1px $white-link-color
         &:hover
           +mt(.3s)
@@ -147,7 +147,7 @@ withDefaults(defineProps<{
       z-index: 1
       +mt(.3s)
       color: $link-color
-      +font(400)
+      +font(600)
       border-bottom: solid 1px $link-color
       &:hover
         +mt(.3s)

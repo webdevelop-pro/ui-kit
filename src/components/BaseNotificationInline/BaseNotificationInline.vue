@@ -16,7 +16,7 @@ withDefaults(defineProps<{
 	<div
 		v-if="show"
 		class="BaseNotificationInline notification-inline"
-		:class="`is--${type}`"
+		:class="[`is--${type}`, { 'is--icon': icon }]"
 	>
 		<p class="notification-inline__body">
 			<BaseSvgIcon
