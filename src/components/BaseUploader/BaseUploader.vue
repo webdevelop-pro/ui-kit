@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import BaseButton from 'UiKit/components/BaseButton/BaseButton.vue';
-import UploadIcon from 'UiKit/components/BaseUploader/upload.svg';
-import FileIcon from 'UiKit/components/BaseUploader/file.svg';
+import { BaseSvgIcon } from 'UiKit/components/BaseSvgIcon'
 
 defineProps({
   isError: Boolean,
@@ -118,10 +117,10 @@ const removeFile = (index: number) => {
           class="base-uploader__file-button"
           @click="triggerFileInput"
         >
-          <img
-            v-svg-inline
-            :src="UploadIcon"
+          <BaseSvgIcon
+            name="upload"
             alt="upload icon"
+            class="base-uploader__file-icon"
           />
           Upload
         </BaseButton>
@@ -135,9 +134,8 @@ const removeFile = (index: number) => {
             class="base-uploader__preview-card"
           >
             <div class="base-uploader__preview-card-info">
-              <img
-                v-svg-inline
-                :src="FileIcon"
+              <BaseSvgIcon
+                name="file"
                 alt="file icon"
                 class="base-uploader__preview-card-icon"
               />
@@ -237,4 +235,10 @@ const removeFile = (index: number) => {
   &__error
     margin-top: 4px
     color: $red
+  
+  &__file-icon
+    width: 16px
+
+  &__preview-card-icon
+    width: 16px
 </style>

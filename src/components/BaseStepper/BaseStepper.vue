@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { PropType, computed } from 'vue';
-import checkIcon from '@/assets/images/icons/check.svg';
+import { BaseSvgIcon } from 'UiKit/components/BaseSvgIcon'
 
 export interface Step {
 	title: string;
@@ -46,10 +46,9 @@ function onItemClick(step: Step, index: number) {
 		>
 			<div class="base-stepper__step-point">
 				<div class="base-stepper__circle">
-					<img
+					<BaseSvgIcon
 						v-if="modelValue > index"
-						v-svg-inline
-						:src="checkIcon"
+						name="check"
 						alt="check icon"
 						class="base-stepper__check-icon"
 					/>
@@ -127,6 +126,8 @@ function onItemClick(step: Step, index: number) {
 
 	&__check-icon
 		display: none
+		width: 16px
+		height: 16px
 
 	.is--last
 		#{$root}__step

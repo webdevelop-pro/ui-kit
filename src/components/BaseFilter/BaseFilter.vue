@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import BaseButton from 'UiKit/components/BaseButton';
 import BaseFormCheckboxGroup from 'UiKit/components/BaseFormCheckbox/BaseFormCheckboxGroup.vue';
-import filterIcon from 'UiKit/components/BaseFilter/filter.svg';
 import { PropType, watch, ref, toRaw } from 'vue';
+import { BaseSvgIcon } from 'UiKit/components/BaseSvgIcon'
 import { onClickOutside } from '@vueuse/core';
 
 export interface IBaseFilter {
@@ -80,9 +80,8 @@ watch(() => props.items, () => {
       class="base-filter__button"
       @click="onFilterButtonClick"
     >
-      <img
-        v-svg-inline
-        :src="filterIcon"
+      <BaseSvgIcon
+        name="filter"
         alt="filter image"
         class="base-filter__button-icon"
       />
@@ -149,6 +148,7 @@ watch(() => props.items, () => {
 
   &__button-icon
     color: inherit
+    width: 16px
 
   &__dropdown
     position: absolute

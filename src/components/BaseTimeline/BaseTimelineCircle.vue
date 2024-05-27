@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import check from './assets/check.svg';
+import check from './assets/check.svg?url';
 
 interface Props {
   type?: 'active' | 'inner' | 'not-complete' | 'complete' | 'highlight' | 'inner-ighlight'

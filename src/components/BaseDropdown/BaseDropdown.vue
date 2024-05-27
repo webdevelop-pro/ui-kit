@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { onClickOutside } from '@vueuse/core';
-import ArrowDown from './assets/chevron-down.svg';
+import { BaseSvgIcon } from 'UiKit/components/BaseSvgIcon';
 
 const props = defineProps({
   hover: Boolean,
@@ -37,12 +37,11 @@ watch(() => props.hover, () => {
     >
       <slot />
 
-      <img
-        v-svg-inline
-        :src="ArrowDown"
+      <BaseSvgIcon
+        name="chevron-down"
         class="base-dropdown__selected-arrow"
         alt="dropdown selected arrow"
-      >
+      />
     </div>
     <Transition name="fade" mode="out-in">
       <div
@@ -79,12 +78,12 @@ watch(() => props.hover, () => {
         visibility: visible
         opacity: 1
       #{$root}__selected-arrow
-        transform: rotate(180deg)
+        transform: rotate(0)
   &:not(.is--hover)
     #{$root}__selected
       &.is-active
         #{$root}__selected-arrow
-            transform: rotate(180deg)
+            transform: rotate(0)
 
   &__selected
     position: relative
@@ -98,6 +97,7 @@ watch(() => props.hover, () => {
     color: $gray-70
     transition: all 0.3s
     transform-origin: center
+    transform: rotate(180deg)
 
   &__items
     position: absolute

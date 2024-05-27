@@ -65,14 +65,14 @@ const modules = [Navigation];
 
 .swiper-button-prev
   right: 51px
-  background-image: url("UiKit/assets/arrow-left-primary.svg")
+  background-image: url("UiKit/assets/arrow-left-primary.svg?url")
   background-repeat: no-repeat
   background-size: 20px
   background-position: center
 
 .swiper-button-next
   right: -3px
-  background-image: url("UiKit/assets/arrow-right-primary.svg")
+  background-image: url("UiKit/assets/arrow-right-primary.svg?url")
   background-repeat: no-repeat
   background-size: 20px
   background-position: center

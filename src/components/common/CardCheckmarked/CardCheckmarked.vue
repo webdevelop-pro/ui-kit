@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CheckedIcon from './assets/check.svg';
+import { BaseSvgIcon } from 'UiKit/components/BaseSvgIcon'
 
 
 export interface ICardCheckmarked {
@@ -22,12 +22,11 @@ defineProps({
   >
     <div class="card-checkmarked__top">
       <div class="card-checkmarked__icon-wrap">
-        <img
-          v-svg-inline
-          :src="CheckedIcon"
+        <BaseSvgIcon
+          name="checked"
           alt="checked icon"
           class="card-checkmarked__icon"
-        >
+        />
       </div>
       <span class="is--h4__title">
         {{ title }}

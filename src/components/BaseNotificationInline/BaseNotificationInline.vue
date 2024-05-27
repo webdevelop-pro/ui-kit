@@ -1,14 +1,32 @@
 <script lang="ts" setup="">
 import { BaseSvgIcon } from 'UiKit/components/BaseSvgIcon'
+import { BaseButton } from 'UiKit/components/BaseButton'
+import { computed } from 'vue';
 
-withDefaults(defineProps<{
-	type?: 'error' | 'warning' | 'success';
+const props = withDefaults(defineProps<{
+	type?: 'error' | 'success' | 'info';
 	show?: boolean;
 	icon?: boolean;
+	buttonText?: string;
 }>(), {
 	type: 'error',
 });
 
+const emit = defineEmits(['click']);
+
+const buttonColor = computed(() => {
+	if (props.type === 'success') {
+		return 'success'
+	}
+	if (props.type === 'info') {
+		return 'primary'
+	}
+	return 'danger'
+})
+
+const onClick = () => {
+	emit('click')
+}
 </script>
 
 <template>
@@ -23,22 +41,36 @@ withDefaults(defineProps<{
 				v-if="(type === 'error') && icon"
 				class="svg-icon notification-inline__icon"
 				alt="exclamation-circle-icon"
-				name="fa-circle-exclamation"
+				name="circle-exclamation"
 			/>
 			<BaseSvgIcon
-				v-else-if="(type === 'warning') && icon"
+				v-else-if="(type === 'info') && icon"
 				alt="info-circle-icon"
 				class="svg-icon notification-inline__icon"
-				name="fa-triangle-exclamation"
+				name="circle-info"
 			/>
 			<BaseSvgIcon
 				v-else-if="icon"
 				alt="info-circle-icon"
 				class="svg-icon notification-inline__icon"
-				name="fa-circle-check"
+				name="circle-check"
 			/>
 			<span class="notification-inline__content">
-				<slot />
+				<div>
+					<span v-if="$slots.title" class="notification-inline__title is--h5__title">
+						<slot name="title"/>
+					</span>
+					<slot />
+				</div>
+				<BaseButton
+					v-if="buttonText"
+					size="small"
+					:color="buttonColor"
+					class="notification-inline__button"
+					@click="onClick"
+				>
+					{{ buttonText }}
+				</BaseButton>
 			</span>
 		</p>
 	</div>
@@ -50,16 +82,17 @@ withDefaults(defineProps<{
 .notification-inline
 	color: $notification-inline-color
 	margin: $notification-inline-margin
-	border-left: solid 3px transparent
+	border-left: solid 2px transparent
 
 	&__body
 		font-size: $notification-inline-font-size
+		font-weight: $notification-inline-font-weight
 		line-height: $notification-inline-line-height
 		padding: $notification-inline-padding
 		margin-bottom: 0
 		+font(400)
 		display: flex
-		align-items: flex-start
+		align-items: center
 
 	&__icon
 		width: $notification-inline-width
@@ -68,6 +101,11 @@ withDefaults(defineProps<{
 		flex-shrink: 0
 	&__content
 		margin-left: $notification-inline-margin-left
+		display: flex
+		align-items: center
+		gap: 20px
+		justify-content: space-between
+		width: 100%
 		:deep(a)
 			position: relative
 			display: inline
@@ -82,12 +120,14 @@ withDefaults(defineProps<{
 				+mt(.3s)
 				border-bottom: solid 1px transparent
 				color: $secondary
+	&____title
+		margin-right: 4px
 
 	&.is--error
 		background-color: $notification-inline-error-background-color
 		border-color: $notification-inline-error-color
 		.notification-inline__icon
-			fill: $notification-inline-error-color
+			color: $notification-inline-error-color
 		.notification-inline__content
 			:deep(a)
 				color: $notification-inline-error-color
@@ -95,23 +135,23 @@ withDefaults(defineProps<{
 				&:hover
 					color: $notification-inline-error-color
 					border-color: transparent
-	&.is--warning
-		background-color: $notification-inline-warning-background-color
-		border-color: $notification-inline-warning-color
+	&.is--info
+		background-color: $notification-inline-info-background-color
+		border-color: $notification-inline-info-color
 		.notification-inline__icon
-			fill: $notification-inline-warning-color
+			color: $notification-inline-info-color
 		.notification-inline__content
 			:deep(a)
-				color: $notification-inline-warning-color
-				border-color: $notification-inline-warning-color
+				color: $notification-inline-info-color
+				border-color: $notification-inline-info-color
 				&:hover
-					color: $notification-inline-warning-color
+					color: $notification-inline-info-color
 					border-color: transparent
 	&.is--success
 		background-color: $notification-inline-success-background-color
 		border-color: $notification-inline-success-color
 		.notification-inline__icon
-			fill: $notification-inline-success-color
+			color: $notification-inline-success-color
 		.notification-inline__content
 			:deep(a)
 				color: $notification-inline-success-color

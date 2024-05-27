@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import BaseButton from 'UiKit/components/BaseButton/BaseButton.vue';
+import { BaseSvgIcon } from 'UiKit/components/BaseSvgIcon'
 
 defineProps({
   title: String,
@@ -48,13 +49,12 @@ defineEmits(['close']);
       data-testid="close-button"
       @click="$emit('close')"
     >
-      <img
-        v-svg-inline
-        src="@/assets/images/icons/close.svg"
+      <BaseSvgIcon
+        name="close"
         class="wd-modal-layout__close-icon"
         alt="modal layout close icon"
         @click="$emit('close')"
-      >
+      />
     </BaseButton>
     <header
       :class="{
@@ -306,4 +306,6 @@ defineEmits(['close']);
 
     @media screen and (min-width: 767px)
       border-radius: 37px
+  &__close-icon
+      width: 20px
 </style>

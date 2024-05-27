@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import BaseFormInput from 'UiKit/components/BaseFormInput';
-import searchIcon from '@/assets/images/icons/search.svg';
-import closeIcon from '@/assets/images/icons/close.svg';
 import { computed, ref, watch } from 'vue';
+import { BaseSvgIcon } from 'UiKit/components/BaseSvgIcon'
 
 const props = defineProps({
 	modelValue: String,
@@ -38,21 +37,19 @@ watch(() => props.modelValue, () => {
 			@update:model-value="model = $event"
         >
           <template #append>
-            <img
-              v-svg-inline
-              :src="searchIcon"
+            <BaseSvgIcon
+              name="search"
               alt="search icon"
 			  class="base-form-input-search__search-icon"
-            >
+            />
           </template>
           <template #prepend>
 			<div v-if="showClearButton" @click="onClearClick">
-				<img
-				v-svg-inline
-				:src="closeIcon"
-				alt="clear icon"
-				class="base-form-input-search__close-icon"
-				>
+				<BaseSvgIcon
+					name="close"
+					alt="clear icon"
+					class="base-form-input-search__close-icon"
+				/>
 			</div>
           </template>
         </BaseFormInput>
