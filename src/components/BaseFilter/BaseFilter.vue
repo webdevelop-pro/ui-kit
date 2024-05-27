@@ -17,6 +17,7 @@ const props = defineProps({
     type: Array as PropType<IBaseFilter[]>,
     required: true,
   },
+  disabled: Boolean,
 });
 
 const emits = defineEmits(['apply']);
@@ -72,10 +73,12 @@ watch(() => props.items, () => {
   <div
     ref="target"
     class="BaseFilter base-filter"
+    :class="{ 'is--disabled': disabled }"
   >
     <BaseButton
       size="small"
       variant="link"
+      :disabled="disabled"
       icon-placement="left"
       class="base-filter__button"
       @click="onFilterButtonClick"
