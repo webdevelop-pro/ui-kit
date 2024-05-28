@@ -43,16 +43,16 @@ const description = computed(() => {
 <template>
   <div
     class="BaseToaster base-toaster"
-		:class="[`is--${type}`, { 'is--icon': icon }]"
+		:class="[`is--${type}`]"
   >
     <BaseSvgIcon
-			v-if="(type === 'error') && icon"
+			v-if="(type === 'error')"
       class="base-toaster__icon"
 			alt="exclamation-circle-icon"
 			name="circle-exclamation"
 		/>
 		<BaseSvgIcon
-			v-else-if="(type === 'info') && icon"
+			v-else-if="(type === 'info')"
 			alt="info-circle-icon"
       class="base-toaster__icon"
 			name="circle-info"
