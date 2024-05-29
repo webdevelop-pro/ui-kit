@@ -73,6 +73,7 @@ const drop = (e: DragEvent) => {
 const removeFile = (index: number) => {
   allFiles.value.splice(index, 1);
   filesUploadError.value = '';
+  emit('update:files', allFiles.value);
   emit('remove', index);
 };
 </script>
@@ -90,6 +91,7 @@ const removeFile = (index: number) => {
         @dragover.prevent="dragover"
         @dragleave.prevent="dragleave"
         @drop.prevent="drop"
+        @click="triggerFileInput"
       >
         <input
           id="file-control"
@@ -146,7 +148,7 @@ const removeFile = (index: number) => {
             <div
               class="base-uploader__preview-card-remove"
               title="Remove file"
-              @click="removeFile(index)"
+              @click.stop="removeFile(index)"
             >
               <b>×</b>
             </div>
@@ -193,6 +195,10 @@ const removeFile = (index: number) => {
     &.is--disabled
       opacity: 0.3
 
+    &:hover
+      border-color: $primary
+      cursor: pointer
+
   input[type="file"]
     opacity: 0
     overflow: hidden
@@ -209,6 +215,8 @@ const removeFile = (index: number) => {
 
   &__preview
     width: 100%
+    position: relative
+    z-index: 1
 
   &__preview-card
     width: 100%
