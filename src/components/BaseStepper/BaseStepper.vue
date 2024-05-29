@@ -16,13 +16,13 @@ const props = defineProps({
 });
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void;
+  (e: 'update:modelValue', value: number): void;
   (e: 'itemClick', value: string): void;
 }>();
 
 function onItemClick(step: Step, index: number) {
   if (props.modelValue <= index) return;
-  emit('update:modelValue', step.value);
+  emit('update:modelValue', index);
   emit('itemClick', step.value);
 }
 </script>
