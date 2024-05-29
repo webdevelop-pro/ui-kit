@@ -17,7 +17,6 @@ const props = defineProps({
   },
   description: {
     type: String,
-    required: true,
   },
   data: {
     type: Object as PropType<INotificationData>,
