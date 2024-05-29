@@ -36,6 +36,7 @@ defineEmits<{
 	    @change="$emit('update:modelValue', $event.target.value)"
 	    @focus="onFocus"
 	    @blur="onBlur"
+		@input="$emit('update:modelValue', $event.target.value)"
     >
       <slot />
     </textarea>
