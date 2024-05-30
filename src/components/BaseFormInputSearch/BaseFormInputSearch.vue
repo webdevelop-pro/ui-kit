@@ -34,6 +34,7 @@ watch(() => props.modelValue, () => {
           	prepend
 			v-bind="$attrs"
           	placeholder="Search"
+			class="base-form-input-search__search-input"
 			@update:model-value="model = $event"
         >
           <template #append>
@@ -66,4 +67,5 @@ watch(() => props.modelValue, () => {
 		width: 10px !important
 		color: $gray-80
 		cursor: pointer
+		display: block
 </style>
