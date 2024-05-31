@@ -129,6 +129,8 @@ const description = computed(() => {
   &__icon
     margin-right: 8px
     margin-top: 1px
+    width: 20px
+    flex-shrink: 0
 
   &__title
     color: $black
