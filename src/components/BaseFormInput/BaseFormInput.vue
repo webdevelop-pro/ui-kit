@@ -26,6 +26,7 @@ interface Props {
 	autoFocused?: boolean
     dataTestid?: string
 	size?: 'large' | 'medium' | 'small'
+	returnMaskedValue?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -66,7 +67,7 @@ const mask = new Mask({
 })
 const unmaskedLocalValue = computed(() => mask.unmasked(localValue.value));
 const returnValue = computed(() => (
-	(!props.mask || props.maskTokens) ? localValue.value : unmaskedLocalValue.value
+	(!props.mask || props.maskTokens || props.returnMaskedValue) ? localValue.value : unmaskedLocalValue.value
 ))
 const maskOptions = computed(() => (props.moneyFormat ? moneyFormatOptions : null));
 
