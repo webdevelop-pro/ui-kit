@@ -106,7 +106,7 @@ const btnClasses = computed(() => {
   &.is--line-hidden:last-child
     &::before
       background: linear-gradient($gray-30, rgba($gray-30, 0)) !important
-  &:first-child
+  &:first-of-type
     &::after
       display: none
 
