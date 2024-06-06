@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropType } from 'vue';
+import { PropType, ref } from 'vue';
 import SliderWithPaginationAutoPlay from 'UiKit/components/common/SliderWithPaginationAutoPlay/SliderWithPaginationAutoPlay.vue';
 
 export interface IWhatOurClientsSaySlider {
@@ -13,6 +13,7 @@ export interface IWhatOurClientsSaySlider {
 defineProps({
   slider: Array as PropType<IWhatOurClientsSaySlider[]>,
 });
+
 
 </script>
 
@@ -90,7 +91,27 @@ defineProps({
     flex-direction: column
     border-radius: 2px
     background: $yellow-light
+    @media screen and (min-width: 260px)
+      height: 500px
+    @media screen and (min-width: 272px)
+      height: 450px
+    @media screen and (min-width: 296px)
+      height: 400px
+    @media screen and (min-width: 327px)
+      height: 350px
+    @media screen and (min-width: 375px)
+      height: 300px
+    @media screen and (min-width: 458px)
+      height: 250px
+    @media screen and (min-width: 525px)
+      height: 200px
+    @media screen and (min-width: 650px)
+      height: 170px
     @media screen and (min-width: 767px)
+      height: 300px
+    @media screen and (min-width: 850px)
+      height: 260px
+    @media screen and (min-width: 1040px)
       height: 196px
 
 .fade-enter-active,

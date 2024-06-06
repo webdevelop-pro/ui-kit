@@ -12,6 +12,9 @@ import { isEmpty } from 'UiKit/helpers/general';
 import { scrollToError } from 'UiKit/helpers/validation/general';
 
 const emit = defineEmits(['submit']);
+defineProps({
+  loading: Boolean,
+})
 
 type FormModelSubscribe = {
   email: number;
@@ -66,6 +69,7 @@ watch(() => model, () => {
             Receive latest news:
           </div>
           <form
+            novalidate
             class="form-submit"
             @submit.prevent="onSubmit"
           >
@@ -91,7 +95,8 @@ watch(() => model, () => {
               </BaseFormGroup>
               <BaseButton
                 size="large"
-                :disabled="isDisabledButton"
+                :loading="loading"
+                :disabled="isDisabledButton || loading"
                 :uppercase="false"
               >
                 Subscribe

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, ref, watch, withDefaults, ObjectDirective } from 'vue';
-import { MaskTokens } from 'maska/dist/types/tokens';
+import { MaskTokens as IMaskTokens } from 'maska/dist/types/tokens';
 import { Mask, vMaska } from 'maska';
 
 // IMPORTANT: before using this component you need to install maska
@@ -12,7 +12,7 @@ interface Props {
 	type?: string
 	isError?: boolean
 	mask?: string
-	maskTokens?: MaskTokens
+	maskTokens?: IMaskTokens
 	moneyFormat?: boolean
 	disallowSpecialChars?: boolean
 	disallowNumbers?: boolean

@@ -2,6 +2,8 @@
 import {
   ref, onBeforeUnmount, onMounted, nextTick, PropType, watch,
 } from 'vue';
+import { useSwipe } from '@vueuse/core';
+import type { UseSwipeDirection } from '@vueuse/core';
 
 interface ISliderWithPaginationAutoPlay {
   id: number;
@@ -26,6 +28,22 @@ let intervalId: NodeJS.Timeout = null;
 const itemCount = props.slider?.length;
 const activeElementId = ref(1);
 const active = ref({});
+const targetSwipe = ref<HTMLElement | null>(null);
+
+const { direction } = useSwipe(targetSwipe);
+
+watch(() => direction.value, () => {
+  if (direction.value === 'left') {
+    if (activeElementId.value < itemCount) activeElementId.value += 1;
+    else activeElementId.value = 1;
+    setActiveElement();
+  }
+  if (direction.value === 'right') {
+    if (activeElementId.value > 1) activeElementId.value -= 1;
+    else activeElementId.value = itemCount;
+    setActiveElement();
+  }
+}, { immediate: true });
 
 const setActiveElement = () => {
   active.value = props.slider.find((item) => item.id === activeElementId.value);
@@ -62,7 +80,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="SliderWithPaginationAutoPlay slider-with-pagination-auto-play">
+  <div ref="targetSwipe" class="SliderWithPaginationAutoPlay slider-with-pagination-auto-play">
     <slot v-bind="active" />
     <div class="slider-with-pagination-auto-play__pagination">
       <div
