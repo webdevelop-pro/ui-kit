@@ -9,12 +9,18 @@ import {
   ZIP_REGEX_ERROR_MESSAGE, CHECKBOX_TRUE_VALIDATOR_NAME, CHECKBOX_TRUE_ERROR_MESSAGE,
   NOT_ZERO_VALIDATOR_NAME, NOT_ZERO_ERROR_MESSAGE, MUST_BE_US_VALIDATOR_NAME, MUST_BE_US_ERROR_MESSAGE,
 } from './constants';
-import { CitizenTypes } from '@/views/Invest/utils';
 
 const ajv = new Ajv({ allErrors: true, allowMatchingProperties: true, $data: true });
 
 ajvErrors(ajv);
 addFormats(ajv, ['date', 'time', 'float', 'email']);
+
+
+enum CitizenTypes {
+  us_citizen = 'U.S. Citizen',
+  us_resident = 'U.S. Resident',
+  us_non_resident = 'Non Resident'
+}
 
 ajv.addKeyword({
   keyword: NOT_EMPTY_VALIDATOR_NAME,
