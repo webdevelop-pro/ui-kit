@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { computed, ref, watch, withDefaults, ObjectDirective } from 'vue';
-import { MaskTokens as IMaskTokens } from 'maska/dist/types/tokens';
-import { Mask, vMaska } from 'maska';
+import { Mask, vMaska, MaskTokens as IMaskTokens } from 'maska';
 
 // IMPORTANT: before using this component you need to install maska
 // type in the terminal yarn add maska
