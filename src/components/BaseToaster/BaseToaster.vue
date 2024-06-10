@@ -121,9 +121,8 @@ const description = computed(() => {
 
   @media screen and (max-width: 768px)
     width: 100%
-    height: auto
-    min-height: 60px
-    padding: 12px 35px 12px 14px
+    min-height: auto
+    padding: 21px 18px !important
     margin-bottom: 0
 
   &__icon
@@ -204,11 +203,6 @@ const description = computed(() => {
       @media screen and (max-width: 768px)
         width: 100%
         height: auto
-        min-height: 101px
-        padding: 12px 35px 47px 14px
-        margin-bottom: 0
-        border-bottom-right-radius: 0
-        border-bottom-left-radius: 0
 
 .vue-notification-group
   @media screen and (max-width: 768px)
