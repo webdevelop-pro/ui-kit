@@ -27,7 +27,7 @@ defineProps({
   position: relative
   overflow: hidden
   background: linear-gradient( 90deg, rgba(207, 219, 255, 0.34) 0%, rgba(235, 243, 255, 0.34) 35.42%, rgba(203, 216, 255, 0.34) 100%)
-  border-radius: 25px
+  border-radius: 2px
 
   &::before
     position: absolute
