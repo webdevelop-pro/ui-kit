@@ -5,7 +5,7 @@ import { ref } from 'vue';
 const props = withDefaults(defineProps<{
     src: string | undefined,
     alt: string,
-	fit: 'cover' | 'contain' | 'inherit'
+	fit?: 'cover' | 'contain' | 'inherit'
 }>(), {
 	fit: 'cover',
 });

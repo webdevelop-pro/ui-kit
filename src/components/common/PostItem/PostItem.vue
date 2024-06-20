@@ -55,9 +55,8 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
       <p
         class="post-item__excerpt is--body"
         itemprop="description"
-      >
-        {{ data.description }}
-      </p>
+        v-html="data.description"
+      />
     </div>
     <div
       v-if="$slots.img"
@@ -189,6 +188,11 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
 
   &__excerpt
     color: $gray-80
+    display: -webkit-box
+    -webkit-line-clamp: 2
+    -webkit-box-orient: vertical
+    overflow: hidden
+    text-overflow: ellipsis
 
 </style>
 
