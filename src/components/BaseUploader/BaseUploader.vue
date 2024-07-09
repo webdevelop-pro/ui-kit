@@ -117,7 +117,6 @@ const removeFile = (index: number) => {
           variant="outlined"
           icon-placement="left"
           class="base-uploader__file-button"
-          @click="triggerFileInput"
         >
           <BaseSvgIcon
             name="upload"
