@@ -1,18 +1,26 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { PropType } from 'vue';
 
 export interface IBreadcrumb {
   name: string;
   routeName?: string;
   params?: object;
+  link?: string;
 }
 
-defineProps({
+const props = defineProps({
   data: {
     type: Array as PropType<IBreadcrumb[]>,
     required: true,
   },
 });
+
+const getComponent = (item: IBreadcrumb) => {
+  if (item.routeName) return 'router-link';
+  if (item.link) return 'a';
+  return 'span';
+}
 </script>
 
 <template>
@@ -24,8 +32,9 @@ defineProps({
         class="base-breadcrumbs__item-wrap"
       >
         <component
-          :is="item.routeName ? 'router-link' : 'span'"
+          :is="getComponent(item)"
           :to="{ name: item.routeName, params: item.params }"
+          :href="item.link"
           class="base-breadcrumbs__item"
         >
           <span class="is--h6__title">

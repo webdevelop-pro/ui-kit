@@ -10,6 +10,7 @@ export interface IMarkdownOptions {
   draft?: boolean;
   tags?: string[];
   route?: string;
+  url?: string;
 }
 
 export interface IPostContent extends IMarkdownOptions {

@@ -15,7 +15,11 @@ const day = computed(() => String(new Date(props.data.date).getDate() + 1).padSt
 const month = computed(() => String(new Date(props.data.date).toLocaleString('en-us', { month: 'short' }).toUpperCase()));
 const year = computed(() => String(new Date(props.data.date).getFullYear()));
 
-const componentName = computed(() => ((props.data.slug || props.data.route) ? 'router-link' : 'div'));
+const componentName = computed(() => {
+  if (props.data.url || props.data.route) return 'a';
+  if (props.data.slug || props.data.route) return 'router-link';
+  return 'div';
+});
 const route = computed(() => (props.data.route ? props.data.route : props.defaultRoute));
 
 </script>
@@ -23,6 +27,7 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
 <template>
   <component
     :is="componentName"
+    :href="data.url"
     :to="{ name: route, params: { slug: data.slug } }"
     v-bind="$attrs"
     class="post-item"

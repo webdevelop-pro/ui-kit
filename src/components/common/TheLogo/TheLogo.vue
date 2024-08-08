@@ -4,17 +4,17 @@ import { BaseSvgIcon } from 'UiKit/components/BaseSvgIcon'
 
 const props = defineProps({
   disabled: Boolean,
-  routeName: String,
+  link: String,
 });
 
-const componentName = computed(() => (props.disabled ? 'span' : 'router-link'));
+const componentName = computed(() => (props.disabled ? 'span' : 'a'));
 </script>
 
 <template>
   <component
     :is="componentName"
     class="TheLogo the-logo"
-    :to="{ name: routeName }"
+    :href="link"
     exact
     aria-label="Site logo"
   >
