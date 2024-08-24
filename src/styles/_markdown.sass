@@ -1,0 +1,490 @@
+
+.is--markdown
+  ul
+    padding-left: 20px
+    margin-bottom: 25px
+    list-style-type: disc
+    display: flex
+    flex-direction: column
+    gap: 8px
+
+  ol
+      list-style-type: decimal
+      padding-left: 20px
+      margin-bottom: 25px
+      display: flex
+      flex-direction: column
+      gap: 8px
+
+  img
+      width: 100%
+      margin: 12px 0
+
+  p
+      margin-bottom: 24px
+
+  hr
+      border-top: 0
+      border-bottom: 1px solid $gray-50
+
+  a
+      color: $primary
+      position: relative
+      display: inline
+      z-index: 1
+      text-decoration: underline
+      transition: all .3s ease-in-out
+      &:hover
+        text-decoration: none
+
+  em
+      font-style: italic
+      font-weight: inherit
+
+  code
+      border: 1px solid $gray-20
+      background: $gray-10
+      display: flex
+      padding: 20px
+      align-items: flex-start
+      gap: 28px
+      align-self: stretch
+      margin-bottom: 20px
+      position: relative
+
+  blockquote,
+  q
+      border: 1px solid $gray-20
+      background: $gray-10
+      display: flex
+      padding: 40px
+      align-items: flex-start
+      gap: 28px
+      align-self: stretch
+      margin-bottom: 20px
+      position: relative
+
+      p:first-of-type
+        margin: 0
+
+      &::before,
+      &::after
+        content: ""
+        position: absolute
+        width: 70px
+        height: 50px
+        z-index: 0
+        border: none
+        background-image: url("Docs/public/images/icons/sign-left.svg")
+
+      &::before
+        left: 12px
+        top: 12px
+
+      &::after
+        right: 12px
+        bottom: 12px
+        transform: rotate(180deg)
+
+      *
+        z-index: 1
+
+  table
+    width: 100%
+    margin-bottom: 20px
+    margin-top: 20px
+
+  th
+    font-size: 14px
+    font-weight: 800
+    line-height: 21px
+    color: $gray-60
+    text-align: left
+    padding: 16px
+    gap: 2px
+    flex: 1 0 0
+
+  tr
+    display: flex
+    align-items: flex-start
+    align-self: stretch
+
+  tbody
+    tr
+      border-top: 1px solid $gray-20
+      cursor: default
+      transition: all 0.3s ease
+
+      &:hover
+        background-color: $gray-10
+
+  td
+    padding: 16px
+    flex: 1 0 0
+    color: $gray-80
+
+  h1,
+  h2,
+  h4,
+  h3,
+  h5,
+  h6
+      margin-bottom: 20px
+      margin-top: 20px
+      color: $black
+
+  // markdown - it
+  .custom-block
+    padding: 12px 20px
+
+  .custom-block.info
+    border-left: 2px solid $primary-dark
+    background: $primary-light
+
+  .custom-block.note
+    border-left: 2px solid $purple
+    background: $purple-light
+
+  .custom-block.tip
+    border-left: 2px solid $gray-50
+    background: $gray-20
+
+  .custom-block.important
+    border-left: 2px solid $secondary
+    background: $secondary-light
+
+  .custom-block.warning
+    border-left: 2px solid $yellow
+    background: $yellow-light
+
+  .custom-block.danger
+    border-left: 2px solid $red
+    background: $red-light
+
+  .custom-block.caution
+    border-left: 2px solid $red
+    background: $red-light
+
+  .custom-block.details
+    border-left: 2px solid $gray-50
+    background: $gray-20
+
+  .custom-block-title
+    font-weight: 600
+
+  .custom-block p + p
+    margin: 8px 0
+
+  .custom-block.details summary
+    margin: 0 0 8px
+    font-weight: 700
+    cursor: pointer
+    user-select: none
+
+  .custom-block.details summary + p
+    margin: 8px 0
+    
+  .custom-block-title
+    font-size: 16px
+    font-weight: 800
+    line-height: 26px
+
+  .header-anchor
+    color: $black
+    text-decoration: none
+    cursor: pointer
+    &:hover:before
+      opacity: 1
+
+
+  .header-anchor:before
+    content: '#'
+    position: absolute
+    left: -15px
+    opacity: 0
+
+
+  .custom-block div[class*='language-'] code
+    font-weight: 400
+    background-color: transparent
+
+
+  .custom-block .vp-code-group .tabs
+    margin: 0
+
+
+  /** Code
+
+
+  :not(pre) > code
+    padding: 12px
+    background-color: $gray-10
+
+
+  a > code
+    color: $black
+
+
+  a:hover > code
+    color: $primary
+
+
+  h1 > code,
+  h2 > code,
+  h3 > code,
+  h4 > code
+    font-size: 0.9em
+
+
+  div[class*='language-'],
+  .vp-block
+    position: relative
+    margin: 16px -24px
+    overflow-x: auto
+    transition: background-color 0.5s
+
+
+  @media (min-width: 640px)
+    div[class*='language-'],
+    .vp-block
+      margin: 16px 0
+    
+
+
+
+
+  [class*='language-'] pre,
+  [class*='language-'] code
+    /*rtl:ignore*/
+    direction: ltr
+    /*rtl:ignore*/
+    text-align: left
+    white-space: pre
+    word-spacing: normal
+    word-break: normal
+    word-wrap: normal
+    -moz-tab-size: 4
+    -o-tab-size: 4
+    tab-size: 4
+    -webkit-hyphens: none
+    -moz-hyphens: none
+    -ms-hyphens: none
+    hyphens: none
+
+
+  [class*='language-'] pre
+    position: relative
+    z-index: 1
+    margin: 0
+    border: 1px solid $gray-20
+    background: $gray-10
+    overflow-x: auto
+
+
+  [class*='language-'] code
+    display: block
+    width: fit-content
+    min-width: 100%
+    border: none
+    transition: color 0.5s
+    margin-bottom: 0
+
+
+  [class*='language-'] code .highlighted
+    background-color: $primary-light
+    transition: background-color 0.5s
+    margin: 0 -24px
+    padding: 0 24px
+    width: calc(100% + 2 * 24px)
+    display: inline-block
+
+
+  [class*='language-'] code .highlighted.error
+    background-color: $red
+
+
+  [class*='language-'] code .highlighted.warning
+    background-color: $yellow
+
+
+  [class*='language-'] code .diff
+    transition: background-color 0.5s
+    margin: 0 -24px
+    padding: 0 24px
+    width: calc(100% + 2 * 24px)
+    display: inline-block
+
+
+  [class*='language-'] code .diff::before
+    position: absolute
+    left: 10px
+
+
+  [class*='language-'] .has-focused-lines .line:not(.has-focus)
+    filter: blur(0.095rem)
+    opacity: 0.4
+    transition: filter 0.35s, opacity 0.35s
+
+
+  [class*='language-'] .has-focused-lines .line:not(.has-focus)
+    opacity: 0.7
+    transition: filter 0.35s, opacity 0.35s
+
+
+  [class*='language-']:hover .has-focused-lines .line:not(.has-focus)
+    filter: blur(0)
+    opacity: 1
+
+
+  [class*='language-'] code .diff.remove
+    background-color: $red
+    opacity: 0.7
+
+
+  [class*='language-'] code .diff.remove::before
+    content: '-'
+    color: $red
+
+
+  [class*='language-'] code .diff.add
+    background-color: $secondary
+
+
+  [class*='language-'] code .diff.add::before
+    content: '+'
+    color: $secondary
+
+
+  div[class*='language-'].line-numbers-mode
+    /*rtl:ignore*/
+    padding-left: 32px
+
+
+  .line-numbers-wrapper
+    position: absolute
+    top: 0
+    bottom: 0
+    /*rtl:ignore*/
+    left: 0
+    z-index: 3
+    /*rtl:ignore*/
+    border-right: 1px solid $primary
+    padding-top: 20px
+    width: 32px
+    text-align: center
+    transition: border-color 0.5s, color 0.5s
+
+
+  [class*='language-'] > button.copy
+    /*rtl:ignore*/
+    direction: ltr
+    position: absolute
+    top: 12px
+    /*rtl:ignore*/
+    right: 12px
+    z-index: 3
+    width: 40px
+    height: 40px
+    background-color: $gray-10
+    opacity: 0
+    cursor: pointer
+    background-image: url("UiKit/assets/copy.svg?url")
+    background-position: 50%
+    background-size: 20px
+    background-repeat: no-repeat
+    transition: border-color 0.25s, background-color 0.25s, opacity 0.25s
+
+
+  [class*='language-']:hover > button.copy,
+  [class*='language-'] > button.copy:focus
+    opacity: 1
+
+
+  [class*='language-'] > button.copy.copied,
+  [class*='language-'] > button.copy:hover.copied
+    background-image: url("UiKit/assets/check.svg?url")
+
+
+
+
+  [class*='language-'] > span.lang
+    position: absolute
+    top: 2px
+    right: 8px
+    z-index: 2
+    font-size: 12px
+    transition: color 0.4s, opacity 0.4s
+
+
+  [class*='language-']:hover > button.copy + span.lang,
+  [class*='language-'] > button.copy:focus + span.lang
+    opacity: 0
+
+
+  .vp-code-group
+    margin-top: 16px
+  
+
+  .vp-code-group .tabs
+    position: relative
+    display: flex
+    margin-right: -24px
+    margin-left: -24px
+    padding: 4px
+    background-color: $gray-20
+    overflow-x: auto
+    overflow-y: hidden
+    border-radius: 2px
+  
+
+  @media (min-width: 640px)
+    .vp-code-group .tabs
+      margin-right: 0
+      margin-left: 0
+    
+  
+
+  .vp-code-group .tabs input
+    position: fixed
+    opacity: 0
+    pointer-events: none
+  
+
+  .vp-code-group .tabs label
+    position: relative
+    display: inline-block
+    border-bottom: 1px solid transparent
+    font-size: 12px
+    font-weight: 800
+    padding: 3px 12px
+    color: $gray-60
+    white-space: nowrap
+    cursor: pointer
+    transition: all 0.25s
+  
+
+  .vp-code-group label:hover
+    color: $black
+  
+
+  .vp-code-group input:checked + label
+    color: $black
+    background-color: $white
+    box-shadow: $box-shadow-small
+  
+
+  .vp-code-group div[class*='language-'],
+  .vp-block
+    display: none
+    margin-top: 0 !important
+    border-top-left-radius: 0 !important
+    border-top-right-radius: 0 !important
+  
+
+  .vp-code-group div[class*='language-'].active,
+  .vp-block.active
+    display: block
+  
+
+  .vp-block
+    padding: 20px 24px
