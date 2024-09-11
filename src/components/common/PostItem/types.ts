@@ -3,10 +3,12 @@ export interface IMarkdownOptions {
   title: string;
   subTitle?: string;
   description: string;
-  date: string;
-  image: string;
+  publishDate: string;
+  cover: {
+    image: string;
+  };
   slug?: string;
-  authors?: string;
+  author?: string;
   draft?: boolean;
   tags?: string[];
   route?: string;
@@ -24,6 +26,6 @@ export interface IAuthor {
   image: string;
   position?: string;
   description: string;
-  favoriteTags?: string[];
+  tags?: string[];
   slug?: string;
 }

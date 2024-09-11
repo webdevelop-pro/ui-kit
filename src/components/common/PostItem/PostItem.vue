@@ -11,9 +11,9 @@ const props = defineProps({
   small: Boolean,
 });
 
-const day = computed(() => String(new Date(props.data.date).getDate() + 1).padStart(2, '0'));
-const month = computed(() => String(new Date(props.data.date).toLocaleString('en-us', { month: 'short' }).toUpperCase()));
-const year = computed(() => String(new Date(props.data.date).getFullYear()));
+const day = computed(() => String(new Date(props.data.publishDate).getDate() + 1).padStart(2, '0'));
+const month = computed(() => String(new Date(props.data.publishDate).toLocaleString('en-us', { month: 'short' }).toUpperCase()));
+const year = computed(() => String(new Date(props.data.publishDate).getFullYear()));
 
 const componentName = computed(() => {
   if (props.data.url || props.data.route) return 'a';
@@ -33,12 +33,9 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
     class="post-item"
     :class="{ 'is--small': small }"
     :aria-label="data.title"
-    itemscope
-    itemtype="https://schema.org/BlogPosting"
   >
     <div
       class="post-item__publish-date is--small-2"
-      itemprop="datePublished"
     >
       {{ day }} {{ month }}, {{ year }}
     </div>
@@ -46,7 +43,6 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
       <div class="post-item__details-title">
         <h3
           class="post-item__name is--h4__title"
-          itemprop="headline"
         >
           {{ data.title }}
         </h3>
@@ -59,7 +55,6 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
       </div>
       <p
         class="post-item__excerpt is--body"
-        itemprop="description"
         v-html="data.description"
       />
     </div>
