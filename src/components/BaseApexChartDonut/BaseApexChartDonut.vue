@@ -52,12 +52,12 @@ import VueApexCharts from 'vue3-apexcharts';
 
 <template>
   <div class="base-apex-chart-donut">
-	<h6
+	<h3
 		v-if="title"
 		class="base-apex-chart-donut__title"
 	>
 		{{ title }}
-	</h6>
+	</h3>
     <VueApexCharts
       :options="options"
       :series="data"

@@ -33,8 +33,6 @@ const options = computed(() => ({
   chart: {
     fontFamily: 'inherit',
     type: 'area',
-    width: '100%',
-    height: 'auto',
     toolbar: {
       show: false,
     },
@@ -69,10 +67,7 @@ const options = computed(() => ({
     axisTicks: {
       show: false,
     },
-    tickAmount: 6,
     labels: {
-      rotate: 0,
-      rotateAlways: true,
       style: {
         colors: props.labelColor,
         fontSize: '12px',
@@ -96,7 +91,6 @@ const options = computed(() => ({
     },
   },
   yaxis: {
-    tickAmount: 4,
     labels: {
       style: {
         colors: props.labelColor,
@@ -150,15 +144,16 @@ const options = computed(() => ({
 
 <template>
   <div class="base-apex-chart-area">
-	<h6
+	<h3
 		v-if="title"
 		class="base-apex-chart-area__title"
 	>
 		{{ title }}
-	</h6>
+	</h3>
     <VueApexCharts
       :options="options"
       :series="series"
+      :height="300"
       type="area"
     />
   </div>
