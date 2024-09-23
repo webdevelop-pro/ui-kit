@@ -97,8 +97,6 @@ const options = computed(() => ({
   },
   yaxis: {
     tickAmount: 4,
-    max: 24,
-    min: 10,
     labels: {
       style: {
         colors: props.labelColor,
