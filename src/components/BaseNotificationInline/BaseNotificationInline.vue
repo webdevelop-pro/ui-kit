@@ -40,18 +40,15 @@ const onClick = () => {
 			<BaseSvgIcon
 				v-if="(type === 'error') && icon"
 				class="svg-icon notification-inline__icon"
-				alt="exclamation-circle-icon"
 				name="circle-exclamation"
 			/>
 			<BaseSvgIcon
 				v-else-if="(type === 'info') && icon"
-				alt="info-circle-icon"
 				class="svg-icon notification-inline__icon"
 				name="circle-info"
 			/>
 			<BaseSvgIcon
 				v-else-if="icon"
-				alt="info-circle-icon"
 				class="svg-icon notification-inline__icon"
 				name="circle-check"
 			/>

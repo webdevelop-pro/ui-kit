@@ -120,7 +120,6 @@ const removeFile = (index: number) => {
         >
           <BaseSvgIcon
             name="upload"
-            alt="upload icon"
             class="base-uploader__file-icon"
           />
           Upload
@@ -137,7 +136,6 @@ const removeFile = (index: number) => {
             <div class="base-uploader__preview-card-info">
               <BaseSvgIcon
                 name="file"
-                alt="file icon"
                 class="base-uploader__preview-card-icon"
               />
               <span class="base-uploader__preview-card-name is--small">

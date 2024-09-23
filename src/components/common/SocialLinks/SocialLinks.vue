@@ -31,7 +31,6 @@ defineProps({
     >
       <BaseSvgIcon
         :name="item.iconName"
-        :alt="`social links icon ${item.icon}`"
         class="social-links__icon"
       />
     </a>

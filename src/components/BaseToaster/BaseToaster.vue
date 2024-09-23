@@ -47,18 +47,15 @@ const description = computed(() => {
     <BaseSvgIcon
 			v-if="(type === 'error')"
       class="base-toaster__icon"
-			alt="exclamation-circle-icon"
 			name="circle-exclamation"
 		/>
 		<BaseSvgIcon
 			v-else-if="(type === 'info')"
-			alt="info-circle-icon"
       class="base-toaster__icon"
 			name="circle-info"
 		/>
 		<BaseSvgIcon
 			v-else
-			alt="info-circle-icon"
       class="base-toaster__icon"
 			name="circle-check"
 		/>
@@ -97,7 +94,6 @@ const description = computed(() => {
         name="close"
         class="base-toaster__close"
         data-testid="close-notification-button"
-        alt="notification close icon"
       />
     </BaseButton>
   </div>

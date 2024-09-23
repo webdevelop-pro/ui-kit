@@ -49,7 +49,6 @@ function onItemClick(step: Step, index: number) {
 					<BaseSvgIcon
 						v-if="modelValue > index"
 						name="check"
-						alt="check icon"
 						class="base-stepper__check-icon"
 					/>
 				</div>

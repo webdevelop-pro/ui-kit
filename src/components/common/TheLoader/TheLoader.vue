@@ -17,7 +17,6 @@ onBeforeUnmount(() => unBlockedBody());
         <BaseSvgIcon
           class="the-loader__logo"
           name="logo"
-          alt="loader logo"
         />
       </div>
     </div>

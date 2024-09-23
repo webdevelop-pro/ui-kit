@@ -40,7 +40,6 @@ watch(() => props.hover, () => {
       <BaseSvgIcon
         name="chevron-down"
         class="base-dropdown__selected-arrow"
-        alt="dropdown selected arrow"
       />
     </div>
     <Transition name="fade" mode="out-in">

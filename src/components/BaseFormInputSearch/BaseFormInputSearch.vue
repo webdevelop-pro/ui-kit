@@ -40,7 +40,6 @@ watch(() => props.modelValue, () => {
           <template #append>
             <BaseSvgIcon
               name="search"
-              alt="search icon"
 			  class="base-form-input-search__search-icon"
             />
           </template>
@@ -48,7 +47,6 @@ watch(() => props.modelValue, () => {
 			<div v-if="showClearButton" @click="onClearClick">
 				<BaseSvgIcon
 					name="close"
-					alt="clear icon"
 					class="base-form-input-search__close-icon"
 				/>
 			</div>

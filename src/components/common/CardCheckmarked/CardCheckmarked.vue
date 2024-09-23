@@ -24,7 +24,6 @@ defineProps({
       <div class="card-checkmarked__icon-wrap">
         <BaseSvgIcon
           name="check"
-          alt="checked icon"
           class="card-checkmarked__icon"
         />
       </div>

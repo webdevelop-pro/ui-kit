@@ -85,7 +85,6 @@ watch(() => props.items, () => {
     >
       <BaseSvgIcon
         name="filter"
-        alt="filter image"
         class="base-filter__button-icon"
       />
       Filters&nbsp;

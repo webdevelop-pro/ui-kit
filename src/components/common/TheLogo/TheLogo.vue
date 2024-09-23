@@ -15,18 +15,15 @@ const componentName = computed(() => (props.disabled ? 'span' : 'a'));
     :is="componentName"
     class="TheLogo the-logo"
     :href="link"
-    exact
     aria-label="Site logo"
   >
     <BaseSvgIcon
       class="the-logo__desktop"
       name="logo"
-      alt="logo"
     />
     <BaseSvgIcon
       class="the-logo__mobile"
       name="logo-mob"
-      alt="mobile logo"
     />
   </component>
 </template>

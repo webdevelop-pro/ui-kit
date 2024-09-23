@@ -52,7 +52,6 @@ defineEmits(['close']);
       <BaseSvgIcon
         name="close"
         class="wd-modal-layout__close-icon"
-        alt="modal layout close icon"
         @click="$emit('close')"
       />
     </BaseButton>

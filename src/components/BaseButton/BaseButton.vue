@@ -39,11 +39,11 @@
     :class="[btnClasses, {'is--block': props.block, 'is--icon-only': iconOnly, 'is--disabled': props.disabled, 'is--squared': squared && !pill, 'is--pill': pill && !squared}]"
     :disabled="loading"
   >
-    <div
+    <span
       class="base-button__content"
     >
       <slot>Button</slot>
-    </div>
+	</span>
 	  <BaseSpinner
 		  v-if="loading"
 		  show
