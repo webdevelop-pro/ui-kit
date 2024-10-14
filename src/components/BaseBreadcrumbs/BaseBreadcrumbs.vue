@@ -24,9 +24,9 @@ const getComponent = (item: IBreadcrumb) => {
 </script>
 
 <template>
-  <section class="BaseBreadcrumbs base-breadcrumbs">
-    <div class="base-breadcrumbs__container">
-      <div
+  <section class="BaseBreadcrumbs base-breadcrumbs is--no-margin">
+    <ul class="base-breadcrumbs__container">
+      <li
         v-for="item in data"
         :key="item.routeName"
         class="base-breadcrumbs__item-wrap"
@@ -35,17 +35,15 @@ const getComponent = (item: IBreadcrumb) => {
           :is="getComponent(item)"
           :to="{ name: item.routeName, params: item.params }"
           :href="item.link"
-          class="base-breadcrumbs__item"
+          class="base-breadcrumbs__item is--h6__title"
         >
-          <span class="is--h6__title">
-            {{ item.name }}
-          </span>
+          {{ item.name }}
         </component>
         <span class="base-breadcrumbs__divider">
           /
         </span>
-      </div>
-    </div>
+      </li>
+    </ul>
   </section>
 </template>
 
@@ -58,9 +56,8 @@ const getComponent = (item: IBreadcrumb) => {
     gap: 8px
     display: flex
     flex-wrap: wrap
-
-  &__item
-    color: $black
+    padding-left: 0
+    margin: 0
 
   &__divider
     color: $gray-50
@@ -75,4 +72,8 @@ const getComponent = (item: IBreadcrumb) => {
 
       #{$root}__divider
         display: none
+
+  a
+    color: inherit !important
+    text-decoration: none !important
 </style>

@@ -46,7 +46,5 @@
   &.is--content-style-default
     #{$root}__content
       max-width: 740px
-      margin: 108px auto 0
-      @media screen and (max-width: 767px)
-        margin: 80px auto 0
+      margin: 0 auto
 </style>

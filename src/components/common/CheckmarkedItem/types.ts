@@ -1,6 +1,6 @@
 
 
-export interface ICardCheckmarked {
+export interface ICheckmarkedItem {
   title: string;
   description: string;
 }

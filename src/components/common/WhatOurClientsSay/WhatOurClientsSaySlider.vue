@@ -84,6 +84,9 @@ defineProps({
     color: $gray-80
     font-style: italic
 
+  &__author
+    margin: 0 !important
+
   &__item-card
     display: flex
     padding: 20px

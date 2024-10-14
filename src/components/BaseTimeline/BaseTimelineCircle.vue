@@ -25,7 +25,7 @@ const btnClasses = computed(() => {
       v-if="type === 'complete'"
       :src="check"
       alt="check icon"
-      class="base-timeline-circle__icon"
+      class="base-timeline-circle__icon is--no-margin"
     />
   </div>
 </template>

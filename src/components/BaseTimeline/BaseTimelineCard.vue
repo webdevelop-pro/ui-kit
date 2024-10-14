@@ -56,7 +56,7 @@ const btnClasses = computed(() => {
   </div>
 </template>
 
-<style lang="sass" scoped>
+<style lang="sass">
 @import 'index.sass'
 .base-timeline-card
   $root: &
@@ -92,6 +92,7 @@ const btnClasses = computed(() => {
       align-items: flex-start
 
   &__title
+    margin-top: 0
     color: $black
     @media screen and (max-width: 767px)
       margin-bottom: 10px
@@ -133,6 +134,9 @@ const btnClasses = computed(() => {
     #{$root}__title
       color: $white
 
+    p
+      color: $white
+
     #{$root}__duration-title, 
     #{$root}__duration-text
       color: $white
@@ -151,6 +155,9 @@ const btnClasses = computed(() => {
 
     #{$root}__title
       color: $gray-10
+
+    p
+      color: $white
 
     #{$root}__duration-title, 
     #{$root}__duration-text

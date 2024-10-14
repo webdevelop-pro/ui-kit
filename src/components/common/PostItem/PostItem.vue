@@ -60,7 +60,7 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
     </div>
     <div
       v-if="$slots.img"
-      class="post-item__image"
+      class="post-item__image is--no-margin"
     >
       <slot name="img" />
     </div>
@@ -81,6 +81,8 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
   border-top: 1px solid $gray-40
   flex-direction: row
   cursor: pointer
+  text-decoration: none !important
+  margin: 0
   @media screen and (min-width: 767px)
     &:hover
       background-color: $white
@@ -131,7 +133,6 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
 
   &__details
     width: 100%
-    padding-right: 30px
     display: flex
     flex-direction: column
     justify-content: center

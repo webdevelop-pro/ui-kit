@@ -11,7 +11,7 @@ defineProps({
 
 <template>
   <div class="WhatOurClientsSay what-our-clients-say">
-    <div class="wd-container what-our-clients-say__container">
+    <div class="is--container what-our-clients-say__container">
       <div class="what-our-clients-say__left">
         <WhatOurClientsSaySlider
           :slider="slider"

@@ -1,25 +1,548 @@
 @import 'UiKit/styles/_colors.sass'
+@import 'UiKit/styles/_mixins.sass'
 
 $box-shadow-small: 0 2px 5px 1px rgba(18, 22, 31, 0.03), 0 2px 3px -2px rgba(18, 22, 31, 0.15)
 $box-shadow-medium: 0 4px 5px -2px rgba(18, 22, 31, 0.05), 0 6px 25px 2px rgba(18, 22, 31, 0.06)
 $box-shadow-large: 0 6px 7px -4px rgba(18, 22, 31, 0.05), 0 10px 32px 4px rgba(18, 22, 31, 0.10)
 
+.is--uppercase
+    text-transform: uppercase
+
 .is--card
-  display: flex
-  padding: 8px
-  gap: 8px
-  border-radius: 2px
-  border: 1px solid $gray-10
-  background: $white
-  box-shadow: $box-shadow-medium
+    display: flex
+    padding: 8px
+    gap: 8px
+    border-radius: 2px
+    border: 1px solid $gray-10
+    background: $white
+    box-shadow: $box-shadow-medium
 
 .is--table-cell
-  display: flex
-  padding: 16px
-  align-items: center
-  gap: 16px
+    display: flex
+    padding: 16px
+    align-items: center
+    gap: 16px
 
 .is--table-not-found
-  border-top: 1px solid $gray-20
-  justify-content: center
-  width: 100%
+    border-top: 1px solid $gray-20
+    justify-content: center
+    width: 100%
+
+
+.is--lt-tablet-show
+    display: none !important
+    @include media-lte(tablet)
+        display: block !important
+  
+
+
+.is--gt-tablet-show
+    display: block !important
+    @include media-lte(tablet)
+        display: none !important
+
+.is--visually-hidden
+    position: absolute
+    width: 1px
+    height: 1px
+    padding: 0
+    margin: -1px
+    overflow: hidden
+    clip: rect(0, 0, 0, 0)
+    border: 0
+
+.is--paddings
+    padding: 130px 0
+    @include media-lte(tablet)
+        padding: 100px 0
+
+  
+.is--short-block
+    display: flex
+    max-width: 799px
+    width: 100%
+    flex-direction: column
+    align-items: flex-start
+
+
+.is--highlight-black
+    background: $black
+    padding: 130px 0
+    position: relative
+    z-index: 0
+    color: $white
+    width: 100%
+    position: relative
+    @include media-lte(tablet)
+        padding: 100px 0
+    .is--border-left
+        padding-left: 20px
+        border-left: 2px solid $secondary
+    p
+        color: $gray-10
+    li
+        color: $white
+        & + &
+            margin-top: 26px
+
+.is--highlight
+    flex-shrink: 0
+    position: relative
+    padding: 130px 196px
+    background-size: cover
+    background-repeat: no-repeat
+    background-position: center
+    color: $white
+    @include media-lte(tablet)
+        padding: 40px
+
+    p
+        color: inherit
+        opacity: 0.9
+
+    h1, h2, h3, h4, h5, h6
+        color: $white
+
+        a
+            text-decoration: none
+            color: inherit
+        
+    a
+        color: inherit
+        
+    ul
+        margin-top: 32px
+        margin-bottom: 0
+        margin-left: 0
+        margin-right: 0
+        @include media-gte(tablet)
+            max-width: 562px
+        
+    li
+        border-bottom: 1px solid $white !important
+  
+
+
+.is--list-pointers
+    ul
+        width: 100%
+        padding-left: 0
+        display: grid
+        grid-template-columns: repeat(2, 1fr)
+        gap: 17px 30px
+        @include media-lte(tablet)
+            grid-template-columns: repeat(1, 1fr)
+            gap: 16px
+
+    li
+        width: 100%
+        display: flex
+        margin: 0
+        padding: 12px 0
+        align-items: center
+        gap: 10px
+        color: inherit
+        border-bottom: 1px solid $gray-70
+
+.base-button
+    svg
+        width: 18px
+  
+.base-tag
+    cursor: pointer
+    &.is--active
+        background-color: $secondary !important
+    @media(hover: hover) and (pointer: fine)
+        &:hover
+            background-color: $secondary !important
+
+.is--tags-inline
+    display: flex
+    align-content: center
+    gap: 12px
+    align-self: stretch
+    flex-wrap: wrap
+
+.is--tags-inline + *
+    margin-top: 20px
+
+.is--side-block
+    flex-shrink: 0
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: flex-start
+    flex: 1 0 0
+    position: relative
+    @include media-lt(tablet)
+        position: initial
+        width: 100%
+    & > p,
+    .is--side-block__content
+        display: flex
+        flex-direction: column
+        align-self: stretch
+        color: $gray-70
+        padding: 0 20px
+        border-left: 2px solid $primary
+        margin-top: 20px
+.sticky
+    @include media-gt(tablet)
+        position: fixed
+        top: 123px
+        width: 26%
+        max-width: 312px
+
+.is--flex-row
+    display: flex
+    align-items: flex-start
+    align-self: stretch
+    gap: 80px
+    @include media-lte(tablet)
+        gap: 25px
+    @include media-lte(tablet)
+        flex-direction: column
+
+.is--align-center
+    align-items: center
+
+.is--two-col-grid
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    gap: 20px 30px
+    @include media-lte(tablet)
+        grid-template-columns: repeat(1, 1fr)
+    &.is--three
+        @include media-gt(tablet)
+            grid-template-columns: repeat(3, 1fr)
+
+    & + & 
+      margin-top: 30px
+
+    * + &    
+        margin-top: 40px
+
+    & > ul,
+    & > ol
+        margin-top: 0
+
+
+.is--three-col-grid
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
+    gap: 30px
+    @include media-lte(desktop)
+        grid-template-columns: repeat(2, 1fr)
+    @include media-lte(tablet)
+        grid-template-columns: repeat(1, 1fr)
+
+
+.is--gap-80
+    gap: 80px
+    @include media-lte(tablet)
+        gap: 25px
+        
+.is--page
+    width: 100%
+
+.is--page > *:not(.is--page-content):not(.is--no-padding),
+.is--page-content > div > *
+    padding-top: 130px
+    @include media-lte(tablet)
+        padding-top: 40px
+    &:last-child:not(.is--container)
+        padding-bottom: 130px
+        @include media-lte(tablet)
+            padding-bottom: 100px
+
+// .is--page > *:last-child:not(.is--container)
+//     padding-bottom: 130px
+//     @include media-lte(tablet)
+//         padding-bottom: 100px
+.is--page > .is--container:last-child
+    padding-bottom: 60px
+.is--page > .is--container + .is--container
+    padding-top: 40px !important
+
+h1, h2, h3, h4, h5, h6,
+.is--h1__title,
+.is--h2__title,
+.is--h3__title,
+.is--h4__title,
+.is--h5__title,
+.is--h6__title 
+    color: inherit
+    a
+        text-decoration: none !important
+        color: inherit !important
+
+
+
+ol
+    list-style: decimal
+    padding-left: 25px
+ul
+    list-style: disc
+    padding-left: 25px
+
+li
+    color: $gray-80
+
+hr
+    border-top: 0
+    border-bottom: 1px solid $gray-50
+
+a
+    color: $primary
+    z-index: 1
+    text-decoration: underline
+    transition: all .3s ease-in-out
+    &:hover
+        text-decoration: none
+
+em
+    font-style: italic
+    font-weight: inherit
+
+code
+    border: 1px solid $gray-20
+    background: $gray-10
+    display: flex
+    padding: 20px
+    align-items: flex-start
+    gap: 28px
+    align-self: stretch
+    margin-bottom: 20px
+    position: relative
+
+blockquote,
+q
+    border: 1px solid $gray-20
+    background: $gray-10
+    display: flex
+    padding: 40px
+    align-items: flex-start
+    gap: 28px
+    align-self: stretch
+    position: relative
+
+    p:first-of-type
+        margin: 0
+
+    &::before,
+    &::after
+        content: ""
+        position: absolute
+        width: 70px
+        height: 50px
+        z-index: 0
+        border: none
+        background-image: url("Docs/public/images/icons/sign-left.svg")
+
+    &::before
+        left: 12px
+        top: 12px
+
+    &::after
+        right: 12px
+        bottom: 12px
+        transform: rotate(180deg)
+
+    *
+        z-index: 1
+
+table
+    width: 100%
+
+th
+    font-size: 14px
+    font-weight: 800
+    line-height: 21px
+    color: $gray-60
+    text-align: left
+    padding: 16px
+    gap: 2px
+    flex: 1 0 0
+
+tr
+    display: flex
+    align-items: flex-start
+    align-self: stretch
+
+tbody
+    tr
+        border-top: 1px solid $gray-20
+        cursor: default
+        transition: all 0.3s ease
+
+        &:hover
+            background-color: $gray-10
+
+td
+    padding: 16px
+    flex: 1 0 0
+    color: $gray-80
+
+// SPACINGS
+h1 + *,
+.is--h1__title + *
+    margin-top: 12px
+h2 + *,
+.is--h2__title + *,
+h3 + *,
+.is--h3__title + *
+    margin-top: 8px
+h4 + *,
+.is--h4__title + *,
+h5 + *,
+.is--h5__title + *,
+h6 + *,
+.is--h6__title + *
+    margin-top: 4px
+
+h2 + p,
+.is--h2__title + p
+    margin-top: 24px
+
+h2 + .is--subheading-1,
+.is--h2__title + .is--subheading-1,
+h2 + .is--subheading-2,
+.is--h2__title + .is--subheading-2,
+h2 + a,
+.is--h2__title + a
+    margin-top: 12px
+h2 + ol, h2 + ul,
+.is--h2__title + ol,
+.is--h2__title + ul
+    margin-top: 24px
+
+h3 + p,
+.is--h3__title + p,
+h3 + ul,
+.is--h3__title + ul
+    margin-top: 20px
+
+.is--subheading-1 + *:not(section)
+    margin-top: 30px
+
+.is--subheading-1 + p
+    margin-top: 28px
+
+.is--subheading-1 + a
+    margin-top: 12px
+
+.is--subheading-1 + .base-image
+    margin-top: 0
+
+.is--subheading-2 + *
+    margin-top: 30px
+
+.is--subheading-2 + a
+    margin-top: 8px
+
+.base-button:not(.is--no-margin)
+    margin-top: 40px
+
+* + .slider-swiper
+    margin-top: 60px
+    @include media-lte(tablet)
+        margin-bottom: 100px
+
+ul,
+ol
+    margin-top: 40px
+
+li + li
+    margin-top: 16px
+
+p + p
+    margin-top: 16px
+
+img:not(.is--no-margin),
+blockquote,
+q,
+code,
+table
+    margin-top: 60px
+
+a + *:not(.is--no-margin)
+    margin-top: 12px
+    
+* + h1,
+* + h2,
+* + h3,
+* + h4,
+* + h5,
+* + h6,
+* + .is--h1__title,
+* + .is--h2__title,
+* + .is--h3__title,
+* + .is--h4__title,
+* + .is--h5__title,
+* + .is--h6__title
+    margin-top: 60px
+
+.base-tag + h1,
+.base-tag + .is--h1__title
+    margin-top: 12px
+
+.is--no-margin
+    a + *,
+    li + li,
+    h1 + *,
+    .is--h1__title + *,
+    h2 + *,
+    .is--h2__title + *,
+    h3 + *,
+    .is--h3__title + *,
+    h4 + *,
+    .is--h4__title + *,
+    h5 + *,
+    .is--h5__title + *,
+    h6 + *,
+    .is--h6__title + *,
+    .is--subheading-1 + *,
+    .is--subheading-2 + *,
+    * + h1,
+    * + h2,
+    * + h3,
+    * + h4,
+    * + h5,
+    * + h6,
+    * + .is--h1__title,
+    * + .is--h2__title,
+    * + .is--h3__title,
+    * + .is--h4__title,
+    * + .is--h5__title,
+    * + .is--h6__title,
+    img,
+    a,
+    .base-button,
+    ul,
+    ol
+        margin-top: 0 !important
+
+.is--margin-top-4
+    margin-top: 4px !important
+.is--margin-top-8
+    margin-top: 8px !important
+.is--margin-top-12
+    margin-top: 12px !important
+.is--margin-top-20
+    margin-top: 20px !important
+.is--margin-top-24
+    margin-top: 24px !important
+
+.is--margin-top-40
+    margin-top: 40px !important
+
+.is--margin-top-60
+    margin-top: 60px !important
+
+.is--margin-top-130
+    margin-top: 130px
+    @include media-lte(tablet)
+        margin-top: 100px 0
+
+.base-breadcrumbs + *
+    margin-top: 60px
