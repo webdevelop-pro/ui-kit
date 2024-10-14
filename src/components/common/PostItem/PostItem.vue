@@ -169,7 +169,7 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
   &__image
     margin-left: auto
     margin-right: 20px
-    width: 188px
+    width: 168px
     height: 125px
     flex-shrink: 0
     

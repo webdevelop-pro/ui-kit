@@ -249,7 +249,9 @@ $box-shadow-large: 0 6px 7px -4px rgba(18, 22, 31, 0.05), 0 10px 32px 4px rgba(1
 .is--page-content > div > *
     padding-top: 130px
     @include media-lte(tablet)
-        padding-top: 40px
+        padding-top: 100px
+.is--page > *:not(.is--page-content):not(.is--no-padding),
+.is--page > .is--page-content
     &:last-child:not(.is--container)
         padding-bottom: 130px
         @include media-lte(tablet)
@@ -446,7 +448,7 @@ h3 + ul,
 * + .slider-swiper
     margin-top: 60px
     @include media-lte(tablet)
-        margin-bottom: 100px
+      margin-top: 100px
 
 ul,
 ol
