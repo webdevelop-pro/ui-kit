@@ -81,7 +81,9 @@
 
 
   :not(pre) > code
-    padding: 12px
+    padding: 0 5px
+    display: inline-block
+    margin: 0
     background-color: $gray-10
 
 
@@ -91,6 +93,11 @@
 
   a:hover > code
     color: $primary
+
+  pre > code
+    display: block
+    a
+      margin: 0 !important
 
 
   h1 > code,
@@ -111,7 +118,11 @@
   @media (min-width: 640px)
     div[class*='language-'],
     .vp-block
-      margin: 16px 0
+      margin-top: 40px
+      margin-left: 0
+      margin-right: 0
+      & + *
+        margin-top: 40px
     
 
 

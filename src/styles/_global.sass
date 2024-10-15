@@ -452,7 +452,11 @@ h3 + ul,
 
 ul,
 ol
-    margin-top: 40px
+    margin-top: 25px
+
+ul + p,
+ol + p
+    margin-top: 20px
 
 li + li
     margin-top: 16px
@@ -466,9 +470,12 @@ p + p
 img:not(.is--no-margin),
 blockquote,
 q,
-code,
+pre,
 table
     margin-top: 60px
+
+p img:not(.is--no-margin)
+    margin-top: 40px
 
 a + *:not(.is--no-margin)
     margin-top: 12px
@@ -485,7 +492,7 @@ a + *:not(.is--no-margin)
 * + .is--h4__title,
 * + .is--h5__title,
 * + .is--h6__title
-    margin-top: 60px
+    margin-top: 30px // changed from 60px as in design TODO c heck with Maria
 
 .base-tag + h1,
 .base-tag + .is--h1__title
@@ -537,6 +544,9 @@ a + *:not(.is--no-margin)
     margin-top: 20px !important
 .is--margin-top-24
     margin-top: 24px !important
+
+.is--margin-top-30
+    margin-top: 30px !important
 
 .is--margin-top-40
     margin-top: 40px !important
