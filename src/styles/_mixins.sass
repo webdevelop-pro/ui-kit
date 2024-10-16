@@ -1,4 +1,5 @@
 @import "UiKit/styles/mixins/mixin-media"
+@import "UiKit/styles/_variables"
   
 @mixin mt($time)
   transition: all $time ease
@@ -8,7 +9,6 @@
   -o-transition: all $time ease-in-out
   transition: all $time ease-in-out
 
-$base-size: 16
 //Function to convert px value into rem
 @function sizeInRem($target, $context: $base-size)
   @return ($target / $context) * 1rem
@@ -16,7 +16,6 @@ $base-size: 16
 @function isImportant($important)
   @return #{if($important, '!important', '')}
 
-$familyValue: 'Avenir', arial, helvetica, sans-serif
 
 @mixin font($weight, $family: $familyValue, $important: false)
   font-family: $family isImportant($important)

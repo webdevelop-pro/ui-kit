@@ -71,3 +71,13 @@ export function urlize(input: string): string {
 
   return urlFriendlyString;
 }
+
+
+export function stripHtml(html: string) {
+  if (typeof document !== 'undefined') {
+    const tmp = document.createElement('DIV');
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || '';
+  }
+  return html;
+}

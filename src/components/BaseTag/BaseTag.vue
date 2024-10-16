@@ -54,6 +54,7 @@ const tagClasses = computed(() => {
 	align-items: center
 	border-radius: $base-tag-default-border-radius
 	font-family: $base-tag-font-family
+	text-decoration: none
 	$root: &
 	&.is--size-small
 		padding: $base-tag-small-padding

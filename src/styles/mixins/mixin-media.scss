@@ -8,20 +8,11 @@
  * @mixin media(mobile, 500px) { ... }
  */
 
-$wd-breakpoints: (
-  mobile: 320px,
-  mobile-xs: 374px,
-  tablet-xs: 575px,
-  tablet: 768px,
-  desktop: 980px,
-  desktop-md: 1024px,
-  desktop-lg: 1199px,
-  wide: 1366px
-) !default;
+@import 'UiKit/styles/_variables.sass';
 
 @function get-breakpoint($key) {
-  @if map-has-key($wd-breakpoints, $key) {
-    @return map-get($wd-breakpoints, $key);
+  @if map-has-key($breakpoints, $key) {
+    @return map-get($breakpoints, $key);
   }
 
   @return $key;

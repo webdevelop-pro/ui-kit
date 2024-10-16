@@ -176,7 +176,7 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
     @media screen and (max-width: 767px)
       order: 1
       width: 100%
-      margin-bottom: 15px
+      margin-bottom: 20px
       height: 122px
       min-width: 100%
 
