@@ -14,6 +14,7 @@ const props = defineProps({
     type: Array as PropType<IBreadcrumb[]>,
     required: true,
   },
+  slug: String,
 });
 
 const getComponent = (item: IBreadcrumb) => {
@@ -24,11 +25,14 @@ const getComponent = (item: IBreadcrumb) => {
 </script>
 
 <template>
-  <section class="BaseBreadcrumbs base-breadcrumbs is--no-margin">
+  <section
+    class="BaseBreadcrumbs base-breadcrumbs is--no-margin"
+    :key="slug"
+  >
     <ul class="base-breadcrumbs__container">
       <li
         v-for="item in data"
-        :key="item.routeName"
+        :key="item.routeName + item.link + item.name"
         class="base-breadcrumbs__item-wrap"
       >
         <component
