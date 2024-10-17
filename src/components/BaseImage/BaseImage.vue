@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import BaseSkeleton from 'UiKit/components/BaseSkeleton/BaseSkeleton.vue';
+import defaulImage from '@/assets/images/default.svg?url';
 import { ref } from 'vue';
 
 const props = withDefaults(defineProps<{
@@ -31,10 +32,11 @@ const onImageLoaded = () => {
 		/>
 		<img
 			v-show="isImageLoaded"
-			:src="src"
+			:src="src || defaulImage"
 			:alt="alt"
+			:key="src"
 			class="base-image__image"
-			:class="[`is--${fit}`]"
+            :class="[`is--${fit}`, { 'is--default-image': !src }]"
 			@load="onImageLoaded"
 		/>
 	</div>
@@ -44,9 +46,13 @@ const onImageLoaded = () => {
 @import 'index.sass'
 .base-image
 	$root:&
-
 	width: 100%
 	height: 100%
+	background-color: $default-background-color
+	display: flex
+	justify-content: center
+	align-items: center
+	overflow: hidden
 
 	&__image
 		height: 100%
@@ -60,4 +66,8 @@ const onImageLoaded = () => {
 
 	&__skeleton
 		min-height: inherit
+
+	.is--default-image
+		max-height: 25%
+		width: auto
 </style>
