@@ -40,7 +40,7 @@ function mute() {
     if (player.value) player.value.mute();
 }
 function onReady() {
-    if (this.autoPlay && this.active) this.runAutoPlay();
+    if (props.autoPlay && props.active) runAutoPlay();
 }
 async function runAutoPlay() {
     await mute();
