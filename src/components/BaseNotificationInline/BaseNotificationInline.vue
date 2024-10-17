@@ -112,10 +112,10 @@ const onClick = () => {
 			font-size: $notification-inline-font-size
 			line-height: $notification-inline-line-height
 			+font(400)
-			border-bottom: solid 1px $notification-inline-link-color
+			// border-bottom: solid 1px $notification-inline-link-color
 			&:hover
 				+mt(.3s)
-				border-bottom: solid 1px transparent
+				// border-bottom: solid 1px transparent
 				color: $secondary
 	&____title
 		margin-right: 4px

@@ -117,7 +117,7 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
     position: relative
     color: $gray-70
     text-align: left
-    margin-bottom: 8px
+    margin-bottom: 4px
 
   &__label-link
     position: absolute

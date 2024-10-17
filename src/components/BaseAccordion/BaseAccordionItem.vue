@@ -148,7 +148,7 @@ withDefaults(defineProps<{
       +mt(.3s)
       color: $link-color
       +font(600)
-      border-bottom: solid 1px $link-color
+      // border-bottom: solid 1px $link-color
       &:hover
         +mt(.3s)
         border-bottom: solid 1px transparent

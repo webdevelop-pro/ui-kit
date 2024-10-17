@@ -144,7 +144,7 @@ function onChange(event: Event) {
 		flex-direction: row
 		justify-content: center
 		align-items: center
-		top: 1px
+		top: 5px
 		overflow: hidden
 	
 	&__icon
