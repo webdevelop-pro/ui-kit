@@ -45,6 +45,12 @@ const onLoad = () => {
   readyResolver();
   emit('ready');
 };
+
+defineExpose({
+  play,
+  pause,
+  mute
+})
 </script>
 
 <template>

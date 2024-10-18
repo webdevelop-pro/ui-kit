@@ -79,7 +79,19 @@ onMounted(() => {
     v-if="url"
     ref="img"
     :style="style"
+    class="BaseVideoThumb base-video-thumb"
   >
     <slot name="playIcon" />
   </div>
 </template>
+
+
+<style lang="sass">
+@import 'UiKit/styles/_colors.sass'
+.base-video-thumb
+  max-height: 100%
+  width: 100%
+  height: 100%
+  position: relative
+  background-size: cover
+</style>

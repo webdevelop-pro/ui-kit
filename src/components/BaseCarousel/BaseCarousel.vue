@@ -5,33 +5,23 @@ import { getImageTitle } from 'UiKit/helpers/utils/text';
 import BaseVideoThumb from 'UiKit/components/BaseVideoEmbedded/BaseVideoThumb.vue';
 import BaseVideoEmbedded from 'UiKit/components/BaseVideoEmbedded/BaseVideoEmbedded.vue';
 import BaseImage from 'UiKit/components/BaseImage/BaseImage.vue';
-import { Swiper } from 'swiper/vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation, Thumbs } from 'swiper/modules';
-import { SwiperSlide } from 'swiper/vue';
 
 const props = defineProps({
   name: String,
-  preloadFirstImage: {
-    type: Boolean,
-    default: false,
-  },
   files: {
     type: Array,
     default: () => [],
   },
-  bigArrowsIcons: {
-    type: Boolean,
-    default: false,
-  },
-  thumbArrows: {
-    type: Boolean,
-    default: false,
-  },
   activeItemByUrl: Boolean,
 });
 
+const emit = defineEmits(['click']);
+
 const modules = [Navigation, Thumbs];
 const thumbsSwiper = ref(null);
+const mainSwiperInstance = ref(null);
 
 const setThumbsSwiper = (swiper) => {
   thumbsSwiper.value = swiper;
@@ -48,18 +38,14 @@ const sortedFiles = computed(() => {
 });
 
 const isFirstItemVideo = computed(() => Boolean(sortedFiles.value[0]?.url));
-const isVideosOnly = computed(() => props.files.every(item => item.type === 'video'));
-const isPreloadFirstImage = computed(() => Boolean(props.preloadFirstImage && itemsNumber.value > 1));
 
 watch(activeItem, () => {
   if (props.activeItemByUrl) setActiveItemNumberToURL();
 });
 
-watch(
-  () => route.query.media,
-  (currentItemNumberByURL) => {
-    if (props.activeItemByUrl) {
-      setActiveItemNumberByURL(currentItemNumberByURL);
+watch( () => [route.query.media, mainSwiperInstance.value], () => {
+    if (props.activeItemByUrl && mainSwiperInstance.value) {
+      setActiveItemNumberByURL(route.query.media);
     }
   },
   { immediate: true }
@@ -67,7 +53,7 @@ watch(
 
 
 function getMetaOrder(item) {
-  if (item.meta_data) return item.meta_data.order || 999;
+  if (item.meta_data) return item.meta_data?.order || 999;
   return 999;
 }
 
@@ -91,9 +77,23 @@ function setActiveItemNumberByURL(currentItemNumberByURL = route.query.media) {
   ) {
     activeItem.value = 0;
     setActiveItemNumberToURL();
+    mainSwiperInstance.value?.slideTo(activeItem.value);
   } else {
     activeItem.value = numberFromURL;
+    mainSwiperInstance.value?.slideTo(activeItem.value);
   }
+}
+
+function onSlideChange(swiper) {
+  activeItem.value = swiper.activeIndex;
+}
+
+const onSwiper = (instance) => {
+  mainSwiperInstance.value = instance;
+}
+
+const onClick = () => {
+  emit('click');
 }
 </script>
 
@@ -104,27 +104,30 @@ function setActiveItemNumberByURL(currentItemNumberByURL = route.query.media) {
       :modules="modules"
       navigation
       :slides-per-view="1"
-      :loop="true"
-      :spaceBetween="10"
       :thumbs="{ swiper: thumbsSwiper }"
       class="base-carousel__slider-main"
+      @slideChange="onSlideChange"
+      @swiper="onSwiper"
 		>
 		  <SwiperSlide
         v-for="(item, index) in sortedFiles"
-        :key="item.name + index"
+        :key="index"
       >
-        <!-- <BaseVideoEmbedded
+        <BaseVideoEmbedded
           v-if="item.video"
           :url="item.video"
           :alt="item.name"
           :active="Boolean(activeItem === index)"
           :auto-play="Boolean(activeItem === 0 && isFirstItemVideo)"
-        /> -->
+          @click="onClick"
+        />
         <BaseImage
-          :src="item.meta_data.big"
+          v-else
+          :src="item.meta_data?.big"
           :alt="name || item.name"
           :title="getImageTitle(name, item.name)"
           itemprop="image"
+          @click="onClick"
         />
         <div class="base-slider__item--description" v-if="!item.url && item.description">
           <p class="small-text">{{ item.description }}</p>
@@ -133,46 +136,31 @@ function setActiveItemNumberByURL(currentItemNumberByURL = route.query.media) {
 		</Swiper>
     <Swiper
       @swiper="setThumbsSwiper"
-      :loop="true"
       :spaceBetween="10"
-      :slidesPerView="4"
-      watch-slides-progress
+      :slidesPerView="8"
       :modules="modules"
       class="base-carousel__slider-thumbs"
     >
       <SwiperSlide
         v-for="(item, index) in sortedFiles"
-        :key="item.name + index"
+        :key="index"
       >
+        <BaseVideoThumb v-if="item.video" :url="item.video" :title="item.name">
+          <template v-slot:playIcon>
+            <div class="play-icon">
+              <div class="triangle"></div>
+            </div>
+          </template>
+        </BaseVideoThumb>
         <BaseImage
-          :src="item.meta_data.small"
+          v-else
+          :src="item.meta_data?.small"
           :alt="name || item.name"
           :title="getImageTitle(name, item.name)"
           itemprop="image"
         />
       </SwiperSlide>
     </Swiper>
-	  <!-- <div class="thumbs">
-		<BaseSlider :items="sortedFiles" v-model="activeItem" blur>
-		  <template v-slot="{ item, index }">
-			<BaseVideoThumb v-if="item.video" :url="item.video" :title="item.name">
-			  <template v-slot:playIcon>
-				<div class="play-icon">
-				  <div class="triangle"></div>
-				</div>
-			  </template>
-			</BaseVideoThumb>
-			<BaseImage
-			  v-else
-			  class="img bg"
-			  :placeholder-src="item.placeholder"
-			  :src="item.meta_data.small"
-			  :title="getImageTitle(name, item,name, index)"
-			  :alt="`${name} thumbnail ${index + 1}` || item,name"
-			/>
-		  </template>
-		</BaseSlider>
-	  </div> -->
 	</div>
 </template>
 
@@ -183,6 +171,7 @@ function setActiveItemNumberByURL(currentItemNumberByURL = route.query.media) {
   height: 100%
   width: 100%
   user-select: none
+  background-color: $gray-10
 
   .base-carousel__slider-main,
   .base-carousel__slider-thumbs
@@ -211,11 +200,13 @@ function setActiveItemNumberByURL(currentItemNumberByURL = route.query.media) {
       background-size: cover
       background-position: center
 
-      img
+      img:not(.is--default-image)
         display: block
         width: 100%
         height: 100%
         object-fit: cover
+      .is--default-image
+        max-height: 40%
 
   .base-carousel__slider-thumbs
     height: 20%
@@ -224,6 +215,11 @@ function setActiveItemNumberByURL(currentItemNumberByURL = route.query.media) {
       height: 100%
       opacity: 0.4
       transition: all 0.3s ease
+      &:hover, .swiper-slide-thumb-active
+        filter: none
+        .play-icon
+          opacity: 1
+          transition: all 0.3s ease
     .swiper-slide-thumb-active
       opacity: 1
       transition: all 0.3s ease
@@ -272,4 +268,30 @@ function setActiveItemNumberByURL(currentItemNumberByURL = route.query.media) {
     background-repeat: no-repeat
     background-size: 20px
     background-position: center
+
+
+  .play-icon
+    width: 20px
+    height: 20px
+    background: rgba(0, 0, 0, 0.6)
+    border-radius: 100px
+    position: absolute
+    left: 50%
+    top: 50%
+    z-index: 2
+    transform: translate(-50%, -50%)
+    cursor: pointer
+    opacity: 0.6
+    transition: all 0.3s ease
+  .triangle
+    width: 0
+    height: 0
+    border-style: solid
+    border-width: 3.5px 0 3.5px 7px
+    border-color: transparent transparent transparent $white
+    position: absolute
+    left: 52%
+    top: 50%
+    border-radius: 0
+    transform: translate(-50%, -50%)
 </style>

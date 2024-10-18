@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, ref, watchEffect } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { getVideoMeta } from 'UiKit/helpers/utils/video';
 import BaseVideoEmbeddedYoutube from './BaseVideoEmbeddedYoutube.vue';
 import BaseVideoEmbeddedVimeo from './BaseVideoEmbeddedVimeo.vue';
@@ -30,24 +30,24 @@ const componentName = computed(() => {
     return null;
 })
 
-function play() {
+const play = () => {
     if (player.value) player.value.play();
 }
-function pause() {
+const pause = () => {
     if (player.value) player.value.pause();
 }
-function mute() {
+const mute = () => {
     if (player.value) player.value.mute();
 }
-function onReady() {
+const  onReady = () => {
     if (props.autoPlay && props.active) runAutoPlay();
 }
-async function runAutoPlay() {
+const runAutoPlay = async () => {
     await mute();
     play();
 }
 
-watchEffect(() => {
+watch(() => props.active, () => {
 	if (!props.active) pause();
 });
 </script>

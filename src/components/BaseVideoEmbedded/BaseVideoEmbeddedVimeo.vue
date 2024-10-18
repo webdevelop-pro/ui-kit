@@ -49,6 +49,12 @@ const mute = async () => {
   player?.setMuted(true);
 };
 
+defineExpose({
+  play,
+  pause,
+  mute
+})
+
 onMounted(() => {
   init();
 });
