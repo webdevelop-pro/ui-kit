@@ -184,92 +184,92 @@ function setActiveItemNumberByURL(currentItemNumberByURL = route.query.media) {
   width: 100%
   user-select: none
 
-.base-carousel__slider-main,
-.base-carousel__slider-thumbs
-  position: relative
-  display: flex
-  flex-direction: row
-  position: relative
-
-.base-carousel__slider-main
-  height: 80%
-  width: 100%
-
-  .swiper-slide
-    max-width: 100%
-    width: 100% !important
-    flex-shrink: 0
-    height: 100%
+  .base-carousel__slider-main,
+  .base-carousel__slider-thumbs
     position: relative
-    transition-property: transform 
-    text-align: center
-    font-size: 18px
-    background: #fff
     display: flex
-    justify-content: center
-    align-items: center
-    background-size: cover
+    flex-direction: row
+    position: relative
+
+  .base-carousel__slider-main
+    height: 80%
+    width: 100%
+
+    .swiper-slide
+      max-width: 100%
+      width: 100% !important
+      flex-shrink: 0
+      height: 100%
+      position: relative
+      transition-property: transform 
+      text-align: center
+      font-size: 18px
+      background: #fff
+      display: flex
+      justify-content: center
+      align-items: center
+      background-size: cover
+      background-position: center
+
+      img
+        display: block
+        width: 100%
+        height: 100%
+        object-fit: cover
+
+  .base-carousel__slider-thumbs
+    height: 20%
+    padding: 10px 0 0
+    .swiper-slide
+      height: 100%
+      opacity: 0.4
+      transition: all 0.3s ease
+    .swiper-slide-thumb-active
+      opacity: 1
+      transition: all 0.3s ease
+
+  .swiper-wrapper
+    position: relative
+    width: 100%
+    height: 100%
+    z-index: 1
+    display: flex
+    box-sizing: content-box
+
+  .swiper-button-prev,
+  .swiper-button-next
+    position: absolute
+    right: 0
+    top: 50%
+    transform: translateY(-50%)
+    width: 48px
+    height: 48px
+    z-index: 2
+    cursor: pointer
+    padding: 12px
+    transition: all 0.3s ease
+    background-color: $primary-light
+    opacity: 0.8
+    &.swiper-button-disabled
+      opacity: 0.3
+      pointer-events: none
+
+    &:hover
+      opacity: 1
+      background-color: $primary-light
+      transition: all 0.3s ease
+
+  .swiper-button-prev
+    left: 0
+    background-image: url("UiKit/assets/arrow-left-primary.svg?url")
+    background-repeat: no-repeat
+    background-size: 20px
     background-position: center
 
-    img
-      display: block
-      width: 100%
-      height: 100%
-      object-fit: cover
-
-.base-carousel__slider-thumbs
-  height: 20%
-  padding: 10px 0
-  .swiper-slide
-    height: 100%
-    opacity: 0.4
-    transition: all 0.3s ease
-  .swiper-slide-thumb-active
-    opacity: 1
-    transition: all 0.3s ease
-
-.swiper-wrapper
-  position: relative
-  width: 100%
-  height: 100%
-  z-index: 1
-  display: flex
-  box-sizing: content-box
-
-.swiper-button-prev,
-.swiper-button-next
-  position: absolute
-  right: 0
-  top: 50%
-  transform: translateY(-50%)
-  width: 48px
-  height: 48px
-  z-index: 2
-  cursor: pointer
-  padding: 12px
-  transition: all 0.3s ease
-  background-color: $primary-light
-  opacity: 0.8
-  &.swiper-button-disabled
-    opacity: 0.3
-    pointer-events: none
-
-  &:hover
-    opacity: 1
-    background-color: $primary-light
-    transition: all 0.3s ease
-
-.swiper-button-prev
-  left: 0
-  background-image: url("UiKit/assets/arrow-left-primary.svg?url")
-  background-repeat: no-repeat
-  background-size: 20px
-  background-position: center
-
-.swiper-button-next
-  right: 0
-  background-image: url("UiKit/assets/arrow-right-primary.svg?url")
-  background-repeat: no-repeat
-  background-size: 20px
-  background-position: center
+  .swiper-button-next
+    right: 0
+    background-image: url("UiKit/assets/arrow-right-primary.svg?url")
+    background-repeat: no-repeat
+    background-size: 20px
+    background-position: center
 </style>
