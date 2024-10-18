@@ -8,12 +8,6 @@ import BaseImage from 'UiKit/components/BaseImage/BaseImage.vue';
 import { Swiper } from 'swiper/vue';
 import { Navigation, Thumbs } from 'swiper/modules';
 import { SwiperSlide } from 'swiper/vue';
-import SliderSwiper from 'UiKit/components/common/SliderSwiper/SliderSwiper.vue';
-
-import SolidAngleLeftIcon from 'UiKit/assets/custom-arrow-left-small.svg';
-import SolidAngleRightIcon from 'UiKit/assets/custom-arrow-right-small.svg';
-import CustomArrowLeftIcon from 'UiKit/assets/custom-arrow-left.svg';
-import CustomArrowRightIcon from 'UiKit/assets/custom-arrow-right.svg';
 
 const props = defineProps({
   name: String,
