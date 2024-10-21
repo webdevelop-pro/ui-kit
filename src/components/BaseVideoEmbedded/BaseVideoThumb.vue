@@ -2,10 +2,12 @@
 import { ref, computed, watch, onMounted } from 'vue';
 import { getVideoMeta } from 'UiKit/helpers/utils/video';
 
-const props = defineProps<{
-  url: string;
-}>();
-
+const props = withDefaults(defineProps<{
+  url: string | undefined,
+	fit?: 'cover' | 'contain' | 'inherit'
+}>(), {
+	fit: 'cover',
+});
 const imgUrl = ref<string | null>(null);
 const imageFallback = ref(false);
 const img = ref<HTMLElement | null>(null);
@@ -80,6 +82,7 @@ onMounted(() => {
     ref="img"
     :style="style"
     class="BaseVideoThumb base-video-thumb"
+		:class="[`is--${fit}`]"
   >
     <slot name="playIcon" />
   </div>
@@ -93,5 +96,15 @@ onMounted(() => {
   width: 100%
   height: 100%
   position: relative
-  background-size: cover
+
+  &.is--cover
+    object-fit: cover
+    background-size: cover
+
+  &.is--contain
+    object-fit: contain
+    background-size: contain
+
+  &.is--inherit
+    object-fit: inherit
 </style>

@@ -203,8 +203,6 @@ const onClick = () => {
       img:not(.is--default-image)
         display: block
         width: 100%
-        height: 100%
-        object-fit: cover
       .is--default-image
         max-height: 40%
 

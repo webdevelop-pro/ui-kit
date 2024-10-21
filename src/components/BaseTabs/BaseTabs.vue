@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { withDefaults } from 'vue';
+import { watch, withDefaults } from 'vue';
 import { Tab } from './types';
+import { useRoute, useRouter } from 'vue-router';
 
 const props = withDefaults(defineProps<{
   tabs: Tab[];
@@ -11,6 +12,9 @@ const props = withDefaults(defineProps<{
   type: 'top-line',
 });
 
+const route = useRoute();
+const router = useRouter();
+
 const emit = defineEmits<{
   (e: 'update:modelValue', value: Tab['value']): void;
   (e: 'itemClick', value: Tab): void;
@@ -20,6 +24,44 @@ function onItemClick(tab: Tab) {
   emit('update:modelValue', tab.value);
   emit('itemClick', tab);
 }
+
+
+function setActiveItemToURL() {
+  const currentItemByURL = route.query.tab || '';
+  let newItem = props.modelValue;
+  if (currentItemByURL === newItem) return;
+  if (!newItem) {
+    if (currentItemByURL === undefined) return;
+    newItem = undefined;
+  }
+  router.replace({ ...route, query: { ...route.query, tab: newItem } });
+}
+
+
+function setActiveItemByURL(currentItemByURL = route.query.tab) {
+  const itemFromURL = currentItemByURL?.toString();
+  // Check if the item from the URL is present in the list of tab values
+  const tabItem = props.tabs.filter(tab => tab.value.toString() === itemFromURL);
+  // If the item is invalid, set the active item in the URL to the current model value
+  if (!tabItem) {
+    setActiveItemToURL();
+  } else if (tabItem && tabItem[0]) {
+    onItemClick(tabItem[0]);
+  }
+}
+
+
+watch(() => props.modelValue, () => {
+  if (props.modelValue) setActiveItemToURL();
+});
+
+watch( () => route.query.tab, () => {
+    if (props.modelValue) {
+      setActiveItemByURL(route.query.tab);
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
