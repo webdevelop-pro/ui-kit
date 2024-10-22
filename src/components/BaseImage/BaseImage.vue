@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import BaseSkeleton from 'UiKit/components/BaseSkeleton/BaseSkeleton.vue';
-import defaulImage from '@/assets/images/default.svg?url';
+import defaulImage from 'UiKit/assets/default.svg?url';
 import { ref } from 'vue';
 
 const props = withDefaults(defineProps<{
