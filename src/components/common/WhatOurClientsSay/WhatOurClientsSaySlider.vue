@@ -4,10 +4,10 @@ import SliderWithPaginationAutoPlay from 'UiKit/components/common/SliderWithPagi
 
 export interface IWhatOurClientsSaySlider {
   id: number;
-  text1: string;
-  author1: string;
-  text2: string;
-  author2: string;
+  testimonials: {
+    text: string;
+    author: string;
+  }[];
 }
 
 defineProps({
@@ -24,9 +24,7 @@ defineProps({
     :autoplay="false"
     active-color="#F1AF32"
   >
-      <div
-        class="what-our-clients-say-slider__item is--card"
-      >
+      <div class="what-our-clients-say-slider__item is--card">
         <div class="what-our-clients-say-slider__item-card">
           <transition
             name="fade"
@@ -34,10 +32,10 @@ defineProps({
           >
           <div :key="active.id" v-bind="active">
             <p :key="active.id" class="what-our-clients-say-slider__text">
-              {{ active?.text1 }}
+              {{ active?.testimonials[0].text }}
             </p>
             <div :key="active.id" class="what-our-clients-say-slider__author is--h5__title">
-              {{ active?.author1 }}
+              {{ active?.testimonials[0].author }}
             </div>
           </div>
           </transition>
@@ -49,10 +47,10 @@ defineProps({
           >
           <div :key="active.id" v-bind="active">
             <p :key="active.id" class="what-our-clients-say-slider__text">
-              {{ active?.text2 }}
+              {{ active?.testimonials[1].text }}
             </p>
             <div :key="active.id" class="what-our-clients-say-slider__author is--h5__title">
-              {{ active?.author2 }}
+              {{ active?.testimonials[1].author }}
             </div>
           </div>
           </transition>

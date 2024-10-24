@@ -22,6 +22,14 @@ const props = defineProps({
     type: String,
     default: '#004FFF',
   },
+  showPagination: {
+    type: Boolean,
+    default: true,
+  },
+  autoplayChangeTime: {
+    type: Number,
+    default: 6000,
+  },
 });
 
 let intervalId: NodeJS.Timeout = null;
@@ -54,7 +62,7 @@ const setAutoPlay = () => {
       if (activeElementId.value < itemCount) activeElementId.value += 1;
       else activeElementId.value = 1;
       setActiveElement();
-    }, 6000);
+    }, props.autoplayChangeTime);
   }
 };
 
@@ -82,7 +90,10 @@ onBeforeUnmount(() => {
 <template>
   <div ref="targetSwipe" class="SliderWithPaginationAutoPlay slider-with-pagination-auto-play">
     <slot v-bind="active" />
-    <div class="slider-with-pagination-auto-play__pagination">
+    <div
+      v-if="showPagination"
+      class="slider-with-pagination-auto-play__pagination"
+    >
       <div
         v-for="item in slider"
         :key="item.id"
