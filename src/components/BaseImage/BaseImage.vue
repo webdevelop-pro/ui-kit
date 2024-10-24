@@ -22,7 +22,7 @@ const onImageLoaded = () => {
 <template>
 	<div
 		class="BaseImage base-image"
-		:class="[`is--${fit}`]"
+		:class="[`is--${fit}`, { 'is--bg': !src }]"
 	>
 		<BaseSkeleton
 			v-show="!isImageLoaded"
@@ -48,11 +48,13 @@ const onImageLoaded = () => {
 	$root:&
 	width: 100%
 	height: 100%
-	background-color: $default-background-color
 	display: flex
 	justify-content: center
 	align-items: center
 	overflow: hidden
+
+	&.is--bg
+		background-color: $default-background-color
 
 	&__image
 		height: 100%

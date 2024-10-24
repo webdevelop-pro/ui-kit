@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { BaseSvgIcon } from 'UiKit/components/BaseSvgIcon'
 import BaseTooltip from 'UiKit/components/BaseTooltip/BaseTooltip.vue';
+import { PropType } from 'vue';
 
 
 export interface ICheckmarkedItem {
@@ -12,7 +13,7 @@ defineProps({
   title: String,
   description: String,
   darkMode: Boolean,
-  iconHollow: Boolean,
+  icon: String as PropType<'hollow' | 'darkbg'>,
   card: Boolean,
   tooltip: String,
 });
@@ -32,7 +33,7 @@ defineProps({
         <div class="checkmarked-item__top">
           <div
             class="checkmarked-item__icon-wrap"
-            :class="{'is--icon-hollow': iconHollow }"
+            :class="{'is--icon-hollow': icon === 'hollow', 'is--icon-dark-bg': icon === 'darkbg'  }"
           >
             <BaseSvgIcon
               name="check"
@@ -92,6 +93,7 @@ defineProps({
     height: auto
     color: $secondary-dark
 
+
   &__icon-wrap
     display: flex
     padding: 4px
@@ -105,6 +107,10 @@ defineProps({
       background-color: transparent
       border: 1px solid $secondary
       padding: 3px
+    &.is--icon-dark-bg
+      background-color: $secondary-dark
+      #{$root}__icon
+        color: $black
 
   &__bottom
     opacity: 0.9
