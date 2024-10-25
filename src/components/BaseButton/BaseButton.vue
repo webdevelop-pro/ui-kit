@@ -62,7 +62,7 @@
 	font-family: $base-button-font-family
 	line-height: $base-button-line-height
 	font-weight: $base-button-font-weight
-	height: $base-button-height
+	min-height: $base-button-min-height
 	color: $base-button-color
 	background-color: transparent
 	border-radius: $base-button-border-radius
@@ -83,6 +83,7 @@
 		align-items: center
 		justify-content: center
 		flex-shrink: 0
+		width: 100%
 	&.is--icon-placement-both
 		:deep(svg),
 		:deep(img)
@@ -112,16 +113,16 @@
 		opacity: 0.3
 		pointer-events: none
 	&.is--size-large
-		height: $base-button-large-height
+		min-height: $base-button-large-min-height
 		padding: $base-button-large-padding
 		font-size: $base-button-large-font-size
 		line-height: $base-button-large-line-height
 	&.is--size-small
-		height: $base-button-small-height
+		min-height: $base-button-small-min-height
 		padding: $base-button-small-padding
 		font-size: $base-button-small-font-size
 	&.is--size-x-small
-		height: $base-button-x-small-height
+		min-height: $base-button-x-small-min-height
 		padding: $base-button-x-small-padding
 	&.is--bg-color-primary
 		background-color: $base-button-primary-color

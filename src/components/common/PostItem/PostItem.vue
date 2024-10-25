@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { PropType, computed } from 'vue';
-import { IMarkdownOptions } from './types';
+import { IFrontmatter } from './types';
 
 const props = defineProps({
   data: {
-    type: Object as PropType<IMarkdownOptions>,
+    type: Object as PropType<IFrontmatter>,
     required: true,
   },
   defaultRoute: String,

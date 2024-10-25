@@ -1,5 +1,4 @@
-
-export interface IMarkdownOptions {
+export interface IFrontmatter {
   title: string;
   subTitle?: string;
   description: string;
@@ -13,17 +12,21 @@ export interface IMarkdownOptions {
   tags?: string[];
   route?: string;
   url?: string;
+  layout?: string;
+  menuGroup?: string;
 }
 
-export interface IPostContent extends IMarkdownOptions {
+export interface IPostContent extends IFrontmatter {
   content: string;
 }
 
 export interface IAuthor {
   title: string;
-  date: string;
+  publishDate: string;
   draft?: boolean;
-  image: string;
+  cover: {
+    image: string;
+  };
   position?: string;
   description: string;
   tags?: string[];

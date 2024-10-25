@@ -3,16 +3,19 @@
 import BaseButton from 'UiKit/components/BaseButton/BaseButton.vue';
 import { BaseSvgIcon } from 'UiKit/components/BaseSvgIcon';
 import { computed, ref, watch } from 'vue';
-import { useRoute, useRouter } from 'vitepress';
+import { useRoute } from 'vitepress';
   
 const props = defineProps({
-    item: Object
-})
+    item: Object,
+    id: Number,
+    closeDropdown: Boolean,
+});
+
+const emit = defineEmits(['open', 'closed']);
 
 const iconMap = import.meta.glob('Docs/public/images/menu/**/*.svg', { eager: true, import: 'default' });
 
 const route = useRoute();
-const router = useRouter();
 
 const getActive = (name: string) => {
   if (route.path.includes(name)) {
@@ -36,25 +39,34 @@ const backgroundImageLocal = computed(() =>
 // Track active dropdown
 const activeDropdown = ref(false);
 
-// Watch route changes to close dropdown
-watch(() => route.path, () => {
-//   activeDropdown.value = false;
-    closeDropdown();
-});
-
 const openDropdown = () => {
-  activeDropdown.value = true;
+    emit('open', props.id);
+    activeDropdown.value = true;
+    // nextTick(() => {
+    //     activeDropdown.value = true;
+    // })
 };
 const closeDropdown = () => {
   activeDropdown.value = false
 };
+
+watch(() => props.closeDropdown, () => {
+    if (props.closeDropdown) {
+        closeDropdown();
+        emit('closed',props.id);
+    }
+}, { immediate: true });
+
+// Watch route changes to close dropdown
+watch(() => route.path, () => {
+    closeDropdown();
+});
 </script>
 
 <template>
     <li
         class="MenuNavigationItem menu-navigation-item"
         @mouseenter="openDropdown"
-        @mouseleave="closeDropdown"
     >
         <a
           v-if="item.link"
@@ -153,7 +165,6 @@ const closeDropdown = () => {
     $root: &
 
     position: relative
-    height: 100%
     display: flex
     align-items: center
     @include media-lte(desktop-md)
@@ -195,7 +206,7 @@ const closeDropdown = () => {
         @include media-gt(desktop-md)
             transform: translateX(-50%)
             left: 50%
-            top: 100%
+            top: calc(100% + 18px)
             position: absolute
             visibility: hidden
             opacity: 0
@@ -203,7 +214,7 @@ const closeDropdown = () => {
             border: 1px solid $gray-10
             background: $white
             box-shadow: $box-shadow-medium
-            transition: 0.3s all ease
+            transition: 0.2s all ease
         @include media-lte(desktop-md)
             width: 100%
             display: block
@@ -283,6 +294,7 @@ const closeDropdown = () => {
 
     &__dropdown-right-subtitle
         color: $primary
+        text-transform: uppercase
 
     &__dropdown-right-text
         flex: 1 0 0
