@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { withDefaults } from 'vue';
+import { watch, withDefaults } from 'vue';
 import { Tab } from './types';
+import { useRoute, useRouter } from 'vue-router';
 
 const props = withDefaults(defineProps<{
   tabs: Tab[];
@@ -11,6 +12,9 @@ const props = withDefaults(defineProps<{
   type: 'top-line',
 });
 
+const route = useRoute();
+const router = useRouter();
+
 const emit = defineEmits<{
   (e: 'update:modelValue', value: Tab['value']): void;
   (e: 'itemClick', value: Tab): void;
@@ -20,6 +24,44 @@ function onItemClick(tab: Tab) {
   emit('update:modelValue', tab.value);
   emit('itemClick', tab);
 }
+
+
+function setActiveItemToURL() {
+  const currentItemByURL = route.query.tab || '';
+  let newItem = props.modelValue;
+  if (currentItemByURL === newItem) return;
+  if (!newItem) {
+    if (currentItemByURL === undefined) return;
+    newItem = undefined;
+  }
+  router.replace({ ...route, query: { ...route.query, tab: newItem } });
+}
+
+
+function setActiveItemByURL(currentItemByURL = route.query.tab) {
+  const itemFromURL = currentItemByURL?.toString();
+  // Check if the item from the URL is present in the list of tab values
+  const tabItem = props.tabs.filter(tab => tab.value.toString() === itemFromURL);
+  // If the item is invalid, set the active item in the URL to the current model value
+  if (!tabItem) {
+    setActiveItemToURL();
+  } else if (tabItem && tabItem[0]) {
+    onItemClick(tabItem[0]);
+  }
+}
+
+
+watch(() => props.modelValue, () => {
+  if (props.modelValue) setActiveItemToURL();
+});
+
+watch( () => route.query.tab, () => {
+    if (props.modelValue) {
+      setActiveItemByURL(route.query.tab);
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
@@ -40,7 +82,7 @@ function onItemClick(tab: Tab) {
         :tab="tab"
       >
         <span
-          class="base-tabs__item-label"
+          class="base-tabs__item-label is--h5__title"
           :title="tab.label"
         >
           {{ tab.label }}
@@ -64,11 +106,12 @@ function onItemClick(tab: Tab) {
   display: flex
   flex-direction: row
   width: 100%
+  gap: $tabs-gap
   &.is--bottom-line
     border-bottom: solid 2px $tabs-bottom-line-color
   &__item
     cursor: pointer
-    padding: 14px 16px
+    padding: $item-top-line-item-padding
     background: $item-top-line-background-color
     position: relative
     display: flex
@@ -102,17 +145,16 @@ function onItemClick(tab: Tab) {
       &.is--top-line
         background-color: $item-top-line-active-background-color
       .base-tabs__item-label
-        +font(400)
         color: $item-top-line-active-label-color
       .base-tabs__item-sub-title
         background-color: $item-top-line-active-sub-title-background-color
         color: $item-top-line-active-sub-title-color
       &:before
         background-color: $item-top-line-active-before-background-color
+    &:hover
+      .base-tabs__item-label
+        color: $item-label-hover-color
   &__item-label
-    +font(350)
-    font-size: 14px
-    line-height: 19.6px
     color: $item-label-color
     flex-shrink: 0
   &__item-sub-title
@@ -120,7 +162,7 @@ function onItemClick(tab: Tab) {
     color: $item-sub-title-color
     font-size: 12px
     line-height: 19px
-    +font(350)
+    +font(400)
     margin-left: 8px
     height: 19px
     min-width: 19px

@@ -2,7 +2,10 @@
 import { withDefaults } from 'vue';
 import {
   VueCollapsiblePanel,
-} from '@dafcoe/vue-collapsible-panel';
+} from '@swoga/vue-collapsible-panel';
+
+// IMPORTANT: before using this component you need to install library
+// type in the terminal: yarn add @swoga/vue-collapsible-panel
 
 withDefaults(defineProps<{
   /**
@@ -17,6 +20,10 @@ withDefaults(defineProps<{
    * opened by default if true
    */
   expanded?: boolean;
+  /**
+   * header background
+   */
+  transparent?: boolean;
 }>(), {
   size: 'small',
   color: 'primary',
@@ -28,7 +35,7 @@ withDefaults(defineProps<{
 <template>
   <VueCollapsiblePanel
     class="BaseAccordionItem base-accordion-item"
-    :class="[`is--${size}`, `is--${color}`]"
+    :class="[`is--${size}`, `is--${color}`, { 'is--transparent': transparent }]"
     :expanded="expanded"
   >
     <template #title>
@@ -80,6 +87,9 @@ withDefaults(defineProps<{
     justify-content: space-between
     padding-right: 16px
     cursor: pointer
+  :deep(.vcp__header-title)
+    width: 100%
+    padding-right: 16px
   &.vcp--expanded
     .base-accordion-item__open-close-icon
       :deep(svg)
@@ -87,6 +97,21 @@ withDefaults(defineProps<{
         +mt(.2s)
     :deep(.vcp__body)
       height: 0
+      background-color: $accordion-item-active-content-background
+  
+  &:not(.is--transparent).vcp--expanded
+    :deep(.vcp__header)
+      background-color: $accordion-item-active-header-background
+      box-shadow: $accordion-item-active-header-box-shadow
+      z-index: 1
+      position: relative
+  &.is--transparent.vcp--expanded
+    :deep(.vcp__header)
+      background-color: $accordion-item-active-content-background
+  &.is--transparent
+    &:hover
+      :deep(.vcp__header)
+        background-color: $accordion-item-active-content-background
   &__title-text
     padding: 12px 16px
     margin-bottom: 0
@@ -110,7 +135,7 @@ withDefaults(defineProps<{
       color: $white-color
       :deep(a)
         color: $white-link-color
-        +font(400)
+        +font(600)
         border-bottom: solid 1px $white-link-color
         &:hover
           +mt(.3s)
@@ -122,8 +147,8 @@ withDefaults(defineProps<{
       z-index: 1
       +mt(.3s)
       color: $link-color
-      +font(400)
-      border-bottom: solid 1px $link-color
+      +font(600)
+      // border-bottom: solid 1px $link-color
       &:hover
         +mt(.3s)
         border-bottom: solid 1px transparent
@@ -144,12 +169,16 @@ withDefaults(defineProps<{
       width: inherit
       height: inherit
       +mt(.2s)
+
+  :deep(.slide-enter-active),
+  :deep(.slide-leave-active),
+  :deep(.slide-reverse-leave-active)
+    transition: height 0.3s ease, opacity 0.3s ease, transform 0.3s ease
   :deep(.slide-enter-active)
     overflow: hidden
   :deep(.slide-leave-active),
   :deep(.slide-reverse-leave-active)
     transform: translateX(0) !important
-    transition: height 0.3s ease
     position: relative !important
     opacity: 1 !important
     overflow: hidden

@@ -25,4 +25,14 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
+storybook-static/
 /compilation-stats.json
+
+# Yarn 3 files
+.pnp.*
+.yarn/
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

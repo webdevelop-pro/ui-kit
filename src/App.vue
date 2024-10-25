@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UiKit } from "@/components/UiKit";
+import { UiKit } from "UiKit/components/UiKit";
 </script>
 
 <template>

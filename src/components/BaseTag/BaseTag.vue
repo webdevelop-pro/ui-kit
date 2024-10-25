@@ -1,23 +1,39 @@
 <script lang="ts" setup>
-import { withDefaults } from 'vue';
+import { computed, withDefaults } from 'vue';
 
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
 	round?: boolean;
 	showIcon?: boolean;
 	strongText?: boolean;
 	whiteTextColor?: boolean;
 	background?: string;
+	tag?: string;
+	size?: 'medium' | 'small'
 }>(), {
 	background: '#F2F4F5',
+	tag: 'div',
+	size: 'medium',
 });
 
+	
+const tagClasses = computed(() => {
+	let classes = `is--size-${props.size} `;
+	return classes;
+});
 </script>
 
 <template>
-	<div
+	<component
+	    :is="tag"
 		class="BaseTag base-tag"
 		:style="{ background: background }"
-		:class="{'is--round': round, 'is--white-text': whiteTextColor, 'is--strong-text': strongText, 'is--icon': showIcon}"
+		:class="[tagClasses, {
+			'is--round': round,
+			'is--white-text': whiteTextColor,
+			'is--strong-text': strongText,
+			'is--icon': showIcon
+		}]"
+		v-bind="$attrs"
 	>
 		<div class="base-tag__icon-wrapper">
 			<slot name="icon" />
@@ -25,7 +41,7 @@ withDefaults(defineProps<{
 		<p class="base-tag__text">
 			<slot />
 		</p>
-	</div>
+	</component>
 </template>
 
 <style lang="sass" scoped>
@@ -37,17 +53,24 @@ withDefaults(defineProps<{
 	flex-direction: row
 	align-items: center
 	border-radius: $base-tag-default-border-radius
+	font-family: $base-tag-font-family
+	text-decoration: none
 	$root: &
+	&.is--size-small
+		padding: $base-tag-small-padding
+		color: $base-tag-small-color
+		#{$root}__text
+			font-weight: $base-tag-small-font-weight
 	&.is--round
 		border-radius: $base-tag-round-border-radius
 	&.is--strong-text
 		#{$root}__text
-			+font(800)
+			font-weight: $base-tag-font-weight
 	&.is--white-text
-		color: $base-tag-white-text-color
+		color: $base-tag-white-text-color !important
 	&__text
 		font-size: $base-tag-font-size
-		+font(350)
+		font-weight: $base-tag-font-weight
 		line-height: $base-tag-line-height
 	&.is--icon
 		padding-left: $base-tag-icon-padding-left

@@ -1,0 +1,23 @@
+.is--hover-elevate-up
+    transition: transform .3s ease
+    &:hover
+        transform: translateY(-2.5%)
+        transition: transform .3s ease
+        will-change: transform
+
+.is--hover-visible-elevate-up-wrapper // use on wrapper
+    transition: transform .3s ease
+    &:hover
+        .is--hover-visible-elevate-up-component
+            opacity: 1
+            visibility: visible
+            display: inherit !important
+            transition: transform .3s ease
+
+
+.is--hover-visible-elevate-up-component // use on element that appears
+    opacity: 0
+    visibility: hidden
+    display: none !important
+    transition: all 0.3s ease
+    margin-top: 8px

@@ -23,7 +23,7 @@
 	})
 	
 	const btnClasses = computed(() => {
-		let classes = `is--color-${props.color} `;
+		let classes = `is--bg-color-${props.color} `;
 		classes += `is--size-${props.size} `;
 		classes += `is--variant-${props.variant} `;
 		classes += `is--icon-placement-${props.iconPlacement} `;
@@ -39,11 +39,11 @@
     :class="[btnClasses, {'is--block': props.block, 'is--icon-only': iconOnly, 'is--disabled': props.disabled, 'is--squared': squared && !pill, 'is--pill': pill && !squared}]"
     :disabled="loading"
   >
-    <div
+    <span
       class="base-button__content"
     >
       <slot>Button</slot>
-    </div>
+	</span>
 	  <BaseSpinner
 		  v-if="loading"
 		  show
@@ -72,8 +72,11 @@
 	position: relative
 	transition: all .3s
 	box-shadow: $base-button-box-shadow
+	letter-spacing: 0.3px
+	text-decoration: none !important
 	&:hover
 		box-shadow: none
+		color: $base-button-hover-color
 	&__content
 		transition: opacity .3s
 		display: flex
@@ -111,6 +114,8 @@
 	&.is--size-large
 		height: $base-button-large-height
 		padding: $base-button-large-padding
+		font-size: $base-button-large-font-size
+		line-height: $base-button-large-line-height
 	&.is--size-small
 		height: $base-button-small-height
 		padding: $base-button-small-padding
@@ -118,80 +123,82 @@
 	&.is--size-x-small
 		height: $base-button-x-small-height
 		padding: $base-button-x-small-padding
-	&.is--color-primary
+	&.is--bg-color-primary
 		background-color: $base-button-primary-color
 		&:hover
 			background-color: $base-button-primary-hover-color
-	&.is--color-secondary
+	&.is--bg-color-secondary
 		background-color: $base-button-secondary-color
+		color: $base-button-secondary-text-color
 		&:hover
 			background-color: $base-button-secondary-hover-color
-	&.is--color-success
+			color: $base-button-secondary-text-hover-color
+	&.is--bg-color-success
 		background-color: $base-button-success-color
+		color: $base-button-success-text-color
 		&:hover
 			background-color: $base-button-success-hover-color
-	&.is--color-warning
+			color: $base-button-success-text-color
+	&.is--bg-color-warning
 		background-color: $base-button-warning-color
 		&:hover
 			background-color: $base-button-warning-hover-color
-	&.is--color-danger
+	&.is--bg-color-danger
 		background-color: $base-button-danger-color
 		&:hover
 			background-color: $base-button-danger-hover-color
 	&.is--variant-outlined
-		background-color: transparent
+		background-color: $white
 		border-style: solid
 		border-width: $base-button-border-width
-		&.is--color-primary
+		&.is--bg-color-primary
 			border-color: $base-button-primary-color
 			color: $base-button-primary-color
 			&:hover
-				background-color: rgba($base-button-primary-color, 0.5)
+				background-color: $base-button-primary-color
 				color: $base-button-color
-		&.is--color-secondary
+		&.is--bg-color-secondary
 			border-color: $base-button-secondary-color
 			color: $base-button-secondary-color
 			&:hover
-				background-color: rgba($base-button-secondary-color, 0.5)
+				background-color: $base-button-secondary-color
 				color: $base-button-color
-		&.is--color-success
+		&.is--bg-color-success
 			border-color: $base-button-success-color
-			color: $base-button-success-color
 			&:hover
-				background-color: rgba($base-button-success-color, 0.5)
-				color: $base-button-color
-		&.is--color-warning
+				background-color: $base-button-success-color
+		&.is--bg-color-warning
 			border-color: $base-button-warning-color
 			color: $base-button-warning-color
 			&:hover
-				background-color: rgba($base-button-warning-color, 0.5)
+				background-color: $base-button-warning-color
 				color: $base-button-color
-		&.is--color-danger
+		&.is--bg-color-danger
 			border-color: $base-button-danger-color
 			color: $base-button-danger-color
 			&:hover
-				background-color: rgba($base-button-danger-color, 0.5)
+				background-color: $base-button-danger-color
 				color: $base-button-color
 	&.is--variant-link
 		background-color: transparent
 		box-shadow: none
-		&.is--color-primary
+		&.is--bg-color-primary
 			color: $base-button-primary-color
 			&:hover
-				background-color: rgba($base-button-primary-color, 0.1)
-		&.is--color-secondary
+				background-color: $base-button-primary-light-color
+		&.is--bg-color-secondary
 			color: $base-button-secondary-color
 			&:hover
 				background-color: rgba($base-button-secondary-color, 0.1)
-		&.is--color-success
-			color: $base-button-success-color
+		&.is--bg-color-success
+			color: $base-button-success-text-color
 			&:hover
 				background-color: rgba($base-button-success-color, 0.1)
-		&.is--color-warning
+		&.is--bg-color-warning
 			color: $base-button-warning-color
 			&:hover
 				background-color: rgba($base-button-warning-color, 0.1)
-		&.is--color-danger
+		&.is--bg-color-danger
 			color: $base-button-danger-color
 			&:hover
 				background-color: rgba($base-button-danger-color, 0.1)

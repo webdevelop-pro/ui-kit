@@ -1,0 +1,399 @@
+@import 'UiKit/styles/_colors.sass'
+@import 'UiKit/styles/_mixins.sass'
+@import 'UiKit/styles/_variables.sass'
+
+.is--uppercase
+    text-transform: uppercase
+
+
+
+.is--lt-tablet-show
+    display: none !important
+    @include media-lte(tablet)
+        display: block !important
+  
+
+
+.is--gt-tablet-show
+    display: block !important
+    @include media-lte(tablet)
+        display: none !important
+
+.is--visually-hidden
+    position: absolute
+    width: 1px
+    height: 1px
+    padding: 0
+    margin: -1px
+    overflow: hidden
+    clip: rect(0, 0, 0, 0)
+    border: 0
+
+.is--paddings
+    padding: 130px 0
+    @include media-lte(tablet)
+        padding: 100px 0
+
+  
+.is--short-block
+    display: flex
+    max-width: 799px
+    width: 100%
+    flex-direction: column
+    align-items: flex-start
+
+
+.is--highlight-black
+    background: $black
+    padding: 130px 0
+    position: relative
+    z-index: 0
+    color: $white
+    width: 100%
+    position: relative
+    @include media-lte(tablet)
+        padding: 100px 0
+    .is--border-left
+        padding-left: 20px
+        border-left: 2px solid $secondary
+    p
+        color: $gray-10
+    li
+        color: $gray-10
+    li + li
+        margin-top: 26px
+
+.is--highlight
+    flex-shrink: 0
+    position: relative
+    padding: 130px 196px
+    background-size: cover
+    background-repeat: no-repeat
+    background-position: center
+    color: $white
+    @include media-lte(tablet)
+        padding: 40px
+
+    p
+        color: inherit
+        opacity: 0.9
+
+    h1, h2, h3, h4, h5, h6
+        color: $white
+
+        a
+            text-decoration: none
+            color: inherit
+        
+    a
+        color: inherit
+        
+    ul
+        color: inherit
+        margin-top: 32px
+        margin-bottom: 0
+        margin-left: 0
+        margin-right: 0
+        @include media-gte(tablet)
+            max-width: 562px
+        
+    li
+        color: inherit
+        border-bottom: 1px solid $white !important
+  
+
+
+.base-button
+    svg
+        width: 18px
+    &.is--size-small
+        svg
+            width: 15px
+
+  
+.base-tag
+    cursor: pointer
+    &.is--active
+        background-color: $secondary !important
+    @media(hover: hover) and (pointer: fine)
+        &:hover
+            background-color: $secondary !important
+
+.is--tags-inline
+    display: flex
+    align-content: center
+    gap: 12px
+    align-self: stretch
+    flex-wrap: wrap
+
+.is--tags-inline + *
+    margin-top: 20px
+
+.is--side-block
+    flex-shrink: 0
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: flex-start
+    flex: 1 0 0
+    position: relative
+    @include media-lt(tablet)
+        position: initial
+        width: 100%
+    & > p,
+    .is--side-block__content
+        display: flex
+        flex-direction: column
+        align-self: stretch
+        color: $gray-70
+        padding: 0 20px
+        border-left: 2px solid $primary
+        margin-top: 20px
+.sticky
+    @include media-gt(tablet)
+        position: fixed
+        top: 123px
+        width: 21%
+        max-width: 312px
+
+.is--flex-row
+    display: flex
+    align-items: flex-start
+    align-self: stretch
+    gap: 80px
+    @include media-lte(tablet)
+        gap: 25px
+    @include media-lte(tablet)
+        flex-direction: column
+
+.is--align-center
+    align-items: center
+
+.is--two-col-grid
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    gap: 20px 30px
+    @include media-lte(tablet)
+        grid-template-columns: repeat(1, 1fr)
+    &.is--three
+        @include media-gt(tablet)
+            grid-template-columns: repeat(3, 1fr)
+
+    & + & 
+      margin-top: 30px
+
+    * + &    
+        margin-top: 40px
+
+    & > ul,
+    & > ol
+        margin-top: 0
+
+
+.is--three-col-grid
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
+    gap: 30px
+    @include media-lte(desktop)
+        grid-template-columns: repeat(2, 1fr)
+    @include media-lte(tablet)
+        grid-template-columns: repeat(1, 1fr)
+
+
+.is--gap-80
+    gap: 80px
+    @include media-lte(tablet)
+        gap: 25px
+        
+.is--page
+    width: 100%
+
+.is--page > *:not(.is--page-content):not(.is--no-padding),
+.is--page-content > div > *
+    padding-top: 130px
+    @include media-lte(tablet)
+        padding-top: 100px
+.is--page > *:not(.is--page-content):not(.is--no-padding),
+.is--page > .is--page-content
+    &:last-child:not(.is--container)
+        padding-bottom: 130px
+        @include media-lte(tablet)
+            padding-bottom: 100px
+
+// .is--page > *:last-child:not(.is--container)
+//     padding-bottom: 130px
+//     @include media-lte(tablet)
+//         padding-bottom: 100px
+.is--page > .is--container:last-child
+    padding-bottom: 60px
+.is--page > .is--container + .is--container
+    padding-top: 40px !important
+
+
+hr
+    border-top: 0
+    border-bottom: 1px solid $gray-50
+
+em
+    font-style: italic
+    font-weight: inherit
+
+
+blockquote,
+q
+    border: 1px solid $gray-20
+    background: $gray-10
+    display: flex
+    padding: 40px
+    align-items: flex-start
+    gap: 28px
+    align-self: stretch
+    position: relative
+
+    p:first-of-type
+        margin: 0
+
+    &::before,
+    &::after
+        content: ""
+        position: absolute
+        width: 70px
+        height: 50px
+        z-index: 0
+        border: none
+        background-image: url("UiKit/assets/sign-left.svg")
+
+    &::before
+        left: 12px
+        top: 12px
+
+    &::after
+        right: 12px
+        bottom: 12px
+        transform: rotate(180deg)
+
+    *
+        z-index: 1
+
+
+// SPACINGS
+
+
+
+
+
+.base-button:not(.is--no-margin)
+    margin-top: 40px
+    & + &
+        margin-top: 20px
+
+* + .slider-swiper
+    margin-top: 60px
+    @include media-lte(tablet)
+      margin-top: 100px
+
+
+blockquote,
+q,
+pre
+    margin-top: 60px
+
+    
+
+.is--no-margin
+    li + li,
+    h1 + *,
+    .is--h1__title + *,
+    h2 + *,
+    .is--h2__title + *,
+    h3 + *,
+    .is--h3__title + *,
+    h4 + *,
+    .is--h4__title + *,
+    h5 + *,
+    .is--h5__title + *,
+    h6 + *,
+    .is--h6__title + *,
+    .is--subheading-1 + *,
+    .is--subheading-2 + *,
+    * + h1,
+    * + h2,
+    * + h3,
+    * + h4,
+    * + h5,
+    * + h6,
+    * + .is--h1__title,
+    * + .is--h2__title,
+    * + .is--h3__title,
+    * + .is--h4__title,
+    * + .is--h5__title,
+    * + .is--h6__title,
+    a,
+    .base-button,
+    ul,
+    ol
+        margin-top: 0 !important
+
+.is--margin-top-4
+    margin-top: 4px !important
+.is--margin-top-8
+    margin-top: 8px !important
+.is--margin-top-10
+    margin-top: 10px !important
+.is--margin-top-12
+    margin-top: 12px !important
+.is--margin-top-20
+    margin-top: 20px !important
+.is--margin-top-24
+    margin-top: 24px !important
+.is--margin-top-30
+    margin-top: 30px !important
+.is--margin-top-40
+    margin-top: 40px !important
+.is--margin-top-50
+    margin-top: 50px !important
+.is--margin-top-60
+    margin-top: 60px !important
+.is--margin-top-70
+    margin-top: 70px !important
+.is--margin-top-80
+    margin-top: 80px !important
+.is--margin-top-90
+    margin-top: 90px !important
+.is--margin-top-100
+    margin-top: 100px !important
+
+.is--margin-top-130
+    margin-top: 130px
+    @include media-lte(tablet)
+        margin-top: 100px 0
+
+
+.is--padding-bottom-130
+    padding-bottom: 130px !important
+    @include media-lte(tablet)
+        padding-bottom: 100px !important
+
+.base-breadcrumbs + *
+    margin-top: 40px
+    @include media-lt(tablet)
+      margin-top: 60px
+
+
+.is--container + .is--container:last-child .base-breadcrumbs
+    margin-top: 90px
+    @include media-lt(tablet)
+      margin-top: 60px
+
+.is--link-text-hidden
+    border: 0
+    clip: rect(1px, 1px, 1px, 1px)
+    clip-path: inset(50%)
+    height: 1px
+    margin: -1px
+    overflow: hidden
+    padding: 0
+    position: absolute !important
+    width: 1px
+    word-wrap: normal !important
+    word-break: normal

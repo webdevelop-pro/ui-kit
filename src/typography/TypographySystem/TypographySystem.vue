@@ -51,6 +51,8 @@
 		</p>
 		<br>
 		<h3>EM/Strong</h3>
+		<strong class="is--small-text">Strong text with is--small-text class: There are those who believe that life here began out there...</strong>
+		<br>
 		<em>There are those who believe that life here began out there...</em>
 		<br>
 		<strong>There are those who believe that life here began out there...</strong>
@@ -58,7 +60,7 @@
 </template>
 
 <style lang="sass" scoped>
-@import '@/styles/_fonts.sass'
+@import 'UiKit/styles/_fonts.sass'
 .typography-system
 	width: 100%
 	&__row

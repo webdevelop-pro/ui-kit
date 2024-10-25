@@ -1,0 +1,92 @@
+
+a
+  +font(800)
+  font-size: inherit
+  line-height: inherit
+  text-decoration: underline
+  transition: 0.3s all  ease-in-out
+  color: $primary
+  cursor: pointer
+  &:hover
+    text-decoration: none
+
+.is--link-1
+  +font(800)
+  font-size: 16px
+  line-height: 26px
+  text-decoration: underline
+  transition: 0.3s all  ease-in-out
+  color: $primary
+  cursor: pointer
+  &:hover
+    text-decoration: none
+
+.is--link-2
+  +font(800)
+  font-size: 12px
+  line-height: 18px
+  text-decoration: underline
+  transition: 0.3s all  ease-in-out
+  color: $primary
+  cursor: pointer
+  &:hover
+    text-decoration: none
+
+.is--link-regular
+  +font(800)
+  font-size: 14px
+  line-height: 21px
+  text-decoration: underline
+  transition: 0.3s all  ease-in-out
+  color: $primary
+  cursor: pointer
+  &:hover
+    text-decoration: none
+
+
+.is--small
+    a, .is--link-1, .is--link-2
+        font-size: inherit
+        line-height: inherit
+
+
+.dotted
+    text-decoration-style: dashed
+    text-decoration-line: underline
+    cursor: pointer
+    transition: all 0.8s ease
+    color: inherit
+    &:hover
+        text-decoration-style: none
+        text-decoration-line: none
+        background-size: 100% 100%
+
+h1, h2, h3, h4, h5, h6,
+.is--h1__title,
+.is--h2__title,
+.is--h3__title,
+.is--h4__title,
+.is--h5__title,
+.is--h6__title 
+    a
+        text-decoration: none
+        color: inherit
+
+
+// SPACING
+a + *:not(.is--no-margin):not(br)
+    margin-top: 12px
+.is--no-margin
+    a + *,
+    a
+        margin-top: 0
+
+h2 + a,
+.is--h2__title + a
+    margin-top: 12px
+
+.is--subheading-1 + a
+    margin-top: 12px
+
+.is--subheading-2 + a
+    margin-top: 8px

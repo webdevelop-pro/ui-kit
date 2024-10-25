@@ -1,0 +1,65 @@
+
+ol
+    list-style: decimal
+    padding-left: 25px
+    color: $gray-80
+ul
+    list-style: disc
+    padding-left: 25px
+    color: $gray-80
+
+li
+    color: inherit
+
+
+// SPACINGS
+h2 + ol, h2 + ul,
+.is--h2__title + ol,
+.is--h2__title + ul
+    margin-top: 24px
+
+h3 + ul,
+.is--h3__title + ul
+    margin-top: 20px
+
+ul,
+ol
+    margin-top: 25px
+
+li + li
+    margin-top: 16px
+
+.is--container li + li
+    margin-top: 5px
+
+
+.is--no-margin
+    li + li,
+    ul,
+    ol
+        margin-top: 0
+// ENS SPACINGS
+
+.is--list-pointers
+    ul
+        width: 100%
+        padding-left: 0
+        display: grid
+        grid-template-columns: repeat(2, 1fr)
+        gap: 17px 30px
+        @include media-lte(tablet)
+            grid-template-columns: repeat(1, 1fr)
+            gap: 16px
+
+    li
+        width: 100%
+        display: flex
+        margin: 0
+        padding: 12px 0
+        align-items: center
+        gap: 10px
+        color: inherit
+        border-bottom: 1px solid $gray-70
+
+    li + li
+        margin-top: 0

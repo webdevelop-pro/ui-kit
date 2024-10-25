@@ -1,0 +1,68 @@
+
+table
+    border-spacing: 0
+    border-collapse: collapse
+    width: 100%
+
+thead,
+tbody
+    width: 100%
+
+th
+    font-size: 14px
+    font-weight: 800
+    line-height: 21px
+    color: $gray-60
+    text-align: left
+    padding: 16px
+    gap: 2px
+    flex: 1 0 0
+
+
+tbody
+    tr
+        border-top: 1px solid $gray-20
+        cursor: default
+        transition: all 0.3s ease
+
+        &:hover
+            background-color: $gray-10
+
+td
+    padding: 16px
+    flex: 1 0 0
+    color: $gray-80
+
+
+.is--table-cell
+    display: flex
+    padding: 16px
+    align-items: center
+    gap: 16px
+
+.is--table-not-found
+    border-top: 1px solid $gray-20
+    justify-content: center
+    width: 100%
+
+td.is--small
+    font-size: 12px !important
+    line-height: 18px !important
+    font-weight: 500 !important
+
+th.is--small-2
+    font-size: 12px !important
+    font-weight: 800 !important
+    line-height: 18px !important
+
+// SPACINGS
+table
+    margin-top: 60px
+
+.base-table
+    table
+        margin-top: 0
+
+.is--no-margin
+    table
+        margin-top: 0

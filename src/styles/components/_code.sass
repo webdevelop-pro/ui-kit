@@ -1,0 +1,298 @@
+
+
+// code
+//     border: 1px solid $gray-20
+//     background: $gray-10
+//     display: flex
+//     padding: 20px
+//     align-items: flex-start
+//     gap: 28px
+//     align-self: stretch
+//     margin-bottom: 20px
+//     position: relative
+
+:not(pre) > code
+  padding: 0 5px
+  display: inline-block
+  margin: 0
+  background-color: $gray-10
+
+
+a > code
+  color: $black
+
+
+a:hover > code
+    color: $primary
+
+pre > code
+    display: block
+    a
+      margin: 0 !important
+
+
+h1 > code,
+h2 > code,
+h3 > code,
+h4 > code
+    font-size: 0.9em
+
+
+div[class*='language-'],
+.vp-block
+    position: relative
+    margin: 16px -24px
+    overflow-x: auto
+    transition: background-color 0.5s
+    max-width: 100%
+
+
+@media (min-width: 640px)
+  div[class*='language-'],
+  .vp-block
+      margin-top: 40px
+      margin-left: 0
+      margin-right: 0
+      & + *
+        margin-top: 40px
+    
+
+
+
+
+[class*='language-'] pre,
+[class*='language-'] code
+    /*rtl:ignore*/
+    direction: ltr
+    /*rtl:ignore*/
+    text-align: left
+    white-space: pre
+    word-spacing: normal
+    word-break: normal
+    word-wrap: normal
+    -moz-tab-size: 4
+    -o-tab-size: 4
+    tab-size: 4
+    -webkit-hyphens: none
+    -moz-hyphens: none
+    -ms-hyphens: none
+    hyphens: none
+
+
+[class*='language-'] pre
+    position: relative
+    z-index: 1
+    margin: 0
+    border: 1px solid $gray-20
+    background: $gray-10
+    overflow-x: auto
+
+
+[class*='language-'] code
+    display: block
+    width: fit-content
+    min-width: 100%
+    border: none
+    transition: color 0.5s
+    margin-bottom: 0
+    padding: 10px
+
+
+[class*='language-'] code .highlighted
+    background-color: $primary-light
+    transition: background-color 0.5s
+    margin: 0 -24px
+    padding: 0 24px
+    width: calc(100% + 2 * 24px)
+    display: inline-block
+
+
+[class*='language-'] code .highlighted.error
+    background-color: $red
+
+
+[class*='language-'] code .highlighted.warning
+    background-color: $yellow
+
+
+[class*='language-'] code .diff
+    transition: background-color 0.5s
+    margin: 0 -24px
+    padding: 0 24px
+    width: calc(100% + 2 * 24px)
+    display: inline-block
+
+
+[class*='language-'] code .diff::before
+    position: absolute
+    left: 10px
+
+
+[class*='language-'] .has-focused-lines .line:not(.has-focus)
+    filter: blur(0.095rem)
+    opacity: 0.4
+    transition: filter 0.35s, opacity 0.35s
+
+
+[class*='language-'] .has-focused-lines .line:not(.has-focus)
+    opacity: 0.7
+    transition: filter 0.35s, opacity 0.35s
+
+
+[class*='language-']:hover .has-focused-lines .line:not(.has-focus)
+    filter: blur(0)
+    opacity: 1
+
+
+[class*='language-'] code .diff.remove
+    background-color: $red
+    opacity: 0.7
+
+
+[class*='language-'] code .diff.remove::before
+    content: '-'
+    color: $red
+
+
+[class*='language-'] code .diff.add
+    background-color: $secondary
+
+
+[class*='language-'] code .diff.add::before
+    content: '+'
+    color: $secondary
+
+
+div[class*='language-'].line-numbers-mode
+    /*rtl:ignore*/
+    padding-left: 32px
+
+
+.line-numbers-wrapper
+    position: absolute
+    top: 0
+    bottom: 0
+    /*rtl:ignore*/
+    left: 0
+    z-index: 3
+    /*rtl:ignore*/
+    border-right: 1px solid $primary
+    padding-top: 20px
+    width: 32px
+    text-align: center
+    transition: border-color 0.5s, color 0.5s
+
+
+[class*='language-'] > button.copy
+    /*rtl:ignore*/
+    direction: ltr
+    position: absolute
+    top: 12px
+    /*rtl:ignore*/
+    right: 12px
+    z-index: 3
+    width: 40px
+    height: 40px
+    background-color: $gray-10
+    opacity: 0
+    cursor: pointer
+    background-image: url("UiKit/assets/copy.svg?url")
+    background-position: 50%
+    background-size: 20px
+    background-repeat: no-repeat
+    transition: border-color 0.25s, background-color 0.25s, opacity 0.25s
+
+
+[class*='language-'] > button.copy:focus,
+[class*='language-'] > button.copy:hover
+    opacity: 1
+
+
+[class*='language-'] > button.copy.copied,
+[class*='language-'] > button.copy:hover.copied
+    background-image: url("UiKit/assets/check.svg?url")
+
+
+
+
+[class*='language-'] > span.lang
+    position: absolute
+    top: 2px
+    right: 8px
+    z-index: 2
+    font-size: 12px
+    transition: color 0.4s, opacity 0.4s
+
+
+[class*='language-']:hover > button.copy + span.lang,
+[class*='language-'] > button.copy:focus + span.lang
+    opacity: 0
+
+
+.vp-code-group
+    margin-top: 16px
+  
+
+.vp-code-group .tabs
+    position: relative
+    display: flex
+    margin-right: -24px
+    margin-left: -24px
+    padding: 4px
+    background-color: $gray-20
+    overflow-x: auto
+    overflow-y: hidden
+    border-radius: 2px
+  
+
+@media (min-width: 640px)
+  .vp-code-group .tabs
+      margin-right: 0
+      margin-left: 0
+    
+  
+
+.vp-code-group .tabs input
+    position: fixed
+    opacity: 0
+    pointer-events: none
+  
+
+.vp-code-group .tabs label
+    position: relative
+    display: inline-block
+    border-bottom: 1px solid transparent
+    font-size: 12px
+    font-weight: 800
+    padding: 3px 12px
+    color: $gray-60
+    white-space: nowrap
+    cursor: pointer
+    transition: all 0.25s
+  
+
+.vp-code-group label:hover
+    color: $black
+  
+
+.vp-code-group input:checked + label
+    color: $black
+    background-color: $white
+    box-shadow: $box-shadow-small
+  
+
+.vp-code-group div[class*='language-'],
+.vp-block
+    display: none
+    margin-top: 0 !important
+    border-top-left-radius: 0 !important
+    border-top-right-radius: 0 !important
+  
+
+.vp-code-group div[class*='language-'].active,
+.vp-block.active
+    display: block
+  
+
+.vp-block
+    padding: 20px 24px

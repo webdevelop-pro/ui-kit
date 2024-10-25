@@ -1,7 +1,10 @@
 <script lang="ts" setup>
 import {
   VueCollapsiblePanelGroup,
-} from '@dafcoe/vue-collapsible-panel';
+} from '@swoga/vue-collapsible-panel';
+
+// IMPORTANT: before using this component you need to install library
+// type in the terminal: yarn add @swoga/vue-collapsible-panel
 
 </script>
 
