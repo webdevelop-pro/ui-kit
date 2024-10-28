@@ -1,63 +1,76 @@
 // markdown - it
-  .custom-block
-    padding: 12px 20px
+// spacing
+.custom-block + *
+  margin-top: 40px
+  @include media-lt(tablet)
+    margin-top: 60px
 
-  .custom-block.info
-    border-left: 2px solid $primary-dark
-    background: $primary-light
+* + .custom-block
+  margin-top: 40px
+  @include media-lt(tablet)
+    margin-top: 60px
 
-  .custom-block.note
-    border-left: 2px solid $purple
-    background: $purple-light
+// end spacing
 
-  .custom-block.tip
-    border-left: 2px solid $gray-50
-    background: $gray-20
+.custom-block
+  padding: 12px 20px
 
-  .custom-block.important
-    border-left: 2px solid $secondary
-    background: $secondary-light
+.custom-block.info
+  border-left: 2px solid $primary-dark
+  background: $primary-light
 
-  .custom-block.warning
-    border-left: 2px solid $yellow
-    background: $yellow-light
+.custom-block.note
+  border-left: 2px solid $purple
+  background: $purple-light
 
-  .custom-block.danger
-    border-left: 2px solid $red
-    background: $red-light
+.custom-block.tip
+  border-left: 2px solid $gray-50
+  background: $gray-20
 
-  .custom-block.caution
-    border-left: 2px solid $red
-    background: $red-light
+.custom-block.important
+  border-left: 2px solid $secondary
+  background: $secondary-light
 
-  .custom-block.details
-    border-left: 2px solid $gray-50
-    background: $gray-20
+.custom-block.warning
+  border-left: 2px solid $yellow
+  background: $yellow-light
 
-  .custom-block-title
-    font-weight: 600
+.custom-block.danger
+  border-left: 2px solid $red
+  background: $red-light
 
-  .custom-block p + p
-    margin: 8px 0
+.custom-block.caution
+  border-left: 2px solid $red
+  background: $red-light
 
-  .custom-block.details summary
-    margin: 0 0 8px
-    font-weight: 700
-    cursor: pointer
-    user-select: none
+.custom-block.details
+  border-left: 2px solid $gray-50
+  background: $gray-20
 
-  .custom-block.details summary + p
-    margin: 8px 0
+.custom-block-title
+  font-weight: 600
+
+.custom-block p + p
+  margin: 8px 0
+
+.custom-block.details summary
+  margin: 0 0 8px
+  font-weight: 700
+  cursor: pointer
+  user-select: none
+
+.custom-block.details summary + p
+  margin: 8px 0
     
-  .custom-block-title
-    font-size: 16px
-    font-weight: 800
-    line-height: 26px
+.custom-block-title
+  font-size: 16px
+  font-weight: 800
+  line-height: 26px
 
-  .custom-block div[class*='language-'] code
-    font-weight: 400
-    background-color: transparent
+.custom-block div[class*='language-'] code
+  font-weight: 400
+  background-color: transparent
 
 
-  .custom-block .vp-code-group .tabs
-    margin: 0
+.custom-block .vp-code-group .tabs
+  margin: 0

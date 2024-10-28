@@ -35,6 +35,7 @@ const onImageLoaded = () => {
 			:src="src || defaulImage"
 			:alt="alt"
 			:key="src"
+            loading="lazy"
 			class="base-image__image"
             :class="[`is--${fit}`, { 'is--default-image': !src }]"
 			@load="onImageLoaded"

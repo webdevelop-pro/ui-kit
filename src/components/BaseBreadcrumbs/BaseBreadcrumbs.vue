@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { PropType } from 'vue';
+import { RouteLocationAsPathGeneric, RouteLocationAsRelativeGeneric } from 'vue-router';
 
 export interface IBreadcrumb {
   name: string;
-  routeName?: string;
-  params?: object;
+  routeTo?: string | RouteLocationAsRelativeGeneric | RouteLocationAsPathGeneric;
   link?: string;
 }
 
@@ -18,37 +18,37 @@ const props = defineProps({
 });
 
 const getComponent = (item: IBreadcrumb) => {
-  if (item.routeName) return 'router-link';
+  if (item.routeTo) return 'router-link';
   if (item.link) return 'a';
   return 'span';
 }
 </script>
 
 <template>
-  <section
-    class="BaseBreadcrumbs base-breadcrumbs is--no-margin"
-    :key="slug"
-  >
-    <ul class="base-breadcrumbs__container">
+    <ul
+      :key="slug"
+      class="BaseBreadcrumbs base-breadcrumbs is--no-margin"
+    >
       <li
         v-for="item in data"
-        :key="item.routeName + item.link + item.name"
+        :key="item.name"
         class="base-breadcrumbs__item-wrap"
       >
         <component
           :is="getComponent(item)"
-          :to="{ name: item.routeName, params: item.params }"
+          :to="item.routeTo"
           :href="item.link"
           class="base-breadcrumbs__item is--h6__title"
         >
           {{ item.name }}
         </component>
         <span class="base-breadcrumbs__divider">
+          <slot>
           /
+          </slot>
         </span>
       </li>
     </ul>
-  </section>
 </template>
 
 <style lang="sass" scoped>
@@ -56,23 +56,23 @@ const getComponent = (item: IBreadcrumb) => {
 .base-breadcrumbs
   $root: &
 
-  &__container
-    gap: 8px
-    display: flex
-    flex-wrap: wrap
-    padding-left: 0
-    margin: 0
+  gap: $base-bredcrumbs-gap
+  display: flex
+  flex-wrap: wrap
+  padding-left: 0
+  margin: 0
 
   &__divider
-    color: $gray-50
+    color: $base-bredcrumbs-divider-color
 
   &__item-wrap
-    gap: 8px
+    gap: $base-bredcrumbs-gap
     display: flex
 
     &:last-of-type
       #{$root}__item
-        color: $gray-50
+        line-height: inherit
+        color: $base-bredcrumbs-item-color
 
       #{$root}__divider
         display: none
@@ -80,4 +80,5 @@ const getComponent = (item: IBreadcrumb) => {
   a
     color: inherit !important
     text-decoration: none !important
+    line-height: inherit
 </style>

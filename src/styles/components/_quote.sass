@@ -1,0 +1,40 @@
+blockquote,
+q
+    margin-top: 60px
+
+
+blockquote,
+q
+    border: 1px solid $gray-20
+    background: $gray-10
+    display: flex
+    padding: 40px
+    align-items: flex-start
+    gap: 28px
+    align-self: stretch
+    position: relative
+
+    p:first-of-type
+        margin: 0
+
+    &::before,
+    &::after
+        content: ""
+        position: absolute
+        width: 70px
+        height: 50px
+        z-index: 0
+        border: none
+        background-image: url("UiKit/assets/sign-left.svg")
+
+    &::before
+        left: 12px
+        top: 12px
+
+    &::after
+        right: 12px
+        bottom: 12px
+        transform: rotate(180deg)
+
+    *
+        z-index: 1

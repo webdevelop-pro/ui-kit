@@ -13,7 +13,7 @@ const props = defineProps({
 
 const emit = defineEmits(['open', 'closed']);
 
-const iconMap = import.meta.glob('Docs/public/images/menu/**/*.svg', { eager: true, import: 'default' });
+const iconMap = import.meta.glob('@/assets/images/menu/**/*.svg', { eager: true, import: 'default' });
 
 const route = useRoute();
 
@@ -26,8 +26,8 @@ const getActive = (name: string) => {
 
 const getSvgComponent = (childItem) => {
   const iconPath = childItem?.frontmatter?.menuIcon;
-  if (iconPath && iconMap[`/public${iconPath}`]) {
-    return iconMap[`/public${iconPath}`];
+  if (iconPath && iconMap[`../src/assets${iconPath}`]) {
+    return iconMap[`../src/assets${iconPath}`];
   }
   return null;
 };
@@ -152,6 +152,9 @@ watch(() => route.path, () => {
                     <BaseSvgIcon
                         name="arrow-right"
                     />
+                    <span class="is--link-text-hidden">
+                        {{ item.title }}
+                    </span>
                 </BaseButton>
             </div>
         </div>
@@ -180,6 +183,7 @@ watch(() => route.path, () => {
         align-items: center
         height: 100%
         display: flex
+        user-select: none
 
         @include media-lte(desktop-md)
             height: auto
