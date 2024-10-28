@@ -143,7 +143,7 @@ export const StyleVariables: StoryFn = {
         $base-button-font-weight: 800
         $base-button-line-height: 21px
         $base-button-color: $white
-        $base-button-min-height: 37px
+        $base-button-height: 37px
         $base-button-padding: 0 16px
         $base-button-icon-margin: 6px
         $base-button-pill: 30px
@@ -152,17 +152,17 @@ export const StyleVariables: StoryFn = {
         $base-button-box-shadow: 0px 3px 4px -2px rgba(18, 22, 31, 0.15)
         $base-button-icon-only-size: 38px
         
-        $base-button-large-min-height: 45px
+        $base-button-large-height: 45px
         $base-button-large-padding: 0 20px
         $base-button-icon-only-large-size: 48px
         
-        $base-button-small-min-height: 32px
+        $base-button-small-height: 32px
         $base-button-small-padding: 0 12px
         $base-button-small-font-size: 14px
         $base-button-icon-only-small-size: 30px
         
         $base-button-x-small-padding: 0 6px
-        $base-button-x-small-min-height: 26px
+        $base-button-x-small-height: 26px
         
         $base-button-icon-only-padding: 9px
         $base-button-icon-only-small-padding: 7px

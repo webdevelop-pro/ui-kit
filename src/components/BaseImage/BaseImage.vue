@@ -1,14 +1,16 @@
 <script lang="ts" setup>
 import BaseSkeleton from 'UiKit/components/BaseSkeleton/BaseSkeleton.vue';
 import defaulImage from 'UiKit/assets/default.svg?url';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = withDefaults(defineProps<{
     src: string | undefined,
     alt: string,
 	fit?: 'cover' | 'contain' | 'inherit'
+	loading?: 'lazy' | 'eager' | undefined,
 }>(), {
 	fit: 'cover',
+	loading: 'eager',
 });
 
 const isImageLoaded = ref<Boolean>(false)
@@ -17,6 +19,9 @@ const onImageLoaded = () => {
     isImageLoaded.value = true
   }, 200)
 }
+const showImage = computed(() => {
+	return isImageLoaded.value || (props.loading === 'lazy')
+});
 </script>
 
 <template>
@@ -25,17 +30,17 @@ const onImageLoaded = () => {
 		:class="[`is--${fit}`, { 'is--bg': !src }]"
 	>
 		<BaseSkeleton
-			v-show="!isImageLoaded"
+			v-show="!showImage"
 			height="100%"
 			width="100%"
 			class="base-image__skeleton"
 		/>
 		<img
-			v-show="isImageLoaded"
+			v-show="showImage"
 			:src="src || defaulImage"
 			:alt="alt"
 			:key="src"
-            loading="lazy"
+            :loading="loading"
 			class="base-image__image"
             :class="[`is--${fit}`, { 'is--default-image': !src }]"
 			@load="onImageLoaded"

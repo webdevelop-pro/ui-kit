@@ -166,12 +166,12 @@ const onClick = () => {
 
 
 <style lang="sass">
-@import 'UiKit/styles/_colors.sass'
+@import 'index.sass'
 .base-carousel
   height: 100%
   width: 100%
   user-select: none
-  background-color: $gray-10
+  background-color: $base-carousel-background-color
 
   .base-carousel__slider-main,
   .base-carousel__slider-thumbs
@@ -181,7 +181,7 @@ const onClick = () => {
     position: relative
 
   .base-carousel__slider-main
-    height: 80%
+    height: $base-carousel-main-height
     width: 100%
 
     .swiper-slide
@@ -204,14 +204,14 @@ const onClick = () => {
         display: block
         width: 100%
       .is--default-image
-        max-height: 40%
+        max-height: $base-carousel-main-default-image-height
 
   .base-carousel__slider-thumbs
-    height: 20%
+    height: $base-carousel-thumbs-height
     padding: 10px 0 0
     .swiper-slide
       height: 100%
-      opacity: 0.4
+      opacity: $base-carousel-thumbs-opacity
       transition: all 0.3s ease
       &:hover, .swiper-slide-thumb-active
         filter: none
@@ -236,8 +236,8 @@ const onClick = () => {
     right: 0
     top: 50%
     transform: translateY(-50%)
-    width: 48px
-    height: 48px
+    width: $base-carousel-navigation-width
+    height: $base-carousel-navigation-height
     z-index: 2
     cursor: pointer
     padding: 12px
