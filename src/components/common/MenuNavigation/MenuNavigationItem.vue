@@ -147,6 +147,7 @@ watch(() => route.path, () => {
                     :href="item?.card?.url"
                     icon-placement="right"
                     size="small"
+                    :aria-label="item.title"
                 >
                     Learn More
                     <BaseSvgIcon
