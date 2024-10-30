@@ -97,11 +97,15 @@ defineProps({
   &__icon-wrap
     display: flex
     padding: 4px
-    align-items: center
+    align-items: flex-start
     gap: 10px
     border-radius: 50px
     box-shadow: $box-shadow-small
     background-color: $secondary-light
+
+
+    @media screen and (max-width: 767px)
+      margin-top: 3px
 
     &.is--icon-hollow
       background-color: transparent

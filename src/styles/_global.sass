@@ -11,6 +11,26 @@
         display: block !important
   
 
+.is--gt-desktop-lg-show
+    display: block !important
+    @include media-lte(desktop-lg)
+        display: none !important
+
+
+.is--lt-desktop-lg-show
+    display: block !important
+    @include media-gte(desktop-lg)
+        display: none !important
+
+.is--gt-desktop-show
+    display: block !important
+    @include media-lte(desktop)
+        display: none !important
+
+.is--lt-desktop-show
+    display: block !important
+    @include media-gte(desktop)
+        display: none !important
 
 .is--gt-tablet-show
     display: block !important
