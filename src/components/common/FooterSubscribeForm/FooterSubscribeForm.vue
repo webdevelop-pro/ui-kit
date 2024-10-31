@@ -1,50 +1,82 @@
 <script setup lang="ts">
 import {
-  computed, nextTick, reactive, ref, watch,
+  computed, defineAsyncComponent, nextTick, reactive, ref, watch,
 } from 'vue';
-import BaseButton from 'UiKit/components/BaseButton/BaseButton.vue';
-import BaseFormInput from 'UiKit/components/BaseFormInput/BaseFormInput.vue';
-import { JSONSchemaType } from 'ajv';
-import { emailRule, errorMessageRule } from 'UiKit/helpers/validation/rules';
-import { PrecompiledValidator } from 'UiKit/helpers/validation/PrecompiledValidator';
-import BaseFormGroup from 'UiKit/components/BaseFormGroup/BaseFormGroup.vue';
-import { isEmpty } from 'UiKit/helpers/general';
-import { scrollToError } from 'UiKit/helpers/validation/general';
+
+const BaseButton = defineAsyncComponent(() => import('UiKit/components/BaseButton/BaseButton.vue'));
+const BaseFormInput = defineAsyncComponent(() => import('UiKit/components/BaseFormInput/BaseFormInput.vue'));
+const BaseFormGroup = defineAsyncComponent(() => import('UiKit/components/BaseFormGroup/BaseFormGroup.vue'));
+
 
 const emit = defineEmits(['submit']);
-defineProps({
+const props = defineProps({
   loading: Boolean,
 })
 
 type FormModelSubscribe = {
   email: number;
 }
-const schemaSubscribe = {
-  $schema: 'http://json-schema.org/draft-07/schema#',
-  definitions: {
-    PatchIndividualProfile: {
-      properties: {
-        email: emailRule,
-      },
-      type: 'object',
-      required: ['email'],
-      errorMessage: errorMessageRule,
-    },
-  },
-  $ref: '#/definitions/PatchIndividualProfile',
-} as unknown as JSONSchemaType<FormModelSubscribe>;
 
-const model = reactive({
-} as FormModelSubscribe);
-const validator = new PrecompiledValidator<FormModelSubscribe>(
-  schemaSubscribe,
-);
+const model = reactive({} as FormModelSubscribe);
 const validation = ref<unknown>();
-const isValid = computed(() => isEmpty(validation.value || {}));
-const isDisabledButton = computed(() => (!isValid.value));
+const isValid = computed(() => validation.value && !Object.keys(validation.value).length);
+const isDisabledButton = computed(() => !isValid.value || props.loading);
+
+const setupValidator = async () => {
+  const { JSONSchemaType } = await import('ajv');
+  const { emailRule, errorMessageRule } = await import('UiKit/helpers/validation/rules');
+  const { PrecompiledValidator } = await import('UiKit/helpers/validation/PrecompiledValidator');
+  const { scrollToError } = await import('UiKit/helpers/validation/general');
+
+  const schemaSubscribe = {
+    $schema: 'http://json-schema.org/draft-07/schema#',
+    definitions: {
+      PatchIndividualProfile: {
+        properties: {
+          email: emailRule,
+        },
+        type: 'object',
+        required: ['email'],
+        errorMessage: errorMessageRule,
+      },
+    },
+    $ref: '#/definitions/PatchIndividualProfile',
+  } as unknown as JSONSchemaType<FormModelSubscribe>;
+
+  return new PrecompiledValidator<FormModelSubscribe>(schemaSubscribe);
+};
+
+// const schemaSubscribe = {
+//   $schema: 'http://json-schema.org/draft-07/schema#',
+//   definitions: {
+//     PatchIndividualProfile: {
+//       properties: {
+//         email: emailRule,
+//       },
+//       type: 'object',
+//       required: ['email'],
+//       errorMessage: errorMessageRule,
+//     },
+//   },
+//   $ref: '#/definitions/PatchIndividualProfile',
+// } as unknown as JSONSchemaType<FormModelSubscribe>;
+
+
+const validator = ref<PrecompiledValidator<FormModelSubscribe> | null>(null);
+setupValidator().then((v) => { validator.value = v; });
+
+// const validator = new PrecompiledValidator<FormModelSubscribe>(
+//   schemaSubscribe,
+// );
+
+// const onValidate = () => {
+//   validation.value = validator.getFormValidationErrors(model);
+// };
 
 const onValidate = () => {
-  validation.value = validator.getFormValidationErrors(model);
+  if (validator.value) {
+    validation.value = validator.value.getFormValidationErrors(model);
+  }
 };
 
 const onSubmit = () => {
