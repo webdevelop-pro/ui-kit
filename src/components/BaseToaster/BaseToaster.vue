@@ -87,7 +87,7 @@ const description = computed(() => {
       size="small"
       icon-only
       variant="link"
-      class="base-toaster__close-button"
+      class="base-toaster__close-button is--no-margin"
       @click="$emit('close')"
     >
       <BaseSvgIcon
