@@ -29,22 +29,24 @@ const showImage = computed(() => {
 		class="BaseImage base-image"
 		:class="[`is--${fit}`, { 'is--bg': !src }]"
 	>
-		<BaseSkeleton
-			v-show="!showImage"
-			height="100%"
-			width="100%"
-			class="base-image__skeleton"
-		/>
-		<img
-			v-show="showImage"
-			:src="src || defaulImage"
-			:alt="alt"
-			:key="src"
-            :loading="loading"
-			class="base-image__image"
-            :class="[`is--${fit}`, { 'is--default-image': !src }]"
-			@load="onImageLoaded"
-		/>
+		<ClientOnly>
+			<BaseSkeleton
+				v-show="!showImage"
+				height="100%"
+				width="100%"
+				class="base-image__skeleton"
+			/>
+			<img
+				v-show="showImage"
+				:src="src || defaulImage"
+				:alt="alt"
+				:key="src"
+				:loading="loading"
+				class="base-image__image"
+				:class="[`is--${fit}`, { 'is--default-image': !src }]"
+				@load="onImageLoaded"
+			/>
+		</ClientOnly>
 	</div>
 </template>
 
