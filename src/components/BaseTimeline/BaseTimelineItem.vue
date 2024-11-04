@@ -62,7 +62,8 @@ const btnClasses = computed(() => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+
 .base-timeline-item
   --top: 42px
   --normal-circle-height: 24px
@@ -88,7 +89,7 @@ const btnClasses = computed(() => {
     z-index: 1
     width: 2px
     height: calc(100% - var(--top) - var(--normal-circle-height) - (2 * var(--highlight-circle-bigger)))
-    background-color: $gray-30
+    background-color: colors.$gray-30
 
   &::after
     content: ""
@@ -98,14 +99,14 @@ const btnClasses = computed(() => {
     z-index: 1
     width: 2px
     height: calc(var(--top) + (2 * var(--highlight-circle-bigger)))
-    background-color: $gray-30
+    background-color: colors.$gray-30
 
   &.is--line-regular:last-child
     &::before
       display: none
   &.is--line-hidden:last-child
     &::before
-      background: linear-gradient($gray-30, rgba($gray-30, 0)) !important
+      background: linear-gradient(colors.$gray-30, rgba(colors.$gray-30, 0)) !important
   &:first-of-type
     &::after
       display: none
@@ -123,7 +124,7 @@ const btnClasses = computed(() => {
 
   &__step
     text-transform: uppercase
-    color: $primary
+    color: colors.$primary
 
   &__circle
     top: var(--top)

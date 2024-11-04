@@ -1,14 +1,13 @@
-@import 'UiKit/styles/_colors.sass'
-@import 'UiKit/styles/_mixins.sass'
+@use 'UiKit/styles/_colors.sass' as colors
 
-$checkbox-label-color: $gray-80
+$checkbox-label-color: colors.$gray-80
 $checkbox-label-font-family: 'Avenir'
 $checkbox-label-font-weight: 400
 $checkbox-label-font-size: 16px
-$checkbox-border: solid 1px $black
-$checkbox-checked-border-color: $primary
+$checkbox-border: solid 1px colors.$black
+$checkbox-checked-border-color: colors.$primary
 $checkbox-border-radius: 2px
 $checkbox-size: 16px
-$checkbox-checked-fill: $primary
-$checkbox-asterisk-color: $red
-$checkbox-error-border-color: $red
+$checkbox-checked-fill: colors.$primary
+$checkbox-asterisk-color: colors.$red
+$checkbox-error-border-color: colors.$red

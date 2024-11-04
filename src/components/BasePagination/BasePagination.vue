@@ -52,7 +52,7 @@ defineEmits(['previous', 'next']);
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-pagination
 	display: flex
 	width: 100%

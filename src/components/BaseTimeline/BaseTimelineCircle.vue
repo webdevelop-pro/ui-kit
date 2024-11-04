@@ -31,7 +31,7 @@ const btnClasses = computed(() => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
 .base-timeline-circle
   $root: &
 
@@ -47,43 +47,43 @@ const btnClasses = computed(() => {
     width: 9px
     height: 9px
     border-width: 3px
-    border-color: $primary
+    border-color: colors.$primary
 
   &.is--type-inner-highlight
     width: 9px
     height: 9px
     border-width: 3px
-    border-color: $white
+    border-color: colors.$white
 
   &.is--type-active
     width: 24px
     height: 24px
     border-width: 5px
-    border-color: $primary
+    border-color: colors.$primary
   
   &.is--type-not-complete
     width: 24px
     height: 24px
     border-width: 5px
-    border-color: $gray-30
+    border-color: colors.$gray-30
   
   &.is--type-complete
     width: 24px
     height: 24px
-    border-color: $primary
-    background-color: $primary
+    border-color: colors.$primary
+    background-color: colors.$primary
 
   &.is--type-highlight
     width: 24px
     height: 24px
     border-width: 5px
-    border-color: $primary
+    border-color: colors.$primary
 
     &::before
       content: ''
       width: 40px
       height: 40px
-      border: 1px solid $primary
+      border: 1px solid colors.$primary
       position: absolute
       border-radius: 100%
 </style>

@@ -142,7 +142,8 @@ watch(() => props.items, () => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+@use 'UiKit/styles/_variables.sass' as variables
 .base-filter
   --base-filter-dropdown--min-width: 150px
 
@@ -161,9 +162,9 @@ watch(() => props.items, () => {
     display: flex
     flex-direction: column
     align-items: flex-start
-    background-color: $gray-10
-    border: 1px solid $gray-20
-    box-shadow: $box-shadow-medium
+    background-color: colors.$gray-10
+    border: 1px solid colors.$gray-20
+    box-shadow: variables.$box-shadow-medium
     z-index: 2
 
   &__cta
@@ -175,7 +176,7 @@ watch(() => props.items, () => {
     align-self: stretch
 
   &__title
-    color: $gray-70
+    color: colors.$gray-70
     padding: 12px 12px 2px 12px
     text-transform: capitalize
 
@@ -187,6 +188,6 @@ watch(() => props.items, () => {
     :deep(.base-form-checkbox)
       &.is--checked
         .base-form-checkbox__text
-          color: $primary
+          color: colors.$primary
           font-weight: 600
 </style>

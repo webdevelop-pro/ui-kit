@@ -56,14 +56,14 @@ watch(() => props.modelValue, () => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-form-input-search
 	&__search-icon
 		width: 20px
-		color: $gray-70
+		color: $base-form-input-search-search-icon-color
 	&__close-icon
 		width: 10px !important
-		color: $gray-80
+		color: $base-form-input-search-close-icon-color
 		cursor: pointer
 		display: block
 </style>

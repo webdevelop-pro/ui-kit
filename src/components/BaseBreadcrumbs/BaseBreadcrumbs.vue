@@ -52,7 +52,7 @@ const getComponent = (item: IBreadcrumb) => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-breadcrumbs
   $root: &
 

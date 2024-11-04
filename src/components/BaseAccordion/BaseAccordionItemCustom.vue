@@ -74,7 +74,7 @@ watch(() => props.expanded, (val) => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 $timing-function: cubic-bezier(.5, .25, 0, 1)
 .base-accordion-item-custom
   $root:&

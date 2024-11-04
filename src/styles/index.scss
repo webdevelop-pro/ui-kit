@@ -1,11 +1,15 @@
-@import 'UiKit/styles/_reset.sass';
-@import 'UiKit/styles/_global.sass';
-@import 'UiKit/styles/_fonts.sass';
-@import 'UiKit/styles/_mixins.sass';
-@import 'UiKit/styles/_transitions.sass';
 
-@import 'UiKit/styles/_layout.sass';
+@use 'UiKit/styles/_colors.sass' as *;
+@use 'UiKit/styles/_mixins.sass' as *;
+@use 'UiKit/styles/_variables.sass' as *;
+
+@forward '_reset.sass';
+@forward '_fonts.sass';
+@forward '_transitions.sass';
+@forward 'components';
+@forward '_global.sass';
+
+@forward '_layout.sass';
 
 // components
-@import 'UiKit/styles/components/index.sass';
 

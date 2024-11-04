@@ -112,7 +112,7 @@ defineEmits(['close']);
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
 .wd-modal-layout
   $root: &
 
@@ -120,7 +120,7 @@ defineEmits(['close']);
   flex-direction: column
   padding-bottom: 15px
   color: $black
-  background: $white
+  background: colors.$white
   position: relative
 
   &.is--full-screen
@@ -136,7 +136,7 @@ defineEmits(['close']);
     justify-content: space-between
 
     &.is-lined
-      border-bottom-color: $gray-10
+      border-bottom-color: colors.$gray-10
 
     &.is-full-width
       margin: 0
@@ -206,7 +206,7 @@ defineEmits(['close']);
         width: 100%
         height: calc(100% - 95px)
         content: ""
-        background: $white
+        background: colors.$white
         border-bottom-right-radius: 37px
         border-bottom-left-radius: 37px
 
@@ -243,7 +243,7 @@ defineEmits(['close']);
         height: 105px
         content: ""
         border-radius: 50%
-        box-shadow: 0 0 0 9999px $white
+        box-shadow: 0 0 0 9999px colors.$white
 
       &::after
         position: absolute
@@ -265,7 +265,7 @@ defineEmits(['close']);
 
     @media screen and (max-width: 767px)
       &.is-lined-mobile
-        border-top-color: $gray-10
+        border-top-color: colors.$gray-10
 
   &__main
     display: flex

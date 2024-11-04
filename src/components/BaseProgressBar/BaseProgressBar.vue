@@ -33,7 +33,7 @@ const progress = computed(() => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
 .base-progressbar
   width: 100%
   display: flex
@@ -44,7 +44,7 @@ const progress = computed(() => {
   flex: 1 0 0
 
   &__top
-    color: $secondary-dark
+    color: colors.$secondary-dark
 
   &__progress
     display: flex
@@ -53,9 +53,9 @@ const progress = computed(() => {
     height: 3px
     flex: 1 0 0
     border-radius: 2px
-    background: $gray-30
+    background: colors.$gray-30
 
   &__progress-bar
     height: 3px
-    background: $secondary
+    background: colors.$secondary
 </style>

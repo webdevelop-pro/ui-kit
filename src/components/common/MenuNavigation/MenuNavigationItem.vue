@@ -163,7 +163,8 @@ watch(() => route.path, () => {
 </template>
   
 <style scoped lang="sass">
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+@use 'UiKit/styles/_variables.sass' as variables
 
 .menu-navigation-item
     $root: &
@@ -171,11 +172,11 @@ watch(() => route.path, () => {
     position: relative
     display: flex
     align-items: center
-    @include media-lte(desktop-md)
+    @media screen and (max-width: variables.$desktop-md)
         height: auto
         flex-direction: column
         & + & 
-            border-top: 1px solid $gray-40
+            border-top: 1px solid colors.$gray-40
 
     &__item
         white-space: nowrap
@@ -186,16 +187,16 @@ watch(() => route.path, () => {
         display: flex
         user-select: none
 
-        @include media-lte(desktop-md)
+        @media screen and (max-width: variables.$desktop-md)
             height: auto
             width: 100%
             padding: 20px 0 0 20px
 
         &.is--link:hover
-            color: $primary
+            color: colors.$primary
 
         &.is--active
-            color: $primary
+            color: colors.$primary
 
     &__dropdown
         cursor: pointer
@@ -208,7 +209,7 @@ watch(() => route.path, () => {
         &.is--visible
             visibility: visible
             opacity: 1
-        @include media-gt(desktop-md)
+        @media screen and (min-width: variables.$desktop-md)
             transform: translateX(-50%)
             left: 50%
             top: calc(100% + 18px)
@@ -216,11 +217,11 @@ watch(() => route.path, () => {
             visibility: hidden
             opacity: 0
             border-radius: 2px
-            border: 1px solid $gray-10
-            background: $white
-            box-shadow: $box-shadow-medium
+            border: 1px solid colors.$gray-10
+            background: colors.$white
+            box-shadow: variables.$box-shadow-medium
             transition: 0.2s all ease
-        @include media-lte(desktop-md)
+        @media screen and (max-width: variables.$desktop-md)
             width: 100%
             display: block
 
@@ -236,11 +237,11 @@ watch(() => route.path, () => {
         padding: 20px 16px
         align-items: flex-start
         gap: 24px
-        @include media-lte(desktop-lg)
+        @media screen and (max-width: variables.$desktop-lg)
             display: grid
             grid-template-columns: repeat(2, 1fr)
             gap: 20px 24px
-        @include media-lte(desktop-md)
+        @media screen and (max-width: variables.$desktop-md)
             grid-template-columns: repeat(1, 1fr)
             padding: 19px
             gap: 9px
@@ -255,14 +256,14 @@ watch(() => route.path, () => {
         align-items: center
         gap: 8px
 
-        @include media-lte(desktop-md)
+        @media screen and (max-width: variables.$desktop-md)
             padding: 7px 12px
 
         &.is--link:hover
-            color: $primary
+            color: colors.$primary
 
         &.is--active
-            color: $primary
+            color: colors.$primary
 
     &__dropdown-icon-wrap
         color: inherit
@@ -273,7 +274,7 @@ watch(() => route.path, () => {
         align-items: center
         gap: 10px
         border-radius: 2px
-        border: 1px solid $gray-20
+        border: 1px solid colors.$gray-20
 
     &__dropdown-icon
         color: inherit
@@ -290,21 +291,21 @@ watch(() => route.path, () => {
         gap: 8px
         flex-shrink: 0
         align-self: stretch
-        background-color: $black
+        background-color: colors.$black
         background-size: auto 75%
         background-position: bottom 9px right 0
         background-repeat: no-repeat
-        @include media-lte(desktop-md)
+        @media screen and (max-width: variables.$desktop-md)
             display: none
 
     &__dropdown-right-subtitle
-        color: $primary
+        color: colors.$primary
         text-transform: uppercase
 
     &__dropdown-right-text
         flex: 1 0 0
         align-self: stretch
-        color: $white
+        color: colors.$white
         opacity: 0.9
 </style>
   

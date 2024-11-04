@@ -273,7 +273,9 @@ onBeforeUnmount(() => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+@use 'UiKit/styles/_variables.sass' as variables
+
 .wd-tooltip
   $root: &
 
@@ -287,7 +289,7 @@ onBeforeUnmount(() => {
     cursor: default
 
     &.is-bordered
-      border-bottom: 1px dashed $gray-10
+      border-bottom: 1px dashed colors.$gray-10
 
     &.is-solid.is-bordered
       border-bottom: 1px solid white
@@ -297,7 +299,7 @@ onBeforeUnmount(() => {
     z-index: 1
     width: 0
     height: 0
-    border-color: $gray-10
+    border-color: colors.$gray-10
     border-style: solid
     border-right-color: transparent
     border-left-color: transparent
@@ -307,15 +309,15 @@ onBeforeUnmount(() => {
     z-index: 1000
     display: none
     padding: 8px
-    box-shadow: $box-shadow-small
+    box-shadow: variables.$box-shadow-small
     border-radius: 2px
-    background: $gray-10
+    background: colors.$gray-10
     opacity: 0
     transition: opacity 0.3s
-    color: $black
+    color: colors.$black
 
     h2, h3, h4, h5, h6
-      color: $white
+      color: colors.$white
 
     &.is-top
       #{$root}__arrow
@@ -334,17 +336,17 @@ onBeforeUnmount(() => {
       opacity: 1
 
     &.is-critical
-      color: $white
-      background-color: $red
+      color: colors.$white
+      background-color: colors.$red
 
       #{$root}__arrow
-        border-color: $red
+        border-color: colors.$red
         border-right-color: transparent
         border-left-color: transparent
 
     &.is-blue
       font-size: 13px
-      color: $white
+      color: colors.$white
       background-color: #091844
 
       #{$root}__arrow

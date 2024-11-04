@@ -1,14 +1,13 @@
-@import 'UiKit/styles/_colors.sass'
-@import 'UiKit/styles/_mixins.sass'
-@import 'UiKit/styles/_global.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+@use 'UiKit/styles/_variables.sass' as variables
 
-$border-color: $gray-30
-$border-color-white: $gray-10
-$white-color: $white
-$white-link-color: $gray-10
-$link-color: $primary
+$border-color: colors.$gray-30
+$border-color-white: colors.$gray-10
+$white-color: colors.$white
+$white-link-color: colors.$gray-10
+$link-color: colors.$primary
 
-$open-close-icon-fill: $black
-$accordion-item-active-header-background: $white
-$accordion-item-active-header-box-shadow: $box-shadow-small
-$accordion-item-active-content-background: $gray-10
+$open-close-icon-fill: colors.$black
+$accordion-item-active-header-background: colors.$white
+$accordion-item-active-header-box-shadow: variables.$box-shadow-small
+$accordion-item-active-content-background: colors.$gray-10

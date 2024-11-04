@@ -48,7 +48,8 @@ const sliderFormatted = computed(() => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+
 .what-our-clients-say-sidebar
 
   &__item
@@ -60,14 +61,14 @@ const sliderFormatted = computed(() => {
     align-self: stretch
     flex-direction: column
     border-radius: 2px
-    background: $yellow-light
+    background: colors.$yellow-light
 
     &.is--active
       position: relative
       transition: opacity 3s ease
 
   &__text
-    color: $gray-80
+    color: colors.$gray-80
     font-style: italic
 
   &__author

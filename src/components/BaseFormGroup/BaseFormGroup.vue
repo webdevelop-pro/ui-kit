@@ -106,7 +106,7 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-form-group
   display: flex
   flex-direction: column
@@ -115,9 +115,9 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
   &__label
     display: inline-block
     position: relative
-    color: $gray-70
+    color: $label-color
     text-align: left
-    margin-bottom: 4px
+    margin-bottom: $label-margin-bottom
 
   &__label-link
     position: absolute
@@ -125,11 +125,11 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
     top: 0
 
   &__label-required
-    color: $red
+    color: $required-color
 
   &__error
-    margin-top: 4px
-    color: $red-dark
+    margin-top: $error-margin-top
+    color: $error-color
 
   &__input
     width: 100%

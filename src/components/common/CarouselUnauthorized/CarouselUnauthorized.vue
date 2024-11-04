@@ -28,7 +28,6 @@ const onClick = () => {
 
 
 <style lang="sass">
-@import 'UiKit/styles/_colors.sass'
 .carousel-unauthorized
     width: 100%
     height: 100%

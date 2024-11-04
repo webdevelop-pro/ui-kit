@@ -32,7 +32,8 @@ const modules = [Navigation];
 </template>
 // scoped cannot add
 <style lang="sass">
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+
 .slider-swiper
   display: flex
   flex-direction: row
@@ -60,7 +61,7 @@ const modules = [Navigation];
       pointer-events: none
 
     &:hover
-      background-color: $primary-light
+      background-color: colors.$primary-light
       transition: all 0.3s ease
 
   .swiper-button-prev

@@ -67,11 +67,11 @@ import VueApexCharts from 'vue3-apexcharts';
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-apex-chart-donut
 	display: flex
 	align-items: center
 	flex-direction: column
 	&__title
-		margin-bottom: 10px
+		margin-bottom: $title-margin-bottom
 </style>

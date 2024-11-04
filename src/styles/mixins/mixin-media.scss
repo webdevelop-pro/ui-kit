@@ -7,12 +7,13 @@
  * @mixin media(mobile, tablet) { ... }
  * @mixin media(mobile, 500px) { ... }
  */
+@use "sass:map";
+@use 'UiKit/styles/_variables.sass' as *;
 
-@import 'UiKit/styles/_variables.sass';
 
 @function get-breakpoint($key) {
-  @if map-has-key($breakpoints, $key) {
-    @return map-get($breakpoints, $key);
+  @if map.has-key($breakpoints, $key) {
+    @return map.get($breakpoints, $key);
   }
 
   @return $key;

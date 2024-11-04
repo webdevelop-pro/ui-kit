@@ -1,13 +1,16 @@
+
+@use 'UiKit/styles/_colors.sass' as *
+@use 'UiKit/styles/_variables.sass' as *
 // markdown - it
 // spacing
 .custom-block + *
   margin-top: 40px
-  @include media-lt(tablet)
+  @media screen and (max-width: $tablet)
     margin-top: 60px
 
 * + .custom-block
   margin-top: 40px
-  @include media-lt(tablet)
+  @media screen and (max-width: $tablet)
     margin-top: 60px
 
 // end spacing

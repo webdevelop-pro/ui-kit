@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { watch, withDefaults } from 'vue';
+import { watch } from 'vue';
 import { Tab } from './types';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -99,7 +99,7 @@ watch( () => route.query.tab, () => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-tabs
   --base-tabs--height: 48px
   height: var(--base-tabs--height)

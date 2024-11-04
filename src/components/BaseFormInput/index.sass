@@ -1,20 +1,19 @@
-@import 'UiKit/styles/_colors.sass'
-@import 'UiKit/styles/_mixins.sass'
+@use 'UiKit/styles/_colors.sass' as colors
 
-$input-color: $black
-$input-caret-color: $black
+$input-color: colors.$black
+$input-caret-color: colors.$black
 $input-font-size: 16px
 $input-line-height: 26px
 $input-font-weight: 400
 $input-font-family: 'Avenir'
-$input-border: solid 1px $gray-40
+$input-border: solid 1px colors.$gray-40
 $input-border-radius: 2px
 $input-height: 40px
 $input-padding: 0 12px
-$input-background-color: $gray-10
-$input-border-focus-color: $primary
-$input-border-error-color: $red
-$input-placeholder-color: $gray-60
+$input-background-color: colors.$gray-10
+$input-border-focus-color: colors.$primary
+$input-border-error-color: colors.$red
+$input-placeholder-color: colors.$gray-60
 
 $input-large-size-height: 48px
 $input-large-size-font-size: 16px

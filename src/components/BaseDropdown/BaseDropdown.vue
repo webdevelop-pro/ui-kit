@@ -55,7 +55,7 @@ watch(() => props.hover, () => {
 
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-dropdown
   $root: &
 
@@ -93,7 +93,7 @@ watch(() => props.hover, () => {
 
   &__selected-arrow
     width: 14px
-    color: $gray-70
+    color: $base-dropdown-selected-arrow-color
     transition: all 0.3s
     transform-origin: center
     transform: rotate(180deg)
@@ -110,7 +110,7 @@ watch(() => props.hover, () => {
     align-items: flex-start
     border-radius: 2px
     border: 1px solid $gray-10
-    background: $white
-    box-shadow: $box-shadow-medium
+    background: $base-dropdown-item-backgroud
+    box-shadow: $base-dropdown-item-box-shadow
     transition: all 0.3s ease
 </style>

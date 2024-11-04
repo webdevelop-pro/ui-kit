@@ -51,7 +51,7 @@ const showImage = computed(() => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-image
 	$root:&
 	width: 100%

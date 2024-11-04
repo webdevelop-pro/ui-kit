@@ -40,7 +40,7 @@ const shortTitle = computed(() => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-avatar
 	overflow: hidden
 	display: flex

@@ -22,7 +22,6 @@ defineProps({
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
 .base-skeleton
   position: relative
   overflow: hidden

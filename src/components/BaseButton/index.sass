@@ -1,11 +1,11 @@
-@import 'UiKit/styles/_colors.sass'
+@use 'UiKit/styles/_colors.sass' as colors
 
 $base-button-font-family: 'Avenir'
 $base-button-font-size: 14px
 $base-button-font-weight: 700
 $base-button-line-height: 21px
-$base-button-color: $white
-$base-button-hover-color: $white
+$base-button-color: colors.$white
+$base-button-hover-color: colors.$white
 $base-button-height: 40px
 $base-button-padding: 0 16px
 $base-button-icon-margin: 4px
@@ -32,19 +32,20 @@ $base-button-x-small-height: 26px
 $base-button-icon-only-padding: 9px
 $base-button-icon-only-small-padding: 7px
 
-$base-button-primary-color: $primary
-$base-button-primary-hover-color: $primary-dark
-$base-button-primary-light-color: $primary-light
+$base-button-primary-color: colors.$primary
+$base-button-primary-hover-color: colors.$primary-dark
+$base-button-primary-light-color: colors.$primary-light
 // $base-button-secondary-color: $gray-60
 // $base-button-secondary-hover-color: $gray-80
-$base-button-secondary-color: $primary-light
-$base-button-secondary-hover-color: $primary
-$base-button-secondary-text-color: $primary
-$base-button-secondary-text-hover-color: $white
-$base-button-success-color: $secondary
-$base-button-success-text-color: $black
-$base-button-success-hover-color: $secondary-dark
-$base-button-warning-color: $yellow
-$base-button-warning-hover-color: $yellow-dark
-$base-button-danger-color: $red
-$base-button-danger-hover-color: $red-dark
+$base-button-secondary-color: colors.$primary-light
+$base-button-secondary-hover-color: colors.$primary
+$base-button-secondary-text-color: colors.$primary
+$base-button-secondary-text-hover-color: colors.$white
+$base-button-success-color: colors.$secondary
+$base-button-success-text-color: colors.$black
+$base-button-success-hover-color: colors.$secondary-dark
+$base-button-warning-color: colors.$yellow
+$base-button-warning-hover-color: colors.$yellow-dark
+$base-button-danger-color: colors.$red
+$base-button-danger-hover-color: colors.$red-dark
+$base-button-outlined-background-color: colors.$white

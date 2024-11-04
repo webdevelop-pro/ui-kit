@@ -1,17 +1,16 @@
-@import 'UiKit/styles/_colors.sass'
-@import 'UiKit/styles/_mixins.sass'
+@use 'UiKit/styles/_colors.sass' as colors
 
-$textarea-color: $black
-$textarea-caret-color: $black
+$textarea-color: colors.$black
+$textarea-caret-color: colors.$black
 $textarea-font-size: 16px
 $textarea-line-height: 26px
 $textarea-font-weight: 400
 $textarea-font-family: 'Avenir'
-$textarea-border: solid 1px $gray-40
+$textarea-border: solid 1px colors.$gray-40
 $textarea-border-radius: 2px
 $textarea-height: 100%
 $textarea-padding: 12px
-$textarea-border-focus-color: $primary
-$textarea-border-error-color: $red
-$textarea-placeholder-color: $gray-60
-$textarea-background-color: $gray-10
+$textarea-border-focus-color: colors.$primary
+$textarea-border-error-color: colors.$red
+$textarea-placeholder-color: colors.$gray-60
+$textarea-background-color: colors.$gray-10

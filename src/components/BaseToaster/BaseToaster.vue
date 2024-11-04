@@ -100,7 +100,9 @@ const description = computed(() => {
 </template>
 
 <style lang="sass">
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+@use 'UiKit/styles/_variables.sass' as variables
+
 .base-toaster
   $root: &
 
@@ -111,9 +113,9 @@ const description = computed(() => {
   min-height: 66px
   padding: 21px 18px
   margin-bottom: 10px
-  background: $white
+  background: colors.$white
   border-left: 2px solid transparent
-  box-shadow: $box-shadow-medium
+  box-shadow: variables.$box-shadow-medium
 
   @media screen and (max-width: 768px)
     width: 100%
@@ -128,11 +130,11 @@ const description = computed(() => {
     flex-shrink: 0
 
   &__title
-    color: $black
+    color: colors.$black
 
   &__description
     margin-top: 4px
-    color: $gray-80
+    color: colors.$gray-80
 
   &__close-button
     position: absolute !important
@@ -142,7 +144,7 @@ const description = computed(() => {
   &__close
     width: 14px
     height: 14px
-    color: $black
+    color: colors.$black
 
   &__progress-bar
     position: absolute
@@ -150,38 +152,38 @@ const description = computed(() => {
     left: 0
     width: 100%
     height: 2px
-    background: $white
+    background: colors.$white
     border-radius: 10px
 
   &__progress-bar-inner
     width: 0
     height: 2px
-    background: $primary
+    background: colors.$primary
     border-radius: 10px
     animation: base-toaster__progress 10000ms ease
 
   &.is--success
-    border-color: $secondary
+    border-color: colors.$secondary
     #{$root}__icon
-      color: $secondary
+      color: colors.$secondary
     #{$root}__progress-bar-inner
-      background: $secondary
+      background: colors.$secondary
   &.is--error
-    border-color: $red
+    border-color: colors.$red
     #{$root}__icon
-      color: $red
+      color: colors.$red
     #{$root}__progress-bar-inner
-      background: $red
+      background: colors.$red
     #{$root}__close
-      color: $red
+      color: colors.$red
   &.is--info
-    border-color: $primary
+    border-color: colors.$primary
     #{$root}__icon
-      color: $primary
+      color: colors.$primary
     #{$root}__progress-bar-inner
-      background: $primary
+      background: colors.$primary
     #{$root}__close
-      color: $primary
+      color: colors.$primary
 
 @keyframes base-toaster__progress
   from

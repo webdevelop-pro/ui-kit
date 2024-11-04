@@ -110,7 +110,8 @@ onBeforeUnmount(() => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+
 .slider-with-pagination-auto-play
   position: relative
 
@@ -124,7 +125,7 @@ onBeforeUnmount(() => {
   &__pagination-item
     width: 31px
     height: 2px
-    background-color: $gray-30
+    background-color: colors.$gray-30
 
     &.is--active
       background-color: v-bind(activecolor)

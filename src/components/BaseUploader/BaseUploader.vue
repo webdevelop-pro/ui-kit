@@ -165,7 +165,8 @@ const removeFile = (index: number) => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+
 .base-uploader
   $root: &
 
@@ -178,13 +179,13 @@ const removeFile = (index: number) => {
     gap: 12px
     align-self: stretch
     border-radius: 2px
-    border: 1px dashed $gray-40
-    background: $gray-10
+    border: 1px dashed colors.$gray-40
+    background: colors.$gray-10
     &.is--dragging
-      border-color: $primary
+      border-color: colors.$primary
 
     &.is--error
-      border-color: $red
+      border-color: colors.$red
 
     &.is--files
       padding: 32px 12px 12px 12px
@@ -193,7 +194,7 @@ const removeFile = (index: number) => {
       opacity: 0.3
 
     &:hover
-      border-color: $primary
+      border-color: colors.$primary
       cursor: pointer
 
   input[type="file"]
@@ -204,7 +205,7 @@ const removeFile = (index: number) => {
     height: 1px
 
   &__label
-    color: $gray-60
+    color: colors.$gray-60
 
   &__file-button
     #{$root}__dropzone.is--files &
@@ -218,7 +219,7 @@ const removeFile = (index: number) => {
   &__preview-card
     width: 100%
     display: flex
-    border-top: 1px solid $gray-20
+    border-top: 1px solid colors.$gray-20
     padding: 12px
     align-items: center
     gap: 12px
@@ -228,18 +229,18 @@ const removeFile = (index: number) => {
     display: flex
     align-items: center
     gap: 12px
-    color: $gray-80
+    color: colors.$gray-80
 
   &__preview-card-remove
     cursor: pointer
 
   &__comment
-    color: $gray-70
+    color: colors.$gray-70
     margin-top: 4px
 
   &__error
     margin-top: 4px
-    color: $red
+    color: colors.$red
   
   &__file-icon
     width: 16px

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, ref, watch, withDefaults, ObjectDirective } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { Mask, vMaska, MaskTokens as IMaskTokens } from 'maska';
 
 // IMPORTANT: before using this component you need to install maska
@@ -207,7 +207,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-form-input
 	color: $input-color
 	caret-color: $input-caret-color

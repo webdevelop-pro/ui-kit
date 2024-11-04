@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-	import { withDefaults, computed } from 'vue';
+	import { computed } from 'vue';
 	import BaseSpinner from 'UiKit/components/BaseSpinner';
 	
 	interface Props {
@@ -53,7 +53,7 @@
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-button
 	display: inline-flex
 	justify-content: center
@@ -149,7 +149,7 @@
 		&:hover
 			background-color: $base-button-danger-hover-color
 	&.is--variant-outlined
-		background-color: $white
+		background-color: $base-button-outlined-background-color
 		border-style: solid
 		border-width: $base-button-border-width
 		&.is--bg-color-primary

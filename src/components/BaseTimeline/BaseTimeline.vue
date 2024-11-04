@@ -29,7 +29,8 @@
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+
 .base-timeline
   $root: &
 
@@ -37,7 +38,7 @@
 
   &__title
     margin-bottom: 20px
-    color: $black
+    color: colors.$black
 
   &__content
     width: 100%
