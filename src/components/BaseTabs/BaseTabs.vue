@@ -2,35 +2,22 @@
 import { computed, ref, watch, withDefaults } from 'vue';
 import { Tab } from './types';
 import { navigateWithQueryParams } from 'UiKit/helpers/general';
+import { urlSearchParamsToObject } from '../../helpers/url';
 
 const props = withDefaults(defineProps<{
   tabs: Tab[];
   modelValue?: string | number;
   type?: 'top-line' | 'bottom-line';
   fullWidth?: boolean,
-  external?: boolean,
+  queryTab: string,
 }>(), {
   type: 'top-line',
 });
 
-const route = ref<any>(null);
-const router = ref<any>(null);
-if (!props.external) {
-  // Async import from vue-router if props.external is false
-  import('vue-router').then(({ useRoute, useRouter }) => {
-    route.value = useRoute();
-    router.value = useRouter();
-  });
-} else {
-  // Async import from vitepress if props.external is true
-  import('vitepress').then(({ useRouter }) => {
-    router.value = useRouter();
-  });
-}
-
 const emit = defineEmits<{
   (e: 'update:modelValue', value: Tab['value']): void;
   (e: 'itemClick', value: Tab): void;
+  (e: 'setUrl', value: string | number): void;
 }>();
 
 function onItemClick(tab: Tab) {
@@ -38,11 +25,7 @@ function onItemClick(tab: Tab) {
   emit('itemClick', tab);
 }
 
-const queryTab = computed(() => {
-  if (!props.external) return router.value.query.tab;
-  return (
-    (window && window.location.search) ? new URLSearchParams(window.location.search).get('tab') : null)
-});
+const queryTab = computed(() => props.queryTab);
 
 
 function setActiveItemToURL() {
@@ -53,11 +36,7 @@ function setActiveItemToURL() {
     if (currentItemByURL === undefined) return;
     newItem = undefined;
   }
-  if (props.external) {
-    navigateWithQueryParams('/signin', { query: { tab: newItem } });
-  } else {
-    router.value.replace({ ...route, query: { ...route.value.query, tab: newItem } });
-  }
+  if (newItem) emit('setUrl', newItem);
 }
 
 
