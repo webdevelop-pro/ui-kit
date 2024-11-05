@@ -1,19 +1,32 @@
 <script lang="ts" setup>
-import { watch, withDefaults } from 'vue';
+import { computed, ref, watch, withDefaults } from 'vue';
 import { Tab } from './types';
-import { useRoute, useRouter } from 'vue-router';
+import { navigateWithQueryParams } from 'UiKit/helpers/general';
 
 const props = withDefaults(defineProps<{
   tabs: Tab[];
   modelValue?: string | number;
   type?: 'top-line' | 'bottom-line';
   fullWidth?: boolean,
+  external?: boolean,
 }>(), {
   type: 'top-line',
 });
 
-const route = useRoute();
-const router = useRouter();
+const route = ref<any>(null);
+const router = ref<any>(null);
+if (!props.external) {
+  // Async import from vue-router if props.external is false
+  import('vue-router').then(({ useRoute, useRouter }) => {
+    route.value = useRoute();
+    router.value = useRouter();
+  });
+} else {
+  // Async import from vitepress if props.external is true
+  import('vitepress').then(({ useRouter }) => {
+    router.value = useRouter();
+  });
+}
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: Tab['value']): void;
@@ -25,20 +38,30 @@ function onItemClick(tab: Tab) {
   emit('itemClick', tab);
 }
 
+const queryTab = computed(() => {
+  if (!props.external) return router.value.query.tab;
+  return (
+    (window && window.location.search) ? new URLSearchParams(window.location.search).get('tab') : null)
+});
+
 
 function setActiveItemToURL() {
-  const currentItemByURL = route.query.tab || '';
+  const currentItemByURL = queryTab.value || '';
   let newItem = props.modelValue;
   if (currentItemByURL === newItem) return;
   if (!newItem) {
     if (currentItemByURL === undefined) return;
     newItem = undefined;
   }
-  router.replace({ ...route, query: { ...route.query, tab: newItem } });
+  if (props.external) {
+    navigateWithQueryParams('/signin', { query: { tab: newItem } });
+  } else {
+    router.value.replace({ ...route, query: { ...route.value.query, tab: newItem } });
+  }
 }
 
 
-function setActiveItemByURL(currentItemByURL = route.query.tab) {
+function setActiveItemByURL(currentItemByURL = queryTab.value) {
   const itemFromURL = currentItemByURL?.toString();
   // Check if the item from the URL is present in the list of tab values
   const tabItem = props.tabs.filter(tab => tab.value.toString() === itemFromURL);
@@ -55,42 +78,25 @@ watch(() => props.modelValue, () => {
   if (props.modelValue) setActiveItemToURL();
 });
 
-watch( () => route.query.tab, () => {
-    if (props.modelValue) {
-      setActiveItemByURL(route.query.tab);
-    }
-  },
+watch(() => queryTab.value, () => {
+  if (props.modelValue) {
+    setActiveItemByURL(queryTab.value);
+  }
+},
   { immediate: true }
 );
 </script>
 
 <template>
-  <div
-    class="BaseTabs base-tabs"
-    :class="`is--${type}`"
-  >
-    <div
-      v-for="tab in props.tabs"
-      :key="tab.value"
-      class="base-tabs__item"
-      :class="[{ 'is--active': modelValue === tab.value, 'is--full-width': fullWidth}, `is--${type}`]"
-      :style="{width: fullWidth ? `${100/(props.tabs.length)}%` : 'auto'}"
-      @click="onItemClick(tab)"
-    >
-      <slot
-        name="tab"
-        :tab="tab"
-      >
-        <span
-          class="base-tabs__item-label is--h5__title"
-          :title="tab.label"
-        >
+  <div class="BaseTabs base-tabs" :class="`is--${type}`">
+    <div v-for="tab in props.tabs" :key="tab.value" class="base-tabs__item"
+      :class="[{ 'is--active': modelValue === tab.value, 'is--full-width': fullWidth }, `is--${type}`]"
+      :style="{ width: fullWidth ? `${100 / (props.tabs.length)}%` : 'auto' }" @click="onItemClick(tab)">
+      <slot name="tab" :tab="tab">
+        <span class="base-tabs__item-label is--h5__title" :title="tab.label">
           {{ tab.label }}
         </span>
-        <span
-          v-if="tab.subTitle"
-          class="base-tabs__item-sub-title"
-        >
+        <span v-if="tab.subTitle" class="base-tabs__item-sub-title">
           <span>{{ tab.subTitle }}</span>
         </span>
       </slot>
