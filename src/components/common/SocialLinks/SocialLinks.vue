@@ -25,7 +25,7 @@ defineProps({
       :key="item.icon"
       :href="item.href"
       target="_blank"
-      class="social-links__item"
+      class="social-links__item is--no-margin"
       rel="noopener noreferrer"
       :aria-label="item.name"
     >
