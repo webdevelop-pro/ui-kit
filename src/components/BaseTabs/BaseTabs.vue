@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<{
   modelValue?: string | number;
   type?: 'top-line' | 'bottom-line';
   fullWidth?: boolean,
-  queryTab: string,
+  queryTab?: string,
 }>(), {
   type: 'top-line',
 });
