@@ -13,7 +13,7 @@ export interface IFrontmatter {
   route?: string;
   url?: string;
   layout?: string;
-  menuGroup?: string;
+  pageSrc?: string;
 }
 
 export interface IPostContent extends IFrontmatter {

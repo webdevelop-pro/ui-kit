@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { PropType, computed } from 'vue';
-import { IFrontmatter } from './types';
+import { IFrontmatter } from 'UiKit/types/types';
+import { capitalizeFirstLetter } from 'UiKit/helpers/text';
 
 const props = defineProps({
   data: {
@@ -44,7 +45,7 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
         <h3
           class="post-item__name is--h4__title"
         >
-          {{ data.title }}
+          {{ capitalizeFirstLetter(data.title) }}
         </h3>
         <div
           v-if="$slots.label"
