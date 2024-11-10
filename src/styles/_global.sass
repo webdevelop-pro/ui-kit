@@ -143,18 +143,15 @@
         padding: 0 20px
         border-left: 2px solid $primary
         margin-top: 20px
-.sticky
+.is--sticky
     @include media-gt(tablet)
-        position: fixed
+        position: sticky
         top: 123px
-        width: 21%
-        max-width: 312px
-        // max-height: calc(100% - 123px)
-        // overflow: auto
 
 .is--flex-row
     display: flex
-    align-items: flex-start
+    align-items: stretch
+    flex-direction: row
     align-self: stretch
     gap: 80px
     @include media-lte(tablet)
@@ -292,3 +289,6 @@ pre
     width: 1px
     word-wrap: normal !important
     word-break: normal
+
+.highlight
+  background-color: $yellow

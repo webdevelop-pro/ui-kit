@@ -41,7 +41,7 @@ watch(() => props.expanded, (val) => {
 
 <template>
   <div
-    class="BaseAccordionItemCustom base-accordion-item-custom"
+    class="BaseAccordionItemCustom base-accordion-item-custom is--no-margin"
     :class="[`is--${size}`, `is--${color}`, { 'is--transparent': transparent, 'is--open': visible }]"
     @click="open"
   >

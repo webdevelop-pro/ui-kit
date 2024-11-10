@@ -1,23 +1,21 @@
 <script lang="ts" setup>
-import { watch } from 'vue';
+import { computed, watch, withDefaults } from 'vue';
 import { Tab } from './types';
-import { useRoute, useRouter } from 'vue-router';
 
 const props = withDefaults(defineProps<{
   tabs: Tab[];
   modelValue?: string | number;
   type?: 'top-line' | 'bottom-line';
   fullWidth?: boolean,
+  queryTab?: string,
 }>(), {
   type: 'top-line',
 });
 
-const route = useRoute();
-const router = useRouter();
-
 const emit = defineEmits<{
   (e: 'update:modelValue', value: Tab['value']): void;
   (e: 'itemClick', value: Tab): void;
+  (e: 'setUrl', value: string | number): void;
 }>();
 
 function onItemClick(tab: Tab) {
@@ -25,20 +23,22 @@ function onItemClick(tab: Tab) {
   emit('itemClick', tab);
 }
 
+const queryTab = computed(() => props.queryTab);
+
 
 function setActiveItemToURL() {
-  const currentItemByURL = route.query.tab || '';
+  const currentItemByURL = queryTab.value || '';
   let newItem = props.modelValue;
   if (currentItemByURL === newItem) return;
   if (!newItem) {
     if (currentItemByURL === undefined) return;
     newItem = undefined;
   }
-  router.replace({ ...route, query: { ...route.query, tab: newItem } });
+  if (newItem) emit('setUrl', newItem);
 }
 
 
-function setActiveItemByURL(currentItemByURL = route.query.tab) {
+function setActiveItemByURL(currentItemByURL = queryTab.value) {
   const itemFromURL = currentItemByURL?.toString();
   // Check if the item from the URL is present in the list of tab values
   const tabItem = props.tabs.filter(tab => tab.value.toString() === itemFromURL);
@@ -55,42 +55,25 @@ watch(() => props.modelValue, () => {
   if (props.modelValue) setActiveItemToURL();
 });
 
-watch( () => route.query.tab, () => {
-    if (props.modelValue) {
-      setActiveItemByURL(route.query.tab);
-    }
-  },
+watch(() => queryTab.value, () => {
+  if (props.modelValue) {
+    setActiveItemByURL(queryTab.value);
+  }
+},
   { immediate: true }
 );
 </script>
 
 <template>
-  <div
-    class="BaseTabs base-tabs"
-    :class="`is--${type}`"
-  >
-    <div
-      v-for="tab in props.tabs"
-      :key="tab.value"
-      class="base-tabs__item"
-      :class="[{ 'is--active': modelValue === tab.value, 'is--full-width': fullWidth}, `is--${type}`]"
-      :style="{width: fullWidth ? `${100/(props.tabs.length)}%` : 'auto'}"
-      @click="onItemClick(tab)"
-    >
-      <slot
-        name="tab"
-        :tab="tab"
-      >
-        <span
-          class="base-tabs__item-label is--h5__title"
-          :title="tab.label"
-        >
+  <div class="BaseTabs base-tabs" :class="`is--${type}`">
+    <div v-for="tab in props.tabs" :key="tab.value" class="base-tabs__item"
+      :class="[{ 'is--active': modelValue === tab.value, 'is--full-width': fullWidth }, `is--${type}`]"
+      :style="{ width: fullWidth ? `${100 / (props.tabs.length)}%` : 'auto' }" @click="onItemClick(tab)">
+      <slot name="tab" :tab="tab">
+        <span class="base-tabs__item-label is--h5__title" :title="tab.label">
           {{ tab.label }}
         </span>
-        <span
-          v-if="tab.subTitle"
-          class="base-tabs__item-sub-title"
-        >
+        <span v-if="tab.subTitle" class="base-tabs__item-sub-title">
           <span>{{ tab.subTitle }}</span>
         </span>
       </slot>

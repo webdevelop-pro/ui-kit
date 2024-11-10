@@ -2,6 +2,7 @@
 import {
   PropType, CSSProperties, ref, computed, nextTick,
   onBeforeUnmount, watch,
+  onMounted,
 } from 'vue';
 
 const emit = defineEmits(['update:modelValue']);
@@ -186,7 +187,17 @@ watch(() => props.disabled, (value) => {
   void close();
 });
 
-window.addEventListener('scroll', onScroll, { passive: true });
+
+watch(() => props.disabled, (value) => {
+  if (!value) return;
+  void close();
+});
+
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+});
 
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', onScroll);

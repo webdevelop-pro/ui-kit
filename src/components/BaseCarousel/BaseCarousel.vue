@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
 import { getImageTitle } from 'UiKit/helpers/utils/text';
 import BaseVideoThumb from 'UiKit/components/BaseVideoEmbedded/BaseVideoThumb.vue';
 import BaseVideoEmbedded from 'UiKit/components/BaseVideoEmbedded/BaseVideoEmbedded.vue';
@@ -15,9 +14,10 @@ const props = defineProps({
     default: () => [],
   },
   activeItemByUrl: Boolean,
+  queryMedia: String,
 });
 
-const emit = defineEmits(['click']);
+const emit = defineEmits(['click', 'setUrl']);
 
 const modules = [Navigation, Thumbs];
 const thumbsSwiper = ref(null);
@@ -27,8 +27,7 @@ const setThumbsSwiper = (swiper) => {
   thumbsSwiper.value = swiper;
 };
 
-const route = useRoute();
-const router = useRouter();
+
 const activeItem = ref(0);
 
 const itemsNumber = computed(() => props.files.length);
@@ -39,36 +38,25 @@ const sortedFiles = computed(() => {
 
 const isFirstItemVideo = computed(() => Boolean(sortedFiles.value[0]?.url));
 
-watch(activeItem, () => {
-  if (props.activeItemByUrl) setActiveItemNumberToURL();
-});
-
-watch( () => [route.query.media, mainSwiperInstance.value], () => {
-    if (props.activeItemByUrl && mainSwiperInstance.value) {
-      setActiveItemNumberByURL(route.query.media);
-    }
-  },
-  { immediate: true }
-);
-
-
 function getMetaOrder(item) {
   if (item.meta_data) return item.meta_data?.order || 999;
   return 999;
 }
 
+const queryMedia = computed(() => props.queryMedia);
+
 function setActiveItemNumberToURL() {
-  const currentItemNumberByURL = Number(route.query.media || 0);
+  const currentItemNumberByURL = Number(queryMedia.value || 0);
   let newItemNumber = activeItem.value;
   if (currentItemNumberByURL === newItemNumber) return;
   if (!newItemNumber) {
     if (currentItemNumberByURL === undefined) return;
     newItemNumber = undefined;
   }
-  router.replace({ ...route, query: { ...route.query, media: newItemNumber } });
+  emit('setUrl', newItemNumber);
 }
 
-function setActiveItemNumberByURL(currentItemNumberByURL = route.query.media) {
+function setActiveItemNumberByURL(currentItemNumberByURL = queryMedia.value) {
   const numberFromURL = Number(currentItemNumberByURL || 0);
   if (
     Number.isNaN(numberFromURL) ||
@@ -95,6 +83,19 @@ const onSwiper = (instance) => {
 const onClick = () => {
   emit('click');
 }
+
+watch(activeItem, () => {
+  if (props.activeItemByUrl) setActiveItemNumberToURL();
+});
+
+watch( () => [queryMedia.value, mainSwiperInstance.value], () => {
+    if (props.activeItemByUrl && mainSwiperInstance.value && queryMedia.value) {
+      setActiveItemNumberByURL(queryMedia.value);
+    }
+  },
+  { immediate: true }
+);
+
 </script>
 
 
