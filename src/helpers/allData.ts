@@ -1,4 +1,4 @@
-import { IFrontmatter } from '@/store/types';
+import { IFrontmatter } from 'UiKit/types/types';
 
 // General function to find elements by a specified filterName and filterValue
 export function filterElements(data: IFrontmatter[], filterName: keyof IFrontmatter, filterValue: string) {

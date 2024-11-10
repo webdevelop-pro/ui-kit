@@ -14,6 +14,10 @@ export interface IFrontmatter {
   url?: string;
   layout?: string;
   pageSrc?: string;
+  products?: string;
+  summary?: string;
+  is_main: boolean;
+  order?: number;
 }
 
 export interface IPostContent extends IFrontmatter {
