@@ -25,7 +25,6 @@ onBeforeUnmount(() => unBlockedBody());
 
 
 <style lang="sass" scoped>
-@import 'index.sass'
 .the-loader
   position: fixed
   top: 0

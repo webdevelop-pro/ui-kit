@@ -1,8 +1,6 @@
 <script lang="ts" setup>
-import { computed, ref, watch, withDefaults } from 'vue';
+import { computed, watch, withDefaults } from 'vue';
 import { Tab } from './types';
-import { navigateWithQueryParams } from 'UiKit/helpers/general';
-import { urlSearchParamsToObject } from '../../helpers/url';
 
 const props = withDefaults(defineProps<{
   tabs: Tab[];
@@ -84,7 +82,7 @@ watch(() => queryTab.value, () => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-tabs
   --base-tabs--height: 48px
   height: var(--base-tabs--height)

@@ -57,19 +57,20 @@ const btnClasses = computed(() => {
 </template>
 
 <style lang="sass">
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+@use 'UiKit/styles/_variables.sass' as variables
 .base-timeline-card
   $root: &
 
   flex-direction: column
   padding: 40px !important
   position: relative
-  color: $gray-80
+  color: colors.$gray-80
 
   &__duration-title
-    color: $black
+    color: colors.$black
   &__duration-text
-    color: $primary
+    color: colors.$primary
 
   &__circle
     position: absolute
@@ -93,13 +94,13 @@ const btnClasses = computed(() => {
 
   &__title
     margin-top: 0
-    color: $black
+    color: colors.$black
     @media screen and (max-width: 767px)
       margin-bottom: 10px
 
   &.is--variant-inner
     margin-bottom: 32px
-    color: $gray-80
+    color: colors.$gray-80
     &::before // inner lines between cards
       content: ""
       position: absolute
@@ -107,7 +108,7 @@ const btnClasses = computed(() => {
       bottom: -32px
       width: 2px
       height: 32px
-      background-color: $gray-30
+      background-color: colors.$gray-30
       @media screen and (max-width: 767px)
         left: 15px
 
@@ -117,8 +118,8 @@ const btnClasses = computed(() => {
         display: none
 
   &.is--variant-inner-highlight
-    background-color: $primary-dark
-    color: $gray-10
+    background-color: colors.$primary-dark
+    color: colors.$gray-10
 
     &::before // inner lines between cards
       content: ""
@@ -127,22 +128,22 @@ const btnClasses = computed(() => {
       bottom: -32px
       width: 2px
       height: 32px
-      background-color: $gray-30
+      background-color: colors.$gray-30
       @media screen and (max-width: 767px)
         left: 15px
 
     #{$root}__title
-      color: $white
+      color: colors.$white
 
     p
-      color: $white
+      color: colors.$white
 
     #{$root}__duration-title, 
     #{$root}__duration-text
-      color: $white
+      color: colors.$white
 
     #{$root}__header
-      border-color: $white
+      border-color: colors.$white
 
     &:last-child
       margin-bottom: 0
@@ -150,26 +151,26 @@ const btnClasses = computed(() => {
         display: none
 
   &.is--variant-highlight
-    background-color: $primary-dark
-    color: $gray-10
+    background-color: colors.$primary-dark
+    color: colors.$gray-10
 
     #{$root}__title
-      color: $gray-10
+      color: colors.$gray-10
 
     p
-      color: $white
+      color: colors.$white
 
     #{$root}__duration-title, 
     #{$root}__duration-text
-      color: $white
+      color: colors.$white
 
     #{$root}__header
-      border-color: $white
+      border-color: colors.$white
 
   &.is--type-not-complete
     opacity: 0.3
   &.is--type-complete
-    background-color: $gray-10
-    border: 1px solid $gray-20
-    box-shadow: $box-shadow-small
+    background-color: colors.$gray-10
+    border: 1px solid colors.$gray-20
+    box-shadow: variables.$box-shadow-small
 </style>

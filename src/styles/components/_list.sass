@@ -1,4 +1,8 @@
 
+@use 'UiKit/styles/_colors.sass' as *
+@use 'UiKit/styles/_variables.sass' as *
+@use 'UiKit/styles/_mixins.sass' as *
+
 ol
     list-style: decimal
     padding-left: 25px
@@ -47,7 +51,7 @@ li + li
         display: grid
         grid-template-columns: repeat(2, 1fr)
         gap: 17px 30px
-        @include media-lte(tablet)
+        @media screen and (max-width: $tablet)
             grid-template-columns: repeat(1, 1fr)
             gap: 16px
 

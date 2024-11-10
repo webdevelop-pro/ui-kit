@@ -160,9 +160,9 @@ const options = computed(() => ({
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-apex-chart-area
 	&__title
-		margin-bottom: 10px
+		margin-bottom: $title-margin-bottom
 		padding-left: 30px
 </style>

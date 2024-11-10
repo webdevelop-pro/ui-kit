@@ -38,19 +38,20 @@ defineProps({
 </template>
 
 <style lang="sass">
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+@use 'UiKit/styles/_variables.sass' as variables
 .social-links
   display: flex
   flex-direction: row
   align-items: center
   width: 100%
-  color: $white
+  color: colors.$white
 
-  @media screen and (max-width: 768px)
+  @media screen and (max-width: variables.$tablet)
     flex-wrap: wrap
     justify-content: center
 
-  @media screen and (max-width: 575px)
+  @media screen and (max-width: variables.$tablet-xs)
     justify-content: flex-start
 
   &__icon
@@ -69,13 +70,13 @@ defineProps({
     &:last-child
       margin-right: 0
 
-    @media screen and (max-width: 768px)
+    @media screen and (max-width: variables.$tablet)
       margin-right: 28px
       margin-bottom: 10px
 
     &:hover
-      color: $primary
+      color: colors.$primary
 
-    @media screen and (min-width: 768px)
+    @media screen and (min-width: variables.$tablet)
       margin-right: 40px
 </style>

@@ -74,7 +74,7 @@ const onClick = () => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 
 .notification-inline
 	color: $notification-inline-color
@@ -116,7 +116,7 @@ const onClick = () => {
 			&:hover
 				+mt(.3s)
 				// border-bottom: solid 1px transparent
-				color: $secondary
+				color: $notification-inline-a-hover-color
 	&____title
 		margin-right: 4px
 

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, withDefaults } from 'vue';
+import { computed } from 'vue';
 
 const props = withDefaults(defineProps<{
 	round?: boolean;
@@ -45,7 +45,7 @@ const tagClasses = computed(() => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-tag
 	padding: $base-tag-padding
 	color: $base-tag-color

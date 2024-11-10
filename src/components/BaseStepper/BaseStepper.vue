@@ -67,7 +67,8 @@ function onItemClick(step: Step, index: number) {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+
 .base-stepper
 	$root: &
 
@@ -101,7 +102,7 @@ function onItemClick(step: Step, index: number) {
 			right: 50%
 			transform: translateX(-50%)
 			width: 1px
-			background: $gray-30
+			background: colors.$gray-30
 
 	&__label
 		display: flex
@@ -115,13 +116,13 @@ function onItemClick(step: Step, index: number) {
 		align-items: flex-start
 		gap: 10px
 		border-radius: 100%
-		border: 5px solid $gray-30
+		border: 5px solid colors.$gray-30
 
 	&__label-step
-		color: $gray-60
+		color: colors.$gray-60
 
 	&__label-title 
-		color: $gray-80
+		color: colors.$gray-80
 
 	&__check-icon
 		display: none
@@ -138,21 +139,21 @@ function onItemClick(step: Step, index: number) {
 
 	.is--active
 		#{$root}__circle
-			border-color: $primary
+			border-color: colors.$primary
 		#{$root}__label-step
-			color: $primary
+			color: colors.$primary
 
 	.is--completed
 		cursor: pointer
 
 		&:hover
 			#{$root}__label-step
-				color: $primary
+				color: colors.$primary
 
 		#{$root}__circle
-			border-color: $primary
-			background: $primary
-			color: $white
+			border-color: colors.$primary
+			background: colors.$primary
+			color: colors.$white
 
 		#{$root}__check-icon
 			display: block

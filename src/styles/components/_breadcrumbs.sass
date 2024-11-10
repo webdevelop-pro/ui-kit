@@ -1,11 +1,13 @@
 
+@use 'UiKit/styles/_variables.sass' as *
+
 .base-breadcrumbs + *
     margin-top: 40px
-    @include media-lt(tablet)
+    @media screen and (max-width: $tablet)
       margin-top: 60px
 
 
 .is--container + .is--container:last-child .base-breadcrumbs
     margin-top: 90px
-    @include media-lt(tablet)
+    @media screen and (max-width: $tablet)
       margin-top: 60px

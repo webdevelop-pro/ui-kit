@@ -30,7 +30,8 @@ const btnClasses = computed(() => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
+@use 'UiKit/styles/_mixins.sass' as *
 .base-table
 	width: 100%
 .base-table
@@ -58,7 +59,7 @@ const btnClasses = computed(() => {
 		font-size: $table-th-font-size
 		line-height: $table-th-line-height
 		padding: $table-th-padding
-		+font(800)
+		@include font(800)
 		text-align: left
 		@media screen and (max-width: 768)
 			padding: $table-th-padding-mobile
@@ -72,18 +73,18 @@ const btnClasses = computed(() => {
 				border-top: solid 1px $table-tbody-tr-border-bottom-color
 			td
 				background: $table-tbody-tr-td-background-color
-				+mt(.3s)
+				@include mt(.3s)
 				font-size: $table-td-font-size
 				line-height: $table-td-line-height
 				padding: $table-td-padding
-				+font(400)
+				@include font(400)
 				text-align: left
 				@media screen and (max-width: 768)
 					padding: $table-td-padding-mobile
 			&:hover
 				td
 					background: $table-tbody-td-hover-background-color
-					+mt(.3s)
+					@include mt(.3s)
 		td
 			color: $table-tbody-td-color
 	

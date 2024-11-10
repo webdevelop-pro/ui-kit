@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, ref, withDefaults, h, useSlots } from 'vue';
+import { computed, ref, h, useSlots } from 'vue';
 import VSelect from 'vue-select';
 
 // IMPORTANT: before using this component you need to install library
@@ -183,7 +183,7 @@ function onSearch(searchString: string) {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-select
 	width: 100%
 	position: relative

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { withDefaults, ref } from 'vue';
+import { ref } from 'vue';
 
 const focused = ref(false);
 
@@ -44,7 +44,7 @@ defineEmits<{
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' s *
 .base-form-textarea
 	color: $textarea-color
 	caret-color: $textarea-caret-color

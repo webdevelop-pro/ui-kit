@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { withDefaults } from 'vue';
 import { Tab } from './types';
 
 const props = withDefaults(defineProps<{
@@ -48,7 +47,7 @@ function onItemClick(tab: Tab) {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-content-switcher
   height: 32px
   display: flex
@@ -56,7 +55,7 @@ function onItemClick(tab: Tab) {
   align-items: center
   gap: 4px
   border-radius: 2px
-  background: $gray-20
+  background: $base-content-switcher-background
   padding: 4px
 
   &.is--full-width
@@ -70,14 +69,14 @@ function onItemClick(tab: Tab) {
     gap: 4px
     align-self: stretch
     border-radius: 2px
-    color: $gray-60
+    color: $base-content-switcher-item-color
     +mt(.2s)
     &.is--active
       +mt(.2s)
-      background-color: $white
-      color: $black
+      background-color: $base-content-switcher-active-background
+      color: $base-content-switcher-active-color
     &:hover
-      color: $black
+      color: $base-content-switcher-active-hover-color
   &__item-label
     flex-shrink: 0
 </style>

@@ -70,7 +70,8 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
 
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+
 .post-item
   $root: &
 
@@ -79,14 +80,14 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
   align-items: center
   justify-content: space-between
   text-decoration: none
-  border-top: 1px solid $gray-40
+  border-top: 1px solid colors.$gray-40
   flex-direction: row
   cursor: pointer
   text-decoration: none !important
   margin: 0
   @media screen and (min-width: 767px)
     &:hover
-      background-color: $white
+      background-color: colors.$white
 
   &.is--small
     flex-direction: column
@@ -101,11 +102,11 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
     align-items: flex-start
 
   &:not(.is--small):last-child
-    border-bottom: 1px solid $gray-40
+    border-bottom: 1px solid colors.$gray-40
 
   .mobile
     opacity: 0.6
-    color: $black
+    color: colors.$black
     text-align: left
     margin-bottom: 15px
     order: 0
@@ -120,7 +121,7 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
     flex-shrink: 0
     justify-content: center
     align-items: center
-    color: $gray-70
+    color: colors.$gray-70
 
     @media screen and (min-width: 767px)
       #{$root}:not(.is--small) &
@@ -144,7 +145,7 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
       order: 2
 
     #{$root}__name
-      color: $black
+      color: colors.$black
       margin-bottom: 8px
 
   &__details-title
@@ -158,14 +159,14 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
     display: flex
     align-items: center
     justify-content: center
-    background: $primary
+    background: colors.$primary
     border-radius: 4px
     font-weight: 400
     font-size: 14px
     line-height: 22px
     text-transform: capitalize
     letter-spacing: 0.3px
-    color: $black
+    color: colors.$black
 
   &__image
     margin-left: auto
@@ -189,7 +190,7 @@ const route = computed(() => (props.data.route ? props.data.route : props.defaul
       min-width: 100%
 
   &__excerpt
-    color: $gray-80
+    color: colors.$gray-80
     display: -webkit-box
     -webkit-line-clamp: 2
     -webkit-box-orient: vertical

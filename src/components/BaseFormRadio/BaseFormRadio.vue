@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, computed, withDefaults } from 'vue';
+import { ref, computed } from 'vue';
 
 type FormRadioOption = {
 	value: unknown,
@@ -105,7 +105,7 @@ function getLabelValue(option: string | number | FormRadioOption) {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-form-radio
 	$root: &
 	display: flex

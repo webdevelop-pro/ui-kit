@@ -56,7 +56,9 @@ defineProps({
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'UiKit/styles/_colors.sass' as colors
+@use 'UiKit/styles/_variables.sass' as variables
+
 .checkmarked-item
   $root: &
 
@@ -68,16 +70,16 @@ defineProps({
   box-shadow: none
   &.is--card
     border-radius: 2px
-    border: 1px solid $gray-20
-    background: $gray-10
+    border: 1px solid colors.$gray-20
+    background: colors.$gray-10
     padding: 20px
   
   &:not(.is--card) + &:not(.is--card)
     padding-top: 20px
     margin-top: 20px
-    border-top: 1px solid $gray-40
+    border-top: 1px solid colors.$gray-40
     &.is--dark-mode
-      border-top: 1px solid $gray-60
+      border-top: 1px solid colors.$gray-60
 
   &__top
     display: flex
@@ -91,7 +93,7 @@ defineProps({
   &__icon
     width: 16px
     height: auto
-    color: $secondary-dark
+    color: colors.$secondary-dark
 
 
   &__icon-wrap
@@ -100,8 +102,8 @@ defineProps({
     align-items: flex-start
     gap: 10px
     border-radius: 50px
-    box-shadow: $box-shadow-small
-    background-color: $secondary-light
+    box-shadow: variables.$box-shadow-small
+    background-color: colors.$secondary-light
 
 
     @media screen and (max-width: 767px)
@@ -109,16 +111,16 @@ defineProps({
 
     &.is--icon-hollow
       background-color: transparent
-      border: 1px solid $secondary
+      border: 1px solid colors.$secondary
       padding: 3px
     &.is--icon-dark-bg
-      background-color: $secondary-dark
+      background-color: colors.$secondary-dark
       #{$root}__icon
-        color: $black
+        color: colors.$black
 
   &__bottom
     opacity: 0.9
-    color: $gray-80
+    color: colors.$gray-80
     #{$root}.is--dark-mode &
-      color: $gray-10
+      color: colors.$gray-10
 </style>

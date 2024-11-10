@@ -32,7 +32,6 @@ defineProps({
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
 .what-our-clients-say
 
   &__container

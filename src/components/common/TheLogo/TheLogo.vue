@@ -36,7 +36,6 @@ const componentName = computed(() => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
 .the-logo
   display: flex
   align-items: center

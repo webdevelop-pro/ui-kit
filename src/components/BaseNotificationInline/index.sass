@@ -1,24 +1,24 @@
-@import 'UiKit/styles/_colors.sass'
-@import 'UiKit/styles/_mixins.sass'
+@use 'UiKit/styles/_colors.sass' as colors
 
-$notification-inline-color: $gray-80
+$notification-inline-color: colors.$gray-80
 $notification-inline-margin: 3px 0 20px
 $notification-inline-font-size: 16px
 $notification-inline-font-weight: 400
 $notification-inline-line-height: 26px
 $notification-inline-padding: 12px 20px 12px 18px
+$notification-inline-a-hover-color: colors.$secondary
 
 $notification-inline-width: 20px
 $notification-inline-height: 20px
 
 $notification-inline-margin-left: 8px
 
-$notification-inline-link-color: $secondary
-$notification-inline-error-background-color: $red-light
-$notification-inline-error-color: $red
+$notification-inline-link-color: colors.$secondary
+$notification-inline-error-background-color: colors.$red-light
+$notification-inline-error-color: colors.$red
 
-$notification-inline-success-background-color: $secondary-light
-$notification-inline-success-color: $secondary-dark
+$notification-inline-success-background-color: colors.$secondary-light
+$notification-inline-success-color: colors.$secondary-dark
 
-$notification-inline-info-background-color: $primary-light
-$notification-inline-info-color: $primary
+$notification-inline-info-background-color: colors.$primary-light
+$notification-inline-info-color: colors.$primary

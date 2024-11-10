@@ -39,14 +39,14 @@
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-card-features
   $root: &
 
   padding: 8px
   border-radius: 2px
-  background: $white
-  border: 1px solid $primary-light
+  background: $base-cards-features-background
+  border: 1px solid $base-cards-features-border-color
   transition: all 0.3s ease
   cursor: pointer
   color: inherit
@@ -54,7 +54,7 @@
   margin: 0
 
   &:hover
-    box-shadow: $box-shadow-medium
+    box-shadow: $base-cards-features-hover-box-shadow
     border-color: transparent
     transition: all 0.3s ease
     
@@ -71,7 +71,7 @@
     flex: 1 0 0
     align-self: stretch
     border-radius: 2px
-    background: $primary-light
+    background: $base-cards-features-card-background
     #{$root}:hover &
       padding-bottom: 36px
 

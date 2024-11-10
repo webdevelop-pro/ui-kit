@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { withDefaults } from 'vue';
 import {
   VueCollapsiblePanel,
 } from '@swoga/vue-collapsible-panel';

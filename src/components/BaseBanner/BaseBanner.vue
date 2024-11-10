@@ -95,7 +95,7 @@ getCloseBannerDuringSession();
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
 .base-banner
 	width: 100%
 	height: auto

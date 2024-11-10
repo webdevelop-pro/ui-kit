@@ -167,7 +167,7 @@ watch( () => [queryMedia.value, mainSwiperInstance.value], () => {
 
 
 <style lang="sass">
-@import 'index.sass'
+@use 'index.sass' as *
 .base-carousel
   height: 100%
   width: 100%
@@ -243,7 +243,7 @@ watch( () => [queryMedia.value, mainSwiperInstance.value], () => {
     cursor: pointer
     padding: 12px
     transition: all 0.3s ease
-    background-color: $primary-light
+    background-color: $base-carousel-navigation-background
     opacity: 0.8
     &.swiper-button-disabled
       opacity: 0.3
@@ -251,7 +251,7 @@ watch( () => [queryMedia.value, mainSwiperInstance.value], () => {
 
     &:hover
       opacity: 1
-      background-color: $primary-light
+      background-color: $base-carousel-navigation-hover-background
       transition: all 0.3s ease
 
   .swiper-button-prev

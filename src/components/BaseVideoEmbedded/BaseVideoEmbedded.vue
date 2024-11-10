@@ -66,5 +66,4 @@ watch(() => props.active, () => {
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
 </style>
