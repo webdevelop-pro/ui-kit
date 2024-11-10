@@ -44,7 +44,7 @@ defineEmits<{
 </template>
 
 <style lang="sass" scoped>
-@use 'index.sass' s *
+@use 'index.sass' as *
 .base-form-textarea
 	color: $textarea-color
 	caret-color: $textarea-caret-color

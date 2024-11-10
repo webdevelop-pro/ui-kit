@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, watch, withDefaults } from 'vue';
+import { computed, watch } from 'vue';
 import { Tab } from './types';
 
 const props = withDefaults(defineProps<{
@@ -83,6 +83,7 @@ watch(() => queryTab.value, () => {
 
 <style lang="sass" scoped>
 @use 'index.sass' as *
+@use 'UiKit/styles/_mixins.sass' as *
 .base-tabs
   --base-tabs--height: 48px
   height: var(--base-tabs--height)
@@ -101,11 +102,11 @@ watch(() => queryTab.value, () => {
     flex-direction: row
     justify-content: center
     align-items: center
-    +mt(.2s)
+    @include mt(.2s)
     &:after
       display: none
       content: attr(title)
-      +font(400)
+      @include font(400)
       height: 0
       overflow: hidden
       visibility: hidden
@@ -124,7 +125,7 @@ watch(() => queryTab.value, () => {
       &:before
         top: 0
     &.is--active
-      +mt(.2s)
+      @include mt(.2s)
       &.is--top-line
         background-color: $item-top-line-active-background-color
       .base-tabs__item-label
@@ -145,7 +146,7 @@ watch(() => queryTab.value, () => {
     color: $item-sub-title-color
     font-size: 12px
     line-height: 19px
-    +font(400)
+    @include font(400)
     margin-left: 8px
     height: 19px
     min-width: 19px

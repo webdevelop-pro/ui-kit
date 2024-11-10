@@ -109,7 +109,7 @@ watch(() => props.hover, () => {
     flex-direction: column
     align-items: flex-start
     border-radius: 2px
-    border: 1px solid $gray-10
+    border: 1px solid $base-dropdown-items-border-color
     background: $base-dropdown-item-backgroud
     box-shadow: $base-dropdown-item-box-shadow
     transition: all 0.3s ease

@@ -48,6 +48,7 @@ function onItemClick(tab: Tab) {
 
 <style lang="sass" scoped>
 @use 'index.sass' as *
+@use 'UiKit/styles/_mixins.sass' as *
 .base-content-switcher
   height: 32px
   display: flex
@@ -70,9 +71,9 @@ function onItemClick(tab: Tab) {
     align-self: stretch
     border-radius: 2px
     color: $base-content-switcher-item-color
-    +mt(.2s)
+    @include mt(.2s)
     &.is--active
-      +mt(.2s)
+      @include mt(.2s)
       background-color: $base-content-switcher-active-background
       color: $base-content-switcher-active-color
     &:hover

@@ -184,6 +184,7 @@ function onSearch(searchString: string) {
 
 <style lang="sass" scoped>
 @use 'index.sass' as *
+@use 'UiKit/styles/_mixins.sass' as *
 .base-select
 	width: 100%
 	position: relative
@@ -288,7 +289,7 @@ function onSearch(searchString: string) {
 			width: 16px
 			height: 16px
 			transform: rotate(90deg)
-			+mt(.3s)
+			@include mt(.3s)
 			background-size: contain
 			background-repeat: no-repeat
 	:deep(.vs__dropdown-menu)

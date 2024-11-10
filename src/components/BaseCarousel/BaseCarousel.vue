@@ -287,7 +287,7 @@ watch( () => [queryMedia.value, mainSwiperInstance.value], () => {
     height: 0
     border-style: solid
     border-width: 3.5px 0 3.5px 7px
-    border-color: transparent transparent transparent $white
+    border-color: transparent transparent transparent $base-carousel-border-color
     position: absolute
     left: 52%
     top: 50%

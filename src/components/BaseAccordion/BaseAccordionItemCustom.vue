@@ -75,6 +75,7 @@ watch(() => props.expanded, (val) => {
 
 <style lang="sass" scoped>
 @use 'index.sass' as *
+@use 'UiKit/styles/_mixins.sass' as *
 $timing-function: cubic-bezier(.5, .25, 0, 1)
 .base-accordion-item-custom
   $root:&
@@ -84,7 +85,7 @@ $timing-function: cubic-bezier(.5, .25, 0, 1)
   position: relative
 
   &:last-child
-    border-bottom: solid 1px $gray-30
+    border-bottom: solid 1px $border-color
 
   &__title-text
     display: flex
@@ -118,22 +119,22 @@ $timing-function: cubic-bezier(.5, .25, 0, 1)
       color: $white-color
       a
         color: $white-link-color
-        +font(600)
+        @include font(600)
         border-bottom: solid 1px $white-link-color
         &:hover
-          +mt(.3s)
+          @include mt(.3s)
           border-bottom: solid 1px transparent
           color: $white-link-color
     a
       position: relative
       display: inline
       z-index: 1
-      +mt(.3s)
+      @include mt(.3s)
       color: $link-color
-      +font(600)
+      @include font(600)
       border-bottom: solid 1px $link-color
       &:hover
-        +mt(.3s)
+        @include mt(.3s)
         border-bottom: solid 1px transparent
         color: $link-color
 
@@ -152,7 +153,7 @@ $timing-function: cubic-bezier(.5, .25, 0, 1)
       transform: rotate(90deg)
       width: inherit
       height: inherit
-      +mt(.2s)
+      @include mt(.2s)
 
   &.is--white
     border-color: $border-color-white
@@ -160,7 +161,7 @@ $timing-function: cubic-bezier(.5, .25, 0, 1)
     #{$root}__open-close-icon
       svg
         transform: rotate(270deg)
-        +mt(.2s)
+        @include mt(.2s)
     #{$root}__content-text
       background-color: $accordion-item-active-content-background
       transition: all 0.3s ease
