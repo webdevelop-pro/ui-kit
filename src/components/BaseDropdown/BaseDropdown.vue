@@ -64,6 +64,9 @@ watch(() => props.hover, () => {
   padding: 13px 0
   cursor: pointer
 
+  *
+    transition: all 0.3s ease
+
   &.is--hover
     #{$root}__items
       display: none

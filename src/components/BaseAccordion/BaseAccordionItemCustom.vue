@@ -113,8 +113,6 @@ $timing-function: cubic-bezier(.5, .25, 0, 1)
     &.is--small
       font-size: 14px
       line-height: 19.6px
-    &.is--large
-      padding-bottom: 36px
     &.is--white
       color: $white-color
       a
@@ -163,19 +161,19 @@ $timing-function: cubic-bezier(.5, .25, 0, 1)
         transform: rotate(270deg)
         @include mt(.2s)
     #{$root}__content-text
-      background-color: $accordion-item-active-content-background
       transition: all 0.3s ease
       height: auto
       padding: 8px 16px 28px 16px
   
   &:not(.is--transparent).is--open
     #{$root}__title-text
-      background-color: $accordion-item-active-header-background
       box-shadow: $accordion-item-active-header-box-shadow
       z-index: 1
       position: relative
   &.is--transparent.is--open
     #{$root}__title-text
+      background-color: $accordion-item-active-content-background
+    #{$root}__content-text
       background-color: $accordion-item-active-content-background
   &.is--transparent
     &:hover

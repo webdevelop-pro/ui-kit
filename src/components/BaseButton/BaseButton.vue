@@ -160,10 +160,9 @@
 				color: $base-button-color
 		&.is--bg-color-secondary
 			border-color: $base-button-secondary-color
-			color: $base-button-secondary-color
 			&:hover
 				background-color: $base-button-secondary-color
-				color: $base-button-color
+				color: $base-button-primary-color
 		&.is--bg-color-success
 			border-color: $base-button-success-color
 			&:hover
@@ -188,9 +187,9 @@
 			&:hover
 				background-color: $base-button-primary-light-color
 		&.is--bg-color-secondary
-			color: $base-button-secondary-color
+			color: $base-button-secondary-text-color
 			&:hover
-				background-color: rgba($base-button-secondary-color, 0.1)
+				background-color: rgba($base-button-secondary-color, 1)
 		&.is--bg-color-success
 			color: $base-button-success-text-color
 			&:hover

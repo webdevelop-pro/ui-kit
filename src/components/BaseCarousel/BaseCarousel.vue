@@ -100,7 +100,7 @@ watch( () => [queryMedia.value, mainSwiperInstance.value], () => {
 
 
 <template>
-	<div class="BaseCarousel base-carousel" itemscope itemtype="http://schema.org/ImageGallery">
+	<div class="BaseCarousel base-carousel is--no-margin" itemscope itemtype="http://schema.org/ImageGallery">
 		<Swiper
       :modules="modules"
       navigation
@@ -173,6 +173,7 @@ watch( () => [queryMedia.value, mainSwiperInstance.value], () => {
   width: 100%
   user-select: none
   background-color: $base-carousel-background-color
+  overflow: hidden
 
   .base-carousel__slider-main,
   .base-carousel__slider-thumbs
