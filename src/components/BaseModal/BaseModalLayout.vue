@@ -119,7 +119,7 @@ defineEmits(['close']);
   display: flex
   flex-direction: column
   padding-bottom: 15px
-  color: $black
+  color: colors.$black
   background: colors.$white
   position: relative
 

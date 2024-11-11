@@ -75,6 +75,7 @@ const onClick = () => {
 
 <style lang="sass" scoped>
 @use 'index.sass' as *
+@use 'UiKit/styles/_mixins.sass' as *
 
 .notification-inline
 	color: $notification-inline-color
@@ -87,7 +88,7 @@ const onClick = () => {
 		line-height: $notification-inline-line-height
 		padding: $notification-inline-padding
 		margin-bottom: 0
-		+font(400)
+		@include font(400)
 		display: flex
 		align-items: center
 
@@ -107,14 +108,14 @@ const onClick = () => {
 			position: relative
 			display: inline
 			z-index: 1
-			+mt(.3s)
+			@include mt(.3s)
 			color: $notification-inline-link-color
 			font-size: $notification-inline-font-size
 			line-height: $notification-inline-line-height
-			+font(400)
+			@include font(400)
 			// border-bottom: solid 1px $notification-inline-link-color
 			&:hover
-				+mt(.3s)
+				@include mt(.3s)
 				// border-bottom: solid 1px transparent
 				color: $notification-inline-a-hover-color
 	&____title

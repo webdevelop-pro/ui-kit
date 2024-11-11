@@ -71,13 +71,14 @@ withDefaults(defineProps<{
 </template>
 
 <style lang="sass" scoped>
-@import 'index.sass'
+@use 'index.sass' as *
+@use 'UiKit/styles/_mixins.sass' as *
 
 .base-accordion-item
   border-top: solid 1px $border-color
   --base-accordion-item--height: 100%
   &:last-child
-    border-bottom: solid 1px $gray-30
+    border-bottom: solid 1px $border-color
   &.is--white
     border-color: $border-color-white
   :deep(.vcp__header)
@@ -93,7 +94,7 @@ withDefaults(defineProps<{
     .base-accordion-item__open-close-icon
       :deep(svg)
         transform: rotate(270deg)
-        +mt(.2s)
+        @include mt(.2s)
     :deep(.vcp__body)
       height: 0
       background-color: $accordion-item-active-content-background
@@ -134,22 +135,22 @@ withDefaults(defineProps<{
       color: $white-color
       :deep(a)
         color: $white-link-color
-        +font(600)
+        @include font(600)
         border-bottom: solid 1px $white-link-color
         &:hover
-          +mt(.3s)
+          @include mt(.3s)
           border-bottom: solid 1px transparent
           color: $white-link-color
     :deep(a)
       position: relative
       display: inline
       z-index: 1
-      +mt(.3s)
+      @include mt(.3s)
       color: $link-color
-      +font(600)
+      @include font(600)
       // border-bottom: solid 1px $link-color
       &:hover
-        +mt(.3s)
+        @include mt(.3s)
         border-bottom: solid 1px transparent
         color: $link-color
   &__open-close-icon
@@ -167,7 +168,7 @@ withDefaults(defineProps<{
       transform: rotate(90deg)
       width: inherit
       height: inherit
-      +mt(.2s)
+      @include mt(.2s)
 
   :deep(.slide-enter-active),
   :deep(.slide-leave-active),
