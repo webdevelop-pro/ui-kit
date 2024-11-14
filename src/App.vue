@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { UiKit } from "UiKit/components/UiKit";
 </script>
 
 <template>
-  <UiKit />
+  uikit
 </template>
 
 <style lang="sass">

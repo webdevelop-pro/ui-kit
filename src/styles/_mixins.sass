@@ -2,15 +2,10 @@
 @forward "UiKit/styles/mixins/mixin-media"
   
 @mixin mt($time)
-  transition: all $time ease
-  -webkit-transition: all $time ease-in-out
-  -moz-transition: all $time ease-in-out
-  -ms-transition: all $time ease-in-out
-  -o-transition: all $time ease-in-out
   transition: all $time ease-in-out
 
 //Function to convert px value into rem
-@function sizeInRem($target, $context: variables.$base-size)
+@function sizeInRem($target, $context: variables.$v-size)
   @return ($target / $context) * 1rem
 
 @function isImportant($important)

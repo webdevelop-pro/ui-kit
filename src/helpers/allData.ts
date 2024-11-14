@@ -2,12 +2,13 @@ import { IFrontmatter } from 'UiKit/types/types';
 
 // General function to find elements by a specified filterName and filterValue
 export function filterElements(data: IFrontmatter[], filterName: keyof IFrontmatter, filterValue: string) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   return data.filter((item) => item[filterName]?.toLowerCase() === filterValue.toLowerCase());
 }
 
 // Function to sort elements by frontmatter.order
 export function sortElementsByOrder(data: IFrontmatter[]) {
-  return data.sort((a, b) => {
+  return data.sort((a: IFrontmatter, b: IFrontmatter) => {
     const orderA = a.order ?? 0; // Default to 0 if order is undefined
     const orderB = b.order ?? 0;
 

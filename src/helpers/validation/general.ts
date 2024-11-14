@@ -74,7 +74,7 @@ export const scrollToError = (parentClass: string) => {
 
   const parentElement = errorTargets.value[0];
   if (parentElement) {
-    const errorElements = parentElement.getElementsByClassName('base-form-group__error');
+    const errorElements = parentElement.getElementsByClassName('v-form-group__error');
     const target = errorElements[0];
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'center' });

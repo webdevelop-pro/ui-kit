@@ -1,3 +1,4 @@
+import { IFrontmatter } from "UiKit/types/types";
 
 export function isEmpty(obj: object) {
   // eslint-disable-next-line
@@ -94,4 +95,111 @@ export function navigateWithQueryParams(url: string, params?: Record<string, str
   }
 
   window.location.href = urlObj.toString(); // Navigate to the new URL
+}
+
+export function getLastModifiedDate(filePath: string): string | null {
+  try {
+    const stats = fs.statSync(filePath);
+    return stats.mtime.toISOString().split('T')[0];// Returns date in YYYY-MM-DD format
+  } catch (err) {
+    return null;
+  }
+}
+
+export function getUniqueCapitalizedTags(items: { tags?: string[] | null }[]): string[] {
+  const tagMap = new Map<string, string>(); // Map to store case-insensitive tag as key, original tag as value
+
+  // Step 1: Flatten the tags, filter out null, undefined, or missing tags
+  const allTags = items
+    .flatMap((item) => item.tags || []);
+
+  // Step 2: Populate the Map with case-insensitive keys but store original tags
+  allTags.forEach((tag) => {
+    const lowerCaseTag = tag.toLowerCase();
+    if (!tagMap.has(lowerCaseTag)) {
+      tagMap.set(lowerCaseTag, tag); // Store the original case version
+    }
+  });
+
+  // Step 3: Get all unique tags with their original case and capitalize each word
+  const capitalizedTags = [...tagMap.values()].map((tag) => tag.split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' '));
+
+  return capitalizedTags;
+}
+
+export function combineTags(
+  tagsArray1: string[],
+  tagsArray2: string[],
+): string[] {
+  const tagMap = new Map<string, string>();
+
+  // Helper function to add tags to the map (case-insensitive uniqueness)
+  function addTagsToMap(tags: string[]) {
+    tags.forEach((tag) => {
+      const lowerCaseTag = tag.toLowerCase();
+      if (!tagMap.has(lowerCaseTag)) {
+        tagMap.set(lowerCaseTag, tag); // Store the original case version
+      }
+    });
+  }
+
+  // Add both arrays to the map
+  addTagsToMap(tagsArray1);
+  addTagsToMap(tagsArray2);
+
+  // Return the unique tags in their original case
+  return [...tagMap.values()];
+}
+
+export function filterItemsByTag<T extends { tags?: string[] }>(
+  items: T[],
+  activeTag: string,
+): T[] {
+  if (activeTag !== '') {
+    return items.filter((item) => {
+      const tags = item.tags?.map((tag) => tag.toLowerCase());
+      return tags?.includes(activeTag.toLowerCase());
+    });
+  }
+  return items;
+}
+export function getFirst200Characters(text: string) {
+  let textLocal = text;
+  // Find the last occurrence of '---' and cut the text from that point onward
+  const lastDelimiterIndex = textLocal.lastIndexOf('---');
+  if (lastDelimiterIndex !== -1) {
+    textLocal = textLocal.slice(lastDelimiterIndex + 3); // +3 to skip the delimiter itself
+  }
+
+  // Remove leading newlines until the first non-newline character
+  textLocal = textLocal.replace(/^\n+/, '');
+
+  // Find the index of the next newline character
+  const nextNewlineIndex = textLocal.indexOf('\n');
+
+  // Extract the text up to the next newline
+  let extractedText = '';
+  if (nextNewlineIndex !== -1) {
+    extractedText = textLocal.slice(0, nextNewlineIndex).trim();
+  } else {
+    // If there is no additional newline, use the entire remaining text
+    extractedText = textLocal.trim();
+  }
+
+  // Return the first 200 characters from the extracted text
+  return extractedText;
+}
+
+export function findBySameFolder(pages: IFrontmatter[], url:string) {
+  const parent = `/${url.split('/').slice(0, -1).join('/')}`; // remove last element
+  const res: IFrontmatter[] = [];
+  pages.forEach((el) => {
+    if (parent && el.url?.startsWith(parent)) {
+      // console.log(parent, el.url);
+      res.push(el);
+    }
+  });
+  return res;
 }
