@@ -83,9 +83,9 @@ const tagClasses = computed(() => {
     width: $v-tag-icon-width
     height: $v-tag-icon-height
     display: none
-    :deep(svg)
+    svg
       width: $v-tag-icon-width
       height: $v-tag-icon-height
-    :deep(div)
+    div
       display: flex
 </style>

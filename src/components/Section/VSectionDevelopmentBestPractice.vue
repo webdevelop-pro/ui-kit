@@ -2,12 +2,7 @@
 import { defineAsyncComponent, hydrateOnVisible, PropType } from 'vue';
 import { ICardsWithCheckmark, IBestPractice } from '../utils';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const VSectionShort = defineAsyncComponent({
-  loader: () => import('UiKit/components/Section/VSectionShort.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
-});
+import VSectionShort from 'UiKit/components/Section/VSectionShort.vue';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const VCardCheckmarked = defineAsyncComponent({
   loader: () => import('UiKit/components/Cards/VCardCheckmarked.vue'),

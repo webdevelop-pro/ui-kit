@@ -3,11 +3,7 @@ import { defineAsyncComponent, hydrateOnVisible, PropType } from 'vue';
 import { IFrontmatter } from 'UiKit/types/types';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const VImage = defineAsyncComponent({
-  loader: () => import('UiKit/components/VImage/VImage.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
-});
+import VImage from 'UiKit/components/VImage/VImage.vue';
 
 defineProps({
   currentPost: {
@@ -51,12 +47,12 @@ defineProps({
     object-position: center;
     width: 100%;
     min-height: 400px;
-    :deep(.v-image__skeleton) {
+    .v-image__skeleton {
       min-height: 400px;
     }
     @include media-lte(tablet) {
       min-height: 100px;
-      :deep(.v-image__skeleton) {
+      .v-image__skeleton {
         min-height: 100px;
       }
     }

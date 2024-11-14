@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import { defineAsyncComponent, hydrateOnVisible, PropType } from 'vue';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const VSectionShort = defineAsyncComponent({
-  loader: () => import('UiKit/components/Section/VSectionShort.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
-});
+import VSectionShort from 'UiKit/components/Section/VSectionShort.vue';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const VCardWithNumber = defineAsyncComponent({

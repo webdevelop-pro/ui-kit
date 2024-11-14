@@ -37,7 +37,7 @@ const btnClasses = computed(() => {
 .v-table
   &.is--fixed-header
     overflow-x: auto
-    :deep(thead)
+    thead
       tr > th
         position: sticky
         top: 0
@@ -50,12 +50,12 @@ const btnClasses = computed(() => {
     border: 0
     border-color: transparent !important
 
-  :deep(thead)
+  thead
     th
       background: $table-thead-background-color
       color: $table-tbody-th-color
 
-  :deep(th)
+  th
     font-size: $table-th-font-size
     line-height: $table-th-line-height
     padding: $table-th-padding
@@ -64,7 +64,7 @@ const btnClasses = computed(() => {
     @media screen and (max-width: 768)
       padding: $table-th-padding-mobile
 
-  :deep(tbody)
+  tbody
     border-style: none !important
     tr
       width: 100%
@@ -89,9 +89,9 @@ const btnClasses = computed(() => {
       color: $table-tbody-td-color
 
   &.is--size-small
-    :deep(tbody)
+    tbody
       td
         padding: $table-td-padding-small
-    :deep(th)
+    th
       padding: $table-th-padding-small
 </style>

@@ -4,12 +4,7 @@ import {
 } from 'vue';
 import VCardCheckmarked from 'UiKit/components/Cards/VCardCheckmarked.vue';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const VSectionShort = defineAsyncComponent({
-  loader: () => import('UiKit/components/Section/VSectionShort.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
-});
+import VSectionShort from 'UiKit/components/Section/VSectionShort.vue';
 
 interface ICardCheckmarkedGrid {
   title: string;

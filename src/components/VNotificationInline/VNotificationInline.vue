@@ -107,7 +107,7 @@ const onClick = () => {
     gap: 20px
     justify-content: space-between
     width: 100%
-    :deep(a)
+    a
       position: relative
       display: inline
       z-index: 1
@@ -130,7 +130,7 @@ const onClick = () => {
     .notification-inline__icon
       color: $notification-inline-error-color
     .notification-inline__content
-      :deep(a)
+      a
         color: $notification-inline-error-color
         border-color: $notification-inline-error-color
         &:hover
@@ -142,7 +142,7 @@ const onClick = () => {
     .notification-inline__icon
       color: $notification-inline-info-color
     .notification-inline__content
-      :deep(a)
+      a
         color: $notification-inline-info-color
         border-color: $notification-inline-info-color
         &:hover
@@ -154,7 +154,7 @@ const onClick = () => {
     .notification-inline__icon
       color: $notification-inline-success-color
     .notification-inline__content
-      :deep(a)
+      a
         color: $notification-inline-success-color
         border-color: $notification-inline-success-color
         &:hover

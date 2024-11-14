@@ -186,7 +186,7 @@ watch(() => props.items, () => {
 
   &__checkbox-group
     width: 100%
-    :deep(.v-form-checkbox)
+    .v-form-checkbox
       &.is--checked
         .v-form-checkbox__text
           color: colors.$primary

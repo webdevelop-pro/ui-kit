@@ -5,7 +5,7 @@ import VImage from 'UiKit/components/VImage/VImage.vue';
 defineProps({
   title: String,
   text: String,
-  image: String,
+  image: [String, Object],
   imageAlt: String,
   svg: Boolean,
 });

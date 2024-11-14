@@ -337,16 +337,16 @@ watch(() => props.message?.message?.value, () => {
   &__button {
     margin-top: 16px;
   }
-}
 
-:deep(code) {
-  background: none;
-  width: 100%;
-  overflow: auto;
-}
-:deep(pre) {
-  background: none;
-  width: 100%;
-  overflow: auto;
+  code {
+    background: none;
+    width: 100%;
+    overflow: auto;
+  }
+  pre {
+    background: none;
+    width: 100%;
+    overflow: auto;
+  }
 }
 </style>
