@@ -44,7 +44,6 @@ defineEmits<{
 </template>
 
 <style lang="sass">
-@use 'index.sass' as *
 @use 'UiKit/styles/_colors.sass' as colors
 .v-form-textarea
   color: colors.$black

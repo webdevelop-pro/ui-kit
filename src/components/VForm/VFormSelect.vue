@@ -195,18 +195,18 @@ function onSearch(searchString: string) {
   font-weight: 400
   background: colors.$gray-10
   &.is--select-large
-    :deep(.vs__dropdown-toggle)
+    .vs__dropdown-toggle
       height: 48px
   &.is--select-medium
-    :deep(.vs__dropdown-toggle)
+    .vs__dropdown-toggle
       height: 40px
     .v-select__append
       height: 40px
   &.is--focused
-    :deep(.vs__dropdown-toggle)
+    .vs__dropdown-toggle
       border-color: colors.$primary
   &.is--error
-    :deep(.vs__dropdown-toggle)
+    .vs__dropdown-toggle
       border-color: colors.$red
       &:before
         display: none
@@ -215,25 +215,25 @@ function onSearch(searchString: string) {
     pointer-events: none
   &.is--readonly
     pointer-events: none
-    :deep(.vs__dropdown-toggle)
+    .vs__dropdown-toggle
       background-color: transparent
       padding-left: 0
       padding-right: 0
       .vs__actions
         display: none
   &.is--append
-    :deep(.vs__dropdown-toggle)
+    .vs__dropdown-toggle
       padding-left: 43px
   &.is--dropdown-absolute
     position: relative
-    :deep(.vs__dropdown-menu)
+    .vs__dropdown-menu
       position: absolute
       top: 100%
       width: 100%
       z-index: 10
   &.vs--unsearchable
-    :deep(.vs__dropdown-toggle),
-    :deep(.vs__search)
+    .vs__dropdown-toggle,
+    .vs__search
       cursor: pointer !important
   &__append
     position: absolute
@@ -244,7 +244,7 @@ function onSearch(searchString: string) {
     height: 48px
     display: flex
     align-items: center
-  :deep(.vs__dropdown-toggle)
+  .vs__dropdown-toggle
     border: solid 1px colors.$gray-40
     border-radius: 2px
     position: relative
@@ -294,7 +294,7 @@ function onSearch(searchString: string) {
       @include mt(.3s)
       background-size: contain
       background-repeat: no-repeat
-  :deep(.vs__dropdown-menu)
+  .vs__dropdown-menu
     padding-left: 0
     list-style-type: none
     background-color: colors.$gray-10
@@ -303,7 +303,7 @@ function onSearch(searchString: string) {
     border-radius: 0
     max-height: 222px
     overflow: scroll
-  :deep(.vs__dropdown-option)
+  .vs__dropdown-option
     font-family: 'Avenir'
     color: colors.$black
     padding: 12px
@@ -318,18 +318,18 @@ function onSearch(searchString: string) {
       font-weight: 600
   &.vs--open
     &.is--error
-      :deep(.vs__dropdown-toggle)
+      .vs__dropdown-toggle
         border-color: colors.$red
-    :deep(.vs__dropdown-toggle)
+    .vs__dropdown-toggle
       &:before
         display: none
-    :deep(.vs__open-indicator)
+    .vs__open-indicator
       transform: rotate(270deg)
     &.vs--searchable
-      :deep(.vs__selected)
+      .vs__selected
         position: absolute
         opacity: 0
-      :deep(.vs__search)
+      .vs__search
         width: 100%
 
   &__no-options
