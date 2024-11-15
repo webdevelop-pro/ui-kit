@@ -1,30 +1,12 @@
 <script setup lang="ts">
-import { defineAsyncComponent, hydrateOnVisible, ref } from 'vue';
+import { ref } from 'vue';
 import { useHubspotForm } from 'UiKit/composables/useHubspotForm';
 import { env } from '@/config/env';
 import { notify } from '@kyvg/vue3-notification';
 import { useData } from 'vitepress';
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const VSocialLinks = defineAsyncComponent({
-  loader: () => import('UiKit/components/VSocialLinks/VSocialLinks.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
-});
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const FooterSubscribeForm = defineAsyncComponent({
-  loader: () => import('UiKit/components/Forms/VFormFooterSubscribe.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
-});
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const AppLayoutDefaultFooterMenu = defineAsyncComponent({
-  loader: () => import('./AppLayoutDefaultFooterMenu.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
-});
+import VSocialLinks from 'UiKit/components/VSocialLinks/VSocialLinks.vue';
+import AppLayoutDefaultFooterMenu from './AppLayoutDefaultFooterMenu.vue';
+import FooterSubscribeForm from 'UiKit/components/Forms/VFormFooterSubscribe.vue';
 
 const { theme } = useData();
 

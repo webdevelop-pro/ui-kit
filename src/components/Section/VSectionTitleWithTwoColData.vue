@@ -1,20 +1,8 @@
 <script setup lang="ts">
-import { defineAsyncComponent, hydrateOnVisible, PropType } from 'vue';
-
+import { PropType } from 'vue';
 import VSectionShort from 'UiKit/components/Section/VSectionShort.vue';
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const VCardWithNumber = defineAsyncComponent({
-  loader: () => import('UiKit/components/Cards/VCardWithNumber.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
-});
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const VCardTag = defineAsyncComponent({
-  loader: () => import('UiKit/components/Cards/VCardTag.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
-});
+import VCardWithNumber from 'UiKit/components/Cards/VCardWithNumber.vue';
+import VCardTag from 'UiKit/components/Cards/VCardTag.vue';
 
 export interface IShortTitleWithTwoColDataData {
   title?: string;

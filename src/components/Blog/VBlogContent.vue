@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { defineAsyncComponent, hydrateOnVisible, PropType } from 'vue';
+import { PropType } from 'vue';
 import { IFrontmatter } from 'UiKit/types/types';
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 import VImage from 'UiKit/components/VImage/VImage.vue';
 
 defineProps({

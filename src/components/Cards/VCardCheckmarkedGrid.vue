@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {
-  PropType, computed, defineAsyncComponent, hydrateOnVisible,
+  PropType, computed,
 } from 'vue';
 import VCardCheckmarked from 'UiKit/components/Cards/VCardCheckmarked.vue';
 
