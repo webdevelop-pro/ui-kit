@@ -21,6 +21,7 @@ const model = reactive({} as FormModelSubscribe);
 const validation = ref<unknown>();
 const isValid = computed(() => validation.value && !Object.keys(validation.value).length);
 const isDisabledButton = computed(() => !isValid.value || props.loading);
+let schemaSubscribe = {};
 
 const setupValidator = async () => {
   const { JSONSchemaType } = await import('ajv');
@@ -28,7 +29,7 @@ const setupValidator = async () => {
   const { PrecompiledValidator } = await import('UiKit/helpers/validation/PrecompiledValidator');
   const { scrollToError } = await import('UiKit/helpers/validation/general');
 
-  const schemaSubscribe = {
+  schemaSubscribe = {
     $schema: 'http://json-schema.org/draft-07/schema#',
     definitions: {
       PatchIndividualProfile: {
