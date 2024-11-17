@@ -81,36 +81,36 @@ withDefaults(defineProps<{
     border-bottom: solid 1px $border-color
   &.is--white
     border-color: $border-color-white
-  :deep(.vcp__header)
+  .vcp__header
     display: flex
     align-items: center
     justify-content: space-between
     padding-right: 16px
     cursor: pointer
-  :deep(.vcp__header-title)
+  .vcp__header-title
     width: 100%
     padding-right: 16px
   &.vcp--expanded
     .v-accordion-item__open-close-icon
-      :deep(svg)
+      svg
         transform: rotate(270deg)
         @include mt(.2s)
-    :deep(.vcp__body)
+    .vcp__body
       height: 0
       background-color: $accordion-item-active-content-background
   
   &:not(.is--transparent).vcp--expanded
-    :deep(.vcp__header)
+    .vcp__header
       background-color: $accordion-item-active-header-background
       box-shadow: $accordion-item-active-header-box-shadow
       z-index: 1
       position: relative
   &.is--transparent.vcp--expanded
-    :deep(.vcp__header)
+    .vcp__header
       background-color: $accordion-item-active-content-background
   &.is--transparent
     &:hover
-      :deep(.vcp__header)
+      .vcp__header
         background-color: $accordion-item-active-content-background
   &__title-text
     padding: 12px 16px
@@ -133,7 +133,7 @@ withDefaults(defineProps<{
       padding-bottom: 36px
     &.is--white
       color: $white-color
-      :deep(a)
+      a
         color: $white-link-color
         @include font(600)
         border-bottom: solid 1px $white-link-color
@@ -141,7 +141,7 @@ withDefaults(defineProps<{
           @include mt(.3s)
           border-bottom: solid 1px transparent
           color: $white-link-color
-    :deep(a)
+    a
       position: relative
       display: inline
       z-index: 1
@@ -163,21 +163,21 @@ withDefaults(defineProps<{
     &.is--large
       width: 20px
       height: 20px
-    :deep(svg)
+    svg
       fill: inherit
       transform: rotate(90deg)
       width: inherit
       height: inherit
       @include mt(.2s)
 
-  :deep(.slide-enter-active),
-  :deep(.slide-leave-active),
-  :deep(.slide-reverse-leave-active)
+  .slide-enter-active,
+  .slide-leave-active,
+  .slide-reverse-leave-active
     transition: height 0.3s ease, opacity 0.3s ease, transform 0.3s ease
-  :deep(.slide-enter-active)
+  .slide-enter-active
     overflow: hidden
-  :deep(.slide-leave-active),
-  :deep(.slide-reverse-leave-active)
+  .slide-leave-active,
+  .slide-reverse-leave-active
     transform: translateX(0) !important
     position: relative !important
     opacity: 1 !important
