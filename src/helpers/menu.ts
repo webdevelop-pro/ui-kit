@@ -13,7 +13,7 @@ export function formatItemsBySubfolder(items: IFrontmatter[]) {
 
   // Iterate over the use cases and group them by subfolder
   items.forEach((item: IFrontmatter) => {
-    const parts = item.url?.split('/');
+    const parts = item.rawUrl?.split('/');
     const subfolder = parts[2].toUpperCase();
 
     if (!groupedUseCases[subfolder]) {
