@@ -37,43 +37,45 @@ const getStarted = filterAndSortByOrderElements(allPages as IFrontmatter[], 'slu
 </script>
 
 <template>
-  <section class="VSliderWithCardBlueLine v-slider-with-card-blue-line">
-    <div class="is--container">
-      <div class="is--short-block">
-        <h2
-          v-if="dataTitle?.title"
+  <ClientOnly>
+    <section class="VSliderWithCardBlueLine v-slider-with-card-blue-line">
+      <div class="is--container">
+        <div class="is--short-block">
+          <h2
+            v-if="dataTitle?.title"
+          >
+            {{ dataTitle?.title }}
+          </h2>
+          <p
+            v-if="dataTitle?.subtitle"
+            class="is--subheading-1"
+          >
+            {{ dataTitle?.subtitle }}
+          </p>
+          <a
+            v-if="dataTitle?.link"
+            class="is--link-1"
+            tag="a"
+            :href="`${getStarted[0].url}?topic=${topic}`"
+          >
+            {{ dataTitle?.linkText }}
+          </a>
+        </div>
+        <SliderSwiper
+          :data="data"
         >
-          {{ dataTitle?.title }}
-        </h2>
-        <p
-          v-if="dataTitle?.subtitle"
-          class="is--subheading-1"
-        >
-          {{ dataTitle?.subtitle }}
-        </p>
-        <a
-          v-if="dataTitle?.link"
-          class="is--link-1"
-          tag="a"
-          :href="`${getStarted[0].url}?topic=${topic}`"
-        >
-          {{ dataTitle?.linkText }}
-        </a>
+          <SwiperSlide
+            v-for="(slide, i) in data"
+            :key="i"
+          >
+            <VCardWithBlueTitleLine
+              :data="slide"
+            />
+          </SwiperSlide>
+        </SliderSwiper>
       </div>
-      <SliderSwiper
-        :data="data"
-      >
-        <SwiperSlide
-          v-for="(slide, i) in data"
-          :key="i"
-        >
-          <VCardWithBlueTitleLine
-            :data="slide"
-          />
-        </SwiperSlide>
-      </SliderSwiper>
-    </div>
-  </section>
+    </section>
+  </ClientOnly>
 </template>
 
 <style lang="scss">

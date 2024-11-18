@@ -82,14 +82,16 @@ const props = defineProps({
             </div>
           </div>
 
-          <div class="v-section-top-digital-ecosystem__background">
-            <ClientOnly>
-              <VImage
-                :src="isTablet ? props.data.imageMobile : props.data.image"
-                alt="digital ecosystem image"
-                class="v-section-top-digital-ecosystem__background-image is--no-margin"
-              />
-            </ClientOnly>
+          <div class="v-section-top-digital-ecosystem__background-wrap">
+            <div class="v-section-top-digital-ecosystem__background">
+              <ClientOnly>
+                <VImage
+                  :src="isTablet ? props.data.imageMobile : props.data.image"
+                  alt="digital ecosystem image"
+                  class="v-section-top-digital-ecosystem__background-image is--no-margin"
+                />
+              </ClientOnly>
+            </div>
           </div>
         </div>
       </div>
@@ -144,7 +146,7 @@ const props = defineProps({
     width: 313px;
     height: 100%;
     position: absolute;
-    right: 127px;
+    right: 30px;
     top: 130px;
     border-radius: 2px;
     background-repeat: no-repeat;
@@ -160,6 +162,17 @@ const props = defineProps({
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
+    }
+  }
+
+  &__background-wrap {
+    @include media-gte(desktop-lg) {
+      height: 100%;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      max-width: 1175px;
+      margin: 0 auto;
     }
   }
 }
