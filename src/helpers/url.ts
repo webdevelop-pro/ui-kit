@@ -9,6 +9,7 @@ export const urlFormat = (url: string, data: IFrontmatter[]) => {
     });
   }
   const removeFolders = [
+    'wiki/',
     'CORE SYSTEMS/',
     'FINANCE & TRANSACTIONS/',
     'INTEGRATION & OPTIMIZATION/',
@@ -19,6 +20,7 @@ export const urlFormat = (url: string, data: IFrontmatter[]) => {
   let cleanUrl = url;
   removeFolders.forEach((path, idx) => {
     cleanUrl = cleanUrl.replace(path, '');
+    cleanUrl = cleanUrl.replace(path.toLowerCase(), '');
   });
   cleanUrl = cleanUrl.replace(/[^\w./-]+/g, '-').replace(/\s+/g, '-').toLowerCase();
   return cleanUrl;
