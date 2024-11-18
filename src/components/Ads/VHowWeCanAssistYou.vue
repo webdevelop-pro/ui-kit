@@ -67,9 +67,12 @@ defineProps({
               :src="item.image"
               :alt="item.title"
             >
-            <h4 v-if="item.title">
+            <h3
+              v-if="item.title"
+              class="is--h4__title"
+            >
               {{ item.title }}
-            </h4>
+            </h3>
             <p v-if="item.description">
               {{ item.description }}
             </p>

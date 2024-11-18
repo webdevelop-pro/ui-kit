@@ -33,11 +33,14 @@ const noData = computed(() => props.items?.length === 0);
       v-if="!noData"
       class="v-card-article-list__items is--no-margin"
     >
-      <VCardArticle
+      <li
         v-for="item in items"
         :key="item.slug"
-        :data="item"
-      />
+      >
+        <VCardArticle
+          :data="item"
+        />
+      </li>
     </ul>
 
     <template #noData>

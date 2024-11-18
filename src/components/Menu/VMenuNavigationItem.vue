@@ -145,14 +145,14 @@ watch(() => route.path, () => {
           :href="item?.card?.url"
           icon-placement="right"
           size="small"
-          :aria-label="item.title"
+          :aria-label="item?.card?.title"
         >
           Learn More
           <VSvgIcon
             name="arrow-right"
           />
           <span class="is--link-text-hidden">
-            {{ item.title }}
+            {{ item?.card?.title }}
           </span>
         </VButton>
       </div>
