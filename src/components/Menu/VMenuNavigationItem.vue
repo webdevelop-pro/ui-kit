@@ -81,7 +81,7 @@ watch(() => route.path, () => {
       {{ item.text }}
     </span>
     <div
-      v-if="item.children && item.children.length > 0"
+      v-if="item.children && item.children.length > 0 && activeDropdown"
       class="menu-navigation-item__dropdown"
       :class="{ 'is--visible': activeDropdown }"
     >
