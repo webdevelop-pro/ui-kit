@@ -1,9 +1,22 @@
 
 <script setup lang="ts">
-import VButton from 'UiKit/components/VButton/VButton.vue';
-import VSvgIcon from 'UiKit/components/VSvgIcon/VSvgIcon.vue';
-import { computed, ref, watch } from 'vue';
+import {
+  computed, defineAsyncComponent, hydrateOnVisible, ref, watch,
+} from 'vue';
 import { useRoute } from 'vitepress';
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const VSvgIcon = defineAsyncComponent({
+  loader: () => import('UiKit/components/VSvgIcon/VSvgIcon.vue'),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  hydrate: hydrateOnVisible(),
+});
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const VButton = defineAsyncComponent({
+  loader: () => import('UiKit/components/VButton/VButton.vue'),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  hydrate: hydrateOnVisible(),
+});
 
 const props = defineProps({
   item: Object,
@@ -81,7 +94,7 @@ watch(() => route.path, () => {
       {{ item.text }}
     </span>
     <div
-      v-if="item.children && item.children.length > 0 && activeDropdown"
+      v-if="item.children && item.children.length > 0"
       class="menu-navigation-item__dropdown"
       :class="{ 'is--visible': activeDropdown }"
     >

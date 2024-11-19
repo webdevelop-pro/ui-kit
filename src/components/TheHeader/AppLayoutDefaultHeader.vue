@@ -3,12 +3,31 @@ import {
   defineAsyncComponent, hydrateOnVisible, ref, watch,
 } from 'vue';
 import { useRoute } from 'vitepress';
-import VLogo from 'UiKit/components/VLogo/VLogo.vue';
-import VButton from 'UiKit/components/VButton/VButton.vue';
-import AppLayoutDefaultHeaderNavigation from './AppLayoutDefaultHeaderNavigation.vue';
-import AppMobileMenuBurger from './AppMobileMenuBurger.vue';
 
-
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const VLogo = defineAsyncComponent({
+  loader: () => import('UiKit/components/VLogo/VLogo.vue'),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  hydrate: hydrateOnVisible(),
+});
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const VButton = defineAsyncComponent({
+  loader: () => import('UiKit/components/VButton/VButton.vue'),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  hydrate: hydrateOnVisible(),
+});
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const AppLayoutDefaultHeaderNavigation = defineAsyncComponent({
+  loader: () => import('./AppLayoutDefaultHeaderNavigation.vue'),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  hydrate: hydrateOnVisible(),
+});
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const AppMobileMenuBurger = defineAsyncComponent({
+  loader: () => import('./AppMobileMenuBurger.vue'),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  hydrate: hydrateOnVisible(),
+});
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const AppMobileMenu = defineAsyncComponent({
   loader: () => import('./AppMobileMenu.vue'),

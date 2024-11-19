@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import { MENU_HEADER_RIGHT } from '@/config/menu';
-import MenuNavigationItem from 'UiKit/components/Menu/VMenuNavigationItem.vue';
-import { ref } from 'vue';
+import { defineAsyncComponent, hydrateOnVisible, ref } from 'vue';
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const MenuNavigationItem = defineAsyncComponent({
+  loader: () => import('UiKit/components/Menu/VMenuNavigationItem.vue'),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  hydrate: hydrateOnVisible(),
+});
 
 const close = ref(false);
 const id = ref(-1);

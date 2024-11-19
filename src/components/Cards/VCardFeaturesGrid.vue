@@ -1,7 +1,22 @@
 <script setup lang="ts">
-import VCardFeatures, { IVCardFeatures } from 'UiKit/components/Cards/VCardFeatures.vue';
-import VSection from 'UiKit/components/VSection/VSection.vue';
-import { computed, PropType } from 'vue';
+import { IVCardFeatures } from 'UiKit/components/Cards/VCardFeatures.vue';
+import {
+  computed, defineAsyncComponent, hydrateOnVisible, PropType,
+} from 'vue';
+
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const VSection = defineAsyncComponent({
+  loader: () => import('UiKit/components/VSection/VSection.vue'),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  hydrate: hydrateOnVisible(),
+});
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const VCardFeatures = defineAsyncComponent({
+  loader: () => import('UiKit/components/Cards/VCardFeatures.vue'),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  hydrate: hydrateOnVisible(),
+});
 
 const props = defineProps({
   title: String,

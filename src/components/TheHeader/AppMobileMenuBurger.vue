@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { VSvgIcon } from 'UiKit/components/VSvgIcon';
+import { defineAsyncComponent, hydrateOnVisible } from 'vue';
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const VSvgIcon = defineAsyncComponent({
+  loader: () => import('UiKit/components/VSvgIcon/VSvgIcon.vue'),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  hydrate: hydrateOnVisible(),
+});
 
 const modelValue = defineModel<boolean>();
 defineEmits(['update:modelValue']);

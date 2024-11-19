@@ -37,8 +37,8 @@ const getStarted = filterAndSortByOrderElements(allPages as IFrontmatter[], 'slu
 </script>
 
 <template>
-  <ClientOnly>
-    <section class="VSliderWithCardBlueLine v-slider-with-card-blue-line">
+  <section class="VSliderWithCardBlueLine v-slider-with-card-blue-line">
+    <ClientOnly>
       <div class="is--container">
         <div class="is--short-block">
           <h2
@@ -74,8 +74,8 @@ const getStarted = filterAndSortByOrderElements(allPages as IFrontmatter[], 'slu
           </SwiperSlide>
         </SliderSwiper>
       </div>
-    </section>
-  </ClientOnly>
+    </ClientOnly>
+  </section>
 </template>
 
 <style lang="scss">

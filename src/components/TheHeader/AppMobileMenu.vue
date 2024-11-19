@@ -1,14 +1,26 @@
 <script setup lang="ts">
 import {
   watch, onMounted, onUnmounted, onBeforeUnmount, ref, nextTick,
+  defineAsyncComponent,
+  hydrateOnVisible,
 } from 'vue';
 import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
 import { blockedBody } from 'UiKit/helpers/blocked-body';
 import { storeToRefs } from 'pinia';
-import VButton from 'UiKit/components/VButton/VButton.vue';
 import { MENU_HEADER_RIGHT } from '@/config/menu';
-import MenuNavigationItem from 'UiKit/components/Menu/VMenuNavigationItem.vue';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const VButton = defineAsyncComponent({
+  loader: () => import('UiKit/components/VButton/VButton.vue'),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  hydrate: hydrateOnVisible(),
+});
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const MenuNavigationItem = defineAsyncComponent({
+  loader: () => import('UiKit/components/Menu/VMenuNavigationItem.vue'),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  hydrate: hydrateOnVisible(),
+});
 
 const props = defineProps({
   modelValue: Boolean,
@@ -95,7 +107,7 @@ watch(() => props.modelValue, (newVal) => {
     class="wd-mobile-menu is--no-margin"
     :class="{ 'is-active': modelValue }"
   >
-    <ul>
+    <ul v-if="modelValue">
       <MenuNavigationItem
         v-for="menuItem in MENU_HEADER_RIGHT"
         :key="JSON.stringify(menuItem)"

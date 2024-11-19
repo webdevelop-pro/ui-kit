@@ -1,8 +1,22 @@
 <script setup lang="ts">
-import { computed, PropType } from 'vue';
-import VSection from 'UiKit/components/VSection/VSection.vue';
-import VCardArticle from 'UiKit/components/Cards/VCardArticle.vue';
+import {
+  computed, defineAsyncComponent, hydrateOnVisible, PropType,
+} from 'vue';
 import { IFrontmatter } from 'UiKit/types/types';
+
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const VCardArticle = defineAsyncComponent({
+  loader: () => import('UiKit/components/Cards/VCardArticle.vue'),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  hydrate: hydrateOnVisible(),
+});
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const VSection = defineAsyncComponent({
+  loader: () => import('UiKit/components/VSection/VSection.vue'),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  hydrate: hydrateOnVisible(),
+});
 
 const props = defineProps({
   title: String,
