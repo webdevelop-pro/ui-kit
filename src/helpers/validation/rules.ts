@@ -15,10 +15,15 @@ export const stateRule = {
 
 export const countryRule = {
   mustBeUS: true,
-  onlyLetters: true,
   title: 'country',
-  type: 'string',
-  // maxLength: 2,
+  minLength: 2,
+};
+
+
+export const countryRuleObject = {
+  mustBeUS: true,
+  title: 'country',
+  type: 'object',
   minLength: 2,
 };
 

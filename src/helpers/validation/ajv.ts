@@ -47,7 +47,7 @@ ajv.addKeyword({
 ajv.addKeyword({
   keyword: MUST_BE_US_VALIDATOR_NAME,
   validate: (_schema: unknown, data: unknown) => (
-    String(data).toLowerCase() === 'us'
+    (String(data).toLowerCase() === 'us') || (String(data?.code).toLowerCase() === 'us')
   ),
   error: {
     message: MUST_BE_US_ERROR_MESSAGE,
