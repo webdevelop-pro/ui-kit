@@ -91,8 +91,8 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
       />
     </div>
     <div
-      v-if="isError"
       class="v-form-group__error is--small"
+      :class="{ 'is--error': isError }"
       data-testid="input-error"
     >
       <slot
@@ -129,7 +129,14 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
   &__error
     margin-top: 4px
     color: colors.$red-dark
+    transition: all 0.3s ease
+    transform: translateY(-5px)
+    &.is--error
+      height: auto
+      transition: all 0.3s ease
+      transform: translateY(0)
 
   &__input
     width: 100%
+    position: relative
 </style>

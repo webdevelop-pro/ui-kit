@@ -3,6 +3,66 @@ import set from 'lodash/set';
 import cloneDeep from 'lodash/cloneDeep';
 import { computed } from 'vue';
 
+interface FilteredObjectElement {
+  enum?: Array<any>;
+  enumNames?: Array<string>;
+  minLength?: number;
+  mustBeUS?: boolean;
+  title?: string;
+  type: string;
+}
+
+type FilteredObject = Record<string, FilteredObjectElement>;
+
+function cleanEnums(filteredObject: FilteredObject): FilteredObject {
+  Object.keys(filteredObject).forEach((key) => {
+    const element = filteredObject[key];
+    if (element.type === 'string' && element.enum) {
+      delete element.enum; // Remove the `enum` property
+    }
+  });
+
+  return filteredObject; // Return the modified object
+}
+
+const resolveSchema = (schemaRef: JSONSchemaType<any>, ref: string): any => {
+  const path = ref?.replace('#/', '')?.split('/') || [];
+  let resolvedObject = schemaRef;
+  // eslint-disable-next-line
+  for (const key of path) {
+    if (key !== '') resolvedObject = resolvedObject[key];
+  }
+  return resolvedObject;
+};
+
+export const getFilteredObject = (schema: JSONSchemaType<any>, formModel: any): FilteredObject => {
+  if (!schema) return schema;
+  // clone deep to ensure we don't mix schemas
+  const newSchema = cloneDeep(schema);
+
+  const mainDataObject = schema.$ref ? resolveSchema(newSchema, newSchema.$ref) : newSchema;
+
+  // Remove "required" key
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  delete mainDataObject.required;
+  set(newSchema, [], mainDataObject);
+
+  // filter by keys
+  const filteredObject: FilteredObject = {};
+  // eslint-disable-next-line
+  for (const key in mainDataObject.properties) { // TODO reqrite as array iteration
+    // eslint-disable-next-line
+    if (formModel.hasOwnProperty(key)) {
+      // eslint-disable-next-line
+      filteredObject[key] = mainDataObject.properties[key].$ref ? resolveSchema(newSchema, mainDataObject.properties[key].$ref).properties : mainDataObject.properties[key];
+    }
+  }
+
+
+  return filteredObject;
+};
+
+
 export const filterSchema = (schema: JSONSchemaType<any>, formModel: any): any => {
   if (!schema) return schema;
   // clone deep to ensure we don't mix schemas
@@ -30,9 +90,10 @@ export const filterSchema = (schema: JSONSchemaType<any>, formModel: any): any =
       filteredObject[key] = mainDataObject.properties[key];
     }
   }
+  const cleanedObject = cleanEnums(filteredObject);
   // put changes data to schema and return
   path.push('properties');
-  set(newSchema, path, filteredObject);
+  set(newSchema, path, cleanedObject);
   return newSchema;
 };
 
