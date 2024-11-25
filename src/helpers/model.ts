@@ -1,5 +1,6 @@
 import { JSONSchemaType } from 'ajv';
 import cloneDeep from 'lodash/cloneDeep';
+import { capitalizeFirstLetter } from 'UiKit/helpers/text';
 
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 export function populateModel<T>(source: Partial<T>, defaults: T): T {
@@ -79,7 +80,7 @@ export const getOptions = (
   // Map the values and names to an array of objects { value, name }
   const options = values.map((value: string, index: number) => ({
     value,
-    name: names[index] || value, // Default to the value itself if no enumNames
+    name: capitalizeFirstLetter(names[index] || value), // Default to the value itself if no enumNames
   }));
 
   // Cache the options for future use

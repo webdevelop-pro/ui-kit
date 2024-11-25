@@ -32,7 +32,7 @@ const setupValidator = async () => {
   schemaSubscribe = {
     $schema: 'http://json-schema.org/draft-07/schema#',
     definitions: {
-      PatchIndividualProfile: {
+      Individual: {
         properties: {
           email: emailRule,
         },
@@ -41,7 +41,7 @@ const setupValidator = async () => {
         errorMessage: errorMessageRule,
       },
     },
-    $ref: '#/definitions/PatchIndividualProfile',
+    $ref: '#/definitions/Individual',
   } as unknown as JSONSchemaType<FormModelSubscribe>;
 
   return new PrecompiledValidator<FormModelSubscribe>(schemaSubscribe);
@@ -50,7 +50,7 @@ const setupValidator = async () => {
 // const schemaSubscribe = {
 //   $schema: 'http://json-schema.org/draft-07/schema#',
 //   definitions: {
-//     PatchIndividualProfile: {
+//     Individual: {
 //       properties: {
 //         email: emailRule,
 //       },
@@ -59,7 +59,7 @@ const setupValidator = async () => {
 //       errorMessage: errorMessageRule,
 //     },
 //   },
-//   $ref: '#/definitions/PatchIndividualProfile',
+//   $ref: '#/definitions/Individual',
 // } as unknown as JSONSchemaType<FormModelSubscribe>;
 
 
