@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import VButton from 'UiKit/components/VButton/VButton.vue';
 import VImage from 'UiKit/components/VImage/VImage.vue';
-import { filterAndSortByOrderElements } from 'UiKit/helpers/allData';
+import { filterPages } from 'UiKit/helpers/allData';
 import { data as allPages } from '@/store/all.data';
 import { IFrontmatter } from 'UiKit/types/types';
 
@@ -21,7 +21,7 @@ const backgroundImageLocal = computed(() => (
 const showImageBottom = computed(() => props.imageBottom && (props.imageBottom !== 'undefined'));
 const showButton = computed(() => props.buttonText && (props.buttonText !== 'undefined'));
 
-const getStarted = filterAndSortByOrderElements(allPages as IFrontmatter[], 'slug', 'get-started');
+const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started');
 </script>
 
 <template>

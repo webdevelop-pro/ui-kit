@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineAsyncComponent, PropType } from 'vue';
-import { filterAndSortByOrderElements } from 'UiKit/helpers/allData';
+import { filterPages } from 'UiKit/helpers/allData';
 import { data as allPages } from '@/store/all.data';
 import { ICardWithBlueTitleLine } from 'UiKit/components/Cards/VCardWithBlueTitleLine.vue';
 import { IFrontmatter } from 'UiKit/types/types';
@@ -33,7 +33,7 @@ defineProps({
 });
 
 
-const getStarted = filterAndSortByOrderElements(allPages as IFrontmatter[], 'slug', 'get-started');
+const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started');
 </script>
 
 <template>

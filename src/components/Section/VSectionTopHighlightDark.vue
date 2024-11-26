@@ -4,7 +4,7 @@ import VButton from 'UiKit/components/VButton/VButton.vue';
 import VCardCheckmarked, { ICheckmarkedItem } from 'UiKit/components/Cards/VCardCheckmarked.vue';
 import VSvgIcon from 'UiKit/components/VSvgIcon/VSvgIcon.vue';
 import VImage from 'UiKit/components/VImage/VImage.vue';
-import { filterAndSortByOrderElements } from 'UiKit/helpers/allData';
+import { filterPages } from 'UiKit/helpers/allData';
 import { data as allPages } from '@/store/all.data';
 import { IFrontmatter } from 'UiKit/types/types';
 import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
@@ -31,7 +31,7 @@ const props = defineProps({
   topic: String,
 });
 
-const getStarted = filterAndSortByOrderElements(allPages as IFrontmatter[], 'slug', 'get-started');
+const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started');
 </script>
 
 <template>

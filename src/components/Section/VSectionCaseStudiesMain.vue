@@ -4,7 +4,7 @@ import VButton from 'UiKit/components/VButton/VButton.vue';
 import CaseStudiesNavigation from 'UiKit/components/Section/VSectionNavigation.vue';
 import WhatOurClientsSaySidebar from 'UiKit/components/VWhatOurClientsSay/VWhatOurClientsSaySidebar.vue';
 import { testimonials } from 'UiKit/components/VWhatOurClientsSay/utils';
-import { filterAndSortByOrderElements } from 'UiKit/helpers/allData';
+import { filterPages } from 'UiKit/helpers/allData';
 import { data as allPages } from '@/store/all.data';
 import { IFrontmatter } from 'UiKit/types/types';
 
@@ -21,7 +21,7 @@ defineProps({
   sideText: String,
 });
 
-const getStarted = filterAndSortByOrderElements(allPages as IFrontmatter[], 'slug', 'get-started');
+const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started');
 </script>
 
 <template>

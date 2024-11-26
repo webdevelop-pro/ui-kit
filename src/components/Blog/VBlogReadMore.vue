@@ -3,7 +3,7 @@ import { ref, watch } from 'vue';
 import VCardArticle from 'UiKit/components/Cards/VCardArticle.vue';
 import { useRoute, useData } from 'vitepress';
 import { data as allPages } from '@/store/all.data';
-import { filterAndSortByPublishDateElements } from 'UiKit/helpers/allData';
+import { filterPages } from 'UiKit/helpers/allData';
 import { IFrontmatter } from 'UiKit/types/types';
 
 const { frontmatter } = useData();
@@ -11,7 +11,7 @@ const { frontmatter } = useData();
 const postsRandom = ref();
 const route = useRoute();
 
-const blogPosts = filterAndSortByPublishDateElements(allPages as IFrontmatter[], 'layout', 'resource-center-single');
+const blogPosts = filterPages(allPages as IFrontmatter[], 'layout', 'resource-center-single');
 
 const getRandomPosts = () => {
   const blogPostsFiltered = blogPosts.filter((item) => item.slug !== frontmatter.value.slug);

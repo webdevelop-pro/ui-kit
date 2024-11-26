@@ -3,7 +3,7 @@ import VButton from 'UiKit/components/VButton/VButton.vue';
 import { VSvgIcon } from 'UiKit/components/VSvgIcon';
 import VImage from 'UiKit/components/VImage/VImage.vue';
 import { PropType } from 'vue';
-import { filterAndSortByOrderElements } from 'UiKit/helpers/allData';
+import { filterPages } from 'UiKit/helpers/allData';
 import { data as allPages } from '@/store/all.data';
 import { IFrontmatter } from 'UiKit/types/types';
 
@@ -24,7 +24,7 @@ defineProps({
   },
 });
 
-const careers = filterAndSortByOrderElements(allPages as IFrontmatter[], 'slug', 'careers');
+const careers = filterPages(allPages as IFrontmatter[], 'slug', 'careers');
 </script>
 
 <template>

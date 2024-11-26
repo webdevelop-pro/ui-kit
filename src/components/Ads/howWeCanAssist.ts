@@ -1,11 +1,11 @@
 
 import { data as allPages } from '@/store/all.data';
-import { filterAndSortByOrderElements } from 'UiKit/helpers/allData';
+import { filterPages } from 'UiKit/helpers/allData';
 import { IFrontmatter } from 'UiKit/types/types';
 
-const ourProcess = filterAndSortByOrderElements(allPages as IFrontmatter[], 'slug', 'our-process');
-const developmentStages = filterAndSortByOrderElements(allPages as IFrontmatter[], 'slug', 'development-stages');
-const howWeCanAssistData = filterAndSortByOrderElements(allPages as IFrontmatter[], 'slug', 'how-can-we-assist');
+const ourProcess = filterPages(allPages as IFrontmatter[], 'slug', 'our-process');
+const developmentStages = filterPages(allPages as IFrontmatter[], 'slug', 'development-stages');
+const howWeCanAssistData = filterPages(allPages as IFrontmatter[], 'slug', 'how-can-we-assist');
 export const HowCanWeAssistItems = [
   {
     image: '/images/assist-group-1.svg',
