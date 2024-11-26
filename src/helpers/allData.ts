@@ -1,13 +1,27 @@
 import { IFrontmatter } from 'UiKit/types/types';
 
+
 // General function to find elements by a specified filterName and filterValue
-export function filterElements(data: IFrontmatter[], filterName: keyof IFrontmatter, filterValue: string) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-  return data.filter((item) => item[filterName]?.toLowerCase() === filterValue.toLowerCase());
+export function getPages(data: IFrontmatter[], filterFuncs = [], sortFuncs = []) {
+  data = data.filter((item:any) => item.draft != true);
+  filterFuncs.forEach((filterFunc) => {
+    data = filterFunc(data);
+  });
+  sortFuncs.forEach((sortFunc) => {
+    data = sortFunc(data);
+  });
+  return data;
+}
+
+// General function to find elements by a specified filterName and filterValue
+export function filterByKeyVal(key: keyof IFrontmatter, val: string) {
+  return (data: IFrontmatter[]) => {
+    return data.filter((item:any) => item[key] === val);
+  }
 }
 
 // Function to sort elements by frontmatter.order
-export function sortElementsByOrder(data: IFrontmatter[]) {
+export function sortByOrder(data: IFrontmatter[]) {
   return data.sort((a: IFrontmatter, b: IFrontmatter) => {
     const orderA = a.order ?? 0; // Default to 0 if order is undefined
     const orderB = b.order ?? 0;
@@ -17,39 +31,15 @@ export function sortElementsByOrder(data: IFrontmatter[]) {
 }
 
 // Function to sort elements by frontmatter.publishDate
-export function sortElementsByPublishDate(data: IFrontmatter[]) {
+export function sortByPublishDate(data: IFrontmatter[]) {
   return data.sort((a, b) => (
     +new Date(String(b.publishDate)) - +new Date(String(a.publishDate))));
 }
 
-export function filterAndSortByOrderElements(
+export function filterPages(
   data: IFrontmatter[],
-  filterName: keyof IFrontmatter,
-  filterValue: string,
-  withDraft: boolean = false,
+  key: keyof IFrontmatter,
+  val: string,
 ) {
-  let filteredData = [];
-  if (!withDraft) {
-    const withoutDraftData = data.filter((post) => !post.draft);
-    filteredData = filterElements(withoutDraftData, filterName, filterValue);
-  } else {
-    filteredData = filterElements(data, filterName, filterValue);
-  }
-  return sortElementsByOrder(filteredData);
-}
-
-export function filterAndSortByPublishDateElements(
-  data: IFrontmatter[],
-  filterName: keyof IFrontmatter,
-  filterValue: string,
-  withDraft: boolean = false,
-) {
-  let filteredData = [];
-  if (!withDraft) {
-    const withoutDraftData = data.filter((post) => !post.draft);
-    filteredData = filterElements(withoutDraftData, filterName, filterValue);
-  } else {
-    filteredData = filterElements(data, filterName, filterValue);
-  }
-  return sortElementsByPublishDate(filteredData);
+  return getPages(data, [filterByKeyVal(key, val)], [sortByOrder, sortByPublishDate]);
 }
