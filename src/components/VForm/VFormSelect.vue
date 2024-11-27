@@ -217,8 +217,9 @@ function onSearch(searchString: string) {
     pointer-events: none
     .vs__dropdown-toggle
       background-color: transparent
-      padding-left: 0
-      padding-right: 0
+      border-radius: 0
+      border: none
+      pointer-events: none
       .vs__actions
         display: none
   &.is--append

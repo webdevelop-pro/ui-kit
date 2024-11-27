@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { ref, computed, useId } from 'vue';
 
 type FormRadioOption = {
   value: unknown;
@@ -70,6 +70,7 @@ function getLabelValue(option: string | number | FormRadioOption) {
   return isObject(option) ? (option as FormRadioOption).text : String(option);
 }
 
+const id = useId();
 </script>
 
 <template>
@@ -84,7 +85,7 @@ function getLabelValue(option: string | number | FormRadioOption) {
     >
       <div class="v-form-radio__item-input">
         <input
-          :id="index"
+          :id="index + id"
           v-model="selectedOption"
           :value="getInputValue(option)"
           type="radio"
@@ -94,7 +95,7 @@ function getLabelValue(option: string | number | FormRadioOption) {
           @change="$emit('update:modelValue', selectedOption);"
         >
         <label
-          :for="index"
+          :for="index + id"
           class="v-form-radio__label"
         >
           {{ getLabelValue(option) }}

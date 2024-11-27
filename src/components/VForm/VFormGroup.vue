@@ -4,6 +4,7 @@ import {
 } from 'vue';
 import get from 'lodash/get';
 import merge from 'lodash/merge';
+import { getFieldSchema } from 'UiKit/helpers/validation/general';
 
 const props = defineProps<{
   label?: string;
@@ -18,28 +19,10 @@ const props = defineProps<{
 
 const schema = ref();
 
-function resolveRef(ref, schema) {
-    const refPath = ref.replace('#/', '').split('/');
-    let currentSchema = schema;
-    return get(currentSchema, refPath.join('.'));
-}
-
 function isFieldRequiredInSchema(fieldName, schema) {
     return schema.required ? schema.required.includes(fieldName) : false;
 }
 
-function getFieldSchema(path, ref, schema) {
-  if (!path || !ref) return undefined;
-    const objectFromRefPath = resolveRef(ref, schema);
-    const pathSegments = path.split('.');
-    const firstChild = pathSegments.shift();
-    const restSegments = pathSegments.join('.');
-    const segment0Property = objectFromRefPath.properties[firstChild];
-    if (segment0Property?.$ref) {
-      return getFieldSchema(restSegments, segment0Property.$ref, schema);
-    }
-    return objectFromRefPath;
-}
 
 function isFieldRequiredAtPath(path, schema) {
     const parentSchema = getFieldSchema(path, schema.$ref, schema);
@@ -91,6 +74,7 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
       />
     </div>
     <div
+      v-if="isError"
       class="v-form-group__error is--small"
       :class="{ 'is--error': isError }"
       data-testid="input-error"
@@ -127,7 +111,6 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
     color: colors.$red
 
   &__error
-    margin-top: 4px
     color: colors.$red-dark
     transition: all 0.3s ease
     transform: translateY(-5px)
@@ -139,4 +122,5 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
   &__input
     width: 100%
     position: relative
+    margin-bottom: 4px
 </style>

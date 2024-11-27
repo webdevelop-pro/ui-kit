@@ -2,6 +2,7 @@ import { JSONSchemaType } from 'ajv';
 import set from 'lodash/set';
 import cloneDeep from 'lodash/cloneDeep';
 import { computed } from 'vue';
+import get from 'lodash/get';
 
 interface FilteredObjectElement {
   enum?: Array<any>;
@@ -25,42 +26,89 @@ function cleanEnums(filteredObject: FilteredObject): FilteredObject {
   return filteredObject; // Return the modified object
 }
 
-const resolveSchema = (schemaRef: JSONSchemaType<any>, ref: string): any => {
-  const path = ref?.replace('#/', '')?.split('/') || [];
-  let resolvedObject = schemaRef;
-  // eslint-disable-next-line
-  for (const key of path) {
-    if (key !== '') resolvedObject = resolvedObject[key];
-  }
-  return resolvedObject;
-};
+export function resolveRef(ref: string, schema: JSONSchemaType<any>) {
+  const refPath = ref.replace('#/', '').split('/');
+  return get({ ...schema }, refPath.join('.'));
+}
 
-export const getFilteredObject = (schema: JSONSchemaType<any>, formModel: any): FilteredObject => {
+export const getFilteredObject = (
+  schema: JSONSchemaType<any> | undefined,
+  formModel: Record<string, any>,
+  refPath: string = schema?.$ref || '',
+): FilteredObject => {
   if (!schema) return schema;
-  // clone deep to ensure we don't mix schemas
-  const newSchema = cloneDeep(schema);
 
-  const mainDataObject = schema.$ref ? resolveSchema(newSchema, newSchema.$ref) : newSchema;
+  // Clone schema to avoid mutation
+  const clonedSchema = cloneDeep(schema);
 
-  // Remove "required" key
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  delete mainDataObject.required;
-  set(newSchema, [], mainDataObject);
+  // Resolve schema from reference path, or use the cloned schema directly
+  const resolvedObject = refPath ? resolveRef(refPath, clonedSchema) : clonedSchema;
 
-  // filter by keys
-  const filteredObject: FilteredObject = {};
-  // eslint-disable-next-line
-  for (const key in mainDataObject.properties) { // TODO reqrite as array iteration
-    // eslint-disable-next-line
-    if (formModel.hasOwnProperty(key)) {
-      // eslint-disable-next-line
-      filteredObject[key] = mainDataObject.properties[key].$ref ? resolveSchema(newSchema, mainDataObject.properties[key].$ref).properties : mainDataObject.properties[key];
-    }
+  // Remove "required" key safely
+  delete resolvedObject.required;
+
+  // Update the cloned schema with the modified object
+  set(clonedSchema, [], resolvedObject);
+
+  // If formModel is empty, return the properties of the resolved object
+  if (!Object.keys(formModel).length) {
+    return resolvedObject.properties;
   }
 
-
-  return filteredObject;
+  // Filter properties based on the keys present in formModel
+  return Object.entries(resolvedObject.properties).reduce((filteredObject: FilteredObject, [key, value]) => {
+    if (key in formModel) {
+      if (value?.$ref) {
+        filteredObject[key] = getFilteredObject(schema, formModel[key], value.$ref)
+      } else if (value?.type === 'array' && value?.items?.$ref) {
+        filteredObject[key] = getFilteredObject(schema, formModel[key], value?.items?.$ref)
+      } else {
+        filteredObject[key] = value;
+      }
+    }
+    return filteredObject;
+  }, {});
 };
+
+
+export function getFieldSchema(
+  path: string | undefined,
+  ref: string | undefined,
+  schema: JSONSchemaType<any>,
+): any | undefined {
+  if (!path || !ref) return undefined;
+
+  const objectFromRefPath = resolveRef(ref, schema);
+  const pathSegments = path.split('.');
+
+  pathSegments.forEach((segment, index) => {
+    if (!Number.isNaN(Number(segment))) {
+      pathSegments.splice(index, 1);
+    }
+  });
+
+  const firstChild = pathSegments.shift();
+  const restSegments = pathSegments.join('.');
+
+  if (!firstChild || !objectFromRefPath.properties) {
+    return undefined;
+  }
+
+  const segment0Property = objectFromRefPath.properties[firstChild];
+
+  if (segment0Property?.$ref) {
+    return getFieldSchema(restSegments, segment0Property.$ref, schema);
+  }
+
+  if (
+    segment0Property?.type === 'array' &&
+    segment0Property?.items?.$ref
+  ) {
+    return getFieldSchema(restSegments, segment0Property.items.$ref, schema);
+  }
+
+  return objectFromRefPath;
+}
 
 
 export const filterSchema = (schema: JSONSchemaType<any>, formModel: any): any => {
@@ -97,29 +145,6 @@ export const filterSchema = (schema: JSONSchemaType<any>, formModel: any): any =
   return newSchema;
 };
 
-type JsonSchema = Record<string, any>;
-
-export function resolveRef(fullSchema: JsonSchema): JsonSchema {
-  const root = fullSchema.$schema ? fullSchema : fullSchema.definitions;
-
-  const traverse = (schema: JsonSchema): JsonSchema => {
-    const innerSchema = cloneDeep(schema);
-    if (innerSchema && typeof innerSchema === 'object') {
-      if ('$ref' in innerSchema) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-        const refPath = innerSchema.$ref.split('/').slice(1);
-        // eslint-disable-next-line
-        return refPath.reduce((obj: { [x: string]: any; }, key: string | number) => obj && obj[key], root);
-      }
-      Object.entries(innerSchema).forEach(([key, value]) => {
-        innerSchema[key] = traverse(value);
-      });
-    }
-    return innerSchema;
-  };
-
-  return traverse(fullSchema);
-}
 
 export const undefinedEmptyProp = (data: object) => {
   const obj = {};
