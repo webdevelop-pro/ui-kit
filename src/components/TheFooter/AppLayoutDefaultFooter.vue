@@ -94,7 +94,10 @@ const onSubmit = async (emailLocal: string) => {
   <div class="footer-bottom">
     <div class="is--container">
       <p class="is--small">
-        © {{ currentYear }} Webdevelop PRO, Inc.
+        <a href="/legal/terms-of-service">Terms of Service</a> | 
+        <a href="/legal/privacy-notice">Privacy Notice</a> | 
+        <a href="/legal/cookie">Cookie Policy</a> |
+         © {{ currentYear }} Pro Webdevelop, LLC.
       </p>
     </div>
   </div>
