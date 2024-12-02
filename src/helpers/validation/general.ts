@@ -59,9 +59,9 @@ export const getFilteredObject = (
   return Object.entries(resolvedObject.properties).reduce((filteredObject: FilteredObject, [key, value]) => {
     if (key in formModel) {
       if (value?.$ref) {
-        filteredObject[key] = getFilteredObject(schema, formModel[key], value.$ref)
+        filteredObject[key] = getFilteredObject(schema, formModel[key], value.$ref);
       } else if (value?.type === 'array' && value?.items?.$ref) {
-        filteredObject[key] = getFilteredObject(schema, formModel[key], value?.items?.$ref)
+        filteredObject[key] = getFilteredObject(schema, formModel[key], value?.items?.$ref);
       } else {
         filteredObject[key] = value;
       }
@@ -101,8 +101,8 @@ export function getFieldSchema(
   }
 
   if (
-    segment0Property?.type === 'array' &&
-    segment0Property?.items?.$ref
+    segment0Property?.type === 'array'
+    && segment0Property?.items?.$ref
   ) {
     return getFieldSchema(restSegments, segment0Property.items.$ref, schema);
   }
@@ -110,11 +110,27 @@ export function getFieldSchema(
   return objectFromRefPath;
 }
 
+function removeRequiredFromDefinitions(schema: JSONSchemaType<any>) {
+  if (schema.definitions && typeof schema.definitions === 'object') {
+    Object.values(schema.definitions).forEach((definition) => {
+      // Remove 'required' if it exists
+      if (definition.required) {
+        delete definition.required;
+      }
+
+      // Recursively process nested definitions
+      if (definition.definitions && typeof definition.definitions === 'object') {
+        removeRequiredFromDefinitions(definition);
+      }
+    });
+  }
+  return schema;
+}
 
 export const filterSchema = (schema: JSONSchemaType<any>, formModel: any): any => {
   if (!schema) return schema;
   // clone deep to ensure we don't mix schemas
-  const newSchema = cloneDeep(schema);
+  let newSchema = cloneDeep(schema);
   // get path
   const path = newSchema.$ref?.replace('#/', '')?.split('/') || [];
 
@@ -127,6 +143,8 @@ export const filterSchema = (schema: JSONSchemaType<any>, formModel: any): any =
   // remove required
   delete mainDataObject.required;
   set(newSchema, path, mainDataObject);
+  newSchema = removeRequiredFromDefinitions(newSchema);
+
 
   // filter by keys
   const filteredObject: any = {};

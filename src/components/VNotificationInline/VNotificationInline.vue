@@ -100,6 +100,10 @@ const onClick = () => {
     height: $notification-inline-height
     margin-top: -1px
     flex-shrink: 0
+
+  &__button
+    flex-shrink: 0
+
   &__content
     margin-left: $notification-inline-margin-left
     display: flex

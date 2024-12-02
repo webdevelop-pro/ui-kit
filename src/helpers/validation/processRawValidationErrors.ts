@@ -31,6 +31,9 @@ export function transformValidationErrors(errors: ErrorObject[] = []): Validatio
       if ('missingProperty' in params) {
         property = property ? `${property}.${params.missingProperty}` : params.missingProperty;
       }
+      if ('failingKeyword' in params) {
+        property = property ? `${property}.${params.failingKeyword}` : params.failingKeyword;
+      }
 
       let messageFormatted = message;
       switch (keyword) {
