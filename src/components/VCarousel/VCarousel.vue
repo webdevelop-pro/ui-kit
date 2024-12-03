@@ -6,6 +6,7 @@ import VVideoEmbedded from 'UiKit/components/VVideoEmbedded/VVideoEmbedded.vue';
 import VImage from 'UiKit/components/VImage/VImage.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation, Thumbs } from 'swiper/modules';
+import { urlSearchParamsToObject } from 'UiKit/helpers/url';
 
 const props = defineProps({
   name: String,
@@ -14,7 +15,6 @@ const props = defineProps({
     default: () => [],
   },
   activeItemByUrl: Boolean,
-  queryMedia: String,
 });
 
 const emit = defineEmits(['click', 'setUrl']);
@@ -43,7 +43,19 @@ function getMetaOrder(item) {
   return 999;
 }
 
-const queryMedia = computed(() => props.queryMedia);
+const queryMedia = computed(() => (
+  (window && window.location.search) ? new URLSearchParams(window.location.search).get('media') : undefined));
+
+const setUrl = (newItemNumber) => {
+  const existingParams = urlSearchParamsToObject(new URLSearchParams(window.location.search));
+  delete existingParams.media;
+  const currentUrl = new URL(window.location.href);
+  if (newItemNumber && newItemNumber !== undefined) {
+    currentUrl.searchParams.set('media', newItemNumber);
+  }
+  window.history.replaceState(null, '', currentUrl.toString());
+};
+
 
 function setActiveItemNumberToURL() {
   const currentItemNumberByURL = Number(queryMedia.value || 0);
@@ -53,7 +65,7 @@ function setActiveItemNumberToURL() {
     if (currentItemNumberByURL === undefined) return;
     newItemNumber = undefined;
   }
-  emit('setUrl', newItemNumber);
+  setUrl(newItemNumber);
 }
 
 function setActiveItemNumberByURL(currentItemNumberByURL = queryMedia.value) {
