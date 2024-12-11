@@ -1,4 +1,5 @@
 import { IFrontmatter } from "UiKit/types/types";
+import groupBy from 'lodash/groupBy';
 
 export function isEmpty(obj: object) {
   // eslint-disable-next-line
@@ -202,4 +203,38 @@ export function findBySameFolder(pages: IFrontmatter[], url:string) {
     }
   });
   return res;
+}
+
+export function groupItemsByRawUrl(data: IFrontmatter[], url:string) {
+  if (!data) return;
+  const parent = `/${url.split('/').slice(0, -1).join('/')}`; // remove last element
+
+  const res = groupBy(data, (item) => {
+    const parts = item.url?.split('/');
+    return parts.slice(0, -1).join('/'); // Full directory path
+  });
+
+  const filtered = Object.keys(res)
+    .filter((key) => key.includes(parent)) // Apply the filter function to the keys
+    .reduce((result, key) => {
+      result[key] = res[key]; // Rebuild the filtered object
+      return result;
+    }, {});
+  return filtered;
+}
+
+export function groupRelatedPagesFormat(pages: IFrontmatter[], data: Record<string, any>) {
+  return Object.keys(data).map(key => {
+    // Find the page object with the matching URL for the current key
+    const page = pages.find(p => p.url === key);
+
+    if (page) {
+      return {
+        groupBy: page,
+        items: data[key]
+      };
+    }
+
+    return null; // Return null if no matching URL is found
+  }).filter(item => item !== null); // Filter out null values
 }
