@@ -1,47 +1,33 @@
 
 import { useData } from 'vitepress';
 import { watch } from 'vue';
-import { IFrontmatter } from 'UiKit/types/types';
+import { Page } from 'UiKit/types/pages';
 
 
-export const useBreadcrumbs = (allPages: IFrontmatter[]) => {
+export const useBreadcrumbs = (currentPage: Page) => {
   const { page, frontmatter } = useData();
 
-  const breadcrumbsListDefault = {
-    link: '/',
-    name: 'Home',
-  };
-  let breadcrumbsList = [breadcrumbsListDefault];
-
-  function findPageBySlug(pages:IFrontmatter[], slug:string):IFrontmatter {
-    let page = null;
-    pages.forEach((el) => {
-      if (el.slug === slug) {
-        page = el;
-        return;
-      }
-    });
-    return page;
-  }
+  let breadcrumbsList = [];
 
   const crumbs = () => {
     breadcrumbsList.splice(0, breadcrumbsList.length);
-    breadcrumbsList.push(breadcrumbsListDefault);
-    const pathData = page.value.relativePath.split('/');
-    pathData.forEach((slug) => {
-      const parent = findPageBySlug(allPages, slug);
-      if (parent !== null) {
-        breadcrumbsList.push({
-          link: parent.url,
-          name: parent.title,
-        });
-      }
-    });
-    if (breadcrumbsList[breadcrumbsList.length - 1].name === frontmatter.value.title) return;
     breadcrumbsList.push({
       link: '',
       name: frontmatter.value.title,
     });
+
+    debugger;
+    let parent = currentPage.parent();
+    while(parent != null) {
+      if (parent.isVirtual() === false) {
+        breadcrumbsList.push({
+          link: parent._data.url,
+          name: parent._data.title,
+        });
+      }
+      parent = parent.parent();
+    }
+    breadcrumbsList = breadcrumbsList.reverse();
   };
 
   watch(() => page.value?.relativePath, () => {
