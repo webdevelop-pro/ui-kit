@@ -22,9 +22,73 @@ class Page {
   }
 
   next() {
+    const parent = this.parent();
+    if (parent !== null) {
+      const childs = parent.childs();
+      let pageIndex = -1;
+      childs.forEach((el:IFrontmatter, idx:number) => {
+        if (el.url == this._data.url) {
+          pageIndex = idx;
+        }
+      });
+      if (pageIndex !== -1) {
+        return childs[pageIndex+1] || null;
+      }
+    }
+    return null;
+  }
+
+  nextPage() {
+    const parent = this.parent();
+    if (parent !== null) {
+      const childs = parent._childrens;
+      const childsKeys = Object.keys(childs);
+      let pageIndex = -1;
+      childsKeys.forEach((slug:string, idx:number) => {
+        if (slug == this._data.slug) {
+          pageIndex = idx;
+        }
+      });
+      if (pageIndex !== -1) {
+        return childs[childsKeys[pageIndex+1]] || null;
+      }
+    }
+    return null;
   }
 
   prev() {
+    const parent = this.parent();
+    if (parent !== null) {
+      const childs = parent.childs();
+      let pageIndex = -1;
+      childs.forEach((el:IFrontmatter, idx:number) => {
+        if (el.url == this._data.url) {
+          pageIndex = idx;
+        }
+      });
+      if (pageIndex !== -1) {
+        return childs[pageIndex-1] || null;
+      }
+    }
+    return null;
+  }
+
+  prevPage() {
+    const parent = this.parent();
+    if (parent !== null) {
+      const childs = parent._childrens;
+      const childsKeys = Object.keys(childs);
+      let pageIndex = -1;
+      childsKeys.forEach((slug:string, idx:number) => {
+        if (slug == this._data.slug) {
+          pageIndex = idx;
+        }
+      });
+      if (pageIndex !== -1) {
+        return childs[childsKeys[pageIndex-1]] || null;
+      }
+    }
+    return null;
   }
 
   parent(skipVirtual = true):Page|null {
@@ -59,6 +123,11 @@ class Page {
     path = path.slice(1);
     let tempPage = pages;
     path.forEach((elem) => {
+      // we need this for some reason during production build tempPage
+      // can be undefined
+      if (typeof tempPage === 'undefined') {
+        return null;
+      }
       tempPage = tempPage[elem];
       if (tempPage === null) {
         return null;
@@ -84,18 +153,21 @@ function convertDictToPage(_obj, key:string) {
 // find a page with path="" and make it parent
 function fixRoot(rawPages: Page) {
   const keys = Object.keys(rawPages);
-  let rootPage = new Page(rawPages[""]._data, false);
-  // no need to do anything if we have just 1 element
-  if (keys.length !== 4) {
-    keys.forEach((key) => {
-      if (key != "") {
-        let pge = convertDictToPage(rawPages[key], key);
-        pge._parent = rootPage;
-        rootPage._childrens[key.toString()] = pge;
-      }
-    });
+  if (rawPages[""]) {
+    let rootPage = new Page(rawPages[""]._data, false);
+    // no need to do anything if we have just 1 element
+    if (keys.length !== 4) {
+      keys.forEach((key) => {
+        if (key != "") {
+          let pge = convertDictToPage(rawPages[key], key);
+          pge._parent = rootPage;
+          rootPage._childrens[key.toString()] = pge;
+        }
+      });
+    }
+    return rootPage;
   }
-  return rootPage;
+  return new Page({}, false);
 }
 
 // recursively create childrens and parent links for each page
