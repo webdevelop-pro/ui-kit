@@ -1,7 +1,9 @@
 <script lang="ts" setup="">
-import VSvgIcon from 'UiKit/components/VSvgIcon/VSvgIcon.vue';
-import VButton from 'UiKit/components/VButton/VButton.vue';
+import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import { computed } from 'vue';
+import errorIcon from 'UiKit/assets/images/circle-exclamation.svg';
+import infoIcon from 'UiKit/assets/images/circle-info.svg';
+import checkIcon from 'UiKit/assets/images/circle-check.svg';
 
 const props = withDefaults(defineProps<{
   type?: 'error' | 'success' | 'info';
@@ -37,20 +39,20 @@ const onClick = () => {
     :class="[`is--${type}`, { 'is--icon': icon }]"
   >
     <p class="notification-inline__body">
-      <VSvgIcon
+      <component
+        :is="errorIcon"
         v-if="(type === 'error') && icon"
         class="svg-icon notification-inline__icon"
-        name="circle-exclamation"
       />
-      <VSvgIcon
+      <component
+        :is="infoIcon"
         v-else-if="(type === 'info') && icon"
         class="svg-icon notification-inline__icon"
-        name="circle-info"
       />
-      <VSvgIcon
+      <component"
+        :is="checkIcon"
         v-else-if="icon"
         class="svg-icon notification-inline__icon"
-        name="circle-check"
       />
       <span class="notification-inline__content">
         <div>
@@ -78,7 +80,7 @@ const onClick = () => {
 
 <style lang="sass">
 @use 'index.sass' as *
-@use 'UiKit/styles/_mixins.sass' as *
+@use 'UiKit/styles/_mixins.scss' as *
 
 .notification-inline
   color: $notification-inline-color

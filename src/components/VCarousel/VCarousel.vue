@@ -3,7 +3,7 @@ import { ref, computed, watch } from 'vue';
 import { getImageTitle } from 'UiKit/helpers/utils/text';
 import VVideoThumb from 'UiKit/components/VVideoEmbedded/VVideoThumb.vue';
 import VVideoEmbedded from 'UiKit/components/VVideoEmbedded/VVideoEmbedded.vue';
-import VImage from 'UiKit/components/VImage/VImage.vue';
+import VImage from 'UiKit/components/Base/VImage/VImage.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation, Thumbs } from 'swiper/modules';
 import { urlSearchParamsToObject } from 'UiKit/helpers/url';
@@ -112,7 +112,7 @@ watch( () => [queryMedia.value, mainSwiperInstance.value], () => {
 
 
 <template>
-	<div class="VCarousel v-carousel is--no-margin" itemscope itemtype="http://schema.org/ImageGallery">
+	<div class="VCarousel v-carousel " itemscope itemtype="http://schema.org/ImageGallery">
 		<Swiper
       :modules="modules"
       navigation

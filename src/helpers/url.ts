@@ -1,7 +1,7 @@
 import { IFrontmatter } from '@/types/types';
 
 export const urlFormat = (url: string, data: IFrontmatter[]) => {
-  if(data !== undefined) {
+  if (data !== undefined) {
     data.forEach((data, idx) => {
       // create algorithm to remove empty folders
       // if <fileName.md> not in foldersName
@@ -24,7 +24,7 @@ export const urlFormat = (url: string, data: IFrontmatter[]) => {
   });
   cleanUrl = cleanUrl.replace(/[^\w./-]+/g, '-').replace(/\s+/g, '-').toLowerCase();
   return cleanUrl;
-}
+};
 
 export function urlSearchParamsToObject(params: URLSearchParams): Record<string, string> {
   const obj: Record<string, string> = {};

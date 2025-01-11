@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import VButton from 'UiKit/components/VButton/VButton.vue';
-import VSvgIcon from 'UiKit/components/VSvgIcon/VSvgIcon.vue';
+import VButton from 'UiKit/components/Base/VButton/VButton.vue';
+import closeIcon from 'UiKit/assets/images/close.svg';
 
 defineProps({
   title: String,
@@ -48,8 +48,8 @@ defineEmits(['close']);
       data-testid="close-button"
       @click="$emit('close')"
     >
-      <VSvgIcon
-        name="close"
+      <component
+        :is="closeIcon"
         class="v-modal-layout__close-icon"
         @click="$emit('close')"
       />
@@ -111,7 +111,7 @@ defineEmits(['close']);
 </template>
 
 <style lang="sass">
-@use 'UiKit/styles/_colors.sass' as colors
+@use 'UiKit/styles/_colors.scss' as colors
 .v-modal-layout
   $root: &
 

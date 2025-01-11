@@ -58,6 +58,3 @@ watch(() => props.active, () => {
     @ready="onReady"
   />
 </template>
-
-<style lang="sass">
-</style>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import VButton from 'UiKit/components/VButton/VButton.vue';
-import VSvgIcon from 'UiKit/components/VSvgIcon/VSvgIcon.vue';
+import VButton from 'UiKit/components/Base/VButton/VButton.vue';
+import uploadIcon from 'UiKit/assets/images/upload.svg';
+import fileIcon from 'UiKit/assets/images/file.svg';
 
 defineProps({
   isError: Boolean,
@@ -118,8 +119,8 @@ const removeFile = (index: number) => {
         icon-placement="left"
         class="v-uploader__file-button"
       >
-        <VSvgIcon
-          name="upload"
+        <component
+          :is="uploadIcon"
           class="v-uploader__file-icon"
         />
         Upload
@@ -134,8 +135,8 @@ const removeFile = (index: number) => {
           class="v-uploader__preview-card"
         >
           <div class="v-uploader__preview-card-info">
-            <VSvgIcon
-              name="file"
+            <component
+              :is="fileIcon"
               class="v-uploader__preview-card-icon"
             />
             <span class="v-uploader__preview-card-name is--small">
@@ -164,87 +165,105 @@ const removeFile = (index: number) => {
   </div>
 </template>
 
-<style lang="sass">
-@use 'UiKit/styles/_colors.sass' as colors
+<style lang="scss">
+@use 'UiKit/styles/_colors.scss' as colors;
 
-.v-uploader
-  $root: &
+.v-uploader{
+  $root: &;
 
-  &__dropzone
-    display: flex
-    padding: 32px 12px
-    flex-direction: column
-    justify-content: center
-    align-items: center
-    gap: 12px
-    align-self: stretch
-    border-radius: 2px
-    border: 1px dashed colors.$gray-40
-    background: colors.$gray-10
-    &.is--dragging
-      border-color: colors.$primary
+  &__dropzone{
+    display: flex;
+    padding: 32px 12px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    align-self: stretch;
+    border-radius: 2px;
+    border: 1px dashed colors.$gray-40;
+    background: colors.$gray-10;
+    &.is--dragging{
+      border-color: colors.$primary;
+    }
 
-    &.is--error
-      border-color: colors.$red
+    &.is--error{
+      border-color: colors.$red;
+    }
 
-    &.is--files
-      padding: 32px 12px 12px 12px
+    &.is--files{
+      padding: 32px 12px 12px 12px;
+    }
 
-    &.is--disabled
-      opacity: 0.3
+    &.is--disabled{
+      opacity: 0.3;
+    }
 
-    &:hover
-      border-color: colors.$primary
-      cursor: pointer
+    &:hover{
+      border-color: colors.$primary;
+      cursor: pointer;
+    }
+  }
+  input[type="file"]{
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+  }
 
-  input[type="file"]
-    opacity: 0
-    overflow: hidden
-    position: absolute
-    width: 1px
-    height: 1px
+  &__label{
+    color: colors.$gray-60;
+  }
 
-  &__label
-    color: colors.$gray-60
+  &__file-button{
+    #{$root}__dropzone.is--files &{
+      margin-bottom: 32px;
+    }
+  }
 
-  &__file-button
-    #{$root}__dropzone.is--files &
-      margin-bottom: 32px
+  &__preview{
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
 
-  &__preview
-    width: 100%
-    position: relative
-    z-index: 1
+  &__preview-card{
+    width: 100%;
+    display: flex;
+    border-top: 1px solid colors.$gray-20;
+    padding: 12px;
+    align-items: center;
+    gap: 12px;
+    justify-content: space-between;
+  }
 
-  &__preview-card
-    width: 100%
-    display: flex
-    border-top: 1px solid colors.$gray-20
-    padding: 12px
-    align-items: center
-    gap: 12px
-    justify-content: space-between
+  &__preview-card-info{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: colors.$gray-80;
+  }
 
-  &__preview-card-info
-    display: flex
-    align-items: center
-    gap: 12px
-    color: colors.$gray-80
+  &__preview-card-remove{
+    cursor: pointer;
+  }
 
-  &__preview-card-remove
-    cursor: pointer
+  &__comment{
+    color: colors.$gray-70;
+    margin-top: 4px;
+  }
 
-  &__comment
-    color: colors.$gray-70
-    margin-top: 4px
+  &__error{
+    margin-top: 4px;
+    color: colors.$red;
+  }
 
-  &__error
-    margin-top: 4px
-    color: colors.$red
-  
-  &__file-icon
-    width: 16px
+  &__file-icon{
+    width: 16px;
+  }
 
-  &__preview-card-icon
-    width: 16px
+  &__preview-card-icon{
+    width: 16px;
+  }
+}
 </style>

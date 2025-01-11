@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import VButton from 'UiKit/components/VButton/VButton.vue';
-import VFormCheckboxGroup from 'UiKit/components/VForm/VFormCheckboxGroup.vue';
+import VButton from 'UiKit/components/Base/VButton/VButton.vue';
+import VFormCheckboxGroup from 'UiKit/components/Base/VForm/VFormCheckboxGroup.vue';
 import {
   PropType, watch, ref, toRaw,
 } from 'vue';
-import { VSvgIcon } from 'UiKit/components/VSvgIcon';
 import { onClickOutside } from '@vueuse/core';
+import filterIcon from 'UiKit/assets/images/filter.svg';
 
 export interface IVFilter {
   value: string;
@@ -85,8 +85,8 @@ watch(() => props.items, () => {
       class="v-filter__button"
       @click="onFilterButtonClick"
     >
-      <VSvgIcon
-        name="filter"
+      <compoent
+        :is="filterIcon"
         class="v-filter__button-icon"
       />
       Filters&nbsp;
@@ -143,8 +143,8 @@ watch(() => props.items, () => {
 </template>
 
 <style lang="sass">
-@use 'UiKit/styles/_colors.sass' as colors
-@use 'UiKit/styles/_variables.sass' as variables
+@use 'UiKit/styles/_colors.scss' as colors
+@use 'UiKit/styles/_variables.scss' as variables
 .v-filter
   --v-filter-dropdown--min-width: 150px
 

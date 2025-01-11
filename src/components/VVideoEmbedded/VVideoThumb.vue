@@ -91,21 +91,25 @@ onMounted(() => {
 </template>
 
 
-<style lang="sass">
-.V-video-thumb
-  max-height: 100%
-  width: 100%
-  height: 100%
-  position: relative
+<style lang="scss">
+.V-video-thumb{
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  position: relative;
 
-  &.is--cover
-    object-fit: cover
-    background-size: cover
+  &.is--cover{
+    object-fit: cover;
+    background-size: cover;
+  }
 
-  &.is--contain
-    object-fit: contain
-    background-size: contain
+  &.is--contain{
+    object-fit: contain;
+    background-size: contain;
+  }
 
-  &.is--inherit
-    object-fit: inherit
+  &.is--inherit{
+    object-fit: inherit;
+  }
+}
 </style>

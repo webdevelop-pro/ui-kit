@@ -78,6 +78,3 @@ onBeforeUnmount(() => {
     :title="`VVideoEmbeddedVimeo ${props.id}`"
   />
 </template>
-
-<style lang="sass">
-</style>

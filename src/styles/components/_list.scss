@@ -1,0 +1,107 @@
+
+@use 'UiKit/styles/_colors.scss' as *;
+@use 'UiKit/styles/_variables.scss' as *;
+@use 'UiKit/styles/_mixins.scss' as *;
+
+ol {
+    list-style: decimal;
+    padding-left: 25px;
+    color: $gray-80;
+}
+
+ul {
+    list-style: disc;
+    padding-left: 25px;
+    color: $gray-80;
+}
+
+li {
+    color: inherit;
+}
+
+// SPACINGS
+.with-default-distance{
+    h2 + ol, h2 + ul,
+    .is--h2__title + ol,
+    .is--h2__title + ul{
+        margin-top: 24px;
+    }
+
+    h3 + ul,
+    .is--h3__title + ul{
+        margin-top: 20px;
+    }
+
+    ul,
+    ol{
+        margin-top: 25px;
+    }
+
+    li + li{
+        margin-top: 16px;
+    }
+
+    .is--container li + li{
+        margin-top: 5px;
+    }
+}
+
+h2 + ol.with-default-distance, h2 + ul.with-default-distance,
+.is--h2__title + ol.with-default-distance,
+.is--h2__title + ul.with-default-distance{
+    margin-top: 24px;
+}
+
+h3 + ul.with-default-distance,
+.is--h3__title + ul.with-default-distance{
+    margin-top: 20px;
+}
+
+ul.with-default-distance,
+ol.with-default-distance{
+    margin-top: 25px;
+}
+
+li.with-default-distance + li.with-default-distance{
+    margin-top: 16px;;
+}
+
+.is--container li.with-default-distance + li.with-default-distance{
+    margin-top: 5px;
+}
+
+// ENS SPACINGS
+
+.is--list-pointers{
+    ul{
+        width: 100%;
+        padding-left: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 17px 30px;
+        @media screen and (max-width: $tablet){
+            grid-template-columns: repeat(1, 1fr);
+            gap: 16px;
+        }
+    }
+
+    li{
+        width: 100%;
+        display: flex;
+        margin: 0;
+        padding: 12px 0;
+        align-items: center;
+        gap: 10px;
+        color: inherit;
+        border-bottom: 1px solid $gray-70;
+    }
+
+    li + li{
+        margin-top: 0;
+    }
+}
+.is--two-col-grid{
+    li:nth-child(2){
+        margin-top: 0;
+    }
+}

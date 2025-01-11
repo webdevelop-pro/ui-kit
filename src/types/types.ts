@@ -18,22 +18,9 @@ export interface IFrontmatter {
   summary?: string;
   is_main: boolean;
   order?: number;
+  position?: string;
 }
 
 export interface IPostContent extends IFrontmatter {
   content: string;
-}
-
-export interface IAuthor {
-  title: string;
-  publishDate: string;
-  draft?: boolean;
-  cover: {
-    image: string;
-  };
-  position?: string;
-  description: string;
-  tags?: string[];
-  slug?: string;
-  url?: string;
 }

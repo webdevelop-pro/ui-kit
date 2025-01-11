@@ -8,8 +8,8 @@ export const useBreadcrumbs = (allPages: IFrontmatter[]) => {
   const { page, frontmatter } = useData();
 
   const breadcrumbsListDefault = {
-    link: '/',
-    name: 'Home',
+    href: '/',
+    label: 'Home',
   };
   let breadcrumbsList = [breadcrumbsListDefault];
 
@@ -32,15 +32,15 @@ export const useBreadcrumbs = (allPages: IFrontmatter[]) => {
       const parent = findPageBySlug(allPages, slug);
       if (parent !== null) {
         breadcrumbsList.push({
-          link: parent.url,
-          name: parent.title,
+          href: parent.url,
+          label: parent.title,
         });
       }
     });
     if (breadcrumbsList[breadcrumbsList.length - 1].name === frontmatter.value.title) return;
     breadcrumbsList.push({
-      link: '',
-      name: frontmatter.value.title,
+      href: '',
+      label: frontmatter.value.title,
     });
   };
 

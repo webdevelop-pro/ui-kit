@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
-import VImage from 'UiKit/components/VImage/VImage.vue';
+import VImage from 'UiKit/components/Base/VImage/VImage.vue';
 
 // TODO: add option to load as svg
 
@@ -19,7 +19,7 @@ defineProps({
 </script>
 
 <template>
-  <section class="VPartners v-partners is--no-margin">
+  <section class="VPartners v-partners ">
     <div class="is--container">
       <h2
         v-if="title"
