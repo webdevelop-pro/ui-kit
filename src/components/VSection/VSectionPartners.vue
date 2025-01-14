@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
 import VImage from 'UiKit/components/Base/VImage/VImage.vue';
+import VSection from 'UiKit/components/VSection/VSection.vue';
 
 // TODO: add option to load as svg
 
@@ -19,35 +20,33 @@ defineProps({
 </script>
 
 <template>
-  <section class="VPartners v-partners ">
-    <div class="is--container">
-      <h2
-        v-if="title"
-        class="is--h6__title"
+  <VSection class="VSectionPartners v-section-partners ">
+    <h2
+      v-if="title"
+      class="is--h6__title"
+    >
+      {{ title }}
+    </h2>
+    <div class="v-section-partners__slider">
+      <div
+        v-for="item in items"
+        :key="item.id"
+        class="v-section-partners__slider-item"
       >
-        {{ title }}
-      </h2>
-      <div class="v-partners__slider">
-        <div
-          v-for="item in items"
-          :key="item.id"
-          class="v-partners__slider-item"
-        >
-          <VImage
-            :src="item.icon"
-            alt="Partner logo"
-            fit="contain"
-            loading="lazy"
-            class="v-partners__image"
-          />
-        </div>
+        <VImage
+          :src="item.icon"
+          alt="Partner logo"
+          fit="contain"
+          loading="lazy"
+          class="v-section-partners__image"
+        />
       </div>
     </div>
-  </section>
+  </VSection>
 </template>
 
 <style lang="scss">
-.v-partners {
+.v-section-partners {
   .is--h6__title {
     text-align: center;
     margin-bottom: 30px;
@@ -93,7 +92,7 @@ defineProps({
     filter: grayscale(100%);
     filter: grayscale(1);
     transition: all 0.2s ease;
-  
+
     &:hover {
       filter: grayscale(0);
       opacity: 1;
