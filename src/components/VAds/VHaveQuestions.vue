@@ -41,7 +41,7 @@ defineProps({
         <VButton
           v-if="buttonLink"
           as="a"
-          :href="buttonLink"
+          :href="encodeURI(buttonLink)"
           size="large"
           class="v-have-questions__button"
         >
@@ -126,6 +126,7 @@ defineProps({
     width: 100%;
     border-radius: 4.853px;
     border: 0.607px solid $gray-20;
+    margin-top: 0 !important;
   }
 
   &.is--no-image {

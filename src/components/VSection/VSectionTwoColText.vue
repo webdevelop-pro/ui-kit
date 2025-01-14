@@ -24,9 +24,8 @@ defineProps({
       <div v-html="text" />
       <VButton
         v-if="buttonLink && buttonText"
-        tag="a"
-        :href="buttonLink"
-        icon-placement="right"
+        as="a"
+        :href="encodeURI(buttonLink)"
         size="large"
         variant="link"
       >

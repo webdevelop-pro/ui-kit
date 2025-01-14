@@ -23,7 +23,7 @@ defineProps({
       >
         <a
           v-if="caption.url"
-          :href="caption.url"
+          :href="encodeURI(caption.url)"
           class="is--link-1"
         >
           {{ caption.text }}

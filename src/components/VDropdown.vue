@@ -42,7 +42,7 @@ const getComponentName = (item: IDropdown) => {
       >
         <component
           :is="getComponentName(menuItem)"
-          :href="menuItem.href"
+          :href="encodeURI(menuItem.href)"
           :to="menuItem.to"
           class="is--h6__title"
         >

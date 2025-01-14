@@ -55,8 +55,8 @@ const showInfoShort = computed(() => (
 
       <VButton
         v-if="buttonText && buttonHref && !noData"
-        tag="a"
-        :href="buttonHref"
+        as="a"
+        :href="encodeURI(buttonHref)"
         size="large"
         variant="link"
         class="v-section__button "

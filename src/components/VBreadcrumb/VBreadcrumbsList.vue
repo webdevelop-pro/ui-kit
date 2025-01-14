@@ -19,13 +19,13 @@ defineProps({
     <VBreadcrumbList>
       <template
         v-for="item in data"
-        :key="item.label"
+        :key="item.text"
       >
         <VBreadcrumbItem>
           <VBreadcrumbLink
-            :href="item.href"
+            :href="item.href ? encodeURI(item.href) : null"
           >
-            {{ item.label }}
+            {{ item.text }}
           </VBreadcrumbLink>
         </VBreadcrumbItem>
         <VBreadcrumbSeparator>

@@ -61,7 +61,7 @@ const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started'
               </p>
             </div>
             <VButton
-              tag="a"
+              as="a"
               :href="`${getStarted[0].url}?topic=${slug}`"
               size="large"
               variant="outlined"

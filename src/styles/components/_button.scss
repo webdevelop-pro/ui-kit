@@ -1,5 +1,5 @@
 
-.with-default-distance button,
-button.with-default-distance{
+.with-default-distance button:not([class]),
+button:not([class]).with-default-distance{
     margin-top: 40px;
 }

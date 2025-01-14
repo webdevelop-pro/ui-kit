@@ -22,7 +22,7 @@ const classLocal = computed(() => (props.variant ? `is--variant-${props.variant}
     <component
       :is="linkIs"
       v-if="href || to"
-      :href="href"
+      :href="encodeURI(href)"
       :to="to"
       class="v-card__link"
       :aria-label="`card link`"

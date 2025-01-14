@@ -54,8 +54,8 @@ const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started'
               class="v-section-top-highlight-dark__button-wrap is--margin-top-0"
             >
               <VButton
-                tag="a"
-                :href="`${getStarted[0].url}?topic=${topic}`"
+                as="a"
+                :href="encodeURI(`${getStarted[0].url}?topic=${topic}`)"
                 size="large"
               >
                 Get In Touch
@@ -63,7 +63,7 @@ const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started'
               <VButton
                 v-if="data.isCaseStudy"
                 as="a"
-                :href="data.caseStudyLink"
+                :href="encodeURI(data.caseStudyLink)"
                 size="large"
                 variant="link"
               >
@@ -81,6 +81,7 @@ const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started'
             v-if="props.data.imageMobile && props.data.image"
             :src="isTablet ? props.data.imageMobile : props.data.image"
             alt="highlight top image"
+            fit="cover"
             class="v-section-top-highlight-dark__image "
           />
         </slot>

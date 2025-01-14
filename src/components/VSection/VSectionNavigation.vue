@@ -6,6 +6,14 @@ import arrowLeftIcon from 'UiKit/assets/images/arrow-left.svg';
 defineProps({
   prev: String,
   next: String,
+  prevButtonText: {
+    type: String,
+    default: 'Previous Case',
+  },
+  nextButtonText: {
+    type: String,
+    default: 'Next Case',
+  },
 });
 </script>
 
@@ -13,27 +21,25 @@ defineProps({
   <section class="VSectionNavigation case-studies-navigation is--background-gray-10 ">
     <VButton
       v-if="prev"
-      tag="a"
-      :href="prev"
+      as="a"
+      :href="encodeURI(prev)"
       size="large"
       variant="link"
-      icon-placement="left"
     >
       <component
         :is="arrowLeftIcon"
         class="case-studies-navigation__button-icon"
       />
-      Previous Case
+      {{ prevButtonText }}
     </VButton>
     <VButton
       v-if="next"
-      tag="a"
-      :href="next"
+      as="a"
+      :href="encodeURI(next)"
       size="large"
       variant="link"
-      icon-placement="right"
     >
-      Next Case
+      {{ nextButtonText }}
       <component
         :is="arrowIcon"
         class="case-studies-navigation__button-icon"

@@ -96,8 +96,6 @@ watch(() => model, () => {
             :is-error="baseFormGroupProps.isFieldError"
             :model-value="model.email"
             placeholder="Email Address"
-            name="email"
-            text
             type="email"
             size="large"
             @update:model-value="model.email = $event"
@@ -107,7 +105,6 @@ watch(() => model, () => {
           size="large"
           :loading="loading"
           :disabled="isDisabledButton || loading"
-          :uppercase="false"
         >
           Subscribe
         </VButton>

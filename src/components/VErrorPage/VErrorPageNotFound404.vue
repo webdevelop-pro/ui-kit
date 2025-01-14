@@ -18,7 +18,7 @@ import imageBg from './illustration-404.svg?url';
           address bar. Let's start fresh by navigating back to the Homepage.
         </p>
         <VButton
-          tag="a"
+          as="a"
           href="/"
           size="large"
           class="errors-404__btn"

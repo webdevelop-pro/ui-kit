@@ -7,7 +7,7 @@ const props = defineProps<AvatarImageProps>();
 <template>
   <AvatarImage
     v-bind="props"
-    class="VAvatarImage v-avatar-image"
+    class="VAvatarImage v-avatar-image is--margin-top-0"
   />
 </template>
 

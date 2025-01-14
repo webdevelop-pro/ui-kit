@@ -28,7 +28,6 @@ const props = defineProps({
       muted
       loop
       playsInline
-      webkit-playsinline
     >
       <source
         :src="videoSrc"
@@ -54,7 +53,7 @@ const props = defineProps({
         <VButton
           v-if="props.buttonHref"
           as="a"
-          :href="props.buttonHref"
+          :href="encodeURI(props.buttonHref)"
           size="large"
           class="is--margin-top-40"
         >

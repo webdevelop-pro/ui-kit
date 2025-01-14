@@ -18,6 +18,8 @@ defineProps({
     required: true,
   },
   title: String,
+  subtitleLeft: String,
+  subtitleRight: String,
 });
 </script>
 
@@ -31,7 +33,7 @@ defineProps({
     </template>
     <div class="v-section-card-checkmarked-grid-subtitle__content">
       <div class="v-section-card-checkmarked-grid-subtitle__column">
-        <h3>For Investors:</h3>
+        <h3>{{ subtitleLeft }}</h3>
         <VCardCheckmarked
           v-for="(item, i) in functionsLeft"
           :key="i"
@@ -41,7 +43,7 @@ defineProps({
         />
       </div>
       <div class="v-section-card-checkmarked-grid-subtitle__column">
-        <h3>For Administrators:</h3>
+        <h3>{{ subtitleRight }}</h3>
         <VCardCheckmarked
           v-for="(item, i) in functionsRight"
           :key="i"

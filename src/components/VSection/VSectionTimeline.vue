@@ -95,8 +95,8 @@ const buttonText = computed(() => {
       class="case-studies-timeline__button-wrap"
     >
       <VButton
-        tag="a"
-        :href="`/get-started.html?topic=${topic}&text=Leave Us Your Email`"
+        as="a"
+        :href="encodeURI(`/get-started.html?topic=${topic}&text=Leave Us Your Email`)"
         variant="outlined"
         size="large"
         block

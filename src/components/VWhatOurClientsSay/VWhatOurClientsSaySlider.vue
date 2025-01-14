@@ -32,7 +32,6 @@ defineProps({
       >
         <div
           :key="active.id"
-          v-bind="active"
         >
           <p
             :key="active.id"

@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import VSectionTwoCol from 'UiKit/components/VSection/VSectionTwoCol.vue';
 import VCardBadgeListNumbered from 'UiKit/components/VCard/VCardBadgeListNumbered.vue';
-import { ICardBadge } from 'UiKit/components/VCard/VCardBadge.vue';
 import { PropType } from 'vue';
 
 const props = defineProps({
-  items: Array as PropType<ICardBadge[]>,
+  items: Array as PropType<string[]>,
   rightTitle: String,
   rightText: String,
   mobileReverse: {

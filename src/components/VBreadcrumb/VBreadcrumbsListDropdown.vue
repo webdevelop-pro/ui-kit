@@ -45,7 +45,7 @@ const visibleBreadcrumbs = computed(() => {
         <!-- Handle regular items -->
         <VBreadcrumbItem v-else>
           <VBreadcrumbLink
-            :href="item.href"
+            :href="encodeURI(item.href)"
           >
             {{ item.text }}
           </VBreadcrumbLink>

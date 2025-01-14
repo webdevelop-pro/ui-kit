@@ -58,6 +58,7 @@ defineProps({
     max-height: 26px;
     width: 100px;
     flex-shrink: 0;
+    margin-top: 0 !important;
   }
 }
 </style>

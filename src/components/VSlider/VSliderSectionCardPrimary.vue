@@ -42,7 +42,7 @@ defineProps({
           <a
             v-if="dataTitle?.link"
             class="is--link-1"
-            :href="`${dataTitle?.link}?topic=${topic}`"
+            :href="encodeURI(`${dataTitle?.link}?topic=${topic}`)"
           >
             {{ dataTitle?.linkText }}
           </a>

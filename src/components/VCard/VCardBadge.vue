@@ -19,7 +19,6 @@ defineProps({
   <VCard class="VCardBadge v-card-badge is--card">
     <VCardHeader>
       <VBadge
-        round
         :class="[classes]"
       >
         {{ tagText }}

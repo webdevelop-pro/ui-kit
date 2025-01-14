@@ -116,7 +116,6 @@ const removeFile = (index: number) => {
       <VButton
         size="small"
         variant="outlined"
-        icon-placement="left"
         class="v-uploader__file-button"
       >
         <component

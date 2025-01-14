@@ -6,3 +6,9 @@
     <slot />
   </div>
 </template>
+
+<style lang="scss">
+.v-card-content {
+  width: 100%;
+}
+</style>

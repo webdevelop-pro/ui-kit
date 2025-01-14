@@ -49,7 +49,7 @@ const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started'
       <VButton
         v-if="showButton"
         as="a"
-        :href="`${getStarted[0].url}?topic=${topic}&text=${buttonText}`"
+        :href="encodeURI(`${getStarted[0].url}?topic=${topic}&text=${buttonText}`)"
         variant="tetriary"
         size="large"
         class="is--margin-top-40"
@@ -63,7 +63,7 @@ const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started'
         <VImage
           :src="imageBottom"
           alt="Products highlight bottom image"
-          class="v-highlight__bottom-image "
+          class="v-highlight__bottom-image"
         />
       </div>
     </div>
@@ -130,6 +130,7 @@ const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started'
     height: 100%;
     width: auto;
     min-width: 628px;
+    margin-top: 0 !important;
 
     @include media-lte(tablet) {
       min-width: auto;

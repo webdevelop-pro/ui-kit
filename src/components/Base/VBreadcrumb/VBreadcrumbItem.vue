@@ -12,7 +12,7 @@
 .v-breadcumb-item {
     gap: 8px;
     display: flex;
-    margin: 0;
+    margin: 0 !important;
 
     a[href=""],
     a:not([href]){

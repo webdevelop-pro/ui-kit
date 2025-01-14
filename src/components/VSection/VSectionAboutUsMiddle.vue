@@ -17,7 +17,7 @@ export interface IAboutUsMiddle {
     title: string;
     text: string;
     showCareersButton: boolean;
-  };
+  }[];
 }
 
 defineProps({
@@ -54,7 +54,7 @@ const careers = filterPages(allPages as IFrontmatter[], 'slug', 'careers');
         <VButton
           v-if="item.showCareersButton"
           as="a"
-          :href="careers[0].url"
+          :href="encodeURI(careers[0].url)"
           size="large"
           variant="link"
           class="is--margin-top-40"
@@ -72,7 +72,7 @@ const careers = filterPages(allPages as IFrontmatter[], 'slug', 'careers');
         :src="data.background"
         fit="cover"
         alt="about us middle image"
-        class="about-us-middle__image "
+        class="about-us-middle__image is--margin-top-0"
       />
     </div>
   </VSectionTwoCol>

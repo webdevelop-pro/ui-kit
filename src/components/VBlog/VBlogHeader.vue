@@ -32,7 +32,7 @@ const year = computed(() => String(new Date(props.data?.publishDate).getFullYear
           class="v-blog-header__author-image "
         />
         <a
-          :href="author?.url"
+          :href="encodeURI(author?.url)"
           class="v-blog-header__author-image-link"
         >
           <span class="is--visually-hidden">{{ author?.title }}</span>
@@ -40,7 +40,7 @@ const year = computed(() => String(new Date(props.data?.publishDate).getFullYear
       </div>
       <div class="v-blog-header__author-details">
         <a
-          :href="author?.url"
+          :href="encodeURI(author?.url)"
           class="v-blog-header__author-name is--h5__title"
         >
           {{ author?.title }}

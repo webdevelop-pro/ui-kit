@@ -26,7 +26,7 @@ const delegatedProps = computed(() => {
   overflow: hidden;
   color: colors.$gray-80;
   transition: all 0.3s ease;
-  margin: 0;
+  margin: 0 !important;
 }
 .v-accordion-content[data-state="open"] {
   animation: slideDown 0.3s ease;

@@ -81,7 +81,6 @@ watch(() => props.items, () => {
       size="small"
       variant="link"
       :disabled="disabled"
-      icon-placement="left"
       class="v-filter__button"
       @click="onFilterButtonClick"
     >

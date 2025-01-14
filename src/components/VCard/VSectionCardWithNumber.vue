@@ -50,7 +50,7 @@ const isPositionOther = computed(() => ((props.position === 'left') ? 'right' : 
           <a
             v-if="linkHref && linkText"
             class="is--link-1"
-            :href="linkHref"
+            :href="encodeURI(linkHref)"
           >
             {{ linkText }}
           </a>

@@ -31,5 +31,9 @@ defineProps({
   &__index {
     color: $primary;
   }
+
+  p {
+    margin-top: 0 !important;
+  }
 }
 </style>

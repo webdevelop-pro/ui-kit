@@ -33,7 +33,6 @@ const sliderFormatted = computed(() => props.slider.map((item, index) => ({
   >
     <div
       :key="active.id"
-      v-bind="active"
       class="what-our-clients-say-sidebar__item"
     >
       <p

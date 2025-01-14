@@ -31,7 +31,7 @@ const noData = computed(() => props.items?.length === 0);
       <VCardFeatures
         v-for="(item, i) in items"
         :key="i"
-        :href="item.url"
+        :href="encodeURI(item.url)"
         button-text="Read More"
       >
         <h3>

@@ -3,15 +3,15 @@ import { computed } from 'vue';
 import check from './assets/check.svg?url';
 
 interface Props {
-  type?: 'active' | 'inner' | 'not-complete' | 'complete' | 'highlight' | 'inner-ighlight'
+  type?: 'active' | 'inner' | 'not-complete' | 'complete' | 'highlight' | 'inner-ighlight';
 }
 
 const props = withDefaults(defineProps<Props>(), {
   type: 'active',
-})
+});
 
 const btnClasses = computed(() => {
-  let classes = `is--type-${props.type} `;
+  const classes = `is--type-${props.type} `;
   return classes;
 });
 </script>

@@ -36,8 +36,8 @@ const SOCIAL_LIST = [
         <VButton
           v-for="button in SOCIAL_LIST"
           :key="button.name"
-          tag="a"
-          :href="button.shareHref + link"
+          as="a"
+          :href="encodeURI(button.shareHref + link)"
           variant="outlined"
           icon-only
         >

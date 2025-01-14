@@ -18,7 +18,10 @@ const props = defineProps({
   twoCol: Boolean,
   title: String,
   subTitle: String,
-  color: String as PropType<'dark' | 'primary'>,
+  color: {
+    type: String as PropType<'dark' | 'primary'>,
+    default: 'primary',
+  },
 });
 
 const isDark = computed(() => props.color === 'dark');

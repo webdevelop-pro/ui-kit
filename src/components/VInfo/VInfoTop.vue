@@ -18,7 +18,6 @@ defineProps({
     <slot>
       <VBadge
         v-if="tagText"
-        round
         color="secondary-light"
       >
         {{ tagText }}
@@ -43,7 +42,7 @@ defineProps({
           <VButton
             v-if="getInTouchUrl"
             as="a"
-            :href="getInTouchUrl"
+            :href="encodeURI(getInTouchUrl)"
             size="large"
           >
             Get In Touch
@@ -51,7 +50,7 @@ defineProps({
           <VButton
             v-if="useCaseUrl"
             as="a"
-            :href="useCaseUrl"
+            :href="encodeURI(useCaseUrl)"
             size="large"
             variant="link"
             class="is--margin-top-0"

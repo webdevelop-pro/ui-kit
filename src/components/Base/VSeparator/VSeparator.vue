@@ -1,15 +1,22 @@
 <script setup lang="ts">
 import { Separator, type SeparatorProps } from 'radix-vue';
+import { computed } from 'vue';
 
 const props = defineProps<
   SeparatorProps & { label?: string; withContainer?: boolean }
 >();
+
+const delegatedProps = computed(() => {
+  const { withContainer: _, ...delegated } = props;
+
+  return delegated;
+});
 </script>
 
 <template>
   <div :class="{ 'is--container': withContainer }">
     <Separator
-      v-bind="props"
+      v-bind="delegatedProps"
       class="VSeparator v-separator"
     >
       <span

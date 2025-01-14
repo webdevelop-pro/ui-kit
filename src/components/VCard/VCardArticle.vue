@@ -169,6 +169,7 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
     width: 168px;
     height: 125px;
     flex-shrink: 0;
+    margin-top: 0 !important;
 
     @media screen and (max-width: 767px) {
       order: 1;

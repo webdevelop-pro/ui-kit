@@ -40,7 +40,7 @@ const forwardedProps = useForwardProps(props);
     transform-origin: center;
     transform: rotate(0);
     margin-left: 9px;
-    margin-top: 0;
+    margin-top: 0 !important;
   }
 }
 

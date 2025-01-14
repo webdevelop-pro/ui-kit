@@ -44,7 +44,7 @@ const getImageType = () => {
 
 <template>
   <VCard
-    :href="data.url"
+    :href="encodeURI(data.url)"
     class="VCardPrimary v-card-primary"
     :aria-label="data.title"
     :class="{ 'is--hoverable': data.url }"
@@ -58,11 +58,11 @@ const getImageType = () => {
           <VImage
             v-if="data.imageType || getImageType()"
             loading="lazy"
-            class="v-card-primary__type-icon "
+            class="v-card-primary__type-icon is--margin-top-0"
             :src="data.imageType || getImageType()"
             alt="CardWithBlueTitleLine title icon"
           />
-          <h3 class="v-card-primary__type is--h5__title">
+          <h3 class="v-card-primary__type is--h5__title is--margin-top-0">
             {{ data.type }}
           </h3>
         </div>
@@ -95,7 +95,7 @@ const getImageType = () => {
           as="a"
           variant="tetriary"
           color="primary"
-          :href="data.url"
+          :href="encodeURI(data.url)"
           class="is--margin-top-10"
         >
           <slot name="buttonText">

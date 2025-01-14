@@ -49,7 +49,7 @@ defineProps({
         <VImage
           :src="isTablet ? data.imageSmall : data.image"
           alt="development process image"
-          class="development-process__image "
+          class="development-process__image is--margin-top-0"
         />
       </div>
     </div>

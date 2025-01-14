@@ -28,8 +28,8 @@ defineProps({
     <VTooltip
       :disabled="!tooltip"
     >
-      <div class="v-card-checkmarked__top">
-        <div
+      <span class="v-card-checkmarked__top">
+        <span
           class="v-card-checkmarked__icon-wrap"
           :class="{ 'is--icon-hollow': icon === 'hollow', 'is--icon-dark-bg': icon === 'darkbg' }"
         >
@@ -37,11 +37,11 @@ defineProps({
             :is="CheckIcon"
             class="v-card-checkmarked__icon"
           />
-        </div>
+        </span>
         <span class="is--h4__title">
           {{ title }}
         </span>
-      </div>
+      </span>
       <template #content>
         <div v-html="tooltip" />
       </template>
@@ -73,6 +73,9 @@ defineProps({
     border: 1px solid colors.$gray-20;
     background: colors.$gray-10;
     padding: 20px;
+  }
+  &.is--dark-mode{
+    color: colors.$white;
   }
 
   &:not(.is--card) + &:not(.is--card){
@@ -136,6 +139,11 @@ defineProps({
     #{$root}.is--dark-mode &{
       color: colors.$gray-10;
     }
+  }
+
+  .is--h4__title {
+    margin-top: 0 !important;
+    color: inherit;
   }
 }
 </style>

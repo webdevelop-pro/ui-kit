@@ -23,7 +23,6 @@ defineProps<IVCardFeatures>();
 
         <VButton
           v-if="buttonText"
-          icon-placement="right"
           size="small"
           variant="link"
           class="v-card-features__button is--hover-visible-elevate-up-component "

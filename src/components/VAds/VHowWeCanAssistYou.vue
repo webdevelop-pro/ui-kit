@@ -41,8 +41,7 @@ defineProps({
         <VButton
           v-if="data?.url && data?.buttonText"
           as="a"
-          :href="data?.url"
-          icon-placement="right"
+          :href="encodeURI(data?.url)"
           size="large"
         >
           {{ data.buttonText }}
@@ -78,7 +77,7 @@ defineProps({
           </p>
           <a
             v-if="item.url"
-            :href="item.url"
+            :href="encodeURI(item.url)"
             :aria-label="item.title"
           >
             Learn More
@@ -181,7 +180,7 @@ defineProps({
   }
 
   img {
-    margin-top: 0;
+    margin-top: 0 !important;
   }
 
   &__right {
@@ -218,10 +217,10 @@ defineProps({
 
   &__background-image {
     width: 100%;
-    height: 100%;
+    // height: 100%;
     border-radius: 2.332px;
     border: 0.603px solid $gray-20;
-    object-fit: contain;
+    // object-fit: contain;
     background-color: $white;
     @include media-gte(tablet) {
       border-radius: 10.958px;

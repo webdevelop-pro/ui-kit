@@ -28,7 +28,6 @@ const componentName = computed(() => {
     <component
       :is="logoIcon"
       class="v-logo__desktop"
-      name="logo"
     />
     <component
       :is="logoMobIcon"

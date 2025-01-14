@@ -22,7 +22,7 @@ defineProps({
         <a
           v-if="linkText && linkHref"
           class="is--link-1"
-          :href="linkHref"
+          :href="encodeURI(linkHref)"
         >
           {{ linkText }}
         </a>

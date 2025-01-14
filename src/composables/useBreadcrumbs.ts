@@ -9,7 +9,7 @@ export const useBreadcrumbs = (allPages: IFrontmatter[]) => {
 
   const breadcrumbsListDefault = {
     href: '/',
-    label: 'Home',
+    text: 'Home',
   };
   let breadcrumbsList = [breadcrumbsListDefault];
 
@@ -33,14 +33,14 @@ export const useBreadcrumbs = (allPages: IFrontmatter[]) => {
       if (parent !== null) {
         breadcrumbsList.push({
           href: parent.url,
-          label: parent.title,
+          text: parent.title,
         });
       }
     });
     if (breadcrumbsList[breadcrumbsList.length - 1].name === frontmatter.value.title) return;
     breadcrumbsList.push({
       href: '',
-      label: frontmatter.value.title,
+      text: frontmatter.value.title,
     });
   };
 
