@@ -1,0 +1,9 @@
+export { default as VCommand } from './VCommand.vue';
+export { default as VCommandDialog } from './VCommandDialog.vue';
+export { default as VCommandEmpty } from './VCommandEmpty.vue';
+export { default as VCommandGroup } from './VCommandGroup.vue';
+export { default as VCommandInput } from './VCommandInput.vue';
+export { default as VCommandItem } from './VCommandItem.vue';
+export { default as VCommandList } from './VCommandList.vue';
+export { default as VCommandSeparator } from './VCommandSeparator.vue';
+export { default as VCommandShortcut } from './VCommandShortcut.vue';

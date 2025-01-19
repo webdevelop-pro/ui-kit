@@ -19,3 +19,9 @@ const delegatedProps = computed(() => {
     <slot />
   </TabsContent>
 </template>
+
+<style lang="scss">
+.v-tabs-content {
+  margin-top: 40px;
+}
+</style>

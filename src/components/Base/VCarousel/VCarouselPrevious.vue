@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ArrowLeft from 'UiKit/assets/images/arrow-left-primary.svg?component';
+import ArrowLeft from 'UiKit/assets/images/arrow-left.svg?component';
 import { useCarousel } from './useCarousel';
 import { VButton } from '../VButton';
 

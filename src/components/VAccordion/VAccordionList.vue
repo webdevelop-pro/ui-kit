@@ -34,7 +34,9 @@ defineProps({
       <VAccordionContent
         class="v-accordion-list-default__content is--body"
       >
-        <p v-html="item.description" />
+        <p
+          v-html="item.description"
+        />
       </VAccordionContent>
     </VAccordionItem>
   </VAccordion>

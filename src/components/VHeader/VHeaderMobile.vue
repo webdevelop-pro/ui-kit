@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { defineAsyncComponent, hydrateOnVisible, ref } from 'vue';
 import {
   VSheet, VSheetContent, VSheetTrigger, VSheetHeader, VSheetTitle,
   VSheetDescription,
@@ -8,6 +8,14 @@ import VMenuBurger from 'UiKit/components/VHeader/VMenuBurger.vue';
 import VHeaderNavigationListItem from './VHeaderNavigationListItem.vue';
 import { MENU_HEADER_RIGHT } from '@/config/menu';
 import { VisuallyHidden } from 'radix-vue';
+
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const VNavigationMenuLink = defineAsyncComponent({
+  loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuLink.vue'),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  hydrate: hydrateOnVisible(),
+});
 
 const open = ref(false);
 </script>
@@ -38,7 +46,17 @@ const open = ref(false);
           class="v-header-mobile__list"
         >
           <li class="v-header-mobile__item">
-            <span class="is--h5__title v-header-mobile__title">
+            <VNavigationMenuLink
+              v-if="!menuItem.children"
+              :href="menuItem.link"
+              @click="open = false"
+            >
+              {{ menuItem.text }}
+            </VNavigationMenuLink>
+            <span
+              v-else
+              class="is--h5__title v-header-mobile__title"
+            >
               {{ menuItem.text }}
             </span>
             <ul

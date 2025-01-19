@@ -2,7 +2,7 @@
 import VSliderCardPrimary from './VSliderCardPrimary.vue';
 import { ICardPrimary } from 'UiKit/components/VCard/VCardPrimary.vue';
 import { PropType } from 'vue';
-import VSectionShort from 'UiKit/components/VInfo/VInfoShort.vue';
+import VSection from 'UiKit/components/VSection/VSection.vue';
 
 interface ITitleSlider {
   title?: string;
@@ -26,33 +26,17 @@ defineProps({
 </script>
 
 <template>
-  <section class="VSliderSectionCardPrimary v-slider-section-card-primary">
-    <div class="is--container">
-      <VSectionShort>
-        <slot>
-          <h2 v-if="dataTitle.title">
-            {{ dataTitle.title }}
-          </h2>
-          <p
-            v-if="dataTitle?.subtitle"
-            class="is--subheading-1"
-          >
-            {{ dataTitle?.subtitle }}
-          </p>
-          <a
-            v-if="dataTitle?.link"
-            class="is--link-1"
-            :href="encodeURI(`${dataTitle?.link}?topic=${topic}`)"
-          >
-            {{ dataTitle?.linkText }}
-          </a>
-        </slot>
-      </VSectionShort>
-      <VSliderCardPrimary
-        :data="data"
-      />
-    </div>
-  </section>
+  <VSection
+    :title="dataTitle.title"
+    :sub-title="dataTitle?.subtitle"
+    :link-href="encodeURI(`${dataTitle?.link}?topic=${topic}`)"
+    :link-text="dataTitle?.linkText"
+    class="VSliderSectionCardPrimary v-slider-section-card-primary"
+  >
+    <VSliderCardPrimary
+      :data="data"
+    />
+  </VSection>
 </template>
 
 <style lang="scss">

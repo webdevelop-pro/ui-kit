@@ -24,6 +24,13 @@ const VHeaderMobile = defineAsyncComponent({
   hydrate: hydrateOnVisible(),
 });
 
+defineProps({
+  showNavigation: {
+    type: Boolean,
+    default: true,
+  },
+});
+
 const { y } = useWindowScroll();
 const isFixed = ref(false);
 
@@ -48,7 +55,10 @@ watchPostEffect(() => {
       />
 
       <div class="v-header__right ">
-        <VHeaderNavigation class="is--gt-desktop-md-show" />
+        <VHeaderNavigation
+          v-if="showNavigation"
+          class="is--gt-desktop-md-show"
+        />
 
         <div class="is--gt-desktop-md-show v-header__data">
           <slot />
@@ -109,6 +119,9 @@ watchPostEffect(() => {
 
   &__data {
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 }
 </style>

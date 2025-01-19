@@ -58,9 +58,9 @@ if (props.fade || isAutoplay.value) {
   width: 100%;
 
   &:not(.is--autoplay) {
-    margin-top: 50px;
+    margin-top: 10px;
     @media screen and (max-width: 767px) {
-      margin-top: 80px;
+      margin-top: 40px;
     }
   }
 

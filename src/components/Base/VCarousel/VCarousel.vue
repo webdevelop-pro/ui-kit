@@ -2,6 +2,9 @@
 import type { CarouselEmits, CarouselProps } from './interface';
 import { useProvideCarousel } from './useCarousel';
 
+// yarn add embla-carousel-vue
+
+
 const props = withDefaults(defineProps<CarouselProps>(), {
   orientation: 'horizontal',
 });

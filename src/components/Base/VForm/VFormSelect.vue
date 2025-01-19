@@ -1,8 +1,9 @@
 <script lang="ts" setup>
+import { ref, watch } from 'vue';
 import {
-  computed, ref, h, useSlots,
-} from 'vue';
-import VSelect from 'vue-select';
+  VSelect, VSelectTrigger, VSelectContent, VSelectValue,
+  VSelectGroup, VSelectItem,
+} from 'UiKit/components/Base/VForm/VSelect';
 
 // IMPORTANT: before using this component you need to install library
 // type in the terminal: yarn add vue-select@beta
@@ -10,176 +11,45 @@ import VSelect from 'vue-select';
 type ObjectOptionValue = string | number | boolean;
 type ObjectOption = Record<string, ObjectOptionValue>
 
-const slots = useSlots();
 
-const props = withDefaults(defineProps<{
-  /**
-   * Options for select
-   */
+withDefaults(defineProps<{
   options: ObjectOption | ObjectOption[] | string[];
-  /**
-   * Key for label in an object option when options is array of objects
-   */
   itemLabel?: string;
-  /**
-   * Key for value in an object option when options is array of objects
-   */
   itemValue?: string;
-  /**
-   * Make select searchable
-   */
-  searchable?: boolean;
-  /**
-   * Sort options in ASC by label
-   */
-  sort?: boolean;
-  /**
-   * Exclude options from select. Pass array of values even if options is array of objects
-   */
-  excludeOptions?: Array<string|number>;
-  /**
-   * Return object instead of value if options is array of objects
-   */
-  returnObject?: boolean;
-  /**
-   * Swap label and value in options if options is simple object
-   */
-  swapLabelAndValue?: boolean;
-  /**
-   * size - default is large, can be: large(height: 48px)/medium(height: 40px)
-   */
   size?: 'large' | 'medium';
   isError?: boolean;
   readonly?: boolean;
   disabled?: boolean;
-  dropdownAbsolute?: boolean;
 }>(), {
   itemLabel: 'label',
   itemValue: 'value',
   size: 'large',
 });
 
-const emit = defineEmits<{(e: 'update:modelValue', value: ObjectOption|ObjectOptionValue): void;
-}>();
 
-// element for open icon
-const OpenIndicator = {
-  render: () => h('span', ''),
-};
-
-const isFocused = ref(false);
-const selectComponent = ref();
-
-// Normalize options. Changes only if options is object
-// Using props.itemLabel and props.itemValue to set label and value for option
-const normalizedOptions = computed((): ObjectOption[] | string[] => {
-  if (Array.isArray(props.options)) return props.options;
-  return Object.entries(props.options).map(([key, value]) => (
-    // If key is value and value is label
-    props.swapLabelAndValue
-      ? { [props.itemValue]: String(key), [props.itemLabel]: String(value) }
-      : { [props.itemValue]: String(value), [props.itemLabel]: key }
-  ));
-});
-
-// Filter options by excludeOptions
-const filteredOptions = computed(() => {
-  if (!props.excludeOptions || !normalizedOptions.value.length) return normalizedOptions.value;
-  // Filter for if options is array of strings
-  if (typeof normalizedOptions.value[0] === 'string') {
-    return (normalizedOptions.value as string[]).filter((option) => (
-      !(props.excludeOptions as string[]).includes(option)
-    ));
-  }
-  // Filter for if options is array of objects
-  return (normalizedOptions.value as ObjectOption[]).filter((option) => (
-    !(props.excludeOptions as string[]).includes((option)[props.itemValue] as string)
-  ));
-});
-
-// Sort option by label if it required by props.sort
-const sortedOptions = computed(() => {
-  if (!props.sort || !normalizedOptions.value.length) return filteredOptions.value;
-  if (typeof filteredOptions.value[0] === 'string') {
-    return (filteredOptions.value.slice() as string[]).sort();
-  }
-  return (filteredOptions.value.slice() as ObjectOption[]).sort((a, b) => (
-    String(a[props.itemLabel]).localeCompare(String(b[props.itemLabel]))
-  ));
-});
-
-// transform value for selected option
-// By default if option is object return value of option but return object if props.returnObject is true
-function getReturnValue(value: string | ObjectOption): string | ObjectOptionValue | ObjectOption {
-  if (props.returnObject || typeof value === 'string') return value;
-  return (value)[props.itemValue];
-}
-
-// find from options by search string
-// ignores types and cases
-function findOptionsBySearchString(searchString: string) {
-  if (!searchString || !sortedOptions.value.length) return null;
-  if (typeof sortedOptions.value[0] === 'string') {
-    return (sortedOptions.value as string[])
-      .find((item: string) => String(item).toLowerCase() === searchString.toLowerCase());
-  }
-  return (sortedOptions.value as ObjectOption[])
-  // .find(item => String(item[props.itemValue]).toLowerCase() === searchString.toLowerCase()
-  //   || item[props.itemLabel] === searchString.toLowerCase());
-    .find((item) => item[props.itemLabel] === searchString.toLowerCase());
-}
-
-// On user input search
-// Also triggers on browser form autofill
-function onSearch(searchString: string) {
-  //
-  const item = findOptionsBySearchString(searchString);
-  if (item) {
-    emit('update:modelValue', getReturnValue(item));
-    selectComponent.value.onAfterSelect();
-  }
-}
-
+const componentValue = ref();
 </script>
 
 <template>
-  <VSelect
-    ref="selectComponent"
-    class="VFormSelect v-select"
-    :class="[`is--select-${size}`, {
-      'is--error': isError,
-      'is--disabled': disabled,
-      'is--readonly': readonly,
-      'is--append': slots.append,
-      'is--focused': isFocused,
-      'is--dropdown-absolute': dropdownAbsolute,
-    }]"
-    :options="sortedOptions"
-    :searchable="searchable"
-    :clearable="false"
-    :reduce="getReturnValue"
-    :label="itemLabel"
-    :autocomplete="isFocused ? 'new-password' : 'on'"
-    :components="{ OpenIndicator }"
-    v-bind="$attrs"
-    @search:focus="isFocused = true"
-    @search:blur="isFocused = false"
-    @search="onSearch"
-    @update:model-value="emit('update:modelValue', $event)"
-  >
-    <template
-      v-if="slots.append"
-      #header
+  <VSelect v-model="componentValue">
+    <VSelectTrigger
+      :size="size"
+      :disabled="disabled || readonly"
+      :class="{ 'is--disabled': disabled, 'is--readonly': readonly, 'is--error': isError }"
     >
-      <div class="v-select__append">
-        <slot name="append" />
-      </div>
-    </template>
-    <template #no-options>
-      <div class="v-select__no-options">
-        No data available
-      </div>
-    </template>
+      <VSelectValue placeholder="Select a fruit" />
+    </VSelectTrigger>
+    <VSelectContent>
+      <VSelectGroup>
+        <VSelectItem
+          v-for="(item, index) in options"
+          :key="item[itemValue] + index"
+          :value="item[itemValue]"
+        >
+          {{ item[itemLabel] }}
+        </VSelectItem>
+      </VSelectGroup>
+    </VSelectContent>
   </VSelect>
 </template>
 
@@ -194,6 +64,8 @@ function onSearch(searchString: string) {
   font-family: 'Avenir';
   font-weight: 400;
   background: colors.$gray-10;
+  position: relative;
+
   &.is--select-large{
     .vs__dropdown-toggle{
       height: 48px;
@@ -239,15 +111,6 @@ function onSearch(searchString: string) {
   &.is--append{
     .vs__dropdown-toggle{
       padding-left: 43px;
-    }
-  }
-  &.is--dropdown-absolute{
-    position: relative;
-    .vs__dropdown-menu{
-      position: absolute;
-      top: 100%;
-      width: 100%;
-      z-index: 10;
     }
   }
   &.vs--unsearchable{
@@ -331,6 +194,10 @@ function onSearch(searchString: string) {
     border-radius: 0;
     max-height: 222px;
     overflow: scroll;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 10;
   }
 
   .vs__dropdown-option{

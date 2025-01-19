@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ArrowRight from 'UiKit/assets/images/arrow-right.svg';
 import VSection from 'UiKit/components/VSection/VSection.vue';
+import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 
 const props = defineProps({
   title: String,

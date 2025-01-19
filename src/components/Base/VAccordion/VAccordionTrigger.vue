@@ -66,7 +66,8 @@ const delegatedProps = computed(() => {
   justify-content: space-between;
   padding-right: 16px;
   cursor: pointer;
-  padding: 12px 16px;
+  padding: 16px;
+  text-align: inherit;
 
   &:hover{
     background-color: colors.$gray-10;

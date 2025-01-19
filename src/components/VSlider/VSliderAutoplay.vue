@@ -4,6 +4,10 @@ import { PropType, ref, watch } from 'vue';
 import VCarouselItem from 'UiKit/components/Base/VCarousel/VCarouselItem.vue';
 import { CarouselApi } from '../Base/VCarousel';
 
+// yarn add embla-carousel-autoplay
+// yarn add embla-carousel-fade
+
+
 interface ISliderAutpoplay {
   id: number;
   testimonials?: {

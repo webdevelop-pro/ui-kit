@@ -1,0 +1,9 @@
+export { default as VDialog } from './VDialog.vue';
+export { default as VDialogClose } from './VDialogClose.vue';
+export { default as VDialogContent } from './VDialogContent.vue';
+export { default as VDialogDescription } from './VDialogDescription.vue';
+export { default as VDialogFooter } from './VDialogFooter.vue';
+export { default as VDialogHeader } from './VDialogHeader.vue';
+export { default as VDialogScrollContent } from './VDialogScrollContent.vue';
+export { default as VDialogTitle } from './VDialogTitle.vue';
+export { default as VDialogTrigger } from './VDialogTrigger.vue';
