@@ -1,18 +1,17 @@
 <script lang="ts" setup>
-import { ref, watch } from 'vue';
 import {
   VSelect, VSelectTrigger, VSelectContent, VSelectValue,
   VSelectGroup, VSelectItem,
 } from 'UiKit/components/Base/VForm/VSelect';
+import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
+import { computed, onMounted, ref, watch } from 'vue';
 
-// IMPORTANT: before using this component you need to install library
-// type in the terminal: yarn add vue-select@beta
 
 type ObjectOptionValue = string | number | boolean;
 type ObjectOption = Record<string, ObjectOptionValue>
 
 
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   options: ObjectOption | ObjectOption[] | string[];
   itemLabel?: string;
   itemValue?: string;
@@ -20,24 +19,64 @@ withDefaults(defineProps<{
   isError?: boolean;
   readonly?: boolean;
   disabled?: boolean;
+  placeholder?: string;
+  loading?: boolean;
 }>(), {
   itemLabel: 'label',
   itemValue: 'value',
   size: 'large',
 });
 
+const modelValue = defineModel();
 
-const componentValue = ref();
+// Helper function to find the label or value based on modelValue (case-insensitive)
+const findValueInOption = (value: ObjectOptionValue) => {
+  if (!value) return value;
+  if (Array.isArray(props.options)) {
+    // Find the matching option
+    return props.options.find((option) => option[props.itemValue].toString().toLowerCase() === value.toString().toLowerCase()
+          || option[props.itemLabel].toString().toLowerCase() === value.toString().toLowerCase());
+  }
+
+  return null;
+};
+
+// Computed display value function
+const displayValue = (value: ObjectOptionValue) => {
+  if (Array.isArray(props.options) && typeof props.options[0] === 'object') {
+    const found = findValueInOption(value);
+    return found ? found[props.itemValue] : value;
+  }
+  return value;
+};
+
+watch(() => [props.options?.length, modelValue.value], () => {
+  if (props.options?.length > 0) {
+    modelValue.value = displayValue(modelValue.value);
+  }
+});
+
+const selectedValue = computed(() => findValueInOption(modelValue.value));
 </script>
 
 <template>
-  <VSelect v-model="componentValue">
+  <VSkeleton
+    v-if="loading"
+    width="100%"
+    class="v-select-trigger"
+    :class="`is--size-${size}`"
+  />
+  <VSelect
+    v-else
+    v-bind="$attrs"
+    v-model="modelValue"
+  >
     <VSelectTrigger
       :size="size"
       :disabled="disabled || readonly"
       :class="{ 'is--disabled': disabled, 'is--readonly': readonly, 'is--error': isError }"
     >
-      <VSelectValue placeholder="Select a fruit" />
+      <VSelectValue :placeholder="placeholder" />
     </VSelectTrigger>
     <VSelectContent>
       <VSelectGroup>
@@ -46,7 +85,12 @@ const componentValue = ref();
           :key="item[itemValue] + index"
           :value="item[itemValue]"
         >
-          {{ item[itemLabel] }}
+          <slot
+            name="item"
+            :item="item"
+          >
+            {{ item[itemLabel] }}
+          </slot>
         </VSelectItem>
       </VSelectGroup>
     </VSelectContent>
@@ -65,6 +109,7 @@ const componentValue = ref();
   font-weight: 400;
   background: colors.$gray-10;
   position: relative;
+  display: flex;
 
   &.is--select-large{
     .vs__dropdown-toggle{

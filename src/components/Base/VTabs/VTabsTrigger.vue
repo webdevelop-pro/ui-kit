@@ -5,7 +5,12 @@ import {
 import { computed, type HTMLAttributes } from 'vue';
 import VBadge from 'UiKit/components/Base/VBadge/VBadge.vue';
 
-const props = defineProps<TabsTriggerProps & { class?: HTMLAttributes['class'] }>();
+  const props = withDefaults(defineProps<TabsTriggerProps & {
+  class?: HTMLAttributes['class'];
+  variant?: 'primary' | 'secondary';
+}>(), {
+  variant: 'primary',
+});
 
 const delegatedProps = computed(() => {
   const { class: _, ...delegated } = props;
@@ -20,8 +25,9 @@ const forwardedProps = useForwardProps(delegatedProps);
   <TabsTrigger
     v-bind="forwardedProps"
     class="VTabsTrigger v-tabs-trigger"
+    :class="[props.class, `is--variant-${variant}`]"
   >
-    <span class="is--h5__title">
+    <span :class="variant === 'primary' ? 'is--h5__title' : 'is--small-2'">
       <slot />
     </span>
     <VBadge
@@ -36,9 +42,9 @@ const forwardedProps = useForwardProps(delegatedProps);
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+@use 'UiKit/styles/_variables.scss' as variables;
 .v-tabs-trigger {
   cursor: pointer;
-  padding: 8px 16px;
   position: relative;
   display: flex;
   flex-direction: row;
@@ -46,29 +52,56 @@ const forwardedProps = useForwardProps(delegatedProps);
   align-items: center;
   color: colors.$gray-60;
   flex-shrink: 0;
-  border-bottom: 2px solid transparent;
-  bottom: -2px;
-  gap: 8px;
-
-  &:hover {
-    color: colors.$primary;
-  }
+  z-index: 1;
+  transition: color 0.3s ease;
 
   &__subtitle {
     margin-top: 0 !important;
+    transition: color 0.3s ease;
     @media screen and (max-width: 576px) {
       display: none;
+    }
+  }
+
+  &.is--variant-primary {
+    padding: 8px 16px;
+    gap: 8px;
+    border-bottom: 2px solid transparent;
+
+    &:hover {
+      color: colors.$primary;
+    }
+  }
+  &.is--variant-secondary {
+    padding: 3px 12px;
+    gap: 4px;
+    align-self: stretch;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: colors.$white;
+      color: colors.$black;
+      box-shadow: variables.$box-shadow-small;
     }
   }
 }
 
 .v-tabs-trigger[data-state='active'] {
-  color: colors.$black;
-  border-color: colors.$primary;
+  &.is--variant-primary {
+    color: colors.$black;
+    border-color: colors.$primary;
 
-  .v-tabs-trigger__subtitle {
-    background-color: colors.$primary;
-    color: colors.$white;
+    .v-tabs-trigger__subtitle {
+      background-color: colors.$primary;
+      color: colors.$white;
+    }
+  }
+
+  &.is--variant-secondary {
+    background-color: colors.$white;
+    color: colors.$black;
+    box-shadow: variables.$box-shadow-small;
   }
 }
 </style>

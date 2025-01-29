@@ -55,6 +55,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 1;
   max-width: 100%;
+  min-width: var(--radix-dropdown-menu-trigger-width);
 }
 .v-dropdown-menu-content[data-side="top"] {
   animation-name: slideUp;

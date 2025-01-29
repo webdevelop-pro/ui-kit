@@ -84,8 +84,7 @@ watch(() => props.items, () => {
       class="v-filter__button"
       @click="onFilterButtonClick"
     >
-      <compoent
-        :is="filterIcon"
+      <filterIcon
         class="v-filter__button-icon"
       />
       Filters&nbsp;
@@ -110,10 +109,9 @@ watch(() => props.items, () => {
             {{ item.title }}
           </div>
           <VFormCheckboxGroup
+            v-model="item.model"
             :options="item.options"
-            :model-value="item.model"
             class="v-filter__checkbox-group"
-            @update:model-value="item.model = toRaw($event)"
           />
         </div>
 
@@ -141,53 +139,63 @@ watch(() => props.items, () => {
   </div>
 </template>
 
-<style lang="sass">
-@use 'UiKit/styles/_colors.scss' as colors
-@use 'UiKit/styles/_variables.scss' as variables
-.v-filter
-  --v-filter-dropdown--min-width: 150px
+<style lang="scss">
+@use 'UiKit/styles/_colors.scss' as colors;
+@use 'UiKit/styles/_variables.scss' as variables;
+.v-filter{
+  --v-filter-dropdown--min-width: 150px;
 
-  position: relative
+  position: relative;
 
-  &__button-icon
-    color: inherit
-    width: 16px
+  &__button-icon{
+    color: inherit;
+    width: 16px;
+  }
 
-  &__dropdown
-    position: absolute
-    top: 100%
-    left: 0
-    min-width: var(--v-filter-dropdown--min-width)
-    width: fit-content
-    display: flex
-    flex-direction: column
-    align-items: flex-start
-    background-color: colors.$gray-10
-    border: 1px solid colors.$gray-20
-    box-shadow: variables.$box-shadow-medium
-    z-index: 2
+  &__dropdown{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: var(--v-filter-dropdown--min-width);
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: colors.$gray-10;
+    border: 1px solid colors.$gray-20;
+    box-shadow: variables.$box-shadow-medium;
+    z-index: 2;
+  }
 
-  &__cta
-    display: flex
-    padding: 12px
-    flex-direction: column
-    align-items: flex-start
-    gap: 4px
-    align-self: stretch
+  &__cta{
+    display: flex;
+    padding: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    align-self: stretch;
+  }
 
-  &__title
-    color: colors.$gray-70
-    padding: 12px 12px 2px 12px
-    text-transform: capitalize
+  &__title{
+    color: colors.$gray-70;
+    padding: 12px 12px 2px 12px;
+    text-transform: capitalize;
+  }
 
-  &__group
-    width: 100%
+  &__group{
+    width: 100%;
+  }
 
-  &__checkbox-group
-    width: 100%
-    .v-form-checkbox
-      &.is--checked
-        .v-form-checkbox__text
-          color: colors.$primary
-          font-weight: 600
+  &__checkbox-group{
+    width: 100%;
+    .v-form-checkbox{
+      &.is--checked{
+        .v-form-checkbox__text{
+          color: colors.$primary;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
 </style>

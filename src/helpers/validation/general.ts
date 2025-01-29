@@ -1,4 +1,4 @@
-import { JSONSchemaType } from 'ajv';
+import { JSONSchemaType } from 'ajv/dist/types/json-schema';
 import set from 'lodash/set';
 import cloneDeep from 'lodash/cloneDeep';
 import { computed } from 'vue';

@@ -208,3 +208,14 @@ $black: #12161F;
 [class*="is--color"] a:not([class*="is--color"]){
     color: inherit;
   }
+
+
+:root {
+    --vis-tooltip-background-color: #F8F9FA;
+    --vis-primary-color: 221 100% 50%;
+    --vis-secondary-color: 154 69% 55%;
+    --vis-text-color: 210 10% 23%;
+    --vis-area-stroke: 221 100% 50%;
+    --vis-dark-area-stroke: 221 100% 50%;
+    --stroke: #F8F9FA;
+}

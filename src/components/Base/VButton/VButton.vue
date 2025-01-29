@@ -44,12 +44,14 @@ const btnClasses = computed(() => ({
 </script>
 
 <template>
-  <Primitive
+  <component
+    :is="(as === 'router-link') ? as : Primitive"
     :as="as"
     :as-child="asChild"
     class="VButton v-button"
     :class="[btnClassesProps, btnClasses]"
     :disabled="loading"
+    v-bind="$attrs"
   >
     <span
       class="v-button__content"
@@ -62,7 +64,7 @@ const btnClasses = computed(() => ({
       small
       class="v-button__spinner"
     />
-  </Primitive>
+  </component>
 </template>
 
 <style lang="scss">

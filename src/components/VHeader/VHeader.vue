@@ -1,27 +1,18 @@
 <script setup lang="ts">
 import {
-  defineAsyncComponent, hydrateOnVisible, ref,
+  defineAsyncComponent, ref,
   watchPostEffect,
 } from 'vue';
 import { useWindowScroll } from '@vueuse/core';
+import VLogo from 'UiKit/components/VLogo.vue';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const VLogo = defineAsyncComponent({
-  loader: () => import('UiKit/components/VLogo.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
-});
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const VHeaderNavigation = defineAsyncComponent({
   loader: () => import('./VHeaderNavigation.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
 });
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const VHeaderMobile = defineAsyncComponent({
   loader: () => import('./VHeaderMobile.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
 });
 
 defineProps({
@@ -33,6 +24,7 @@ defineProps({
 
 const { y } = useWindowScroll();
 const isFixed = ref(false);
+const isMobileSidebarOpen = defineModel<boolean>();
 
 watchPostEffect(() => {
   if (y.value > 0) {
@@ -64,7 +56,10 @@ watchPostEffect(() => {
           <slot />
         </div>
 
-        <VHeaderMobile class="is--lt-desktop-md-show">
+        <VHeaderMobile
+          v-model="isMobileSidebarOpen"
+          class="is--lt-desktop-md-show"
+        >
           <slot name="mobile" />
         </VHeaderMobile>
       </div>

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, useId } from 'vue';
-import VFormLabel from './VFormLabel.vue';
-import VCheckbox from './VCheckbox/VCheckbox.vue';
+import VFormLabel from 'UiKit/components/Base/VForm/VFormLabel.vue';
+import VCheckbox from 'UiKit/components/Base/VForm/VCheckbox/VCheckbox.vue';
 import type { CheckboxRootEmits, CheckboxRootProps } from 'radix-vue';
 import { useForwardPropsEmits } from 'radix-vue';
 
@@ -26,6 +26,7 @@ const delegatedProps = computed(() => {
 });
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const modelValue = defineModel<boolean>();
 </script>
 
 <template>
@@ -34,8 +35,10 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     :class="props.class"
   >
     <VCheckbox
-      :id="inputId"
       v-bind="forwarded"
+      :id="inputId"
+      :checked="modelValue"
+      @update:checked="modelValue = $event"
     />
     <VFormLabel
       :for="inputId"

@@ -8,8 +8,7 @@ import {
   useForwardPropsEmits,
 } from 'radix-vue';
 import { computed, type HTMLAttributes } from 'vue';
-import VSelectScrollDownButton from './VSelectScrollDownButton.vue';
-import VSelectScrollUpButton from './VSelectScrollUpButton.vue';
+
 
 defineOptions({
   inheritAttrs: false,
@@ -39,11 +38,9 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
       :class="props.class"
       class="VSelectContent v-select-content"
     >
-      <VSelectScrollUpButton />
       <SelectViewport class="v-select-viewport">
         <slot />
       </SelectViewport>
-      <VSelectScrollDownButton />
     </SelectContent>
   </SelectPortal>
 </template>
@@ -57,7 +54,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     background-color: colors.$gray-10;
     border: solid 1px colors.$gray-20;
     box-shadow: variables.$box-shadow-medium;
-    border-radius: 2;
+    border-radius: 2px;
     max-height: 222px;
     overflow: scroll;
     width: var(--radix-select-trigger-width);

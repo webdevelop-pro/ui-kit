@@ -3,7 +3,7 @@ import { computed } from 'vue';
 
 const props = withDefaults(defineProps<{
   size?: 'medium' | 'small';
-  color?: 'primary' | 'secondary'| 'secondary-light';
+  color?: 'primary' | 'secondary'| 'secondary-light' | 'red' | 'yellow' | 'red-light' | 'yellow-light' | 'purple-light' | 'default';
   isActive?: boolean;
   hover?: boolean;
 }>(), {
@@ -42,6 +42,7 @@ const classes = computed(() => {
   line-height: 18px;
   background-color: colors.$gray-30;
   display: inline-block;
+  white-space: nowrap;
 
   &.is--size-medium {
     padding: 8px 12px;
@@ -79,6 +80,47 @@ const classes = computed(() => {
     &.is--hover:hover {
       background-color: colors.$secondary;
     }
+  }
+
+  &.is--badge-color-red {
+    background-color: colors.$red;
+    color: colors.$white;
+    &.is--active,
+    &.is--hover:hover {
+      background-color: colors.$red-dark;
+    }
+  }
+
+  &.is--badge-color-yellow {
+    background-color: colors.$yellow;
+    &.is--active,
+    &.is--hover:hover {
+      background-color: colors.$yellow-dark;
+    }
+  }
+  &.is--badge-color-red-light {
+    background-color: colors.$red-light;
+    &.is--active,
+    &.is--hover:hover {
+      background-color: colors.$red;
+    }
+  }
+  &.is--badge-color-yellow-light {
+    background-color: colors.$yellow-light;
+    &.is--active,
+    &.is--hover:hover {
+      background-color: colors.$yellow;
+    }
+  }
+  &.is--badge-color-purple-light {
+    background-color: colors.$purple-light;
+    &.is--active,
+    &.is--hover:hover {
+      background-color: colors.$purple;
+    }
+  }
+  &.is--badge-color-default {
+    // default color
   }
 }
 </style>

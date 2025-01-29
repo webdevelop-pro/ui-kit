@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineAsyncComponent, hydrateOnVisible, ref } from 'vue';
+import { defineAsyncComponent, hydrateOnVisible } from 'vue';
 import {
   VSheet, VSheetContent, VSheetTrigger, VSheetHeader, VSheetTitle,
   VSheetDescription,
@@ -17,7 +17,7 @@ const VNavigationMenuLink = defineAsyncComponent({
   hydrate: hydrateOnVisible(),
 });
 
-const open = ref(false);
+const open = defineModel<boolean>();
 </script>
 
 <template>

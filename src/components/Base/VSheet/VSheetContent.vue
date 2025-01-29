@@ -9,12 +9,13 @@ import {
   useForwardPropsEmits,
 } from 'radix-vue';
 import { computed } from 'vue';
-import closeIcon from 'UiKit/assets/images/close.svg';
+import VSheetClose from './VSheetClose.vue';
 
 interface SheetContentProps extends DialogContentProps {
   side?: 'top' | 'bottom' | 'left' | 'right';
-  withHeader: boolean;
-  hideClose: boolean;
+  withHeader?: boolean;
+  hideClose?: boolean;
+  ariaDescribedby?: string;
 }
 
 defineOptions({
@@ -28,7 +29,7 @@ const props = withDefaults(defineProps<SheetContentProps>(), {
 const emits = defineEmits<DialogContentEmits>();
 
 const delegatedProps = computed(() => {
-  const { side, ...delegated } = props;
+  const { side, ariaDescribedby, ...delegated } = props;
 
   return delegated;
 });
@@ -44,17 +45,13 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     />
     <DialogContent
       class="VSheetContent v-sheet-content"
+      :aria-describedby="ariaDescribedby"
       :class="[`is--side-${side}`, { 'is--with-header': withHeader }]"
       v-bind="{ ...forwarded, ...$attrs }"
     >
       <slot />
 
-      <DialogClose
-        v-if="!hideClose"
-        class="v-sheet-content__close"
-      >
-        <closeIcon class="v-sheet-content__icon" />
-      </DialogClose>
+      <VSheetClose v-if="!hideClose" />
     </DialogContent>
   </DialogPortal>
 </template>

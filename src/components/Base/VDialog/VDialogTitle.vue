@@ -17,7 +17,7 @@ const forwardedProps = useForwardProps(delegatedProps);
   <DialogTitle
     v-bind="forwardedProps"
     :class="props.class"
-    class="VDialogTitle v-dialog-title"
+    class="VDialogTitle v-dialog-title is--h3__title"
   >
     <slot />
   </DialogTitle>

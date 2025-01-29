@@ -1,9 +1,17 @@
 <script setup lang="ts">
+import { PropType } from 'vue';
+
+defineProps({
+  size: String as PropType<'large' | 'regular' | 'small'>,
+});
 </script>
 
 <template>
   <div class="v-table__wrap">
-    <table class="VTable v-table">
+    <table
+      class="VTable v-table"
+      :class="`is--size-${size}`"
+    >
       <slot />
     </table>
   </div>
@@ -17,6 +25,7 @@
 
   &__wrap {
     width: 100%;
+    overflow: auto;
   }
 }
 </style>

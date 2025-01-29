@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 import { useVModel } from '@vueuse/core';
+import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
+import { onMounted, ref } from 'vue';
 
 
 const props = defineProps<{
   defaultValue?: string | number;
   modelValue?: string | number;
   isError?: boolean;
+  loading?: boolean;
 }>();
 
 const emits = defineEmits<{(e: 'update:modelValue', payload: string | number): void;
@@ -15,13 +18,20 @@ const modelValue = useVModel(props, 'modelValue', emits, {
   passive: true,
   defaultValue: props.defaultValue,
 });
+
 </script>
 
 <template>
+  <VSkeleton
+    v-if="loading"
+    width="100%"
+    height="50px"
+  />
   <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
   <textarea
-    v-model="modelValue"
+    v-else
     v-bind="$attrs"
+    v-model="modelValue"
     class="VFormTextarea v-form-textarea"
     :class="{ 'is--error': isError }"
   />

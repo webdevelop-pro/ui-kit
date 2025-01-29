@@ -28,3 +28,32 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     <slot />
   </ComboboxRoot>
 </template>
+
+
+<style lang="scss">
+@use 'UiKit/styles/_colors.scss' as colors;
+@use 'UiKit/styles/_variables.scss' as variables;
+.v-command {
+  padding-left: 0;
+    list-style-type: none;
+    background-color: colors.$gray-10;
+    border: solid 1px colors.$gray-20;
+    box-shadow: variables.$box-shadow-medium;
+    border-radius: 2px;
+    max-height: 222px;
+    overflow: scroll;
+    width: var(--radix-select-trigger-width);
+    z-index: 10;
+    display: flex;
+  flex-direction: column;
+  // position: fixed;
+  // min-width: 175px;
+  // left: 636px;
+  // bottom: 0px;
+  // height: 638px;
+  // margin: 10px 0px;
+  // min-height: 125px;
+  // max-height: 950px;
+  // z-index: 100;
+}
+</style>

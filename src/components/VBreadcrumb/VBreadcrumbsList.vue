@@ -23,6 +23,7 @@ defineProps({
       >
         <VBreadcrumbItem>
           <VBreadcrumbLink
+            :to="item.to"
             :href="item.href ? encodeURI(item.href) : null"
           >
             {{ item.text }}

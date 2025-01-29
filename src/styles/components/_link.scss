@@ -71,11 +71,14 @@ font-weight: 800;
     color: inherit;
     margin: 0;
     &:hover{
-        text-decoration-style: none;
         text-decoration-line: none;
         background-image: linear-gradient(to bottom, #444fe520 0%, #444fe520 100%);
         background-size: 100% 100%;
     }
+}
+
+.router-link-active {
+    color: $primary !important;
 }
 
 h1, h2, h3, h4, h5, h6,

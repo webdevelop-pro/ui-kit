@@ -2,15 +2,15 @@
 import type { HTMLAttributes } from 'vue';
 
 const props = defineProps<{
-  class?: HTMLAttributes['class'];
+  class?: HTMLAttributes['class']
 }>();
 </script>
 
 <template>
-  <header
+  <div
     :class="props.class"
-    class="VDialogHeader v-dialog-header"
+    class="VDialogheader v-dialog-header"
   >
     <slot />
-  </header>
+  </div>
 </template>

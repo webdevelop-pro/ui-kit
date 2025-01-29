@@ -25,12 +25,11 @@ const forwardedProps = useForwardProps(delegatedProps);
 <template>
   <div
     class="VCommandInput v-command-input"
-    :class="`is--size-${size}`"
   >
     <ComboboxInput
       v-bind="{ ...forwardedProps, ...$attrs }"
       auto-focus
-      :class="props.class"
+      :class="[props.class, `is--size-${size}`]"
       class="v-command-input__input"
     />
   </div>
@@ -73,6 +72,20 @@ const forwardedProps = useForwardProps(delegatedProps);
       height: 32px;
       font-size: 16px;
       line-height: 26px;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: colors.$primary;
+    }
+
+    &::placeholder {
+      opacity: 1;
+      color: colors.$gray-60;
+      font-size: inherit;
+      font-weight: inherit;
+      font-family: inherit;
+      line-height: inherit;
     }
   }
 }

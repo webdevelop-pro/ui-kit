@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { IFrontmatter } from 'UiKit/types/types';
-import { useRoute } from 'vitepress';
 import { PropType } from 'vue';
 
 interface IHeaderNavigation {
@@ -18,10 +17,9 @@ const emit = defineEmits(['click']);
 
 const iconMap = import.meta.glob('@/assets/images/menu/**/*.svg', { eager: true, import: 'default' });
 
-const route = useRoute();
 
 const getActive = (name: string) => {
-  if (route.path.includes(name)) {
+  if (window?.location.pathname.includes(name)) {
     return 'is--active';
   }
   return '';

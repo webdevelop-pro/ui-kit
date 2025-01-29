@@ -15,9 +15,15 @@ const props = withDefaults(defineProps<{
       class="VTableEmpty v-table-empty"
       v-bind="props"
     >
-      <div class="flex items-center justify-center py-10">
+      <div class=" is--body">
         <slot />
       </div>
     </TableCell>
   </TableRow>
 </template>
+
+<style lang="scss">
+.v-table-empty {
+  text-align: center;
+}
+</style>

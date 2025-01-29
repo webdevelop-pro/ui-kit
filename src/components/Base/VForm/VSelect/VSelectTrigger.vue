@@ -74,7 +74,6 @@ const forwardedProps = useForwardProps(delegatedProps);
     border-radius: 0;
     border: none;
     pointer-events: none;
-    background-color: transparent;
   }
 
   &.is--disabled {

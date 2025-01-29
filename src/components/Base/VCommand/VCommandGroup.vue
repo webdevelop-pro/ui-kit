@@ -30,3 +30,9 @@ const delegatedProps = computed(() => {
     <slot />
   </ComboboxGroup>
 </template>
+
+<style lang="scss">
+.v-command-group {
+  width: 100%;
+}
+</style>

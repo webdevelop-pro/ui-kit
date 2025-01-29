@@ -8,6 +8,7 @@ const props = withDefaults(defineProps<{
   alt: string;
   fit?: 'cover' | 'contain' | 'none';
   loading?: 'lazy' | 'eager' | undefined;
+  clientOnly?: boolean;
 }>(), {
   fit: 'none',
   loading: 'eager',
@@ -21,7 +22,10 @@ const { isLoading } = useImage({ src: props.src || '' });
     class="VImage v-image"
     :class="[`is--${fit}`, { 'is--bg': !src }]"
   >
-    <ClientOnly>
+    <component
+      :is="clientOnly ? 'ClientOnly' : 'div'"
+      class="v-image__client"
+    >
       <VSkeleton
         v-show="isLoading"
         height="100%"
@@ -38,7 +42,7 @@ const { isLoading } = useImage({ src: props.src || '' });
         class="v-image__image"
         :class="[`is--${fit}`, { 'is--default-image': !src }]"
       />
-    </ClientOnly>
+    </component>
   </div>
 </template>
 
@@ -53,6 +57,11 @@ const { isLoading } = useImage({ src: props.src || '' });
 
   &.is--bg{
     background-color: colors.$primary-light;
+  }
+
+  &__client {
+    height: 100%;
+    width: 100%;
   }
 
   &__image {
@@ -74,8 +83,12 @@ const { isLoading } = useImage({ src: props.src || '' });
   }
 
   .is--default-image {
-    max-height: 25%;
+    max-height: 45%;
     width: auto;
+    left: 50%;
+    top: 50%;
+    position: relative;
+    transform: translate(-50%, -50%);
   }
 }
 </style>

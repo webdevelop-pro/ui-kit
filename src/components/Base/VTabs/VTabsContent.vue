@@ -22,6 +22,6 @@ const delegatedProps = computed(() => {
 
 <style lang="scss">
 .v-tabs-content {
-  margin-top: 40px;
+  padding-top: 40px;
 }
 </style>

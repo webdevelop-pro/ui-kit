@@ -9,7 +9,8 @@ import { computed, type HTMLAttributes } from 'vue';
 const props = withDefaults(
   defineProps<ProgressRootProps & {
     class?: HTMLAttributes['class'];
-    withText: boolean;
+    style?: HTMLAttributes['style'];
+    withText?: boolean;
   }>(),
   {
     modelValue: 0,
@@ -24,7 +25,10 @@ const delegatedProps = computed(() => {
 </script>
 
 <template>
-  <div class="VProgressBar v-progressbar">
+  <div
+    class="VProgressBar v-progressbar"
+    :class="props.class"
+  >
     <div
       v-if="withText"
       class="v-progressbar__top is--h5__title"
@@ -33,12 +37,11 @@ const delegatedProps = computed(() => {
     </div>
     <ProgressRoot
       v-bind="delegatedProps"
-      :class="props.class"
       class="v-progressbar__progress"
     >
       <ProgressIndicator
         class="v-progressbar__progress-bar"
-        :style="`transform: translateX(-${100 - (props.modelValue ?? 0)}%);`"
+        :style="[`transform: translateX(-${100 - (props.modelValue ?? 0)}%);`, props.style]"
       />
     </ProgressRoot>
   </div>

@@ -5,10 +5,10 @@ const props = defineProps<{ class?: HTMLAttributes['class'] }>();
 </script>
 
 <template>
-  <footer
+  <div
     :class="props.class"
     class="VDialogFooter v-dialog-footer"
   >
     <slot />
-  </footer>
+  </div>
 </template>

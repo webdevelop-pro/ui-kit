@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { MENU_HEADER_RIGHT } from '@/config/menu';
-import { defineAsyncComponent, hydrateOnVisible, ref, watch } from 'vue';
+import { defineAsyncComponent, hydrateOnVisible, ref } from 'vue';
 import VHeaderNavigationListItem from './VHeaderNavigationListItem.vue';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

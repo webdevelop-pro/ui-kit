@@ -5,6 +5,7 @@ import { env } from '@/config/env';
 import { notify } from '@kyvg/vue3-notification';
 import { useData } from 'vitepress';
 import { socials } from 'UiKit/utils/socials';
+import { useToast } from '../Base/VToast/use-toast';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const VSocialLinks = defineAsyncComponent({
@@ -41,14 +42,11 @@ const SOCIAL_LIST = [
   socials?.linkedin, socials?.github,
 ];
 
-const NOTIFY_OPTIONS = {
-  text: 'Submitted!',
-  type: 'success',
-  data: {
-    status: 1,
-  },
-  group: 'transaction',
-  duration: 10000,
+const { toast } = useToast();
+
+const TOAST_OPTIONS = {
+  title: 'Submitted!',
+  variant: 'error',
 };
 
 
@@ -60,7 +58,7 @@ const onSubmit = async (emailLocal: string) => {
     email: emailLocal,
   });
   loadingSubmitting.value = false;
-  notify(NOTIFY_OPTIONS);
+  toast(TOAST_OPTIONS);
 };
 </script>
 

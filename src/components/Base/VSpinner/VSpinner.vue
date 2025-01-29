@@ -70,88 +70,119 @@ const circleSizeAttrs = computed(() => {
   </transition>
 </template>
 
-<style lang="sass">
-.v-spinner
-  position: absolute
-  width: 100%
-  height: 100%
-  top: 0
-  bottom: 0
-  left: 0
-  right: 0
-  content: ''
-  z-index: 9999
-  display: flex
-  align-items: center
-  justify-content: center
-  color: #343D45
-  &.is--opaque
-    background-color: #fff
-  &.is--full
-    position: fixed
-  &.is--small &__container
-    height: 23px
-    width: 23px
-    svg
-      circle
-        stroke-width: 3.8095238095238093
-  &__container
-    position: relative
-    display: inline-flex
-    vertical-align: middle
-    justify-content: center
-    align-items: center
-    height: 32px
-    width: 32px
-  &__info
-    align-items: center
-    display: flex
-    justify-content: center
-  svg
-    animation: progress-circular-rotate 1.4s linear infinite
-    transform-origin: center center
-    transition: all 0.2s ease-in-out
-    width: 100%
-    height: 100%
-    margin: auto
-    position: absolute
-    top: 0
-    bottom: 0
-    left: 0
-    right: 0
-    z-index: 0
-    circle
-      stroke-width: 5.714285714285714
-  &__overlay
-    animation: progress-circular-dash 1.4s ease-in-out infinite
-    stroke-linecap: round
-    stroke-dasharray: 80, 200
-    stroke-dashoffset: 0
-    stroke: currentColor
-    z-index: 2
-    transition: all 0.6s ease-in-out
+<style lang="scss">
+.v-spinner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: '';
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #343D45;
 
-@keyframes progress-circular-dash
-  0%
-    stroke-dasharray: 1, 200
-    stroke-dashoffset: 0px
+  &.is--opaque {
+    background-color: #fff;
+  }
 
-  50%
-    stroke-dasharray: 100, 200
-    stroke-dashoffset: -15px
+  &.is--full {
+    position: fixed;
+  }
 
-  100%
-    stroke-dasharray: 100, 200
-    stroke-dashoffset: -125px
+  &.is--small {
+    &__container {
+      height: 23px;
+      width: 23px;
 
-@keyframes progress-circular-rotate
-  100%
-    transform: rotate(360deg)
+      svg {
+        circle {
+          stroke-width: 3.8095238095238093;
+        }
+      }
+    }
+  }
+
+  &__container {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+  }
+
+  &__info {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  svg {
+    animation: progress-circular-rotate 1.4s linear infinite;
+    transform-origin: center center;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+
+    circle {
+      stroke-width: 5.714285714285714;
+    }
+  }
+
+  &__overlay {
+    animation: progress-circular-dash 1.4s ease-in-out infinite;
+    stroke-linecap: round;
+    stroke-dasharray: 80, 200;
+    stroke-dashoffset: 0;
+    stroke: currentColor;
+    z-index: 2;
+    transition: all 0.6s ease-in-out;
+  }
+}
+
+@keyframes progress-circular-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0px;
+  }
+
+  50% {
+    stroke-dasharray: 100, 200;
+    stroke-dashoffset: -15px;
+  }
+
+  100% {
+    stroke-dasharray: 100, 200;
+    stroke-dashoffset: -125px;
+  }
+}
+
+@keyframes progress-circular-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 .fade-enter-active,
-.fade-leave-active
-  transition: opacity .3s
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
 .fade-enter-from,
-.fade-leave-to
-  opacity: 0 !important
+.fade-leave-to {
+  opacity: 0 !important;
+}
 </style>

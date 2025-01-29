@@ -17,6 +17,10 @@
     &:hover {
       background-color: $gray-10;
     }
+
+    &:last-of-type {
+      border-bottom: 1px solid $gray-20;
+    }
   }
 }
 </style>

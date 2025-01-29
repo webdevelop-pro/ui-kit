@@ -5,7 +5,7 @@ import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VBadge from 'UiKit/components/Base/VBadge/VBadge.vue';
 import { PropType, computed } from 'vue';
 import defaulImage from 'InvestCommon/assets/images/default.svg?url';
-import VInfoSlot from 'InvestCommon/components/VInfoSlot/VInfoSlot.vue';
+import VInfoSlot from 'UiKit/components/VInfo/VInfoSlot.vue';
 import { useOfferStore } from 'InvestCommon/store/useOffer';
 import VImage from 'UiKit/components/Base/VImage/VImage.vue';
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';

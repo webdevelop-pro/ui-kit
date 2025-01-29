@@ -27,7 +27,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     class="VNavigationMenu v-navigation-menu"
   >
     <slot />
-    <NavigationMenuViewport />
+    <NavigationMenuViewport/>
   </NavigationMenuRoot>
 </template>
 

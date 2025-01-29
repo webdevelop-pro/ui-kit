@@ -54,7 +54,7 @@
   </svg>
 </template>
 
-<style scoped>
+<style>
 .three-dots-loading {
   width: 40px;
   height: 20px;

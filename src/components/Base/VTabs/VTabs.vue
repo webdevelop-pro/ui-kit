@@ -5,11 +5,18 @@ import {
   computed, HTMLAttributes, ref, watch,
 } from 'vue';
 
-const props = defineProps<TabsRootProps & { class?: HTMLAttributes['class'] }>();
+const props = withDefaults(defineProps<TabsRootProps & {
+  class?: HTMLAttributes['class'];
+  tabsToUrl?: boolean;
+  variant?: 'primary' | 'secondary';
+  fullWidth?: boolean;
+}>(), {
+  variant: 'primary',
+});
 const emits = defineEmits<TabsRootEmits>();
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+  const { class: _, tabsToUrl, ...delegated } = props;
 
   return delegated;
 });
@@ -33,7 +40,7 @@ const setUrl = (newItem: string) => {
 watch(
   () => props.modelValue,
   (newValue) => {
-    if (newValue) {
+    if (newValue && props.tabsToUrl) {
       selectedTab.value = newValue;
       setUrl(newValue);
     }
@@ -45,7 +52,7 @@ watch(
   () => selectedTab.value,
   (newValue) => {
     emits('update:modelValue', newValue); // Emit to parent if `modelValue` is bound
-    setUrl(newValue); // Update the URL
+    if (props.tabsToUrl) setUrl(newValue); // Update the URL
   },
 );
 // Sync with query parameter when it changes
@@ -67,16 +74,29 @@ watch(
     v-bind="forwarded"
     v-model="selectedTab"
     class="VTabs v-tabs"
-    :class="props.class"
+    :class="[props.class, `is--variant-${variant}`, { 'is--full-width': fullWidth }]"
   >
     <slot />
   </TabsRoot>
 </template>
 
 <style lang="scss">
+@use 'UiKit/styles/_colors.scss' as colors;
 .with-default-distance .v-tabs,
 .v-tabs.with-default-distance {
   margin-top: 40px;
   width: 100%;
+}
+
+.v-tabs {
+  &.is--variant-secondary {
+    gap: 4px;
+    border-radius: 2px;
+    background: colors.$gray-20;
+    padding: 4px;
+  }
+  &.is--full-width {
+    width: 100%;
+  }
 }
 </style>

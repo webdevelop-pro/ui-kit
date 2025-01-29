@@ -43,11 +43,13 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </template>
 
 <style lang="scss">
+@use 'UiKit/styles/_colors.scss' as colors;
+@use 'UiKit/styles/_variables.scss' as variables;
 .v-popover-content {
   background-color: colors.$gray-10;
   border: solid 1px colors.$gray-20;
   box-shadow: variables.$box-shadow-medium;
-  border-radius: 2;
+  border-radius: 2px;
   width: var(--radix-popover-trigger-width);
   animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);

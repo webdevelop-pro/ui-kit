@@ -20,6 +20,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   <RadioGroupRoot
     :class="props.class"
     v-bind="forwarded"
+    class="VRadioGroup v-radio-group"
   >
     <slot />
   </RadioGroupRoot>

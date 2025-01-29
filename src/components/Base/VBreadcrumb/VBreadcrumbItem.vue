@@ -15,7 +15,8 @@
     margin: 0 !important;
 
     a[href=""],
-    a:not([href]){
+    a:not([href]),
+    span{
       line-height: inherit;
       color: colors.$gray-50;
       pointer-events: none;

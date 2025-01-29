@@ -5,7 +5,7 @@ defineProps({
 </script>
 
 <template>
-  <Label
+  <label
     v-bind="$attrs"
     class="VFormlabel v-form-label"
   >
@@ -17,7 +17,7 @@ defineProps({
     >
       *
     </span>
-  </Label>
+  </label>
 </template>
 
 <style lang="scss">

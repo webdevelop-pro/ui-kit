@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref, computed, useId } from 'vue';
+import VFormLabel from 'UiKit/components/Base/VForm/VFormLabel.vue';
 
 type FormRadioOption = {
   value: unknown;
@@ -94,12 +95,11 @@ const id = useId();
           v-bind="$attrs"
           @change="$emit('update:modelValue', selectedOption);"
         >
-        <label
+        <VFormLabel
           :for="index + id"
-          class="v-form-radio__label"
         >
           {{ getLabelValue(option) }}
-        </label>
+        </VFormLabel>
       </div>
     </div>
   </div>
@@ -129,6 +129,8 @@ const id = useId();
     display: flex;
     align-items: center;
     margin: 10px 0;
+    gap: 8px;
+    cursor: pointer;
   }
 
   &__input {
@@ -154,17 +156,6 @@ const id = useId();
         top: 50%;
       }
     }
-  }
-
-  &__label {
-    color: colors.$gray-80;
-    font-family: 'Avenir';
-    font-weight: 400;
-    font-size: 16px;
-    display: inline-block;
-    position: relative;
-    margin-left: 8px;
-    cursor: pointer;
   }
 }
 </style>

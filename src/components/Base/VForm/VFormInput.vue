@@ -1,6 +1,9 @@
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue';
+import {
+  computed, onMounted, ref, watch,
+} from 'vue';
 import { Mask, vMaska, MaskTokens as IMaskTokens } from 'maska';
+import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
 
 // IMPORTANT: before using this component you need to install maska
 // type in the terminal yarn add maska
@@ -26,6 +29,7 @@ interface Props {
     dataTestid?: string;
   size?: 'large' | 'medium' | 'small';
   returnMaskedValue?: boolean;
+  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -165,10 +169,19 @@ function onBlur() {
 // check modelValue data
 if (props.modelValue !== '') onInput(props.modelValue);
 watch(() => props.modelValue, () => onInput(props.modelValue));
+
+
 </script>
 
 <template>
+  <VSkeleton
+    v-if="loading"
+    width="100%"
+    class="VFormInput v-form-input"
+    :class="`is--size-${size}`"
+  />
   <div
+    v-else
     class="VFormInput v-form-input"
     :class="[`is--size-${size}`, {
       'is--error': isError, 'is--focused': focused, 'is--readonly': readonly, 'is--disabled': disabled,
@@ -227,6 +240,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
   border: solid 1px colors.$gray-40;
   border-radius: 2px;
   height: 40px;
+  min-height: 32px;
 
   &.is--focused {
     border-color: colors.$primary;

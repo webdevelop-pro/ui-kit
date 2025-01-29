@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  DialogClose,
   DialogContent,
   type DialogContentEmits,
   type DialogContentProps,
@@ -9,7 +8,7 @@ import {
   useForwardPropsEmits,
 } from 'radix-vue';
 import { computed, type HTMLAttributes } from 'vue';
-import closeIcon from 'UiKit/assets/images/close.svg';
+import VDialogClose from './VDialogClose.vue';
 
 const props = defineProps<DialogContentProps & { class?: HTMLAttributes['class'] }>();
 const emits = defineEmits<DialogContentEmits>();
@@ -30,8 +29,8 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     >
       <DialogContent
         :class="props.class"
+        class="VDialogScrollContent v-dialog-scroll-content"
         v-bind="forwarded"
-        class="VDialogContent v-dialog-content"
         @pointer-down-outside="(event) => {
           const originalEvent = event.detail.originalEvent;
           const target = originalEvent.target as HTMLElement;
@@ -42,26 +41,16 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
       >
         <slot />
 
-        <DialogClose class="v-dialog-close">
-          <closeIcon class="v-dialog-close__icon" />
-        </DialogClose>
+        <VDialogClose />
       </DialogContent>
     </DialogOverlay>
   </DialogPortal>
 </template>
 
-
 <style lang="scss">
-.v-dialog-close {
-  position: absolute;
-  right: 8px;
-  top: 8px;
-
-  &__icon {
-    width: 20px
-  }
-}
-
+@use 'UiKit/styles/_transitions.scss' as *;
+@use 'UiKit/styles/_variables.scss' as *;
+@use 'UiKit/styles/_colors.scss' as colors;
 .v-dialog-overlay {
   background: rgba(18, 22, 31, 0.40);
   position: fixed;
@@ -69,12 +58,22 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes overlayShow {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+.v-dialog-scroll-content {
+  padding-bottom: 15px;
+  background: colors.$white;
+  box-shadow: $box-shadow-medium;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 450px;
+  max-height: 85vh;
+  padding: 40px;
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:focus {
+    outline: none;
   }
 }
 </style>

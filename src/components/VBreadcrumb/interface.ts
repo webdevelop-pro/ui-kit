@@ -2,6 +2,7 @@
 export interface IBreadcrumb {
   text: string;
   href?: string;
+  to?: object;
 }
 
 

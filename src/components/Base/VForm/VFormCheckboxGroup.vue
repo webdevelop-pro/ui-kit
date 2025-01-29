@@ -33,9 +33,9 @@ function onUpdate(option: string, checked: boolean) {
     >
       <VFormCheckbox
         v-bind="$attrs"
-        :model-value="value.includes(option)"
+        :checked="value.includes(option)"
         class="v-form-checkbox-group__item"
-        @update:model-value="onUpdate(option, $event)"
+        @update:checked="onUpdate(option, $event)"
       >
         <span> {{ option }}</span>
       </VFormCheckbox>

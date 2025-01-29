@@ -1,0 +1,88 @@
+<script setup lang="ts">
+import {
+  VCard, VCardContent, VCardHeader, VCardTitle,
+} from 'UiKit/components/Base/VCard';
+
+defineProps<{
+  title?: string;
+  data: {
+    name: string;
+    color: string;
+    value: any;
+  }[];
+}>();
+</script>
+
+<template>
+  <VCard class="VChartTooltip v-chart-tooltip is--small">
+    <VCardHeader
+      v-if="title"
+      class="v-chart-tooltip__header"
+    >
+      <VCardTitle>
+        {{ title }}
+      </VCardTitle>
+    </VCardHeader>
+    <VCardContent class="v-chart-tooltip__content">
+      <div
+        v-for="(item, key) in data"
+        :key="key"
+        class="v-chart-tooltip__item"
+      >
+        <div class="v-chart-tooltip__left">
+          <span class="v-chart-tooltip__icon">
+            <svg
+              width="100%"
+              height="100%"
+              viewBox="0 0 30 30"
+            >
+              <path
+                d=" M 15 15 m -14, 0 a 14,14 0 1,1 28,0 a 14,14 0 1,1 -28,0"
+                :stroke="item.color"
+                :fill="item.color"
+                stroke-width="1"
+              />
+            </svg>
+          </span>
+          <span>{{ item.name }}</span>
+        </div>
+        <span class="v-chart-tooltip__right">{{ item.value }}</span>
+      </div>
+    </VCardContent>
+  </VCard>
+</template>
+
+<style lang="scss">
+.v-chart-tooltip {
+  &__content {
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &__item {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    width: 10px;
+    height: 10px;
+    margin-right: 4px;
+    display: inline-block;
+    svg {
+      display: block;
+    }
+  }
+
+  &__right {
+    margin-left: 4px;
+  }
+}
+</style>
+
