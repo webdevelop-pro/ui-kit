@@ -2,7 +2,6 @@
 import { defineAsyncComponent, hydrateOnVisible, ref } from 'vue';
 import { useHubspotForm } from 'UiKit/composables/useHubspotForm';
 import { env } from '@/config/env';
-import { notify } from '@kyvg/vue3-notification';
 import { useData } from 'vitepress';
 import { socials } from 'UiKit/utils/socials';
 import { useToast } from '../Base/VToast/use-toast';

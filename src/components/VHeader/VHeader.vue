@@ -5,6 +5,11 @@ import {
 } from 'vue';
 import { useWindowScroll } from '@vueuse/core';
 import VLogo from 'UiKit/components/VLogo.vue';
+import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
+import { storeToRefs } from 'pinia';
+
+
+const { isDesktopMD } = storeToRefs(useBreakpoints());
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const VHeaderNavigation = defineAsyncComponent({
@@ -20,6 +25,7 @@ defineProps({
     type: Boolean,
     default: true,
   },
+  path: String,
 });
 
 const { y } = useWindowScroll();
@@ -49,6 +55,7 @@ watchPostEffect(() => {
       <div class="v-header__right ">
         <VHeaderNavigation
           v-if="showNavigation"
+          :path="path"
           class="is--gt-desktop-md-show"
         />
 
@@ -57,6 +64,7 @@ watchPostEffect(() => {
         </div>
 
         <VHeaderMobile
+          v-if="!isDesktopMD"
           v-model="isMobileSidebarOpen"
           class="is--lt-desktop-md-show"
         >

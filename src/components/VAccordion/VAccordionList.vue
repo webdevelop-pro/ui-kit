@@ -23,7 +23,7 @@ defineProps({
     <VAccordionItem
       v-for="(item, idx) in data"
       :key="idx"
-      :value="idx"
+      :value="String(idx)"
       transparent
     >
       <VAccordionTrigger

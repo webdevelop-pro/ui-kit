@@ -8,7 +8,7 @@ import { computed } from 'vue';
 import chevronDownIcon from 'UiKit/assets/images/chevron-down.svg';
 
 const props = defineProps<AccordionTriggerProps & {
-  isWhite: boolean;
+  isWhite?: boolean;
 }>();
 
 const delegatedProps = computed(() => {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isVNode, onMounted, ref } from 'vue';
+import { isVNode } from 'vue';
 import {
   VToast, VToastClose, VToastDescription, VToastProvider, VToastTitle, VToastViewport,
   VToastAction,

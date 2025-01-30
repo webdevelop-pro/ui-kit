@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ArrowLeft from 'UiKit/assets/images/arrow-left.svg?component';
 import { useCarousel } from './useCarousel';
-import { VButton } from '../VButton';
+import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 
 const { canScrollPrev, scrollPrev } = useCarousel();
 </script>

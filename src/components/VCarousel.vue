@@ -137,6 +137,7 @@ watch(() => selectedIndex.value, () => {
             :alt="name || item.name"
             :title="getImageTitle(name, item.name)"
             itemprop="image"
+            loading="eager"
           />
           <div
             v-if="!item.url && item.description"
@@ -165,6 +166,7 @@ watch(() => selectedIndex.value, () => {
             v-if="item.video"
             :url="item.video"
             :title="item.name"
+            loading="eager"
           />
           <VImage
             v-else
@@ -173,6 +175,7 @@ watch(() => selectedIndex.value, () => {
             fit="cover"
             :title="getImageTitle(name, item.name)"
             itemprop="image"
+            loading="eager"
           />
         </VCarouselItem>
       </VCarouselContent>

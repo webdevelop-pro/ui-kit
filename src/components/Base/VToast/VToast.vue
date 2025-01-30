@@ -39,7 +39,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   width: 100%;
   height: auto;
   min-height: 66px;
-  padding: 21px 18px;
+  padding: 21px 44px 21px 18px;
   margin-bottom: 10px;
   background: colors.$white;
   border-left: 2px solid transparent;

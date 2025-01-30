@@ -14,7 +14,6 @@ import { VCard, VCardContent } from 'UiKit/components/Base/VCard';
 const props = defineProps({
   offer: {
     type: Object as PropType<IOffer>,
-    required: true,
   },
   funded: Boolean,
   routeName: String,

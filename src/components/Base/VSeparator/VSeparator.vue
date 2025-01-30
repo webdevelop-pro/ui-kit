@@ -21,6 +21,7 @@ const delegatedProps = computed(() => {
     >
       <span
         v-if="props.label"
+        class="is--h6__title"
       >
         {{ props.label }}
       </span>
@@ -33,7 +34,23 @@ const delegatedProps = computed(() => {
 @use 'UiKit/styles/_variables.scss' as variables;
 .v-separator {
   margin: 60px 0;
-  border-bottom: 1px solid $gray-40;
+  background-color: $gray-40;
   position: relative;
+  color: $gray-60;
+  width: 100%;
+  height: 1px;
+
+  span {
+      background-color: $white;
+      z-index: 1;
+      position: absolute;
+      left: 50%;
+      top: 49%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+  }
 }
 </style>

@@ -47,6 +47,10 @@ const VHeaderNavigationCardDark = defineAsyncComponent({
 });
 
 const currentTrigger = ref('');
+
+defineProps({
+  path: String,
+});
 </script>
 
 <template>
@@ -64,6 +68,7 @@ const currentTrigger = ref('');
         <VNavigationMenuLink
           v-if="!menuItem.children"
           :href="menuItem.link"
+          :class="{ 'router-link-active': menuItem.link?.includes(path) }"
         >
           {{ menuItem.text }}
         </VNavigationMenuLink>
