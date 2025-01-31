@@ -68,7 +68,7 @@ defineProps({
         <VNavigationMenuLink
           v-if="!menuItem.children"
           :href="menuItem.link"
-          :class="{ 'router-link-active': menuItem.link?.includes(path) }"
+          :class="{ 'router-link-active': path && menuItem.link?.includes(path) }"
         >
           {{ menuItem.text }}
         </VNavigationMenuLink>
