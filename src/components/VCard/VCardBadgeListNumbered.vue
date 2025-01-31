@@ -13,13 +13,20 @@ defineProps({
 </script>
 
 <template>
-  <div class="VCardBadgeListNumbered v-card-badge-list-numbered is--card">
+  <div
+    class="VCardBadgeListNumbered v-card-badge-list-numbered is--card"
+    itemscope
+    itemtype="https://schema.org/ItemList"
+  >
     <VCardBadge
       v-for="(item, i) in items"
       :key="i"
       :tag-text="i + 1 + ''"
       :index="i + 1"
       :text="item"
+      itemprop="itemListElement"
+      itemscope
+      itemtype="https://schema.org/ListItem"
     />
   </div>
 </template>

@@ -23,6 +23,7 @@ const componentProps = computed(() => {
     :is="isComponent"
     v-bind="componentProps"
     class="VBreadcrumbLink v-breadcumb-link is--h6__title"
+    itemprop="url"
   >
     <slot />
   </component>

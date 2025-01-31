@@ -2,7 +2,12 @@
 </script>
 
 <template>
-  <li class="VBreadcrumbItem v-breadcumb-item">
+  <li
+    class="VBreadcrumbItem v-breadcumb-item"
+    itemprop="itemListElement"
+    itemscope
+    itemtype="https://schema.org/ListItem"
+  >
     <slot />
   </li>
 </template>

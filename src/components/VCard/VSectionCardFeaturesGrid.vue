@@ -27,12 +27,19 @@ const noData = computed(() => props.items?.length === 0);
     <template #infoShort>
       <slot name="infoShort" />
     </template>
-    <div class="is--three-col-grid">
+    <div
+      class="is--three-col-grid"
+      itemscope
+      itemtype="https://schema.org/ItemList"
+    >
       <VCardFeatures
         v-for="(item, i) in items"
         :key="i"
         :href="encodeURI(item.url)"
         button-text="Read More"
+        itemprop="itemListElement"
+        itemscope
+        itemtype="https://schema.org/ListItem"
       >
         <h3>
           {{ item.title }}

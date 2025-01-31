@@ -30,6 +30,7 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
     <div
       v-if="day || month || year"
       class="v-card-article__publish-date is--small-2"
+      itemprop="datePublished"
     >
       {{ day }} {{ month }}, {{ year }}
     </div>
@@ -37,6 +38,7 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
       <h3
         v-if="data.title"
         class="v-card-article__name is--h4__title"
+        itemprop="headline"
       >
         {{ capitalizeFirstLetter(data.title) }}
       </h3>
@@ -44,6 +46,7 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
         v-if="data.description"
         class="v-card-article__excerpt is--body"
         v-html="data.description"
+        itemprop="description"
       />
     </VCardContent>
     <VImage
@@ -53,6 +56,7 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
       :src="data.cover?.image"
       :alt="`article ${data.title} image`"
       class="v-card-article__image "
+      itemprop="image"
     />
   </VCard>
 </template>

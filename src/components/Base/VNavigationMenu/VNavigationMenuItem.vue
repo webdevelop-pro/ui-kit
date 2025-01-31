@@ -8,6 +8,8 @@ const props = defineProps<NavigationMenuItemProps>();
   <NavigationMenuItem
     v-bind="props"
     class="VNavigationMenuItem v-navigation-menu-item"
+    itemscope
+    itemtype="https://schema.org/MenuItem"
   >
     <slot />
   </NavigationMenuItem>

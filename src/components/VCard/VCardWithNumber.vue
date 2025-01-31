@@ -9,10 +9,13 @@ defineProps({
 
 <template>
   <VCard class="VCardWithNumber v-card-with-number">
-    <div class="v-card-with-number__index is--h2__title">
+    <div
+      class="v-card-with-number__index is--h2__title"
+      itemprop="headline"
+    >
       {{ index }}
     </div>
-    <p>
+    <p itemprop="description">
       {{ text }}
     </p>
   </VCard>

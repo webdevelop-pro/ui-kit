@@ -2,7 +2,10 @@
 </script>
 
 <template>
-  <div class="VCardContent v-card-content">
+  <div
+    class="VCardContent v-card-content"
+    itemprop="articleBody"
+  >
     <slot />
   </div>
 </template>

@@ -38,7 +38,10 @@ defineProps({
             class="v-card-checkmarked__icon"
           />
         </span>
-        <span class="is--h4__title">
+        <span
+          class="is--h4__title"
+          itemprop="headline"
+        >
           {{ title }}
         </span>
       </span>
@@ -49,6 +52,7 @@ defineProps({
     <div
       v-if="description"
       class="v-card-checkmarked__bottom"
+      itemprop="description"
     >
       {{ description }}
     </div>

@@ -43,11 +43,17 @@ defineProps({
       </slot>
     </template>
     <template #right>
-      <div>
+      <div
+        itemscope
+        itemtype="https://schema.org/ItemList"
+      >
         <VCardCheckmarked
           v-for="(item, i) in items"
           :key="i"
           :title="item"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
         />
       </div>
     </template>

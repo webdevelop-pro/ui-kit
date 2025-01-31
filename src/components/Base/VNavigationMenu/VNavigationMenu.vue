@@ -25,9 +25,11 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   <NavigationMenuRoot
     v-bind="forwarded"
     class="VNavigationMenu v-navigation-menu"
+    itemscope
+    itemtype="https://schema.org/Menu"
   >
     <slot />
-    <NavigationMenuViewport/>
+    <NavigationMenuViewport />
   </NavigationMenuRoot>
 </template>
 

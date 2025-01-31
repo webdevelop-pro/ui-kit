@@ -24,7 +24,12 @@ const year = computed(() => String(new Date(props.data?.publishDate).getFullYear
 
 <template>
   <header class="VBlogHeader v-blog-header">
-    <div class="v-blog-header__author-wrap">
+    <div
+      class="v-blog-header__author-wrap"
+      itemscope
+      itemtype="https://schema.org/Person"
+      itemprop="author"
+    >
       <div class="v-blog-header__author">
         <VImage
           :alt="author?.title || ''"
@@ -38,10 +43,14 @@ const year = computed(() => String(new Date(props.data?.publishDate).getFullYear
           <span class="is--visually-hidden">{{ author?.title }}</span>
         </a>
       </div>
-      <div class="v-blog-header__author-details">
+      <div
+        class="v-blog-header__author-details"
+        itemprop="name"
+      >
         <a
           :href="encodeURI(author?.url)"
           class="v-blog-header__author-name is--h5__title"
+          itemprop="url"
         >
           {{ author?.title }}
         </a>
@@ -52,6 +61,7 @@ const year = computed(() => String(new Date(props.data?.publishDate).getFullYear
     </div>
     <VBadgeClickToBlogInline
       :data="data?.tags"
+      itemprop="keywords"
     />
   </header>
 </template>

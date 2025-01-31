@@ -61,8 +61,11 @@ const getImageType = () => {
             class="v-card-primary__type-icon is--margin-top-0"
             :src="data.imageType || getImageType()"
             alt="CardWithBlueTitleLine title icon"
+            itemprop="image"
           />
-          <h3 class="v-card-primary__type is--h5__title is--margin-top-0">
+          <h3
+            class="v-card-primary__type is--h5__title is--margin-top-0"
+          >
             {{ data.type }}
           </h3>
         </div>
@@ -88,6 +91,7 @@ const getImageType = () => {
         class="v-card-primary__body-image"
         :src="data.bodyImg"
         alt="slider bosy image"
+        itemprop="image"
       />
       <slot name="button">
         <VButton

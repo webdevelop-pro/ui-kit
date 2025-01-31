@@ -24,6 +24,7 @@ const delegatedProps = computed(() => {
       v-bind="delegatedProps"
       class="VAccordionTrigger v-accordion-trigger"
       :class="{ 'is--white': isWhite }"
+      itemprop="name"
     >
       <slot />
       <slot name="icon">

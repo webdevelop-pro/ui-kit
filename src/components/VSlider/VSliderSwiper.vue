@@ -31,50 +31,60 @@ const modules = [Navigation];
   </Swiper>
 </template>
 
-<style lang="sass">
-@use 'UiKit/styles/_colors.sass' as colors
 
-.slider-swiper
-  display: flex
-  flex-direction: row
-  position: relative
+<style lang="scss">
+@use 'UiKit/styles/_colors.scss' as colors;
 
-  @media screen and (max-width: 767px)
-    margin-top: 55px
+.slider-swiper {
+  display: flex;
+  flex-direction: row;
+  position: relative;
 
-  .swiper-wrapper
-    display: flex
+  @media screen and (max-width: 767px) {
+    margin-top: 55px;
+  }
+
+  .swiper-wrapper {
+    display: flex;
+  }
 
   .swiper-button-prev,
-  .swiper-button-next
-    position: absolute
-    right: 0
-    top: -87px
-    width: 48px
-    height: 48px
-    z-index: 2
-    cursor: pointer
-    padding: 12px
-    transition: all 0.3s ease
-    &.swiper-button-disabled
-      opacity: 0.3
-      pointer-events: none
+  .swiper-button-next {
+    position: absolute;
+    right: 0;
+    top: -87px;
+    width: 48px;
+    height: 48px;
+    z-index: 2;
+    cursor: pointer;
+    padding: 12px;
+    transition: all 0.3s ease;
 
-    &:hover
-      background-color: colors.$primary-light
-      transition: all 0.3s ease
+    &.swiper-button-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
 
-  .swiper-button-prev
-    right: 51px
-    background-image: url("UiKit/assets/images/arrow-left-primary.svg?url")
-    background-repeat: no-repeat
-    background-size: 20px
-    background-position: center
+    &:hover {
+      background-color: colors.$primary-light;
+      transition: all 0.3s ease;
+    }
+  }
 
-  .swiper-button-next
-    right: -3px
-    background-image: url("UiKit/assets/images/arrow-right-primary.svg?url")
-    background-repeat: no-repeat
-    background-size: 20px
-    background-position: center
+  .swiper-button-prev {
+    right: 51px;
+    background-image: url("UiKit/assets/images/arrow-left-primary.svg?url");
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: center;
+  }
+
+  .swiper-button-next {
+    right: -3px;
+    background-image: url("UiKit/assets/images/arrow-right-primary.svg?url");
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: center;
+  }
+}
 </style>

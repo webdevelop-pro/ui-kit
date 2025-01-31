@@ -13,8 +13,14 @@ defineProps({
 </script>
 
 <template>
-  <section class="VBlogContent v-blog-content">
-    <h1 v-if="currentPost?.title">
+  <section
+    class="VBlogContent v-blog-content"
+    itemprop="articleBody"
+  >
+    <h1
+      v-if="currentPost?.title"
+      itemprop="headline"
+    >
       {{ currentPost?.title }}
     </h1>
     <p

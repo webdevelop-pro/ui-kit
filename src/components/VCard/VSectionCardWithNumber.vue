@@ -61,12 +61,17 @@ const isPositionOther = computed(() => ((props.position === 'left') ? 'right' : 
       <div
         class="is--card v-section-with-number__cards"
         :class="slotProps.class"
+        itemscope
+        itemtype="https://schema.org/ItemList"
       >
         <VCardWithNumber
           v-for="(itemNumbered, inumb) in items"
           :key="inumb"
           :index="inumb + 1"
           :text="itemNumbered"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
         />
       </div>
     </template>

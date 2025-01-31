@@ -17,12 +17,17 @@ defineProps({
 </script>
 
 <template>
-  <div class="TheComment the-comment">
+  <div
+    class="TheComment the-comment"
+    itemscope
+    itemtype="https://schema.org/Comment"
+  >
     <VAvatar
       class="the-comment__image"
       :src="imageSrc"
       size="small"
       alt="avatar image"
+      itemprop="image"
     />
     <div class="the-comment__content">
       <div class="the-comment__top">
@@ -45,6 +50,7 @@ defineProps({
         <div
           v-if="date"
           class="the-comment__right"
+          itemprop="dateCreated"
         >
           <span
             class="the-comment__date is--small"
@@ -56,7 +62,7 @@ defineProps({
       </div>
       <p
         class="the-comment__text"
-        itemprop="reviewBody"
+        itemprop="text"
       >
         {{ text }}
       </p>

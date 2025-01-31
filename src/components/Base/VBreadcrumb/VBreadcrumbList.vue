@@ -2,7 +2,11 @@
 </script>
 
 <template>
-  <ol class="VBreadcrumbList v-breadcrumb-list">
+  <ol
+    class="VBreadcrumbList v-breadcrumb-list"
+    itemscope
+    itemtype="https://schema.org/BreadcrumbList"
+  >
     <slot />
   </ol>
 </template>

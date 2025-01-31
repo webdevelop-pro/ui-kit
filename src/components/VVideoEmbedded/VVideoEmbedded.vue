@@ -55,6 +55,9 @@ watch(() => props.active, () => {
     width="100%"
     height="100%"
     class="VVideoEmbedded"
+    itemscope
+    itemtype="https://schema.org/VideoObject"
+    itemprop="video"
     @ready="onReady"
   />
 </template>

@@ -31,7 +31,11 @@ defineProps({
     <template #infoShort>
       <slot name="infoShort" />
     </template>
-    <div class="v-section-card-checkmarked-grid-subtitle__content">
+    <div
+      class="v-section-card-checkmarked-grid-subtitle__content"
+      itemscope
+      itemtype="https://schema.org/ItemList"
+    >
       <div class="v-section-card-checkmarked-grid-subtitle__column">
         <h3>{{ subtitleLeft }}</h3>
         <VCardCheckmarked
@@ -40,6 +44,9 @@ defineProps({
           :title="item.title"
           :description="item.description"
           card
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
         />
       </div>
       <div class="v-section-card-checkmarked-grid-subtitle__column">
@@ -50,6 +57,9 @@ defineProps({
           card
           :title="item.title"
           :description="item.description"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
         />
       </div>
     </div>

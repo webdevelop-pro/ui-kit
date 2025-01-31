@@ -37,7 +37,11 @@ watchEffect(() => {
       <slot name="infoShort" />
     </template>
     <ClientOnly>
-      <div class="v-section-card-offer-grid__list-wrap">
+      <div
+        class="v-section-card-offer-grid__list-wrap"
+        itemscope
+        itemtype="https://schema.org/ItemList"
+      >
         <div
           v-if="!loadingLocal"
           class="is--three-col-grid"
@@ -49,6 +53,9 @@ watchEffect(() => {
             :image-loading="(index < 7) ? 'eager' : 'lazy'"
             :link="urlOfferSingle(offer.slug)"
             class="v-offer-list__list-item"
+            itemprop="itemListElement"
+            itemscope
+            itemtype="https://schema.org/ListItem"
           />
         </div>
         <div
@@ -59,6 +66,9 @@ watchEffect(() => {
             v-for="index in 6"
             :key="index"
             class="v-offer-list__list-item"
+            itemprop="itemListElement"
+            itemscope
+            itemtype="https://schema.org/ListItem"
           />
         </div>
       </div>

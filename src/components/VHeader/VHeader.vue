@@ -59,17 +59,19 @@ watchPostEffect(() => {
           class="is--gt-desktop-md-show"
         />
 
-        <div class="is--gt-desktop-md-show v-header__data">
-          <slot />
-        </div>
+        <ClientOnly>
+          <div class="is--gt-desktop-md-show v-header__data">
+            <slot />
+          </div>
 
-        <VHeaderMobile
-          v-if="!isDesktopMD"
-          v-model="isMobileSidebarOpen"
-          class="is--lt-desktop-md-show"
-        >
-          <slot name="mobile" />
-        </VHeaderMobile>
+          <VHeaderMobile
+            v-if="!isDesktopMD"
+            v-model="isMobileSidebarOpen"
+            class="is--lt-desktop-md-show"
+          >
+            <slot name="mobile" />
+          </VHeaderMobile>
+        </ClientOnly>
       </div>
     </div>
   </header>

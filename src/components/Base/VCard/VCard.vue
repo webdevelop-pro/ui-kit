@@ -17,6 +17,8 @@ const classLocal = computed(() => (props.variant ? `is--variant-${props.variant}
   <article
     class="VCard v-card"
     :class="[classLocal, { 'is--link': href || to }]"
+    itemscope
+    itemtype="https://schema.org/Article"
   >
     <slot />
     <component

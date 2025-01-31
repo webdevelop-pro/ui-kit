@@ -16,6 +16,8 @@ const forwarded = useForwardPropsEmits(props, emits);
   <AccordionRoot
     v-bind="forwarded"
     class="VAccordion v-accordion"
+    itemscope
+    itemtype="https://schema.org/ItemList"
   >
     <slot />
   </AccordionRoot>

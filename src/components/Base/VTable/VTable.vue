@@ -11,6 +11,8 @@ defineProps({
     <table
       class="VTable v-table"
       :class="`is--size-${size}`"
+      itemscope
+      itemtype="https://schema.org/Table"
     >
       <slot />
     </table>

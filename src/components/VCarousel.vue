@@ -142,6 +142,7 @@ watch(() => selectedIndex.value, () => {
           <div
             v-if="!item.url && item.description"
             class="v-carousel__item-description"
+            itemprop="description"
           >
             <p class="small-text">
               {{ item.description }}

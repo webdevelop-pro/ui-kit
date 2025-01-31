@@ -37,22 +37,36 @@ const isFiveColumns = computed(() => (props.data.length === 5));
       <slot name="infoShort" />
     </template>
     <template v-if="isFiveColumns">
-      <div class="is--two-col-grid is--three">
+      <div
+        class="is--two-col-grid is--three"
+        itemscope
+        itemtype="https://schema.org/ItemList"
+      >
         <VCardCheckmarked
           v-for="(item, i) in data.slice(0, 3)"
           :key="i"
           card
           :title="item.title"
           :description="item.description"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
         />
       </div>
-      <div class="is--two-col-grid">
+      <div
+        class="is--two-col-grid"
+        itemscope
+        itemtype="https://schema.org/ItemList"
+      >
         <VCardCheckmarked
           v-for="(item, i) in data.slice(3, 5)"
           :key="i"
           card
           :title="item.title"
           :description="item.description"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
         />
       </div>
     </template>
@@ -60,6 +74,8 @@ const isFiveColumns = computed(() => (props.data.length === 5));
       v-else
       class="is--two-col-grid"
       :class="{ 'is--three': isThreeColumns }"
+      itemscope
+      itemtype="https://schema.org/ItemList"
     >
       <VCardCheckmarked
         v-for="(item, i) in data"
@@ -67,6 +83,9 @@ const isFiveColumns = computed(() => (props.data.length === 5));
         card
         :title="item.title"
         :description="item.description"
+        itemprop="itemListElement"
+        itemscope
+        itemtype="https://schema.org/ListItem"
       />
     </div>
   </VSection>

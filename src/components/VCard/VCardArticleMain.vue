@@ -34,17 +34,24 @@ const h1Class = computed(() => (isTablet.value ? 'is--h4__title' : 'is--h1__titl
     :class="{ 'is--secondary': secondary }"
     :style="{ background: backgroundImage }"
   >
-    <div class="v-card-article-main__publish-date is--small-2">
+    <div
+      class="v-card-article-main__publish-date is--small-2"
+      itemprop="datePublished"
+    >
       {{ month }} {{ day }}, {{ year }}
     </div>
     <VCardContent class="v-card-article-main__details">
       <div
         class="v-card-article-main__title "
         :class="secondary ? 'is--h4__title' : h1Class"
+        itemprop="headline"
       >
         {{ data.title }}
       </div>
-      <p class="v-card-article-main__description">
+      <p
+        class="v-card-article-main__description"
+        itemprop="description"
+      >
         {{ data.description }}
       </p>
     </VCardContent>
