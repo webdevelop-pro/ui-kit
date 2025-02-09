@@ -18,43 +18,59 @@ export const useChat = defineStore('chat', () => {
     messages.value.push(message);
   };
 
+  let buffer = '';
+
   const handleStreamData = (value: string, attributes: IChatAttributes) => {
     if (!value || (value === '{}')) return;
     const arrayOfValue = value.split('\n');
     arrayOfValue.forEach((item: string) => {
-      if (!item) return;
-      const data = JSON.parse(item) as IStreamItem;
-      // if don't have this stream in botTypingId then add
-      if (botTypingId.value.filter((streamId) => streamId === data.id).length === 0) botTypingId.value.push(data.id);
-      // check if we have stream message in messages array
-      let messagesHasStreamId = messages.value.filter((messageItem: IMessageArrayItem) => messageItem.id === data.id);
-      // if there is no messagesHasStreamId means this is new stream, then push new message object
-      if (messagesHasStreamId.length === 0) {
-        addNewMessage({
-          id: data.id,
-          user: bot.value,
-          attributes,
-          message: { type: MessageType.text, value: '' },
-          choices: data.choices,
-          finished: false,
-        });
-        choices.value = data.choices;
-        messagesHasStreamId = messages.value.filter((messageItem: IMessageArrayItem) => messageItem.id === data.id);
+      if (!item) {
+        return;
       }
-      const { ai_response } = data;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      if (ai_response && ai_response.length > 0) {
-        const { content } = ai_response[0].delta;
-        if (content) {
-          setTimeout(() => {
-            messagesHasStreamId[0].message.value += content.replace(/(?:\r\n|\r|\n)/g, '<br>');
-          }, 100);
+      try {
+        const data = JSON.parse(buffer + item) as IStreamItem;
+        buffer = '';
+        // if don't have this stream in botTypingId then add
+        if (botTypingId.value.filter((streamId) => streamId === data.id).length === 0) {
+          botTypingId.value.push(data.id);
         }
-        if (ai_response[0].finish_reason === 'stop') {
-          setTimeout(() => {
-            botTypingId.value = botTypingId.value.filter((streamId) => streamId !== data.id);
-            messagesHasStreamId[0].finished = true;
-          }, 150);
+        // check if we have stream message in messages array
+        let messagesHasStreamId = messages.value.filter((messageItem: IMessageArrayItem) => messageItem.id === data.id);
+        // if there is no messagesHasStreamId means this is new stream, then push new message object
+        if (messagesHasStreamId.length === 0) {
+          addNewMessage({
+            id: data.id,
+            user: bot.value,
+            attributes,
+            message: { type: MessageType.text, value: '' },
+            choices: data.choices,
+            finished: false,
+          });
+          choices.value = data.choices;
+          messagesHasStreamId = messages.value.filter((messageItem: IMessageArrayItem) => messageItem.id === data.id);
+        }
+        const { ai_response } = data;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        if (ai_response && ai_response.length > 0) {
+          const { content } = ai_response[0].delta;
+          if (content) {
+            setTimeout(() => {
+              messagesHasStreamId[0].message.value += content.replace(/(?:\r\n|\r|\n)/g, '<br>');
+            }, 100);
+          }
+          if (ai_response[0].finish_reason === 'stop') {
+            setTimeout(() => {
+              botTypingId.value = botTypingId.value.filter((streamId) => streamId !== data.id);
+              messagesHasStreamId[0].finished = true;
+            }, 150);
+          }
+        }
+      } catch (e) {
+        // meaning we don't have full json yet
+        if (e instanceof SyntaxError) {
+          buffer = item;
+        } else {
+          console.error(e);
         }
       }
     });
