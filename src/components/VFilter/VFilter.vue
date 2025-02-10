@@ -119,7 +119,7 @@ watch(() => props.items, () => {
           <VButton
             size="small"
             block
-            class="v-filter__button"
+            class="v-filter__button is--margin-top-0"
             @click="onApplyClick"
           >
             Apply
@@ -128,7 +128,7 @@ watch(() => props.items, () => {
             size="small"
             variant="link"
             block
-            class="v-filter__button"
+            class="v-filter__button is--margin-top-0"
             @click.stop="onClearClick"
           >
             Clear Selected

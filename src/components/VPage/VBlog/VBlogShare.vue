@@ -40,6 +40,7 @@ const SOCIAL_LIST = [
           :href="encodeURI(button.shareHref + link)"
           variant="outlined"
           icon-only
+          class="is--margin-top-0"
         >
           <component
             :is="button.icon"

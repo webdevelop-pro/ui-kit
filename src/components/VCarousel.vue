@@ -111,11 +111,11 @@ watch(() => selectedIndex.value, () => {
       @init-api="(val) => emblaMainApi = val"
     >
       <VCarouselPrevious
-        class="v-carousel__prev"
+        class="v-carousel__prev is--margin-top-0"
         variant="tetriary"
       />
       <VCarouselNext
-        class="v-carousel__next"
+        class="v-carousel__next is--margin-top-0"
         variant="tetriary"
       />
       <VCarouselContent class="v-carousel__content">
@@ -177,6 +177,7 @@ watch(() => selectedIndex.value, () => {
             :title="getImageTitle(name, item.name)"
             itemprop="image"
             loading="eager"
+            class='is--margin-top-0'
           />
         </VCarouselItem>
       </VCarouselContent>

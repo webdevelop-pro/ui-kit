@@ -85,7 +85,10 @@ const getImageType = () => {
         v-html="descriptionWithHtml ? data.text : stripHtml(data.text)"
       />
     </div>
-    <VCardFooter class=" is--margin-top-30">
+    <VCardFooter
+      v-if="data.url || data.bodyImg || $slots.button"
+      class="is--margin-top-30"
+    >
       <VImage
         v-if="data.bodyImg"
         class="v-card-primary__body-image"

@@ -66,7 +66,7 @@ const componentIcon = computed(() => {
       v-if="buttonText"
       size="small"
       :color="buttonColor"
-      class="v-alert-default__button"
+      class="v-alert-default__button is--margin-top-0"
       @click="onClick"
     >
       {{ buttonText }}
@@ -110,5 +110,12 @@ const componentIcon = computed(() => {
             color: colors.$primary;
         }
     }
+
+  .v-alert-title {
+    margin-top: 0 !important;
+  }
+  .v-alert-description {
+    margin-top: 0 !important;
+  }
 }
 </style>

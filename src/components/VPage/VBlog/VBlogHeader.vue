@@ -34,7 +34,7 @@ const year = computed(() => String(new Date(props.data?.publishDate).getFullYear
         <VImage
           :alt="author?.title || ''"
           :src="author?.cover?.image"
-          class="v-blog-header__author-image "
+          class="v-blog-header__author-image is--margin-top-0"
         />
         <a
           :href="encodeURI(author?.url)"

@@ -9,7 +9,7 @@ const props = defineProps<{
 <template>
   <div
     :class="props.class"
-    class="VAlertDescription"
+    class="VAlertDescription v-alert-description"
   >
     <slot />
   </div>

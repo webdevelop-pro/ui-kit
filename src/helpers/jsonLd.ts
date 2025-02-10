@@ -25,27 +25,6 @@ export function generateJsonLd(pageData: PageData, env: any): string {
     ],
   };
 
-  if (pageData.frontmatter.jsonLDType === 'BlogPosting') {
-    return JSON.stringify({
-      ...commonData,
-      '@type': pageData.frontmatter.jsonLDType,
-      datePublished: pageData.frontmatter.publishDate,
-      dateModified: pageData.frontmatter.lastmod || pageData.frontmatter.publishDate,
-      publisher: {
-        '@type': 'Organization',
-        '@id': env.FRONTEND_URL,
-        name: env.title,
-        logo: {
-          '@type': 'ImageObject',
-          '@id': `${env.FRONTEND_URL}/public/images/logo.svg`,
-          url: `${env.FRONTEND_URL}/public/images/logo.svg`,
-          width: '112',
-          height: '38',
-        },
-      },
-    });
-  }
-
   if (pageData.frontmatter.jsonLDType) {
     return JSON.stringify({
       ...commonData,

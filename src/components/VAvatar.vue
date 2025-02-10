@@ -5,7 +5,7 @@ import user from 'UiKit/assets/images/user.svg?component';
 withDefaults(defineProps<{
   size?: 'large' | 'medium' | 'small' | 'x-small';
   shape?: 'circle' | 'square';
-  src: string;
+  src: string | undefined;
   alt?: string;
 }>(), {
   size: 'medium',
@@ -21,6 +21,7 @@ withDefaults(defineProps<{
     class="VAvatarDefault v-avatar-default"
   >
     <VAvatarImage
+      v-if="src"
       :src="src"
       :alt="alt"
     />

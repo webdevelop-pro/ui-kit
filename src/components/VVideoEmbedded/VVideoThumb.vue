@@ -86,7 +86,7 @@ onMounted(() => {
       :src="imgUrl"
       :fit="fit"
       alt="video thumb image"
-      class="v-video-thumb__image"
+      class="v-video-thumb__image is--margin-top-0"
     />
     <slot name="playIcon">
       <div class="v-video-thumb__play-icon">

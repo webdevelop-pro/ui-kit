@@ -17,6 +17,8 @@ defineProps({
     class="VBlogContent v-blog-content"
     itemprop="articleBody"
   >
+    <meta itemprop="datePublished" :content="currentPost?.publishDate" />
+    <meta itemprop="dateModified" :content="currentPost?.updateDate" />
     <h1
       v-if="currentPost?.title"
       itemprop="headline"
@@ -34,7 +36,7 @@ defineProps({
         v-if="currentPost?.cover?.image"
         :src="currentPost.cover?.image"
         alt="blog image"
-        class="v-blog-content__image"
+        class="v-blog-content__image is--margin-top-0"
       />
     </div>
     <div
