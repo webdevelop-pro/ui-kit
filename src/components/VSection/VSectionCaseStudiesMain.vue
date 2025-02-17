@@ -34,7 +34,7 @@ const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started'
               <h3>
                 Table of contents
               </h3>
-              <ol class="is--margin-top-30">
+              <ol class="is--margin-top-20">
                 <li><a href="#smooth-transaction-settlement-and-clearing">Smooth Transaction Settlement</a></li>
                 <li><a href="#user-experience-and-accessibility">User Experience and Accessibility</a></li>
                 <li><a href="#cybersecurity-requirements">Cybersecurity Requirements</a></li>
@@ -62,7 +62,7 @@ const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started'
             </div>
             <VButton
               as="a"
-              :href="`${getStarted[0].url}?topic=${slug}`"
+              :href="`${getStarted[0].url}?topic=${topic}`"
               size="large"
               variant="outlined"
               class="is--margin-top-30"
