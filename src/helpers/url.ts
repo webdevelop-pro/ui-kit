@@ -1,5 +1,6 @@
 import { IFrontmatter } from '@/types/types';
 
+
 export const urlFormat = (url: string, data: IFrontmatter[]) => {
   if (data !== undefined) {
     data.forEach((data, idx) => {
