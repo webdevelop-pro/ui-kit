@@ -12,7 +12,6 @@ const VButton = defineAsyncComponent({
   hydrate: hydrateOnVisible(),
 });
 
-
 const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started');
 </script>
 
