@@ -116,14 +116,23 @@ class Page {
     return this._virtual;
   }
 
-  filterChilds(key: keyof IFrontmatter, val: string) {
-    const res:IFrontmatter[] = [];
-    Object.keys(this._childrens).forEach((slug, el) => {
-      if (el[key] == val) {
+  getChilds(key: string, val: string):Page[] {
+    const res:Page[] = [];
+    Object.keys(this._childrens).forEach((slug) => {
+      const el = this._childrens[slug];
+      if (key == '' || el._data[key] == val) {
         res.push(el);
       }
     });
     return res;
+  }
+
+  getChild(key: keyof IFrontmatter, val: string):Page|null {
+    const res = this.getChilds(key, val);
+    if (res.length > 0) {
+      return res[0];
+    }
+    return null;
   }
 
   getPageByURL(url:string) {
@@ -145,6 +154,7 @@ class Page {
     });
     return tempPage;
   }
+
 }
 
 let pages = new Page({}, true)

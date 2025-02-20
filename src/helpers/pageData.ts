@@ -21,7 +21,7 @@ export function getImage(img: string) {
 }
 
 export function normalizeFrontmatter(pageData) {
-  pageData.frontmatter.url = urlFormat(pageData.relativePath ? `/${pageData.relativePath}` : pageData.url);
+  pageData.frontmatter.url = urlFormat(pageData.relativePath ? `/${pageData.relativePath.replace(/index\.md$/, '').replace('.md', '')}` : pageData.url);
   if (pageData.frontmatter.hasOwnProperty('slug') == false) {
     pageData.frontmatter.slug = getSlugFromURL(pageData.frontmatter.url);
   }
