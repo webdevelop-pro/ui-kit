@@ -1,13 +1,12 @@
 
-import { useData } from 'vitepress';
+// import { useData } from 'vitepress';
 import { watch } from 'vue';
 import { pages, Page } from 'UiKit/types/pages';
 
 
-
-export const useBreadcrumbs = () => {
+export const useBreadcrumbs = (page, frontmatter) => {
   let breadcrumbsList = [];
-  const { page, frontmatter } = useData();
+  // const { page, frontmatter } = useData();
   const currentPage = pages.getPageByURL(frontmatter.value.url);
   if (currentPage == null) {
     console.warn(`page ${frontmatter.value.url} not found in pages`);
@@ -15,7 +14,7 @@ export const useBreadcrumbs = () => {
       breadcrumbsList,
     };
   }
-
+  debugger;
 
   const crumbs = () => {
     breadcrumbsList.splice(0, breadcrumbsList.length);
@@ -41,8 +40,6 @@ export const useBreadcrumbs = () => {
     crumbs();
   }, { immediate: true });
 
-  return {
-    breadcrumbsList,
-  };
+  return breadcrumbsList;
 };
 

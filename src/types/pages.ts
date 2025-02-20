@@ -116,6 +116,16 @@ class Page {
     return this._virtual;
   }
 
+  filterChilds(key: keyof IFrontmatter, val: string) {
+    const res:IFrontmatter[] = [];
+    Object.keys(this._childrens).forEach((slug, el) => {
+      if (el[key] == val) {
+        res.push(el);
+      }
+    });
+    return res;
+  }
+
   getPageByURL(url:string) {
     let path = url.replaceAll('/', '._childrens.').split('.');
     // does not work if there is a number in path

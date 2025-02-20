@@ -1,22 +1,29 @@
-<script setup lang="ts">
+<script lang="ts">
 import { ref, watch } from 'vue';
-import VCardArticle from 'UiKit/components/VCard/VCardArticle.vue';
 import { useRoute, useData } from 'vitepress';
-import { data as allPages } from '@/store/all.data';
-import { filterPages } from 'UiKit/helpers/allData';
-import { IFrontmatter } from 'UiKit/types/types';
 
+import VCardArticle from 'UiKit/components/VCard/VCardArticle.vue';
+
+import { pages } from 'UiKit/types/pages';
+</script>
+
+<script setup lang="ts">
 const { frontmatter } = useData();
 
 const postsRandom = ref();
 const route = useRoute();
 
-const blogPosts = filterPages(allPages as IFrontmatter[], 'layout', 'resource-center-single');
-
 const getRandomPosts = () => {
-  const blogPostsFiltered = blogPosts.filter((item) => item.slug !== frontmatter.value.slug);
-  const shuffledPosts = blogPostsFiltered?.slice().sort(() => Math.random() - 0.5); // Shuffle the array
-  return shuffledPosts?.slice(0, 3); // Select the first three elements (randomly selected)
+  // todo
+  // maybe store it somewhere in config?
+  const resourceCenter = pages.filterChilds('layout', 'resource-center');
+  if (resourceCenter.length > 0) {
+    const blogPostsFiltered = resourceCenter[0].filterChilds('layout', 'resource-center-single')
+      .filter((item) => item.slug !== frontmatter.value.slug);
+      const shuffledPosts = blogPostsFiltered?.slice().sort(() => Math.random() - 0.5); // Shuffle the array
+      return shuffledPosts?.slice(0, 3); // Select the first three elements (randomly selected)  
+  }
+  return [];
 };
 
 watch(() => route.path, () => {
