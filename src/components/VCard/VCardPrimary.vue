@@ -82,8 +82,11 @@ const getImageType = () => {
         v-if="data.text"
         class="v-card-primary__text"
         :class="{ 'is--ellipsis': ellipsis }"
-        v-html="descriptionWithHtml ? data.text : stripHtml(data.text)"
-      />
+      >
+        <p
+          v-html="descriptionWithHtml ? data.text : stripHtml(data.text)"
+        />
+      </VCardContent>
     </div>
     <VCardFooter
       v-if="data.url || data.bodyImg || $slots.button"

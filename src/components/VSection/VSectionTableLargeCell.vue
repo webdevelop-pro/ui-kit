@@ -64,8 +64,11 @@ const filteredHeader = computed(() => (
             v-for="(rowItem, rowInd) in row"
             :key="rowInd"
             class="v-section-table-large-cell__cell"
-            v-html="rowItem"
-          />
+          >
+            <p
+              v-html="rowItem"
+            />
+          </VTableCell>
         </VTableRow>
       </VTableBody>
     </VTable>
