@@ -93,11 +93,11 @@ const props = defineProps({
   }
 
   &__background-wrap {
+    width: 100%;
     @include media-gte(desktop-lg) {
       height: 100%;
       position: absolute;
       top: 0;
-      width: 100%;
       max-width: 1175px;
       margin: 0 auto;
     }

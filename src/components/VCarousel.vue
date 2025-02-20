@@ -194,7 +194,7 @@ watch(() => selectedIndex.value, () => {
   width: 100%;
   user-select: none;
   background-color: colors.$gray-10;
-  overflow: hidden;
+  // overflow: hidden;
 
   &__slider-main,
   &__slider-thumbs{
