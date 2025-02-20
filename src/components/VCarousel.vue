@@ -100,9 +100,9 @@ watch(() => selectedIndex.value, () => {
 
 
 <template>
-  <div class="v-carousel">
+  <div class="v-carousel-default">
     <VCarousel
-      class="v-carousel__slider-main"
+      class="v-carousel-default__slider-main"
       :opts="{
         align: 'start',
         ...props.options,
@@ -111,18 +111,18 @@ watch(() => selectedIndex.value, () => {
       @init-api="(val) => emblaMainApi = val"
     >
       <VCarouselPrevious
-        class="v-carousel__prev is--margin-top-0"
+        class="v-carousel-default__prev is--margin-top-0"
         variant="tetriary"
       />
       <VCarouselNext
-        class="v-carousel__next is--margin-top-0"
+        class="v-carousel-default__next is--margin-top-0"
         variant="tetriary"
       />
-      <VCarouselContent class="v-carousel__content">
+      <VCarouselContent class="v-carousel-default__content">
         <VCarouselItem
           v-for="(item, index) in sortedFiles"
           :key="index"
-          class="v-carousel__item"
+          class="v-carousel-default__item"
         >
           <VVideoEmbedded
             v-if="item.video"
@@ -141,7 +141,7 @@ watch(() => selectedIndex.value, () => {
           />
           <div
             v-if="!item.url && item.description"
-            class="v-carousel__item-description"
+            class="v-carousel-default__item-description"
             itemprop="description"
           >
             <p class="small-text">
@@ -152,15 +152,15 @@ watch(() => selectedIndex.value, () => {
       </VCarouselContent>
     </VCarousel>
     <VCarousel
-      class="v-carousel__slider-thumbs"
+      class="v-carousel-default__slider-thumbs"
       @init-api="(val) => emblaThumbnailApi = val"
     >
       <VCarouselContent>
         <VCarouselItem
           v-for="(item, index) in sortedFiles"
           :key="index"
-          class="v-carousel__thumb-item"
-          :class="{'is--active': index === selectedIndex }"
+          class="v-carousel-default__thumb-item"
+          :class="{ 'is--active': index === selectedIndex }"
           @click="onThumbClick(index)"
         >
           <VVideoThumb
@@ -189,12 +189,12 @@ watch(() => selectedIndex.value, () => {
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as *;
-.v-carousel{
+.v-carousel-default{
   height: 100%;
   width: 100%;
   user-select: none;
   background-color: colors.$gray-10;
-  // overflow: hidden;
+  overflow: hidden;
 
   &__slider-main,
   &__slider-thumbs{
