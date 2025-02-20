@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount } from 'vue';
-import { blockedBody, unBlockedBody } from 'UiKit/helpers/blocked-body';
 import logoIcon from 'UiKit/assets/images/logo.svg';
 
-onMounted(() => blockedBody());
-onBeforeUnmount(() => unBlockedBody());
+defineProps({
+  hide: Boolean,
+});
 </script>
 
 <template>
   <div
     class="VLoader the-loader"
     data-testid="the-loader"
+    :class="{ 'is--hidden': hide }"
   >
     <div class="the-loader__circle">
       <div class="the-loader__wrap">
@@ -36,6 +36,10 @@ onBeforeUnmount(() => unBlockedBody());
   width: 100%;
   height: 100%;
   background-color: #fff;
+
+  &.is--hidden {
+    display: none;
+  }
 
   &__circle{
     position: relative;

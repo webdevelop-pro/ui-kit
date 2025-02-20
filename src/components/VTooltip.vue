@@ -3,6 +3,10 @@ import {
   VTooltipTrigger, VTooltip, VTooltipContent, VTooltipProvider,
 } from './Base/VTooltip';
 
+defineProps({
+  asChild: Boolean,
+});
+
 </script>
 
 <template>
@@ -10,7 +14,9 @@ import {
     :delay-duration="100"
   >
     <VTooltip>
-      <VTooltipTrigger>
+      <VTooltipTrigger
+        :as-child="asChild"
+      >
         <slot />
       </VTooltipTrigger>
       <VTooltipContent>

@@ -110,6 +110,7 @@ const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started'
       cursor: pointer;
       transition: all 0.8s ease;
       color: inherit;
+      display: inline;
 
       &:hover {
           text-decoration-line: none;

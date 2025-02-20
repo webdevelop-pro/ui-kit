@@ -51,6 +51,7 @@ const onClick = (item: IMessage) => {
           <VButton
             size="small"
             variant="link"
+            block
             class="chat-side-mobile__button"
             @click="onClick(item)"
           >
