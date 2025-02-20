@@ -1,4 +1,4 @@
-import { JSONSchemaType } from 'ajv';
+import { JSONSchemaType } from 'ajv/dist/types/json-schema';
 import cloneDeep from 'lodash/cloneDeep';
 import { capitalizeFirstLetter } from 'UiKit/helpers/text';
 

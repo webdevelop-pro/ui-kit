@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import { IFrontmatter } from 'UiKit/types/types';
 import { PropType } from 'vue';
+import {
+  VTable, VTableBody, VTableCell, VTableRow,
+} from 'UiKit/components/Base/VTable';
 
 interface IRelatedPages {
     groupBy: IFrontmatter;
@@ -14,38 +17,40 @@ defineProps({
 
 <template>
   <div class="VRelatedPages v-related-pages">
-    <table class="v-related-pages__content">
-      <tr
-        v-for="(item, index) in data"
-        :key="index"
-        class="v-related-pages__item"
-      >
-        <td class="v-related-pages__left">
-          <a
-            :href="item.groupBy.url"
-            class="is--h4__title"
-          >
-            {{ item.groupBy.title }}
-          </a>
-        </td>
-        <td class="v-related-pages__right">
-          <a
-            v-for="(child, indexChild) in item.items"
-            :key="indexChild"
-            :href="child.url"
-            class="is--link-regular"
-          >
-            {{ child.title }}
-          </a>
-        </td>
-      </tr>
-    </table>
+    <VTable class="v-related-pages__content">
+      <VTableBody>
+        <VTableRow
+          v-for="(item, index) in data"
+          :key="index"
+          class="v-related-pages__item"
+        >
+          <VTableCell class="v-related-pages__left">
+            <a
+              :href="encodeURI(item.groupBy.url)"
+              class="is--h4__title"
+            >
+              {{ item.groupBy.title }}
+            </a>
+          </VTableCell>
+          <VTableCell class="v-related-pages__right">
+            <a
+              v-for="(child, indexChild) in item.items"
+              :key="indexChild"
+              :href="encodeURI(child.url)"
+              class="is--link-regular"
+            >
+              {{ child.title }}
+            </a>
+          </VTableCell>
+        </VTableRow>
+      </VTableBody>
+    </VTable>
   </div>
 </template>
 
 <style lang="scss">
-@use 'UiKit/styles/_colors.sass' as colors;
-@use 'UiKit/styles/_variables.sass' as variables;
+@use 'UiKit/styles/_colors.scss' as colors;
+@use 'UiKit/styles/_variables.scss' as variables;
 
 .v-related-pages {
     display: flex;
@@ -60,24 +65,11 @@ defineProps({
     box-shadow: variables.$box-shadow-medium;
 
     &__content {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        align-self: stretch;
-        border-radius: 2px;
-        border: 1px solid colors.$gray-20;
-        background: colors.$white;
-        margin-top: 0;
-    }
-
-    &__item {
-        & + & {
-            border-top: 1px solid colors.$gray-20;
-        }
+      border: 1px solid colors.$gray-20;
+      border-top: none;
     }
 
     &__left {
-        padding: 16px;
         width: 30%;
         background-color: colors.$primary-light;
         a {
@@ -86,11 +78,9 @@ defineProps({
     }
 
     &__right {
-        padding: 8px 0;
         a {
             padding: 8px 16px;
             display: inline-block;
-            margin: 0 !important;
         }
     }
 }

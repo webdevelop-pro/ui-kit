@@ -1,14 +1,15 @@
 
-@use 'UiKit/styles/_colors.sass' as *;
-@use 'UiKit/styles/_mixins.sass' as *;
-@use 'UiKit/styles/_variables.sass' as *;
+@use 'UiKit/styles/_colors.scss' as *;
+@use 'UiKit/styles/_mixins.scss' as *;
+@use 'UiKit/styles/_variables.scss' as *;
+@use 'UiKit/styles/_transitions.scss' as *;
 
-@forward '_reset.sass';
-@forward '_fonts.sass';
-@forward '_transitions.sass';
+@forward '_reset.scss';
+@forward '_fonts.scss';
 @forward 'components';
-@forward '_global.sass';
+@forward '_global.scss';
 
-@forward '_layout.sass';
+@forward '_layout.scss';
 
 // components
+//yarn add radix-vue

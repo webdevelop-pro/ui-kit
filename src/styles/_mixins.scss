@@ -1,0 +1,22 @@
+@use "UiKit/styles/_variables" as variables;
+@forward "UiKit/styles/mixins/mixin-media";
+  
+@mixin mt($time){
+  transition: all $time ease-in-out;
+}
+
+//Function to convert px value into rem
+@function sizeInRem($target, $context: variables.$v-size){
+  @return ($target / $context) * 1rem;
+}
+
+@function isImportant($important){
+  @return #{if($important, '!important', '')};
+}
+
+
+@mixin font($weight, $family: variables.$familyValue, $important: false){
+  font-family: $family isImportant($important);
+  font-style: normal;
+  font-weight: $weight;
+}

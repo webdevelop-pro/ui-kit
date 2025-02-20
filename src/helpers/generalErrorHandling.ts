@@ -1,16 +1,13 @@
-
-import { notify } from '@kyvg/vue3-notification';
+import { useToast } from 'UiKit/components/Base/VToast/use-toast';
 
 const statusCodes = [500, 501, 502, 503, 504, 505, 506, 507, 508, 510, 511];
-const NOTIFY_OPTIONS = {
-  text: 'Something went wrong',
-  data: {
-    description: 'Please try again',
-    status: 3,
-  },
-  type: 'error',
-  group: 'transaction',
-  duration: 10000,
+
+const { toast } = useToast();
+
+const TOAST_OPTIONS = {
+  title: 'Something went wrong',
+  description: 'Please try again',
+  variant: 'error',
 };
 
 // eslint-disable @typescript-eslint/no-unsafe-assignment
@@ -24,12 +21,12 @@ export const generalErrorHandling = async (error: Response) => {
     const errorJson = await error.json();
     if (errorJson) {
       // eslint-disable-next-line
-      NOTIFY_OPTIONS.text = errorJson;
+      TOAST_OPTIONS.description = errorJson;
     }
   } catch (errorTry) {
     if (statusCodes.includes(statusCode)) {
       // person.value.isServerError = true;
     }
   }
-  notify(NOTIFY_OPTIONS);
+  toast(TOAST_OPTIONS);
 };

@@ -8,7 +8,7 @@
  * @mixin media(mobile, 500px) { ... }
  */
 @use "sass:map";
-@use 'UiKit/styles/_variables.sass' as *;
+@use 'UiKit/styles/_variables.scss' as *;
 
 
 @function get-breakpoint($key) {

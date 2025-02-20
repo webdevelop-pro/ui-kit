@@ -1,5 +1,5 @@
 
-import { IBreadcrumb } from 'UiKit/components/VBreadcrumbs/VBreadcrumbs.vue';
+import { IBreadcrumb } from 'UiKit/components/VBreadcrumb/VBreadcrumbsList.vue';
 
 
 
@@ -71,5 +71,6 @@ export interface ICaseStudiesTimelineItemCard {
 }
 export interface ICaseStudiesTimelineItem {
   circleType?: 'active' | 'not-complete' | 'complete' | 'highlight';
+  title: string;
   items: ICaseStudiesTimelineItemCard[];
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, PropType } from 'vue';
-import VSliderWithPaginationAutoPlay from 'UiKit/components/Sliders/VSliderWithPaginationAutoPlay.vue';
+import VSliderAutoplay from 'UiKit/components/VSlider/VSliderAutoplay.vue';
 
 export interface IWhatOurClientsSaySlider {
   text: string;
@@ -22,72 +22,65 @@ const sliderFormatted = computed(() => props.slider.map((item, index) => ({
 </script>
 
 <template>
-  <VSliderWithPaginationAutoPlay
+  <VSliderAutoplay
     v-if="sliderFormatted"
     v-slot="active"
-    :slider="sliderFormatted"
+    :data="slider"
     :show-pagination="false"
     :autoplay-change-time="60000"
+    autoplay
+    class="what-our-clients-say-sidebar"
   >
-    <transition
-      name="fade"
-      mode="out-in"
+    <div
+      :key="active.id"
+      class="what-our-clients-say-sidebar__item"
     >
+      <p
+        :key="active.id"
+        class="what-our-clients-say-sidebar__text"
+      >
+        {{ active?.text }}
+      </p>
       <div
         :key="active.id"
-        v-bind="active"
-        class="what-our-clients-say-sidebar__item"
+        class="what-our-clients-say-sidebar__author is--h5__title"
       >
-        <p
-          :key="active.id"
-          class="what-our-clients-say-sidebar__text"
-        >
-          {{ active?.text }}
-        </p>
-        <div
-          :key="active.id"
-          class="what-our-clients-say-sidebar__author is--h5__title"
-        >
-          {{ active?.author }}
-        </div>
+        {{ active?.author }}
       </div>
-    </transition>
-  </VSliderWithPaginationAutoPlay>
+    </div>
+  </VSliderAutoplay>
 </template>
 
-<style lang="sass">
-@use 'UiKit/styles/_colors.sass' as colors
+<style lang="scss">
+@use 'UiKit/styles/_colors.scss' as colors;
 
-.what-our-clients-say-sidebar
+.what-our-clients-say-sidebar{
+  overflow: hidden;
 
-  &__item
-    top: 0
-    left: 0
-    width: 100%
-    display: flex
-    padding: 20px
-    align-self: stretch
-    flex-direction: column
-    border-radius: 2px
-    background: colors.$yellow-light
+  &__item{
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    align-self: stretch;
+    flex-direction: column;
+    border-radius: 2px;
+    background: colors.$yellow-light;
 
-    &.is--active
-      position: relative
-      transition: opacity 3s ease
+    &.is--active{
+      position: relative;
+      transition: opacity 3s ease;
+    }
+  }
 
-  &__text
-    color: colors.$gray-80
-    font-style: italic
+  &__text{
+    color: colors.$gray-80;
+    font-style: italic;
+  }
 
-  &__author
-    margin: 0 !important
-
-
-.fade-enter-active,
-.fade-leave-active
-  transition: opacity 0.5s ease
-
-.fade-enter-from,
-.fade-leave-to
-  opacity: 0
+  &__author{
+    margin: 0 !important;
+  }
+}
 </style>

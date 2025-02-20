@@ -3,6 +3,7 @@ import {
   ref, computed, watch, onMounted,
 } from 'vue';
 import { getVideoMeta } from 'UiKit/helpers/utils/video';
+import VImage from '../Base/VImage/VImage.vue';
 
 const props = withDefaults(defineProps<{
   url: string | undefined;
@@ -15,14 +16,8 @@ const imageFallback = ref(false);
 const img = ref<HTMLElement | null>(null);
 
 const videoMeta = computed(() => getVideoMeta(props.url));
-const id = computed(() => videoMeta.value.id);
-const service = computed(() => videoMeta.value.service);
-
-const style = computed(() => {
-  return imgUrl.value
-    ? { backgroundImage: `url(${imgUrl.value})` }
-    : {};
-});
+const id = computed(() => videoMeta.value?.id);
+const service = computed(() => videoMeta.value?.service);
 
 const src = computed(() => {
   switch (service.value) {
@@ -37,17 +32,6 @@ const src = computed(() => {
   }
 });
 
-const setImgUrl = () => {
-  switch (service.value) {
-    case 'youtube':
-      imgUrl.value = src.value;
-      break;
-    case 'vimeo':
-      setVimeoImgUrl();
-      break;
-  }
-};
-
 const setVimeoImgUrl = async () => {
   try {
     const response = await fetch(src.value);
@@ -57,6 +41,20 @@ const setVimeoImgUrl = async () => {
     console.error('Failed to fetch Vimeo thumbnail:', error);
   }
 };
+
+const setImgUrl = () => {
+  switch (service.value) {
+    case 'youtube':
+      imgUrl.value = src.value;
+      break;
+    case 'vimeo':
+      void setVimeoImgUrl();
+      break;
+    default:
+      break;
+  }
+};
+
 
 const checkImage = (url: string) => {
   const img = new Image();
@@ -82,30 +80,63 @@ onMounted(() => {
   <div
     v-if="url"
     ref="img"
-    :style="style"
-    class="VVideoThumb V-video-thumb"
-    :class="[`is--${fit}`]"
+    class="VVideoThumb v-video-thumb"
   >
-    <slot name="playIcon" />
+    <VImage
+      :src="imgUrl"
+      :fit="fit"
+      alt="video thumb image"
+      class="v-video-thumb__image is--margin-top-0"
+    />
+    <slot name="playIcon">
+      <div class="v-video-thumb__play-icon">
+        <div class="v-video-thumb__triangle" />
+      </div>
+    </slot>
   </div>
 </template>
 
 
-<style lang="sass">
-.V-video-thumb
-  max-height: 100%
-  width: 100%
-  height: 100%
-  position: relative
+<style lang="scss">
+@use 'UiKit/styles/_colors.scss' as colors;
+.v-video-thumb{
+  max-height: 100%;
+  height: 100%;
+  width: auto;
+  position: relative;
 
-  &.is--cover
-    object-fit: cover
-    background-size: cover
+  &__image {
+    width: 100%;
+    height: 100%;
+  }
 
-  &.is--contain
-    object-fit: contain
-    background-size: contain
 
-  &.is--inherit
-    object-fit: inherit
+  &__play-icon{
+    width: 20px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 100px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+
+  &__triangle{
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 3.5px 0 3.5px 7px;
+    border-color: transparent transparent transparent colors.$white;
+    position: absolute;
+    left: 52%;
+    top: 50%;
+    border-radius: 0;
+    transform: translate(-50%, -50%);
+  }
+}
 </style>

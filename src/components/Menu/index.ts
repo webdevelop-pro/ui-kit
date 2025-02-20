@@ -1,1 +1,0 @@
-export * from './VMenuNavigationItem.vue';
