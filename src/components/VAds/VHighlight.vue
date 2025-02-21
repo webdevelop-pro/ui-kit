@@ -1,13 +1,12 @@
-<script setup lang="ts">
+<script lang="ts">
 import { computed } from 'vue';
+import { useData } from 'vitepress';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VImage from 'UiKit/components/Base/VImage/VImage.vue';
-import { filterPages } from 'UiKit/helpers/allData';
-import { data as allPages } from '@/store/all.data';
-import { IFrontmatter } from 'UiKit/types/types';
 import VSection from 'UiKit/components/VSection/VSection.vue';
+</script>
 
-
+<script setup lang="ts">
 const props = defineProps({
   backgroundImage: String,
   imageBottom: String,
@@ -30,7 +29,8 @@ const backgroundImageLocal = computed(() => (
 const showImageBottom = computed(() => props.imageBottom && (props.imageBottom !== 'undefined'));
 const showButton = computed(() => props.buttonText && (props.buttonText !== 'undefined'));
 
-const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started');
+const { frontmatter, theme } = useData();
+const getStarted = theme.navigation.getStarted._data;
 </script>
 
 <template>
@@ -49,7 +49,7 @@ const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started'
       <VButton
         v-if="showButton"
         as="a"
-        :href="encodeURI(`${getStarted[0].url}?topic=${topic}&text=${buttonText}`)"
+        :href="encodeURI(`${getStarted.url}?topic=${topic}&text=${buttonText}`)"
         variant="tetriary"
         size="large"
         class="is--margin-top-40"

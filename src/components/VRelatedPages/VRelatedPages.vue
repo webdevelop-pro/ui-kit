@@ -26,17 +26,17 @@ defineProps({
         >
           <VTableCell class="v-related-pages__left">
             <a
-              :href="encodeURI(item.groupBy.url)"
+              :href="encodeURI(item._data.url)"
               class="is--h4__title"
             >
-              {{ item.groupBy.title }}
+              {{ item._data.title }}
             </a>
           </VTableCell>
           <VTableCell class="v-related-pages__right">
             <a
-              v-for="(child, indexChild) in item.items"
+              v-for="(child, indexChild) in item.childs()"
               :key="indexChild"
-              :href="encodeURI(child.url)"
+              :href="child.url"
               class="is--link-regular"
             >
               {{ child.title }}

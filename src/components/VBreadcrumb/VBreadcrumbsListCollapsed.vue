@@ -4,7 +4,7 @@ import {
   VBreadcrumb, VBreadcrumbList, VBreadcrumbItem, VBreadcrumbLink, VBreadcrumbSeparator,
   VBreadcrumbEllipsis,
 } from 'UiKit/components/Base/VBreadcrumb';
-import { IBreadcrumb, IBreadcrumbCollapsed } from './interface';
+import { IBreadcrumb, IBreadcrumbCollapsed } from '../../composables/interface';
 
 const props = defineProps({
   data: {

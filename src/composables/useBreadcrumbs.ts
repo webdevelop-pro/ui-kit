@@ -1,13 +1,10 @@
 import { watch } from 'vue';
 import { pages } from 'UiKit/types/pages';
 
-export interface IBreadcrumbs {
-  href: string;
-  text: string;
-}
+import { IBreadcrumb } from './interface';
 
 export const useBreadcrumbs = (page, frontmatter):IBreadcrumbs[] => {
-  let breadcrumbsList:IBreadcrumbs[] = [];
+  let breadcrumbsList:IBreadcrumb[] = [];
   const currentPage = pages.getPageByURL(frontmatter.value.url);
   if (currentPage == null) {
     console.warn(`page ${frontmatter.value.url} not found in pages`);

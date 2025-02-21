@@ -1,13 +1,12 @@
-<script setup lang="ts">
-
+<script lang="ts">
+import { useData } from 'vitepress';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import CaseStudiesNavigation from 'UiKit/components/VSection/VSectionNavigation.vue';
 import WhatOurClientsSaySidebar from 'UiKit/components/VWhatOurClientsSay/VWhatOurClientsSaySidebar.vue';
 import { testimonials } from 'UiKit/components/VWhatOurClientsSay/utils';
-import { filterPages } from 'UiKit/helpers/allData';
-import { data as allPages } from '@/store/all.data';
-import { IFrontmatter } from 'UiKit/types/types';
+</script>
 
+<script setup lang="ts">
 defineProps({
   prev: String,
   next: String,
@@ -21,7 +20,8 @@ defineProps({
   sideText: String,
 });
 
-const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started');
+const { frontmatter, theme } = useData();
+const getStarted = theme.navigation.getStarted._data;
 </script>
 
 <template>
@@ -62,7 +62,7 @@ const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started'
             </div>
             <VButton
               as="a"
-              :href="`${getStarted[0].url}?topic=${topic}`"
+              :href="`${getStarted.url}?topic=${topic}`"
               size="large"
               variant="outlined"
               class="is--margin-top-30"

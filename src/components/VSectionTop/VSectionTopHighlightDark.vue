@@ -1,15 +1,15 @@
-<script setup lang="ts">
+<script lang="ts">
 import { PropType } from 'vue';
+import { useData } from 'vitepress';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VCardCheckmarked, { ICheckmarkedItem } from 'UiKit/components/VCard/VCardCheckmarked.vue';
 import VImage from 'UiKit/components/Base/VImage/VImage.vue';
-import { filterPages } from 'UiKit/helpers/allData';
-import { data as allPages } from '@/store/all.data';
-import { IFrontmatter } from 'UiKit/types/types';
 import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
 import arrowIcon from 'UiKit/assets/images/arrow-right.svg';
 import VSection from 'UiKit/components/VSection/VSection.vue';
+</script>
 
+<script setup lang="ts">
 const { isTablet } = useBreakpoints();
 
 export interface IHighlightTop {
@@ -32,7 +32,8 @@ const props = defineProps({
   topic: String,
 });
 
-const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started');
+const { frontmatter, theme } = useData();
+const getStarted = theme.navigation.getStarted._data;
 </script>
 
 <template>
@@ -55,7 +56,7 @@ const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started'
             >
               <VButton
                 as="a"
-                :href="encodeURI(`${getStarted[0].url}?topic=${topic}`)"
+                :href="encodeURI(`${getStarted.url}?topic=${topic}`)"
                 size="large"
               >
                 Get In Touch

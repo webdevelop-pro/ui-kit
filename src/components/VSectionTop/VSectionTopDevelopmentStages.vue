@@ -1,11 +1,10 @@
-<script setup lang="ts">
+<script lang="ts">
 import { PropType } from 'vue';
+import { useData } from 'vitepress';
 import VSectionTop from 'UiKit/components/VSectionTop/VSectionTop.vue';
-import { IFrontmatter } from 'UiKit/types/types';
-import { filterPages } from 'UiKit/helpers/allData';
-import { data as allPages } from '@/store/all.data';
+</script>
 
-
+<script setup lang="ts">
 export interface IDevelopmentStagesTop {
   image: string;
   title: string;
@@ -21,13 +20,14 @@ defineProps({
   topic: String,
 });
 
-const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started');
+const { frontmatter, theme } = useData();
+const getStarted = theme.navigation.getStarted._data;
 </script>
 
 <template>
   <VSectionTop
     :title="data.title"
-    :get-in-touch-url="`${getStarted[0].url}?topic=${topic}`"
+    :get-in-touch-url="`${getStarted.url}?topic=${topic}`"
     class="VSectionTopDevelopmentStages development-stages-top with-default-distance"
   >
     <template #right>

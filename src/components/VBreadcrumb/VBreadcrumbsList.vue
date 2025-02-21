@@ -3,8 +3,7 @@ import { PropType } from 'vue';
 import {
   VBreadcrumb, VBreadcrumbList, VBreadcrumbItem, VBreadcrumbLink, VBreadcrumbSeparator,
 } from 'UiKit/components/Base/VBreadcrumb';
-import { IBreadcrumb } from './interface';
-
+import { IBreadcrumb } from '../../composables/interface';
 
 defineProps({
   data: {

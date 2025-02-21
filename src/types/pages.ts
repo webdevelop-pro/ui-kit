@@ -135,6 +135,10 @@ class Page {
     return null;
   }
 
+  childsLength():number { 
+    return Object.keys(this._childrens).length;
+  }
+
   getPageByURL(url:string) {
     let path = url.replaceAll('/', '._childrens.').split('.');
     // does not work if there is a number in path
@@ -217,7 +221,7 @@ export function convertPages(rawData) {
       const path = el.url.substring(1).replaceAll('/', '.');
       const pge = new Page(el, false)
       // todo
-      // bug with number
+      // bug if directory containes only numbers
       const isExist = get(tmpPages, path);
       if (isExist !== undefined) {
         isExist._virtual = false;

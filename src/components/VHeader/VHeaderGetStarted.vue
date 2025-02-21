@@ -1,9 +1,12 @@
-<script setup lang="ts">
-import VHeader from 'UiKit/components/VHeader/VHeader.vue';
-import { filterPages } from 'UiKit/helpers/allData';
-import { data as allPages } from '@/store/all.data';
-import { IFrontmatter } from 'UiKit/types/types';
+<script lang="ts">
 import { defineAsyncComponent, hydrateOnVisible } from 'vue';
+import { useData } from 'vitepress';
+import VHeader from 'UiKit/components/VHeader/VHeader.vue';
+</script>
+
+<script setup lang="ts">
+const { frontmatter, theme } = useData();
+const getStarted = theme.navigation.getStarted._data;
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const VButton = defineAsyncComponent({
@@ -11,22 +14,20 @@ const VButton = defineAsyncComponent({
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   hydrate: hydrateOnVisible(),
 });
-
-const getStarted = filterPages(allPages as IFrontmatter[], 'slug', 'get-started');
 </script>
 
 <template>
   <VHeader class="VHeaderGetStarted v-header-get-started">
     <VButton
       as="a"
-      :href="getStarted[0].url"
+      :href="getStarted.url"
     >
       Get Started
     </VButton>
     <template #mobile>
       <VButton
         as="a"
-        :href="getStarted[0].url"
+        :href="getStarted.url"
         block
         size="large"
       >

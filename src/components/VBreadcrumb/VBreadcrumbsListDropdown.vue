@@ -3,7 +3,7 @@ import { computed, PropType } from 'vue';
 import {
   VBreadcrumb, VBreadcrumbList, VBreadcrumbItem, VBreadcrumbLink, VBreadcrumbSeparator,
 } from 'UiKit/components/Base/VBreadcrumb';
-import { IBreadcrumb, IBreadcrumbDropdown } from './interface';
+import { IBreadcrumb, IBreadcrumbDropdown } from '../../composables/interface';
 import VDropdown from 'UiKit/components/VDropdown.vue';
 
 
