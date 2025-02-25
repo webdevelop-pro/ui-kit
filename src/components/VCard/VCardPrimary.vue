@@ -30,14 +30,14 @@ const props = defineProps({
 
 const getImageType = () => {
   if ((props.data.type?.toLowerCase() === 'fintech')
-    || (props.data.type?.toLowerCase() === 'reg-cf')) return '/images/case-studies/fintech.svg';
+    || (props.data.type?.toLowerCase() === 'reg-cf')) return '/images/use-cases/fintech.svg';
   if ((props.data.type?.toLowerCase() === 'crowdfunding')
     || (props.data.type?.toLowerCase() === 'reg-d')
-    || (props.data.type?.toLowerCase() === 'security')) return '/images/case-studies/crowdfunding.svg';
+    || (props.data.type?.toLowerCase() === 'security')) return '/images/use-cases/crowdfunding.svg';
   if ((props.data.type?.toLowerCase() === 'blockchain')
-    || (props.data.type?.toLowerCase() === 'alternative-assets')) return '/images/case-studies/blockchain.svg';
+    || (props.data.type?.toLowerCase() === 'alternative-assets')) return '/images/use-cases/blockchain.svg';
   if ((props.data.type?.toLowerCase() === 'ai/ml software')
-    || (props.data.type?.toLowerCase() === 'reg-a')) return '/images/case-studies/ai-software.svg';
+    || (props.data.type?.toLowerCase() === 'reg-a')) return '/images/use-cases/ai-software.svg';
   return null;
 };
 </script>
