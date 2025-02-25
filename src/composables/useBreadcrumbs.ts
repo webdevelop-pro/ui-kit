@@ -1,55 +1,39 @@
-
-import { useData } from 'vitepress';
 import { watch } from 'vue';
-import { IFrontmatter } from 'UiKit/types/types';
+import { pages } from 'UiKit/types/pages';
 
+import { IBreadcrumb } from './interface';
 
-export const useBreadcrumbs = (allPages: IFrontmatter[]) => {
-  const { page, frontmatter } = useData();
-
-  const breadcrumbsListDefault = {
-    href: '/',
-    text: 'Home',
-  };
-  let breadcrumbsList = [breadcrumbsListDefault];
-
-  function findPageBySlug(pages:IFrontmatter[], slug:string):IFrontmatter {
-    let page = null;
-    pages.forEach((el) => {
-      if (el.slug === slug) {
-        page = el;
-        return;
-      }
-    });
-    return page;
+export const useBreadcrumbs = (page, frontmatter):IBreadcrumbs[] => {
+  let breadcrumbsList:IBreadcrumb[] = [];
+  const currentPage = pages.getPageByURL(frontmatter.value.url);
+  if (currentPage == null) {
+    console.warn(`page ${frontmatter.value.url} not found in pages`);
+    return breadcrumbsList;
   }
 
   const crumbs = () => {
     breadcrumbsList.splice(0, breadcrumbsList.length);
-    breadcrumbsList.push(breadcrumbsListDefault);
-    const pathData = page.value.relativePath.split('/');
-    pathData.forEach((slug) => {
-      const parent = findPageBySlug(allPages, slug);
-      if (parent !== null) {
-        breadcrumbsList.push({
-          href: parent.url,
-          text: parent.title,
-        });
-      }
-    });
-    if (breadcrumbsList[breadcrumbsList.length - 1].name === frontmatter.value.title) return;
     breadcrumbsList.push({
       href: '',
       text: frontmatter.value.title,
     });
+
+    let parent = currentPage.parent();
+    while(parent != null) {
+      if (parent.isVirtual() === false) {
+        breadcrumbsList.push({
+          href: parent._data.url,
+          text: parent._data.title,
+        });
+      }
+      parent = parent.parent();
+    }
+    breadcrumbsList = breadcrumbsList.reverse();
   };
 
   watch(() => page.value?.relativePath, () => {
     crumbs();
   }, { immediate: true });
 
-  return {
-    breadcrumbsList,
-  };
+  return breadcrumbsList;
 };
-

@@ -14,14 +14,11 @@ export function getSummary(description: string) {
 export function getImage(img: string) {
   // image can be on different domain, for example https://img.youtube.com/vi/6B-KagJZ3kI/maxresdefault.jpg
   let image = (img == undefined || img == '') ? '/images/sharing.png': img;
-  if (image.startsWith('http') === false) {
-    image = `${process.env.VITE_FRONTEND_URL}${image}`;
-  }
   return image;
 }
 
 export function normalizeFrontmatter(pageData) {
-  pageData.frontmatter.url = urlFormat(pageData.relativePath ? `/${pageData.relativePath}` : pageData.url);
+  pageData.frontmatter.url = urlFormat(pageData.relativePath ? `/${pageData.relativePath.replace(/index\.md$/, '').replace('.md', '')}` : pageData.url);
   if (pageData.frontmatter.hasOwnProperty('slug') == false) {
     pageData.frontmatter.slug = getSlugFromURL(pageData.frontmatter.url);
   }
