@@ -5,6 +5,9 @@ import { IBreadcrumb } from './interface';
 
 export const useBreadcrumbs = (page, frontmatter):IBreadcrumbs[] => {
   let breadcrumbsList:IBreadcrumb[] = [];
+  if (frontmatter == void 0) {
+    return breadcrumbsList;
+  }
   const currentPage = pages.getPageByURL(frontmatter.value.url);
   if (currentPage == null) {
     console.warn(`page ${frontmatter.value.url} not found in pages`);
