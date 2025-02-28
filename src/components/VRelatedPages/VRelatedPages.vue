@@ -37,10 +37,10 @@ defineProps({
             <a
               v-for="(child, indexChild) in item.getChilds()"
               :key="indexChild"
-              :href="child.url"
+              :href="child.data.url"
               class="is--link-regular"
             >
-              {{ child.title }}
+              {{ child.data.title }}
             </a>
           </VTableCell>
         </VTableRow>
