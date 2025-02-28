@@ -90,11 +90,13 @@ class Page implements IPage {
     return this.virtual;
   }
 
-  getChilds():Page[] {
+  getChilds(skipVirtual = true):Page[] {
     const res:Page[] = [];
     Object.keys(this.children).forEach((slug) => {
       const el = this.children[slug];
-      res.push(el);
+      if(skipVirtual == false || skipVirtual == true && el.isVirtual() == false) {
+        res.push(el);
+      }
     });
     return res;
   }
