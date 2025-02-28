@@ -30,7 +30,7 @@ const showImageBottom = computed(() => props.imageBottom && (props.imageBottom !
 const showButton = computed(() => props.buttonText && (props.buttonText !== 'undefined'));
 
 const { frontmatter, theme } = useData();
-const getStarted = theme.navigation.getStarted._data;
+const getStarted = theme.navigation.getStarted.data;
 </script>
 
 <template>

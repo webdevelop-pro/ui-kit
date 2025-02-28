@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { IFrontmatter } from 'UiKit/types/types';
+import { IPage } from 'UiKit/types/pages';
 import { PropType } from 'vue';
 import {
   VTable, VTableBody, VTableCell, VTableRow,
@@ -7,7 +8,7 @@ import {
 
 interface IRelatedPages {
     groupBy: IFrontmatter;
-    items: IFrontmatter[];
+    items: IPage[];
 }
 
 defineProps({
@@ -24,17 +25,17 @@ defineProps({
           :key="index"
           class="v-related-pages__item"
         >
-          <VTableCell class="v-related-pages__left" v-if="item._data">
+          <VTableCell class="v-related-pages__left" v-if="item.data">
             <a
-              :href="encodeURI(item._data.url)"
+              :href="encodeURI(item.data.url)"
               class="is--h4__title"
             >
-              {{ item._data.title }}
+              {{ item.data.title }}
             </a>
           </VTableCell>
-          <VTableCell class="v-related-pages__right" v-if="item._data">
+          <VTableCell class="v-related-pages__right" v-if="item.data">
             <a
-              v-for="(child, indexChild) in item.childs()"
+              v-for="(child, indexChild) in item.getChilds()"
               :key="indexChild"
               :href="child.url"
               class="is--link-regular"

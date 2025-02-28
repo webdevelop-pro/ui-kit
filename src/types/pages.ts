@@ -3,124 +3,110 @@ import get from 'lodash/get';
 
 import { IFrontmatter } from './types';
 
-class Page {
-  _data: IFrontmatter;
+interface IPage {
+  data: IFrontmatter;
+  children: Object;
+  parent: Page|null;
+  virtual: Boolean;
+
+  next(): Page|null;
+  prev(): Page|null;
+  isVirtual(): Boolean;
+  getChilds(): Array<Page>;
+  getChild(key: string, value: any): Page|null;
+  getParent(skipVirtual: true): Page|null;
+  getPageByURL(url: string): Page|null;
+  filterChilds(key: string, value: any): Array<Page>;
+  childsLength(): number;
+}
+
+class Page implements IPage {
+  data: IFrontmatter;
   // Pages in format: slug: { Page }
-  _childrens: {};
-  _parent: Page|null;
+  children: {};
+  parent: Page|null;
   // Virtual - means its created to handle childrens but page itself does not exist
   // for example /section/page - exist
   // but there is no /section page
-  _virtual: Boolean
+  virtual: Boolean
 
   constructor(data: IFrontmatter, virtualPage: Boolean) {
-    this._data = data;
-    this._parent = null;
-    this._childrens = {};
-    this._virtual = virtualPage;
-    // this.pages = pages;
+    this.data = data;
+    this.parent = null;
+    this.children = {};
+    this.virtual = virtualPage;
   }
 
-  next() {
-    const parent = this.parent();
+  next(): Page|null {
+    // ToDo
+    // cache response
+    const parent = this.parent;
     if (parent !== null) {
-      const childs = parent.childs();
+      const childs = parent.getChilds();
       let pageIndex = -1;
-      childs.forEach((el:IFrontmatter, idx:number) => {
-        if (el.url == this._data.url) {
+      childs.forEach((el:Page, idx:number) => {
+        if (el.data.url == this.data.url) {
           pageIndex = idx;
         }
       });
-      if (pageIndex !== -1) {
+      if (pageIndex > -1) {
         return childs[pageIndex+1] || null;
       }
     }
     return null;
   }
 
-  nextPage() {
-    const parent = this.parent();
+  prev(): Page|null {
+    // ToDo
+    // cache response
+    const parent = this.parent;
     if (parent !== null) {
-      const childs = parent._childrens;
-      const childsKeys = Object.keys(childs);
+      const childs = parent.getChilds();
       let pageIndex = -1;
-      childsKeys.forEach((slug:string, idx:number) => {
-        if (slug == this._data.slug) {
+      childs.forEach((el:Page, idx:number) => {
+        if (el.data.url == this.data.url) {
           pageIndex = idx;
         }
       });
-      if (pageIndex !== -1) {
-        return childs[childsKeys[pageIndex+1]] || null;
-      }
-    }
-    return null;
-  }
-
-  prev() {
-    const parent = this.parent();
-    if (parent !== null) {
-      const childs = parent.childs();
-      let pageIndex = -1;
-      childs.forEach((el:IFrontmatter, idx:number) => {
-        if (el.url == this._data.url) {
-          pageIndex = idx;
-        }
-      });
-      if (pageIndex !== -1) {
+      if (pageIndex > 0) {
         return childs[pageIndex-1] || null;
       }
     }
     return null;
   }
 
-  prevPage() {
-    const parent = this.parent();
-    if (parent !== null) {
-      const childs = parent._childrens;
-      const childsKeys = Object.keys(childs);
-      let pageIndex = -1;
-      childsKeys.forEach((slug:string, idx:number) => {
-        if (slug == this._data.slug) {
-          pageIndex = idx;
-        }
-      });
-      if (pageIndex !== -1) {
-        return childs[childsKeys[pageIndex-1]] || null;
-      }
+  getParent(skipVirtual = true):Page|null {
+    if (skipVirtual == false) {
+      return this.parent;
     }
-    return null;
-  }
-
-  parent(skipVirtual = true):Page|null {
-    if (skipVirtual) {
-      return this._parent;
-    }
-    let parent = this.parent();
+    let parent = this.parent;
     while(parent && parent.isVirtual() === true) {
-      parent = parent.parent();
+      parent = parent.parent;
     }
     return parent;
   }
 
-  childs(skipCurrent = false):IFrontmatter[] {
-    const res:IFrontmatter[] = [];
-    Object.keys(this._childrens).forEach((slug) => {
-      if (skipCurrent === false || slug !== this._data.slug) {
-        res.push(this._childrens[slug]._data);
-      }
+  isVirtual() {
+    return this.virtual;
+  }
+
+  getChilds():Page[] {
+    const res:Page[] = [];
+    Object.keys(this.children).forEach((slug) => {
+      const el = this.children[slug];
+      res.push(el);
     });
     return res;
   }
 
-  isVirtual() {
-    return this._virtual;
-  }
-
-  getChilds(key: string, val: string):Page[] {
+  filterChilds(key: string, val: string):Page[] {
+    // ToDo
+    // Create more powerful filter where you can pass 
+    // different functions for filtering
     const res:Page[] = [];
-    Object.keys(this._childrens).forEach((slug) => {
-      const el = this._childrens[slug];
-      if (key == '' || el._data[key] == val) {
+    Object.keys(this.children).forEach((slug) => {
+      const el = this.children[slug];
+      if (key == '' || el.data[key] == val) {
         res.push(el);
       }
     });
@@ -128,7 +114,7 @@ class Page {
   }
 
   getChild(key: keyof IFrontmatter, val: string):Page|null {
-    const res = this.getChilds(key, val);
+    const res = this.filterChilds(key, val);
     if (res.length > 0) {
       return res[0];
     }
@@ -136,29 +122,30 @@ class Page {
   }
 
   childsLength():number { 
-    return Object.keys(this._childrens).length;
+    // ToDo
+    // Cache response
+    return Object.keys(this.children).length;
   }
 
   getPageByURL(url:string) {
-    let path = url.replaceAll('/', '._childrens.').split('.');
+    let path = url.replaceAll('/', '.').split('.');
     // does not work if there is a number in path
     // return get(pages, path);
     path = path.slice(1);
     let tempPage = pages;
-    path.forEach((elem) => {
+    path.forEach((elem:string) => {
       // we need this for some reason during production build tempPage
       // can be undefined
       if (typeof tempPage === 'undefined') {
         return null;
       }
-      tempPage = tempPage[elem];
+      tempPage = tempPage.children[elem];
       if (tempPage === null) {
         return null;
       }
     });
     return tempPage;
   }
-
 }
 
 let pages = new Page({}, true)
@@ -178,14 +165,14 @@ function convertDictToPage(_obj, key:string) {
 function fixRoot(rawPages: Page) {
   const keys = Object.keys(rawPages);
   if (rawPages[""]) {
-    let rootPage = new Page(rawPages[""]._data, false);
+    let rootPage = new Page(rawPages[""].data, false);
     // no need to do anything if we have just 1 element
     if (keys.length !== 4) {
       keys.forEach((key) => {
         if (key != "") {
           let pge = convertDictToPage(rawPages[key], key);
-          pge._parent = rootPage;
-          rootPage._childrens[key.toString()] = pge;
+          pge.parent = rootPage;
+          rootPage.children[key.toString()] = pge;
         }
       });
     }
@@ -198,14 +185,14 @@ function fixRoot(rawPages: Page) {
 // starting from the bottom pages
 function polish(unSortedPages: Page, parent: Page|null) {
   const keys = Object.keys(unSortedPages);
-  unSortedPages._parent = parent;
+  unSortedPages.parent = parent;
   if (keys.length !== 4) {
     keys.forEach((key) => {
-      if (key !== "_data" && key !== "_childrens" && key !== "_parent" && key !== "_virtual") {
+      if (key !== "data" && key !== "children" && key !== "parent" && key !== "virtual") {
         const pge = convertDictToPage(unSortedPages[key], key);
-        pge._parent = unSortedPages;
+        pge.parent = unSortedPages;
         polish(pge, unSortedPages);
-        unSortedPages._childrens[key.toString()] = pge;
+        unSortedPages.children[key.toString()] = pge;
         delete unSortedPages[key];
       }
     });
@@ -224,8 +211,8 @@ export function convertPages(rawData) {
       // bug if directory containes only numbers
       const isExist = get(tmpPages, path);
       if (isExist !== undefined) {
-        isExist._virtual = false;
-        isExist._data = pge._data;
+        isExist.virtual = false;
+        isExist.data = pge.data;
       } else {
         set(tmpPages, path, pge);
       }
@@ -233,7 +220,7 @@ export function convertPages(rawData) {
   });
   // find root page and make it a lead of all pages
   pages = fixRoot(tmpPages);
-  const childs = pages._childrens;
+  const childs = pages.children;
   Object.keys(childs).forEach((slug:string) => {
     polish(childs[slug], pages);
   });

@@ -23,7 +23,7 @@ defineProps({
 });
 
 const { frontmatter, theme } = useData();
-const getStarted = theme.navigation.getStarted._data;
+const getStarted = theme.navigation.getStarted.data;
 </script>
 
 <template>

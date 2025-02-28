@@ -21,15 +21,13 @@ export const useBreadcrumbs = (page, frontmatter):IBreadcrumbs[] => {
       text: frontmatter.value.title,
     });
 
-    let parent = currentPage.parent();
+    let parent = currentPage.getParent();
     while(parent != null) {
-      if (parent.isVirtual() === false) {
-        breadcrumbsList.push({
-          href: parent._data.url,
-          text: parent._data.title,
-        });
-      }
-      parent = parent.parent();
+      breadcrumbsList.push({
+        href: parent.data.url,
+        text: parent.data.title,
+      });
+      parent = parent.getParent();
     }
     breadcrumbsList = breadcrumbsList.reverse();
   };

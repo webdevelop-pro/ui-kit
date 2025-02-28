@@ -17,9 +17,9 @@ const getRandomPosts = () => {
   // todo
   // maybe store it somewhere in config?
   const blogPostsFiltered = theme.navigation.rc.getChilds('layout', 'resource-center-single')
-    .filter((item) => item._data.slug !== frontmatter.value.slug);
+    .filter((item) => item.data.slug !== frontmatter.value.slug);
   const shuffledPosts = blogPostsFiltered?.slice().sort(() => Math.random() - 0.5); // Shuffle the array
-  return shuffledPosts?.slice(0, 3).map(post => post._data); // Select the first three elements (randomly selected)  
+  return shuffledPosts?.slice(0, 3).map(post => post.data); // Select the first three elements (randomly selected)  
 };
 
 watch(() => route.path, () => {

@@ -6,7 +6,7 @@ import VHeader from 'UiKit/components/VHeader/VHeader.vue';
 
 <script setup lang="ts">
 const { frontmatter, theme } = useData();
-const getStarted = theme.navigation.getStarted._data;
+const getStarted = theme.navigation.getStarted.data;
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const VButton = defineAsyncComponent({
