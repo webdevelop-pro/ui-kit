@@ -101,17 +101,28 @@ class Page implements IPage {
     return res;
   }
 
-  filterChilds(key: string, val: string):Page[] {
-    // ToDo
-    // Create more powerful filter where you can pass 
-    // different functions for filtering
-    const res:Page[] = [];
-    Object.keys(this.children).forEach((slug) => {
-      const el = this.children[slug];
-      if (key == '' || el.data[key] == val) {
-        res.push(el);
-      }
-    });
+  filterChilds(key: string, val: string, skipVirtual = false): Page[] {
+    //   // ToDo
+    //   // Create more powerful filter where you can pass 
+    //   // different functions for filtering
+    const res: Page[] = [];
+
+    const filterRecursive = (children: Record<string, Page>) => {
+      Object.keys(children).forEach((slug) => {
+        const el = children[slug];
+        if (skipVirtual === false || (skipVirtual === true && el.isVirtual() === false)) {
+          if (key === '' || el.data[key] === val) {
+            res.push(el);
+          }
+        }
+        // If the element has children, recursively filter them
+        if (el.children && Object.keys(el.children).length > 0) {
+          filterRecursive(el.children);
+        }
+      });
+    };
+
+    filterRecursive(this.children);
     return res;
   }
 
