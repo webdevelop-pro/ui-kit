@@ -14,10 +14,10 @@ const route = useRoute();
 const getRandomPosts = () => {
   // todo
   // maybe store it somewhere in config?
-  const blogPosts = theme.navigation.rc.filterChilds('layout', 'resource-center-single').map(post => post.data);
+  const blogPosts = theme.navigation.rc.filterChilds('layout', 'resource-center-single')?.map(post => post.data);
   const shuffledPosts = blogPosts?.slice().sort(() => Math.random() - 0.5); // Shuffle the array
   const shuffledPostsResult = shuffledPosts?.slice(0, 4); // Select the first 4 elements (randomly selected)
-  const shuffledPostsResultFiltered = shuffledPostsResult.filter((item) => item.slug !== frontmatter.value.slug); // filter current
+  const shuffledPostsResultFiltered = shuffledPostsResult?.filter((item) => item.slug !== frontmatter.value.slug); // filter current
   return shuffledPostsResultFiltered?.slice(0, 3); 
 };
 
