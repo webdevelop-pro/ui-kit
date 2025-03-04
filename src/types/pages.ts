@@ -2,16 +2,17 @@ import set from 'lodash/set';
 import get from 'lodash/get';
 
 import { IFrontmatter } from './types';
+import { filterPages } from '../helpers/allData';
 
 interface IPage {
   data: IFrontmatter;
-  children: Object;
+  children: Record<string, Page>;
   parent: Page|null;
-  virtual: Boolean;
+  virtual: boolean;
 
   next(): Page|null;
   prev(): Page|null;
-  isVirtual(): Boolean;
+  isVirtual(): boolean;
   getChilds(): Array<Page>;
   getChild(key: string, value: any): Page|null;
   getParent(skipVirtual: true): Page|null;
@@ -21,115 +22,75 @@ interface IPage {
 }
 
 class Page implements IPage {
-  data: IFrontmatter;
+  public data: IFrontmatter;
+
   // Pages in format: slug: { Page }
-  children: {};
-  parent: Page|null;
+  public children: Record<string, Page> = {};
+
+  public parent: Page|null;
+
   // Virtual - means its created to handle childrens but page itself does not exist
   // for example /section/page - exist
   // but there is no /section page
-  virtual: Boolean
+  public virtual: boolean;
 
-  constructor(data: IFrontmatter, virtualPage: Boolean) {
+  constructor(data: IFrontmatter, virtualPage: boolean) {
     this.data = data;
     this.parent = null;
     this.children = {};
     this.virtual = virtualPage;
   }
 
-  next(): Page|null {
-    // ToDo
-    // cache response
-    const parent = this.parent;
-    if (parent !== null) {
-      const childs = parent.getChilds();
-      let pageIndex = -1;
-      childs.forEach((el:Page, idx:number) => {
-        if (el.data.url == this.data.url) {
-          pageIndex = idx;
-        }
-      });
-      if (pageIndex > -1) {
-        return childs[pageIndex+1] || null;
-      }
-    }
-    return null;
+  // if check for example use cases then will check only in folder for example fintech
+  public next(): Page | null {
+    if (!this.parent) return null;
+    const siblings = this.parent.getChilds();
+    const index = siblings.findIndex((el) => el.data.url === this.data.url);
+    return index !== -1 && index + 1 < siblings.length ? siblings[index + 1] : siblings[0];
   }
 
-  prev(): Page|null {
-    // ToDo
-    // cache response
-    const parent = this.parent;
-    if (parent !== null) {
-      const childs = parent.getChilds();
-      let pageIndex = -1;
-      childs.forEach((el:Page, idx:number) => {
-        if (el.data.url == this.data.url) {
-          pageIndex = idx;
-        }
-      });
-      if (pageIndex > 0) {
-        return childs[pageIndex-1] || null;
-      }
-    }
-    return null;
+  public prev(): Page | null {
+    if (!this.parent) return null;
+    const siblings = this.parent.getChilds();
+    const index = siblings.findIndex((el) => el.data.url === this.data.url);
+    return index > 0 ? siblings[index - 1] : siblings[siblings.length - 1];
   }
 
-  getParent(skipVirtual = true):Page|null {
-    if (skipVirtual == false) {
-      return this.parent;
+  public getParent(skipVirtual = true): Page | null {
+    let currentParent = this.parent;
+    while (skipVirtual && currentParent?.isVirtual()) {
+      currentParent = currentParent.parent;
     }
-    let parent = this.parent;
-    while(parent && parent.isVirtual() === true) {
-      parent = parent.parent;
-    }
-    return parent;
+    return currentParent;
   }
 
-  isVirtual() {
+  public isVirtual(): boolean {
     return this.virtual;
   }
 
-  getChilds(skipVirtual = true):Page[] {
-    const res:Page[] = [];
-    Object.keys(this.children).forEach((slug) => {
-      const el = this.children[slug];
-      if(skipVirtual == false || skipVirtual == true && el.isVirtual() == false) {
-        res.push(el);
-      }
-    });
-    return res;
+  public getChilds(skipVirtual = true): Page[] {
+    return Object.values(this.children).filter((child) => !skipVirtual || !child.isVirtual());
   }
 
-  filterChilds(key: string, val: string):Page[] {
-    // ToDo
-    // Create more powerful filter where you can pass 
-    // different functions for filtering
-    const res:Page[] = [];
-    Object.keys(this.children).forEach((slug) => {
-      const el = this.children[slug];
-      if (key == '' || el.data[key] == val) {
-        res.push(el);
-      }
-    });
-    return res;
+  public filterChilds(key: string, val: string): Page[] {
+    const filteredPages = filterPages(Object.values(this.children).map((child) => child.data), key, val);
+    const matchingPages = Object.values(this.children).filter((child) => (
+      filteredPages.some((filtered) => filtered.url === child.data.url)
+    ));
+    return matchingPages.concat(
+      ...Object.values(this.children).map((child) => child.filterChilds(key, val)),
+    );
   }
 
-  getChild(key: keyof IFrontmatter, val: string):Page|null {
-    const res = this.filterChilds(key, val);
-    if (res.length > 0) {
-      return res[0];
-    }
-    return null;
+  public getChild(key: keyof IFrontmatter, val: string): Page | null {
+    return this.filterChilds(key, val)[0] || null;
   }
 
-  childsLength():number { 
-    // ToDo
-    // Cache response
+  public childsLength(): number {
     return Object.keys(this.children).length;
   }
 
-  getPageByURL(url:string) {
+  public getPageByURL(url:string): Page | null {
     let path = url.replaceAll('/', '.').split('.');
     // does not work if there is a number in path
     // return get(pages, path);
@@ -150,29 +111,27 @@ class Page implements IPage {
   }
 }
 
-let pages = new Page({}, true)
+let pages = new Page({} as IFrontmatter, true);
 
-function convertDictToPage(_obj, key:string) {
-  if (Page.prototype.isPrototypeOf(_obj) === false) {
-    let pge = new Page({url: `/${key}`, slug: key }, true);
-    Object.keys(_obj).forEach((subKey:string) => {
-      pge[subKey.toString()] = _obj[subKey];
-    });
-    return pge;
+function convertDictToPage(obj: any, key: string): Page {
+  if (!(obj instanceof Page)) {
+    const newPage = new Page({ url: `/${key}`, slug: key } as IFrontmatter, true);
+    Object.assign(newPage, obj);
+    return newPage;
   }
-  return _obj;
+  return obj;
 }
 
 // find a page with path="" and make it parent
-function fixRoot(rawPages: Page) {
+function fixRoot(rawPages: Page): Page {
   const keys = Object.keys(rawPages);
-  if (rawPages[""]) {
-    let rootPage = new Page(rawPages[""].data, false);
+  if (rawPages['']) {
+    const rootPage = new Page(rawPages[''].data, false);
     // no need to do anything if we have just 1 element
     if (keys.length !== 4) {
       keys.forEach((key) => {
-        if (key != "") {
-          let pge = convertDictToPage(rawPages[key], key);
+        if (key != '') {
+          const pge = convertDictToPage(rawPages[key], key);
           pge.parent = rootPage;
           rootPage.children[key.toString()] = pge;
         }
@@ -185,12 +144,12 @@ function fixRoot(rawPages: Page) {
 
 // recursively create childrens and parent links for each page
 // starting from the bottom pages
-function polish(unSortedPages: Page, parent: Page|null) {
+function polish(unSortedPages: Page, parent: Page|null): void {
   const keys = Object.keys(unSortedPages);
   unSortedPages.parent = parent;
   if (keys.length !== 4) {
     keys.forEach((key) => {
-      if (key !== "data" && key !== "children" && key !== "parent" && key !== "virtual") {
+      if (key !== 'data' && key !== 'children' && key !== 'parent' && key !== 'virtual') {
         const pge = convertDictToPage(unSortedPages[key], key);
         pge.parent = unSortedPages;
         polish(pge, unSortedPages);
@@ -201,14 +160,14 @@ function polish(unSortedPages: Page, parent: Page|null) {
   }
 }
 
-export function convertPages(rawData) {
-  const tmpPages = {};
+export function convertPages(rawData: IFrontmatter[]): Page {
+  const tmpPages: Record<string, Page> = {};
   rawData.forEach((el) => {
     if (el.title && el.draft !== true) {
       // todo
       // bug - if file path contains . it will break everything
-      const path = el.url.substring(1).replaceAll('/', '.');
-      const pge = new Page(el, false)
+      const path = el.url?.substring(1).replaceAll('/', '.') || '';
+      const pge = new Page(el, false);
       // todo
       // bug if directory containes only numbers
       const isExist = get(tmpPages, path);
