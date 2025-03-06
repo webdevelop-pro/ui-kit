@@ -23,7 +23,6 @@ const { isLoading } = useImage({ src: props.src || '' });
     :class="[`is--${fit}`, { 'is--bg': !src }]"
     itemscope
     itemtype="https://schema.org/ImageObject"
-    itemprop="image"
   >
     <component
       :is="clientOnly ? 'ClientOnly' : 'div'"
@@ -44,7 +43,6 @@ const { isLoading } = useImage({ src: props.src || '' });
         :loading="loading"
         class="v-image__image"
         :class="[`is--${fit}`, { 'is--default-image': !src }]"
-        itemprop="url"
       />
     </component>
   </div>

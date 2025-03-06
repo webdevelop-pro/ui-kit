@@ -1,4 +1,4 @@
-import { IFrontmatter } from "UiKit/types/types";
+import { IFrontmatter } from 'UiKit/types/types';
 import groupBy from 'lodash/groupBy';
 
 export function isEmpty(obj: object) {
@@ -31,7 +31,6 @@ export function formatPhoneNumber(phoneNumber: string | undefined): string | und
 
   return formattedPhoneNumber;
 }
-
 
 export function booleanFormatToString(value: boolean | undefined) {
   if (value === undefined) return undefined;
@@ -73,17 +72,6 @@ export function urlize(input: string): string {
 
   return urlFriendlyString;
 }
-
-
-export function stripHtml(html: string) {
-  if (typeof document !== 'undefined') {
-    const tmp = document.createElement('DIV');
-    tmp.innerHTML = html;
-    return tmp.textContent || tmp.innerText || '';
-  }
-  return html;
-}
-
 
 export function navigateWithQueryParams(url: string, params?: Record<string, string>): void {
   const urlObj = new URL(url, window.location.origin); // Create a URL object
@@ -193,15 +181,24 @@ export function getFirst200Characters(text: string) {
   return extractedText;
 }
 
-export function findBySameFolder(pages: IFrontmatter[], url:string) {
-  const parent = `/${url.split('/').slice(0, -1).join('/')}`; // remove last element
+export function findPagesByParentFolder(pages: IFrontmatter[], url: string) {
   const res: IFrontmatter[] = [];
+
+  // Find the page with the given URL
+  const currentPage = pages.find((el) => el.url === url);
+
+  // If the current page is not main, adjust the URL to the parent
+  if (currentPage && !currentPage.is_main) {
+    const parentUrl = url.substring(0, url.lastIndexOf('/'));
+    url = parentUrl;
+  }
+
   pages.forEach((el) => {
-    if (parent && el.url?.startsWith(parent)) {
-      // console.log(parent, el.url);
+    if (url && el.url?.startsWith(url)) {
       res.push(el);
     }
   });
+
   return res;
 }
 
@@ -224,17 +221,17 @@ export function groupItemsByRawUrl(data: IFrontmatter[], url:string) {
 }
 
 export function groupRelatedPagesFormat(pages: IFrontmatter[], data: Record<string, any>) {
-  return Object.keys(data).map(key => {
+  return Object.keys(data).map((key) => {
     // Find the page object with the matching URL for the current key
-    const page = pages.find(p => p.url === key);
+    const page = pages.find((p) => p.url === key);
 
     if (page) {
       return {
         groupBy: page,
-        items: data[key]
+        items: data[key],
       };
     }
 
     return null; // Return null if no matching URL is found
-  }).filter(item => item !== null); // Filter out null values
+  }).filter((item) => item !== null); // Filter out null values
 }

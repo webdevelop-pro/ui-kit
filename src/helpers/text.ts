@@ -41,3 +41,11 @@ export const stripMarkdown = (markdown: string): string => {
 
   return markdown;
 };
+
+export function stripHtml(html: string) {
+  return html.replace(/(<([^>]+)>)/gi, '');
+}
+
+export function stripHtmlAndMarkdown(html: string) {
+  return stripMarkdown(stripHtml(html));
+}

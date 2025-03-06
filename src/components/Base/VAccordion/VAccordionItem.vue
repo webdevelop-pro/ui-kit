@@ -17,9 +17,6 @@ const forwardedProps = useForwardProps(delegatedProps);
   <AccordionItem
     v-bind="forwardedProps"
     class="VAccordionItem v-accordion-item"
-    itemscope
-    itemtype="https://schema.org/ListItem"
-    itemprop="itemListElement"
   >
     <slot />
   </AccordionItem>

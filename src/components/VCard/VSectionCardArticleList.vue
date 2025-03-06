@@ -36,16 +36,11 @@ const noData = computed(() => !props.items || props.items?.length === 0);
     </template>
     <ul
       class="v-section-card-article-list__items"
-      itemscope
-      itemtype="https://schema.org/ItemList"
     >
       <li
         v-for="item in items"
         :key="item.slug"
         class="v-section-card-article-list__item"
-        itemprop="itemListElement"
-        itemscope
-        itemtype="https://schema.org/ListItem"
       >
         <VCardArticle
           :data="item"

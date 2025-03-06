@@ -3,7 +3,7 @@ import { pages } from 'UiKit/types/pages';
 
 import { IBreadcrumb } from './interface';
 
-export const useBreadcrumbs = (page, frontmatter):IBreadcrumbs[] => {
+export const useBreadcrumbs = (page, frontmatter):IBreadcrumb[] => {
   let breadcrumbsList:IBreadcrumb[] = [];
   if (frontmatter == void 0) {
     return breadcrumbsList;
@@ -22,7 +22,7 @@ export const useBreadcrumbs = (page, frontmatter):IBreadcrumbs[] => {
     });
 
     let parent = currentPage.getParent();
-    while(parent != null) {
+    while (parent != null) {
       breadcrumbsList.push({
         href: parent.data.url,
         text: parent.data.title,

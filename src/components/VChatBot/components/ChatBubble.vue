@@ -12,30 +12,26 @@ import { marked } from 'marked';
 import { useChat } from '../store/useChat';
 import { storeToRefs } from 'pinia';
 
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const ChatAvatar = defineAsyncComponent({
   loader: () => import('./ChatAvatar.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
-});
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const ChatEmbedCode = defineAsyncComponent({
-  loader: () => import('./ChatEmbedCode.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   hydrate: hydrateOnVisible(),
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const ChatHubspotForm = defineAsyncComponent({
-  loader: () => import('./ChatHubspotForm.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+const ChatEmbedCode = defineAsyncComponent({
+  loader: () => import('./ChatEmbedCode.vue'),
+
   hydrate: hydrateOnVisible(),
 });
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
+const ChatHubspotForm = defineAsyncComponent({
+  loader: () => import('./ChatHubspotForm.vue'),
+
+  hydrate: hydrateOnVisible(),
+});
+
 const ChatChoices = defineAsyncComponent({
   loader: () => import('./ChatChoices.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+
   hydrate: hydrateOnVisible(),
 });
 
@@ -105,7 +101,7 @@ const onButtonClick = (message: string) => {
 
 const parseBotText = () => {
   if (!props.message?.message?.value) return;
-  // eslint-disable-next-line
+
   botText.value = replaceLinks(marked.parse(props.message?.message?.value));
 };
 

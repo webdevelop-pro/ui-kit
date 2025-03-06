@@ -1,6 +1,6 @@
 import { PageData } from 'vitepress';
 
-export function generateJsonLd(pageData: PageData, env: any): string {
+export function generateJsonLd(pageData: PageData, env: any): string | null {
   const baseUrl = `${env.FRONTEND_URL}/${pageData.relativePath?.replace(/index\.md$/, '')?.replace(/\.md$/, '.html')}`;
   const keywords = pageData.frontmatter.keywords || pageData.frontmatter.tags || env.keywords;
 
@@ -44,5 +44,5 @@ export function generateJsonLd(pageData: PageData, env: any): string {
     });
   }
 
-  return JSON.stringify(commonData);
+  return null;
 }

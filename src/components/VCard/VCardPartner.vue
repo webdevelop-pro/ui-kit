@@ -28,9 +28,8 @@ defineProps({
           fit="contain"
           alt="service icon"
           class="v-card-partner__icon "
-          itemprop="image"
         />
-        <p itemprop="text">
+        <p>
           {{ item.text }}
         </p>
       </div>

@@ -6,7 +6,7 @@ import imageBg from './illustration-404.svg?url';
 
 <template v-once>
   <div class="VErrorPageNotFound404 errors-404">
-    <div class="is--container errors-404__container">
+    <div class="is--container errors-404__container with-default-distance">
       <div class="errors-404__content">
         <h1
           class="errors-404__title"

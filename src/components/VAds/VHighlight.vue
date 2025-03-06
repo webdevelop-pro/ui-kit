@@ -7,6 +7,9 @@ import VSection from 'UiKit/components/VSection/VSection.vue';
 </script>
 
 <script setup lang="ts">
+const { theme } = useData();
+const getStarted = theme.navigation.getStarted.data;
+
 const props = defineProps({
   backgroundImage: String,
   imageBottom: String,
@@ -20,6 +23,7 @@ const props = defineProps({
     type: String,
     default: 'linear-gradient(0deg, rgba(0, 66, 212, 0.85) 0%, rgba(0, 66, 212, 0.85) 100%)',
   },
+  buttonHref: String,
 });
 
 const backgroundImageLocal = computed(() => (
@@ -28,9 +32,7 @@ const backgroundImageLocal = computed(() => (
 
 const showImageBottom = computed(() => props.imageBottom && (props.imageBottom !== 'undefined'));
 const showButton = computed(() => props.buttonText && (props.buttonText !== 'undefined'));
-
-const { frontmatter, theme } = useData();
-const getStarted = theme.navigation.getStarted.data;
+const buttonHrefFormatted = computed(() => props.buttonHref || encodeURI(`${getStarted.url}?topic=${props.topic}&text=${props.buttonText}`));
 </script>
 
 <template>
@@ -49,7 +51,7 @@ const getStarted = theme.navigation.getStarted.data;
       <VButton
         v-if="showButton"
         as="a"
-        :href="encodeURI(`${getStarted.url}?topic=${topic}&text=${buttonText}`)"
+        :href="buttonHrefFormatted"
         variant="tetriary"
         size="large"
         class="is--margin-top-40"

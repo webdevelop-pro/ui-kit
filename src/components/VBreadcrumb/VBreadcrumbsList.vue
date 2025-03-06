@@ -17,7 +17,7 @@ defineProps({
   <VBreadcrumb>
     <VBreadcrumbList>
       <template
-        v-for="item in data"
+        v-for="(item, index) in data"
         :key="item.text"
       >
         <VBreadcrumbItem>
@@ -27,6 +27,10 @@ defineProps({
           >
             {{ item.text }}
           </VBreadcrumbLink>
+          <meta
+            itemprop="position"
+            :content="String(index)"
+          />
         </VBreadcrumbItem>
         <VBreadcrumbSeparator>
           <slot>

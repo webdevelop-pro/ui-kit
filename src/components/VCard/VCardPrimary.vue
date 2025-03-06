@@ -5,8 +5,7 @@ import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import {
   VCard, VCardContent, VCardHeader, VCardDescription, VCardFooter, VCardTitle,
 } from 'UiKit/components/Base/VCard';
-import { stripHtml } from 'UiKit/helpers/general';
-
+import { stripHtml } from 'UiKit/helpers/text';
 
 export interface ICardPrimary {
   type?: string;
@@ -27,17 +26,16 @@ const props = defineProps({
   ellipsis: Boolean,
 });
 
-
 const getImageType = () => {
-  if ((props.data.type?.toLowerCase() === 'fintech')
-    || (props.data.type?.toLowerCase() === 'reg-cf')) return '/images/use-cases/fintech.svg';
-  if ((props.data.type?.toLowerCase() === 'crowdfunding')
-    || (props.data.type?.toLowerCase() === 'reg-d')
-    || (props.data.type?.toLowerCase() === 'security')) return '/images/use-cases/crowdfunding.svg';
-  if ((props.data.type?.toLowerCase() === 'blockchain')
-    || (props.data.type?.toLowerCase() === 'alternative-assets')) return '/images/use-cases/blockchain.svg';
-  if ((props.data.type?.toLowerCase() === 'ai/ml software')
-    || (props.data.type?.toLowerCase() === 'reg-a')) return '/images/use-cases/ai-software.svg';
+  // if ((props.data.type?.toLowerCase() === 'fintech')
+  //   || (props.data.type?.toLowerCase() === 'reg-cf')) return '/images/use-cases/fintech.svg';
+  // if ((props.data.type?.toLowerCase() === 'crowdfunding')
+  //   || (props.data.type?.toLowerCase() === 'reg-d')
+  //   || (props.data.type?.toLowerCase() === 'security')) return '/images/use-cases/crowdfunding.svg';
+  // if ((props.data.type?.toLowerCase() === 'blockchain')
+  //   || (props.data.type?.toLowerCase() === 'alternative-assets')) return '/images/use-cases/blockchain.svg';
+  // if ((props.data.type?.toLowerCase() === 'ai/ml software')
+  //   || (props.data.type?.toLowerCase() === 'reg-a')) return '/images/use-cases/ai-software.svg';
   return null;
 };
 </script>
@@ -69,11 +67,15 @@ const getImageType = () => {
             {{ data.type }}
           </h3>
         </div>
-        <VCardTitle v-if="data.title">
+        <VCardTitle
+          v-if="data.title"
+          itemprop="headline"
+        >
           {{ data.title }}
         </VCardTitle>
         <VCardDescription
           v-if="data.subtitle"
+          itemprop="description"
         >
           {{ data.subtitle }}
         </VCardDescription>
@@ -82,6 +84,7 @@ const getImageType = () => {
         v-if="data.text"
         class="v-card-primary__text"
         :class="{ 'is--ellipsis': ellipsis }"
+        itemprop="text"
       >
         <p
           v-html="descriptionWithHtml ? data.text : stripHtml(data.text)"
@@ -101,12 +104,11 @@ const getImageType = () => {
       />
       <slot name="button">
         <VButton
-          v-if="data.url"
+          v-if="data.url && !data.bodyImg"
           as="a"
           variant="tetriary"
           color="primary"
           :href="encodeURI(data.url)"
-          class="is--margin-top-10"
         >
           <slot name="buttonText">
             Discover More
@@ -116,7 +118,6 @@ const getImageType = () => {
     </VCardFooter>
   </VCard>
 </template>
-
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;

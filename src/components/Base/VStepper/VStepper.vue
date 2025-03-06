@@ -22,8 +22,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     :class="props.class"
     class="VStepper v-stepper"
     v-bind="forwarded"
-    itemscope
-    itemtype="https://schema.org/ItemList"
   >
     <slot v-bind="slotProps" />
   </StepperRoot>

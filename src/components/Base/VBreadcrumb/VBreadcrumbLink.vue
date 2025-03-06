@@ -23,9 +23,9 @@ const componentProps = computed(() => {
     :is="isComponent"
     v-bind="componentProps"
     class="VBreadcrumbLink v-breadcumb-link is--h6__title"
-    itemprop="url"
+    itemprop="item"
   >
-    <slot />
+    <span itemprop="name"><slot /></span>
   </component>
 </template>
 
@@ -35,5 +35,10 @@ const componentProps = computed(() => {
   color: inherit;
   text-decoration: none;
   line-height: inherit;
+  span {
+    color: inherit;
+    text-decoration: none;
+    line-height: inherit;
+  }
 }
 </style>
