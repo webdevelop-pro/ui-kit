@@ -2,7 +2,8 @@
 import {
   computed, onMounted, ref, watch,
 } from 'vue';
-import { Mask, vMaska, MaskTokens as IMaskTokens } from 'maska';
+import { Mask, MaskTokens as IMaskTokens } from 'maska';
+import { vMaska } from 'maska/vue';
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
 
 // IMPORTANT: before using this component you need to install maska

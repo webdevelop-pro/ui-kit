@@ -5,12 +5,12 @@ import {
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VFormInput from 'UiKit/components/Base/VForm/VFormInput.vue';
 import VFormGroup from 'UiKit/components/Base/VForm/VFormGroup.vue';
+import { scrollToError } from 'UiKit/helpers/validation/general';
 
 const props = defineProps({
   loading: Boolean,
   label: String,
 });
-
 
 const emit = defineEmits(['submit']);
 
@@ -28,7 +28,6 @@ const setupValidator = async () => {
   const { JSONSchemaType } = await import('ajv');
   const { emailRule, errorMessageRule } = await import('UiKit/helpers/validation/rules');
   const { PrecompiledValidator } = await import('UiKit/helpers/validation/PrecompiledValidator');
-  const { scrollToError } = await import('UiKit/helpers/validation/general');
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   schemaSubscribe = {
@@ -49,10 +48,8 @@ const setupValidator = async () => {
   return new PrecompiledValidator<FormModelSubscribe>(schemaSubscribe);
 };
 
-
 const validator = ref<PrecompiledValidator<FormModelSubscribe> | null>(null);
 setupValidator().then((v) => { validator.value = v; });
-
 
 const onValidate = () => {
   if (validator.value) {
@@ -69,7 +66,6 @@ const onSubmit = () => {
 
   emit('submit', model.email);
 };
-
 
 watch(() => model, () => {
   if (!isValid.value) onValidate();
@@ -105,6 +101,7 @@ watch(() => model, () => {
           size="large"
           :loading="loading"
           :disabled="isDisabledButton || loading"
+          class="v-form-footer-subscribe__button"
         >
           Subscribe
         </VButton>
@@ -113,13 +110,16 @@ watch(() => model, () => {
   </div>
 </template>
 
-
 <style lang="scss">
 .v-form-footer-subscribe {
   &__group {
     display: flex;
-    align-items: end;
     gap: 4px;
+  }
+
+  &__button {
+    position: relative;
+    top: 25px;
   }
 }
 </style>
