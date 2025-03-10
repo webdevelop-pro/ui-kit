@@ -42,7 +42,6 @@ defineProps({
   </VAccordion>
 </template>
 
-
 <style lang="scss">
 .v-accordion-list-default {
   &__content {

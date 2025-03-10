@@ -9,7 +9,6 @@ import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
 import { storeToRefs } from 'pinia';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 
-
 const { isTablet } = storeToRefs(useBreakpoints());
 
 const props = defineProps({
@@ -17,8 +16,6 @@ const props = defineProps({
     type: Object as PropType<ICaseStudiesTimelineItem[]>,
     required: true,
   },
-  prev: String,
-  next: String,
   topic: String,
   title: String,
   showAll: Boolean,

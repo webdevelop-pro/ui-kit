@@ -4,7 +4,7 @@ import type { HTMLAttributes } from 'vue';
 const props = defineProps<{
   class?: HTMLAttributes['class']
   variant?: 'error' | 'success' | 'info';
-}>()
+}>();
 </script>
 
 <template>
@@ -12,7 +12,6 @@ const props = defineProps<{
     :class="[`is--${variant}`, props.class]"
     role="alert"
     class="VAlert v-alert"
-    
   >
     <slot />
   </div>

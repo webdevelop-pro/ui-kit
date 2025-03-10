@@ -4,7 +4,6 @@ import { useProvideCarousel } from './useCarousel';
 
 // yarn add embla-carousel-vue
 
-
 const props = withDefaults(defineProps<CarouselProps>(), {
   orientation: 'horizontal',
 });
@@ -64,7 +63,6 @@ function onKeyDown(event: KeyboardEvent) {
     />
   </div>
 </template>
-
 
 <style lang="scss">
 .v-carousel {

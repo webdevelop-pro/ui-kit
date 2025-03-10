@@ -25,6 +25,7 @@ const props = defineProps({
   },
   buttonHref: String,
 });
+const emit = defineEmits(['click']);
 
 const backgroundImageLocal = computed(() => (
   `${props.backgroundGradient}, url(${props.backgroundImage}) lightgray 50% / cover no-repeat`
@@ -55,6 +56,7 @@ const buttonHrefFormatted = computed(() => props.buttonHref || encodeURI(`${getS
         variant="tetriary"
         size="large"
         class="is--margin-top-40"
+        @click="emit('click')"
       >
         {{ buttonText }}
       </VButton>

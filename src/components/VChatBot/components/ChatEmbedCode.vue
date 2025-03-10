@@ -14,11 +14,10 @@ const props = defineProps({
 const isLoading = ref(true);
 
 const trackSuccess = (event) => {
-  // eslint-disable-next-line
   if (event.origin !== 'https://meetings.hubspot.com') {
     return;
   }
-  // eslint-disable-next-line
+
   if (event.data.meetingBookSucceeded) {
     emit('success', props.message);
   }

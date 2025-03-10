@@ -27,7 +27,6 @@ const forwardedProps = useForwardProps(delegatedProps);
   </ComboboxItem>
 </template>
 
-
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 .v-combobox-item {

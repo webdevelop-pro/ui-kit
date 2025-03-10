@@ -51,7 +51,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     margin-bottom: 0;
   }
 
-
   &.is--variant-info{
     border-color: colors.$primary;
   }

@@ -21,7 +21,6 @@ const { canScrollPrev, scrollPrev } = useCarousel();
   </VButton>
 </template>
 
-
 <style lang="scss">
 .v-carousel-prev {
   position: absolute;

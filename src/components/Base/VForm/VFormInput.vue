@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <script lang="ts" setup>
 import {
   computed, onMounted, ref, watch,
@@ -171,7 +172,6 @@ function onBlur() {
 if (props.modelValue !== '') onInput(props.modelValue);
 watch(() => props.modelValue, () => onInput(props.modelValue));
 
-
 </script>
 
 <template>
@@ -194,6 +194,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
     >
       <slot name="append" />
     </span>
+    <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
     <input
       v-model="localValue"
       v-maska:[maskOptions]

@@ -16,7 +16,6 @@ import ChatSide from './ChatSide.vue';
 import ChatSideMobile from './ChatSideMobile.vue';
 import ChatHeader from './ChatHeader.vue';
 
-
 const chatStore = useChat();
 const { isPostMessageLoading } = storeToRefs(chatStore);
 const { isTablet } = storeToRefs(useBreakpoints());
@@ -54,7 +53,6 @@ const isShowAvatar = (index: number) => {
   return props.messages[index]?.user !== props.messages[index + 1]?.user;
 };
 
-
 const scrollToTopNewMessage = () => {
   if (!messageBox.value) return;
 
@@ -62,7 +60,7 @@ const scrollToTopNewMessage = () => {
   const lastUserChatBubble = userChatBubbles[userChatBubbles.length - 1] as HTMLElement;
   if (!lastUserChatBubble) return;
   const difference = lastUserChatBubble.offsetTop - 70;
-  // eslint-disable-next-line
+
   messageBox.value.scrollTo({
     top: difference,
     behavior: 'smooth',
@@ -76,7 +74,7 @@ const scrollToTopLastMessage = () => {
   const lastBotChatBubble = botChatBubbles[botChatBubbles.length - 1] as HTMLElement;
   if (!lastBotChatBubble) return;
   const difference = lastBotChatBubble.offsetTop - 70;
-  // eslint-disable-next-line
+
   messageBox.value.scrollTo({
     top: difference,
     behavior: 'smooth',

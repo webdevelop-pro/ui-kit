@@ -40,7 +40,7 @@ defineProps({
             {{ title }}
           </span>
           <VBadge
-            v-if="tag && tag != 'none'"
+            v-if="tag && tag !== 'none'"
             size="small"
             color="primary"
           >

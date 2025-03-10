@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import imageBg from './illustration-404.svg?url';
-</script>
+import { useGlobalLoader } from 'UiKit/store/useGlobalLoader';
 
+useGlobalLoader().hide();
+</script>
 
 <template v-once>
   <div class="VErrorPageNotFound404 errors-404">

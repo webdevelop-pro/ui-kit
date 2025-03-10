@@ -19,9 +19,9 @@ defineProps({
 const link = computed(() => (env.FRONTEND_URL + router.route.path));
 
 const SOCIAL_LIST = [
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
   socials?.facebook, socials?.twitter,
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
   socials?.linkedin,
 ];
 </script>

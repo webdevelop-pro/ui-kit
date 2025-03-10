@@ -1,7 +1,5 @@
-
 import { IChatBody } from '../types';
 import { env } from '@/config/env';
-
 
 export const fetchPostMessageChat = (bodyObject: IChatBody) => {
   const path = `${env.CHATBOT_URL}/v2/message`;
@@ -23,4 +21,3 @@ export const fetchPostMessageChat = (bodyObject: IChatBody) => {
     return response;
   });
 };
-

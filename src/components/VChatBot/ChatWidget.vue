@@ -51,7 +51,6 @@ const init = () => {
 
 init();
 
-
 const latestMessage = computed(() => messages.value[messages.value.length - 1]);
 const latestMessageHasChoices = computed(() => (latestMessage.value.choices && latestMessage.value.choices.length > 0));
 const isLatestInactivityMessage = computed(() => {
@@ -217,7 +216,6 @@ onBeforeUnmount(() => {
   chatStore.resetChatAll();
 });
 
-
 watch(() => [queryText.value, botTypingId.value.length, queryTextCanPrint.value], () => {
   clearTimeout(queryTextTimer);
   if ((botTypingId.value.length === 0) && queryText.value && !queryTextPrinted.value && queryTextCanPrint.value) {
@@ -233,7 +231,6 @@ watch(() => [messages.value.length, isStartTimer.value], () => {
     resetInactivityTimer();
   }
 }, { immediate: true });
-
 
 watch(() => queryTopic.value, () => {
   if (queryTopic.value && !topic.value) chatStore.setTopic(queryTopic.value);

@@ -7,7 +7,6 @@
   </tfoot>
 </template>
 
-
 <style lang="scss">
 .v-table-footer {
   width: 100%;

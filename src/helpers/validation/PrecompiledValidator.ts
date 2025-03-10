@@ -1,8 +1,7 @@
-
-import { ajv } from './ajv';
 import { JSONSchemaType, ValidateFunction } from 'ajv';
-import { processRawValidationErrors } from './processRawValidationErrors';
 import merge from 'lodash/merge';
+import { ajv } from './ajv';
+import { processRawValidationErrors } from './processRawValidationErrors';
 import { undefinedEmptyProp } from './general';
 
 export class PrecompiledValidator<T> {

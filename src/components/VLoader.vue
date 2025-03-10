@@ -23,7 +23,6 @@ defineProps({
   </div>
 </template>
 
-
 <style lang="scss">
 .the-loader{
   position: fixed;

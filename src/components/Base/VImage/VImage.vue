@@ -2,6 +2,7 @@
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
 import defaulImage from 'UiKit/assets/images/default.svg?url';
 import { useImage } from '@vueuse/core';
+import { watch } from 'vue';
 
 const props = withDefaults(defineProps<{
   src: string | undefined;
@@ -9,18 +10,25 @@ const props = withDefaults(defineProps<{
   fit?: 'cover' | 'contain' | 'none';
   loading?: 'lazy' | 'eager' | undefined;
   clientOnly?: boolean;
+  isFullWidth?: boolean;
 }>(), {
   fit: 'none',
   loading: 'eager',
 });
 
+const emit = defineEmits(['loading:src']);
+
 const { isLoading } = useImage({ src: props.src || '' });
+
+watch(() => isLoading.value, () => {
+  emit('loading:src', isLoading.value);
+}, { immediate: true });
 </script>
 
 <template>
   <div
     class="VImage v-image"
-    :class="[`is--${fit}`, { 'is--bg': !src }]"
+    :class="[`is--${fit}`, { 'is--bg': !src, 'is--full-width': isFullWidth }]"
     itemscope
     itemtype="https://schema.org/ImageObject"
   >
@@ -61,9 +69,14 @@ const { isLoading } = useImage({ src: props.src || '' });
     background-color: colors.$primary-light;
   }
 
+  &.is--full-width {
+    width: 100%;
+  }
+
   &__client {
     height: 100%;
     width: 100%;
+    min-height: inherit;
   }
 
   &__image {

@@ -9,11 +9,8 @@ import VHeaderNavigationListItem from './VHeaderNavigationListItem.vue';
 import { MENU_HEADER_RIGHT } from '@/config/menu';
 import { VisuallyHidden } from 'radix-vue';
 
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const VNavigationMenuLink = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuLink.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   hydrate: hydrateOnVisible(),
 });
 

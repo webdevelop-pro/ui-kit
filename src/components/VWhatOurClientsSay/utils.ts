@@ -1,9 +1,8 @@
-
 export const WhatOurClientsSayTitle = 'What Our Clients Have to Say';
 export const WhatOurClientsSayText = 'From small businesses to large enterprises, our software solutions have helped many clients'
   + 'streamline their operations, boost productivity, and achieve their goals.';
 
-// IMPORTANT! because from design perspective it was asked to make cards height harcoded, if you change text 
+// IMPORTANT! because from design perspective it was asked to make cards height harcoded, if you change text
 // you need to change styles in lines 94-114
 
 export const testimonials = [

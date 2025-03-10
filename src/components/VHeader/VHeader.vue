@@ -8,14 +8,12 @@ import VLogo from 'UiKit/components/VLogo.vue';
 import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
 import { storeToRefs } from 'pinia';
 
-
 const { isDesktopMD } = storeToRefs(useBreakpoints());
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const VHeaderNavigation = defineAsyncComponent({
   loader: () => import('./VHeaderNavigation.vue'),
 });
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
 const VHeaderMobile = defineAsyncComponent({
   loader: () => import('./VHeaderMobile.vue'),
 });
@@ -27,6 +25,8 @@ defineProps({
   },
   path: String,
 });
+
+const emit = defineEmits(['click']);
 
 const { y } = useWindowScroll();
 const isFixed = ref(false);
@@ -57,6 +57,7 @@ watchPostEffect(() => {
           v-if="showNavigation"
           :path="path"
           class="is--gt-desktop-md-show"
+          @click="emit('click')"
         />
 
         <ClientOnly>

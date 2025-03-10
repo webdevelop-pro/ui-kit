@@ -53,7 +53,6 @@ const componentName = computed(() => {
     }
   }
 
-
   &__mobile {
     width: 47px;
     height: auto;

@@ -1,4 +1,3 @@
-
 import { env } from '@/config/env';
 
 const { HUBSPOTFORM, HUBSPOTPORTAL_ID } = env;

@@ -25,7 +25,7 @@ defineProps({
           :key="index"
           class="v-related-pages__item"
         >
-          <VTableCell class="v-related-pages__left" v-if="item.data">
+          <VTableCell v-if="item.data" class="v-related-pages__left">
             <a
               :href="encodeURI(item.data.url)"
               class="is--h4__title"
@@ -33,7 +33,7 @@ defineProps({
               {{ item.data.title }}
             </a>
           </VTableCell>
-          <VTableCell class="v-related-pages__right" v-if="item.data">
+          <VTableCell v-if="item.data" class="v-related-pages__right">
             <a
               v-for="(child, indexChild) in item.getChilds()"
               :key="indexChild"

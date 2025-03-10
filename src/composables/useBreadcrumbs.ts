@@ -5,7 +5,7 @@ import { IBreadcrumb } from './interface';
 
 export const useBreadcrumbs = (page, frontmatter):IBreadcrumb[] => {
   let breadcrumbsList:IBreadcrumb[] = [];
-  if (frontmatter == void 0) {
+  if (frontmatter === undefined) {
     return breadcrumbsList;
   }
   const currentPage = pages.getPageByURL(frontmatter.value.url);

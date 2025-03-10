@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/require-valid-default-prop -->
 <script lang="ts" setup>
 import { computed } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';

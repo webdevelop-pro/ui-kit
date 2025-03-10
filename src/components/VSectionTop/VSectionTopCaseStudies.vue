@@ -6,7 +6,6 @@ import VTopInfo from 'UiKit/components/VInfo/VInfoTop.vue';
 import VBadgeClickToBlogInline from 'UiKit/components/VBadge/VBadgeClickToBlogInline.vue';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 
-
 const props = defineProps({
   data: {
     type: Object as PropType<ICaseStudies>,

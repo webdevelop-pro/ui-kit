@@ -15,7 +15,6 @@ const ajv = new Ajv({ allErrors: true, allowMatchingProperties: true, $data: tru
 ajvErrors(ajv);
 addFormats(ajv, ['date', 'time', 'float', 'email']);
 
-
 enum CitizenTypes {
   us_citizen = 'U.S. Citizen',
   us_resident = 'U.S. Resident',
@@ -99,7 +98,6 @@ ajv.addKeyword({
     message: ZIP_REGEX_ERROR_MESSAGE,
   },
 });
-
 
 // Custom keyword definition
 ajv.addKeyword({

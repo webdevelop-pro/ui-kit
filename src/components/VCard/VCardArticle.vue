@@ -45,8 +45,8 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
       <p
         v-if="data.summary || data.description"
         class="v-card-article__excerpt is--body"
-        v-html="data.summary || data.description"
         itemprop="description"
+        v-html="data.summary || data.description"
       />
     </VCardContent>
     <VImage
@@ -60,7 +60,6 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
     />
   </VCard>
 </template>
-
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;

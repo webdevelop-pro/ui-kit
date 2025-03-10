@@ -25,7 +25,7 @@ function template(d: any, i: number, elements: (HTMLElement | SVGElement)[]) {
 
     const componentDiv = document.createElement('div');
     const omittedData = Object.entries(omit(d, [props.index])).map(([key, value]) => {
-      const legendReference = props.items?.find((i) => i.name === key);
+      const legendReference = props.items?.find((item) => item.name === key);
       return { ...legendReference, value: props.valueFormatter(value) };
     });
     const TooltipComponent = props.customTooltip ?? VChartTooltip;
@@ -33,7 +33,6 @@ function template(d: any, i: number, elements: (HTMLElement | SVGElement)[]) {
     wm.set(d, componentDiv.innerHTML);
     return componentDiv.innerHTML;
   }
-
 
   const { data } = d;
 
@@ -61,4 +60,3 @@ function template(d: any, i: number, elements: (HTMLElement | SVGElement)[]) {
     class="VChartSingleTooltip v-chart-single-tooltip"
   />
 </template>
-

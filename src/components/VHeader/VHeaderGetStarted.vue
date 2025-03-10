@@ -2,22 +2,29 @@
 import { defineAsyncComponent, hydrateOnVisible } from 'vue';
 import { useData } from 'vitepress';
 import VHeader from 'UiKit/components/VHeader/VHeader.vue';
+import { useGlobalLoader } from 'UiKit/store/useGlobalLoader';
 </script>
 
 <script setup lang="ts">
 const { frontmatter, theme } = useData();
 const getStarted = theme.navigation.getStarted.data;
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const VButton = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VButton/VButton.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+
   hydrate: hydrateOnVisible(),
 });
+
+const onClick = () => {
+  useGlobalLoader().show();
+};
 </script>
 
 <template>
-  <VHeader class="VHeaderGetStarted v-header-get-started">
+  <VHeader
+    class="VHeaderGetStarted v-header-get-started"
+    @click="onClick"
+  >
     <VButton
       as="a"
       :href="getStarted.url"

@@ -1,9 +1,9 @@
+/* eslint-disable no-param-reassign */
 import { IFrontmatter } from 'UiKit/types/types';
-
 
 // General function to find elements by a specified filterName and filterValue
 export function getPages(data: IFrontmatter[], filterFuncs = [], sortFuncs = []) {
-  data = data.filter((item:any) => item.draft != true);
+  data = data.filter((item:any) => item.draft !== true);
   filterFuncs.forEach((filterFunc) => {
     data = filterFunc(data);
   });
@@ -15,9 +15,7 @@ export function getPages(data: IFrontmatter[], filterFuncs = [], sortFuncs = [])
 
 // General function to find elements by a specified filterName and filterValue
 export function filterByKeyVal(key: keyof IFrontmatter, val: string) {
-  return (data: IFrontmatter[]) => {
-    return data.filter((item:any) => item[key] === val);
-  }
+  return (data: IFrontmatter[]) => data.filter((item:any) => item[key] === val);
 }
 
 // Function to sort elements by frontmatter.order

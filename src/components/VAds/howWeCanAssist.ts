@@ -1,7 +1,6 @@
-
-import { data as allPages } from '@/store/all.data';
 import { filterPages } from 'UiKit/helpers/allData';
 import { IFrontmatter } from 'UiKit/types/types';
+import { data as allPages } from '@/store/all.data';
 
 const ourProcess = filterPages(allPages as IFrontmatter[], 'slug', 'our-process');
 const developmentStages = filterPages(allPages as IFrontmatter[], 'slug', 'development-stages');

@@ -1,4 +1,3 @@
-
 export { default as VNavigationMenu } from './VNavigationMenu.vue';
 export { default as VNavigationMenuContent } from './VNavigationMenuContent.vue';
 export { default as VNavigationMenuItem } from './VNavigationMenuItem.vue';

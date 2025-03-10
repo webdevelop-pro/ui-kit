@@ -11,7 +11,6 @@ export interface IChatButton {
   block?: boolean;
 }
 
-
 export interface IMessage {
   type: string;
   value: string;
@@ -40,7 +39,6 @@ export interface IMessageArrayItem {
   finished?: boolean;
 }
 export type AsyncState = null | 'loading' | 'error' | 'complete';
-
 
 export enum MessageType {
   text = 'text',

@@ -20,7 +20,6 @@ export function formatItemsBySubfolder(items: IFrontmatter[]) {
       groupedUseCases[subfolder] = [];
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     groupedUseCases[subfolder].push({
       frontmatter: item,
       link: item.url,
@@ -29,7 +28,6 @@ export function formatItemsBySubfolder(items: IFrontmatter[]) {
   });
 
   // Format the grouped use cases into the desired structure
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   const formattedArray = Object.entries(groupedUseCases).map(([key, value]) => [
     { text: key.replace('-', ' ') },
     ...value,

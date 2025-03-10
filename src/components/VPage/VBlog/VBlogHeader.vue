@@ -4,7 +4,6 @@ import VImage from 'UiKit/components/Base/VImage/VImage.vue';
 import { IFrontmatter } from 'UiKit/types/types';
 import VBadgeClickToBlogInline from 'UiKit/components/VBadge/VBadgeClickToBlogInline.vue';
 
-
 const props = defineProps({
   data: {
     type: Object as PropType<IFrontmatter>,

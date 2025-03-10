@@ -5,7 +5,6 @@ import {
 } from 'UiKit/components/Base/VDropdownMenu';
 import { computed, PropType, ref } from 'vue';
 
-
 export interface IDropdown {
     to?: string;
     href?: string;
@@ -13,13 +12,11 @@ export interface IDropdown {
     active?: boolean;
 }
 
-
 const props = defineProps({
   menu: Array as PropType<IDropdown[]>,
   withChevron: Boolean,
   contentProps: Object as PropType<DropdownMenuContentProps>,
 });
-
 
 const getComponentName = (item: IDropdown) => {
   if (item.to) return 'router-link';
@@ -35,7 +32,6 @@ const getComponentProps = (item: IDropdown) => {
 
 const toggleState = ref(false);
 </script>
-
 
 <template>
   <VDropdownMenu

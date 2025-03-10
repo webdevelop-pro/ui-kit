@@ -23,7 +23,6 @@ const delegatedProps = computed(() => {
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 const selectedTab = ref(props.defaultValue || '');
 
-
 const queryTab = computed(() => new URLSearchParams(window.location.search).get('tab'));
 
 const setUrl = (newItem: string) => {

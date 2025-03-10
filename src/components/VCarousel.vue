@@ -23,7 +23,6 @@ const emblaMainApi = ref<CarouselApi>();
 const emblaThumbnailApi = ref<CarouselApi>();
 const selectedIndex = ref(0);
 
-
 function getMetaOrder(item) {
   if (item?.meta_data) return item.meta_data?.order || 999;
   return 999;
@@ -35,7 +34,6 @@ const sortedFiles = computed(() => {
 });
 
 const isFirstItemVideo = computed(() => Boolean(sortedFiles.value[0]?.url));
-
 
 const queryMedia = computed(() => new URLSearchParams(window.location.search).get('media'));
 
@@ -85,19 +83,18 @@ function onThumbClick(index: number) {
   emblaMainApi.value.scrollTo(index);
 }
 
-watchOnce(emblaMainApi, (emblaMainApi) => {
-  if (!emblaMainApi) return;
+watchOnce(emblaMainApi, (value) => {
+  if (!value) return;
 
   onSelect();
-  emblaMainApi.on('select', onSelect);
-  emblaMainApi.on('reInit', onSelect);
+  value.on('select', onSelect);
+  value.on('reInit', onSelect);
 });
 
 watch(() => selectedIndex.value, () => {
   setUrl(selectedIndex.value);
 });
 </script>
-
 
 <template>
   <div class="v-carousel-default">
@@ -177,14 +174,13 @@ watch(() => selectedIndex.value, () => {
             :title="getImageTitle(name, item.name)"
             itemprop="image"
             loading="eager"
-            class='is--margin-top-0'
+            class="is--margin-top-0"
           />
         </VCarouselItem>
       </VCarouselContent>
     </VCarousel>
   </div>
 </template>
-
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
@@ -256,7 +252,6 @@ watch(() => selectedIndex.value, () => {
       width: 100%;
       height: 100%;
     }
-
 
     @media screen and (max-width: $tablet){
       max-width: 110px;

@@ -3,7 +3,6 @@ import VCardCheckmarked from 'UiKit/components/VCard/VCardCheckmarked.vue';
 import { PropType } from 'vue';
 import VSectionTwoCol from 'UiKit/components/VSection/VSectionTwoCol.vue';
 
-
 defineProps({
   title: String,
   subtitle: String,

@@ -5,12 +5,12 @@ import { Swiper } from 'swiper/vue';
 defineProps({
   breakpoints: {
     type: Object,
-    default: {
+    default: () => ({
       767: {
         slidesPerView: 2,
         spaceBetween: 30,
       },
-    },
+    }),
   },
 });
 
@@ -30,7 +30,6 @@ const modules = [Navigation];
     <slot />
   </Swiper>
 </template>
-
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;

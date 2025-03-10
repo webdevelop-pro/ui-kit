@@ -23,17 +23,16 @@ readyPromise.value = new Promise<void>((resolve) => {
 
 const src = computed(() => `https://player.vimeo.com/video/${props.id}`);
 
+const onLoad = () => {
+  readyResolver();
+  ready.value = true;
+  emit('ready');
+};
 
 const init = () => {
   player = new VimeoPlayer(video.value);
   player.on('loaded', onLoad);
   player.setMuted(true);
-};
-
-const onLoad = () => {
-  readyResolver();
-  ready.value = true;
-  emit('ready');
 };
 
 const play = async () => {

@@ -1,6 +1,6 @@
 import type { Component, VNode } from 'vue';
-import type { ToastProps } from '.';
 import { computed, ref } from 'vue';
+import type { ToastProps } from '.';
 
 const TOAST_LIMIT = 100;
 const TOAST_REMOVE_DELAY = 10000;
@@ -62,6 +62,7 @@ function addToRemoveQueue(toastId: string) {
 
   const timeout = setTimeout(() => {
     toastTimeouts.delete(toastId);
+    // eslint-disable-next-line no-use-before-define
     dispatch({
       type: actionTypes.REMOVE_TOAST,
       toastId,
@@ -91,8 +92,8 @@ function dispatch(action: Action) {
       if (toastId) {
         addToRemoveQueue(toastId);
       } else {
-        state.value.toasts.forEach((toast) => {
-          addToRemoveQueue(toast.id);
+        state.value.toasts.forEach((toastLocal) => {
+          addToRemoveQueue(toastLocal.id);
         });
       }
 
@@ -110,12 +111,15 @@ function dispatch(action: Action) {
       else state.value.toasts = state.value.toasts.filter((t) => t.id !== action.toastId);
 
       break;
+    default:
+      break;
   }
 }
 
 function useToast() {
   return {
     toasts: computed(() => state.value.toasts),
+    // eslint-disable-next-line no-use-before-define
     toast,
     dismiss: (toastId?: string) => dispatch({ type: actionTypes.DISMISS_TOAST, toastId }),
     TOAST_REMOVE_DELAY,
@@ -127,9 +131,9 @@ type Toast = Omit<ToasterToast, 'id'>
 function toast(props: Toast) {
   const id = genId();
 
-  const update = (props: ToasterToast) => dispatch({
+  const update = (propsLocal: ToasterToast) => dispatch({
     type: actionTypes.UPDATE_TOAST,
-    toast: { ...props, id },
+    toast: { ...propsLocal, id },
   });
 
   const dismiss = () => dispatch({ type: actionTypes.DISMISS_TOAST, toastId: id });

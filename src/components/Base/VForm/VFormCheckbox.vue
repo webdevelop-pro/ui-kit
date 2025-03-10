@@ -18,7 +18,6 @@ const emits = defineEmits<CheckboxRootEmits>();
 
 const inputId = useId();
 
-
 const delegatedProps = computed(() => {
   const { class: _, ...delegated } = props;
 

@@ -30,7 +30,6 @@ const classes = computed(() => {
   </span>
 </template>
 
-
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 .v-badge {

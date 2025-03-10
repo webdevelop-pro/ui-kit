@@ -83,6 +83,7 @@ const getStarted = theme.navigation.getStarted.data;
             :src="isTablet ? props.data.imageMobile : props.data.image"
             alt="highlight top image"
             fit="cover"
+            is-full-width
             class="v-section-top-highlight-dark__image "
           />
         </slot>
@@ -164,4 +165,3 @@ const getStarted = theme.navigation.getStarted.data;
   }
 }
 </style>
-

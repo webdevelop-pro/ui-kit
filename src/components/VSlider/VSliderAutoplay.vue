@@ -7,7 +7,6 @@ import { CarouselApi } from '../Base/VCarousel';
 // yarn add embla-carousel-autoplay
 // yarn add embla-carousel-fade
 
-
 interface ISliderAutpoplay {
   id: number;
   testimonials?: {
@@ -44,7 +43,6 @@ function setApi(val: CarouselApi) {
 }
 const activeElementId = ref(0);
 
-
 const setActiveElement = () => {
   active.value = props.data[activeElementId.value];
 };
@@ -54,14 +52,13 @@ const changeSlide = (index: number) => {
   api.value?.plugins()?.autoplay.reset();
 };
 
+watch(api, (value) => {
+  if (!value) return;
 
-watch(api, (api) => {
-  if (!api) return;
+  activeElementId.value = value.selectedScrollSnap();
 
-  activeElementId.value = api.selectedScrollSnap();
-
-  api.on('select', () => {
-    activeElementId.value = api.selectedScrollSnap();
+  value.on('select', () => {
+    activeElementId.value = value.selectedScrollSnap();
     setActiveElement();
   });
 });

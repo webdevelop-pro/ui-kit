@@ -14,8 +14,8 @@ defineProps({
   <div
     class="VSkeleton v-skeleton"
     :style="{
-      width: width,
-      height: height,
+      width,
+      height,
     }"
   />
 </template>
@@ -50,4 +50,3 @@ defineProps({
   }
 }
 </style>
-

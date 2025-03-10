@@ -3,7 +3,6 @@ import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import arrowIcon from 'UiKit/assets/images/arrow-right.svg';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 
-
 defineProps({
   title: String,
   text: String,

@@ -7,7 +7,6 @@ import {
 import { storeToRefs } from 'pinia';
 import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
 
-
 const { isTablet } = storeToRefs(useBreakpoints());
 
 interface IStepper {

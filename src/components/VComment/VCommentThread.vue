@@ -14,14 +14,12 @@ export interface IOfferComment {
   };
 }
 
-
 defineProps({
   comment: {
     type: Object as PropType<IOfferComment>,
     required: true,
   },
 });
-
 
 const showAnswer = computed(() => false);
 </script>
@@ -30,7 +28,7 @@ const showAnswer = computed(() => false);
   <div class="VCommentThread v-comment-thread">
     <VComment
       class="v-comment-thread__comment"
-      :title="`${ comment?.user.first_name } ${ comment?.user.last_name }`"
+      :title="`${comment?.user.first_name} ${comment?.user.last_name}`"
       :date="formatToDate(new Date(comment.created_at).toISOString())"
       :text="comment?.comment"
       :tag="comment.related"
@@ -39,7 +37,7 @@ const showAnswer = computed(() => false);
     <VComment
       v-if="showAnswer"
       class="v-comment-thread__comment is--reply"
-      :title="`${ comment?.user.first_name } ${ comment?.user.last_name }`"
+      :title="`${comment?.user.first_name} ${comment?.user.last_name}`"
       :date="formatToDate(new Date(comment.created_at).toISOString())"
       :text="comment?.comment"
       :tag="comment.related"

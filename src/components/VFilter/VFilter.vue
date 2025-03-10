@@ -32,6 +32,7 @@ const itemsInner = ref();
 const updateFilters = () => {
   selectedFilters.value = 0;
   itemsInner.value?.reduce((countLocal, item) => {
+    // eslint-disable-next-line no-unsafe-optional-chaining
     selectedFilters.value += item.model?.length;
     return selectedFilters.value;
   }, 0);
@@ -52,6 +53,7 @@ const onApplyClick = () => {
 };
 
 const onClear = () => {
+  // eslint-disable-next-line no-param-reassign
   itemsInner.value?.forEach((item) => { item.model = []; });
 };
 

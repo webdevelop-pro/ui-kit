@@ -22,7 +22,8 @@ export function getElementWidthSpace(element) {
     marginLeft,
     marginRight,
     borderLeftWidth,
-    borderRightWidth } = element.currentStyle || window.getComputedStyle(element);
+    borderRightWidth,
+  } = element.currentStyle || window.getComputedStyle(element);
   return element.offsetWidth + parseFloat(marginLeft) + parseFloat(marginRight)
     + parseFloat(borderLeftWidth) + parseFloat(borderRightWidth);
 }

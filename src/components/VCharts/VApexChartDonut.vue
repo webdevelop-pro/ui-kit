@@ -11,12 +11,11 @@ import VueApexCharts from 'vue3-apexcharts';
   }
 
 const props = withDefaults(defineProps<Props>(), {
-  data: [],
-  labels: [],
+  data: () => [],
+  labels: () => [],
   fontSize: '10px',
-  colors: ['#004FFF', '#3DDC97', '#FF7070', '#6F3DFD', '#FFC24D'],
+  colors: () => ['#004FFF', '#3DDC97', '#FF7070', '#6F3DFD', '#FFC24D'],
 });
-
 
 const options = computed(() => ({
   chart: {

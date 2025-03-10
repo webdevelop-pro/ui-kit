@@ -3,46 +3,45 @@ import { MENU_HEADER_RIGHT } from '@/config/menu';
 import { defineAsyncComponent, hydrateOnVisible, ref } from 'vue';
 import VHeaderNavigationListItem from './VHeaderNavigationListItem.vue';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const VNavigationMenu = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenu.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+
   hydrate: hydrateOnVisible(),
 });
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
 const VNavigationMenuList = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuList.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+
   hydrate: hydrateOnVisible(),
 });
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
 const VNavigationMenuItem = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuItem.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+
   hydrate: hydrateOnVisible(),
 });
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
 const VNavigationMenuTrigger = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuTrigger.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+
   hydrate: hydrateOnVisible(),
 });
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
 const VNavigationMenuContent = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuContent.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+
   hydrate: hydrateOnVisible(),
 });
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
 const VNavigationMenuLink = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuLink.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+
   hydrate: hydrateOnVisible(),
 });
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
 const VHeaderNavigationCardDark = defineAsyncComponent({
   loader: () => import('./VHeaderNavigationCardDark.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+
   hydrate: hydrateOnVisible(),
 });
 
@@ -51,6 +50,8 @@ const currentTrigger = ref('');
 defineProps({
   path: String,
 });
+
+const emit = defineEmits(['click']);
 </script>
 
 <template>
@@ -69,6 +70,7 @@ defineProps({
           v-if="!menuItem.children"
           :href="menuItem.link"
           :class="{ 'router-link-active': path && menuItem.link?.includes(path) }"
+          @click.stop="emit('click')"
         >
           {{ menuItem.text }}
         </VNavigationMenuLink>
@@ -87,7 +89,7 @@ defineProps({
                     v-for="(childItem, childIndex) in childGroup"
                     :key="childIndex"
                     :data="childItem"
-                    @click="currentTrigger = ''"
+                    @click="currentTrigger = ''; emit('click');"
                   />
                 </ul>
               </div>

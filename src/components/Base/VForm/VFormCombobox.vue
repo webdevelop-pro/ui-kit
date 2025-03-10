@@ -6,10 +6,8 @@ import {
 } from './VCombobox';
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
 
-
 type ObjectOptionValue = string | number | boolean;
 type ObjectOption = Record<string, ObjectOptionValue>
-
 
 const props = withDefaults(defineProps<{
   options: ObjectOption | ObjectOption[] | string[];
@@ -36,11 +34,8 @@ const searchTerm = ref('');
 const findValueInOption = (value: ObjectOptionValue) => {
   if (Array.isArray(props.options)) {
     // Find the matching option
-    return props.options.find((option) => {
-        return option[props.itemValue].toString().toLowerCase() === value.toString().toLowerCase()
-          || option[props.itemLabel].toString().toLowerCase() === value.toString().toLowerCase()
-      }
-    );
+    return props.options.find((option) => option[props.itemValue].toString().toLowerCase() === value.toString().toLowerCase()
+          || option[props.itemLabel].toString().toLowerCase() === value.toString().toLowerCase());
   }
 
   return null;

@@ -15,6 +15,8 @@ const props = defineProps({
   fullHeight: Boolean,
   videoCoverImage: String,
 });
+
+const emit = defineEmits(['click']);
 </script>
 
 <template>
@@ -57,6 +59,7 @@ const props = defineProps({
           :href="encodeURI(props.buttonHref)"
           size="large"
           class="is--margin-top-40"
+          @click="emit('click')"
         >
           <slot name="buttonText">
             {{ props.buttonText }}

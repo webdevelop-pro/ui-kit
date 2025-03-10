@@ -2,7 +2,6 @@ import { JSONSchemaType } from 'ajv/dist/types/json-schema';
 import cloneDeep from 'lodash/cloneDeep';
 import { capitalizeFirstLetter } from 'UiKit/helpers/text';
 
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 export function populateModel<T>(source: Partial<T>, defaults: T): T {
   return Object.keys(defaults).reduce((acc, key) => {
     const typedKey = key as keyof T;
@@ -10,7 +9,6 @@ export function populateModel<T>(source: Partial<T>, defaults: T): T {
     return acc;
   }, {} as T);
 }
-
 
 // Function to initialize properties recursively
 const initializeProperties = (properties: Record<string, any>): Record<string, any> => {
@@ -52,7 +50,6 @@ export const createFormModel = (schema: JSONSchemaType<T>): Record<string, any> 
   const rootDefinition = mainDataObject.properties;
   return initializeProperties(rootDefinition);
 };
-
 
 export const getOptions = (
   fieldPath: string,

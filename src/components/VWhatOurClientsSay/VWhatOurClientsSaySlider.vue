@@ -14,7 +14,6 @@ defineProps({
   slider: Array as PropType<IWhatOurClientsSaySlider[]>,
 });
 
-
 </script>
 
 <template>

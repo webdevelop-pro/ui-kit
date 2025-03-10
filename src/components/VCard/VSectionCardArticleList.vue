@@ -17,6 +17,7 @@ const props = defineProps({
   buttonText: String,
   noContainer: Boolean,
 });
+const emit = defineEmits(['click']);
 
 const noData = computed(() => !props.items || props.items?.length === 0);
 </script>
@@ -44,6 +45,7 @@ const noData = computed(() => !props.items || props.items?.length === 0);
       >
         <VCardArticle
           :data="item"
+          @click="emit('click')"
         />
       </li>
     </ul>

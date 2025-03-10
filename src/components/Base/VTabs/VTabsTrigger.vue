@@ -5,7 +5,7 @@ import {
 import { computed, type HTMLAttributes } from 'vue';
 import VBadge from 'UiKit/components/Base/VBadge/VBadge.vue';
 
-  const props = withDefaults(defineProps<TabsTriggerProps & {
+const props = withDefaults(defineProps<TabsTriggerProps & {
   class?: HTMLAttributes['class'];
   variant?: 'primary' | 'secondary';
 }>(), {

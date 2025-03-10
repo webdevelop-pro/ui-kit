@@ -29,7 +29,6 @@ const setupValidator = async () => {
   const { emailRule, errorMessageRule } = await import('UiKit/helpers/validation/rules');
   const { PrecompiledValidator } = await import('UiKit/helpers/validation/PrecompiledValidator');
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   schemaSubscribe = {
     $schema: 'http://json-schema.org/draft-07/schema#',
     definitions: {

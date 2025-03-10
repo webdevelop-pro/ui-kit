@@ -9,7 +9,6 @@ import ArrowRight from 'UiKit/assets/images/arrow-right.svg';
 import VSectionTwoCol from 'UiKit/components/VSection/VSectionTwoCol.vue';
 import VSeparator from 'UiKit/components/Base/VSeparator/VSeparator.vue';
 
-
 export interface IAboutUsMiddle {
   title: string;
   background: string;

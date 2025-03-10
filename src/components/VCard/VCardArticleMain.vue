@@ -4,7 +4,6 @@ import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
 import { IFrontmatter } from 'UiKit/types/types';
 import { VCard, VCardContent } from 'UiKit/components/Base/VCard';
 
-
 const { isTablet } = useBreakpoints();
 
 const props = defineProps({
@@ -57,7 +56,6 @@ const h1Class = computed(() => (isTablet.value ? 'is--h4__title' : 'is--h1__titl
     </VCardContent>
   </VCard>
 </template>
-
 
 <style lang="scss">
 .v-card-article-main {

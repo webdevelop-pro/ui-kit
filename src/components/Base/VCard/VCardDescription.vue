@@ -4,7 +4,7 @@
 <template>
   <p
     class="VCardDescription is--subheading-2 is--color-black is--margin-top-8"
-    itemprops="description"
+    itemprop="description"
   >
     <slot />
   </p>

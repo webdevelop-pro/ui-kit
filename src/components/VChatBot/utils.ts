@@ -8,14 +8,13 @@ export const me = ref<User>({
 });
 export const bot = ref<User>({
   id: 'assistant',
-  // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment
+
   avatar: true,
   name: 'Bot',
 });
 
 export const inactivityMessageDelay = 60000;
 export const queryTextDelay = 3000;
-
 
 // write property always in lowercase !important
 export const links = {
@@ -289,7 +288,6 @@ export const chatSideInfoMobileText: IMessage[] = [
   },
 ];
 
-
 export const chatSideInfoMobileButtons: IMessage[] = [
   {
     type: 'button',
@@ -300,7 +298,6 @@ export const chatSideInfoMobileButtons: IMessage[] = [
     value: 'Send Us a Message',
   },
 ];
-
 
 export const defaultMessages: IMessage[] = [
   {
@@ -546,5 +543,3 @@ export const defaultMessages: IMessage[] = [
     ],
   },
 ];
-
-

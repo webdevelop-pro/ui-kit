@@ -56,7 +56,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   </DialogPortal>
 </template>
 
-
 <style lang="scss">
 @use 'UiKit/styles/_variables.scss' as variables;
 @use 'UiKit/styles/_transitions.scss' as *;

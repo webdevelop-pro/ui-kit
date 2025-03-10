@@ -7,7 +7,6 @@ import {
 import { IBreadcrumb, IBreadcrumbDropdown } from '../../composables/interface';
 import VDropdown from 'UiKit/components/VDropdown.vue';
 
-
 const props = defineProps({
   data: {
     type: Array as PropType<IBreadcrumb[]>,

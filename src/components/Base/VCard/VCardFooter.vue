@@ -7,7 +7,6 @@
   </footer>
 </template>
 
-
 <style lang="scss">
 .v-card-footer {
   width: 100%;

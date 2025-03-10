@@ -32,7 +32,6 @@ const delegatedProps = computed(() => {
   </ComboboxAnchor>
 </template>
 
-
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 .v-combobox-anchor {

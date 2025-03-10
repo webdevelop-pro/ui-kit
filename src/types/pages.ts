@@ -1,8 +1,11 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-use-before-define */
 import set from 'lodash/set';
 import get from 'lodash/get';
 
 import { IFrontmatter } from './types';
-import { filterPages } from '../helpers/allData';
+import { filterByKeyVal } from '../helpers/allData';
 
 interface IPage {
   data: IFrontmatter;
@@ -72,8 +75,26 @@ class Page implements IPage {
     return Object.values(this.children).filter((child) => !skipVirtual || !child.isVirtual());
   }
 
+  public getPages(data: IFrontmatter[], filterFuncs = [], sortFuncs = []) {
+    filterFuncs.forEach((filterFunc) => {
+      data = filterFunc(data);
+    });
+    sortFuncs.forEach((sortFunc) => {
+      data = sortFunc(data);
+    });
+    return data;
+  }
+
+  public filterPages(
+    data: IFrontmatter[],
+    key: keyof IFrontmatter,
+    val: string,
+  ) {
+    return this.getPages(data, [filterByKeyVal(key, val)], []);
+  }
+
   public filterChilds(key: string, val: string): Page[] {
-    const filteredPages = filterPages(Object.values(this.children).map((child) => child.data), key, val);
+    const filteredPages = this.filterPages(Object.values(this.children).map((child) => child.data), key, val);
     const matchingPages = Object.values(this.children).filter((child) => (
       filteredPages.some((filtered) => filtered.url === child.data.url)
     ));
@@ -96,6 +117,7 @@ class Page implements IPage {
     // return get(pages, path);
     path = path.slice(1);
     let tempPage = pages;
+    // eslint-disable-next-line consistent-return
     path.forEach((elem:string) => {
       // we need this for some reason during production build tempPage
       // can be undefined
@@ -111,6 +133,7 @@ class Page implements IPage {
   }
 }
 
+// eslint-disable-next-line import/no-mutable-exports
 let pages = new Page({} as IFrontmatter, true);
 
 function convertDictToPage(obj: any, key: string): Page {
@@ -130,7 +153,7 @@ function fixRoot(rawPages: Page): Page {
     // no need to do anything if we have just 1 element
     if (keys.length !== 4) {
       keys.forEach((key) => {
-        if (key != '') {
+        if (key !== '') {
           const pge = convertDictToPage(rawPages[key], key);
           pge.parent = rootPage;
           rootPage.children[key.toString()] = pge;

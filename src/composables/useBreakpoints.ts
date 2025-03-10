@@ -1,6 +1,4 @@
-
 import { ref, onBeforeMount, onBeforeUnmount } from 'vue';
-
 
 const BREAKPOINTS = {
   TABLET: 768,
@@ -8,7 +6,6 @@ const BREAKPOINTS = {
   DESKTOP_MD: 1024,
   DESKTOP_LG: 1199,
 };
-
 
 let count = 0;
 const isTablet = ref(false);
@@ -42,6 +39,6 @@ export const useBreakpoints = () => {
     isTablet,
     isDesktop,
     isDesktopMD,
-    isDesktopLG
+    isDesktopLG,
   };
 };

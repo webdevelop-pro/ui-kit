@@ -26,6 +26,7 @@ defineProps({
     default: howWeCanAssist,
   },
 });
+const emit = defineEmits(['click']);
 </script>
 
 <template>
@@ -43,6 +44,7 @@ defineProps({
           as="a"
           :href="encodeURI(data?.url)"
           size="large"
+          @click="emit('click')"
         >
           {{ data.buttonText }}
           <component
@@ -79,6 +81,7 @@ defineProps({
             v-if="item.url"
             :href="encodeURI(item.url)"
             :aria-label="item.title"
+            @click="emit('click')"
           >
             Learn More
             <span class="is--link-text-hidden">

@@ -55,6 +55,7 @@ defineExpose({
   <iframe
     ref="video"
     :src="src"
+    :title="`YouTube video player ${props.id}`"
     allowfullscreen
     webkitallowfullscreen
     mozallowfullscreen

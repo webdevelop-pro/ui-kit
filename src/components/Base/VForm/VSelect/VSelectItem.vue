@@ -31,7 +31,6 @@ const forwardedProps = useForwardProps(delegatedProps);
   </SelectItem>
 </template>
 
-
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 .v-select-item {

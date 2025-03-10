@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { IVCardFeatures } from 'UiKit/components/VCard/VCardFeatures.vue';
 import { computed, PropType } from 'vue';
 import VSection from 'UiKit/components/VSection/VSection.vue';
-import VCardFeatures from 'UiKit/components/VCard/VCardFeatures.vue';
+import VCardFeatures, { IVCardFeatures } from 'UiKit/components/VCard/VCardFeatures.vue';
 
 const props = defineProps({
   title: String,
@@ -12,6 +11,7 @@ const props = defineProps({
   buttonText: String,
 });
 
+const emit = defineEmits(['click']);
 const noData = computed(() => props.items?.length === 0);
 </script>
 
@@ -35,6 +35,7 @@ const noData = computed(() => props.items?.length === 0);
         :key="i"
         :href="encodeURI(item.url)"
         button-text="Read More"
+        @click="emit('click')"
       >
         <h3>
           {{ item.title }}

@@ -4,7 +4,6 @@ import { PropType } from 'vue';
 import CheckIcon from 'UiKit/assets/images/check.svg';
 import { VCard } from 'UiKit/components/Base/VCard';
 
-
 export interface ICheckmarkedItem {
   title: string;
   description: string;
@@ -109,7 +108,6 @@ defineProps({
     color: colors.$secondary-dark;
   }
 
-
   &__icon-wrap{
     display: flex;
     padding: 4px;
@@ -118,7 +116,6 @@ defineProps({
     border-radius: 50px;
     box-shadow: variables.$box-shadow-small;
     background-color: colors.$secondary-light;
-
 
     @media screen and (max-width: 767px){
       margin-top: 3px;

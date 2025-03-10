@@ -38,4 +38,3 @@ defineProps({
     </ul>
   </div>
 </template>
-

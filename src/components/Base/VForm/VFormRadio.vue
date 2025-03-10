@@ -17,9 +17,7 @@ const props = withDefaults(defineProps<{
   options: () => [],
 });
 
-defineEmits<{
-  (e: 'update:modelValue', value: boolean | string | string[] | number[]): void;
-}>();
+defineEmits<{(e: 'update:modelValue', value: boolean | string | string[] | number[]): void;}>();
 
 function isObject(value: unknown): boolean {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -90,7 +88,6 @@ const id = useId();
           v-model="selectedOption"
           :value="getInputValue(option)"
           type="radio"
-          tabindex="1"
           class="v-form-radio__input"
           v-bind="$attrs"
           @change="$emit('update:modelValue', selectedOption);"

@@ -5,6 +5,7 @@ defineProps({
 </script>
 
 <template>
+  <!-- eslint-disable-next-line vuejs-accessibility/label-has-for -->
   <label
     v-bind="$attrs"
     class="VFormlabel v-form-label"
@@ -29,7 +30,6 @@ defineProps({
   font-size: 16px;
   display: inline-block;
   position: relative;
-
 
   &__required {
     color: colors.$red;

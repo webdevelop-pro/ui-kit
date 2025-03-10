@@ -190,6 +190,7 @@ export function findPagesByParentFolder(pages: IFrontmatter[], url: string) {
   // If the current page is not main, adjust the URL to the parent
   if (currentPage && !currentPage.is_main) {
     const parentUrl = url.substring(0, url.lastIndexOf('/'));
+    // eslint-disable-next-line no-param-reassign
     url = parentUrl;
   }
 
@@ -214,9 +215,11 @@ export function groupItemsByRawUrl(data: IFrontmatter[], url:string) {
   const filtered = Object.keys(res)
     .filter((key) => key.includes(parent)) // Apply the filter function to the keys
     .reduce((result, key) => {
+      // eslint-disable-next-line no-param-reassign
       result[key] = res[key]; // Rebuild the filtered object
       return result;
     }, {});
+  // eslint-disable-next-line consistent-return
   return filtered;
 }
 

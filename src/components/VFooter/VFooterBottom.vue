@@ -13,7 +13,6 @@ const currentYear = new Date().getFullYear();
   </div>
 </template>
 
-
 <style lang="scss">
 .v-footer-bottom {
     background-color: $black;

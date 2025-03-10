@@ -55,13 +55,12 @@ const setImgUrl = () => {
   }
 };
 
-
 const checkImage = (url: string) => {
-  const img = new Image();
-  img.addEventListener('error', () => {
+  const image = new Image();
+  image.addEventListener('error', () => {
     imageFallback.value = true;
   });
-  img.src = url;
+  image.src = url;
 };
 
 // Watchers
@@ -96,7 +95,6 @@ onMounted(() => {
   </div>
 </template>
 
-
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 .v-video-thumb{
@@ -109,7 +107,6 @@ onMounted(() => {
     width: 100%;
     height: 100%;
   }
-
 
   &__play-icon{
     width: 20px;

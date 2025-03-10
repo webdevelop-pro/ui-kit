@@ -4,12 +4,12 @@ import {
   VSelectGroup, VSelectItem,
 } from 'UiKit/components/Base/VForm/VSelect';
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
-import { computed, onMounted, ref, watch } from 'vue';
-
+import {
+  computed, onMounted, ref, watch,
+} from 'vue';
 
 type ObjectOptionValue = string | number | boolean;
 type ObjectOption = Record<string, ObjectOptionValue>
-
 
 const props = withDefaults(defineProps<{
   options: ObjectOption | ObjectOption[] | string[];

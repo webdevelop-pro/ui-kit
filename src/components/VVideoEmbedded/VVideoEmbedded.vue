@@ -33,12 +33,12 @@ const pause = () => {
 const mute = () => {
   if (player.value) player.value.mute();
 };
-const onReady = () => {
-  if (props.autoPlay && props.active) runAutoPlay();
-};
 const runAutoPlay = async () => {
   await mute();
   play();
+};
+const onReady = () => {
+  if (props.autoPlay && props.active) runAutoPlay();
 };
 
 watch(() => props.active, () => {

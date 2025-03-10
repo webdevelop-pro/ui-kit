@@ -13,7 +13,6 @@ const props = defineProps({
   data: Object as PropType<IHeaderNavigation>,
 });
 
-
 const backgroundImageLocal = computed(() => (props.data?.background ? `url(${props.data?.background})` : undefined));
 </script>
 

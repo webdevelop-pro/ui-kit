@@ -3,7 +3,6 @@ import { computed, PropType } from 'vue';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 import VImage from 'UiKit/components/Base/VImage/VImage.vue';
 
-
 interface IDigitalIntro {
   title: string;
   text: string;
@@ -38,46 +37,47 @@ const isPrimary = computed(() => props.color === 'primary');
     :class="{ 'is--highlight-black': isDark, 'is--highlight-primary-light': isPrimary }"
   >
     <div :class="{ 'is--image': imageUrl }">
-    <div
-      :class="{ 'is--short': short, 'is--two-col-grid is--gap-80': twoCol, 'v-intro__container': !twoCol }"
-    >
       <div
-        v-for="(item, i) in data"
-        :key="i"
-        class="is--border-left"
+        :class="{ 'is--short': short, 'is--two-col-grid is--gap-80': twoCol, 'v-intro__container': !twoCol }"
       >
-        <slot>
-          <h2
-            v-if="item.title"
-            class="is--h2__title"
-          >
-            {{ item.title }}
-          </h2>
-          <p
-            v-if="item.text"
-            v-html="item.text"
-          />
-          <ol
-            v-if="item.list"
-          >
-            <li
-              v-for="(listItem, lii) in item.list"
-              :key="lii"
+        <div
+          v-for="(item, i) in data"
+          :key="i"
+          class="is--border-left"
+        >
+          <slot>
+            <h2
+              v-if="item.title"
+              class="is--h2__title"
             >
-              {{ listItem }}
-            </li>
-          </ol>
-        </slot>
+              {{ item.title }}
+            </h2>
+            <p
+              v-if="item.text"
+              v-html="item.text"
+            />
+            <ol
+              v-if="item.list"
+            >
+              <li
+                v-for="(listItem, lii) in item.list"
+                :key="lii"
+              >
+                {{ listItem }}
+              </li>
+            </ol>
+          </slot>
+        </div>
       </div>
+      <VImage
+        v-if="imageUrl"
+        :src="imageUrl"
+        loading="lazy"
+        fit="cover"
+        alt="intro image"
+        class="v-intro__img is--margin-top-0"
+      />
     </div>
-    <VImage
-      v-if="imageUrl"
-      :src="imageUrl"
-      loading="lazy"
-      fit="cover"
-      alt="intro image"
-      class="v-intro__img is--margin-top-0"
-    /></div>
   </VSection>
 </template>
 
@@ -113,7 +113,6 @@ const isPrimary = computed(() => props.color === 'primary');
     padding-left: 20px;
     border-left: 2px solid $secondary;
   }
-
 
   &.is--highlight-black {
     background: $black;

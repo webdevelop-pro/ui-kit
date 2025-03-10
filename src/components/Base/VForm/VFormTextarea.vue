@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { useVModel } from '@vueuse/core';
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
-import { onMounted, ref } from 'vue';
-
 
 const props = defineProps<{
   defaultValue?: string | number;

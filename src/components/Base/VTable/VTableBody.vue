@@ -7,7 +7,6 @@
   </tbody>
 </template>
 
-
 <style lang="scss">
 .v-table-body {
   width: 100%;

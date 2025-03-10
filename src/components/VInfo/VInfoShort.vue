@@ -31,7 +31,6 @@ defineProps({
   </div>
 </template>
 
-
 <style lang="scss">
 .v-info-short {
   width: 100%;

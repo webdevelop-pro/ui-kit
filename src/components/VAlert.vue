@@ -15,11 +15,9 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits(['click']);
 
-
 const onClick = () => {
   emit('click');
 };
-
 
 const buttonColor = computed(() => {
   if (props.variant === 'success') {
@@ -30,7 +28,6 @@ const buttonColor = computed(() => {
   }
   return 'red';
 });
-
 
 const componentIcon = computed(() => {
   if (props.variant === 'success') {

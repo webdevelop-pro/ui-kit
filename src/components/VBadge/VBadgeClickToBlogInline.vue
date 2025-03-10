@@ -22,9 +22,8 @@ defineProps({
         :text="text"
       />
     </li>
-</ul>
+  </ul>
 </template>
-
 
 <style lang="scss">
 .v-badge-click-to-blog-inline {

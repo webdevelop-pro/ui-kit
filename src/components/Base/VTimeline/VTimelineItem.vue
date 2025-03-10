@@ -10,7 +10,7 @@ interface Props {
   title?: string;
   duration?: string;
   active?: boolean;
-  to?: [boolean, Object];
+  to?: [boolean, object];
   horizontal?: boolean;
 }
 
@@ -176,7 +176,6 @@ const btnClasses = computed(() => {
       top: 0;
     }
   }
-
 
   &.is--horizontal {
     position: relative;

@@ -12,7 +12,6 @@ const props = defineProps<CheckboxRootProps & {
 
 const emits = defineEmits<CheckboxRootEmits>();
 
-
 const delegatedProps = computed(() => {
   const { class: _, ...delegated } = props;
 

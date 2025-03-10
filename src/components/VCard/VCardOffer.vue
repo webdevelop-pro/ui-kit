@@ -32,7 +32,7 @@ const offerImage = computed(() => {
 });
 
 const isDefaultImage = computed(() => (!props.offer?.image.meta_data?.small && !props.offer?.image.url));
-const minInvestment = computed(() => (props.offer?.min_investment * props.offer?.price_per_share));
+const minInvestment = computed(() => ((props.offer?.min_investment || 0) * (props.offer?.price_per_share || 0)));
 const amountPercent = computed(() => offerStore.getOfferFundedPercent(props.offer));
 const isClosingSoon = computed(() => (amountPercent.value > 90));
 const isNew = computed(() => {

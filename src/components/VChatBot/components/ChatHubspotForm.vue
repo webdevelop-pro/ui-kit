@@ -24,7 +24,6 @@ const init = () => {
   document.body.appendChild(script);
   script.addEventListener('load', () => {
     if (window.hbspt) {
-      // eslint-disable-next-line
       window.hbspt.forms.create({
         portalId: '6876576',
         formId: props.message?.message.code,

@@ -10,6 +10,8 @@ const getActive = (name: string) => {
   }
   return '';
 };
+
+const emit = defineEmits(['click']);
 </script>
 
 <template>
@@ -29,6 +31,7 @@ const getActive = (name: string) => {
           :href="menuItem.link"
           :class="[getActive(menuItem.link)]"
           class="app-layout-default-footer-menu__item is--h6__title"
+          @click="emit('click')"
         >
           {{ menuItem.text }}
         </a>
@@ -52,6 +55,7 @@ const getActive = (name: string) => {
               :href="childItem.link"
               :class="[getActive(childItem.link)]"
               class="app-layout-default-footer-menu__item is--h6__title"
+              @click="emit('click')"
             >
               {{ childItem.text }}
             </a>
@@ -61,7 +65,6 @@ const getActive = (name: string) => {
     </ul>
   </nav>
 </template>
-
 
 <style lang="scss">
 .app-layout-default-footer-menu {

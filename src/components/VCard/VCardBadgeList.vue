@@ -2,7 +2,6 @@
 import { PropType } from 'vue';
 import VCardBadge, { ICardBadge } from 'UiKit/components/VCard/VCardBadge.vue';
 
-
 defineProps({
   items: {
     type: Object as PropType<ICardBadge[]>,

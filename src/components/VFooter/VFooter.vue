@@ -5,39 +5,38 @@ import { env } from '@/config/env';
 import { useData } from 'vitepress';
 import { socials } from 'UiKit/utils/socials';
 import { useToast } from '../Base/VToast/use-toast';
+import { useGlobalLoader } from 'UiKit/store/useGlobalLoader';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const VSocialLinks = defineAsyncComponent({
   loader: () => import('UiKit/components/VSocialLinks/VSocialLinks.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
-});
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const VFooterMenu = defineAsyncComponent({
-  loader: () => import('./VFooterMenu.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
-});
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const VFormFooterSubscribe = defineAsyncComponent({
-  loader: () => import('UiKit/components/VForms/VFormFooterSubscribe.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  hydrate: hydrateOnVisible(),
-});
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const VFooterBottom = defineAsyncComponent({
-  loader: () => import('UiKit/components/VFooter/VFooterBottom.vue'),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+
   hydrate: hydrateOnVisible(),
 });
 
+const VFooterMenu = defineAsyncComponent({
+  loader: () => import('./VFooterMenu.vue'),
+
+  hydrate: hydrateOnVisible(),
+});
+
+const VFormFooterSubscribe = defineAsyncComponent({
+  loader: () => import('UiKit/components/VForms/VFormFooterSubscribe.vue'),
+
+  hydrate: hydrateOnVisible(),
+});
+
+const VFooterBottom = defineAsyncComponent({
+  loader: () => import('UiKit/components/VFooter/VFooterBottom.vue'),
+
+  hydrate: hydrateOnVisible(),
+});
 
 const { theme } = useData();
 
 const SOCIAL_LIST = [
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
   socials?.facebook, socials?.instagram,
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
   socials?.linkedin, socials?.github,
 ];
 
@@ -48,7 +47,6 @@ const TOAST_OPTIONS = {
   variant: 'error',
 };
 
-
 const loadingSubmitting = ref(false);
 const onSubmit = async (emailLocal: string) => {
   loadingSubmitting.value = true;
@@ -58,6 +56,10 @@ const onSubmit = async (emailLocal: string) => {
   });
   loadingSubmitting.value = false;
   toast(TOAST_OPTIONS);
+};
+
+const onClickMenu = () => {
+  useGlobalLoader().show();
 };
 </script>
 
@@ -88,13 +90,15 @@ const onSubmit = async (emailLocal: string) => {
             :social-list="SOCIAL_LIST"
           />
         </div>
-        <VFooterMenu class="v-footer__menu" />
+        <VFooterMenu
+          class="v-footer__menu"
+          @click="onClickMenu"
+        />
       </div>
     </div>
   </div>
   <VFooterBottom />
 </template>
-
 
 <style lang="scss">
 .v-footer {

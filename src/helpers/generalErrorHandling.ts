@@ -17,10 +17,8 @@ export const generalErrorHandling = async (error: Response) => {
   // const { person } = useCore();
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const errorJson = await error.json();
     if (errorJson) {
-      // eslint-disable-next-line
       TOAST_OPTIONS.description = errorJson;
     }
   } catch (errorTry) {

@@ -3,7 +3,6 @@ import { ErrorSchema, ValidationError } from './types';
 import { toErrorSchema } from './toErrorSchema';
 import { REQUIRED_ERROR_MESSAGE } from './constants';
 
-
 export function transformValidationErrors(errors: ErrorObject[] = []): ValidationError[] {
   return errors.flatMap((e: ErrorObject) => {
     const {
@@ -12,7 +11,6 @@ export function transformValidationErrors(errors: ErrorObject[] = []): Validatio
     const formattedErrors: ValidationError[] = [];
 
     if (keyword === 'errorMessage' && params.errors) {
-      // eslint-disable-next-line
       params.errors.forEach((error: ErrorObject) => {
         let property = error.instancePath ? error.instancePath.replace(/^\//, '').replace(/\//g, '.') : '';
         if ('missingProperty' in error.params) {
@@ -65,7 +63,6 @@ interface ErrorSchema {
 
 function formatErrorSchema(schema: ErrorSchema): ErrorSchema {
   if ('__errors' in schema) {
-    // eslint-disable-next-line
     return schema.__errors.join(', ');
   }
   const formattedSchema: ErrorSchema = {};

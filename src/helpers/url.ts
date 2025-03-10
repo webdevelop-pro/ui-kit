@@ -1,13 +1,12 @@
 import { IFrontmatter } from '@/types/types';
 
-
 export const urlFormat = (url: string, data: IFrontmatter[]) => {
   if (data !== undefined) {
-    data.forEach((data, idx) => {
-      // create algorithm to remove empty folders
-      // if <fileName.md> not in foldersName
-      // remove folder
-    });
+    // data.forEach((data, idx) => {
+    //   // create algorithm to remove empty folders
+    //   // if <fileName.md> not in foldersName
+    //   // remove folder
+    // });
   }
   const removeFolders = [
     'wiki/',
@@ -19,7 +18,7 @@ export const urlFormat = (url: string, data: IFrontmatter[]) => {
     'INTELLIGENT ECOSYSTEM/',
   ];
   let cleanUrl = url;
-  removeFolders.forEach((path, idx) => {
+  removeFolders.forEach((path) => {
     cleanUrl = cleanUrl.replace(path, '');
     cleanUrl = cleanUrl.replace(path.toLowerCase(), '');
   });

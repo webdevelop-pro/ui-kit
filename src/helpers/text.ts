@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 export const capitalizeFirstLetter = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 export const stripMarkdown = (markdown: string): string => {
@@ -33,7 +34,7 @@ export const stripMarkdown = (markdown: string): string => {
   markdown = markdown.replace(/^\s*>\s+(.+?)\s*$/gm, '');
 
   // Remove lists
-  markdown = markdown.replace(/^\s*[\*\+-]\s+(.+?)\s*$/gm, '');
+  markdown = markdown.replace(/^\s*[*+-]\s+(.+?)\s*$/gm, '');
   markdown = markdown.replace(/^\s*\d+\.\s+(.+?)\s*$/gm, '');
 
   // Remove horizontal lines

@@ -19,7 +19,6 @@ export const countryRule = {
   minLength: 2,
 };
 
-
 export const countryRuleObject = {
   mustBeUS: true,
   title: 'country',
@@ -145,7 +144,6 @@ export const relationshipTypeRule = {
   minLength: 2,
 };
 
-
 export const typeProfileRule = {
   type: 'string',
   minLength: 3,
@@ -159,7 +157,6 @@ export const identificationTypeRule = {
 export const identificationNumberRule = {
   minLength: 3,
 };
-
 
 // ERROR MESSAGE
 export const errorMessageRule = {

@@ -26,6 +26,7 @@ const props = defineProps({
   ellipsis: Boolean,
 });
 
+// eslint-disable-next-line arrow-body-style
 const getImageType = () => {
   // if ((props.data.type?.toLowerCase() === 'fintech')
   //   || (props.data.type?.toLowerCase() === 'reg-cf')) return '/images/use-cases/fintech.svg';
@@ -69,7 +70,6 @@ const getImageType = () => {
         </div>
         <VCardTitle
           v-if="data.title"
-          itemprop="headline"
         >
           {{ data.title }}
         </VCardTitle>

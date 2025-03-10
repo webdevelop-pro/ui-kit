@@ -21,7 +21,6 @@ const { canScrollNext, scrollNext } = useCarousel();
   </VButton>
 </template>
 
-
 <style lang="scss">
 .v-carousel-next {
   position: absolute;

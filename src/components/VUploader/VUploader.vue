@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <script setup lang="ts">
 import { ref } from 'vue';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
@@ -47,7 +48,6 @@ const onFileChange = () => {
 
   if (filesUploadError.value) return;
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   allFiles.value = [...allFiles.value, ...incomingFiles];
   emit('update:files', allFiles.value);
 };

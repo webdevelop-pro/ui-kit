@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { JSONSchemaType } from 'ajv/dist/types/json-schema';
 import set from 'lodash/set';
 import cloneDeep from 'lodash/cloneDeep';
@@ -69,7 +70,6 @@ export const getFilteredObject = (
     return filteredObject;
   }, {});
 };
-
 
 export function getFieldSchema(
   path: string | undefined,
@@ -145,14 +145,13 @@ export const filterSchema = (schema: JSONSchemaType<any>, formModel: any): any =
   set(newSchema, path, mainDataObject);
   newSchema = removeRequiredFromDefinitions(newSchema);
 
-
   // filter by keys
   const filteredObject: any = {};
   // eslint-disable-next-line
   for (const key in mainDataObject.properties) { // TODO reqrite as array iteration
     // eslint-disable-next-line
     if (formModel.hasOwnProperty(key)) {
-      // eslint-disable-next-line
+
       filteredObject[key] = mainDataObject.properties[key];
     }
   }
@@ -162,7 +161,6 @@ export const filterSchema = (schema: JSONSchemaType<any>, formModel: any): any =
   set(newSchema, path, cleanedObject);
   return newSchema;
 };
-
 
 export const undefinedEmptyProp = (data: object) => {
   const obj = {};

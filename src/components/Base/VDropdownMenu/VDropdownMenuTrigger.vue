@@ -23,7 +23,6 @@ const forwardedProps = useForwardProps(props);
   </DropdownMenuTrigger>
 </template>
 
-
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 .v-dropdown-menu-trigger {

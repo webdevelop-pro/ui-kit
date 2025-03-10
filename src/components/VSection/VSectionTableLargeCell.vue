@@ -7,9 +7,7 @@ import { storeToRefs } from 'pinia';
 import { computed, PropType } from 'vue';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 
-
 const { isTablet } = storeToRefs(useBreakpoints());
-
 
 interface ISectionTableLargeCell {
   title: string;

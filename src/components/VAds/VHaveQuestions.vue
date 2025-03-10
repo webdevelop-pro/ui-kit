@@ -18,6 +18,7 @@ defineProps({
   },
   noImage: Boolean,
 });
+const emit = defineEmits(['click']);
 </script>
 
 <template>
@@ -44,6 +45,7 @@ defineProps({
           :href="encodeURI(buttonLink)"
           size="large"
           class="v-have-questions__button"
+          @click="emit('click')"
         >
           {{ buttonText }}
         </VButton>

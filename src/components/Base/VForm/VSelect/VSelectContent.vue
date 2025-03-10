@@ -9,7 +9,6 @@ import {
 } from 'radix-vue';
 import { computed, type HTMLAttributes } from 'vue';
 
-
 defineOptions({
   inheritAttrs: false,
 });

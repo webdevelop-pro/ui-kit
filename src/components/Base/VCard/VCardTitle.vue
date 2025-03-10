@@ -4,7 +4,7 @@
 <template>
   <h3
     class="VCardTitle v-card-title"
-    itemprops="headline"
+    itemprop="headline"
   >
     <slot />
   </h3>

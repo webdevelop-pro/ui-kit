@@ -5,6 +5,7 @@ import {
 import get from 'lodash/get';
 import merge from 'lodash/merge';
 import { getFieldSchema } from 'UiKit/helpers/validation/general';
+import { JSONSchemaType } from 'ajv';
 
 const props = defineProps<{
   label?: string;
@@ -20,13 +21,12 @@ const props = defineProps<{
 
 const schema = ref();
 
-function isFieldRequiredInSchema(fieldName, schema) {
-  return schema.required ? schema.required.includes(fieldName) : false;
+function isFieldRequiredInSchema(fieldName: string, schemaLocal: JSONSchemaType<any>) {
+  return schemaLocal.required ? schemaLocal.required.includes(fieldName) : false;
 }
 
-
-function isFieldRequiredAtPath(path, schema) {
-  const parentSchema = getFieldSchema(path, schema.$ref, schema);
+function isFieldRequiredAtPath(path: string, schemaLocal: JSONSchemaType<any>) {
+  const parentSchema = getFieldSchema(path, schemaLocal.$ref, schema);
   if (!parentSchema) return false;
   const fieldName = path.split('.').pop();
   return isFieldRequiredInSchema(fieldName, parentSchema);
@@ -35,7 +35,6 @@ function isFieldRequiredAtPath(path, schema) {
 const required = computed(() => {
   if (props.required) return true;
   if (!props.path || !schema.value) return false;
-  // eslint-disable-next-line
   return isFieldRequiredAtPath(props.path, schema.value);
 });
 
@@ -59,6 +58,7 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
 
 <template>
   <div class="VFormGroup v-form-group">
+    <!-- eslint-disable-next-line vuejs-accessibility/label-has-for -->
     <label
       v-if="label"
       class="v-form-group__label is--h6__title"

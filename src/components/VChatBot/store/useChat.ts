@@ -1,11 +1,10 @@
-import { fetchPostMessageChat } from '../api/chat';
-
-import {
-  IMessageArrayItem, IStreamItem, IChatAttributes, MessageType,
-} from '../types';
 import { acceptHMRUpdate, defineStore } from 'pinia';
 import { generalErrorHandling } from 'UiKit/helpers/generalErrorHandling';
 import { ref } from 'vue';
+import {
+  IMessageArrayItem, IStreamItem, IChatAttributes, MessageType,
+} from '../types';
+import { fetchPostMessageChat } from '../api/chat';
 import { bot } from '../utils';
 
 const messages = ref<IMessageArrayItem[]>([]);
@@ -49,15 +48,19 @@ export const useChat = defineStore('chat', () => {
           choices.value = data.choices;
           messagesHasStreamId = messages.value.filter((messageItem: IMessageArrayItem) => messageItem.id === data.id);
         }
+        // eslint-disable-next-line camelcase
         const { ai_response } = data;
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
+        // eslint-disable-next-line camelcase
         if (ai_response && ai_response.length > 0) {
+          // eslint-disable-next-line camelcase
           const { content } = ai_response[0].delta;
           if (content) {
             setTimeout(() => {
               messagesHasStreamId[0].message.value += content.replace(/(?:\r\n|\r|\n)/g, '<br>');
             }, 100);
           }
+          // eslint-disable-next-line camelcase
           if (ai_response[0].finish_reason === 'stop') {
             setTimeout(() => {
               botTypingId.value = botTypingId.value.filter((streamId) => streamId !== data.id);
@@ -88,17 +91,18 @@ export const useChat = defineStore('chat', () => {
     }).catch((error: Response) => {
       isPostMessageError.value = true;
       botTypingId.value = [];
+      // eslint-disable-next-line no-void
       void generalErrorHandling(error);
     });
     // handle stream data
     if (response && response.body) {
       streamReader.value = response.body.pipeThrough(new TextDecoderStream()).getReader();
-      // eslint-disable-next-line
+
       while (true) {
-        // eslint-disable-next-line no-await-in-loop, @typescript-eslint/no-unsafe-assignment
+        // eslint-disable-next-line no-await-in-loop
         const { value, done } = await streamReader.value.read();
         if (done) break;
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+
         handleStreamData(value, message.attributes);
       }
     }
@@ -110,7 +114,6 @@ export const useChat = defineStore('chat', () => {
     messages.value.push(message);
     await postMessage(message);
   };
-
 
   // add to array and send to backend
   const handleInitMessage = async (message: IMessageArrayItem) => {
@@ -125,9 +128,9 @@ export const useChat = defineStore('chat', () => {
     if (text) topic.value = text;
   };
 
-
   const cancelStream = () => {
     if (!streamReader.value) return;
+    // eslint-disable-next-line no-void
     void streamReader.value.cancel();
   };
 
@@ -161,6 +164,5 @@ export const useChat = defineStore('chat', () => {
 });
 
 if (import.meta.hot) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   import.meta.hot.accept(acceptHMRUpdate(useChat, import.meta.hot));
 }

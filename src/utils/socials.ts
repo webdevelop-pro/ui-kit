@@ -1,4 +1,3 @@
-
 import linkedinIcon from 'UiKit/assets/social/linkedin.svg?component';
 import facebookIcon from 'UiKit/assets/social/facebook.svg?component';
 import instagramIcon from 'UiKit/assets/social/instagram.svg?component';
