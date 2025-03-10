@@ -10,7 +10,7 @@ interface ISectionCardsPrimaryDifferentHeight {
     title: string;
     subtitle: string;
     text: string;
-    url: string;
+    href: string;
   }[];
 }
 
@@ -45,9 +45,9 @@ defineProps({
       >
         <template #button>
           <VButton
-            v-if="item.url"
+            v-if="item.href"
             as="a"
-            :href="encodeURI(item.url)"
+            :href="encodeURI(item.href)"
             block
             class="is--margin-top-0"
           >

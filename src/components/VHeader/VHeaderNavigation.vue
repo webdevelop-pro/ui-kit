@@ -68,8 +68,8 @@ const emit = defineEmits(['click']);
       >
         <VNavigationMenuLink
           v-if="!menuItem.children"
-          :href="menuItem.link"
-          :class="{ 'router-link-active': path && menuItem.link?.includes(path) }"
+          :href="menuItem.href"
+          :class="{ 'router-link-active': path?.includes(menuItem.href) }"
           @click.stop="emit('click')"
         >
           {{ menuItem.text }}
@@ -89,6 +89,7 @@ const emit = defineEmits(['click']);
                     v-for="(childItem, childIndex) in childGroup"
                     :key="childIndex"
                     :data="childItem"
+                    :path="path"
                     @click="currentTrigger = ''; emit('click');"
                   />
                 </ul>

@@ -48,7 +48,7 @@ watchPostEffect(() => {
   >
     <div class="is--container v-header__container">
       <VLogo
-        link="/"
+        href="/"
         class="v-header__logo"
       />
 

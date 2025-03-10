@@ -2,7 +2,7 @@ import { IFrontmatter } from 'UiKit/types/types';
 
 export function formatMenu(data: IFrontmatter[]) {
   return data.map((item: IFrontmatter) => ({
-    link: item.url,
+    href: item.url,
     text: item.title,
     frontmatter: item,
   }));
@@ -22,7 +22,7 @@ export function formatItemsBySubfolder(items: IFrontmatter[]) {
 
     groupedUseCases[subfolder].push({
       frontmatter: item,
-      link: item.url,
+      href: item.url,
       text: item.title,
     });
   });

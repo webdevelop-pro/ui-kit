@@ -5,12 +5,12 @@ import logoMobIcon from 'UiKit/assets/images/logo-mob.svg';
 
 const props = defineProps({
   disabled: Boolean,
-  link: String,
+  href: String,
   routeName: String,
 });
 
 const componentName = computed(() => {
-  if (props.link) return 'a';
+  if (props.href) return 'a';
   if (props.routeName) return 'router-link';
   return 'span';
 });
@@ -20,10 +20,10 @@ const componentName = computed(() => {
   <component
     :is="componentName"
     class="VLogo v-logo"
-    :href="link"
+    :href="href"
     :to="{ name: routeName }"
     aria-label="Site logo"
-    :class="{ 'is--link': link || routeName }"
+    :class="{ 'is--link': href || routeName }"
   >
     <component
       :is="logoIcon"

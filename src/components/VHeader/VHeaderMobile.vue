@@ -45,7 +45,7 @@ const open = defineModel<boolean>();
           <li class="v-header-mobile__item">
             <VNavigationMenuLink
               v-if="!menuItem.children"
-              :href="menuItem.link"
+              :href="menuItem.href"
               @click="open = false"
             >
               {{ menuItem.text }}

@@ -7,7 +7,7 @@ import VSection from 'UiKit/components/VSection/VSection.vue';
 interface ITitleSlider {
   title?: string;
   subtitle?: string;
-  link?: string;
+  href?: string;
   linkText?: string;
   topic?: string;
 }
@@ -29,7 +29,7 @@ defineProps({
   <VSection
     :title="dataTitle.title"
     :sub-title="dataTitle?.subtitle"
-    :link-href="encodeURI(`${dataTitle?.link}?topic=${topic}`)"
+    :link-href="encodeURI(`${dataTitle?.href}?topic=${topic}`)"
     :link-text="dataTitle?.linkText"
     class="VSliderSectionCardOffer v-slider-section-card-offer"
   >

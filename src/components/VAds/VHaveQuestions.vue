@@ -7,7 +7,7 @@ import VImage from 'UiKit/components/Base/VImage/VImage.vue';
 defineProps({
   title: String,
   subtitle: String,
-  buttonLink: String,
+  buttonHref: String,
   buttonText: {
     type: String,
     default: 'Chat with Assistant',
@@ -40,9 +40,9 @@ const emit = defineEmits(['click']);
           </p>
         </slot>
         <VButton
-          v-if="buttonLink"
+          v-if="buttonHref"
           as="a"
-          :href="encodeURI(buttonLink)"
+          :href="encodeURI(buttonHref)"
           size="large"
           class="v-have-questions__button"
           @click="emit('click')"

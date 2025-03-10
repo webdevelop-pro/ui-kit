@@ -5,7 +5,7 @@ import { computed, PropType } from 'vue';
 interface IHeaderNavigation {
   title?: string;
   text?: string;
-  url?: string;
+  href?: string;
   background?: string;
 }
 
@@ -35,9 +35,9 @@ const backgroundImageLocal = computed(() => (props.data?.background ? `url(${pro
     </p>
 
     <VButton
-      v-if="data?.url"
+      v-if="data?.href"
       as="a"
-      :href="data?.url"
+      :href="data?.href"
       size="small"
       :aria-label="data?.title"
     >

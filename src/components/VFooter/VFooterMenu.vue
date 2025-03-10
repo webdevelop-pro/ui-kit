@@ -27,16 +27,16 @@ const emit = defineEmits(['click']);
         class="app-layout-default-footer-menu__menu-item"
       >
         <a
-          v-if="menuItem.link"
-          :href="menuItem.link"
-          :class="[getActive(menuItem.link)]"
+          v-if="menuItem.href"
+          :href="menuItem.href"
+          :class="[getActive(menuItem.href)]"
           class="app-layout-default-footer-menu__item is--h6__title"
           @click="emit('click')"
         >
           {{ menuItem.text }}
         </a>
         <div
-          v-if="!menuItem.link"
+          v-if="!menuItem.href"
           class="app-layout-default-footer-menu__item-not-link is--h5__title"
         >
           {{ menuItem.text }}
@@ -51,9 +51,9 @@ const emit = defineEmits(['click']);
             :key="childItem.text"
           >
             <a
-              v-if="childItem.link"
-              :href="childItem.link"
-              :class="[getActive(childItem.link)]"
+              v-if="childItem.href"
+              :href="childItem.href"
+              :class="[getActive(childItem.href)]"
               class="app-layout-default-footer-menu__item is--h6__title"
               @click="emit('click')"
             >

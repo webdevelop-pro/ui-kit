@@ -16,8 +16,7 @@ const props = defineProps({
     type: Object as PropType<IOffer>,
   },
   funded: Boolean,
-  routeName: String,
-  link: String,
+  href: String,
   imageLoading: {
     type: String,
     default: 'lazy',
@@ -55,7 +54,7 @@ const minInvestmentValue = computed(() => currency(minInvestment.value, 0));
 <template>
   <VCard
     v-bind="$attrs"
-    :href="link"
+    :href="href"
     :aria-label="offer?.name"
     class="VOfferCard v-offer-card with-default-distance"
   >

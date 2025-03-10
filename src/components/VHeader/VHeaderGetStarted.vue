@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineAsyncComponent, hydrateOnVisible } from 'vue';
-import { useData } from 'vitepress';
+import { useData, useRoute } from 'vitepress';
 import VHeader from 'UiKit/components/VHeader/VHeader.vue';
 import { useGlobalLoader } from 'UiKit/store/useGlobalLoader';
 </script>
@@ -11,17 +11,19 @@ const getStarted = theme.navigation.getStarted.data;
 
 const VButton = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VButton/VButton.vue'),
-
   hydrate: hydrateOnVisible(),
 });
 
 const onClick = () => {
   useGlobalLoader().show();
 };
+
+const route = useRoute();
 </script>
 
 <template>
   <VHeader
+    :path="route.path"
     class="VHeaderGetStarted v-header-get-started"
     @click="onClick"
   >

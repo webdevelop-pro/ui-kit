@@ -6,7 +6,7 @@ import VSection from 'UiKit/components/VSection/VSection.vue';
 defineProps({
   title: String,
   text: String,
-  buttonLink: String,
+  buttonHref: String,
   buttonText: String,
 });
 </script>
@@ -22,9 +22,9 @@ defineProps({
     <div class="is--two-col-text">
       <div v-html="text" />
       <VButton
-        v-if="buttonLink && buttonText"
+        v-if="buttonHref && buttonText"
         as="a"
-        :href="encodeURI(buttonLink)"
+        :href="encodeURI(buttonHref)"
         size="large"
         variant="link"
       >
