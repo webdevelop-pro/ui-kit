@@ -49,7 +49,7 @@ watchEffect(() => {
             :key="offer.slug"
             :offer="offer"
             :image-loading="(index < 7) ? 'eager' : 'lazy'"
-            :link="urlOfferSingle(offer.slug)"
+            :href="urlOfferSingle(offer.slug)"
             class="v-offer-list__list-item"
           />
         </div>
