@@ -90,11 +90,11 @@ export function getFieldSchema(
   const firstChild = pathSegments.shift();
   const restSegments = pathSegments.join('.');
 
-  if (!firstChild || !objectFromRefPath.properties) {
+  if (!firstChild || !objectFromRefPath?.properties) {
     return undefined;
   }
 
-  const segment0Property = objectFromRefPath.properties[firstChild];
+  const segment0Property = objectFromRefPath?.properties[firstChild];
 
   if (segment0Property?.$ref) {
     return getFieldSchema(restSegments, segment0Property.$ref, schema);

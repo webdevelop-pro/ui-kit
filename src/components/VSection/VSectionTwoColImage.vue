@@ -128,11 +128,11 @@ defineProps({
 
   &__wrap {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 130px;
 
     @include media-lte(tablet) {
-      grid-template-columns: repeat(1, 1fr);
+      grid-template-columns: repeat(1, minmax(0, 1fr));
       gap: 40px;
     }
 

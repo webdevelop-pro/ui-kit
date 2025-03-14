@@ -34,6 +34,16 @@ export function sortByPublishDate(data: IFrontmatter[]) {
     +new Date(String(b.publishDate)) - +new Date(String(a.publishDate))));
 }
 
+// Function to sort elements by frontmatter.publishDate
+export function sortByDate(data: [], key: string, order: 'ascending' | 'descending' = 'ascending') {
+  if (order === 'ascending') {
+    return data.sort((a, b) => (
+      +new Date(String(a[key])) - +new Date(String(b[key]))));
+  }
+  return data.sort((a, b) => (
+    +new Date(String(b[key])) - +new Date(String(a[key]))));
+}
+
 export function filterPages(
   data: IFrontmatter[],
   key: keyof IFrontmatter,

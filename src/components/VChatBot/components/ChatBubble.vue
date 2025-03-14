@@ -203,7 +203,7 @@ watch(() => props.message?.message?.value, () => {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 
   @include media-lte(tablet) {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
   &__avatar {
