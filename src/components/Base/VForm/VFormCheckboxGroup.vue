@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import VFormCheckbox from 'UiKit/components/Base/VForm/VFormCheckbox.vue';
 
 const props = withDefaults(defineProps<{
-  options: string[];
+  options?: string[];
   modelValue: string[];
 }>(), {
   options: () => [],

@@ -6,7 +6,7 @@ import { type Component, createApp } from 'vue';
 import VChartTooltip from './VChartTooltip.vue';
 
 const props = withDefaults(defineProps<{
-  colors: string[];
+  colors?: string[];
   index: string;
   items: BulletLegendItemInterface[];
   customTooltip?: Component;

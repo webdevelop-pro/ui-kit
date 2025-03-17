@@ -3,8 +3,8 @@ import { computed } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
 
   interface Props {
-    data: number[];
-    labels: string[];
+    data?: number[];
+    labels?: string[];
     fontSize?: string;
     colors?: string[];
     title: string;
