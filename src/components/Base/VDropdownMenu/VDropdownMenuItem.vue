@@ -4,13 +4,7 @@ import { computed, type HTMLAttributes } from 'vue';
 
 const props = defineProps<DropdownMenuItemProps & { class?: HTMLAttributes['class']; inset?: boolean }>();
 
-const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
-
-  return delegated;
-});
-
-const forwardedProps = useForwardProps(delegatedProps);
+const forwardedProps = useForwardProps(props);
 </script>
 
 <template>
@@ -29,7 +23,6 @@ const forwardedProps = useForwardProps(delegatedProps);
   display: block;
   color: $black;
   width: 100%;
-  padding: 8px 12px;
   cursor: pointer;
   text-decoration: none;
 

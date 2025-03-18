@@ -48,19 +48,15 @@ export const useChat = defineStore('chat', () => {
           choices.value = data.choices;
           messagesHasStreamId = messages.value.filter((messageItem: IMessageArrayItem) => messageItem.id === data.id);
         }
-        // eslint-disable-next-line camelcase
         const { ai_response } = data;
 
-        // eslint-disable-next-line camelcase
         if (ai_response && ai_response.length > 0) {
-          // eslint-disable-next-line camelcase
           const { content } = ai_response[0].delta;
           if (content) {
             setTimeout(() => {
               messagesHasStreamId[0].message.value += content.replace(/(?:\r\n|\r|\n)/g, '<br>');
             }, 100);
           }
-          // eslint-disable-next-line camelcase
           if (ai_response[0].finish_reason === 'stop') {
             setTimeout(() => {
               botTypingId.value = botTypingId.value.filter((streamId) => streamId !== data.id);
@@ -91,7 +87,6 @@ export const useChat = defineStore('chat', () => {
     }).catch((error: Response) => {
       isPostMessageError.value = true;
       botTypingId.value = [];
-      // eslint-disable-next-line no-void
       void generalErrorHandling(error);
     });
     // handle stream data
@@ -130,7 +125,6 @@ export const useChat = defineStore('chat', () => {
 
   const cancelStream = () => {
     if (!streamReader.value) return;
-    // eslint-disable-next-line no-void
     void streamReader.value.cancel();
   };
 

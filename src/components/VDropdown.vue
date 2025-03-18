@@ -54,7 +54,7 @@ const toggleState = ref(false);
         <component
           :is="getComponentName(menuItem)"
           v-bind="getComponentProps(menuItem)"
-          class="is--h6__title"
+          class="v-dropdown__item"
           :class="{ 'is--active': menuItem.active }"
         >
           {{ menuItem.text }}
@@ -64,3 +64,12 @@ const toggleState = ref(false);
     </VDropdownMenuContent>
   </VDropdownMenu>
 </template>
+
+<style lang="scss">
+.v-dropdown {
+  &__item {
+    padding: 8px 12px;
+    display: block;
+  }
+}
+</style>

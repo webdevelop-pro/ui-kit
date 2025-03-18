@@ -145,7 +145,7 @@ watch(() => props.items, () => {
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
 .v-filter{
-  --v-filter-dropdown--min-width: 150px;
+  --v-filter-dropdown-min-width: 150px;
 
   position: relative;
 
@@ -158,7 +158,7 @@ watch(() => props.items, () => {
     position: absolute;
     top: 100%;
     left: 0;
-    min-width: var(--v-filter-dropdown--min-width);
+    min-width: var(--v-filter-dropdown-min-width);
     width: fit-content;
     display: flex;
     flex-direction: column;
