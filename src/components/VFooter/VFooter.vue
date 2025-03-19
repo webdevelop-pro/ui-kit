@@ -9,25 +9,21 @@ import { useGlobalLoader } from 'UiKit/store/useGlobalLoader';
 
 const VSocialLinks = defineAsyncComponent({
   loader: () => import('UiKit/components/VSocialLinks/VSocialLinks.vue'),
-
   hydrate: hydrateOnVisible(),
 });
 
 const VFooterMenu = defineAsyncComponent({
   loader: () => import('./VFooterMenu.vue'),
-
   hydrate: hydrateOnVisible(),
 });
 
 const VFormFooterSubscribe = defineAsyncComponent({
   loader: () => import('UiKit/components/VForms/VFormFooterSubscribe.vue'),
-
   hydrate: hydrateOnVisible(),
 });
 
 const VFooterBottom = defineAsyncComponent({
   loader: () => import('UiKit/components/VFooter/VFooterBottom.vue'),
-
   hydrate: hydrateOnVisible(),
 });
 

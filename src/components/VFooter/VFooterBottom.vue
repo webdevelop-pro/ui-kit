@@ -1,13 +1,27 @@
 <script setup lang="ts">
+import { PropType } from 'vue';
+
 const currentYear = new Date().getFullYear();
+
+interface IFooterBottom {
+  href: string,
+  text: string,
+}
+
+defineProps({
+  items: Array as PropType<IFooterBottom[]>,
+});
 </script>
 
 <template>
   <div class="VFooterBottom v-footer-bottom">
     <p class="is--container is--small">
-      <a href="/legal/terms-of-service">Terms of Service</a> |
-      <a href="/legal/privacy-notice">Privacy Notice</a> |
-      <a href="/legal/cookie">Cookie Policy</a> |
+      <template
+        v-for="(item, index) in items"
+        :key="index"
+      >
+        <a :href="item.href">{{ item.text }}</a> |
+      </template>
       © {{ currentYear }} Pro Webdevelop, LLC.
     </p>
   </div>
