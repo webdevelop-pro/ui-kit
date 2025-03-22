@@ -21,7 +21,7 @@ const disabledButton = computed(() => (props.disabled || (messageInput.value ===
 //  Send a new message to the server and add it to our messages list
 const onClick = () => {
   emit('text', messageInput.value);
-  void nextTick(() => {
+  nextTick(() => {
     messageInput.value = '';
   });
 };

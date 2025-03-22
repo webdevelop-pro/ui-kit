@@ -46,7 +46,7 @@ const messageInit = computed(() => ({
 
 const init = () => {
   // init chat by sending hello message
-  void chatStore.handleInitMessage(messageInit.value);
+  chatStore.handleInitMessage(messageInit.value);
 };
 
 init();
@@ -71,7 +71,7 @@ const handleDefaultMessage = (item: IMessageArrayItem, addNewMessage = true) => 
   const defaultMessage = defaultMessages.filter((defaultItem) => (
     defaultItem.value.toLowerCase() === item.message.value.toLowerCase()));
   if (defaultMessage.length === 0) {
-    void chatStore.handleNewMessage(item);
+    chatStore.handleNewMessage(item);
   } else {
     defaultMessage.forEach((defaultItem) => {
       if (addNewMessage) chatStore.addNewMessage({ ...item, ...defaultItem });
@@ -186,7 +186,7 @@ const handleInactivityMessage = () => {
     choices: inactivityMessage[0].choices,
     finished: true,
   };
-  void chatStore.addNewMessage(message);
+  chatStore.addNewMessage(message);
 };
 
 const handleQueryText = () => {

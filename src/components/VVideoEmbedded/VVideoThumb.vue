@@ -48,7 +48,7 @@ const setImgUrl = () => {
       imgUrl.value = src.value;
       break;
     case 'vimeo':
-      void setVimeoImgUrl();
+      setVimeoImgUrl();
       break;
     default:
       break;

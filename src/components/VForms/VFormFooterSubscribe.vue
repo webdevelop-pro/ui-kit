@@ -59,7 +59,7 @@ const onValidate = () => {
 const onSubmit = () => {
   onValidate();
   if (!isValid.value) {
-    void nextTick(() => scrollToError('FooterSubscribeForm'));
+    nextTick(() => scrollToError('FooterSubscribeForm'));
     return;
   }
 

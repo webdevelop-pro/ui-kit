@@ -87,7 +87,7 @@ export const useChat = defineStore('chat', () => {
     }).catch((error: Response) => {
       isPostMessageError.value = true;
       botTypingId.value = [];
-      void generalErrorHandling(error);
+      generalErrorHandling(error);
     });
     // handle stream data
     if (response && response.body) {
@@ -125,7 +125,7 @@ export const useChat = defineStore('chat', () => {
 
   const cancelStream = () => {
     if (!streamReader.value) return;
-    void streamReader.value.cancel();
+    streamReader.value.cancel();
   };
 
   const resetChatAll = () => {
