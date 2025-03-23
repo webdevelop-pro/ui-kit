@@ -237,7 +237,7 @@ const btnClasses = computed(() => ({
       color: colors.$red;
       &:hover {
         background-color: colors.$red;
-        color: colors.$red;
+        color: colors.$white;
       }
     }
   }
