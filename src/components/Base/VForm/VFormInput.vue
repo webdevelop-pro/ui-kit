@@ -315,7 +315,6 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
     align-items: center;
     margin-right: 8px;
     position: relative;
-    z-index: 2;
     > div {
       width: 20px;
       height: 20px;
