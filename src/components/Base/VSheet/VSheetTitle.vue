@@ -6,7 +6,7 @@ const props = defineProps<DialogTitleProps>();
 
 <template>
   <DialogTitle
-    class="VSheetTitle v-sheet-title"
+    class="VSheetTitle v-sheet-title is--h4__title"
     v-bind="props"
   >
     <slot />

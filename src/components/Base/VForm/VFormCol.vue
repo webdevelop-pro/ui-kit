@@ -28,14 +28,14 @@ const classes = computed(() => ({
   margin-bottom: 20px;
 
   &.f-col-2 {
-    width: calc(50% - 15px);
+    width: calc(50% - 10px);
     @include media-lte(tablet) {
       width: 100%;
     }
   }
 
   &.f-col-3 {
-    width: calc(33.3333% - 15px);
+    width: calc(33.3333% - 10px);
     @include media-lte(tablet) {
       width: 100%;
     }

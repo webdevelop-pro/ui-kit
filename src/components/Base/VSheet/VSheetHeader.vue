@@ -13,5 +13,8 @@
 .v-sheet-header {
   padding: 8px 50px 8px 20px ;
   flex-wrap: wrap;
+  min-height: 65px;
+  display: flex;
+  align-items: center;
 }
 </style>

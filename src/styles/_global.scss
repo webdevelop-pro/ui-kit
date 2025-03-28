@@ -172,6 +172,14 @@
     }
 }
 
+
+.is--gap-40-80{
+    gap: 40px 80px;
+    @media screen and (max-width: $tablet){
+        gap: 40px 60px;
+    }
+}
+
 .is--col-gap-100{
     column-gap: 100px;
     @media screen and (max-width: $tablet){
