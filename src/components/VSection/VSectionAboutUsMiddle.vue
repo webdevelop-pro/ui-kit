@@ -88,6 +88,10 @@ const careers = filterPages(allPages as IFrontmatter[], 'slug', 'careers');
     }
   }
 
+  .v-separator {
+    margin: 60px 0;
+  }
+
   &__left {
     display: flex;
     flex-direction: column;

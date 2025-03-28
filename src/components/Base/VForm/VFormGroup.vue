@@ -26,9 +26,9 @@ function isFieldRequiredInSchema(fieldName: string, schemaLocal: JSONSchemaType<
 }
 
 function isFieldRequiredAtPath(path: string, schemaLocal: JSONSchemaType<any>) {
-  const parentSchema = getFieldSchema(path, schemaLocal.$ref, schema);
+  const parentSchema = getFieldSchema(path, schemaLocal.$ref, schemaLocal);
   if (!parentSchema) return false;
-  const fieldName = path.split('.').pop();
+  const fieldName = path.split('.').pop() || '';
   return isFieldRequiredInSchema(fieldName, parentSchema);
 }
 
@@ -102,7 +102,7 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
     position: relative;
     color: colors.$gray-70;
     text-align: left;
-    margin-bottom: 4px;
+    margin-bottom: 7px;
     &.is--dark {
       color: colors.$white;
     }

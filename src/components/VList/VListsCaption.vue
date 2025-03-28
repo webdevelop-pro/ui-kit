@@ -15,7 +15,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="VListsCaption v-list-caprion is--list-pointers">
+  <div class="VListsCaption v-list-caption is--list-pointers">
     <ul>
       <li
         v-for="(caption, index) in items"
@@ -30,7 +30,7 @@ defineProps({
         </a>
         <span
           v-else
-          class="is--h5__title"
+          class="is--h5__title v-list-caption__text"
         >
           {{ caption.text }}
         </span>
@@ -38,3 +38,13 @@ defineProps({
     </ul>
   </div>
 </template>
+
+<style lang="scss">
+@use 'UiKit/styles/_colors.scss' as *;
+
+.v-list-caption {
+  &__text {
+    color: $black;
+  }
+}
+</style>

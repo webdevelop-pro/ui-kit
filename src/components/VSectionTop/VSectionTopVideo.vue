@@ -50,7 +50,7 @@ const emit = defineEmits(['click']);
         </h1>
         <p
           v-if="subTitle"
-          class="is--subheading-1 is--margin-top-15"
+          class="is--subheading-1 is--margin-top-15 is--color-black"
           v-html="subTitle"
         />
         <VButton

@@ -86,7 +86,7 @@ const showInfoShort = computed(() => (
   }
 
   &__button {
-    margin-top: 25px;
+    margin-top: 32px;
     align-self: center;
   }
 

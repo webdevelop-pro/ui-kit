@@ -30,7 +30,7 @@ defineProps({
 <style lang="scss">
 .v-footer-bottom {
     background-color: $black;
-    padding: 10px 0 16px;
+    padding: 16px 0;
     @include media-lte(tablet) {
       padding-top: 51px;
     }

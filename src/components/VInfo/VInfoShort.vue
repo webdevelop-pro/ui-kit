@@ -16,7 +16,7 @@ defineProps({
         </h2>
         <p
           v-if="subtitle"
-          class="is--subheading-1"
+          class="is--subheading-1 is--color-black"
           v-html="subtitle"
         />
         <a

@@ -42,7 +42,7 @@ defineProps({
             </h2>
             <p
               v-if="right?.text"
-              class="is--subheading-2 is--margin-top-10"
+              class="is--subheading-2 is--margin-top-10 is--color-black"
               v-html="right?.text"
             />
           </div>

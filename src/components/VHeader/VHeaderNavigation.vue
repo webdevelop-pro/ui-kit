@@ -69,7 +69,7 @@ const emit = defineEmits(['click']);
         <VNavigationMenuLink
           v-if="!menuItem.children"
           :href="menuItem.href"
-          :class="{ 'router-link-active': path?.includes(menuItem.href) }"
+          :class="{ 'router-link-active': path?.includes(menuItem.href) || menuItem.href?.includes(path) }"
           @click.stop="emit('click')"
         >
           {{ menuItem.text }}
