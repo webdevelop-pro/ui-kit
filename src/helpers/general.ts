@@ -238,3 +238,30 @@ export function groupRelatedPagesFormat(pages: IFrontmatter[], data: Record<stri
     return null; // Return null if no matching URL is found
   }).filter((item) => item !== null); // Filter out null values
 }
+
+export function mergeObjects(obj1, obj2) {
+  if (!obj1 || !obj2) return {};
+  const merged = { ...obj1 };
+
+  Object.entries(obj2).forEach(([topKey, topValue]) => {
+    merged[topKey] = merged[topKey] || { entities: {} };
+    merged[topKey].entities = merged[topKey].entities || {};
+
+    Object.entries(topValue.entities).forEach(([entityKey, entityValue]) => {
+      merged[topKey].entities[entityKey] = {
+        ...merged[topKey].entities[entityKey],
+        ...entityValue,
+      };
+    });
+  });
+
+  return merged;
+}
+
+export const transformedArray = (mergedObj) => (Object.keys(mergedObj)?.map((topKey) => (
+  Object.keys(mergedObj[topKey].entities).map((entityKey) => ({
+    name: mergedObj[topKey].entities[entityKey].filename,
+    'object-type': topKey, // This will be the top-level key, e.g., companyA
+    updated_at: mergedObj[topKey].entities[entityKey].updated_at,
+    url: mergedObj[topKey].entities[entityKey].url,
+  })))).flat());

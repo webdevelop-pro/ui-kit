@@ -46,4 +46,11 @@ withDefaults(defineProps<{
     color: $gray-50;
   }
 }
+
+.is--large {
+  .v-avatar-default__icon {
+    height: 24px;
+    width: 24px;
+  }
+}
 </style>

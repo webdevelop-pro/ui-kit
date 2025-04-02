@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import type { CheckboxRootEmits, CheckboxRootProps } from 'radix-vue';
 import { CheckboxIndicator, CheckboxRoot, useForwardPropsEmits } from 'radix-vue';
+import check from 'UiKit/assets/images/check.svg';
 
 const props = defineProps<CheckboxRootProps & {
   isError?: boolean;
@@ -33,34 +34,10 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   >
     <CheckboxIndicator class="v-checkbox__indicator">
       <slot>
-        <svg
+        <check
+          alt="check icon"
           class="v-checkbox__icon"
-          width="12"
-          height="12"
-          viewBox="0 0 12 12"
-          fill="#48535C"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g
-            id="square-check 1"
-            clip-path="url(#clip0_381_5240)"
-          >
-            <path
-              d="M12 0H0V12H12V0ZM9.02679 4.74107L5.59821 8.16964L5.14286 8.625L4.6875
-            8.16964L2.97321 6.45536L2.51786 6L3.42857 5.09196L3.88393 5.54732L5.14286 6.80625L8.11607
-            3.83036L8.57143 3.375L9.47946 4.28571L9.02411 4.74107H9.02679Z"
-            />
-          </g>
-          <defs>
-            <clipPath id="clip0_381_5240">
-              <rect
-                width="12"
-                height="12"
-                fill="white"
-              />
-            </clipPath>
-          </defs>
-        </svg>
+        />
       </slot>
     </CheckboxIndicator>
   </CheckboxRoot>
@@ -88,9 +65,9 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   }
 
   &__icon {
-    fill: colors.$primary;
-    width: 16px;
-    height: 16px;
+    color: colors.$white;
+    width: 14px;
+    height: 14px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -119,6 +96,8 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   }
 }
 .v-checkbox[aria-checked="true"] {
+  border-color: colors.$primary;
+  background: colors.$primary;
   .v-checkbox__icon {
       opacity: 1;
     }

@@ -35,6 +35,7 @@ const delegatedProps = computed(() => {
     overflow-x: auto;
     overflow-y: hidden;
     position: relative;
+    gap: 20px;
 
   &.is--varinat-primary {
     height: 48px;
