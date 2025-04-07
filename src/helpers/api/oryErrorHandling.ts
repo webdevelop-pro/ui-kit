@@ -4,7 +4,7 @@ import { navigateWithQueryParams } from 'UiKit/helpers/general';
 import { useAuthStore } from 'InvestCommon/store/useAuth';
 import { useAuthLogicStore } from 'InvestCommon/store/useAuthLogic';
 
-export const oryErrorHandling = (error: IErrorGeneric, url: string) => {
+export const oryErrorHandling = (error: IErrorGeneric, url: string, type: string) => {
   const authStore = useAuthStore();
   const authLogicStore = useAuthLogicStore();
 
@@ -14,7 +14,7 @@ export const oryErrorHandling = (error: IErrorGeneric, url: string) => {
       break;
     case 'session_aal2_required': // 2FA is enabled and enforced, but user did not perform 2fa yet!
     case 'session_refresh_required': // We need to re-authenticate to perform this action
-      authLogicStore.refreshRedirect();
+      authLogicStore.refreshRedirect(type);
       break;
     case 'browser_location_change_required': // Ory Kratos asked us to point the user to this URL.
       if (error.redirect_browser_to.includes('aal2')) navigateWithQueryParams(urlAuthenticator);
