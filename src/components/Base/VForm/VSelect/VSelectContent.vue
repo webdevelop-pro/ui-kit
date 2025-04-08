@@ -57,7 +57,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     max-height: 222px;
     overflow: scroll;
     width: var(--radix-select-trigger-width);
-    z-index: 10;
+    z-index: 1101;
     display: flex;
   // flex-direction: column;
   // position: fixed;
