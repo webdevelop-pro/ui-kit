@@ -59,8 +59,8 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 <style lang="scss">
 @use 'UiKit/styles/_variables.scss' as variables;
 @use 'UiKit/styles/_transitions.scss' as *;
-$z-index-menu-bg: 9;
-$z-index-menu: 10;
+$z-index-menu-bg: 100;
+$z-index-menu: 100;
 $z-index-menu-burger: $z-index-menu + 1;
 
 .v-sheet-content {

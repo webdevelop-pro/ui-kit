@@ -20,9 +20,10 @@ export const generalErrorHandling = async (error: any) => {
     const errorJson = await error.json();
 
     if (errorJson.message) TOAST_OPTIONS.description = errorJson.message;
-    if (errorJson) {
-      TOAST_OPTIONS.description = errorJson;
-    }
+    // eslint-disable-next-line prefer-destructuring
+    else if (errorJson.__error__[0]) TOAST_OPTIONS.description = errorJson.__error__[0];
+    else if (errorJson.__error__) TOAST_OPTIONS.description = errorJson.__error__;
+    else if (errorJson) TOAST_OPTIONS.description = errorJson;
   } catch (errorTry) {
     if (statusCodes.includes(statusCode)) {
       // person.value.isServerError = true;
