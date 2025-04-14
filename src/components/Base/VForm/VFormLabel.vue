@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 defineProps({
   hasAsterisk: Boolean,
+  disabled: Boolean,
 });
 </script>
 
@@ -9,6 +10,7 @@ defineProps({
   <label
     v-bind="$attrs"
     class="VFormlabel v-form-label"
+    :class="{ 'is--disabled': disabled }"
   >
     <slot />
 
@@ -33,6 +35,11 @@ defineProps({
 
   &__required {
     color: colors.$red;
+  }
+
+  &.is--disabled {
+    color: colors.$gray-80;
+    opacity: 0.3;
   }
 }
 </style>

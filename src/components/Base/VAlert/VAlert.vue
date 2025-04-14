@@ -25,6 +25,8 @@ const props = defineProps<{
   border-left: solid 2px transparent;
   padding: 12px 20px 12px 18px;
   display: flex;
+  gap: 20px;
+  align-items: center;
   justify-content: space-between;
 
   &.is--error {

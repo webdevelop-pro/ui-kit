@@ -51,10 +51,10 @@ const componentIcon = computed(() => {
         :is="componentIcon"
         class="v-alert-default__icon"
       />
-      <VAlertTitle>
+      <VAlertTitle v-if="$slots.title">
         <slot name="title" />
       </VAlertTitle>
-      <VAlertDescription>
+      <VAlertDescription v-if="$slots.description">
         <slot name="description" />
       </VAlertDescription>
     </div>
@@ -73,21 +73,30 @@ const componentIcon = computed(() => {
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+@use 'UiKit/styles/_variables.scss' as *;
 
 .v-alert-default {
     $root: &;
 
+    @media screen and (max-width: $mobile-xs) {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .v-alert-default__button {
+        width: 100%;
+      }
+    }
+
     &__icon {
         width: 20px;
         height: 20px;
-        margin-top: -1px;
+        margin-top: 3px;
         flex-shrink: 0;
     }
 
     &__content {
         display: flex;
         gap:8px;
-        align-items: center;
     }
 
     &.is--error {

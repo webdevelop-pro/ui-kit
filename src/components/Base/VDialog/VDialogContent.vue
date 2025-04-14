@@ -68,7 +68,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   overflow-y: auto;
   padding: 40px;
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 1101;
+  z-index: 1100;
 
   @media screen and (max-width: $tablet){
     padding: 50px 10px 10px;

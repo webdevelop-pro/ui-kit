@@ -4,7 +4,7 @@ import { TabsRoot, useForwardPropsEmits } from 'radix-vue';
 import {
   computed, HTMLAttributes, ref, watch,
 } from 'vue';
-
+// todo: if multiple tabs on page? how to differentiate
 const props = withDefaults(defineProps<TabsRootProps & {
   class?: HTMLAttributes['class'];
   tabsToUrl?: boolean;

@@ -2,7 +2,7 @@
 import { AvatarRoot } from 'radix-vue';
 
 const props = withDefaults(defineProps<{
-  size?: 'large' | 'medium' | 'small' | 'x-small';
+  size?: 'x-large' | 'large' | 'medium' | 'small' | 'x-small';
   shape?: 'circle' | 'square';
 }>(), {
   size: 'medium',
@@ -31,8 +31,14 @@ const props = withDefaults(defineProps<{
   border: 1px solid colors.$gray-30;
   font-size: 20px;
   background:colors.$gray-20;
+  flex-shrink: 0;
   &.is--circle {
     border-radius: 100%;
+  }
+  &.is--x-large {
+    width: 152px;
+    height: 152px;
+    font-size: 40px;
   }
   &.is--large {
     width: 100px;

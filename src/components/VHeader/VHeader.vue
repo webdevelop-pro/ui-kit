@@ -5,14 +5,11 @@ import {
 } from 'vue';
 import { useWindowScroll } from '@vueuse/core';
 import VLogo from 'UiKit/components/VLogo.vue';
+import VHeaderNavigation from './VHeaderNavigation.vue';
 import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
 import { storeToRefs } from 'pinia';
 
 const { isDesktopMD } = storeToRefs(useBreakpoints());
-
-const VHeaderNavigation = defineAsyncComponent({
-  loader: () => import('./VHeaderNavigation.vue'),
-});
 
 const VHeaderMobile = defineAsyncComponent({
   loader: () => import('./VHeaderMobile.vue'),

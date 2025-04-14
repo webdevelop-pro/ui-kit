@@ -3,7 +3,7 @@ import { VAvatarFallback, VAvatarImage, VAvatar } from 'UiKit/components/Base/VA
 import user from 'UiKit/assets/images/user.svg?component';
 
 withDefaults(defineProps<{
-  size?: 'large' | 'medium' | 'small' | 'x-small';
+  size?: 'x-large' | 'large' | 'medium' | 'small' | 'x-small';
   shape?: 'circle' | 'square';
   src: string | undefined;
   alt?: string;
@@ -51,6 +51,12 @@ withDefaults(defineProps<{
   .v-avatar-default__icon {
     height: 24px;
     width: 24px;
+  }
+}
+.is--x-large {
+  .v-avatar-default__icon {
+    height: 60px;
+    width: 60px;
   }
 }
 </style>
