@@ -10,6 +10,9 @@ import { useOfferStore } from 'InvestCommon/store/useOffer';
 import VImage from 'UiKit/components/Base/VImage/VImage.vue';
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
 import { VCard, VCardContent } from 'UiKit/components/Base/VCard';
+import env from 'InvestCommon/global';
+
+const { FILER_URL } = env;
 
 const props = defineProps({
   offer: {
@@ -23,10 +26,12 @@ const props = defineProps({
   },
 });
 const offerStore = useOfferStore();
+const imageID = computed(() => props.offer?.image_link_id);
 
 const offerImage = computed(() => {
   if (props.offer?.image.meta_data?.medium) return props.offer?.image.meta_data.medium;
   if (props.offer?.image.url) return props.offer?.image.url;
+  if (imageID.value > 0) return `${FILER_URL}/auth/files/${imageID.value}?size=big`;
   return defaulImage;
 });
 
