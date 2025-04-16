@@ -9,6 +9,7 @@ import {
   VCarouselItem, CarouselApi,
 } from './Base/VCarousel';
 import { watchOnce } from '@vueuse/core';
+import { useSyncWithUrl } from 'UiKit/composables/useSyncWithUrl';
 
 const props = defineProps({
   name: String,
@@ -21,7 +22,17 @@ const props = defineProps({
 
 const emblaMainApi = ref<CarouselApi>();
 const emblaThumbnailApi = ref<CarouselApi>();
-const selectedIndex = ref(0);
+// const selectedIndex = ref(0);
+
+const selectedIndex = useSyncWithUrl<number>({
+  key: 'media',
+  defaultValue: 0,
+  syncToUrl: props.activeItemByUrl,
+  parse: (val) => {
+    const num = Number(val);
+    return Number.isNaN(num) ? 0 : num;
+  },
+});
 
 function getMetaOrder(item) {
   if (item?.meta_data) return item.meta_data?.order || 999;
@@ -35,42 +46,42 @@ const sortedFiles = computed(() => {
 
 const isFirstItemVideo = computed(() => Boolean(sortedFiles.value[0]?.url));
 
-const queryMedia = computed(() => new URLSearchParams(window.location.search).get('media'));
+// const queryMedia = computed(() => new URLSearchParams(window.location.search).get('media'));
 
-const setUrl = (newItemNumber: number) => {
-  const currentUrl = new URL(window.location.href);
-  if (newItemNumber === 0) {
-    currentUrl.searchParams.delete('media'); // Remove `media` if index is 0
-  } else {
-    currentUrl.searchParams.set('media', newItemNumber.toString());
-  }
-  window.history.replaceState(null, '', currentUrl.toString());
-};
+// const setUrl = (newItemNumber: number) => {
+//   const currentUrl = new URL(window.location.href);
+//   if (newItemNumber === 0) {
+//     currentUrl.searchParams.delete('media'); // Remove `media` if index is 0
+//   } else {
+//     currentUrl.searchParams.set('media', newItemNumber.toString());
+//   }
+//   window.history.replaceState(null, '', currentUrl.toString());
+// };
 
-function setActiveItemNumberByURL(currentItemNumberByURL = queryMedia.value) {
-  const numberFromURL = Number(currentItemNumberByURL || 0);
-  if (
-    Number.isNaN(numberFromURL)
-    || numberFromURL < 0
-    || numberFromURL > itemsNumber.value - 1
-  ) {
-    selectedIndex.value = 0;
-  } else {
-    selectedIndex.value = numberFromURL;
-  }
-  setUrl(selectedIndex.value);
-  emblaMainApi.value?.scrollTo(selectedIndex.value);
-}
+// function setActiveItemNumberByURL(currentItemNumberByURL = queryMedia.value) {
+//   const numberFromURL = Number(currentItemNumberByURL || 0);
+//   if (
+//     Number.isNaN(numberFromURL)
+//     || numberFromURL < 0
+//     || numberFromURL > itemsNumber.value - 1
+//   ) {
+//     selectedIndex.value = 0;
+//   } else {
+//     selectedIndex.value = numberFromURL;
+//   }
+//   setUrl(selectedIndex.value);
+//   emblaMainApi.value?.scrollTo(selectedIndex.value);
+// }
 
-watch(
-  () => [queryMedia.value, emblaMainApi.value],
-  () => {
-    if (props.activeItemByUrl && emblaMainApi.value && queryMedia.value) {
-      setActiveItemNumberByURL(queryMedia.value);
-    }
-  },
-  { immediate: true },
-);
+// watch(
+//   () => [queryMedia.value, emblaMainApi.value],
+//   () => {
+//     if (props.activeItemByUrl && emblaMainApi.value && queryMedia.value) {
+//       setActiveItemNumberByURL(queryMedia.value);
+//     }
+//   },
+//   { immediate: true },
+// );
 
 function onSelect() {
   if (!emblaMainApi.value || !emblaThumbnailApi.value) return;
@@ -91,9 +102,9 @@ watchOnce(emblaMainApi, (value) => {
   value.on('reInit', onSelect);
 });
 
-watch(() => selectedIndex.value, () => {
-  setUrl(selectedIndex.value);
-});
+// watch(() => selectedIndex.value, () => {
+//   setUrl(selectedIndex.value);
+// });
 </script>
 
 <template>

@@ -4,6 +4,7 @@ import { TabsRoot, useForwardPropsEmits } from 'radix-vue';
 import {
   computed, HTMLAttributes, ref, watch,
 } from 'vue';
+import { useSyncWithUrl } from 'UiKit/composables/useSyncWithUrl';
 // todo: if multiple tabs on page? how to differentiate
 const props = withDefaults(defineProps<TabsRootProps & {
   class?: HTMLAttributes['class'];
@@ -21,51 +22,57 @@ const delegatedProps = computed(() => {
   return delegated;
 });
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
-const selectedTab = ref(props.defaultValue || '');
 
-const queryTab = computed(() => new URLSearchParams(window.location.search).get('tab'));
+const selectedTab = useSyncWithUrl({
+  key: 'tab',
+  defaultValue: props.defaultValue || '',
+  syncToUrl: props.tabsToUrl,
+});
+// const selectedTab = ref(props.defaultValue || '');
 
-const setUrl = (newItem: string) => {
-  const currentUrl = new URL(window.location.href);
-  if (newItem === props.defaultValue) {
-    currentUrl.searchParams.delete('tab'); // Remove `media` if index is 0
-  } else {
-    currentUrl.searchParams.set('tab', newItem);
-  }
-  window.history.replaceState(null, '', currentUrl.toString());
-};
+// const queryTab = computed(() => new URLSearchParams(window.location.search).get('tab'));
+
+// const setUrl = (newItem: string) => {
+//   const currentUrl = new URL(window.location.href);
+//   if (newItem === props.defaultValue) {
+//     currentUrl.searchParams.delete('tab'); // Remove `media` if index is 0
+//   } else {
+//     currentUrl.searchParams.set('tab', newItem);
+//   }
+//   window.history.replaceState(null, '', currentUrl.toString());
+// };
 
 // Watch for changes in `modelValue` or local `selectedTab`
-watch(
-  () => props.modelValue,
-  (newValue) => {
-    if (newValue && props.tabsToUrl) {
-      selectedTab.value = newValue;
-      setUrl(newValue);
-    }
-  },
-  { immediate: true },
-);
+// watch(
+//   () => props.modelValue,
+//   (newValue) => {
+//     if (newValue && props.tabsToUrl) {
+//       selectedTab.value = newValue;
+//       setUrl(newValue);
+//     }
+//   },
+//   { immediate: true },
+// );
 
 watch(
   () => selectedTab.value,
   (newValue) => {
     emits('update:modelValue', newValue); // Emit to parent if `modelValue` is bound
-    if (props.tabsToUrl) setUrl(newValue); // Update the URL
+    // if (props.tabsToUrl) setUrl(newValue); // Update the URL
   },
 );
 // Sync with query parameter when it changes
-watch(
-  () => queryTab.value,
-  (newQuery) => {
-    if (newQuery) {
-      selectedTab.value = newQuery;
-    } else {
-      selectedTab.value = props.defaultValue || '';
-    }
-  },
-  { immediate: true },
-);
+// watch(
+//   () => queryTab.value,
+//   (newQuery) => {
+//     if (newQuery) {
+//       selectedTab.value = newQuery;
+//     } else {
+//       selectedTab.value = props.defaultValue || '';
+//     }
+//   },
+//   { immediate: true },
+// );
 </script>
 
 <template>
