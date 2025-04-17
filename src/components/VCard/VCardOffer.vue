@@ -29,13 +29,11 @@ const offerStore = useOfferStore();
 const imageID = computed(() => props.offer?.image_link_id);
 
 const offerImage = computed(() => {
-  if (props.offer?.image.meta_data?.medium) return props.offer?.image.meta_data.medium;
-  if (props.offer?.image.url) return props.offer?.image.url;
-  if (imageID.value > 0) return `${FILER_URL}/auth/files/${imageID.value}?size=big`;
+  if (imageID.value > 0) return `${FILER_URL}/public/files/${imageID.value}?size=small`;
   return defaulImage;
 });
 
-const isDefaultImage = computed(() => (!props.offer?.image.meta_data?.small && !props.offer?.image.url));
+const isDefaultImage = computed(() => !imageID.value);
 const minInvestment = computed(() => ((props.offer?.min_investment || 0) * (props.offer?.price_per_share || 0)));
 const amountPercent = computed(() => offerStore.getOfferFundedPercent(props.offer));
 const isClosingSoon = computed(() => (amountPercent.value > 90));
@@ -71,12 +69,12 @@ const minInvestmentValue = computed(() => currency(minInvestment.value, 0));
       {{ tagText }}
     </VBadge>
     <div
-      v-if="props.offer?.image"
+      v-if="offerImage"
       class="v-offer-card__img-wrap"
     >
       <VImage
         :src="offerImage"
-        :alt="offer?.slug"
+        :alt="offer?.slug || 'offer image'"
         itemprop="image"
         :loading="imageLoading"
         class="v-offer-card__img is--margin-top-0"

@@ -44,44 +44,7 @@ const sortedFiles = computed(() => {
   return items.sort((a, b) => getMetaOrder(a) - getMetaOrder(b));
 });
 
-const isFirstItemVideo = computed(() => Boolean(sortedFiles.value[0]?.url));
-
-// const queryMedia = computed(() => new URLSearchParams(window.location.search).get('media'));
-
-// const setUrl = (newItemNumber: number) => {
-//   const currentUrl = new URL(window.location.href);
-//   if (newItemNumber === 0) {
-//     currentUrl.searchParams.delete('media'); // Remove `media` if index is 0
-//   } else {
-//     currentUrl.searchParams.set('media', newItemNumber.toString());
-//   }
-//   window.history.replaceState(null, '', currentUrl.toString());
-// };
-
-// function setActiveItemNumberByURL(currentItemNumberByURL = queryMedia.value) {
-//   const numberFromURL = Number(currentItemNumberByURL || 0);
-//   if (
-//     Number.isNaN(numberFromURL)
-//     || numberFromURL < 0
-//     || numberFromURL > itemsNumber.value - 1
-//   ) {
-//     selectedIndex.value = 0;
-//   } else {
-//     selectedIndex.value = numberFromURL;
-//   }
-//   setUrl(selectedIndex.value);
-//   emblaMainApi.value?.scrollTo(selectedIndex.value);
-// }
-
-// watch(
-//   () => [queryMedia.value, emblaMainApi.value],
-//   () => {
-//     if (props.activeItemByUrl && emblaMainApi.value && queryMedia.value) {
-//       setActiveItemNumberByURL(queryMedia.value);
-//     }
-//   },
-//   { immediate: true },
-// );
+const isFirstItemVideo = computed(() => Boolean(sortedFiles.value[0]?.video));
 
 function onSelect() {
   if (!emblaMainApi.value || !emblaThumbnailApi.value) return;
@@ -101,16 +64,22 @@ watchOnce(emblaMainApi, (value) => {
   value.on('select', onSelect);
   value.on('reInit', onSelect);
 });
-
-// watch(() => selectedIndex.value, () => {
-//   setUrl(selectedIndex.value);
-// });
 </script>
 
 <template>
   <div class="v-carousel-default">
+    <VImage
+      v-if="sortedFiles.length === 0"
+      alt="default image"
+      :title="name"
+      itemprop="image"
+      loading="eager"
+      class="is--default-image"
+    />
     <VCarousel
+      v-else
       class="v-carousel-default__slider-main"
+      :class="{ 'is--slider-active': itemsNumber > 1 }"
       :opts="{
         align: 'start',
         ...props.options,
@@ -119,10 +88,12 @@ watchOnce(emblaMainApi, (value) => {
       @init-api="(val) => emblaMainApi = val"
     >
       <VCarouselPrevious
+        v-if="itemsNumber > 1"
         class="v-carousel-default__prev is--margin-top-0"
         variant="tetriary"
       />
       <VCarouselNext
+        v-if="itemsNumber > 1"
         class="v-carousel-default__next is--margin-top-0"
         variant="tetriary"
       />
@@ -141,14 +112,14 @@ watchOnce(emblaMainApi, (value) => {
           />
           <VImage
             v-else
-            :src="item.meta_data?.big"
+            :src="item.image"
             :alt="name || item.name"
             :title="getImageTitle(name, item.name)"
             itemprop="image"
             loading="eager"
           />
           <div
-            v-if="!item.url && item.description"
+            v-if="item.description"
             class="v-carousel-default__item-description"
             itemprop="description"
           >
@@ -160,6 +131,7 @@ watchOnce(emblaMainApi, (value) => {
       </VCarouselContent>
     </VCarousel>
     <VCarousel
+      v-if="itemsNumber > 1"
       class="v-carousel-default__slider-thumbs"
       @init-api="(val) => emblaThumbnailApi = val"
     >
@@ -179,7 +151,7 @@ watchOnce(emblaMainApi, (value) => {
           />
           <VImage
             v-else
-            :src="item.meta_data?.small"
+            :src="item.thumb || item.image"
             :alt="name || item.name"
             fit="cover"
             :title="getImageTitle(name, item.name)"
@@ -204,41 +176,59 @@ watchOnce(emblaMainApi, (value) => {
   overflow: hidden;
 
   &__slider-main,
-  &__slider-thumbs{
+  &__slider-thumbs {
     position: relative;
     display: flex;
     flex-direction: row;
     position: relative;
   }
 
-  &__slider-main{
-    height: 80%;
+  &__slider-main {
+    height: 100%;
     width: 100%;
+
+    &.is--slider-active {
+      height: 80%;
+    }
   }
 
-  &__item{
-      max-width: 100%;
-      width: 100% !important;
-      flex-shrink: 0;
-      height: 100%;
-      position: relative;
-      transition-property: transform;
-      text-align: center;
-      font-size: 18px;
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-size: cover;
-      background-position: center;
+  .is--default-image {
+    max-width: 100%;
+    width: 100% !important;
+    flex-shrink: 0;
+    height: 100%;
+  }
 
-      img:not(.is--default-image){
-        display: block;
-        width: 100%;
-      }
-      .is--default-image{
-        max-height: 40%;
-      }
+  &__item {
+    max-width: 100%;
+    width: 100% !important;
+    flex-shrink: 0;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+
+    img:not(.is--default-image){
+      display: block;
+      object-fit: contain;
+      margin: 0 auto;
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .is--default-image{
+      max-height: 40%;
+    }
+    .v-image {
+      height: 100%;
+      width: 100%;
+    }
   }
 
   &__slider-thumbs{
@@ -247,6 +237,7 @@ watchOnce(emblaMainApi, (value) => {
   }
   &__thumb-item {
     height: 100%;
+    width: 20%;
     opacity: 0.4;
     transition: all 0.3s ease;
     cursor: pointer;

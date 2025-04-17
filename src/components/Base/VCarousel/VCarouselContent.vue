@@ -25,6 +25,7 @@ const { carouselRef } = useCarousel();
 <style lang="scss">
 .v-carousel-content {
   display: flex;
+  width: 100%;
 
   &__container {
     width: 100%;

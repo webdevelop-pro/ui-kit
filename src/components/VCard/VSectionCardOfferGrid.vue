@@ -6,6 +6,7 @@ import {
 import VSection from 'UiKit/components/VSection/VSection.vue';
 import VCardOffer from 'UiKit/components/VCard/VCardOffer.vue';
 import { urlOfferSingle } from 'InvestCommon/global/links';
+import VCardLazyRendered from 'UiKit/components/VCard/VCardLazyRendered.vue';
 
 const props = defineProps({
   title: String,
@@ -18,6 +19,14 @@ const props = defineProps({
 
 const noData = computed(() => (props.items?.length === 0) && !props.loading);
 const loadingLocal = ref(true);
+const arrayEager = computed(() => {
+  const items = props.items || [];
+  return items.slice(0, 6);
+});
+const arrayLazy = computed(() => {
+  const items = props.items || [];
+  return items.slice(6);
+});
 
 watchEffect(() => {
   loadingLocal.value = props.loading;
@@ -45,12 +54,18 @@ watchEffect(() => {
           class="is--three-col-grid"
         >
           <VCardOffer
-            v-for="(offer, index) in items"
+            v-for="(offer, index) in arrayEager"
             :key="offer.slug"
             :offer="offer"
-            :image-loading="(index < 7) ? 'eager' : 'lazy'"
+            image-loading="eager"
             :href="urlOfferSingle(offer.slug)"
             class="v-offer-list__list-item"
+          />
+          <!-- Lazy cards -->
+          <VCardLazyRendered
+            v-for="offer in arrayLazy"
+            :key="offer.slug"
+            :offer="offer"
           />
         </div>
         <div
