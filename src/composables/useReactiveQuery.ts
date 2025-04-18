@@ -1,7 +1,8 @@
+/* eslint-disable no-restricted-globals */
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const patchHistoryMethods = () => {
-  ['pushState', 'replaceState'].forEach(method => {
+  ['pushState', 'replaceState'].forEach((method) => {
     const original = history[method as 'pushState'];
     history[method as 'pushState'] = function (...args) {
       const result = original.apply(this, args);
