@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import VFormCheckbox from 'UiKit/components/Base/VForm/VFormCheckbox.vue';
 
 const props = withDefaults(defineProps<{
@@ -23,6 +23,9 @@ function onUpdate(option: string, checked: boolean) {
   emit('update:modelValue', value?.value);
 }
 
+watch(() => props.modelValue, () => {
+  value.value = props.modelValue;
+});
 </script>
 
 <template>
@@ -33,9 +36,9 @@ function onUpdate(option: string, checked: boolean) {
     >
       <VFormCheckbox
         v-bind="$attrs"
-        :checked="value.includes(option)"
+        :model-value="value.includes(option)"
         class="v-form-checkbox-group__item"
-        @update:checked="onUpdate(option, $event)"
+        @update:model-value="onUpdate(option, $event)"
       >
         <span> {{ option }}</span>
       </VFormCheckbox>

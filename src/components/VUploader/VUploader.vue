@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import uploadIcon from 'UiKit/assets/images/upload.svg';
 import fileIcon from 'UiKit/assets/images/file.svg';
+import closeIcon from 'UiKit/assets/images/close.svg?component';
 
 defineProps({
   isError: Boolean,
@@ -147,7 +148,10 @@ const removeFile = (index: number) => {
             title="Remove file"
             @click.stop="removeFile(index)"
           >
-            <b>×</b>
+            <closeIcon
+              alt="close icon"
+              class="v-uploader__close-icon"
+            />
           </div>
         </div>
       </div>
@@ -176,7 +180,6 @@ const removeFile = (index: number) => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 12px;
     align-self: stretch;
     border-radius: 2px;
     border: 1px dashed colors.$gray-40;
@@ -215,6 +218,7 @@ const removeFile = (index: number) => {
   }
 
   &__file-button{
+    margin-top: 12px;
     #{$root}__dropzone.is--files &{
       margin-bottom: 32px;
     }
@@ -230,7 +234,7 @@ const removeFile = (index: number) => {
     width: 100%;
     display: flex;
     border-top: 1px solid colors.$gray-20;
-    padding: 12px;
+    padding: 7px 13px 7px 10px;
     align-items: center;
     gap: 12px;
     justify-content: space-between;
@@ -263,6 +267,12 @@ const removeFile = (index: number) => {
 
   &__preview-card-icon{
     width: 16px;
+  }
+
+  &__close-icon {
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
   }
 }
 </style>

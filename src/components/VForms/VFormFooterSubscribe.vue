@@ -6,6 +6,7 @@ import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VFormInput from 'UiKit/components/Base/VForm/VFormInput.vue';
 import VFormGroup from 'UiKit/components/Base/VForm/VFormGroup.vue';
 import { scrollToError } from 'UiKit/helpers/validation/general';
+import { isEmpty } from 'InvestCommon/helpers/general';
 
 const props = defineProps({
   loading: Boolean,
@@ -20,7 +21,7 @@ type FormModelSubscribe = {
 
 const model = reactive({} as FormModelSubscribe);
 const validation = ref<unknown>();
-const isValid = computed(() => validation.value && !Object.keys(validation.value).length);
+const isValid = computed(() => isEmpty(validation.value || {}));
 const isDisabledButton = computed(() => !isValid.value || props.loading);
 let schemaSubscribe = {};
 
