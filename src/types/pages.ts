@@ -150,16 +150,13 @@ function fixRoot(rawPages: Page): Page {
   const keys = Object.keys(rawPages);
   if (rawPages['']) {
     const rootPage = new Page(rawPages[''].data, false);
-    // no need to do anything if we have just 1 element
-    if (keys.length !== 4) {
-      keys.forEach((key) => {
-        if (key !== '') {
-          const pge = convertDictToPage(rawPages[key], key);
-          pge.parent = rootPage;
-          rootPage.children[key.toString()] = pge;
-        }
-      });
-    }
+    keys.forEach((key) => {
+      if (key !== '') {
+        const pge = convertDictToPage(rawPages[key], key);
+        pge.parent = rootPage;
+        rootPage.children[key.toString()] = pge;
+      }
+    });
     return rootPage;
   }
   return new Page({}, false);
@@ -170,23 +167,21 @@ function fixRoot(rawPages: Page): Page {
 function polish(unSortedPages: Page, parent: Page|null): void {
   const keys = Object.keys(unSortedPages);
   unSortedPages.parent = parent;
-  if (keys.length !== 4) {
-    keys.forEach((key) => {
-      if (key !== 'data' && key !== 'children' && key !== 'parent' && key !== 'virtual') {
-        const pge = convertDictToPage(unSortedPages[key], key);
-        pge.parent = unSortedPages;
-        polish(pge, unSortedPages);
-        unSortedPages.children[key.toString()] = pge;
-        delete unSortedPages[key];
-      }
-    });
-  }
+  keys.forEach((key) => {
+    if (key !== 'data' && key !== 'children' && key !== 'parent' && key !== 'virtual') {
+      const pge = convertDictToPage(unSortedPages[key], key);
+      pge.parent = unSortedPages;
+      polish(pge, unSortedPages);
+      unSortedPages.children[key.toString()] = pge;
+      delete unSortedPages[key];
+    }
+  });
 }
 
 export function convertPages(rawData: IFrontmatter[]): Page {
   const tmpPages: Record<string, Page> = {};
   rawData.forEach((el) => {
-    if (el.title && el.draft !== true) {
+    if (el.draft !== true) {
       // todo
       // bug - if file path contains . it will break everything
       const path = el.url?.substring(1).replaceAll('/', '.') || '';
