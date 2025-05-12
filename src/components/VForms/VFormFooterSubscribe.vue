@@ -6,7 +6,7 @@ import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VFormInput from 'UiKit/components/Base/VForm/VFormInput.vue';
 import VFormGroup from 'UiKit/components/Base/VForm/VFormGroup.vue';
 import { scrollToError } from 'UiKit/helpers/validation/general';
-import { isEmpty } from 'InvestCommon/helpers/general';
+import { isEmpty } from 'UiKit/helpers/general';
 
 const props = defineProps({
   loading: Boolean,
