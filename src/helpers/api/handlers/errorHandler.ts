@@ -24,6 +24,7 @@ export class ErrorHandler {
     throw apiError;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   private async getErrorMessage(error: any): Promise<string> {
     if (error instanceof Response) {
       try {

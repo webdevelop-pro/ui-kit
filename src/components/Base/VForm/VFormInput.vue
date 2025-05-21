@@ -202,6 +202,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
       :placeholder="placeholder"
       :type="type"
       :title="localValue"
+      :readonly="readonly"
       tabindex="0"
       v-bind="$attrs"
       :data-testid="dataTestid"
@@ -267,7 +268,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
   &.is--readonly {
     border-radius: 0;
     border: none;
-    pointer-events: none;
+    // pointer-events: none;
   }
 
   &.is--disabled {

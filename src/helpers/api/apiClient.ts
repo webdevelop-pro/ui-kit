@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { v4 as uuidv4 } from 'uuid';
 import { ErrorHandler } from './handlers/errorHandler';
 import { LoadingHandler } from './handlers/loadingHandler';

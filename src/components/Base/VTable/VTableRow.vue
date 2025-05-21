@@ -1,8 +1,14 @@
 <script setup lang="ts">
+defineProps({
+  disabled: Boolean,
+});
 </script>
 
 <template>
-  <tr class="VTableRow v-table-row">
+  <tr
+    class="VTableRow v-table-row"
+    :class="{ 'is--disabled': disabled }"
+  >
     <slot />
   </tr>
 </template>
@@ -20,6 +26,11 @@
 
     &:last-of-type {
       border-bottom: 1px solid $gray-20;
+    }
+
+    &.is--disabled {
+      opacity: 0.5;
+      pointer-events: none;
     }
   }
 }

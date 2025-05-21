@@ -1,5 +1,5 @@
 import {
-  describe, it, expect, beforeEach,
+  describe, it, expect,
 } from 'vitest';
 import { ErrorHandler } from '../errorHandler';
 
@@ -107,6 +107,7 @@ describe('ErrorHandler', () => {
     });
 
     it('should include timestamp in error response', async () => {
+      // eslint-disable-next-line no-shadow
       const errorHandler = new ErrorHandler();
       const error = new Error('Test error');
       const beforeTest = Date.now();
