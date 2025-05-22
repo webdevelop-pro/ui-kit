@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 // Add type definitions
 declare global {
   interface Window {
@@ -92,15 +93,16 @@ export default {
             // Initialize GTM
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({ event: 'cookie_consent_analytics' });
-            
+
             // Load GTM script
             const gtmScript = document.createElement('script');
-            gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=' + process.env.GTM;
+            gtmScript.src = `https://www.googletagmanager.com/gtm.js?id=${process.env.GTM}`;
             document.head.appendChild(gtmScript);
           },
           onReject: () => {
             // Clear GTM cookies if needed
             const cookies = document.cookie.split(';');
+            // eslint-disable-next-line no-plusplus
             for (let i = 0; i < cookies.length; i++) {
               const cookie = cookies[i];
               const eqPos = cookie.indexOf('=');
