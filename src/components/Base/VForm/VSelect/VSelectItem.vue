@@ -22,7 +22,7 @@ const forwardedProps = useForwardProps(delegatedProps);
 <template>
   <SelectItem
     v-bind="forwardedProps"
-    :class="props.class"
+    :class="[props.class, { 'is--disabled': disabled }]"
     class="VSelectItem v-select-item"
   >
     <SelectItemText>

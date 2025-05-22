@@ -84,6 +84,7 @@ const selectedValue = computed(() => findValueInOption(modelValue.value));
           v-for="(item, index) in options"
           :key="item[itemValue] + index"
           :value="item[itemValue]"
+          :disabled="item.disabled"
         >
           <slot
             name="item"
