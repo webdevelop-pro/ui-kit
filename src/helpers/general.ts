@@ -258,10 +258,16 @@ export function mergeObjects(obj1, obj2) {
   return merged;
 }
 
-export const transformedArray = (mergedObj) => (Object.keys(mergedObj)?.map((topKey) => (
-  Object.keys(mergedObj[topKey].entities).map((entityKey) => ({
-    name: mergedObj[topKey].entities[entityKey].name || mergedObj[topKey].entities[entityKey].filename,
-    'object-type': topKey, // This will be the top-level key, e.g., companyA
-    updated_at: mergedObj[topKey].entities[entityKey].updated_at,
-    url: mergedObj[topKey].entities[entityKey].url,
-  })))).flat());
+export const transformedArray = (mergedObj) => {
+  if (!mergedObj || Object.keys(mergedObj).length === 0) return [];
+  return (Object.keys(mergedObj)?.map((topKey) => {
+    if (!mergedObj[topKey]?.entities) return [];
+    return (
+      Object.keys(mergedObj[topKey]?.entities).map((entityKey) => ({
+        name: mergedObj[topKey].entities[entityKey].name || mergedObj[topKey].entities[entityKey].filename,
+        'object-type': topKey, // This will be the top-level key, e.g., companyA
+        updated_at: mergedObj[topKey].entities[entityKey].updated_at,
+        url: mergedObj[topKey].entities[entityKey].url,
+      })))
+  }).flat());
+};
