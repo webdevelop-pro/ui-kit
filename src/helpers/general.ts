@@ -264,7 +264,7 @@ export const transformedArray = (mergedObj) => {
     if (!mergedObj[topKey]?.entities) return [];
     return (
       Object.keys(mergedObj[topKey]?.entities).map((entityKey) => ({
-        name: mergedObj[topKey].entities[entityKey].name || mergedObj[topKey].entities[entityKey].filename,
+        name: mergedObj[topKey].entities[entityKey].original_filename || mergedObj[topKey].entities[entityKey].filename,
         'object-type': topKey, // This will be the top-level key, e.g., companyA
         updated_at: mergedObj[topKey].entities[entityKey].updated_at,
         url: mergedObj[topKey].entities[entityKey].url,
