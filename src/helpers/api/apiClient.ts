@@ -1,15 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { v4 as uuidv4 } from 'uuid';
 import { ErrorHandler } from './handlers/errorHandler';
-import { LoadingHandler } from './handlers/loadingHandler';
 import {
-  ApiResponse, RequestConfig, HttpMethod, ApiError,
+  ApiResponse, RequestConfig, ApiError,
 } from './types';
 
 export class ApiClient {
   private errorHandler = new ErrorHandler();
-
-  private loadingHandler = new LoadingHandler();
 
   private pendingRequests = new Map<string, Promise<any>>();
 
@@ -17,35 +13,13 @@ export class ApiClient {
     this.baseURL = new URL(baseURL || window.location.origin).toString();
   }
 
-  async request<T>(
-    url: string,
-    config: RequestConfig = {},
-  ): Promise<ApiResponse<T>> {
-    const requestKey = `${config.method || 'GET'}-${url}`;
-
-    if (this.loadingHandler.isLoading(requestKey)) {
-      return this.pendingRequests.get(requestKey);
-    }
-
-    try {
-      this.loadingHandler.setLoading(requestKey, true);
-      const promise = this.executeRequest<T>(url, config);
-      this.pendingRequests.set(requestKey, promise);
-      return await promise;
-    } finally {
-      this.loadingHandler.setLoading(requestKey, false);
-      this.pendingRequests.delete(requestKey);
-    }
-  }
-
   private async executeRequest<T>(url: string, config: RequestConfig): Promise<ApiResponse<T>> {
     try {
       const fullUrl = new URL(url, config.baseURL || this.baseURL);
 
-      // Add query params support
       if (config.params) {
         Object.entries(config.params).forEach(([key, value]) => {
-          if (value !== undefined && value !== null) {
+          if (value != null) {
             fullUrl.searchParams.append(key, String(value));
           }
         });
@@ -63,16 +37,13 @@ export class ApiClient {
       });
 
       if (!response.ok) {
-        throw new ApiError(response);
+        throw new ApiError(`HTTP error! status: ${response.status}`);
       }
 
-      let data: T;
       const contentType = response.headers.get('content-type');
-      if (contentType?.includes('application/json')) {
-        data = await response.json();
-      } else {
-        data = await response.text() as unknown as T;
-      }
+      const data = contentType?.includes('application/json')
+        ? await response.json()
+        : await response.text();
 
       return {
         data,
@@ -88,55 +59,48 @@ export class ApiClient {
     }
   }
 
+  async request<T>(url: string, config: RequestConfig = {}): Promise<ApiResponse<T>> {
+    const requestKey = `${config.method || 'GET'}-${url}`;
+
+    if (this.pendingRequests.has(requestKey)) {
+      return this.pendingRequests.get(requestKey);
+    }
+
+    const promise = this.executeRequest<T>(url, config);
+    this.pendingRequests.set(requestKey, promise);
+
+    try {
+      return await promise;
+    } finally {
+      this.pendingRequests.delete(requestKey);
+    }
+  }
+
   get<T>(url: string, config?: Omit<RequestConfig, 'method' | 'body'>): Promise<ApiResponse<T>> {
     return this.request<T>(url, { ...config, method: 'GET' });
   }
 
-  post<T, D = any>(
-    url: string,
-    data?: D,
-    config?: Omit<RequestConfig, 'method' | 'body'>,
-  ): Promise<ApiResponse<T>> {
+  post<T>(url: string, data?: any, config?: Omit<RequestConfig, 'method' | 'body'>): Promise<ApiResponse<T>> {
     return this.request<T>(url, {
       ...config,
       method: 'POST',
       body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-        ...config?.headers,
-      },
     });
   }
 
-  put<T, D = any>(
-    url: string,
-    data?: D,
-    config?: Omit<RequestConfig, 'method' | 'body'>,
-  ): Promise<ApiResponse<T>> {
+  put<T>(url: string, data?: any, config?: Omit<RequestConfig, 'method' | 'body'>): Promise<ApiResponse<T>> {
     return this.request<T>(url, {
       ...config,
       method: 'PUT',
       body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-        ...config?.headers,
-      },
     });
   }
 
-  patch<T, D = any>(
-    url: string,
-    data?: D,
-    config?: Omit<RequestConfig, 'method' | 'body'>,
-  ): Promise<ApiResponse<T>> {
+  patch<T>(url: string, data?: any, config?: Omit<RequestConfig, 'method' | 'body'>): Promise<ApiResponse<T>> {
     return this.request<T>(url, {
       ...config,
       method: 'PATCH',
       body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-        ...config?.headers,
-      },
     });
   }
 
@@ -149,7 +113,7 @@ export class ApiClient {
     page: number,
     limit: number,
     config?: Omit<RequestConfig, 'method' | 'body'>,
-  ): Promise<PaginatedResponse<T>> {
+  ): Promise<ApiResponse<T> & { pagination: { currentPage: number; totalPages: number; totalItems: number; itemsPerPage: number } }> {
     const response = await this.get<T>(url, {
       ...config,
       params: {
@@ -159,7 +123,7 @@ export class ApiClient {
       },
     });
 
-    const totalItems = Number(response.headers.get('x-total-count'));
+    const totalItems = Number(response.headers.get('x-total-count')) || 0;
     const itemsPerPage = limit;
 
     return {
