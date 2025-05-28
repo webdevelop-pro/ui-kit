@@ -268,6 +268,6 @@ export const transformedArray = (mergedObj) => {
         'object-type': topKey, // This will be the top-level key, e.g., companyA
         updated_at: mergedObj[topKey].entities[entityKey].updated_at,
         url: mergedObj[topKey].entities[entityKey].url,
-      })))
+      })));
   }).flat());
 };
