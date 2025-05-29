@@ -1,6 +1,6 @@
 import { ApiError } from './types';
 
-interface ErrorResponse {
+export interface ErrorResponse {
   error: string;
   message: string;
   data: {
@@ -17,7 +17,6 @@ export class ErrorHandler {
         timestamp: Date.now(),
       },
     };
-
     const apiError: ApiError = new Error(errorResponse.message);
     apiError.response = errorResponse;
 
