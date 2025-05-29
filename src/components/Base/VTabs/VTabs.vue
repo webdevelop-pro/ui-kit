@@ -60,7 +60,20 @@ watch(
     emits('update:modelValue', newValue); // Emit to parent if `modelValue` is bound
     // if (props.tabsToUrl) setUrl(newValue); // Update the URL
   },
+  { immediate: true },
 );
+
+// Watch for changes from parent v-model
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    if (newValue !== undefined && newValue !== selectedTab.value) {
+      selectedTab.value = newValue;
+    }
+  },
+  { immediate: true },
+);
+
 // Sync with query parameter when it changes
 // watch(
 //   () => queryTab.value,

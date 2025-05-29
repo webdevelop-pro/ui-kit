@@ -25,5 +25,6 @@ const props = withDefaults(defineProps<{
 <style lang="scss">
 .v-table-empty {
   text-align: center;
+  height: 80px;
 }
 </style>
