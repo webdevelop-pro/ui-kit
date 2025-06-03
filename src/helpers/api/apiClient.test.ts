@@ -204,6 +204,49 @@ describe('ApiClient', () => {
       );
     });
 
+    it('should handle FormData in POST request', async () => {
+      const formData = new FormData();
+      formData.append('file', new Blob(['test']));
+      formData.append('name', 'test.txt');
+
+      await apiClient.post('/test', formData);
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        `${baseURL}/test`,
+        expect.objectContaining({
+          method: 'POST',
+          body: formData,
+          credentials: 'include',
+          headers: expect.objectContaining({
+            accept: 'application/json',
+            'X-Request-ID': expect.any(String),
+          }),
+        }),
+      );
+      // Should not have Content-Type header for FormData
+      expect(mockFetch.mock.calls[0][1].headers['Content-Type']).toBeUndefined();
+    });
+
+    it('should handle absolute URLs correctly', async () => {
+      const absoluteUrl = 'https://other-api.example.com/test';
+      await apiClient.post(absoluteUrl, { data: 'test' });
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        absoluteUrl,
+        expect.any(Object),
+      );
+    });
+
+    it('should handle baseURL override correctly', async () => {
+      const customBaseURL = 'https://custom.example.com';
+      await apiClient.post('/test', { data: 'test' }, { baseURL: customBaseURL });
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        `${customBaseURL}/test`,
+        expect.any(Object),
+      );
+    });
+
     it('should make PUT request with data', async () => {
       const data = { name: 'test' };
       await apiClient.put('/test', data);

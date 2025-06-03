@@ -10,30 +10,41 @@ export class ApiClient {
   private pendingRequests = new Map<string, Promise<any>>();
 
   constructor(private baseURL: string = '') {
-    this.baseURL = new URL(baseURL || window.location.origin).toString();
+    this.baseURL = baseURL || window.location.origin;
   }
 
   private async executeRequest<T>(url: string, config: RequestConfig): Promise<ApiResponse<T>> {
     try {
-      const fullUrl = new URL(url, config.baseURL || this.baseURL);
+      const baseUrl = config.baseURL || this.baseURL;
+      let fullUrl = url.startsWith('http') ? url : `${baseUrl}${url}`;
 
       if (config.params) {
+        const urlWithParams = new URL(fullUrl);
         Object.entries(config.params).forEach(([key, value]) => {
           if (value != null) {
-            fullUrl.searchParams.append(key, String(value));
+            urlWithParams.searchParams.append(key, String(value));
           }
         });
+        fullUrl = urlWithParams.toString();
       }
 
-      const response = await fetch(fullUrl.toString(), {
+      const isFormData = config.body instanceof FormData;
+      const defaultHeaders: Record<string, string> = {
+        accept: 'application/json',
+        'X-Request-ID': uuidv4(),
+      };
+
+      if (!isFormData) {
+        defaultHeaders['Content-Type'] = 'application/json';
+      }
+
+      const headers = config.headers ? config.headers : defaultHeaders;
+
+      const response = await fetch(fullUrl, {
         credentials: 'include',
-        ...config,
-        headers: {
-          'Content-Type': 'application/json',
-          accept: 'application/json',
-          'X-Request-ID': uuidv4(),
-          ...config.headers,
-        },
+        method: config.method,
+        body: config.body,
+        headers,
       });
 
       if (!response.ok) {
@@ -81,26 +92,29 @@ export class ApiClient {
   }
 
   post<T>(url: string, data?: any, config?: Omit<RequestConfig, 'method' | 'body'>): Promise<ApiResponse<T>> {
+    const isFormData = data instanceof FormData;
     return this.request<T>(url, {
       ...config,
       method: 'POST',
-      body: JSON.stringify(data),
+      body: isFormData ? data : JSON.stringify(data),
     });
   }
 
   put<T>(url: string, data?: any, config?: Omit<RequestConfig, 'method' | 'body'>): Promise<ApiResponse<T>> {
+    const isFormData = data instanceof FormData;
     return this.request<T>(url, {
       ...config,
       method: 'PUT',
-      body: JSON.stringify(data),
+      body: isFormData ? data : JSON.stringify(data),
     });
   }
 
   patch<T>(url: string, data?: any, config?: Omit<RequestConfig, 'method' | 'body'>): Promise<ApiResponse<T>> {
+    const isFormData = data instanceof FormData;
     return this.request<T>(url, {
       ...config,
       method: 'PATCH',
-      body: JSON.stringify(data),
+      body: isFormData ? data : JSON.stringify(data),
     });
   }
 
