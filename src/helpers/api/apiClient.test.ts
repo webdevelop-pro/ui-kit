@@ -266,6 +266,40 @@ describe('ApiClient', () => {
       );
     });
 
+    it('should make OPTIONS request', async () => {
+      await apiClient.options('/test');
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        `${baseURL}/test`,
+        expect.objectContaining({
+          method: 'OPTIONS',
+          credentials: 'include',
+          headers: expect.objectContaining({
+            'Content-Type': 'application/json',
+            accept: 'application/json',
+            'X-Request-ID': expect.any(String),
+          }),
+        }),
+      );
+    });
+
+    it('should make OPTIONS request with params', async () => {
+      await apiClient.options('/test', { params: { q: 'search' } });
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        `${baseURL}/test?q=search`,
+        expect.objectContaining({
+          method: 'OPTIONS',
+          credentials: 'include',
+          headers: expect.objectContaining({
+            'Content-Type': 'application/json',
+            accept: 'application/json',
+            'X-Request-ID': expect.any(String),
+          }),
+        }),
+      );
+    });
+
     it('should make PATCH request with data', async () => {
       const data = { name: 'test' };
       await apiClient.patch('/test', data);

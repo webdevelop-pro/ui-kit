@@ -122,6 +122,10 @@ export class ApiClient {
     return this.request<T>(url, { ...config, method: 'DELETE' });
   }
 
+  options<T>(url: string, config?: Omit<RequestConfig, 'method' | 'body'>): Promise<ApiResponse<T>> {
+    return this.request<T>(url, { ...config, method: 'OPTIONS' });
+  }
+
   async getPaginated<T>(
     url: string,
     page: number,
