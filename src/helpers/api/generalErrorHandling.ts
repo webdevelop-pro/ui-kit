@@ -1,5 +1,7 @@
 import { useToast } from 'UiKit/components/Base/VToast/use-toast';
 
+// todo: delete after refactoring
+
 const statusCodes = [500, 501, 502, 503, 504, 505, 506, 507, 508, 510, 511];
 
 const { toast } = useToast();

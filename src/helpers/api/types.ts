@@ -4,15 +4,6 @@ export interface ApiResponse<T> {
   headers: Headers;
 }
 
-export interface PaginatedResponse<T> extends ApiResponse<T> {
-  pagination: {
-    currentPage: number;
-    totalPages: number;
-    totalItems: number;
-    itemsPerPage: number;
-  };
-}
-
 export interface RequestConfig extends RequestInit {
   baseURL?: string;
   params?: Record<string, string | number | boolean | undefined | null>;
@@ -30,3 +21,9 @@ export class ApiError extends Error {
 }
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+
+export type ActionState<T> = {
+  data: T | undefined;
+  loading: boolean;
+  error: Error | null;
+};

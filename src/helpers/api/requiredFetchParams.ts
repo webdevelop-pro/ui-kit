@@ -1,5 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
+// todo: delete after refactoring
+
 export const requiredFetchParams = () => ({
   headers: {
     'Content-Type': 'application/json',
