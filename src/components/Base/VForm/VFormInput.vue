@@ -241,6 +241,9 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
   border-radius: 4px;
   height: 40px;
   min-height: 32px;
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
 
   &.is--focused {
     border-color: colors.$light-blue;
@@ -252,9 +255,9 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
   }
 
   &.is--size-large {
-    height: 64px;
-    font-size: 20px;
-    line-height: 28px;
+    height: 48px;
+    font-size: 16px;
+    line-height: 26px;
   }
 
   &.is--size-small {

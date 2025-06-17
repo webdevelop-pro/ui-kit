@@ -55,9 +55,9 @@ const forwardedProps = useForwardProps(delegatedProps);
   transition: all 0.3s ease;
 
   &.is--size-large {
-    height: 64px;
-    font-size: 20px;
-    line-height: 28px;
+    height: 48px;
+    font-size: 16px;
+    line-height: 26px;
   }
 
   &.is--size-small {
