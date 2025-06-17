@@ -260,14 +260,13 @@ const btnClasses = computed(() => ({
 
   &.is--variant-tetriary {
     &.is--button-color-primary {
-      background-color: colors.$primary-light;
-      border-color: colors.$primary-light;
       color: colors.$white;
+      background-color: colors.$primary-red;
+      border-color: colors.$primary-red;
 
-      &:hover {
-        background-color: colors.$primary;
-        border-color: colors.$primary;
-        color: colors.$white;
+      &:hover{
+        background-color: colors.$primary-red-dark;
+        border-color: colors.$primary-red-dark;
       }
     }
 
