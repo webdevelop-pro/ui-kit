@@ -8,7 +8,7 @@ const props = defineProps<SelectLabelProps & { class?: HTMLAttributes['class'] }
 <template>
   <SelectLabel
     :class="props.class"
-    class="VSelectLabel v-select-llabel"
+    class="VSelectLabel v-select-label"
   >
     <slot />
   </SelectLabel>

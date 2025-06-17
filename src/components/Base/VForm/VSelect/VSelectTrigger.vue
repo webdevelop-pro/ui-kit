@@ -43,21 +43,21 @@ const forwardedProps = useForwardProps(delegatedProps);
   gap: 8px;
   width: 100%;
   position: relative;
-  font-size: 16px;
-  font-family: 'Avenir';
-  font-weight: 400;
-  background: colors.$gray-10;
+  color: colors.$black;
+  caret-color: colors.$black;
+  background-color: colors.$grayscale-white;
   position: relative;
-  border: solid 1px colors.$gray-40;
-  border-radius: 2px;
+  border: solid 1px colors.$gray;
+  border-radius: 4px;
   height: 40px;
-  padding: 12.5px 12px;
+  min-height: 32px;
+  padding: 12.5px 20px;
   transition: all 0.3s ease;
 
   &.is--size-large {
-    height: 48px;
-    font-size: 16px;
-    line-height: 26px;
+    height: 64px;
+    font-size: 20px;
+    line-height: 28px;
   }
 
   &.is--size-small {
@@ -66,14 +66,20 @@ const forwardedProps = useForwardProps(delegatedProps);
     line-height: 26px;
   }
 
+  &.is--focused {
+    border-color: colors.$light-blue;
+    border-width: 2px;
+  }
+
   &.is--error {
-    border-color: colors.$red;
+    border-color: colors.$primary-red;
   }
 
   &.is--readonly {
     border-radius: 0;
     border: none;
     pointer-events: none;
+    background-color: colors.$light-gray;
   }
 
   &.is--disabled {
@@ -82,8 +88,8 @@ const forwardedProps = useForwardProps(delegatedProps);
   }
 
   &__icon {
-    width: 14px;
-    color: colors.$gray-70;
+    width: 20px;
+    color: colors.$dark-gray;
     transition: all 0.3s;
     transform-origin: center;
     transform: rotate(0);
@@ -92,7 +98,8 @@ const forwardedProps = useForwardProps(delegatedProps);
   }
 }
 .v-select-trigger[data-state="open"]{
-  border-color: colors.$primary;
+  border-color: colors.$light-blue;
+    border-width: 2px;
   outline: none;
   .v-select-trigger__icon {
     transform: rotate(180deg);

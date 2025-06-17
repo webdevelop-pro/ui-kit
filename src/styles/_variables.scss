@@ -12,8 +12,10 @@ $desktop-md: 1024px !default;
 $desktop-lg: 1199px !default;
 $wide: 1366px !default;
 
-$header-height: 64px;
+$header-height: 76px;
+$header-height-mobile: 73px;
 
-$v-size: 16;
-$familyValue: 'Avenir', 'Nunito', 'Lato', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+$v-size: 20;
+$familyValue: 'Inter', 'San Francisco', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+$familyValueHeader: 'TiemposHeadlineSemibold', 'Georgia', 'Times New Roman', 'Palatino', 'Constantia', 'Cambria', serif;
 

@@ -6,13 +6,13 @@
 ol {
     list-style: decimal;
     padding-left: 25px;
-    color: $gray-80;
+    color: $body-text;
 }
 
 ul {
     list-style: disc;
     padding-left: 25px;
-    color: $gray-80;
+    color: $body-text;
 }
 
 li {
@@ -77,10 +77,11 @@ li.with-default-distance + li.with-default-distance{
         width: 100%;
         padding-left: 0;
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         gap: 17px 30px;
-        @media screen and (max-width: $tablet){
-            grid-template-columns: repeat(1, minmax(0, 1fr));
+
+        @media screen and (width < $tablet){
+            grid-template-columns: repeat(1, 1fr);
             gap: 16px;
         }
     }
@@ -93,13 +94,14 @@ li.with-default-distance + li.with-default-distance{
         align-items: center;
         gap: 10px;
         color: inherit;
-        border-bottom: 1px solid $gray-70;
+        // border-bottom: 1px solid $gray-70;
     }
 
     li + li{
         margin-top: 0;
     }
 }
+
 .is--two-col-grid{
     li:nth-child(2){
         margin-top: 0;

@@ -61,7 +61,7 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
     <!-- eslint-disable-next-line vuejs-accessibility/label-has-for -->
     <label
       v-if="label"
-      class="v-form-group__label is--h6__title"
+      class="v-form-group__label is--h5__title"
       :class="{ 'is--dark': dark }"
     >
       <span class="v-form-group__label-text">{{ label }}</span>
@@ -100,7 +100,7 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
   &__label {
     display: inline-block;
     position: relative;
-    color: colors.$gray-70;
+    color: colors.$black;
     text-align: left;
     margin-bottom: 7px;
     &.is--dark {

@@ -34,7 +34,7 @@ const props = defineProps<ComboboxInputProps & { class?: HTMLAttributes['class']
 
     &::placeholder {
       opacity: 1;
-      color: colors.$gray-60;
+      color: colors.$dark-gray;
       font-size: inherit;
       font-weight: inherit;
       font-family: inherit;

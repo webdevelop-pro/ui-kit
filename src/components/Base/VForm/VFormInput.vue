@@ -225,38 +225,36 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-form-input {
   color: colors.$black;
   caret-color: colors.$black;
-  background-color: colors.$gray-10;
-  font-size: 16px;
-  line-height: 26px;
-  font-weight: 400;
-  font-family: 'Avenir';
-  padding: 0 12px;
+  background-color: colors.$grayscale-white;
+  padding: 0 20px;
   margin: 0;
   -webkit-appearance: none;
   display: flex;
   align-items: center;
   width: 100%;
   position: relative;
-  border: solid 1px colors.$gray-40;
-  border-radius: 2px;
+  border: solid 1px colors.$gray;
+  border-radius: 4px;
   height: 40px;
   min-height: 32px;
 
   &.is--focused {
-    border-color: colors.$primary;
+    border-color: colors.$light-blue;
+    border-width: 2px;
   }
 
   &.is--error {
-    border-color: colors.$red;
+    border-color: colors.$primary-red;
   }
 
   &.is--size-large {
-    height: 48px;
-    font-size: 16px;
-    line-height: 26px;
+    height: 64px;
+    font-size: 20px;
+    line-height: 28px;
   }
 
   &.is--size-small {
@@ -266,9 +264,9 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
   }
 
   &.is--readonly {
-    border-radius: 0;
     border: none;
-    // pointer-events: none;
+    pointer-events: none;
+    background-color: colors.$light-gray;
   }
 
   &.is--disabled {
@@ -295,7 +293,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 
     &::placeholder {
       opacity: 1;
-      color: colors.$gray-60;
+      color: colors.$dark-gray;
       font-size: inherit;
       font-weight: inherit;
       font-family: inherit;
@@ -316,10 +314,13 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
     align-items: center;
     margin-right: 8px;
     position: relative;
+    z-index: 2;
+
     > div {
       width: 20px;
       height: 20px;
     }
+
     svg {
       width: 20px;
       height: 20px;

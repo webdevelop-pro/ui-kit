@@ -4,13 +4,19 @@ import { computed, type HTMLAttributes } from 'vue';
 
 const props = defineProps<DropdownMenuItemProps & { class?: HTMLAttributes['class']; inset?: boolean }>();
 
-const forwardedProps = useForwardProps(props);
+const delegatedProps = computed(() => {
+  const { class: _, ...delegated } = props;
+
+  return delegated;
+});
+
+const forwardedProps = useForwardProps(delegatedProps);
 </script>
 
 <template>
   <DropdownMenuItem
     v-bind="forwardedProps"
-    class="VDropdownMenuItem v-dropdown-menu-item is--h6__title"
+    class="VDropdownMenuItem v-dropdown-menu-item is--body"
   >
     <slot />
   </DropdownMenuItem>
@@ -19,6 +25,7 @@ const forwardedProps = useForwardProps(props);
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
+
 .v-dropdown-menu-item {
   display: block;
   color: $black;
@@ -26,12 +33,23 @@ const forwardedProps = useForwardProps(props);
   cursor: pointer;
   text-decoration: none;
 
-  &:hover {
-    background-color: $gray-20;
+  &:hover{
+    background-color: $light-gray;
   }
 
-  &.is--active {
-    color: $primary;
+
+  * {
+    color: $black;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+    text-decoration: none;
+    padding: 12px;
+  }
+
+  .is--active {
+    color: $light-blue;
+    font-weight: 700;
   }
 }
 </style>

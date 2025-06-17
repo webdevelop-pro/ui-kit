@@ -25,6 +25,7 @@ const forwardedProps = useForwardProps(props);
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-dropdown-menu-trigger {
   position: relative;
   display: flex;
@@ -34,11 +35,11 @@ const forwardedProps = useForwardProps(props);
 
   &__icon {
     width: 14px;
-    color: colors.$gray-70;
+    color: inherit;
     transition: all 0.3s;
     transform-origin: center;
     transform: rotate(0);
-    margin-left: 9px;
+    margin-left: 4px;
     margin-top: 0 !important;
   }
 }

@@ -1,57 +1,62 @@
 
 @use 'UiKit/styles/_colors.scss' as *;
 @use 'UiKit/styles/_mixins.scss' as *;
+
 a {
-  font-weight: 800;
+  font-weight: 700;
   font-size: inherit;
   line-height: inherit;
   text-decoration: underline;
   transition: 0.3s all  ease-in-out;
-  color: $primary;
+  color: $primary-red;
   cursor: pointer;
   display: inline-block;
+
   &:hover{
     text-decoration: none;
   }
 }
 
 .is--link-1{
-  font-weight: 800;
-  font-size: 16px;
-  line-height: 26px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
   text-decoration: underline;
   transition: 0.3s all  ease-in-out;
-  color: $primary;
+  color: $primary-red;
   cursor: pointer;
+
   &:hover{
     text-decoration: none;
-    }
+  }
 }
 
 .is--link-2{
-font-weight: 800;
-  font-size: 12px;
-  line-height: 18px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
   text-decoration: underline;
   transition: 0.3s all  ease-in-out;
-  color: $primary;
+  color: $primary-red;
   cursor: pointer;
+
   &:hover{
     text-decoration: none;
-}
+  }
 }
 
 .is--link-regular{
-font-weight: 800;
+  font-weight: 700;
   font-size: 14px;
   line-height: 21px;
   text-decoration: underline;
   transition: 0.3s all  ease-in-out;
-  color: $primary;
+  color: $primary-red;
   cursor: pointer;
+
   &:hover{
     text-decoration: none;
-}
+  }
 }
 
 
@@ -70,6 +75,7 @@ font-weight: 800;
     transition: all 0.8s ease;
     color: inherit;
     margin: 0;
+
     &:hover{
         text-decoration-line: none;
         background-image: linear-gradient(to bottom, #444fe520 0%, #444fe520 100%);
@@ -78,7 +84,7 @@ font-weight: 800;
 }
 
 .router-link-active {
-    color: $primary !important;
+    color: $primary-red !important;
 }
 
 h1, h2, h3, h4, h5, h6,

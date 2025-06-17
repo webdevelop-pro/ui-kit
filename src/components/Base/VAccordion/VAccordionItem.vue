@@ -26,9 +26,10 @@ const forwardedProps = useForwardProps(delegatedProps);
 @use 'UiKit/styles/_colors.scss' as colors;
 
 .v-accordion-item {
-  border-top: solid 1px colors.$gray-30;
+  border-top: solid 1px colors.$dark-gray;
+  
   &:last-child {
-    border-bottom: solid 1px colors.$gray-30
+    border-bottom: solid 1px colors.$dark-gray
   }
 }
 </style>

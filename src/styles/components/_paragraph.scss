@@ -1,25 +1,47 @@
 
 @use 'UiKit/styles/_colors.scss' as *;
+@use 'UiKit/styles/_variables.scss' as *;
     
 p{
-  color: $gray-80;
-  opacity: 0.9;
+  color: $body-text;
 }
 
 // SPACINGS
 .with-default-distance{
     p + p{
-        margin-top: 16px;
+        margin-top: 24px;
+    }
+
+    h1 + p,
+    .is--h1__title + p{
+        margin-top: 24px;
+
+        @media screen and (width < $tablet){
+            margin-top: 20px;
+        }
     }
 
     h2 + p,
     .is--h2__title + p{
         margin-top: 24px;
+
+        @media screen and (width < $tablet){
+            margin-top: 20px;
+        }
     }
 
     h3 + p,
     .is--h3__title + p{
-        margin-top: 20px;
+        margin-top: 24px;
+
+        @media screen and (width < $tablet){
+            margin-top: 20px;
+        }
+    }
+
+    h5 + p,
+    .is--h5__title + p{
+        margin-top: 10px;
     }
 
     .is--subheading-1 + p{

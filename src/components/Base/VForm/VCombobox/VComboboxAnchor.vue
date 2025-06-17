@@ -38,20 +38,20 @@ const delegatedProps = computed(() => {
   position: relative;
   color: colors.$black;
   caret-color: colors.$black;
-  background-color: colors.$gray-10;
+  background-color: colors.$grayscale-white;
   font-size: 16px;
   line-height: 26px;
   font-weight: 400;
   font-family: 'Avenir';
-  padding: 0 12px;
+  padding: 0 20px;
   margin: 0;
   -webkit-appearance: none;
   display: flex;
   align-items: center;
   width: 100%;
   position: relative;
-  border: solid 1px colors.$gray-40;
-  border-radius: 2px;
+  border: solid 1px colors.$gray;
+  border-radius: 4px;
   height: 40px;
   display: inline-flex;
   align-items: center;
@@ -59,17 +59,18 @@ const delegatedProps = computed(() => {
   gap: 4px;
 
   &.is--focused {
-    border-color: colors.$primary;
+    border-color: colors.$light-blue;
+    border-width: 2px;
   }
 
   &.is--error {
-    border-color: colors.$red;
+    border-color: colors.$primary-red;
   }
 
   &.is--size-large {
-    height: 48px;
-    font-size: 16px;
-    line-height: 26px;
+    height: 64px;
+    font-size: 20px;
+    line-height: 28px;
   }
 
   &.is--size-small {

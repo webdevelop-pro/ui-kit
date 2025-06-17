@@ -50,15 +50,15 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 .v-select-content {
   padding-left: 0;
     list-style-type: none;
-    background-color: colors.$gray-10;
-    border: solid 1px colors.$gray-20;
-    box-shadow: variables.$box-shadow-medium;
     border-radius: 2px;
     max-height: 222px;
     overflow: scroll;
     width: var(--radix-select-trigger-width);
     z-index: 1101;
     display: flex;
+  border: 1px solid colors.$light-gray;
+  background: colors.$grayscale-white;
+  box-shadow: variables.$box-shadow-medium;
   // flex-direction: column;
   // position: fixed;
   // min-width: 175px;

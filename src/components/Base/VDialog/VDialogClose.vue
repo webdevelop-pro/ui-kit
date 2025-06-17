@@ -16,7 +16,7 @@ const props = defineProps<DialogCloseProps>();
       <VButton
         icon-only
         variant="link"
-        size="large"
+        class="is--margin-top-0"
       >
         <closeIcon class="v-dialog-close__icon" />
       </VButton>
@@ -28,16 +28,17 @@ const props = defineProps<DialogCloseProps>();
 @use 'UiKit/styles/_transitions.scss' as *;
 @use 'UiKit/styles/_variables.scss' as *;
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-dialog-close {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 12px;
+  right: 12px;
   width: auto;
 
   &__icon {
-    width: 20px;
-    height: 20px;
-    color: colors.$primary
+    width: 24px !important;
+    height: 24px !important;
+    color: colors.$black
   }
 }
 </style>

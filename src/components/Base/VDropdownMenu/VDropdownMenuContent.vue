@@ -11,7 +11,7 @@ import { computed, type HTMLAttributes } from 'vue';
 const props = withDefaults(
   defineProps<DropdownMenuContentProps & { class?: HTMLAttributes['class'] }>(),
   {
-    sideOffset: 4,
+    sideOffset: 8,
   },
 );
 const emits = defineEmits<DropdownMenuContentEmits>();
@@ -39,36 +39,41 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
+
 .v-dropdown-menu-content {
-  padding: 8px 0;
   position: relative;
   flex-direction: column;
   align-items: flex-start;
-  border-radius: 2px;
-  border: 1px solid colors.$gray-10;
-  background: colors.$white;
-  box-shadow: variables.$box-shadow-medium;
   transition: all 0.3s ease;
   width: fit-content;
   max-height: var(--radix-dropdown-menu-content-available-height);
-  animation-duration: 0.6s;
+  animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 1;
+  will-change: transform, opacity;
+  z-index: 100;
   max-width: 100%;
   min-width: var(--radix-dropdown-menu-trigger-width);
+  border: 1px solid colors.$light-gray;
+  background: colors.$grayscale-white;
+  box-shadow: variables.$box-shadow-medium;
 }
+
 .v-dropdown-menu-content[data-side="top"] {
-  animation-name: slideUp;
+  // animation-name: slideUp;
+  border-radius: 4px 4px 0 0;
 }
+
 .v-dropdown-menu-content[data-side="bottom"] {
   animation-name: slideDown;
+  border-radius: 0 0 4px 4px;
 }
 
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(2px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -78,8 +83,9 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-2px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

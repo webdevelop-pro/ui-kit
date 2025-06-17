@@ -1,4 +1,6 @@
+@use 'UiKit/styles/_colors.scss' as *;
 
 strong, b {
-  font-weight: 800;
+  font-weight: 700;
+  color: $black;
 }

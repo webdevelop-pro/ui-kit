@@ -105,12 +105,15 @@ const selectedValue = computed(() => findValueInOption(modelValue.value));
 .v-select{
   width: 100%;
   position: relative;
-  font-size: 16px;
-  font-family: 'Avenir';
-  font-weight: 400;
-  background: colors.$gray-10;
   position: relative;
   display: flex;
+  color: colors.$black;
+  caret-color: colors.$black;
+  background-color: colors.$grayscale-white;
+  border: solid 1px colors.$gray;
+  border-radius: 4px;
+  height: 40px;
+  min-height: 32px;
 
   &.is--select-large{
     .vs__dropdown-toggle{

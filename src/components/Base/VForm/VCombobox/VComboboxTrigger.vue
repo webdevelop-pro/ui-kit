@@ -38,10 +38,13 @@ const forwardedProps = useForwardProps(delegatedProps);
   display: flex;
   align-items: center;
   width: 100%;
+  color: colors.$black;
+  caret-color: colors.$black;
+  background-color: colors.$grayscale-white;
 
   &__icon {
-    width: 14px;
-    color: colors.$gray-70;
+    width: 20px;
+    color: colors.$dark-gray;
     transition: all 0.3s;
     transform-origin: center;
     transform: rotate(0);

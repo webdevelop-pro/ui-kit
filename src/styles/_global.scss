@@ -363,3 +363,12 @@ pre{
         columns: 1;
     }
 }
+
+.is--display-row {
+    display: flex;
+    gap: 24px;
+
+    @media screen and (width < $tablet){
+      flex-direction: column;
+    }
+}

@@ -26,10 +26,12 @@ defineProps({
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 .v-form-label{
-  color: colors.$gray-80;
-  font-family: 'Avenir';
-  font-weight: 400;
-  font-size: 16px;
+  color: colors.$black;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
   display: inline-block;
   position: relative;
 

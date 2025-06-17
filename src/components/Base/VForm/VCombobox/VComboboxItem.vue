@@ -31,12 +31,20 @@ const forwardedProps = useForwardProps(delegatedProps);
 @use 'UiKit/styles/_colors.scss' as colors;
 .v-combobox-item {
 
-  font-family: 'Avenir';
-    color: colors.$black;
-    padding: 12px;
+  color: colors.$black;
     cursor: pointer;
-    font-size: 16px;
-    line-height: 26px;
+      padding: 12px;
+      transition: all 0.3s ease;
+    * {
+      color: colors.$black;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 28px;
+      text-decoration: none;
+    }
+    &:hover{
+    background-color: $light-gray;
+  }
 }
 .v-combobox-item[data-disabled] {
   pointer-events: none;
@@ -44,6 +52,7 @@ const forwardedProps = useForwardProps(delegatedProps);
 }
 .v-combobox-item[data-highlighted] {
   outline: none;
-  background-color: colors.$gray-20;
+    // color: $light-blue;
+    // font-weight: 700;
 }
 </style>

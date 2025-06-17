@@ -6,7 +6,7 @@ import { Primitive, type PrimitiveProps } from 'radix-vue';
 interface Props extends PrimitiveProps {
     as?: 'button' | 'a' | 'router-link';
     size?: 'large' | 'medium' | 'small';
-    variant?: 'default' | 'outlined' | 'link' | 'tetriary';
+    variant?: 'default' | 'outlined' | 'link' | 'tetriary' | 'social';
     color?: 'primary' | 'secondary' | 'red';
     block?: boolean;
     disabled?: boolean;
@@ -78,11 +78,10 @@ const btnClasses = computed(() => ({
   justify-content: center;
   align-items: center;
   border: unset;
-  font-family: 'Avenir';
   font-weight: 700;
   flex-shrink: 0;
   background-color: transparent;
-  border-radius: 2px;
+  border-radius: 4px;
   border-style: solid;
   border-width: 1px;
   cursor: pointer;
@@ -90,6 +89,7 @@ const btnClasses = computed(() => ({
   transition: all .3s;
   box-shadow: variables.$box-shadow-small;
   text-decoration: none !important;
+
   &:hover {
     box-shadow: none;
   }
@@ -129,23 +129,24 @@ const btnClasses = computed(() => ({
 
   &.is--loading {
     pointer-events: none;
+
     #{$root}__content {
       opacity: 0.2;
     }
   }
 
   &.is--size-large {
-    height: 48px;
-    padding: 0 20px;
-    font-size: 16px;
-    line-height: 26px;
+    height: 64px;
+    padding: 0 28px;
+    font-size: 20px;
+    line-height: normal;
   }
 
   &.is--size-medium{
-    height: 40px;
-    padding: 0 16px;
-    font-size: 14px;
-    line-height: 21px;
+    height: 48px;
+    padding: 0 20px;
+    font-size: 16px;
+    line-height: 20px;
   }
 
   &.is--size-small {
@@ -153,6 +154,7 @@ const btnClasses = computed(() => ({
     padding: 0 12px;
     font-size: 12px;
     line-height: 28px;
+
     svg,
     img {
       width: 15px;
@@ -161,25 +163,28 @@ const btnClasses = computed(() => ({
   }
 
   &.is--button-color-primary {
-    background-color: colors.$primary;
+    background-color: colors.$primary-red;
     color: colors.$white;
+
     &:hover {
-      background-color: colors.$primary-dark;
+      background-color: colors.$primary-red-dark;
       color: colors.$white;
     }
   }
 
   &.is--button-color-secondary {
-    background-color: colors.$primary-light;
+    background-color: colors.$green;
     color: colors.$black;
+
     &:hover{
-      background-color: colors.$primary;
+      background-color: colors.$green;
     }
   }
 
   &.is--button-color-red {
     background-color: colors.$red;
     color: colors.$white;
+
     &:hover {
       background-color: colors.$red-dark;
       color: colors.$white;
@@ -189,26 +194,31 @@ const btnClasses = computed(() => ({
   &.is--variant-default {
     &.is--button-color-primary {
       color: colors.$white;
-      background-color: colors.$primary;
-      border-color: colors.$primary;
+      background-color: colors.$primary-red;
+      border-color: colors.$primary-red;
+
       &:hover{
-        background-color: colors.$primary-dark;
-        border-color: colors.$primary-dark;
+        background-color: colors.$primary-red-dark;
+        border-color: colors.$primary-red-dark;
       }
     }
+
     &.is--button-color-secondary {
       color: colors.$black;
       background-color: colors.$secondary;
       border-color: colors.$secondary;
+
       &:hover {
         background-color: colors.$secondary-dark;
         border-color: colors.$secondary-dark;
       }
     }
+
     &.is--button-color-red {
       color: colors.$white;
       background-color: colors.$red;
       border-color: colors.$red;
+
       &:hover {
         background-color: colors.$red-dark;
         border-color: colors.$red-dark;
@@ -218,26 +228,32 @@ const btnClasses = computed(() => ({
 
   &.is--variant-outlined {
     background-color: colors.$white;
+
     &.is--button-color-primary {
       border-color: colors.$primary;
       color: colors.$primary;
+
       &:hover {
         background-color: colors.$primary;
         color: colors.$white;
       }
     }
+
     &.is--button-color-secondary {
       border-color: colors.$secondary;
+
       &:hover {
         background-color: colors.$secondary;
       }
     }
+
     &.is--button-color-red {
       border-color: colors.$red;
       color: colors.$red;
+
       &:hover {
         background-color: colors.$red;
-        color: colors.$white;
+        color: colors.$red;
       }
     }
   }
@@ -246,25 +262,30 @@ const btnClasses = computed(() => ({
     &.is--button-color-primary {
       background-color: colors.$primary-light;
       border-color: colors.$primary-light;
-      color: colors.$primary;
+      color: colors.$white;
+
       &:hover {
         background-color: colors.$primary;
         border-color: colors.$primary;
         color: colors.$white;
       }
     }
+
     &.is--button-color-secondary {
       background-color: colors.$primary-light;
       border-color: colors.$primary-light;
+
       &:hover {
         background-color: colors.$secondary;
         border-color: colors.$secondary;
       }
     }
+
     &.is--button-color-red {
       background-color: colors.$red-light;
       border-color: colors.$red-light;
       color: colors.$red;
+
       &:hover{
         background-color: colors.$red;
         border-color: colors.$red;
@@ -277,43 +298,83 @@ const btnClasses = computed(() => ({
     background-color: transparent;
     box-shadow: none;
     border-color: transparent;
+
     &.is--button-color-primary {
-      color: colors.$primary;
+      color: colors.$primary-red;
+
       &:hover {
-        background-color: colors.$primary-light;
+        background-color: colors.$primary-red-light;
       }
     }
+
     &.is--button-color-secondary {
+      color: colors.$black;
+
       &:hover {
-        background-color: colors.$secondary-light;
+        background-color: colors.$green;
       }
     }
+
     &.is--button-color-red {
       color: colors.$red;
+
       &:hover {
         background-color: colors.$red-light;
+        color: colors.$white;
+      }
+    }
+
+    &.is--icon-only {
+      &:hover {
+        background-color: rgb(66 84 102 / 0.5);
       }
     }
   }
 
   &.is--icon-only {
     padding: 9px;
-    height: 40px;
-    width: 40px;
+    height: 48px;
+    width: 48px;
+
     &.is--size-large {
-      height: 48px;
-      width: 48px;
+      height: 64px;
+      width: 64px;
+
+      svg,
+      img {
+        width: 24px;
+        height: 24px;
+      }
     }
+
     &.is--size-small {
       height: 32px;
       width: 32px;
       padding: 7px;
     }
+
+    &:hover {
+      background-color: rgb(66 84 102 / 0.5);
+    }
+  }
+
+  &.is--variant-social {
+    background-color: rgb(252 252 252 / 0.1);
+    border-color: transparent;
+    color: colors.$white;
+
+    &:hover {
+      background-color: rgb(252 252 252 / 0.3);
+    }
   }
 
   .with-default-distance &,
   &.with-default-distance {
-    margin-top: 40px;
+    margin-top: 48px;
+
+    @media screen and (width < $tablet){
+      margin-top: 40px;
+    }
   }
 }
 </style>

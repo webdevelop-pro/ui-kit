@@ -7,9 +7,7 @@ import {
 import { computed } from 'vue';
 import chevronDownIcon from 'UiKit/assets/images/chevron-down.svg';
 
-const props = defineProps<AccordionTriggerProps & {
-  isWhite?: boolean;
-}>();
+const props = defineProps<AccordionTriggerProps>();
 
 const delegatedProps = computed(() => {
   const { ...delegated } = props;
@@ -23,8 +21,6 @@ const delegatedProps = computed(() => {
     <AccordionTrigger
       v-bind="delegatedProps"
       class="VAccordionTrigger v-accordion-trigger"
-      :class="{ 'is--white': isWhite }"
-      itemprop="name"
     >
       <slot />
       <slot name="icon">
@@ -40,20 +36,17 @@ const delegatedProps = computed(() => {
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
+
 .v-accordion-chevron {
-  width: 18px;
+  width: 24px;
   color: inherit;
   transition: transform 0.3s ease;
+  flex-shrink: 0;
 }
+
 .v-accordion-trigger[data-state="open"] {
-  background-color: colors.$gray-10;
+  background-color: #F2F1ED;
   transition: transform 0.3s ease;
-  &.is--white {
-    background-color: colors.$white;
-    box-shadow: variables.$box-shadow-small;
-    z-index: 1;
-    position: relative;
-  }
 }
 
 .v-accordion-trigger[data-state="open"] > .v-accordion-chevron {
@@ -65,13 +58,12 @@ const delegatedProps = computed(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-right: 16px;
   cursor: pointer;
-  padding: 16px;
+  padding: 28px;
   text-align: inherit;
 
   &:hover{
-    background-color: colors.$gray-10;
+    background-color: #F2F1ED;
     transition: transform 0.3s ease;
   }
 }
