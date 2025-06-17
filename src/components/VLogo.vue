@@ -1,18 +1,22 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import logoIcon from 'UiKit/assets/images/logo.svg';
-import logoMobIcon from 'UiKit/assets/images/logo-mob.svg';
+import logoIcon from '@/assets/images/logo.svg?component';
 
 const props = defineProps({
   disabled: Boolean,
   href: String,
   routeName: String,
+  white: Boolean,
 });
 
 const componentName = computed(() => {
   if (props.href) return 'a';
   if (props.routeName) return 'router-link';
   return 'span';
+});
+
+const icon = computed(() => {
+  return logoIcon;
 });
 </script>
 
@@ -25,38 +29,48 @@ const componentName = computed(() => {
     aria-label="Site logo"
     :class="{ 'is--link': href || routeName }"
   >
-    <component
-      :is="logoIcon"
+    <!-- <component
+      :is="icon"
       class="v-logo__desktop"
     />
     <component
-      :is="logoMobIcon"
+      :is="icon"
       class="v-logo__mobile"
-    />
+    /> -->
+    <img
+      src="UiKit/assets/images/logo.webp"
+      class="v-logo__desktop"
+      alt="Logo"
+    >
   </component>
 </template>
 
 <style lang="scss">
 .v-logo {
-  flex-shrink: 0;
+  color: inherit;
+  // height: 100%;
 
   &.is--link {
     cursor: pointer;
   }
 
   &__desktop {
-    width: 111px;
-    max-width: 111px;
-    height: 37px;
-    @media screen and (max-width: 1024px) {
-      display: none;
-    }
+    // height: 100%;
+    color: inherit;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    // @media screen and (width < 1024px) {
+    //   display: none;
+    // }
   }
 
   &__mobile {
-    width: 47px;
+    display: none;
     height: auto;
-    @media screen and (min-width: 1024px) {
+    color: inherit;
+
+    @media screen and (width > 1024px) {
       display: none;
     }
   }

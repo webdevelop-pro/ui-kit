@@ -2,7 +2,7 @@
 import { PropType, computed } from 'vue';
 import VComment from 'UiKit/components/VComment/VComment.vue';
 import { formatToDate } from 'UiKit/helpers/formatters/formatToDate';
-import logoMob from 'UiKit/assets/images/logo-mob.svg?url';
+import logoMob from 'UiKit/assets/images/logo-mob2.svg?url';
 
 export interface IOfferComment {
   created_at: string;
@@ -12,6 +12,7 @@ export interface IOfferComment {
     first_name: string;
     last_name: string;
   };
+  thread: IOfferComment[];
 }
 
 defineProps({
@@ -34,16 +35,20 @@ const showAnswer = computed(() => false);
       :tag="comment.related"
     />
 
-    <VComment
-      v-if="showAnswer"
-      class="v-comment-thread__comment is--reply"
-      :title="`${comment?.user.first_name} ${comment?.user.last_name}`"
-      :date="formatToDate(new Date(comment.created_at).toISOString())"
-      :text="comment?.comment"
-      :tag="comment.related"
-      :image-src="logoMob"
-      background="#F8F9FA"
-    />
+    <template
+      v-if="comment.thread"
+    >
+      <VComment
+        v-for="(item, index) in comment.thread"
+        :key="index"
+        class="v-comment-thread__comment is--reply"
+        :title="`${item?.user.first_name} ${item?.user.last_name}`"
+        :date="formatToDate(new Date(item.created_at).toISOString())"
+        :text="item?.comment"
+        :tag="item.related"
+        :image-src="logoMob"
+      />
+    </template>
   </div>
 </template>
 

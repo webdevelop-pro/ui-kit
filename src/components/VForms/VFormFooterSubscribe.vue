@@ -119,7 +119,7 @@ watch(() => model, () => {
 
   &__button {
     position: relative;
-    top: 28px;
+    top: 35px;
   }
 }
 </style>

@@ -18,31 +18,29 @@ a {
 }
 
 .is--link-1{
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 28px;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 26px;
   text-decoration: underline;
   transition: 0.3s all  ease-in-out;
-  color: $primary-red;
+  color: $primary;
   cursor: pointer;
-
   &:hover{
     text-decoration: none;
-  }
+    }
 }
 
 .is--link-2{
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
+font-weight: 800;
+  font-size: 12px;
+  line-height: 18px;
   text-decoration: underline;
   transition: 0.3s all  ease-in-out;
-  color: $primary-red;
+  color: $primary;
   cursor: pointer;
-
   &:hover{
     text-decoration: none;
-  }
+}
 }
 
 .is--link-regular{

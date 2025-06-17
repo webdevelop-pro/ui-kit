@@ -9,7 +9,7 @@ defineProps({
   title: String,
   background: {
     type: String,
-    default: '#F0F4FF',
+    default: 'rgb(165 36 34 / 0.2)',
   },
   tag: String,
 });
