@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import logoIcon from '@/assets/images/logo.svg?component';
 
 const props = defineProps({
   disabled: Boolean,
@@ -13,10 +12,6 @@ const componentName = computed(() => {
   if (props.href) return 'a';
   if (props.routeName) return 'router-link';
   return 'span';
-});
-
-const icon = computed(() => {
-  return logoIcon;
 });
 </script>
 
@@ -38,7 +33,7 @@ const icon = computed(() => {
       class="v-logo__mobile"
     /> -->
     <img
-      src="UiKit/assets/images/logo.webp"
+      src="/logo.webp"
       class="v-logo__desktop"
       alt="Logo"
     >
