@@ -44,4 +44,8 @@ export class PrecompiledValidator<T> {
     if (!rawErrors) return {};
     return processRawValidationErrors(rawErrors);
   }
+
+  public getSchemaObject(ref: string) {
+    return ajv.getSchema(ref);
+  }
 }

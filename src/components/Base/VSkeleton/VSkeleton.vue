@@ -21,7 +21,7 @@ const props = defineProps({
   },
   radius: {
     type: String,
-    default: '4px',
+    default: '2px',
   },
   skeletonClass: {
     type: String,
@@ -34,6 +34,10 @@ const props = defineProps({
   margin: {
     type: String,
   },
+  size: {
+    type: String,
+    validator: (val) => ['small', 'medium', 'large'].includes(val),
+  },
 });
 
 const componentClass = computed(() => [
@@ -42,9 +46,16 @@ const componentClass = computed(() => [
   props.animation ? `v-skeleton--${props.animation}` : null,
 ]);
 
+const height = computed(() => {
+  if (props.size === 'small') return '32px';
+  if (props.size === 'medium') return '40px';
+  if (props.size === 'large') return '48px';
+  return props.height;
+});
+
 const componentStyle = computed(() => ({
   width: props.width,
-  height: props.height,
+  height: height.value,
   borderRadius: props.radius,
   margin: props.margin,
 }));

@@ -35,6 +35,7 @@ const initializeProperties = (properties: Record<string, any>): Record<string, a
 };
 
 export const createFormModel = (schema: JSONSchemaType<T>): Record<string, any> => {
+  if (!schema || !schema.$ref) return null;
   // clone deep to ensure we don't mix schemas
   const newSchema = cloneDeep(schema);
   // get path

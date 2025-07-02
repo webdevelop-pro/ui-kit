@@ -63,6 +63,7 @@ const selectedValue = computed(() => findValueInOption(modelValue.value));
   <VSkeleton
     v-if="loading"
     width="100%"
+    :size="size"
     class="v-select-trigger"
     :class="`is--size-${size}`"
   />

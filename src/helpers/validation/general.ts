@@ -37,13 +37,17 @@ export const getFilteredObject = (
   formModel: Record<string, any>,
   refPath: string = schema?.$ref || '',
 ): FilteredObject => {
-  if (!schema) return schema;
+  if (!schema) return {};
 
   // Clone schema to avoid mutation
   const clonedSchema = cloneDeep(schema);
 
   // Resolve schema from reference path, or use the cloned schema directly
   const resolvedObject = refPath ? resolveRef(refPath, clonedSchema) : clonedSchema;
+
+  if (!Object.keys(resolvedObject).length) {
+    return {};
+  }
 
   // Remove "required" key safely
   delete resolvedObject.required;
@@ -57,7 +61,7 @@ export const getFilteredObject = (
   }
 
   // Filter properties based on the keys present in formModel
-  return Object.entries(resolvedObject.properties).reduce((filteredObject: FilteredObject, [key, value]) => {
+  return Object.entries(resolvedObject?.properties)?.reduce((filteredObject: FilteredObject, [key, value]) => {
     if (key in formModel) {
       if (value?.$ref) {
         filteredObject[key] = getFilteredObject(schema, formModel[key], value.$ref);

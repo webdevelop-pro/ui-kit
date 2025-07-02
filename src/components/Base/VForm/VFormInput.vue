@@ -178,6 +178,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
   <VSkeleton
     v-if="loading"
     width="100%"
+    :size="size"
     class="VFormInput v-form-input"
     :class="`is--size-${size}`"
   />

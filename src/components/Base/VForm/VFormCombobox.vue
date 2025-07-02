@@ -91,6 +91,7 @@ const filterFunction = (list: [], _) => list;
   <VSkeleton
     v-if="loading"
     width="100%"
+    :size="size"
     class="v-combobox-anchor"
     :class="`is--size-${size}`"
   />
