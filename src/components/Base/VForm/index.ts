@@ -1,6 +1,7 @@
 export * from './VForm.vue';
 export * from './VFormCheckbox.vue';
 export * from './VFormCheckboxGroup.vue';
+export * from './VFormDocument.vue';
 export * from './VFormGroup.vue';
 export * from './VFormInput.vue';
 export * from './VFormInputSearch.vue';
