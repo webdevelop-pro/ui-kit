@@ -30,8 +30,7 @@ const props = withDefaults(defineProps<Props>(), {
   userId: '',
 });
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: number | null): void;
+const emit = defineEmits<{(e: 'update:modelValue', value: number | null): void;
   (e: 'upload-success', fileId: number): void;
   (e: 'upload-error', error: string): void;
 }>();
@@ -79,12 +78,12 @@ const onFileChange = async () => {
   try {
     // Simulate upload process - in real implementation, this would call the filer store
     // For now, we'll simulate the upload and return a mock file ID
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate upload delay
-    
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate upload delay
+
     const mockFileId = Math.floor(Math.random() * 10000) + 1; // Mock file ID
     uploadedFileId.value = mockFileId;
     uploadedFileName.value = file.name;
-    
+
     emit('update:modelValue', mockFileId);
     emit('upload-success', mockFileId);
     filesUploadError.value = '';
@@ -206,14 +205,14 @@ const removeFile = () => {
         </div>
       </div>
     </div>
-    
+
     <p
       v-if="filesUploadError"
       class="v-form-document__error is--small"
     >
       {{ filesUploadError }}
     </p>
-    
+
     <div class="v-form-document__comment is--small">
       Supported files: PDF, JPG, JPEG, PNG. Maximum size {{ maxFileSize }}MB.
     </div>
@@ -237,7 +236,7 @@ const removeFile = () => {
     border: 1px dashed colors.$gray-40;
     background: colors.$gray-10;
     transition: border-color 0.2s ease;
-    
+
     &.is--dragging {
       border-color: colors.$primary;
     }
@@ -271,7 +270,7 @@ const removeFile = () => {
 
   &__label {
     color: colors.$gray-60;
-    
+
     &.disabled {
       cursor: not-allowed;
     }
@@ -279,7 +278,7 @@ const removeFile = () => {
 
   &__file-button {
     margin-top: 12px;
-    
+
     #{$root}__dropzone.is--file & {
       margin-bottom: 32px;
     }
@@ -310,7 +309,7 @@ const removeFile = () => {
 
   &__preview-card-remove {
     cursor: pointer;
-    
+
     &:hover {
       opacity: 0.7;
     }
@@ -340,4 +339,4 @@ const removeFile = () => {
     vertical-align: middle;
   }
 }
-</style> 
+</style>

@@ -45,6 +45,7 @@ export class PrecompiledValidator<T> {
     return processRawValidationErrors(rawErrors);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   public getSchemaObject(ref: string) {
     return ajv.getSchema(ref);
   }
