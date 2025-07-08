@@ -6,6 +6,8 @@ import get from 'lodash/get';
 import merge from 'lodash/merge';
 import { getFieldSchema } from 'UiKit/helpers/validation/general';
 import { JSONSchemaType } from 'ajv';
+import questionIcon from 'UiKit/assets/images/circle-question.svg';
+import VTooltip from 'UiKit/components/VTooltip.vue';
 
 const props = defineProps<{
   label?: string;
@@ -69,6 +71,14 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
         v-if="required"
         class="v-form-group__label-required"
       >*</span>
+      <VTooltip v-if="$slots.tooltip">
+        <questionIcon
+          class="v-form-group__label-icon"
+        />
+        <template #content>
+          <slot name="tooltip" />
+        </template>
+      </VTooltip>
     </label>
     <div class="v-form-group__input">
       <slot
@@ -98,20 +108,23 @@ watch(() => [props.schemaBack, props.schemaFront], () => {
   position: relative;
 
   &__label {
-    display: inline-block;
+    display: inline-flex;
     position: relative;
     color: colors.$gray-70;
     text-align: left;
+    align-items: center;
     margin-bottom: 7px;
     &.is--dark {
       color: colors.$white;
     }
   }
 
-  &__label-link {
-    position: absolute;
-    right: 0;
-    top: 0;
+  &__label-icon {
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+    color: colors.$gray-70;
+    cursor: pointer;
   }
 
   &__label-required {

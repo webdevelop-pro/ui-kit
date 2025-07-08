@@ -288,7 +288,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
     background-color: transparent;
     width: 100%;
     position: relative;
-    z-index: 2;
+    // z-index: 2;
 
     &:focus {
       outline: none;
