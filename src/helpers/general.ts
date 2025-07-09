@@ -239,20 +239,45 @@ export function groupRelatedPagesFormat(pages: IFrontmatter[], data: Record<stri
   }).filter((item) => item !== null); // Filter out null values
 }
 
-export function mergeObjects(obj1, obj2) {
+// Define interfaces for the expected object structure
+interface EntityValue {
+  [key: string]: any;
+}
+
+interface TopLevelValue {
+  entities: Record<string, EntityValue>;
+}
+
+interface MergedObject {
+  [key: string]: TopLevelValue;
+}
+
+export function mergeObjects(obj1: any, obj2: any): MergedObject {
   if (!obj1 || !obj2) return {};
   const merged = { ...obj1 };
 
   Object.entries(obj2).forEach(([topKey, topValue]) => {
-    merged[topKey] = merged[topKey] || { entities: {} };
-    merged[topKey].entities = merged[topKey].entities || {};
+    // Ensure topValue is an object with entities property
+    if (topValue && typeof topValue === 'object' && 'entities' in topValue) {
+      merged[topKey] = merged[topKey] || { entities: {} };
+      merged[topKey].entities = merged[topKey].entities || {};
 
-    Object.entries(topValue.entities).forEach(([entityKey, entityValue]) => {
-      merged[topKey].entities[entityKey] = {
-        ...merged[topKey].entities[entityKey],
-        ...entityValue,
-      };
-    });
+      // Ensure topValue.entities is an object before iterating
+      if (typeof topValue.entities === 'object' && topValue.entities !== null) {
+        Object.entries(topValue.entities).forEach(([entityKey, entityValue]) => {
+          // Ensure entityValue is an object before spreading
+          if (entityValue && typeof entityValue === 'object') {
+            merged[topKey].entities[entityKey] = {
+              ...merged[topKey].entities[entityKey],
+              ...entityValue,
+            };
+          } else {
+            // If entityValue is not an object, just assign it directly
+            merged[topKey].entities[entityKey] = entityValue;
+          }
+        });
+      }
+    }
   });
 
   return merged;
