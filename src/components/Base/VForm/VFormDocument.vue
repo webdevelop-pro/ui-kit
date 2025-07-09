@@ -5,6 +5,9 @@ import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import uploadIcon from 'UiKit/assets/images/upload.svg';
 import fileIcon from 'UiKit/assets/images/file.svg';
 import closeIcon from 'UiKit/assets/images/close.svg?component';
+import { storeToRefs } from 'pinia';
+import { useFilerStore } from 'InvestCommon/store/useFiler';
+import { useRepositoryProfiles } from 'InvestCommon/data/profiles/profiles.repository';
 
 interface Props {
   modelValue?: number | null;
@@ -25,9 +28,6 @@ const props = withDefaults(defineProps<Props>(), {
   size: 'medium',
   maxFileSize: 10, // 10MB default
   acceptedFileTypes: 'application/pdf',
-  objectName: 'document',
-  objectId: '',
-  userId: '',
 });
 
 const emit = defineEmits<{(e: 'update:modelValue', value: number | null): void;
@@ -41,11 +41,21 @@ const refFiles = ref<HTMLInputElement>();
 const isLoading = ref(false);
 const uploadedFileId = ref<number | null>(props.modelValue || null);
 const uploadedFileName = ref<string>('');
+const imageFile = ref<File>();
+
+const filerStore = useFilerStore();
+const { postSignurlData } = storeToRefs(filerStore);
+const useRepositoryProfilesStore = useRepositoryProfiles();
+const { getUserState } = storeToRefs(useRepositoryProfilesStore);
 
 // Watch for external modelValue changes
 watch(() => props.modelValue, (newValue) => {
   uploadedFileId.value = newValue;
 });
+
+const onUpload = async (file: File) => {
+  await filerStore.uploadHandler(file, getUserState.value?.data?.id, 'user');
+};
 
 const onFileChange = async () => {
   const fileList = refFiles.value?.files as FileList;
@@ -76,16 +86,14 @@ const onFileChange = async () => {
   }
 
   try {
-    // Simulate upload process - in real implementation, this would call the filer store
-    // For now, we'll simulate the upload and return a mock file ID
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate upload delay
+    [imageFile.value] = incomingFiles;
+    await onUpload(imageFile.value);
 
-    const mockFileId = Math.floor(Math.random() * 10000) + 1; // Mock file ID
-    uploadedFileId.value = mockFileId;
+    uploadedFileId.value = postSignurlData.value?.meta?.id;
     uploadedFileName.value = file.name;
 
-    emit('update:modelValue', mockFileId);
-    emit('upload-success', mockFileId);
+    emit('update:modelValue', uploadedFileId.value);
+    emit('upload-success', uploadedFileId.value);
     filesUploadError.value = '';
   } catch (error) {
     filesUploadError.value = 'Upload failed. Please try again.';
@@ -270,6 +278,7 @@ const removeFile = () => {
 
   &__label {
     color: colors.$gray-60;
+    text-align: center;
 
     &.disabled {
       cursor: not-allowed;
