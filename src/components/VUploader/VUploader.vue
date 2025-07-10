@@ -1,75 +1,150 @@
 <!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import uploadIcon from 'UiKit/assets/images/upload.svg';
 import fileIcon from 'UiKit/assets/images/file.svg';
 import closeIcon from 'UiKit/assets/images/close.svg?component';
+import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
 
-defineProps({
-  isError: Boolean,
-  isDisabled: Boolean,
+interface Props {
+  isError?: boolean;
+  isDisabled?: boolean;
+  isLoading?: boolean;
+  maxFiles?: number;
+  maxFileSize?: number; // in MB
+  acceptedFileTypes?: string; // e.g., "application/pdf,image/*"
+  dragDropText?: string;
+  uploadButtonText?: string;
+  supportedFilesText?: string;
+  maxSizeText?: string;
+  showFilePreview?: boolean;
+  showSupportedFilesInfo?: boolean;
+  showMaxSizeInfo?: boolean;
+  customClass?: string;
+  multiple?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  isError: false,
+  isDisabled: false,
+  isLoading: false,
+  maxFiles: 1,
+  maxFileSize: 10, // 10MB default
+  acceptedFileTypes: '*',
+  dragDropText: 'Drag & drop files here or click to upload',
+  uploadButtonText: 'Upload',
+  supportedFilesText: 'Supported files: all types',
+  maxSizeText: 'Maximum size 10MB',
+  showFilePreview: true,
+  showSupportedFilesInfo: true,
+  showMaxSizeInfo: true,
+  customClass: '',
+  multiple: false,
 });
-const emit = defineEmits(['update:files', 'remove']);
+
+const emit = defineEmits<{
+  'update:files': [files: File[]];
+  'remove': [index: number];
+  'error': [message: string];
+}>();
 
 const filesUploadError = ref('');
 const isDragging = ref(false);
 const refFiles = ref<HTMLInputElement>();
-
 const allFiles = ref<File[]>([]);
+
+// Validation helpers
+const validateFileSize = (files: File[]): string | null => {
+  const maxFileSizeInBytes = props.maxFileSize * 1024 * 1024;
+  const oversizedFiles = files.filter(file => file.size >= maxFileSizeInBytes);
+  return oversizedFiles.length > 0 
+    ? `Please upload smaller files. Limit ${props.maxFileSize}MB`
+    : null;
+};
+
+const validateFileCount = (incomingFiles: File[]): string | null => {
+  if (incomingFiles.length + allFiles.value.length > props.maxFiles) {
+    return `You are only allowed to upload a maximum of ${props.maxFiles} files at a time`;
+  }
+  return null;
+};
+
+const validateDuplicateFiles = (incomingFiles: File[]): string | null => {
+  const hasDuplicates = allFiles.value.some(existingFile => 
+    incomingFiles.some(newFile => 
+      newFile.name === existingFile.name && newFile.size === existingFile.size
+    )
+  );
+  return hasDuplicates ? 'New upload contains files that already exist' : null;
+};
+
+const setError = (message: string) => {
+  filesUploadError.value = message;
+  emit('error', message);
+};
 
 const onFileChange = () => {
   const fileList = refFiles.value?.files as FileList;
   const incomingFiles = Array.from(fileList);
-  const maxAllowedSize = 100 * 1024 * 1024; // 100MB
   filesUploadError.value = '';
 
-  const fileExist = allFiles.value.some((r) => incomingFiles.some(
-    (file) => file.name === r.name && file.size === r.size,
-  ));
-
-  if (fileExist) {
-    filesUploadError.value = 'New upload contains files that already exist';
+  // Validate file size
+  const sizeError = validateFileSize(incomingFiles);
+  if (sizeError) {
+    setError(sizeError);
     return;
   }
 
-  if (incomingFiles.length + allFiles.value.length > 5) {
-    filesUploadError.value = 'You are only allowed to upload a maximum of 5 files at a time';
+  // Single file mode - replace existing files
+  if (!props.multiple) {
+    allFiles.value = incomingFiles;
+    emit('update:files', allFiles.value);
+    return;
+  }
+
+  // Multiple file mode - additional validations
+  const countError = validateFileCount(incomingFiles);
+  if (countError) {
+    setError(countError);
     setTimeout(() => {
       filesUploadError.value = '';
     }, 4000);
     return;
   }
 
-  incomingFiles.forEach((file: File) => {
-    if (file.size >= maxAllowedSize) {
-      filesUploadError.value = 'Please upload a smaller file size. Limit 100MB';
-    }
-  });
+  const duplicateError = validateDuplicateFiles(incomingFiles);
+  if (duplicateError) {
+    setError(duplicateError);
+    return;
+  }
 
-  if (filesUploadError.value) return;
-
+  // Add new files to existing ones
   allFiles.value = [...allFiles.value, ...incomingFiles];
   emit('update:files', allFiles.value);
 };
 
 const triggerFileInput = () => {
-  refFiles.value?.click();
+  if (!props.isDisabled && !props.isLoading) {
+    refFiles.value?.click();
+  }
 };
 
-const dragover = () => {
-  isDragging.value = true;
-};
-
-const dragleave = () => {
-  isDragging.value = false;
+const handleDragEvent = (e: DragEvent, isEntering: boolean) => {
+  if (!props.isDisabled && !props.isLoading) {
+    e.preventDefault();
+    isDragging.value = isEntering;
+  }
 };
 
 const drop = (e: DragEvent) => {
-  const files = e.dataTransfer?.files as FileList;
-  if (refFiles.value) refFiles.value.files = files;
-  onFileChange();
-  isDragging.value = false;
+  if (!props.isDisabled && !props.isLoading) {
+    e.preventDefault();
+    const files = e.dataTransfer?.files as FileList;
+    if (refFiles.value) refFiles.value.files = files;
+    onFileChange();
+    isDragging.value = false;
+  }
 };
 
 const removeFile = (index: number) => {
@@ -81,17 +156,21 @@ const removeFile = (index: number) => {
 </script>
 
 <template>
-  <div class="VUploader v-uploader">
+  <div 
+    class="VUploader v-uploader"
+    :class="customClass"
+  >
     <div
       class="v-uploader__dropzone"
       :class="{
         'is--dragging': isDragging,
         'is--error': filesUploadError || isError,
         'is--disabled': isDisabled,
+        'is--loading': isLoading,
         'is--files': allFiles?.length > 0,
       }"
-      @dragover.prevent="dragover"
-      @dragleave.prevent="dragleave"
+      @dragover.prevent="handleDragEvent($event, true)"
+      @dragleave.prevent="handleDragEvent($event, false)"
       @drop.prevent="drop"
       @click="triggerFileInput"
     >
@@ -99,39 +178,48 @@ const removeFile = (index: number) => {
         id="file-control"
         ref="refFiles"
         name="file"
-        multiple
+        :multiple="multiple"
         type="file"
-        accept="application/pdf"
-        data-testid="accreditation-input-file"
+        :accept="acceptedFileTypes"
+        :disabled="isDisabled || isLoading"
         @change="onFileChange"
       >
 
       <label
         class="v-uploader__label"
         for="file-control"
-        :class="{ disabled: isDisabled }"
+        :class="{ disabled: isDisabled || isLoading }"
       >
-        Drag & drop files here or click to upload
+        {{ dragDropText }}
       </label>
-
+      <VSkeleton
+        v-if="isLoading"
+        width="200px"
+        height="28px"
+        class="v-uploader__file-button"
+      />
       <VButton
+        v-else
         size="small"
         variant="outlined"
         class="v-uploader__file-button"
+        :disabled="isDisabled || isLoading"
+        @click.stop="triggerFileInput"
       >
         <component
           :is="uploadIcon"
           class="v-uploader__file-icon"
         />
-        Upload
+        {{ uploadButtonText }}
       </VButton>
+      
       <div
-        v-if="allFiles?.length"
+        v-if="allFiles?.length && showFilePreview"
         class="v-uploader__preview"
       >
         <div
           v-for="(file, index) in allFiles"
-          :key="file.name"
+          :key="`${file.name}-${index}`"
           class="v-uploader__preview-card"
         >
           <div class="v-uploader__preview-card-info">
@@ -156,14 +244,29 @@ const removeFile = (index: number) => {
         </div>
       </div>
     </div>
+    
     <p
       v-if="filesUploadError"
       class="v-uploader__error is--small"
     >
       {{ filesUploadError }}
     </p>
-    <div class="v-uploader__comment is--small">
-      Supported files: pdf. Maximum size 100mb.
+
+
+    <VSkeleton
+      v-if="isLoading"
+      width="200px"
+      height="17px"
+      class="v-uploader__comment is--small"
+    />
+    
+    <div 
+      v-else-if="showSupportedFilesInfo || showMaxSizeInfo"
+      class="v-uploader__comment is--small"
+    >
+      <span v-if="showSupportedFilesInfo">{{ supportedFilesText }}</span>
+      <span v-if="showSupportedFilesInfo && showMaxSizeInfo">. </span>
+      <span v-if="showMaxSizeInfo">{{ maxSizeText }}</span>
     </div>
   </div>
 </template>
@@ -198,13 +301,20 @@ const removeFile = (index: number) => {
 
     &.is--disabled{
       opacity: 0.3;
+      pointer-events: none;
     }
 
-    &:hover{
+    &.is--loading{
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    &:hover:not(.is--disabled):not(.is--loading){
       border-color: colors.$primary;
       cursor: pointer;
     }
   }
+  
   input[type="file"]{
     opacity: 0;
     overflow: hidden;
