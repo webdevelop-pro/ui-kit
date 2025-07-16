@@ -11,6 +11,7 @@ const props = withDefaults(defineProps<TabsRootProps & {
   tabsToUrl?: boolean;
   variant?: 'primary' | 'secondary';
   fullWidth?: boolean;
+  queryKey?: string;
 }>(), {
   variant: 'primary',
 });
@@ -24,7 +25,7 @@ const delegatedProps = computed(() => {
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 const selectedTab = useSyncWithUrl({
-  key: 'tab',
+  key: props.queryKey || 'tab',
   defaultValue: props.defaultValue || '',
   syncToUrl: props.tabsToUrl,
 });

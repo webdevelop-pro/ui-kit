@@ -36,7 +36,11 @@ export function useSyncWithUrl<T = string>({
   };
 
   watch(paramValue, (newQuery) => {
-    state.value = parse(newQuery) ?? defaultValue;
+    if (syncToUrl) {
+      state.value = parse(newQuery) ?? defaultValue;
+    } else {
+      state.value = defaultValue;
+    }
   }, { immediate: true });
 
   watch(state, (newVal) => {
