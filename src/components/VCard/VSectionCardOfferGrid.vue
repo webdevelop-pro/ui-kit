@@ -29,7 +29,9 @@ const arrayLazy = computed(() => {
 });
 
 watchEffect(() => {
-  loadingLocal.value = props.loading;
+  setTimeout(() => {
+    loadingLocal.value = props.loading;
+  }, 1000);
 });
 </script>
 

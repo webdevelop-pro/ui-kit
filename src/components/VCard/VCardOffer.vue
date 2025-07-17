@@ -3,7 +3,7 @@ import { IOffer } from 'InvestCommon/types/api/offers';
 import { currency } from 'InvestCommon/helpers/currency';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VBadge from 'UiKit/components/Base/VBadge/VBadge.vue';
-import { PropType, computed } from 'vue';
+import { PropType, computed, onMounted, ref } from 'vue';
 import defaulImage from 'InvestCommon/assets/images/default.svg?url';
 import VInfoSlot from 'UiKit/components/VInfo/VInfoSlot.vue';
 import { useOfferStore } from 'InvestCommon/store/useOffer';
@@ -28,10 +28,11 @@ const props = defineProps({
 const offerStore = useOfferStore();
 const imageID = computed(() => props.offer?.image_link_id);
 
-const offerImage = computed(() => {
-  if (imageID.value > 0) return `${FILER_URL}/public/files/${imageID.value}?size=small`;
-  return defaulImage;
-});
+// const offerImage = computed(() => {
+//   if (imageID.value > 0) return `${FILER_URL}/public/files/${imageID.value}?size=small`;
+//   return defaulImage;
+// });
+const offerImage = ref();
 
 const isDefaultImage = computed(() => !imageID.value);
 const minInvestment = computed(() => ((props.offer?.min_investment || 0) * (props.offer?.price_per_share || 0)));
@@ -52,6 +53,16 @@ const infoTags = computed(() => ([
   'Network Security',
 ]));
 const minInvestmentValue = computed(() => currency(minInvestment.value, 0));
+
+onMounted(() => {
+  setTimeout(() => {
+    if (imageID.value > 0) {
+      offerImage.value = `${FILER_URL}/public/files/${imageID.value}?size=small`;
+    } else {
+      offerImage.value = defaulImage;
+    }
+  }, 100);
+});
 </script>
 
 <template>
