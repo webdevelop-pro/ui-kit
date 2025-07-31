@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals */
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const patchHistoryMethods = () => {

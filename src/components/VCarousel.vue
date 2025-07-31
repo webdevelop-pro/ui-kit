@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed } from 'vue';
 import { getImageTitle } from 'UiKit/helpers/utils/text';
 import VVideoThumb from 'UiKit/components/VVideoEmbedded/VVideoThumb.vue';
 import VVideoEmbedded from 'UiKit/components/VVideoEmbedded/VVideoEmbedded.vue';

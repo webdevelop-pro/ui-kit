@@ -32,7 +32,7 @@ const props = defineProps({
   topic: String,
 });
 
-const { frontmatter, theme } = useData();
+const { theme } = useData();
 const getStarted = theme.navigation.getStarted.data;
 </script>
 

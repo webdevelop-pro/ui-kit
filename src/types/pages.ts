@@ -1,6 +1,3 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-use-before-define */
 import set from 'lodash/set';
 import get from 'lodash/get';
 
@@ -117,7 +114,6 @@ class Page implements IPage {
     // return get(pages, path);
     path = path.slice(1);
     let tempPage = pages;
-    // eslint-disable-next-line consistent-return
     path.forEach((elem:string) => {
       // we need this for some reason during production build tempPage
       // can be undefined
@@ -133,7 +129,6 @@ class Page implements IPage {
   }
 }
 
-// eslint-disable-next-line import/no-mutable-exports
 let pages = new Page({} as IFrontmatter, true);
 
 function convertDictToPage(obj: any, key: string): Page {

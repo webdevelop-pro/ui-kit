@@ -2,11 +2,10 @@
 import type { BaseChartProps } from './index';
 import { VChartCrosshair, VChartLegend, defaultColors } from 'UiKit/components/Base/VChart';
 import { type BulletLegendItemInterface, CurveType } from '@unovis/ts';
-import { Area, Axis, Line } from '@unovis/ts';
+import { Area, Line } from '@unovis/ts';
 import {
   VisArea, VisAxis, VisLine, VisXYContainer,
 } from '@unovis/vue';
-import { useMounted } from '@vueuse/core';
 import { useId } from 'radix-vue';
 import { type Component, computed, ref } from 'vue';
 
@@ -46,7 +45,6 @@ const emits = defineEmits<{
   legendItemClick: [d: BulletLegendItemInterface, i: number];
 }>();
 
-type KeyOfT = Extract<keyof T, string>
 type Data = typeof props.data[number]
 
 const chartRef = useId();
@@ -59,8 +57,6 @@ const legendItems = ref<BulletLegendItemInterface[]>(props.categories.map((categ
   color: colors.value[i],
   inactive: false,
 })));
-
-const isMounted = useMounted();
 
 function handleLegendItemClick(d: BulletLegendItemInterface, i: number) {
   emits('legendItemClick', d, i);

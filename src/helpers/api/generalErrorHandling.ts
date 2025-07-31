@@ -22,7 +22,6 @@ export const generalErrorHandling = async (error: any) => {
     const errorJson = await error.json();
 
     if (errorJson.message) TOAST_OPTIONS.description = errorJson.message;
-    // eslint-disable-next-line prefer-destructuring
     else if (errorJson.__error__[0]) TOAST_OPTIONS.description = errorJson.__error__[0];
     else if (errorJson.__error__) TOAST_OPTIONS.description = errorJson.__error__;
     else if (errorJson) TOAST_OPTIONS.description = errorJson;

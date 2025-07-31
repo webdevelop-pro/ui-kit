@@ -13,7 +13,6 @@ const props = withDefaults(defineProps<Pick<BaseChartProps<T>, 'data' | 'colors'
   /**
    * Sets the name of the key containing the quantitative chart values.
    */
-  // eslint-disable-next-line no-use-before-define
   category: KeyOfT;
   /**
    * Change the type of the chart

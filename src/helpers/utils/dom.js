@@ -104,7 +104,6 @@ function writeClipboardExecCommand(value) {
 /**
  * Maes an attempt to copy data to the clipboard.
  */
-// eslint-disable-next-line consistent-return
 export async function copyText(text) {
   const copied = writeClipboardExecCommand(text);
   if (copied) return true;

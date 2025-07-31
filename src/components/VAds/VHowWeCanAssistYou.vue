@@ -98,7 +98,7 @@ const emit = defineEmits(['click']);
             loading="lazy"
             alt="How we can assist bg image of code"
             class="how-we-can-assist-you__background-image"
-          />
+          >
         </div>
       </div>
     </div>

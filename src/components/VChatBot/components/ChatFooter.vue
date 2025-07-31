@@ -9,7 +9,6 @@ const props = defineProps({
   disabled: Boolean,
 });
 
-// eslint-disable-next-line
 const emit = defineEmits<{
   (e: 'text', text: string): void;
   (e: 'choice', choice: string): void;

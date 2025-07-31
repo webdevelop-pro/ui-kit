@@ -66,9 +66,7 @@ function formatErrorSchema(schema: ErrorSchema): ErrorSchema {
     return schema.__errors.join(', ');
   }
   const formattedSchema: ErrorSchema = {};
-  // eslint-disable-next-line
   for (const key in schema) {
-    // eslint-disable-next-line
     if (schema.hasOwnProperty(key)) {
       formattedSchema[key] = formatErrorSchema(schema[key]);
     }

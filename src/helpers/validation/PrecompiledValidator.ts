@@ -23,7 +23,6 @@ export class PrecompiledValidator<T> {
     return errors;
   }
 
-  // eslint-disable-next-line
   private getCompiledValidator(schema: JSONSchemaType<T>) {
     return ajv.compile(schema);
   }
@@ -45,7 +44,6 @@ export class PrecompiledValidator<T> {
     return processRawValidationErrors(rawErrors);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   public getSchemaObject(ref: string) {
     return ajv.getSchema(ref);
   }

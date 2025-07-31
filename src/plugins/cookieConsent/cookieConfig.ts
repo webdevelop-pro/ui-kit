@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals */
 // Add type definitions
 declare global {
   interface Window {
@@ -102,7 +101,6 @@ export default {
           onReject: () => {
             // Clear GTM cookies if needed
             const cookies = document.cookie.split(';');
-            // eslint-disable-next-line no-plusplus
             for (let i = 0; i < cookies.length; i++) {
               const cookie = cookies[i];
               const eqPos = cookie.indexOf('=');

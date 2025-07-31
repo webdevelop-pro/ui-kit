@@ -51,7 +51,7 @@ watch(() => isLoading.value, () => {
         :loading="loading"
         class="v-image__image"
         :class="[`is--${fit}`, { 'is--default-image': !src }]"
-      />
+      >
     </component>
   </div>
 </template>

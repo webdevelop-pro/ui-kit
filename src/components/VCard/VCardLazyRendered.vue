@@ -9,7 +9,7 @@ const VCardOfferAsync = defineAsyncComponent({
   hydrate: hydrateOnVisible(),
 });
 
-const props = defineProps<{
+defineProps<{
   offer: IOffer;
 }>();
 

@@ -26,7 +26,6 @@ const props = defineProps({
   disabled: Boolean,
 });
 
-// eslint-disable-next-line
 const emit = defineEmits<{
   (e: 'text', text: string): void;
   (e: 'choice', choice: string): void;
@@ -47,9 +46,7 @@ const onSideClick = (item: IMessage) => {
 
 const isShowAvatar = (index: number) => {
   if (!props.messages) return;
-  // eslint-disable-next-line consistent-return
   if (index === props.messages?.length) return true;
-  // eslint-disable-next-line consistent-return
   return props.messages[index]?.user !== props.messages[index + 1]?.user;
 };
 
@@ -106,7 +103,6 @@ watch(() => props.messages?.length, async () => {
 watch(() => y.value, () => {
   if (!messageBox.value) return;
   const height = messageBox.value?.scrollHeight;
-  // eslint-disable-next-line
   const top = messageBox.value?.clientHeight + y.value;
   // if user scrolled to top
   const defaultSafeDistance = isTablet.value ? 60 : 30;

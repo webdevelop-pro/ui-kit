@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { IFrontmatter } from 'UiKit/types/types';
 
 // General function to find elements by a specified filterName and filterValue

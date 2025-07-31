@@ -4,9 +4,7 @@ import {
   VSelectGroup, VSelectItem,
 } from 'UiKit/components/Base/VForm/VSelect';
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
-import {
-  computed, onMounted, ref, watch,
-} from 'vue';
+import { watch } from 'vue';
 
 type ObjectOptionValue = string | number | boolean;
 type ObjectOption = Record<string, ObjectOptionValue>
@@ -55,8 +53,6 @@ watch(() => [props.options?.length, modelValue.value], () => {
     modelValue.value = displayValue(modelValue.value);
   }
 });
-
-const selectedValue = computed(() => findValueInOption(modelValue.value));
 </script>
 
 <template>

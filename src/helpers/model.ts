@@ -43,7 +43,6 @@ export const createFormModel = (schema: JSONSchemaType<T>): Record<string, any> 
 
   // get object from path
   let mainDataObject = newSchema;
-  // eslint-disable-next-line
   for (const key of path) { // TODO reqrite as array iteration
     if (key !== '') mainDataObject = mainDataObject[key];
   }

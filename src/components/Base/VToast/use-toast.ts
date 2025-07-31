@@ -62,7 +62,6 @@ function addToRemoveQueue(toastId: string) {
 
   const timeout = setTimeout(() => {
     toastTimeouts.delete(toastId);
-    // eslint-disable-next-line no-use-before-define
     dispatch({
       type: actionTypes.REMOVE_TOAST,
       toastId,
@@ -119,7 +118,6 @@ function dispatch(action: Action) {
 function useToast() {
   return {
     toasts: computed(() => state.value.toasts),
-    // eslint-disable-next-line no-use-before-define
     toast,
     dismiss: (toastId?: string) => dispatch({ type: actionTypes.DISMISS_TOAST, toastId }),
     TOAST_REMOVE_DELAY,

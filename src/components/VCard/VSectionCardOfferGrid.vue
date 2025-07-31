@@ -56,7 +56,7 @@ watchEffect(() => {
           class="is--three-col-grid"
         >
           <VCardOffer
-            v-for="(offer, index) in arrayEager"
+            v-for="offer in arrayEager"
             :key="offer.slug"
             :offer="offer"
             image-loading="eager"

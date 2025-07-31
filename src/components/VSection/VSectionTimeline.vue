@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropType, computed, ref } from 'vue';
+import { PropType, computed } from 'vue';
 import { ICaseStudiesTimelineItem } from '../../types/useCase';
 import VTimeline from 'UiKit/components/Base/VTimeline/VTimeline.vue';
 import VTimelineItem from 'UiKit/components/Base/VTimeline/VTimelineItem.vue';
