@@ -57,7 +57,7 @@ const minInvestmentValue = computed(() => currency(minInvestment.value, 0));
 onMounted(() => {
   setTimeout(() => {
     if (imageID.value > 0) {
-      offerImage.value = `${FILER_URL}/public/files/${imageID.value}?size=small`;
+      offerImage.value = `${FILER_URL}/public/files/${imageID.value}?size=medium`;
     } else {
       offerImage.value = defaulImage;
     }
