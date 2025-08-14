@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<Pick<BaseChartProps<T>, 'data' | 'colors'
   /**
    * Function to sort the segment
    */
-  sortFunction?:(a: any, b: any) => number | undefined;
+  sortFunction?:(a: unknown, b: unknown) => number | undefined;
   /**
    * Controls the formatting for the label.
    */
@@ -53,7 +53,11 @@ const index = computed(() => props.index);
 
 const isMounted = useMounted();
 const activeSegmentKey = ref<string>();
-const colors = computed(() => (props.colors?.length ? props.colors : defaultColors(props.data.filter((d) => d[props.category]).filter(Boolean).length)));
+const colors = computed(() => (
+  props.colors?.length
+  ? props.colors
+  : defaultColors(props.data.filter((d) => d[props.category]).filter(Boolean).length)
+));
 const legendItems = computed(() => props.data.map((item, i) => ({
   name: item[props.index],
   color: colors.value[i],

@@ -26,6 +26,7 @@ const isDisabledButton = computed(() => !isValid.value || props.loading);
 let schemaSubscribe = {};
 
 const setupValidator = async () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { JSONSchemaType } = await import('ajv');
   const { emailRule, errorMessageRule } = await import('UiKit/helpers/validation/rules');
   const { PrecompiledValidator } = await import('UiKit/helpers/validation/PrecompiledValidator');

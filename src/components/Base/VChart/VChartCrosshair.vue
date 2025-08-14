@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<{
 
 // Use weakmap to store reference to each datapoint for Tooltip
 const wm = new WeakMap();
-function template(d: any) {
+function template(d: object) {
   if (wm.has(d)) {
     return wm.get(d);
   }

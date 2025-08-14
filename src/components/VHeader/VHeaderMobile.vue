@@ -6,7 +6,7 @@ import {
 } from '../Base/VSheet';
 import VMenuBurger from 'UiKit/components/VHeader/VMenuBurger.vue';
 import VHeaderNavigationListItem from './VHeaderNavigationListItem.vue';
-import { MENU_HEADER_RIGHT } from '@/config/menu';
+import { MENU_HEADER_RIGHT } from 'InvestCommon/domain/menu';
 import { VisuallyHidden } from 'radix-vue';
 
 const VNavigationMenuLink = defineAsyncComponent({

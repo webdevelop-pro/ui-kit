@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<{
 
 // Use weakmap to store reference to each datapoint for Tooltip
 const wm = new WeakMap();
-function template(d: any, i: number, elements: (HTMLElement | SVGElement)[]) {
+function template(d: object, i: number, elements: (HTMLElement | SVGElement)[]) {
   if (props.index in d) {
     if (wm.has(d)) {
       return wm.get(d);
@@ -29,6 +29,7 @@ function template(d: any, i: number, elements: (HTMLElement | SVGElement)[]) {
       return { ...legendReference, value: props.valueFormatter(value) };
     });
     const TooltipComponent = props.customTooltip ?? VChartTooltip;
+    // eslint-disable-next-line vue/one-component-per-file
     createApp(TooltipComponent, { title: d[props.index], data: omittedData }).mount(componentDiv);
     wm.set(d, componentDiv.innerHTML);
     return componentDiv.innerHTML;
@@ -44,6 +45,7 @@ function template(d: any, i: number, elements: (HTMLElement | SVGElement)[]) {
   const omittedData = [{ name: data.name, value: props.valueFormatter(data[props.index]), color: style.fill }];
   const componentDiv = document.createElement('div');
   const TooltipComponent = props.customTooltip ?? VChartTooltip;
+  // eslint-disable-next-line vue/one-component-per-file
   createApp(TooltipComponent, { title: d[props.index], data: omittedData }).mount(componentDiv);
   wm.set(d, componentDiv.innerHTML);
   return componentDiv.innerHTML;

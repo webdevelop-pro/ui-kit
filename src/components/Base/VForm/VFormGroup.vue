@@ -23,11 +23,11 @@ const props = defineProps<{
 
 const schema = ref();
 
-function isFieldRequiredInSchema(fieldName: string, schemaLocal: JSONSchemaType<any>) {
+function isFieldRequiredInSchema(fieldName: string, schemaLocal: JSONSchemaType<unknown>) {
   return schemaLocal.required ? schemaLocal.required.includes(fieldName) : false;
 }
 
-function isFieldRequiredAtPath(path: string, schemaLocal: JSONSchemaType<any>) {
+function isFieldRequiredAtPath(path: string, schemaLocal: JSONSchemaType<unknown>) {
   const parentSchema = getFieldSchema(path, schemaLocal.$ref, schemaLocal);
   if (!parentSchema) return false;
   const fieldName = path.split('.').pop() || '';
