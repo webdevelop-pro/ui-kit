@@ -36,7 +36,7 @@ export const getFilteredObject = (
   formModel: Record<string, any>,
   refPath: string = schema?.$ref || '',
 ): FilteredObject => {
-  if (!schema) return {};
+  if (!schema || !formModel) return {};
 
   // Clone schema to avoid mutation
   const clonedSchema = cloneDeep(schema);
