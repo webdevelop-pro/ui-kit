@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MENU_HEADER_RIGHT } from 'InvestCommon/domain/menu';
+import { MENU_HEADER_RIGHT } from 'InvestCommon/domain/config/menu';
 import { defineAsyncComponent, hydrateOnVisible, ref } from 'vue';
 import VHeaderNavigationListItem from './VHeaderNavigationListItem.vue';
 

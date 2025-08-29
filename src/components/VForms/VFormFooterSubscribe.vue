@@ -74,7 +74,6 @@ const isDisabledButton = computed(() => !isValid.value || props.loading);
           :error-text="getErrorText('email', validation)"
           :required="isFieldRequired('email')"
           dark
-          path="email"
         >
           <VFormInput
             :is-error="baseFormGroupProps.isFieldError"

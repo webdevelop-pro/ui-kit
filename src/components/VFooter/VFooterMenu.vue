@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vitepress';
-import { MENU_FOOTER } from 'InvestCommon/domain/menu';
+import { MENU_FOOTER } from 'InvestCommon/domain/config/menu';
 
 const route = useRoute();
 

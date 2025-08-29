@@ -1,4 +1,5 @@
-import { env } from '@/config/env';
+// import { env } from '@/config/env';
+import env from 'InvestCommon/domain/config/env';
 
 const { HUBSPOTFORM, HUBSPOTPORTAL_ID } = env;
 

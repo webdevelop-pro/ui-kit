@@ -5,7 +5,7 @@ import {
 } from 'vue';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 import VCardOffer from 'UiKit/components/VCard/VCardOffer.vue';
-import { urlOfferSingle } from 'InvestCommon/global/links';
+import { urlOfferSingle } from 'InvestCommon/domain/config/links';
 import VCardLazyRendered from 'UiKit/components/VCard/VCardLazyRendered.vue';
 
 const props = defineProps({
