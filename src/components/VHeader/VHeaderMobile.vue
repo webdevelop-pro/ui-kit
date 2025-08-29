@@ -22,7 +22,10 @@ const open = defineModel<boolean>();
     v-model:open="open"
     class="VHeaderMobile v-header-mobile"
   >
-    <VSheetTrigger v-bind="{ ...$attrs }">
+    <VSheetTrigger 
+      v-bind="{ ...$attrs }"
+      :aria-label="open ? 'Close mobile menu' : 'Open mobile menu'"
+    >
       <VMenuBurger :model-value="open" />
     </VSheetTrigger>
     <VSheetContent

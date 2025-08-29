@@ -3,6 +3,7 @@ import set from 'lodash/set';
 import cloneDeep from 'lodash/cloneDeep';
 import { computed } from 'vue';
 import get from 'lodash/get';
+import pick from 'lodash/pick';
 
 interface FilteredObjectElement {
   enum?: Array<any>;
@@ -113,52 +114,46 @@ export function getFieldSchema(
   return objectFromRefPath;
 }
 
-function removeRequiredFromDefinitions(schema: JSONSchemaType<any>) {
-  if (schema.definitions && typeof schema.definitions === 'object') {
-    Object.values(schema.definitions).forEach((definition) => {
-      // Remove 'required' if it exists
-      if (definition.required) {
-        delete definition.required;
-      }
+function removeRequiredFromDefinitions(schema: any) {
+  const traverse = (node: any) => {
+    if (!node || typeof node !== 'object') return;
+    if (Array.isArray(node)) {
+      node.forEach(traverse);
+      return;
+    }
 
-      // Recursively process nested definitions
-      if (definition.definitions && typeof definition.definitions === 'object') {
-        removeRequiredFromDefinitions(definition);
-      }
-    });
-  }
+    if (node.required) delete node.required;
+
+    const defs = node.definitions || node.$defs;
+    if (defs && typeof defs === 'object') {
+      Object.values(defs).forEach(traverse);
+    }
+  };
+
+  traverse(schema);
   return schema;
 }
 
 export const filterSchema = (schema: JSONSchemaType<any>, formModel: any): any => {
   if (!schema) return schema;
-  // clone deep to ensure we don't mix schemas
-  let newSchema = cloneDeep(schema);
-  // get path
+
+  const newSchema = cloneDeep(schema);
   const path = newSchema.$ref?.replace('#/', '')?.split('/') || [];
 
-  // get object from path
-  let mainDataObject = newSchema;
-  for (const key of path) { // TODO reqrite as array iteration
-    if (key !== '') mainDataObject = mainDataObject[key];
-  }
-  // remove required
+  const mainDataObject: any = path.length ? get(newSchema, path.join('.')) : newSchema;
+  if (!mainDataObject || !mainDataObject.properties) return newSchema;
+
   delete mainDataObject.required;
   set(newSchema, path, mainDataObject);
-  newSchema = removeRequiredFromDefinitions(newSchema);
+  removeRequiredFromDefinitions(newSchema);
 
-  // filter by keys
-  const filteredObject: any = {};
-  for (const key in mainDataObject.properties) { // TODO reqrite as array iteration
-    if (formModel.hasOwnProperty(key)) {
+  const keys = Object.keys(formModel || {});
+  const filteredProperties = keys.length
+    ? pick(mainDataObject.properties, keys)
+    : {};
 
-      filteredObject[key] = mainDataObject.properties[key];
-    }
-  }
-  const cleanedObject = cleanEnums(filteredObject);
-  // put changes data to schema and return
-  path.push('properties');
-  set(newSchema, path, cleanedObject);
+  const cleanedObject = cleanEnums(filteredProperties as any);
+  set(newSchema, [...path, 'properties'], cleanedObject);
   return newSchema;
 };
 
