@@ -36,7 +36,7 @@ const props = defineProps({
   },
   size: {
     type: String,
-    validator: (val) => ['small', 'medium', 'large'].includes(val),
+    validator: (val) => ['small', 'medium', 'large', 'x-large', 'x-small', 'max'].includes(val),
   },
 });
 
@@ -50,6 +50,7 @@ const height = computed(() => {
   if (props.size === 'small') return '32px';
   if (props.size === 'medium') return '40px';
   if (props.size === 'large') return '48px';
+  if (props.size === 'max') return '100%';
   return props.height;
 });
 

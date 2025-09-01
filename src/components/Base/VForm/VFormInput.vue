@@ -1,7 +1,7 @@
 <!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <script lang="ts" setup>
 import {
-  computed, onMounted, ref, watch,
+  computed, ref, watch,
 } from 'vue';
 import { Mask, MaskTokens as IMaskTokens } from 'maska';
 import { vMaska } from 'maska/vue';
@@ -78,7 +78,6 @@ const maskOptions = computed(() => (props.moneyFormat ? moneyFormatOptions : nul
 function getEscapedRegExp(str: string) {
   // If you need to use any of the special characters literally (actually searching for a "*", for instance),
   // you must escape it by putting a backslash in front of it.
-  // eslint-disable-next-line no-useless-escape
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
 }
 

@@ -31,7 +31,7 @@ const btnClasses = computed(() => {
 </script>
 
 <template>
-  <div
+  <li
     class="VTimelineItem v-timeline-item"
     :class="[btnClasses, { 'is--title': title, 'is--horizontal': horizontal }]"
   >
@@ -59,7 +59,7 @@ const btnClasses = computed(() => {
     >
       <slot />
     </div>
-  </div>
+  </li>
 </template>
 
 <style lang="scss">
@@ -72,6 +72,8 @@ const btnClasses = computed(() => {
   --highlight-circle-height: calc(var(--normal-circle-height) + var(--highlight-circle-bigger));
 
   $root: &;
+
+  list-style: none;
 
   &:not(.is--horizontal) {
     #{$root}__items {

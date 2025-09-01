@@ -9,7 +9,7 @@ import logoMob from '/images/logo-mob.svg?url';
       :src="logoMob"
       alt="logo image"
       class="chat-avatar__avatar-image "
-    />
+    >
   </div>
 </template>
 

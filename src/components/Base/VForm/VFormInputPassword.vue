@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
-import VFormInput from 'UiKit/components/Base/VForm/VFormInput.vue';
+import VFormInput from './VFormInput.vue';
 import eyeOff from 'UiKit/assets/images/eye-off.svg';
 import eye from 'UiKit/assets/images/eye.svg';
 
@@ -33,6 +33,11 @@ const showPassword = ref(false);
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
 };
+
+function onUpdateModelValue(val: string) {
+  emit('update:modelValue', val);
+  emit('strength-change', calculatePasswordStrength(val));
+}
 
 const calculatePasswordStrength = (password: string): number => {
   let score = 0;
@@ -87,17 +92,18 @@ const strengthWidth = computed(() => {
       :size="size"
       :disabled="disabled"
       :is-error="isError"
-      :class="class"
+      :class="props.class"
       prepend
-      @update:model-value="(val) => {
-        emit('update:modelValue', val);
-        emit('strength-change', calculatePasswordStrength(val));
-      }"
+      @update:model-value="onUpdateModelValue"
     >
       <template #prepend>
         <div
           class="v-form-input-password__icon-wrap"
+          role="button"
+          tabindex="0"
           @click="togglePasswordVisibility"
+          @keydown.enter="togglePasswordVisibility"
+          @keydown.space.prevent="togglePasswordVisibility"
         >
           <component
             :is="showPassword ? eye : eyeOff"

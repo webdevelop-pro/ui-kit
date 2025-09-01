@@ -17,8 +17,14 @@ defineProps({
     class="VBlogContent v-blog-content"
     itemprop="articleBody"
   >
-    <meta itemprop="datePublished" :content="currentPost?.publishDate" />
-    <meta itemprop="dateModified" :content="currentPost?.updateDate" />
+    <meta
+      itemprop="datePublished"
+      :content="currentPost?.publishDate"
+    >
+    <meta
+      itemprop="dateModified"
+      :content="currentPost?.updateDate"
+    >
     <h1
       v-if="currentPost?.title"
       itemprop="headline"

@@ -5,7 +5,7 @@ import {
 } from 'vue';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 import VCardOffer from 'UiKit/components/VCard/VCardOffer.vue';
-import { urlOfferSingle } from 'InvestCommon/global/links';
+import { urlOfferSingle } from 'InvestCommon/domain/config/links';
 import VCardLazyRendered from 'UiKit/components/VCard/VCardLazyRendered.vue';
 
 const props = defineProps({
@@ -29,7 +29,9 @@ const arrayLazy = computed(() => {
 });
 
 watchEffect(() => {
-  loadingLocal.value = props.loading;
+  setTimeout(() => {
+    loadingLocal.value = props.loading;
+  }, 1000);
 });
 </script>
 
@@ -54,7 +56,7 @@ watchEffect(() => {
           class="is--three-col-grid"
         >
           <VCardOffer
-            v-for="(offer, index) in arrayEager"
+            v-for="offer in arrayEager"
             :key="offer.slug"
             :offer="offer"
             image-loading="eager"

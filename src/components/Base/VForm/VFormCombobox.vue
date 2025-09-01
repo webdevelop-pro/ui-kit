@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import {
   VCombobox, VComboboxAnchor, VComboboxTrigger, VComboboxInput,
   VComboboxContent, VComboboxEmpty, VComboboxGroup, VComboboxItem,
@@ -34,8 +34,9 @@ const searchTerm = ref('');
 const findValueInOption = (value: ObjectOptionValue) => {
   if (Array.isArray(props.options)) {
     // Find the matching option
-    return props.options.find((option) => option[props.itemValue].toString().toLowerCase() === value.toString().toLowerCase()
-          || option[props.itemLabel].toString().toLowerCase() === value.toString().toLowerCase());
+    return props.options.find((option) => (
+      option[props.itemValue].toString().toLowerCase() === value.toString().toLowerCase()
+          || option[props.itemLabel].toString().toLowerCase() === value.toString().toLowerCase()));
   }
 
   return null;
@@ -84,6 +85,7 @@ const onFocus = () => {
 };
 // do not change, otherwise not working search
 // have to wirk with filteredOptions
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const filterFunction = (list: [], _) => list;
 </script>
 

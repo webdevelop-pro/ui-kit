@@ -6,7 +6,7 @@ import { useGlobalLoader } from 'UiKit/store/useGlobalLoader';
 </script>
 
 <script setup lang="ts">
-const { frontmatter, theme } = useData();
+const { theme } = useData();
 const getStarted = theme.navigation.getStarted.data;
 
 const VButton = defineAsyncComponent({

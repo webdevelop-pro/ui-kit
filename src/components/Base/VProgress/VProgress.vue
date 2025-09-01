@@ -19,6 +19,8 @@ const props = withDefaults(
 
 const delegatedProps = computed(() => {
   const { class: _, withText, ...delegated } = props;
+  void _; // Explicitly mark as intentionally unused
+  void withText; // Explicitly mark as intentionally unused
 
   return delegated;
 });

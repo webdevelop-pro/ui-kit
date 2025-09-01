@@ -6,8 +6,10 @@ const props = withDefaults(defineProps<{
   color?: 'primary' | 'secondary'| 'secondary-light' | 'red' | 'yellow' | 'red-light' | 'yellow-light' | 'purple-light' | 'default';
   isActive?: boolean;
   hover?: boolean;
+  as?: string;
 }>(), {
   size: 'medium',
+  as: 'span',
 });
 
 const classes = computed(() => {
@@ -21,13 +23,14 @@ const classes = computed(() => {
 </script>
 
 <template>
-  <span
+  <component
+    :is="as"
     class="VBadge v-badge"
     :class="[classes]"
     v-bind="$attrs"
   >
     <slot />
-  </span>
+  </component>
 </template>
 
 <style lang="scss">
@@ -42,6 +45,7 @@ const classes = computed(() => {
   background-color: colors.$gray-30;
   display: inline-block;
   white-space: nowrap;
+  list-style: none;
 
   &.is--size-medium {
     padding: 8px 12px;

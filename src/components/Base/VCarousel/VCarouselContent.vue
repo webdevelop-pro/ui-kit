@@ -30,6 +30,7 @@ const { carouselRef } = useCarousel();
   &__container {
     width: 100%;
     display: flex;
+    padding-left: 0;
   }
 }
 </style>

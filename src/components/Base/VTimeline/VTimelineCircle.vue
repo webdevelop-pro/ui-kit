@@ -26,7 +26,7 @@ const btnClasses = computed(() => {
       :src="check"
       alt="check icon"
       class="v-timeline-circle__icon "
-    />
+    >
   </div>
 </template>
 

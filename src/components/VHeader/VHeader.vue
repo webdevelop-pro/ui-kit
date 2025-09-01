@@ -21,6 +21,10 @@ defineProps({
     default: true,
   },
   path: String,
+  logoHref: {
+    type: String,
+    default: '/',
+  },
 });
 
 const emit = defineEmits(['click']);
@@ -45,7 +49,7 @@ watchPostEffect(() => {
   >
     <div class="is--container v-header__container">
       <VLogo
-        href="/"
+        :href="logoHref"
         class="v-header__logo"
       />
 

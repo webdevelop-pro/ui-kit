@@ -2,14 +2,14 @@
 import { useIntersectionObserver } from '@vueuse/core';
 import { defineAsyncComponent, hydrateOnVisible, ref } from 'vue';
 import { IOffer } from 'InvestCommon/types/api/offers';
-import { urlOfferSingle } from 'InvestCommon/global/links';
+import { urlOfferSingle } from 'InvestCommon/domain/config/links';
 
 const VCardOfferAsync = defineAsyncComponent({
   loader: () => import(/* webpackChunkName: "VCardOfferAsync" */ 'UiKit/components/VCard/VCardOffer.vue'),
   hydrate: hydrateOnVisible(),
 });
 
-const props = defineProps<{
+defineProps<{
   offer: IOffer;
 }>();
 

@@ -27,8 +27,8 @@ defineProps({
     >
       {{ title }}
     </h2>
-    <div class="v-section-partners__slider">
-      <div
+    <ul class="v-section-partners__slider">
+      <li
         v-for="item in items"
         :key="item.id"
         class="v-section-partners__slider-item"
@@ -40,8 +40,8 @@ defineProps({
           loading="lazy"
           class="v-section-partners__image"
         />
-      </div>
-    </div>
+      </li>
+    </ul>
   </VSection>
 </template>
 
@@ -76,6 +76,9 @@ defineProps({
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
+    margin: 0;
+    padding: 0;
+
     @include media-lte(desktop) {
       flex-wrap: wrap;
       justify-content: center;

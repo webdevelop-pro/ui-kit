@@ -1,13 +1,14 @@
 import { IFrontmatter } from 'UiKit/types/types';
 import groupBy from 'lodash/groupBy';
+import lodashIsEmpty from 'lodash/isEmpty';
+import uniqBy from 'lodash/uniqBy';
+import startCase from 'lodash/startCase';
+import toLower from 'lodash/toLower';
+import unionBy from 'lodash/unionBy';
+import kebabCase from 'lodash/kebabCase';
 
 export function isEmpty(obj: object) {
-  // eslint-disable-next-line
-  for (const prop of Object.keys(obj)) {
-    return false;
-  }
-
-  return true;
+  return lodashIsEmpty(obj);
 }
 
 export function formatPhoneNumber(phoneNumber: string | undefined): string | undefined {
@@ -57,20 +58,7 @@ export function checkObjectAndDeleteNotRequiredFields(
 }
 
 export function urlize(input: string): string {
-  // Convert the input string to lowercase and replace spaces with hyphens
-  let urlFriendlyString = input.toLowerCase().replace(/\s+/g, '-');
-
-  // Remove any characters that are not alphanumeric or hyphens
-  // eslint-disable-next-line
-  urlFriendlyString = urlFriendlyString.replace(/[^a-z0-9\-]/g, '');
-
-  // Remove any consecutive hyphens
-  urlFriendlyString = urlFriendlyString.replace(/-{2,}/g, '-');
-
-  // Trim leading and trailing hyphens
-  urlFriendlyString = urlFriendlyString.replace(/^-+|-+$/g, '');
-
-  return urlFriendlyString;
+  return kebabCase(input);
 }
 
 export function navigateWithQueryParams(url: string, params?: Record<string, string>): void {
@@ -96,50 +84,16 @@ export function getLastModifiedDate(filePath: string): string | null {
 }
 
 export function getUniqueCapitalizedTags(items: { tags?: string[] | null }[]): string[] {
-  const tagMap = new Map<string, string>(); // Map to store case-insensitive tag as key, original tag as value
-
-  // Step 1: Flatten the tags, filter out null, undefined, or missing tags
-  const allTags = items
-    .flatMap((item) => item.tags || []);
-
-  // Step 2: Populate the Map with case-insensitive keys but store original tags
-  allTags.forEach((tag) => {
-    const lowerCaseTag = tag.toLowerCase();
-    if (!tagMap.has(lowerCaseTag)) {
-      tagMap.set(lowerCaseTag, tag); // Store the original case version
-    }
-  });
-
-  // Step 3: Get all unique tags with their original case and capitalize each word
-  const capitalizedTags = [...tagMap.values()].map((tag) => tag.split(' ')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' '));
-
-  return capitalizedTags;
+  const tags = items.flatMap((item) => item.tags || []).filter(Boolean) as string[];
+  const unique = uniqBy(tags, (t) => toLower(t));
+  return unique.map((t) => startCase(toLower(t)));
 }
 
 export function combineTags(
   tagsArray1: string[],
   tagsArray2: string[],
 ): string[] {
-  const tagMap = new Map<string, string>();
-
-  // Helper function to add tags to the map (case-insensitive uniqueness)
-  function addTagsToMap(tags: string[]) {
-    tags.forEach((tag) => {
-      const lowerCaseTag = tag.toLowerCase();
-      if (!tagMap.has(lowerCaseTag)) {
-        tagMap.set(lowerCaseTag, tag); // Store the original case version
-      }
-    });
-  }
-
-  // Add both arrays to the map
-  addTagsToMap(tagsArray1);
-  addTagsToMap(tagsArray2);
-
-  // Return the unique tags in their original case
-  return [...tagMap.values()];
+  return unionBy(tagsArray1, tagsArray2, (t) => toLower(t));
 }
 
 export function filterItemsByTag<T extends { tags?: string[] }>(
@@ -190,7 +144,6 @@ export function findPagesByParentFolder(pages: IFrontmatter[], url: string) {
   // If the current page is not main, adjust the URL to the parent
   if (currentPage && !currentPage.is_main) {
     const parentUrl = url.substring(0, url.lastIndexOf('/'));
-    // eslint-disable-next-line no-param-reassign
     url = parentUrl;
   }
 
@@ -215,11 +168,9 @@ export function groupItemsByRawUrl(data: IFrontmatter[], url:string) {
   const filtered = Object.keys(res)
     .filter((key) => key.includes(parent)) // Apply the filter function to the keys
     .reduce((result, key) => {
-      // eslint-disable-next-line no-param-reassign
       result[key] = res[key]; // Rebuild the filtered object
       return result;
     }, {});
-  // eslint-disable-next-line consistent-return
   return filtered;
 }
 

@@ -94,7 +94,6 @@ export const useChat = defineStore('chat', () => {
       streamReader.value = response.body.pipeThrough(new TextDecoderStream()).getReader();
 
       while (true) {
-        // eslint-disable-next-line no-await-in-loop
         const { value, done } = await streamReader.value.read();
         if (done) break;
 

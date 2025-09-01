@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { VAvatarFallback, VAvatarImage, VAvatar } from 'UiKit/components/Base/VAvatar';
 import user from 'UiKit/assets/images/user.svg?component';
+import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
 
 withDefaults(defineProps<{
   size?: 'x-large' | 'large' | 'medium' | 'small' | 'x-small';
   shape?: 'circle' | 'square';
   src: string | undefined;
   alt?: string;
+  loading?: boolean;
 }>(), {
   size: 'medium',
   shape: 'circle',
@@ -20,8 +22,14 @@ withDefaults(defineProps<{
     :shape="shape"
     class="VAvatarDefault v-avatar-default"
   >
+    <VSkeleton
+      v-if="loading"
+      redius="100%"
+      size="max"
+      class="v-avatar-default__skeleton"
+    />
     <VAvatarImage
-      v-if="src"
+      v-else-if="src"
       :src="src"
       :alt="alt"
     />
@@ -44,6 +52,11 @@ withDefaults(defineProps<{
     max-height: 100%;
     flex-shrink: 0;
     color: $gray-50;
+  }
+
+  &__skeleton {
+    width: 100%;
+    height: 100%;
   }
 }
 

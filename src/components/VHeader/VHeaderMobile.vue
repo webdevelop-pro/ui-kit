@@ -6,7 +6,7 @@ import {
 } from '../Base/VSheet';
 import VMenuBurger from 'UiKit/components/VHeader/VMenuBurger.vue';
 import VHeaderNavigationListItem from './VHeaderNavigationListItem.vue';
-import { MENU_HEADER_RIGHT } from '@/config/menu';
+import { MENU_HEADER_RIGHT } from 'InvestCommon/domain/config/menu';
 import { VisuallyHidden } from 'radix-vue';
 
 const VNavigationMenuLink = defineAsyncComponent({
@@ -22,7 +22,10 @@ const open = defineModel<boolean>();
     v-model:open="open"
     class="VHeaderMobile v-header-mobile"
   >
-    <VSheetTrigger v-bind="{ ...$attrs }">
+    <VSheetTrigger 
+      v-bind="{ ...$attrs }"
+      :aria-label="open ? 'Close mobile menu' : 'Open mobile menu'"
+    >
       <VMenuBurger :model-value="open" />
     </VSheetTrigger>
     <VSheetContent

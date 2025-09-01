@@ -17,7 +17,7 @@ export interface ICardPrimary {
   url?: string;
 }
 
-const props = defineProps({
+defineProps({
   data: {
     type: Object as PropType<ICardPrimary>,
     required: true,
@@ -26,7 +26,6 @@ const props = defineProps({
   ellipsis: Boolean,
 });
 
-// eslint-disable-next-line arrow-body-style
 const getImageType = () => {
   // if ((props.data.type?.toLowerCase() === 'fintech')
   //   || (props.data.type?.toLowerCase() === 'reg-cf')) return '/images/use-cases/fintech.svg';

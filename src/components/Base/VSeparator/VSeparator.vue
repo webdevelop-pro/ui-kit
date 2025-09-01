@@ -8,9 +8,11 @@ const props = defineProps<
 
 const delegatedProps = computed(() => {
   const { withContainer: _, ...delegated } = props;
+  void _; // Explicitly mark as intentionally unused
 
   return delegated;
 });
+
 </script>
 
 <template>

@@ -19,7 +19,8 @@ const emits = defineEmits<CheckboxRootEmits>();
 const inputId = useId();
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+  const { class: unused, ...delegated } = props;
+  void unused; // Explicitly mark as intentionally unused
 
   return delegated;
 });

@@ -30,7 +30,7 @@ defineProps({
           <meta
             itemprop="position"
             :content="String(index)"
-          />
+          >
         </VBreadcrumbItem>
         <VBreadcrumbSeparator>
           <slot>

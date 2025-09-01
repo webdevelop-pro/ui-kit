@@ -1,13 +1,14 @@
 import { JSONSchemaType } from 'ajv/dist/types/json-schema';
 import cloneDeep from 'lodash/cloneDeep';
-import { capitalizeFirstLetter } from 'UiKit/helpers/text';
+import defaults from 'lodash/defaults';
+import pick from 'lodash/pick';
+import type { Ref } from 'vue';
+import { capitalizeFirstLetter } from './text';
 
-export function populateModel<T>(source: Partial<T>, defaults: T): T {
-  return Object.keys(defaults).reduce((acc, key) => {
-    const typedKey = key as keyof T;
-    acc[typedKey] = source?.[typedKey] !== undefined ? source[typedKey] : defaults[typedKey];
-    return acc;
-  }, {} as T);
+export function populateModel<T extends object>(source: Partial<T>, defaultsObj: T): T {
+  // ensure only keys from defaults are preserved; then fill missing via defaults
+  const picked = pick(source as Record<string, any>, Object.keys(defaultsObj)) as Partial<T>;
+  return defaults({} as T, picked, defaultsObj);
 }
 
 // Function to initialize properties recursively
@@ -34,8 +35,8 @@ const initializeProperties = (properties: Record<string, any>): Record<string, a
   }, {} as Record<string, any>);
 };
 
-export const createFormModel = (schema: JSONSchemaType<T>): Record<string, any> => {
-  if (!schema || !schema.$ref) return null;
+export const createFormModel = <T>(schema: JSONSchemaType<T>): Record<string, any> => {
+  if (!schema || !schema.$ref) return {} as Record<string, any>;
   // clone deep to ensure we don't mix schemas
   const newSchema = cloneDeep(schema);
   // get path
@@ -43,7 +44,6 @@ export const createFormModel = (schema: JSONSchemaType<T>): Record<string, any> 
 
   // get object from path
   let mainDataObject = newSchema;
-  // eslint-disable-next-line
   for (const key of path) { // TODO reqrite as array iteration
     if (key !== '') mainDataObject = mainDataObject[key];
   }
@@ -54,7 +54,7 @@ export const createFormModel = (schema: JSONSchemaType<T>): Record<string, any> 
 
 export const getOptions = (
   fieldPath: string,
-  schemaObject: object, // Pass schemaObject as a prop
+  schemaObject: Ref<any>, // Pass schemaObject as a prop
 ): { value: string; name: string }[] => {
   const optionsCache = new Map<string, { value: string; name: string }[]>();
   // Check if options for this field are already cached

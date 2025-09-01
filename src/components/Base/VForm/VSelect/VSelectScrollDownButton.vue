@@ -4,9 +4,9 @@ import { SelectScrollDownButton, type SelectScrollDownButtonProps, useForwardPro
 import { computed, type HTMLAttributes } from 'vue';
 
 const props = defineProps<SelectScrollDownButtonProps & { class?: HTMLAttributes['class'] }>();
-
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+  const { class: unused, ...delegated } = props;
+  void unused; // Explicitly mark as intentionally unused
 
   return delegated;
 });

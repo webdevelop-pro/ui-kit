@@ -95,7 +95,7 @@ const onFileChange = async () => {
     emit('update:modelValue', uploadedFileId.value);
     emit('upload-success', uploadedFileId.value);
     filesUploadError.value = '';
-  } catch (error) {
+  } catch {
     filesUploadError.value = 'Upload failed. Please try again.';
     emit('upload-error', 'Upload failed');
   } finally {

@@ -3,7 +3,7 @@ import { DropdownMenuContentProps } from 'radix-vue/dist/DropdownMenu/DropdownMe
 import {
   VDropdownMenu, VDropdownMenuTrigger, VDropdownMenuContent, VDropdownMenuItem,
 } from 'UiKit/components/Base/VDropdownMenu';
-import { computed, PropType, ref } from 'vue';
+import { PropType, ref } from 'vue';
 
 export interface IDropdown {
     to?: string;
@@ -12,7 +12,7 @@ export interface IDropdown {
     active?: boolean;
 }
 
-const props = defineProps({
+defineProps({
   menu: Array as PropType<IDropdown[]>,
   withChevron: Boolean,
   contentProps: Object as PropType<DropdownMenuContentProps>,

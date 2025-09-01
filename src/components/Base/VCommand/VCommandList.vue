@@ -9,7 +9,8 @@ const props = withDefaults(defineProps<ComboboxContentProps & { class?: HTMLAttr
 const emits = defineEmits<ComboboxContentEmits>();
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+  const { class: unused, ...delegated } = props;
+  void unused; // Explicitly mark as intentionally unused
 
   return delegated;
 });

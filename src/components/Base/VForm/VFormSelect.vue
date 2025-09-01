@@ -4,9 +4,7 @@ import {
   VSelectGroup, VSelectItem,
 } from 'UiKit/components/Base/VForm/VSelect';
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
-import {
-  computed, onMounted, ref, watch,
-} from 'vue';
+import { watch } from 'vue';
 
 type ObjectOptionValue = string | number | boolean;
 type ObjectOption = Record<string, ObjectOptionValue>
@@ -27,15 +25,16 @@ const props = withDefaults(defineProps<{
   size: 'large',
 });
 
-const modelValue = defineModel();
+const modelValue = defineModel<unknown>();
 
 // Helper function to find the label or value based on modelValue (case-insensitive)
 const findValueInOption = (value: ObjectOptionValue) => {
   if (!value) return value;
   if (Array.isArray(props.options)) {
     // Find the matching option
-    return props.options.find((option) => option[props.itemValue].toString().toLowerCase() === value.toString().toLowerCase()
-          || option[props.itemLabel].toString().toLowerCase() === value.toString().toLowerCase());
+    return props.options.find((option) => (
+      option[props.itemValue].toString().toLowerCase() === value.toString().toLowerCase()
+          || option[props.itemLabel].toString().toLowerCase() === value.toString().toLowerCase()));
   }
 
   return null;
@@ -55,8 +54,6 @@ watch(() => [props.options?.length, modelValue.value], () => {
     modelValue.value = displayValue(modelValue.value);
   }
 });
-
-const selectedValue = computed(() => findValueInOption(modelValue.value));
 </script>
 
 <template>

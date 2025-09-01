@@ -11,7 +11,6 @@ export function getTextContentFromMarkdown(markdownText) {
 }
 
 export function trimString(str, limit) {
-  // eslint-disable-next-line prefer-template
   return str.length > limit ? str.substring(0, limit - 3) + '...' : str;
 }
 

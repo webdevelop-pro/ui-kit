@@ -1,22 +1,17 @@
 <script setup lang="ts">
-import { IOffer } from 'InvestCommon/types/api/offers';
-import { currency } from 'InvestCommon/helpers/currency';
+import { IOfferFormatted } from 'InvestCommon/types/offer';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VBadge from 'UiKit/components/Base/VBadge/VBadge.vue';
 import { PropType, computed } from 'vue';
-import defaulImage from 'InvestCommon/assets/images/default.svg?url';
 import VInfoSlot from 'UiKit/components/VInfo/VInfoSlot.vue';
-import { useOfferStore } from 'InvestCommon/store/useOffer';
 import VImage from 'UiKit/components/Base/VImage/VImage.vue';
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
 import { VCard, VCardContent } from 'UiKit/components/Base/VCard';
-import env from 'InvestCommon/global';
 
-const { FILER_URL } = env;
 
 const props = defineProps({
   offer: {
-    type: Object as PropType<IOffer>,
+    type: Object as PropType<IOfferFormatted>,
   },
   funded: Boolean,
   href: String,
@@ -25,33 +20,11 @@ const props = defineProps({
     default: 'lazy',
   },
 });
-const offerStore = useOfferStore();
-const imageID = computed(() => props.offer?.image_link_id);
-
-const offerImage = computed(() => {
-  if (imageID.value > 0) return `${FILER_URL}/public/files/${imageID.value}?size=small`;
-  return defaulImage;
-});
-
-const isDefaultImage = computed(() => !imageID.value);
-const minInvestment = computed(() => ((props.offer?.min_investment || 0) * (props.offer?.price_per_share || 0)));
-const amountPercent = computed(() => offerStore.getOfferFundedPercent(props.offer));
-const isClosingSoon = computed(() => (amountPercent.value > 90));
-const isNew = computed(() => {
-  const twoDaysAgo = new Date();
-  twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
-  // return start_at < twoDaysAgo;
-  return false; // TODO fix
-});
-const tagText = computed(() => (isClosingSoon.value ? '🔥 Closing Soon' : 'New'));
-const tagBackground = computed(() => (isClosingSoon.value ? 'is--background-yellow-light' : 'is--background-secondary-light'));
-const showTag = computed(() => isClosingSoon.value || isNew.value);
 const infoTags = computed(() => ([
   'Fintech',
   'E-Commerce',
   'Network Security',
 ]));
-const minInvestmentValue = computed(() => currency(minInvestment.value, 0));
 </script>
 
 <template>
@@ -62,23 +35,23 @@ const minInvestmentValue = computed(() => currency(minInvestment.value, 0));
     class="VOfferCard v-offer-card with-default-distance"
   >
     <VBadge
-      v-if="showTag"
-      :class="tagBackground"
+      v-if="offer?.showTag"
+      :class="offer?.tagBackground"
       class="v-offer-card__tag"
     >
-      {{ tagText }}
+      {{ offer?.tagText }}
     </VBadge>
     <div
-      v-if="offerImage"
+      v-if="offer?.imageMedium"
       class="v-offer-card__img-wrap"
     >
       <VImage
-        :src="offerImage"
+        :src="offer?.imageMedium"
         :alt="offer?.slug || 'offer image'"
         itemprop="image"
         :loading="imageLoading"
         class="v-offer-card__img is--margin-top-0"
-        :class="{ 'is--default-image': isDefaultImage }"
+        :class="{ 'is--default-image': offer?.isDefaultImage }"
       />
     </div>
     <VSkeleton
@@ -126,10 +99,10 @@ const minInvestmentValue = computed(() => currency(minInvestment.value, 0));
               <div class="v-offer-card__details is--small-2">
                 Min investment:
                 <span
-                  v-if="props.offer"
+                  v-if="offer"
                   class="v-offer-card__details-number is--h6__title"
                 >
-                  {{ minInvestmentValue }}
+                  {{ offer?.minInvestmentFormatted }}
                 </span>
                 <VSkeleton
                   v-else
@@ -144,7 +117,7 @@ const minInvestmentValue = computed(() => currency(minInvestment.value, 0));
                   v-if="props.offer"
                   class="v-offer-card__details-number is--h6__title"
                 >
-                  {{ currency(offer?.valuation, 0) }}
+                  {{ offer?.valuationFormatted }}
                 </span>
                 <VSkeleton
                   v-else

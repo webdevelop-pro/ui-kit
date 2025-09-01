@@ -2,7 +2,7 @@
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VFormCheckboxGroup from 'UiKit/components/Base/VForm/VFormCheckboxGroup.vue';
 import {
-  PropType, watch, ref, toRaw,
+  PropType, watch, ref,
 } from 'vue';
 import { onClickOutside } from '@vueuse/core';
 import filterIcon from 'UiKit/assets/images/filter.svg';
@@ -32,7 +32,6 @@ const itemsInner = ref();
 const updateFilters = () => {
   selectedFilters.value = 0;
   itemsInner.value?.reduce((countLocal, item) => {
-    // eslint-disable-next-line no-unsafe-optional-chaining
     selectedFilters.value += item.model?.length;
     return selectedFilters.value;
   }, 0);
@@ -53,7 +52,6 @@ const onApplyClick = () => {
 };
 
 const onClear = () => {
-  // eslint-disable-next-line no-param-reassign
   itemsInner.value?.forEach((item) => { item.model = []; });
 };
 

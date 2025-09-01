@@ -158,6 +158,12 @@ export const identificationNumberRule = {
   minLength: 3,
 };
 
+export const documentRule = {
+  errorMessage: {
+    minimum: 'Please provide a document',
+  },
+};
+
 // ERROR MESSAGE
 export const errorMessageRule = {
   required: 'Please complete',

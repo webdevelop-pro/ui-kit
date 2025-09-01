@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  DialogClose,
   DialogContent,
   type DialogContentEmits,
   type DialogContentProps,
@@ -30,6 +29,8 @@ const emits = defineEmits<DialogContentEmits>();
 
 const delegatedProps = computed(() => {
   const { side, ariaDescribedby, ...delegated } = props;
+  void side; // Explicitly mark as intentionally unused
+  void ariaDescribedby; // Explicitly mark as intentionally unused
 
   return delegated;
 });

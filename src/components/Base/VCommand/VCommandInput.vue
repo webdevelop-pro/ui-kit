@@ -15,6 +15,8 @@ const props = withDefaults(defineProps<ComboboxInputProps & {
 
 const delegatedProps = computed(() => {
   const { class: _, size, ...delegated } = props;
+  void _; // Explicitly mark as intentionally unused
+  void size; // Explicitly mark as intentionally unused
 
   return delegated;
 });

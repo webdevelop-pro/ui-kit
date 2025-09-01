@@ -1,61 +1,21 @@
 <script lang="ts" setup>
-import {
-  computed, ref, watch, toRaw,
-} from 'vue';
-import get from 'lodash/get';
-import merge from 'lodash/merge';
-import { getFieldSchema } from 'UiKit/helpers/validation/general';
-import { JSONSchemaType } from 'ajv';
+import { computed } from 'vue';
 import questionIcon from 'UiKit/assets/images/circle-question.svg';
 import VTooltip from 'UiKit/components/VTooltip.vue';
 
 const props = defineProps<{
   label?: string;
-  model?: object;
-  path?: string;
-  validation?: object | unknown;
-  schemaBack?: object;
-  schemaFront?: object;
   errorText?: string[];
   required?: boolean;
   dark?: boolean;
 }>();
 
-const schema = ref();
-
-function isFieldRequiredInSchema(fieldName: string, schemaLocal: JSONSchemaType<any>) {
-  return schemaLocal.required ? schemaLocal.required.includes(fieldName) : false;
-}
-
-function isFieldRequiredAtPath(path: string, schemaLocal: JSONSchemaType<any>) {
-  const parentSchema = getFieldSchema(path, schemaLocal.$ref, schemaLocal);
-  if (!parentSchema) return false;
-  const fieldName = path.split('.').pop() || '';
-  return isFieldRequiredInSchema(fieldName, parentSchema);
-}
-
-const required = computed(() => {
-  if (props.required) return true;
-  if (!props.path || !schema.value) return false;
-  return isFieldRequiredAtPath(props.path, schema.value);
-});
 
 const errorText = computed(() => {
-  if (!props.path) return '';
-  let errorsArray = [];
-  const validationError = get(props.validation, props.path);
-  const backendError = props.errorText;
-  if (validationError) errorsArray.push(validationError);
-  if (backendError) errorsArray = [...errorsArray, backendError];
-  return errorsArray.join(', ') || '';
+  return props.errorText?.join(', ') || '';
 });
-const isError = computed(() => (errorText.value.length > 0));
+const isError = computed(() => (errorText.value?.length > 0));
 
-watch(() => [props.schemaBack, props.schemaFront], () => {
-  const schema1 = structuredClone(toRaw(props.schemaBack));
-  const schema2 = structuredClone(toRaw(props.schemaFront));
-  schema.value = merge(schema1, schema2);
-}, { immediate: true, deep: true });
 </script>
 
 <template>

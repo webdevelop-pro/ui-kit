@@ -2,7 +2,7 @@
 import type { TabsRootEmits, TabsRootProps } from 'radix-vue';
 import { TabsRoot, useForwardPropsEmits } from 'radix-vue';
 import {
-  computed, HTMLAttributes, ref, watch,
+  computed, HTMLAttributes, watch,
 } from 'vue';
 import { useSyncWithUrl } from 'UiKit/composables/useSyncWithUrl';
 // todo: if multiple tabs on page? how to differentiate
@@ -11,20 +11,23 @@ const props = withDefaults(defineProps<TabsRootProps & {
   tabsToUrl?: boolean;
   variant?: 'primary' | 'secondary';
   fullWidth?: boolean;
+  queryKey?: string;
 }>(), {
   variant: 'primary',
 });
 const emits = defineEmits<TabsRootEmits>();
 
 const delegatedProps = computed(() => {
-  const { class: _, tabsToUrl, ...delegated } = props;
+  const { class: unused, tabsToUrl, ...delegated } = props;
+  void unused; // Explicitly mark as intentionally unused
+  void tabsToUrl; // Explicitly mark as intentionally unused
 
   return delegated;
 });
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 const selectedTab = useSyncWithUrl({
-  key: 'tab',
+  key: props.queryKey || 'tab',
   defaultValue: props.defaultValue || '',
   syncToUrl: props.tabsToUrl,
 });

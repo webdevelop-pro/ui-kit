@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { stripHtmlAndMarkdown } from './text';
 import { getFirst200Characters } from './general';
 import { urlFormat } from './url';

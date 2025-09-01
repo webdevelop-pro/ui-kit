@@ -9,6 +9,5 @@ export function formatPhoneNumber(input: string | number): string {
   const centralOfficeCode = digits.slice(4, 7);
   const lineNumber = digits.slice(7, 11);
 
-  // eslint-disable-next-line consistent-return
   return `+1 (${areaCode}) ${centralOfficeCode} - ${lineNumber}`;
 }

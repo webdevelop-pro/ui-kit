@@ -2,7 +2,7 @@
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
 import defaulImage from 'UiKit/assets/images/default.svg?url';
 import { useImage } from '@vueuse/core';
-import { watch } from 'vue';
+import { computed, watch } from 'vue';
 
 const props = withDefaults(defineProps<{
   src: string | undefined;
@@ -11,6 +11,7 @@ const props = withDefaults(defineProps<{
   loading?: 'lazy' | 'eager' | undefined;
   clientOnly?: boolean;
   isFullWidth?: boolean;
+  isLoading?: boolean;
 }>(), {
   fit: 'none',
   loading: 'eager',
@@ -20,8 +21,10 @@ const emit = defineEmits(['loading:src']);
 
 const { isLoading } = useImage({ src: props.src || '' });
 
-watch(() => isLoading.value, () => {
-  emit('loading:src', isLoading.value);
+const isLoadingLocal = computed(() => props.isLoading || isLoading.value);
+
+watch(() => isLoadingLocal.value, () => {
+  emit('loading:src', isLoadingLocal.value);
 }, { immediate: true });
 </script>
 
@@ -37,13 +40,13 @@ watch(() => isLoading.value, () => {
       class="v-image__client"
     >
       <VSkeleton
-        v-show="isLoading"
+        v-show="isLoadingLocal"
         height="100%"
         width="100%"
         class="v-image__skeleton"
       />
       <img
-        v-show="!isLoading"
+        v-show="!isLoadingLocal"
         v-bind="$attrs"
         :key="src"
         :src="src || defaulImage"
@@ -51,7 +54,7 @@ watch(() => isLoading.value, () => {
         :loading="loading"
         class="v-image__image"
         :class="[`is--${fit}`, { 'is--default-image': !src }]"
-      />
+      >
     </component>
   </div>
 </template>

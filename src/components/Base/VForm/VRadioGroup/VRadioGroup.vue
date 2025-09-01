@@ -8,7 +8,8 @@ const props = defineProps<RadioGroupRootProps & { class?: HTMLAttributes['class'
 const emits = defineEmits<RadioGroupRootEmits>();
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+  const { class: unused, ...delegated } = props;
+  void unused; // Explicitly mark as intentionally unused
 
   return delegated;
 });

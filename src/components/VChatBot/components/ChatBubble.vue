@@ -62,7 +62,6 @@ function replaceLinks(text: string) {
     if (latestUserMessage.value?.message?.value.toLowerCase().includes(key.toLowerCase())) {
       return;
     }
-    // eslint-disable-next-line
     text = text.replace(regex, (match) => {
       const spanRegex = new RegExp(`<span[^>]*?data-key="${key}"[^>]*?>.*?</span>`, 'gi');
       if (!replacedKeys.has(key) && !spanRegex.test(match) && !props.message?.message?.disableLinkReplace) {
