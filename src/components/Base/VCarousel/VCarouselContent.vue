@@ -13,12 +13,12 @@ const { carouselRef } = useCarousel();
     ref="carouselRef"
     class="VCarouselContent v-carousel-content"
   >
-    <ul
+    <div
       v-bind="$attrs"
       class="v-carousel-content__container"
     >
       <slot />
-    </ul>
+    </div>
   </div>
 </template>
 

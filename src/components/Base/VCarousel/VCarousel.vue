@@ -49,8 +49,6 @@ function onKeyDown(event: KeyboardEvent) {
     aria-roledescription="carousel"
     tabindex="0"
     class="VCarousel v-carousel"
-    itemscope
-    itemtype="https://schema.org/MediaGallery"
     @keydown="onKeyDown"
   >
     <slot
