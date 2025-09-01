@@ -25,9 +25,9 @@ defineProps({
         {{ title }}
       </h3>
     </slot>
-    <div class="v-timeline__content">
+    <ul class="v-timeline__content">
       <slot />
-    </div>
+    </ul>
   </div>
 </template>
 
@@ -48,6 +48,7 @@ defineProps({
   &__content{
     width: 100%;
     position: relative;
+    padding-left: 0;
   }
 
   &.is--content-style-default{

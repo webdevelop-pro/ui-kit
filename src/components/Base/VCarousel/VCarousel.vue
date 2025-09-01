@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/no-static-element-interactions -->
 <script setup lang="ts">
 import type { CarouselEmits, CarouselProps } from './interface';
 import { useProvideCarousel } from './useCarousel';
