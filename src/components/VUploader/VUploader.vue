@@ -1,11 +1,9 @@
-<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import uploadIcon from 'UiKit/assets/images/upload.svg';
-import fileIcon from 'UiKit/assets/images/file.svg';
-import closeIcon from 'UiKit/assets/images/close.svg?component';
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
+import VUploaderPreviewCard from './VUploaderPreviewCard.vue';
 
 interface Props {
   isError?: boolean;
@@ -34,8 +32,8 @@ const props = withDefaults(defineProps<Props>(), {
   acceptedFileTypes: '*',
   dragDropText: 'Drag & drop files here or click to upload',
   uploadButtonText: 'Upload',
-  supportedFilesText: 'Supported files: all types',
-  maxSizeText: 'Maximum size 10MB',
+  supportedFilesText: 'all types',
+  maxSizeText: '10MB',
   showFilePreview: true,
   showSupportedFilesInfo: true,
   showMaxSizeInfo: true,
@@ -47,12 +45,16 @@ const emit = defineEmits<{
   'update:files': [files: File[]];
   'remove': [index: number];
   'error': [message: string];
+  'click': [index: number];
 }>();
 
 const filesUploadError = ref('');
 const isDragging = ref(false);
 const refFiles = ref<HTMLInputElement>();
 const allFiles = ref<File[]>([]);
+
+// Ensure unique association between label and input for accessibility
+const inputId = `v-uploader-file-${Math.random().toString(36).slice(2, 10)}`;
 
 // Validation helpers
 const validateFileSize = (files: File[]): string | null => {
@@ -169,27 +171,31 @@ const removeFile = (index: number) => {
         'is--loading': isLoading,
         'is--files': allFiles?.length > 0,
       }"
+      role="button"
+      tabindex="0"
+      :aria-label="dragDropText"
       @dragover.prevent="handleDragEvent($event, true)"
       @dragleave.prevent="handleDragEvent($event, false)"
       @drop.prevent="drop"
       @click="triggerFileInput"
+      @keydown.enter.prevent="triggerFileInput"
+      @keydown.space.prevent="triggerFileInput"
     >
-      <input
-        id="file-control"
-        ref="refFiles"
-        name="file"
-        :multiple="multiple"
-        type="file"
-        :accept="acceptedFileTypes"
-        :disabled="isDisabled || isLoading"
-        @change="onFileChange"
-      >
-
       <label
         class="v-uploader__label"
-        for="file-control"
+        :for="inputId"
         :class="{ disabled: isDisabled || isLoading }"
       >
+        <input
+          :id="inputId"
+          ref="refFiles"
+          name="file"
+          :multiple="multiple"
+          type="file"
+          :accept="acceptedFileTypes"
+          :disabled="isDisabled || isLoading"
+          @change="onFileChange"
+        >
         {{ dragDropText }}
       </label>
       <VSkeleton
@@ -217,31 +223,14 @@ const removeFile = (index: number) => {
         v-if="allFiles?.length && showFilePreview"
         class="v-uploader__preview"
       >
-        <div
+        <VUploaderPreviewCard
           v-for="(file, index) in allFiles"
           :key="`${file.name}-${index}`"
-          class="v-uploader__preview-card"
-        >
-          <div class="v-uploader__preview-card-info">
-            <component
-              :is="fileIcon"
-              class="v-uploader__preview-card-icon"
-            />
-            <span class="v-uploader__preview-card-name is--small">
-              {{ file.name }}
-            </span>
-          </div>
-          <div
-            class="v-uploader__preview-card-remove"
-            title="Remove file"
-            @click.stop="removeFile(index)"
-          >
-            <closeIcon
-              alt="close icon"
-              class="v-uploader__close-icon"
-            />
-          </div>
-        </div>
+          :file="file"
+          :index="index"
+          @remove="removeFile"
+          @click="emit('click', index)"
+        />
       </div>
     </div>
     
@@ -264,9 +253,9 @@ const removeFile = (index: number) => {
       v-else-if="showSupportedFilesInfo || showMaxSizeInfo"
       class="v-uploader__comment is--small"
     >
-      <span v-if="showSupportedFilesInfo">{{ supportedFilesText }}</span>
+      <span v-if="showSupportedFilesInfo">Supported files: {{ supportedFilesText }}</span>
       <span v-if="showSupportedFilesInfo && showMaxSizeInfo">. </span>
-      <span v-if="showMaxSizeInfo">{{ maxSizeText }}</span>
+      <span v-if="showMaxSizeInfo">Maximum size {{ maxSizeText }}</span>
     </div>
   </div>
 </template>
@@ -287,6 +276,11 @@ const removeFile = (index: number) => {
     border-radius: 2px;
     border: 1px dashed colors.$gray-40;
     background: colors.$gray-10;
+
+    &:focus-visible{
+      border-color: colors.$primary;
+    }
+
     &.is--dragging{
       border-color: colors.$primary;
     }
@@ -325,6 +319,7 @@ const removeFile = (index: number) => {
 
   &__label{
     color: colors.$gray-60;
+    text-align: center;
   }
 
   &__file-button{
@@ -338,27 +333,6 @@ const removeFile = (index: number) => {
     width: 100%;
     position: relative;
     z-index: 1;
-  }
-
-  &__preview-card{
-    width: 100%;
-    display: flex;
-    border-top: 1px solid colors.$gray-20;
-    padding: 7px 13px 7px 10px;
-    align-items: center;
-    gap: 12px;
-    justify-content: space-between;
-  }
-
-  &__preview-card-info{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: colors.$gray-80;
-  }
-
-  &__preview-card-remove{
-    cursor: pointer;
   }
 
   &__comment{
@@ -375,14 +349,6 @@ const removeFile = (index: number) => {
     width: 16px;
   }
 
-  &__preview-card-icon{
-    width: 16px;
-  }
 
-  &__close-icon {
-    width: 15px;
-    height: 15px;
-    vertical-align: middle;
-  }
 }
 </style>
