@@ -1,0 +1,11 @@
+// we disable zooming for better UX on mobile devices, 
+// but this class can be used to re-enable it for specific elements
+.is--pwa-allow-zoom { 
+    touch-action: pinch-zoom pan-x pan-y; 
+}
+
+@media (display-mode: standalone) {
+    html, body {
+      overscroll-behavior: none;
+    }
+  }
