@@ -104,6 +104,7 @@ const id = useId();
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-form-radio{
   $root: &;
   display: flex;
@@ -112,6 +113,7 @@ const id = useId();
   &.is--row {
     align-items: center;
     flex-direction: row;
+
     #{$root}__item{
       margin: 0 30px 0 0;
     }
@@ -139,8 +141,14 @@ const id = useId();
     margin: 0;
     -webkit-appearance: none;
     cursor: pointer;
+
+    &:focus-visible {
+      border-color: colors.$primary;
+    }
+
     &:checked {
       border-color: colors.$primary;
+
       &:after {
         content: '';
         position: absolute;
