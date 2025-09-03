@@ -45,6 +45,7 @@ defineProps({
     @include media-lte(tablet) {
       max-width: 190.27px;
     }
+
     @include media-gt(tablet) {
       right: -0.337px;
       bottom: -47px;

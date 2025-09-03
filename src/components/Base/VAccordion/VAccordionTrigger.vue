@@ -40,14 +40,17 @@ const delegatedProps = computed(() => {
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
+
 .v-accordion-chevron {
   width: 18px;
   color: inherit;
   transition: transform 0.3s ease;
 }
+
 .v-accordion-trigger[data-state="open"] {
   background-color: colors.$gray-10;
   transition: transform 0.3s ease;
+
   &.is--white {
     background-color: colors.$white;
     box-shadow: variables.$box-shadow-small;
@@ -65,7 +68,6 @@ const delegatedProps = computed(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-right: 16px;
   cursor: pointer;
   padding: 16px;
   text-align: inherit;

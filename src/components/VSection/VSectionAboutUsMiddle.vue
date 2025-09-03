@@ -104,6 +104,7 @@ const careers = filterPages(allPages as IFrontmatter[], 'slug', 'careers');
     border-radius: 2px;
     overflow: hidden;
     position: relative;
+
     @include media-gt(tablet) {
       flex: 1; // Adjusted
     }

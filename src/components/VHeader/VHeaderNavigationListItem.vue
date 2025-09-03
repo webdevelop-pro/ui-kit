@@ -62,6 +62,7 @@ const getSvgComponent = (data) => {
 <style lang="scss">
 @use 'UiKit/styles/_variables.scss' as variables;
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-header-navigation-list-item {
   margin-top: 0;
 

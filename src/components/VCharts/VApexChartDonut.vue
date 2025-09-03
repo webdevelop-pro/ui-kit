@@ -71,6 +71,7 @@ const options = computed(() => ({
   display: flex;
   align-items: center;
   flex-direction: column;
+
   &__title {
     margin-bottom: 10px;
   }

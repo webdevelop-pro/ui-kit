@@ -40,6 +40,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
 @use 'UiKit/styles/_transitions.scss' as *;
+
 .v-tooltip-content {
   padding: 8px;
   box-shadow: variables.$box-shadow-small;
@@ -52,15 +53,19 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   max-width: 270px;
   width: 100%;
 }
+
 .v-tooltip-content[data-state='delayed-open'][data-side='top'] {
   animation-name: slideDownAndFade;
 }
+
 .v-tooltip-content[data-state='delayed-open'][data-side='right'] {
   animation-name: slideLeftAndFade;
 }
+
 .v-tooltip-content[data-state='delayed-open'][data-side='bottom'] {
   animation-name: slideUpAndFade;
 }
+
 .v-tooltip-content[data-state='delayed-open'][data-side='left'] {
   animation-name: slideRightAndFade;
 }

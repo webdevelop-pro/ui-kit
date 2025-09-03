@@ -85,7 +85,7 @@ watch(api, (value) => {
       v-if="showPagination"
       class="v-slider-autoplay__pagination"
     >
-      <div
+      <button
         v-for="(_, indexp) in data"
         :key="indexp"
         class="v-slider-autoplay__pagination-item-wrap"
@@ -95,23 +95,25 @@ watch(api, (value) => {
           class="v-slider-autoplay__pagination-item"
           :class="{ 'is--active': indexp === activeElementId }"
         />
-      </div>
+      </button>
     </div>
   </div>
 </template>
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-slider-autoplay {
   width: 100%;
-  o
 
   &__slider {
     margin: 0;
   }
+
   &__item {
     flex: 0 0 100%;
   }
+
   &__pagination {
     display: flex;
     flex-direction: row;

@@ -225,6 +225,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-form-input {
   color: colors.$black;
   caret-color: colors.$black;
@@ -232,10 +233,10 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
   font-size: 16px;
   line-height: 26px;
   font-weight: 400;
-  font-family: 'Avenir';
+  font-family: Avenir;
   padding: 0 12px;
   margin: 0;
-  -webkit-appearance: none;
+  appearance: none;
   display: flex;
   align-items: center;
   width: 100%;
@@ -316,10 +317,12 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
     align-items: center;
     margin-right: 8px;
     position: relative;
+
     > div {
       width: 20px;
       height: 20px;
     }
+
     svg {
       width: 20px;
       height: 20px;

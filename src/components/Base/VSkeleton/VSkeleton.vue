@@ -93,7 +93,7 @@ const hasChild = computed(() => !!useSlots().default);
   user-select: none;
   position: relative;
   // overflow: hidden;
-  background: linear-gradient(90deg, rgba(207, 219, 255, 0.34) 0%, rgba(235, 243, 255, 0.34) 35.42%, rgba(203, 216, 255, 0.34) 100%);
+  background: linear-gradient(90deg, rgb(207 219 255 / 34%) 0%, rgb(235 243 255 / 34%) 35.42%, rgb(203 216 255 / 34%) 100%);
   // border-radius: 2px;
 
   // &::before {
@@ -115,18 +115,16 @@ const hasChild = computed(() => !!useSlots().default);
   &--wave {
     position: relative;
     overflow: hidden;
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: -webkit-radial-gradient(white, black);
+
     &::after {
       animation: wave 1.5s linear 0s infinite;
-      background: linear-gradient(90deg, rgba(207, 219, 255, 0.34) 0%, rgba(235, 243, 255, 0.34) 35.42%, rgba(203, 216, 255, 0.34) 100%);
+      background: linear-gradient(90deg, rgb(207 219 255 / 34%) 0%, rgb(235 243 255 / 34%) 35.42%, rgb(203 216 255 / 34%) 100%);
       content: '';
       position: absolute;
       transform: translate3d(-100%, 0, 0);
       will-change: transform;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      top: 0;
+      inset: 0;
     }
   }
 }
@@ -145,9 +143,11 @@ const hasChild = computed(() => !!useSlots().default);
   0% {
     transform: translate3d(-100%, 0, 0);
   }
+
   60% {
     transform: translate3d(100%, 0, 0);
   }
+
   100% {
     transform: translate3d(100%, 0, 0);
   }

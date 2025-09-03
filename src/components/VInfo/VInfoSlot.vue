@@ -70,6 +70,7 @@ const isSizeSmall = computed(() => props.size === 'small');
   &__title {
     color: $gray-70;
   }
+
   &__text {
     color: $gray-80;
   }

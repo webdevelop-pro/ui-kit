@@ -13,6 +13,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+
   @include media-lte(tablet) {
     flex-direction: column;
   }

@@ -62,18 +62,21 @@ const getStarted = theme.navigation.getStarted.data;
         bottom: -180px;
         transform: translateX(-50%);
       }
+
       @include media-gt(tablet) {
         max-width: 372px;
         max-height: 350px;
         right: 2%;
         bottom: -170px;
       }
+
       @include media-gt(desktop) {
         max-width: 472px;
         max-height: 450px;
         right: 0;
         bottom: -80%;
       }
+
       @include media-gt(wide) {
         max-width: 472px;
         max-height: 450px;

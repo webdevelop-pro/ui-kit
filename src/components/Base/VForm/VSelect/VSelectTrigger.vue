@@ -37,15 +37,15 @@ const forwardedProps = useForwardProps(delegatedProps);
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-select-trigger {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
   width: 100%;
-  position: relative;
   font-size: 16px;
-  font-family: 'Avenir';
+  font-family: Avenir;
   font-weight: 400;
   background: colors.$gray-10;
   position: relative;
@@ -92,14 +92,17 @@ const forwardedProps = useForwardProps(delegatedProps);
     margin-top: 0 !important;
   }
 }
+
 .v-select-trigger[data-state="open"]{
   border-color: colors.$primary;
   outline: none;
+
   .v-select-trigger__icon {
     transform: rotate(180deg);
     transition: all 0.3s;
   }
 }
+
 .v-select-trigger[data-placeholder] {
   opacity: 1;
       color: colors.$gray-60;

@@ -63,6 +63,7 @@ defineProps({
   &__container {
     display: flex;
     flex-direction: row;
+
     @include media-lte(tablet) {
       flex-direction: column;
     }
@@ -73,11 +74,13 @@ defineProps({
     height: auto;
     max-width: 313px;
     border-radius: 2px;
+
     @include media-lte(tablet) {
       max-width: 100%;
       width: 100%;
       margin-top: 60px;
     }
+
     @include media-gt(tablet) {
       margin-left: 180px;
     }
@@ -86,6 +89,7 @@ defineProps({
   &__image {
     width: 100%;
     height: 100%;
+
     @include media-lte(tablet) {
       min-height: 300px;
     }

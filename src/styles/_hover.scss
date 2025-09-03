@@ -1,5 +1,6 @@
 .is--hover-elevate-up{
     transition: transform 0.3s ease;
+
     &:hover{
         transform: translateY(-2.5%);
         transition: transform 0.3s ease;
@@ -11,9 +12,10 @@
     * {
         transition: all 0.3s ease;
     }
+
     &:hover{
         .is--hover-visible-elevate-up-component{
-            transform: translateY(0px);
+            transform: translateY(0);
             opacity: 1;
         }
 

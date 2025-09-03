@@ -59,6 +59,7 @@ const btnClasses = computed(() => {
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
+
 .v-timeline-card{
   $root: &;
 
@@ -70,6 +71,7 @@ const btnClasses = computed(() => {
   &__duration-title{
     color: colors.$black;
   }
+
   &__duration-text{
     color: colors.$primary;
   }
@@ -78,7 +80,8 @@ const btnClasses = computed(() => {
     position: absolute;
     left: 16px;
     top: 50px;
-    @media screen and (max-width: 767px){
+
+    @media screen and (width <= 767px){
       left: 10px;
     }
   }
@@ -90,8 +93,9 @@ const btnClasses = computed(() => {
     align-items: center;
     margin-bottom: 10px;
     padding-bottom: 15px;
-    border-bottom: 1px dashed rgba(51,51,51,.1);
-    @media screen and (max-width: 767px){
+    border-bottom: 1px dashed rgb(51 51 51 / 10%);
+
+    @media screen and (width <= 767px){
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
@@ -101,7 +105,8 @@ const btnClasses = computed(() => {
   &__title{
     margin-top: 0;
     color: colors.$black;
-    @media screen and (max-width: 767px){
+
+    @media screen and (width <= 767px){
       margin-bottom: 10px;
     }
   }
@@ -109,6 +114,7 @@ const btnClasses = computed(() => {
   &.is--variant-inner{
     margin-bottom: 32px;
     color: colors.$gray-80;
+
     &::before {// inner lines between cards
       content: "";
       position: absolute;
@@ -117,13 +123,15 @@ const btnClasses = computed(() => {
       width: 2px;
       height: 32px;
       background-color: colors.$gray-30;
-      @media screen and (max-width: 767px){
+
+      @media screen and (width <= 767px){
         left: 15px;
       }
     }
 
     &:last-child{
       margin-bottom: 0;
+
       &::before{
         display: none;
       }
@@ -142,7 +150,8 @@ const btnClasses = computed(() => {
       width: 2px;
       height: 32px;
       background-color: colors.$gray-30;
-      @media screen and (max-width: 767px){
+
+      @media screen and (width <= 767px){
         left: 15px;
       }
     }
@@ -166,6 +175,7 @@ const btnClasses = computed(() => {
 
     &:last-child{
       margin-bottom: 0;
+
       &::before{
         display: none;
       }

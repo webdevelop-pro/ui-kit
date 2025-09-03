@@ -61,8 +61,10 @@ watch(() => isLoadingLocal.value, () => {
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-image {
   $root:&;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,12 +87,15 @@ watch(() => isLoadingLocal.value, () => {
   &__image {
     height: 100%;
     width: 100%;
+
     &.is--cover{
       object-fit: cover;
     }
+
     &.is--contain{
       object-fit: contain;
     }
+
     &.is--inherit{
       object-fit: inherit;
     }

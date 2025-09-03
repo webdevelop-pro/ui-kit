@@ -84,8 +84,8 @@ const isPrimary = computed(() => props.color === 'primary');
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as *;
 @use 'UiKit/styles/_variables.scss' as *;
+
 .v-intro {
-  position: relative;
   z-index: 0;
   width: 100%;
   position: relative;
@@ -94,6 +94,7 @@ const isPrimary = computed(() => props.color === 'primary');
     display: flex;
     flex-direction: column;
     gap: 80px;
+
     @include media-lte(desktop-lg) {
       gap: 60px;
     }
@@ -121,9 +122,11 @@ const isPrimary = computed(() => props.color === 'primary');
     .is--border-left {
       border-color: $secondary;
     }
+
     p {
       color: $gray-10;
     }
+
     li{
       color: $gray-10;
     }
@@ -131,6 +134,7 @@ const isPrimary = computed(() => props.color === 'primary');
 
   &.is--highlight-primary-light {
     background: $primary-light;
+
     .is--border-left {
       border-color: $primary;
     }
@@ -140,9 +144,11 @@ const isPrimary = computed(() => props.color === 'primary');
     display: grid;
     grid-template-columns: repeat(2, auto);
     gap: 80px;
+
     @include media-lte(desktop-lg) {
       gap: 60px;
     }
+
     @include media-lte(tablet) {
       display: flex;
       flex-direction: column;
@@ -158,6 +164,7 @@ const isPrimary = computed(() => props.color === 'primary');
     background-repeat: no-repeat;
     background-position: center;
     flex-shrink: 0;
+
     @include media-lte(tablet) {
       max-width: 100%;
     }

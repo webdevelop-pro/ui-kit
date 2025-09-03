@@ -290,7 +290,7 @@ const removeFile = (index: number) => {
     }
 
     &.is--files{
-      padding: 32px 12px 12px 12px;
+      padding: 32px 12px 12px;
     }
 
     &.is--disabled{
@@ -303,7 +303,7 @@ const removeFile = (index: number) => {
       pointer-events: none;
     }
 
-    &:hover:not(.is--disabled):not(.is--loading){
+    &:hover:not(.is--disabled, .is--loading){
       border-color: colors.$primary;
       cursor: pointer;
     }

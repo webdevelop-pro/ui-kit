@@ -61,6 +61,7 @@ const SOCIAL_LIST = [
   justify-content: space-between;
   align-items: center;
   padding-top: 20px;
+
   @include media-lte(tablet) {
     flex-direction: column;
     align-items: flex-start;

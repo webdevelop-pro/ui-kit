@@ -32,6 +32,7 @@ const forwarded = useForwardProps(delegatedProps);
     cursor: pointer;
   }
 }
+
 .v-stepper-item[data-disabled] .v-stepper-trigger {
   &:hover {
     pointer-events: none;

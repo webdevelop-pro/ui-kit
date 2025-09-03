@@ -24,6 +24,7 @@
   gap: 12px;
   display: flex;
   border-bottom: 1px solid $gray-20;
+
   @include media-lte(tablet) {
     padding: 12px;
   }

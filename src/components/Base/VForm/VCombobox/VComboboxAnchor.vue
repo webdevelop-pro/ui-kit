@@ -35,20 +35,18 @@ const delegatedProps = computed(() => {
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-combobox-anchor {
-  position: relative;
   color: colors.$black;
   caret-color: colors.$black;
   background-color: colors.$gray-10;
   font-size: 16px;
   line-height: 26px;
   font-weight: 400;
-  font-family: 'Avenir';
+  font-family: Avenir;
   padding: 0 12px;
   margin: 0;
-  -webkit-appearance: none;
-  display: flex;
-  align-items: center;
+  appearance: none;
   width: 100%;
   position: relative;
   border: solid 1px colors.$gray-40;

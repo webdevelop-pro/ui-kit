@@ -99,24 +99,21 @@ const h1Class = computed(() => (isTablet.value ? 'is--h4__title' : 'is--h1__titl
     width: 100%;
     height: 100%;
     z-index: 0;
-    background-image: linear-gradient(-180deg,rgba(97,97,97,0) 5%,rgba(15,15,15,.62) 60%,rgba(0,0,0,.73) 100%);
+    background-image: linear-gradient(-180deg,rgb(97 97 97 / 0%) 5%,rgb(15 15 15 / 62%) 60%,rgb(0 0 0 / 73%) 100%);
     opacity: .65;
   }
 
   &::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       z-index: 0;
       background: 0 0;
       transition: background .5s ease;
     }
 
     &:hover::after {
-        background: rgba(0,79,255,.7);
+        background: rgb(0 79 255 / 70%);
       }
 
   &__publish-date {
@@ -167,6 +164,7 @@ const h1Class = computed(() => (isTablet.value ? 'is--h4__title' : 'is--h1__titl
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+
     @include media-lte(tablet) {
       max-height: 170px;
     }
@@ -174,10 +172,7 @@ const h1Class = computed(() => (isTablet.value ? 'is--h4__title' : 'is--h1__titl
 
   &__link {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
     z-index: 2;
     margin: 0;
   }

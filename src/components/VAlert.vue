@@ -120,6 +120,7 @@ const componentIcon = computed(() => {
   .v-alert-title {
     margin-top: 0 !important;
   }
+
   .v-alert-description {
     margin-top: 0 !important;
   }

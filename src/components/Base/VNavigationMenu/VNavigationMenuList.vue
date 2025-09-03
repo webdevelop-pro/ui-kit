@@ -25,6 +25,7 @@ const forwardedProps = useForwardProps(props);
   list-style: none;
   padding: 0;
 }
+
 .v-navigation-menu-list[data-orientation="vertical"] {
   flex-direction: column;
   align-items: flex-start;

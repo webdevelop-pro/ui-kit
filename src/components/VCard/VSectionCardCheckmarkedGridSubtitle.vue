@@ -67,6 +67,7 @@ defineProps({
     align-items: flex-start;
     gap: 30px;
     align-self: stretch;
+
     @include media-lte(tablet) {
       flex-direction: column;
     }

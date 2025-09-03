@@ -140,6 +140,7 @@ const filterFunction = (list: [], _) => list;
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
 @use 'UiKit/styles/_mixins.scss' as *;
+
 .v-form-combobox{
   $root: &;
 

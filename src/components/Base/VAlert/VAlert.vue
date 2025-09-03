@@ -19,6 +19,7 @@ const props = defineProps<{
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-alert {
   color: colors.$gray-80;
   margin: 3px 0 20px;
@@ -32,22 +33,27 @@ const props = defineProps<{
   &.is--error {
     background-color: colors.$red-light;
     border-color: colors.$red;
+
     a {
       color: colors.$red;
       border-color: colors.$red;
     }
   }
+
   &.is--success {
     background-color: colors.$secondary-light;
     border-color: colors.$secondary;
+
     a {
       color: colors.$secondary;
       border-color: colors.$secondary;
     }
   }
+
   &.is--info {
     background-color: colors.$primary-light;
     border-color: colors.$primary;
+
     a {
       color: colors.$primary;
       border-color: colors.$primary;

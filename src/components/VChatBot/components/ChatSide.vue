@@ -153,6 +153,7 @@ const onHideSideBar = () => {
   &-enter-active {
     transition: transform 0.4s ease;
   }
+
   &-leave-active {
     transition: transform 0.3s ease;
   }
@@ -160,6 +161,7 @@ const onHideSideBar = () => {
   &-enter-from {
     transform: translateX(-100%);
   }
+
   &-leave-to {
     transform: translateX(-100%);
   }

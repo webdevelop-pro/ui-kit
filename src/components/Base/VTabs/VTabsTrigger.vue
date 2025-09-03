@@ -44,6 +44,7 @@ const forwardedProps = useForwardProps(delegatedProps);
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
+
 .v-tabs-trigger {
   cursor: pointer;
   position: relative;
@@ -59,7 +60,8 @@ const forwardedProps = useForwardProps(delegatedProps);
   &__subtitle {
     margin-top: 0 !important;
     transition: color 0.3s ease;
-    @media screen and (max-width: 576px) {
+
+    @media screen and (width <= 576px) {
       display: none;
     }
   }
@@ -73,6 +75,7 @@ const forwardedProps = useForwardProps(delegatedProps);
       color: colors.$primary;
     }
   }
+
   &.is--variant-secondary {
     padding: 3px 12px;
     gap: 4px;

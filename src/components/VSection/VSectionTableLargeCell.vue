@@ -80,6 +80,7 @@ const filteredHeader = computed(() => (
       height: 87px;
     }
   }
+
   .v-table {
     table-layout: fixed;
   }

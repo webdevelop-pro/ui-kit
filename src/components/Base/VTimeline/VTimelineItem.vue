@@ -83,6 +83,7 @@ const btnClasses = computed(() => {
       top: var(--top);
       position: absolute;
     }
+
     &::before {
       content: "";
       position: absolute;
@@ -93,6 +94,7 @@ const btnClasses = computed(() => {
       height: calc(100% - var(--top) - var(--normal-circle-height) - (2 * var(--highlight-circle-bigger)));
       background-color: colors.$gray-30;
     }
+
     &::after {
       content: "";
       position: absolute;
@@ -103,11 +105,13 @@ const btnClasses = computed(() => {
       height: calc(var(--top) + (2 * var(--highlight-circle-bigger)));
       background-color: colors.$gray-30;
     }
+
     &.is--title.is--circle-type-highlight{
       &::before {
         top: var(--highlight-circle-height);
         height: calc(100% - var(--highlight-circle-height));
       }
+
       &::after {
         height: var(--highlight-circle-bigger);
       }
@@ -122,7 +126,8 @@ const btnClasses = computed(() => {
   left: 0;
   top: 0;
   height: 100%;
-  @media screen and (max-width: 767px) {
+
+  @media screen and (width <= 767px) {
     padding-bottom: 35px;
     margin-left: 8px;
   }
@@ -132,11 +137,13 @@ const btnClasses = computed(() => {
       display: none;
     }
   }
+
   &.is--line-hidden {
     &::before{
       background: linear-gradient(colors.$gray-30, rgba(colors.$gray-30, 0)) !important;
     }
   }
+
   &:first-of-type{
     &::after {
       display: none;
@@ -161,6 +168,7 @@ const btnClasses = computed(() => {
       top: calc(var(--top) + var(--highlight-circle-height));
       height: calc(100% - var(--top) - var(--highlight-circle-height) - var(--highlight-circle-bigger));
     }
+
     &::after {
       height: calc(var(--top) + var(--highlight-circle-bigger));
     }
@@ -171,6 +179,7 @@ const btnClasses = computed(() => {
       top: var(--normal-circle-height);
       height: calc(100% - var(--normal-circle-height) - var(--highlight-circle-bigger));
     }
+
     &::after {
       height: calc(2 * var(--highlight-circle-bigger));
     }
@@ -222,16 +231,19 @@ const btnClasses = computed(() => {
         height: calc(100% + 7px);
       }
     }
+
     &:nth-child(1)::before {
       @include media-gt(tablet) {
         left: calc(50% + 19px);
         width: calc(100%);
       }
+
       @include media-lte(tablet) {
         top: 32px;
         height: calc(100%);
       }
     }
+
     &:nth-child(3)::after {
       @include media-lte(desktop) {
         width: calc(100% + 100vw);
@@ -248,6 +260,7 @@ const btnClasses = computed(() => {
         }
       }
     }
+
     &:nth-child(3)::before {
       @include media-gt(desktop) {
         width: calc(100% + 100vw);
@@ -264,10 +277,12 @@ const btnClasses = computed(() => {
         height: 2px;
         background-color: $gray-30;
       }
+
       @include media-gte(desktop) {
         width: calc(100% + 100vw);
       }
     }
+
     &:nth-child(5)::after {
       @include media-lte(desktop) {
         width: calc(100% + 100vw);
@@ -290,6 +305,7 @@ const btnClasses = computed(() => {
       @include media-lte(tablet) {
         margin-top: 0;
       }
+
       @include media-gt(tablet) {
         justify-content: center;
       }

@@ -71,30 +71,28 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
   display: flex;
   align-items: center;
   justify-content: space-between;
-  text-decoration: none;
   flex-direction: row;
   cursor: pointer;
   text-decoration: none !important;
   margin: 0;
   position: relative;
   transition: all 0.2s ease;
-  @media screen and (min-width: 767px) {
+
+  @media screen and (width >= 767px) {
     &:hover {
       background-color: colors.$white;
     }
   }
 
   &.is--small{
-    flex-direction: column;
-    flex-wrap: wrap;
+    flex-flow: column wrap;
     align-items: flex-start;
     border: none;
     justify-content: flex-start;
   }
 
-  @media screen and (max-width: 767px){
-    flex-direction: column;
-    flex-wrap: wrap;
+  @media screen and (width <= 767px){
+    flex-flow: column wrap;
     align-items: flex-start;
   }
 
@@ -108,7 +106,7 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
     align-items: center;
     color: colors.$gray-70;
 
-    @media screen and (min-width: 767px) {
+    @media screen and (width >= 767px) {
       #{$root}:not(.is--small) & {
         flex-basis: 140px;
       }
@@ -118,7 +116,7 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
       margin-bottom: 12px;
     }
 
-    @media screen and (max-width: 767px){
+    @media screen and (width <= 767px){
       margin-bottom: 12px;
     }
   }
@@ -133,7 +131,7 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
       order: 2;
     }
 
-    @media screen and (max-width: 767px) {
+    @media screen and (width <= 767px) {
       order: 2;
       padding-right: 0;
     }
@@ -174,7 +172,7 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
     flex-shrink: 0;
     margin-top: 0 !important;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (width <= 767px) {
       order: 1;
       width: 100%;
       margin-bottom: 20px;

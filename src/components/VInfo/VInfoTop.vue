@@ -72,12 +72,14 @@ defineProps({
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
     @include media-gte(tablet) {
       gap: 12px;
       align-items: end;
       flex-direction: row;
     }
   }
+
   a:not([class]) {
     margin-top: 0 !important;
   }

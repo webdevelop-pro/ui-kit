@@ -23,6 +23,7 @@ const delegatedProps = computed(() => {
 <style lang="scss">
 .v-toast-viewport {
   --viewport-padding: 25px;
+
   position: fixed;
   top: 0;
   right: 0;

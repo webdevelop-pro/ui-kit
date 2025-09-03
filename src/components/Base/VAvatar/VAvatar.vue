@@ -21,6 +21,7 @@ const props = withDefaults(defineProps<{
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-avatar {
   overflow: hidden;
   display: inline-flex;
@@ -32,28 +33,34 @@ const props = withDefaults(defineProps<{
   font-size: 20px;
   background:colors.$gray-20;
   flex-shrink: 0;
+
   &.is--circle {
     border-radius: 100%;
   }
+
   &.is--x-large {
     width: 152px;
     height: 152px;
     font-size: 40px;
   }
+
   &.is--large {
     width: 100px;
     height: 100px;
     font-size: 40px;
   }
+
   &.is--medium {
     width: 55px;
     height: 55px;
   }
+
   &.is--small {
     width: 30px;
     height: 30px;
     font-size: 14px;
   }
+
   &.is--x-small {
     width: 20px;
     height: 20px;

@@ -29,19 +29,19 @@ const delegatedProps = computed(() => {
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-tabs-list {
     display: flex;
     flex-direction: row;
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow: auto hidden;
     position: relative;
     gap: 20px;
 
   &.is--varinat-primary {
     height: 48px;
 
-    &:after {
+    &::after {
       content: '';
       position: absolute;
       bottom: 0;

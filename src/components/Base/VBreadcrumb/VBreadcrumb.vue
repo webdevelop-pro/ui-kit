@@ -17,6 +17,7 @@
 .v-breadcrumb {
   & + * {
     margin-top: 40px;
+
     @media screen and (max-width: $tablet) {
       margin-top: 60px;
     }
@@ -24,6 +25,7 @@
 
   .is--container + .is--container:last-child & {
     margin-top: 90px;
+
     @media screen and (max-width: $tablet) {
       margin-top: 60px;
     }

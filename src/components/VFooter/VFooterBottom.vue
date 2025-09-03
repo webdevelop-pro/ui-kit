@@ -31,9 +31,11 @@ defineProps({
 .v-footer-bottom {
     background-color: $black;
     padding: 16px 0;
+
     @include media-lte(tablet) {
       padding-top: 51px;
     }
+
     p {
       color: $gray-50;
     }

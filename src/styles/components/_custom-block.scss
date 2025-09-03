@@ -5,6 +5,7 @@
 // spacing
 .custom-block + *{
   margin-top: 40px;
+
   @media screen and (max-width: $tablet){
     margin-top: 60px;
   }
@@ -12,6 +13,7 @@
 
 * + .custom-block{
   margin-top: 40px;
+
   @media screen and (max-width: $tablet){
     margin-top: 60px;
   }
@@ -62,9 +64,7 @@
   background: $gray-20;
 }
 
-.custom-block-title{
-  font-weight: 600;
-}
+// merged into the single .custom-block-title block below
 
 .custom-block p + p{
   margin: 8px 0;

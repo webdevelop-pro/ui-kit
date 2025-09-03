@@ -77,6 +77,7 @@ const emit = defineEmits(['click']);
     border-radius: 2px;
     border: 1px solid $gray-20;
     background: $primary-light;
+
     @include media-lte(tablet) {
       padding: 40px;
       flex-direction: column;
@@ -86,6 +87,7 @@ const emit = defineEmits(['click']);
 
   &__button {
     margin-top: 40px;
+
     @include media-lte(tablet) {
       margin-top: 24px !important;
     }
@@ -95,6 +97,7 @@ const emit = defineEmits(['click']);
     font-size: 20px;
     line-height: 30px;
     margin-top: 8px !important;
+
     @include media-lte(tablet) {
       margin-top: 3px !important;
     }
@@ -104,6 +107,7 @@ const emit = defineEmits(['click']);
     position: relative;
     flex-shrink: 0;
     width: 62%;
+
     @include media-lte(tablet) {
       width: 100%;
     }
@@ -116,7 +120,7 @@ const emit = defineEmits(['click']);
     padding: 5.5px;
     border-radius: 10.958px;
     background: $white;
-    box-shadow: 0px 8.818px 10.287px -5.878px rgba(18, 22, 31, 0.05), 0px 14.696px 47.028px 5.878px rgba(18, 22, 31, 0.10);
+    box-shadow: 0 8.818px 10.287px -5.878px rgb(18 22 31 / 5%), 0 14.696px 47.028px 5.878px rgb(18 22 31 / 10%);
 
     @include media-lte(tablet) {
       width: 100%;

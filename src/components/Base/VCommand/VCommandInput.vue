@@ -39,6 +39,7 @@ const forwardedProps = useForwardProps(delegatedProps);
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-command-input {
   &__search-icon {
     width: 20px;
@@ -52,9 +53,9 @@ const forwardedProps = useForwardProps(delegatedProps);
     font-size: 16px;
     line-height: 26px;
     font-weight: 400;
-    font-family: 'Avenir';
+    font-family: Avenir;
     padding: 0 12px;
-    -webkit-appearance: none;
+    appearance: none;
     display: flex;
     align-items: center;
     width: 100%;

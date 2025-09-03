@@ -78,7 +78,7 @@ const btnClasses = computed(() => ({
   justify-content: center;
   align-items: center;
   border: unset;
-  font-family: 'Avenir';
+  font-family: Avenir;
   font-weight: 700;
   flex-shrink: 0;
   background-color: transparent;
@@ -90,6 +90,7 @@ const btnClasses = computed(() => ({
   transition: all .3s;
   box-shadow: variables.$box-shadow-small;
   text-decoration: none !important;
+
   &:hover {
     box-shadow: none;
   }
@@ -153,6 +154,7 @@ const btnClasses = computed(() => ({
     padding: 0 12px;
     font-size: 12px;
     line-height: 28px;
+
     svg,
     img {
       width: 15px;
@@ -163,6 +165,7 @@ const btnClasses = computed(() => ({
   &.is--button-color-primary {
     background-color: colors.$primary;
     color: colors.$white;
+
     &:hover {
       background-color: colors.$primary-dark;
       color: colors.$white;
@@ -172,6 +175,7 @@ const btnClasses = computed(() => ({
   &.is--button-color-secondary {
     background-color: colors.$primary-light;
     color: colors.$black;
+
     &:hover{
       background-color: colors.$primary;
     }
@@ -180,6 +184,7 @@ const btnClasses = computed(() => ({
   &.is--button-color-red {
     background-color: colors.$red;
     color: colors.$white;
+
     &:hover {
       background-color: colors.$red-dark;
       color: colors.$white;
@@ -191,24 +196,29 @@ const btnClasses = computed(() => ({
       color: colors.$white;
       background-color: colors.$primary;
       border-color: colors.$primary;
+
       &:hover{
         background-color: colors.$primary-dark;
         border-color: colors.$primary-dark;
       }
     }
+
     &.is--button-color-secondary {
       color: colors.$black;
       background-color: colors.$secondary;
       border-color: colors.$secondary;
+
       &:hover {
         background-color: colors.$secondary-dark;
         border-color: colors.$secondary-dark;
       }
     }
+
     &.is--button-color-red {
       color: colors.$white;
       background-color: colors.$red;
       border-color: colors.$red;
+
       &:hover {
         background-color: colors.$red-dark;
         border-color: colors.$red-dark;
@@ -218,23 +228,29 @@ const btnClasses = computed(() => ({
 
   &.is--variant-outlined {
     background-color: colors.$white;
+
     &.is--button-color-primary {
       border-color: colors.$primary;
       color: colors.$primary;
+
       &:hover {
         background-color: colors.$primary;
         color: colors.$white;
       }
     }
+
     &.is--button-color-secondary {
       border-color: colors.$secondary;
+
       &:hover {
         background-color: colors.$secondary;
       }
     }
+
     &.is--button-color-red {
       border-color: colors.$red;
       color: colors.$red;
+
       &:hover {
         background-color: colors.$red;
         color: colors.$white;
@@ -247,24 +263,29 @@ const btnClasses = computed(() => ({
       background-color: colors.$primary-light;
       border-color: colors.$primary-light;
       color: colors.$primary;
+
       &:hover {
         background-color: colors.$primary;
         border-color: colors.$primary;
         color: colors.$white;
       }
     }
+
     &.is--button-color-secondary {
       background-color: colors.$primary-light;
       border-color: colors.$primary-light;
+
       &:hover {
         background-color: colors.$secondary;
         border-color: colors.$secondary;
       }
     }
+
     &.is--button-color-red {
       background-color: colors.$red-light;
       border-color: colors.$red-light;
       color: colors.$red;
+
       &:hover{
         background-color: colors.$red;
         border-color: colors.$red;
@@ -277,19 +298,24 @@ const btnClasses = computed(() => ({
     background-color: transparent;
     box-shadow: none;
     border-color: transparent;
+
     &.is--button-color-primary {
       color: colors.$primary;
+
       &:hover {
         background-color: colors.$primary-light;
       }
     }
+
     &.is--button-color-secondary {
       &:hover {
         background-color: colors.$secondary-light;
       }
     }
+
     &.is--button-color-red {
       color: colors.$red;
+
       &:hover {
         background-color: colors.$red-light;
       }
@@ -300,10 +326,12 @@ const btnClasses = computed(() => ({
     padding: 9px;
     height: 40px;
     width: 40px;
+
     &.is--size-large {
       height: 48px;
       width: 48px;
     }
+
     &.is--size-small {
       height: 32px;
       width: 32px;

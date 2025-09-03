@@ -30,10 +30,12 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 <style lang="scss">
 @use 'UiKit/styles/_variables.scss' as *;
+
 .v-stepper[data-orientation="horizontal"] {
   display: flex;
   justify-content: space-between;
   width: 100%;
+
   @media screen and (max-width: $tablet){
     min-width: fit-content;
   }

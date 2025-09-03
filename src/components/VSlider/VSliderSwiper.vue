@@ -39,7 +39,7 @@ const modules = [Navigation];
   flex-direction: row;
   position: relative;
 
-  @media screen and (max-width: 767px) {
+  @media screen and (width <= 767px) {
     margin-top: 55px;
   }
 

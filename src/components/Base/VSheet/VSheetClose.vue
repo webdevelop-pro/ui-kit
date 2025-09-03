@@ -28,6 +28,7 @@ const props = defineProps<DialogCloseProps>();
 @use 'UiKit/styles/_transitions.scss' as *;
 @use 'UiKit/styles/_variables.scss' as *;
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-sheet-close {
   position: absolute;
   top: 8px;

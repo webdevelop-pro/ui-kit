@@ -38,6 +38,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as *;
+
 .v-switch {
     width: 34px;
     height: 16px;
@@ -51,6 +52,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     position: relative;
     cursor: pointer;
 }
+
 .v-switch[data-state='checked'] {
   background-color: $primary;
 }
@@ -70,6 +72,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   transform: translateX(0);
   will-change: transform;
 }
+
 .v-switch-thumb[data-state='checked'] {
   transform: translateX(18px);
 }

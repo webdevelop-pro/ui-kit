@@ -58,6 +58,7 @@ const noData = computed(() => !props.items || props.items?.length === 0);
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-section-card-article-list {
   width: 100%;
 
@@ -69,6 +70,7 @@ const noData = computed(() => !props.items || props.items?.length === 0);
 
   &__item {
     border-top: 1px solid colors.$gray-40;
+
     &:last-child {
       border-bottom: 1px solid colors.$gray-40;
     }

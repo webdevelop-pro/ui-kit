@@ -34,6 +34,7 @@ const delegatedProps = computed(() => {
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
+
 .v-separator {
   background-color: $gray-40;
   position: relative;

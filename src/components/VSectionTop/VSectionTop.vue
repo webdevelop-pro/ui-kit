@@ -43,9 +43,11 @@ defineProps({
     position: relative;
     display: flex;
     align-items: center;
+
     @include media-gt(tablet) {
       justify-content: space-between;
     }
+
     @include media-lte(tablet) {
       flex-direction: column;
     }
@@ -55,9 +57,11 @@ defineProps({
     width: 100%;
     z-index: 2;
     position: relative;
+
     @include media-gt(tablet) {
       max-width: 653px;
     }
+
     @include media-lte(tablet) {
       margin-bottom: 60px;
     }

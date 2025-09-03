@@ -17,6 +17,7 @@ const props = defineProps<{
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-alert-title {
   color: colors.$black;
 }

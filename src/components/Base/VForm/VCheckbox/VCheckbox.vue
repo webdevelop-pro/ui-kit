@@ -46,6 +46,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-checkbox {
   $root: &;
 
@@ -96,12 +97,15 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     }
   }
 }
+
 .v-checkbox[aria-checked="true"] {
   border-color: colors.$primary;
   background: colors.$primary;
+
   .v-checkbox__icon {
       opacity: 1;
     }
+
     .v-checkbox__icon-wrap {
       border-color: colors.$primary;
     }

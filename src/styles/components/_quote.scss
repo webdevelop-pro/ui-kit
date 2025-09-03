@@ -7,12 +7,6 @@
     
 blockquote,
 q{
-    margin-top: 60px;
-}
-
-
-blockquote,
-q{
     border: 1px solid $gray-20;
     background: $gray-10;
     display: flex;
@@ -21,6 +15,7 @@ q{
     gap: 28px;
     align-self: stretch;
     position: relative;
+    margin-top: 60px;
 
     p:first-of-type{
         margin: 0;

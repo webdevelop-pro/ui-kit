@@ -61,11 +61,14 @@ defineProps({
     object-position: center;
     width: 100%;
     min-height: 400px;
+
     .v-image__skeleton {
       min-height: 400px;
     }
+
     @include media-lte(tablet) {
       min-height: 100px;
+
       .v-image__skeleton {
         min-height: 100px;
       }
@@ -76,6 +79,7 @@ defineProps({
     width: 100%;
     max-width: 756px;
     margin: 60px auto;
+
     &.is-wide {
       max-width: 100%;
     }

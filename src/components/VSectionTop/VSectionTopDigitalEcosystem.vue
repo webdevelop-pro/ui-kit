@@ -67,6 +67,7 @@ const isLoadingImage = ref(true);
   $root: &;
 
   margin-bottom: 80px;
+
   @include media-lte(desktop-lg) {
     margin-bottom: 100px;
   }
@@ -95,6 +96,7 @@ const isLoadingImage = ref(true);
       background-size: cover;
       background-position: center;
     }
+
     @include media-lte(tablet) {
       width: 100%;
     }
@@ -117,6 +119,7 @@ const isLoadingImage = ref(true);
 
   &__background-image {
     min-height: 100%;
+
     @include media-lte(desktop-lg) {
       height: 100%;
       object-fit: cover;

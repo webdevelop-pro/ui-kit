@@ -168,6 +168,7 @@ watchOnce(emblaMainApi, (value) => {
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as *;
+
 .v-carousel-default{
   height: 100%;
   width: 100%;
@@ -177,7 +178,6 @@ watchOnce(emblaMainApi, (value) => {
 
   &__slider-main,
   &__slider-thumbs {
-    position: relative;
     display: flex;
     flex-direction: row;
     position: relative;
@@ -222,9 +222,11 @@ watchOnce(emblaMainApi, (value) => {
       max-width: 100%;
       max-height: 100%;
     }
+
     .is--default-image{
       max-height: 40%;
     }
+
     .v-image {
       height: 100%;
       width: 100%;
@@ -235,6 +237,7 @@ watchOnce(emblaMainApi, (value) => {
     height: 20%;
     padding: 10px 0 0;
   }
+
   &__thumb-item {
     height: 100%;
     width: 20%;
