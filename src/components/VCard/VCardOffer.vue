@@ -112,7 +112,7 @@ const infoTags = computed(() => ([
                 />
               </div>
               <div class="v-offer-card__details is--small-2">
-                Pre-Money Valuation:
+                {{ offer?.valuationLabel }}
                 <span
                   v-if="props.offer"
                   class="v-offer-card__details-number is--h6__title"
