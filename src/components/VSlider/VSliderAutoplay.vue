@@ -88,10 +88,11 @@ watch(api, (value) => {
       <button
         v-for="(_, indexp) in data"
         :key="indexp"
+        :aria-label="'Go to slide ' + (indexp + 1)"
         class="v-slider-autoplay__pagination-item-wrap"
         @click="changeSlide(indexp)"
       >
-        <div
+        <span
           class="v-slider-autoplay__pagination-item"
           :class="{ 'is--active': indexp === activeElementId }"
         />
@@ -126,6 +127,7 @@ watch(api, (value) => {
     width: 31px;
     height: 2px;
     background-color: colors.$gray-30;
+    display: block;
 
     &.is--active {
       background-color: v-bind(activecolor);
