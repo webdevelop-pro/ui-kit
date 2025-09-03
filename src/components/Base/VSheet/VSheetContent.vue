@@ -70,29 +70,31 @@ $z-index-menu-burger: $z-index-menu + 1;
   background: $white;
   overflow-y: auto;
 }
+
 .v-sheet-overlay {
   pointer-events: auto;
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: $z-index-menu-bg;
-  background: rgba(0, 0, 0, 0.33);
+  background: rgb(0 0 0 / 33%);
 
   &.is--with-header {
     top: $header-height;
   }
 }
+
 .v-sheet-overlay[data-state="open"] {
   animation: fadeIn 0.3s ease-out;
 }
+
 .v-sheet-overlay[data-state="closed"] {
   animation: fadeOut 0.3s ease-in;
 }
+
 .v-sheet-content[data-state="open"] {
   animation: 0.3s ease-out;
 }
+
 .v-sheet-content[data-state="closed"] {
   animation: 0.3s ease-in;
 }
@@ -106,13 +108,16 @@ $z-index-menu-burger: $z-index-menu + 1;
     width: 100%;
     max-height: 367px;
   }
+
   &.v-sheet-content[data-state="open"] {
     animation-name: slideInFromTop;
   }
+
   &.v-sheet-content[data-state="closed"] {
     animation-name: slideOutToTop;
   }
 }
+
 .is--side-bottom {
   .v-sheet-content {
     left: 0;
@@ -122,13 +127,16 @@ $z-index-menu-burger: $z-index-menu + 1;
     width: 100%;
     max-height: 367px;
   }
+
   .v-sheet-content[data-state="open"] {
     animation-name: slideInFromBottom;
   }
+
   .v-sheet-content[data-state="closed"] {
     animation-name: slideOutToBottom;
   }
 }
+
 .is--side-left {
   .v-sheet-content {
     top: 0;
@@ -137,18 +145,22 @@ $z-index-menu-burger: $z-index-menu + 1;
     height: 100%;
     width: 100%;
     max-width: 367px;
+
     &.is--with-header {
       top: $header-height;
       height: calc(100% - $header-height);
     }
   }
+
   .v-sheet-content[data-state="open"] {
     animation-name: slideInFromLeft;
   }
+
   .v-sheet-content[data-state="closed"] {
     animation-name: slideOutToLeft;
   }
 }
+
 .is--side-right {
   &.v-sheet-content {
     top: 0;
@@ -157,14 +169,17 @@ $z-index-menu-burger: $z-index-menu + 1;
     height: 100%;
     width: 100%;
     max-width: 367px;
+
     &.is--with-header {
       top: $header-height;
       height: calc(100% - $header-height);
     }
   }
+
   &.v-sheet-content[data-state="open"] {
     animation-name: slideInFromRight;
   }
+
   &.v-sheet-content[data-state="closed"] {
     animation-name: slideOutToRight;
   }

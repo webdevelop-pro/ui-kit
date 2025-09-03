@@ -29,11 +29,14 @@ const forwarded = useForwardProps(delegatedProps);
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-stepper-description {
   color: colors.$gray-60;
+
   .v-stepper-item[data-state="active"] & {
     color: colors.$black;
   }
+
   .v-stepper-item[data-state="completed"] & {
     color: colors.$gray-80;
   }

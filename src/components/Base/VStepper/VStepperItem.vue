@@ -32,6 +32,7 @@ const forwarded = useForwardProps(delegatedProps);
   position: relative;
   min-height: 0;
 }
+
 .v-stepper-item[data-disabled] {
   pointer-events: none;
 }
@@ -39,6 +40,7 @@ const forwarded = useForwardProps(delegatedProps);
 .v-stepper-item[data-orientation="vertical"] {
   min-height: 90px;
 }
+
 .v-stepper-item[data-orientation="horizontal"] {
   min-width: 90px;
   width: 100%;

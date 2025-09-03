@@ -30,19 +30,21 @@ const forwardedProps = useForwardProps(delegatedProps);
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
-.v-combobox-item {
 
-  font-family: 'Avenir';
+.v-combobox-item {
+  font-family: Avenir;
     color: colors.$black;
     padding: 12px;
     cursor: pointer;
     font-size: 16px;
     line-height: 26px;
 }
+
 .v-combobox-item[data-disabled] {
   pointer-events: none;
   opacity: 0.3;
 }
+
 .v-combobox-item[data-highlighted] {
   outline: none;
   background-color: colors.$gray-20;

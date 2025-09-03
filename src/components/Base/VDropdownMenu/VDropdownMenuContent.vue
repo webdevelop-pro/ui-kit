@@ -40,6 +40,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
+
 .v-dropdown-menu-content {
   padding: 8px 0;
   position: relative;
@@ -58,9 +59,11 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   max-width: 100%;
   min-width: var(--radix-dropdown-menu-trigger-width);
 }
+
 .v-dropdown-menu-content[data-side="top"] {
   animation-name: slideUp;
 }
+
 .v-dropdown-menu-content[data-side="bottom"] {
   animation-name: slideDown;
 }
@@ -70,6 +73,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -81,6 +85,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

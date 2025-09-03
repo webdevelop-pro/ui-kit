@@ -55,6 +55,7 @@ const backgroundImageLocal = computed(() => (props.data?.background ? `url(${pro
 <style lang="scss">
 @use 'UiKit/styles/_variables.scss' as variables;
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-header-navigation-card-dark {
   display: flex;
   width: 210px;
@@ -68,6 +69,7 @@ const backgroundImageLocal = computed(() => (props.data?.background ? `url(${pro
   background-size: auto 75%;
   background-position: bottom 9px right 0;
   background-repeat: no-repeat;
+
   @media screen and (max-width: variables.$desktop-md) {
     display: none;
   }

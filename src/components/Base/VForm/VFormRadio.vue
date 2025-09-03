@@ -107,6 +107,7 @@ const id = useId();
 
 .v-form-radio{
   $root: &;
+
   display: flex;
   flex-direction: column;
 
@@ -139,7 +140,7 @@ const id = useId();
     height: 16px;
     border: solid 1px colors.$gray-40;
     margin: 0;
-    -webkit-appearance: none;
+    appearance: none;
     cursor: pointer;
 
     &:focus-visible {
@@ -149,7 +150,7 @@ const id = useId();
     &:checked {
       border-color: colors.$primary;
 
-      &:after {
+      &::after {
         content: '';
         position: absolute;
         width: calc(#{16px} / 2);

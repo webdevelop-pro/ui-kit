@@ -33,6 +33,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
+
 .v-command {
   padding-left: 0;
     list-style-type: none;

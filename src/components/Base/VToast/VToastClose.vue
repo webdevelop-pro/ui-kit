@@ -36,6 +36,7 @@ const delegatedProps = computed(() => {
 @use 'UiKit/styles/_transitions.scss' as *;
 @use 'UiKit/styles/_variables.scss' as *;
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-toast-close {
   position: absolute;
   top: 8px;

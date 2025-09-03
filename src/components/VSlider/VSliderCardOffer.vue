@@ -30,6 +30,7 @@ defineProps({
 
 <style lang="scss">
 @use 'UiKit/styles/_variables.scss' as *;
+
 .v-slider-offer {
   margin: 0 -15px;
   width: calc(100% + 30px);

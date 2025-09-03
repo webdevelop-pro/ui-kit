@@ -66,18 +66,21 @@ const getStarted = theme.navigation.getStarted.data;
         bottom: -180px;
         transform: translateX(-50%);
       }
+
       @include media-gt(tablet) {
         max-width: 372px;
         max-height: 350px;
         right: 2%;
         bottom: -190px;
       }
+
       @include media-gt(desktop) {
         max-width: 472px;
         max-height: 450px;
         right: 0;
         bottom: -55%;
       }
+
       @include media-gt(wide) {
         max-width: 472px;
         max-height: 450px;
@@ -93,12 +96,14 @@ const getStarted = theme.navigation.getStarted.data;
         right: 15px;
         bottom: -42%;
       }
+
       @include media-gt(desktop) {
         max-width: 472px;
         max-height: 450px;
         right: 0;
         bottom: -42%;
       }
+
       @include media-lte(desktop) {
         max-width: 190.27px;
         max-height: 180px;
@@ -106,6 +111,7 @@ const getStarted = theme.navigation.getStarted.data;
         bottom: -120px;
         transform: translateX(-50%);
       }
+
       @include media-lte(tablet) {
         max-width: 190.27px;
         max-height: 180px;
@@ -114,6 +120,7 @@ const getStarted = theme.navigation.getStarted.data;
         transform: translateX(-50%);
       }
     }
+
     &.is--insightful {
       @include media-lte(tablet) {
         max-width: 190.27px;
@@ -122,18 +129,21 @@ const getStarted = theme.navigation.getStarted.data;
         bottom: -150px;
         transform: translateX(-50%);
       }
+
       @include media-gt(tablet) {
         max-width: 372px;
         max-height: 350px;
         right: 25px;
         bottom: -150px;
       }
+
       @include media-gt(desktop) {
         max-width: 472px;
         max-height: 450px;
         right: 0;
         bottom: -145px;
       }
+
       @include media-gt(wide) {
         max-width: 472px;
         max-height: 450px;

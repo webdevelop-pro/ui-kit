@@ -15,6 +15,7 @@
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-breadcrumb-separator {
   color: colors.$gray-50;
   margin-top: 0 !important;

@@ -33,19 +33,21 @@ const forwardedProps = useForwardProps(delegatedProps);
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
-.v-select-item {
 
-  font-family: 'Avenir';
+.v-select-item {
+  font-family: Avenir;
     color: colors.$black;
     padding: 12px;
     cursor: pointer;
     font-size: 16px;
     line-height: 26px;
 }
+
 .v-select-item[data-disabled] {
   pointer-events: none;
   opacity: 0.3;
 }
+
 .v-select-item[data-highlighted] {
   outline: none;
   background-color: colors.$gray-20;

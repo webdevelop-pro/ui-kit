@@ -14,6 +14,7 @@ const props = defineProps<ComboboxInputProps & { class?: HTMLAttributes['class']
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-combobox-input {
   padding: 0;
     border: none;

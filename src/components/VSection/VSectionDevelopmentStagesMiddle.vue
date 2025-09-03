@@ -64,9 +64,11 @@ defineProps({
     display: flex;
     align-items: center;
     gap: 80px;
+
     & + & {
       margin-top: 80px;
     }
+
     @include media-lte(tablet) {
       flex-direction: column-reverse;
       gap: 40px;

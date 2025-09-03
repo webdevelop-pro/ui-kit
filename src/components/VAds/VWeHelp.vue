@@ -39,7 +39,9 @@ import VSection from 'UiKit/components/VSection/VSection.vue';
 
   h4 {
     margin-top: 8px;
+
     @include font(350);
+
     font-size: 20px;
     line-height: 30px;
     font-style: normal;
@@ -53,6 +55,7 @@ import VSection from 'UiKit/components/VSection/VSection.vue';
     padding: 20px;
     border-radius: 2px;
     background-color: $gray-90;
+
     @media screen and (max-width: $tablet) {
       margin-top: 40px;
     }
@@ -63,6 +66,7 @@ import VSection from 'UiKit/components/VSection/VSection.vue';
     left: 26%;
     bottom: 0;
     width: 318px;
+
     @media screen and (max-width: $tablet) {
       max-width: 100%;
       width: 40%;

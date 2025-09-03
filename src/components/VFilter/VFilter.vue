@@ -142,6 +142,7 @@ watch(() => props.items, () => {
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
+
 .v-filter{
   --v-filter-dropdown-min-width: 150px;
 
@@ -178,7 +179,7 @@ watch(() => props.items, () => {
 
   &__title{
     color: colors.$gray-70;
-    padding: 12px 12px 2px 12px;
+    padding: 12px 12px 2px;
     text-transform: capitalize;
   }
 
@@ -188,6 +189,7 @@ watch(() => props.items, () => {
 
   &__checkbox-group{
     width: 100%;
+
     .v-form-checkbox{
       &.is--checked{
         .v-form-checkbox__text{

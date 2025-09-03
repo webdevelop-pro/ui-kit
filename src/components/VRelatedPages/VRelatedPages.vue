@@ -79,6 +79,7 @@ defineProps({
     &__left {
         width: 30%;
         background-color: colors.$primary-light;
+
         a {
             text-decoration: none;
         }

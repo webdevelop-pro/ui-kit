@@ -70,6 +70,7 @@ const year = computed(() => String(new Date(props.data?.publishDate).getFullYear
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   @include media-lte(tablet) {
     flex-direction: column;
     align-items: flex-start;
@@ -91,6 +92,7 @@ const year = computed(() => String(new Date(props.data?.publishDate).getFullYear
     flex-flow: row wrap;
     align-items: center;
     flex-shrink: 0;
+
     @include media-lte(tablet) {
       margin-bottom: 20px;
     }
@@ -106,10 +108,7 @@ const year = computed(() => String(new Date(props.data?.publishDate).getFullYear
 
   &__author-image-link {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
     z-index: 5;
   }
 

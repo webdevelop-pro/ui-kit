@@ -112,9 +112,11 @@ const onClickMenu = () => {
   &__wrap {
     display: flex;
     gap: 80px;
+
     @include media-lte(desktop-lg) {
       gap: 40px;
     }
+
     @include media-lte(desktop) {
       max-width: 100%;
       margin: 0 auto;
@@ -124,6 +126,7 @@ const onClickMenu = () => {
 
   &__form-wrap {
     width: 35%;
+
     @include media-lte(desktop) {
       width: 100%;
     }

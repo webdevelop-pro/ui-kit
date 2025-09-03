@@ -109,6 +109,7 @@ const emit = defineEmits(['click']);
 <style lang="scss">
 @use 'UiKit/styles/_variables.scss' as variables;
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-header-navigation {
   $root: &;
 
@@ -122,11 +123,13 @@ const emit = defineEmits(['click']);
     padding: 20px 16px;
     align-items: flex-start;
     gap: 24px;
+
     @media screen and (max-width: variables.$desktop-lg) {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 20px 24px;
     }
+
     @media screen and (max-width: variables.$desktop-md){
       grid-template-columns: repeat(1, minmax(0, 1fr));
       padding: 19px;

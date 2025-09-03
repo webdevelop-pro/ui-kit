@@ -48,6 +48,7 @@ useGlobalLoader().hide();
   background-color: $white;
   min-height: 100vh;
   padding: 190px 0 140px;
+
   @include media-lt(desktop) {
     padding: 120px 0 110px;
   }
@@ -77,6 +78,7 @@ useGlobalLoader().hide();
     display: flex;
     position: relative;
     justify-content: space-between;
+
     @include media-lte(desktop) {
       flex-direction: column;
     }

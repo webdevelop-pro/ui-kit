@@ -79,26 +79,31 @@ const emit = defineEmits(['click']);
     display: flex;
     flex-direction: column;
   }
+
   &__item-not-link {
     color: $gray-60;
   }
+
   &__item {
     white-space: nowrap;
     text-decoration: none !important;
     color: $white !important;
+
     &:hover {
       color: $primary !important;
     }
+
     &.is--active,
     &.router-link-active {
       color: $primary !important;
     }
   }
+
   &__children {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    flex-flow: column wrap;
     gap: 0 40px;
+
     @include media-lte(tablet) {
       gap: 0;
     }
@@ -114,17 +119,21 @@ const emit = defineEmits(['click']);
       padding: 8px 0;
     }
   }
+
   &__menu-list {
     display: flex;
     gap: 48px;
     list-style-type: none;
+
     @include media-lte(desktop-lg) {
       gap: 24px;
     }
+
     @include media-lte(desktop) {
       gap: 24px;
       flex-direction: column;
     }
+
     @include media-lte(tablet) {
       flex-direction: column;
       gap: 24px;

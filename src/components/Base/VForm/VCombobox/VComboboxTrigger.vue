@@ -35,6 +35,7 @@ const forwardedProps = useForwardProps(delegatedProps);
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-combobox-trigger {
   display: flex;
   align-items: center;
@@ -50,6 +51,7 @@ const forwardedProps = useForwardProps(delegatedProps);
     margin-top: 0 !important;
   }
 }
+
 .v-combobox-trigger[data-state="open"] {
   .v-combobox-trigger__icon {
     transform: rotate(180deg);

@@ -136,13 +136,13 @@ watch(() => props.message?.message?.value, () => {
       :class="{ 'is--embde-code': isEmbedCode }"
     >
       <slot>
-        <div
+        <button
           v-if="props.message?.user === bot"
           class="chat-bubble__markdown"
           @click="handleClick"
           v-html="botText"
         />
-        <div
+        <button
           v-else
           class="chat-bubble__markdown"
           @click="handleClick"
@@ -295,6 +295,7 @@ watch(() => props.message?.message?.value, () => {
       margin-top: 4px;
     }
   }
+
   &.is--chat-end {
     place-items: end;
     grid-template-columns: 1fr auto;
@@ -311,9 +312,10 @@ watch(() => props.message?.message?.value, () => {
 
     #{$root}__bubble{
       grid-column-start: 1;
-      border-radius: 12px 12px 0 12px;
+      border-radius: 12px 12px 0;
       background: $primary-dark;
       color: $white !important;
+
       p {
         color: $white !important;
       }
@@ -338,6 +340,7 @@ watch(() => props.message?.message?.value, () => {
     width: 100%;
     overflow: auto;
   }
+
   pre {
     background: none;
     width: 100%;

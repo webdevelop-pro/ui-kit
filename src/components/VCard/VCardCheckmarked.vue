@@ -71,12 +71,14 @@ defineProps({
   gap: 8px;
   align-self: stretch;
   box-shadow: none;
+
   &.is--card{
     border-radius: 2px;
     border: 1px solid colors.$gray-20;
     background: colors.$gray-10;
     padding: 20px;
   }
+
   &.is--dark-mode{
     color: colors.$white;
   }
@@ -85,6 +87,7 @@ defineProps({
     padding-top: 20px;
     margin-top: 20px;
     border-top: 1px solid colors.$gray-40;
+
     &.is--dark-mode{
       border-top: 1px solid colors.$gray-60;
     }
@@ -97,7 +100,7 @@ defineProps({
     align-self: stretch;
     text-align: initial;
 
-    @media screen and (max-width: 767px){
+    @media screen and (width <= 767px){
       align-items: flex-start;
     }
   }
@@ -117,7 +120,7 @@ defineProps({
     box-shadow: variables.$box-shadow-small;
     background-color: colors.$secondary-light;
 
-    @media screen and (max-width: 767px){
+    @media screen and (width <= 767px){
       margin-top: 3px;
     }
 
@@ -126,6 +129,7 @@ defineProps({
       border: 1px solid colors.$secondary;
       padding: 3px;
     }
+
     &.is--icon-dark-bg{
       background-color: colors.$secondary-dark;
       #{$root}__icon{

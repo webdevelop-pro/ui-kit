@@ -77,11 +77,14 @@ const buttonHrefFormatted = computed(() => props.buttonHref || encodeURI(`${getS
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as *;
 @use 'UiKit/styles/_variables.scss' as *;
+
 .v-highlight {
   width: 100%;
   overflow: hidden;
+
   &.is--gap-bottom {
     padding-bottom: 136px;
+
     @include media-lte(tablet) {
       padding-bottom: 175px;
     }
@@ -98,6 +101,7 @@ const buttonHrefFormatted = computed(() => props.buttonHref || encodeURI(`${getS
     background-repeat: no-repeat;
     background-position: center;
     color: $white;
+
     @media screen and (max-width: $tablet) {
         padding: 40px;
     }
@@ -165,10 +169,8 @@ const buttonHrefFormatted = computed(() => props.buttonHref || encodeURI(`${getS
 
   ul {
     color: inherit;
-    margin-top: 32px;
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 0;
+    margin: 32px 0 0;
+
     @media screen and (min-width: $tablet) {
       max-width: 562px;
     }

@@ -34,7 +34,7 @@ defineProps({
       padding: 15px;
       flex: 0 0 44%;
 
-      @media screen and (max-width: 767px){
+      @media screen and (width <= 767px){
         flex: 0 0 76%;
       }
     }

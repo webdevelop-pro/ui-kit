@@ -32,6 +32,7 @@ const btnClasses = computed(() => {
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-timeline-circle{
   $root: &;
 

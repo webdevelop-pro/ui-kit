@@ -31,10 +31,12 @@ const componentProps = computed(() => {
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-breadcumb-link {
   color: inherit;
   text-decoration: none;
   line-height: inherit;
+
   span {
     color: inherit;
     text-decoration: none;

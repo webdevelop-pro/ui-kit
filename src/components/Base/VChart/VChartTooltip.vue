@@ -60,6 +60,7 @@ defineProps<{
     flex-direction: column;
     gap: 10px;
   }
+
   &__item {
     display: flex;
     justify-content: space-between;
@@ -75,6 +76,7 @@ defineProps<{
     height: 10px;
     margin-right: 4px;
     display: inline-block;
+
     svg {
       display: block;
     }

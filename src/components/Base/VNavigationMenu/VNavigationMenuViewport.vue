@@ -30,6 +30,7 @@ const forwardedProps = useForwardProps(delegatedProps);
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
 @use 'UiKit/styles/_transitions.scss' as *;
+
 .v-navigation-menu-viewport {
   position: relative;
   transform-origin: top center;
@@ -52,9 +53,11 @@ const forwardedProps = useForwardProps(delegatedProps);
     perspective: 2000px;
   }
 }
+
 .v-navigation-menu-viewport[data-state='open'] {
   animation: scaleIn 200ms ease;
 }
+
 .v-navigation-menu-viewport[data-state='closed'] {
   animation: scaleOut 200ms ease;
 }

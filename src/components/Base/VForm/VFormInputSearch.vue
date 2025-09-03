@@ -45,7 +45,7 @@ watch(() => props.modelValue, () => {
         />
       </template>
       <template #prepend>
-        <div
+        <button
           v-if="showClearButton"
           @click="onClearClick"
         >
@@ -53,7 +53,7 @@ watch(() => props.modelValue, () => {
             :is="closeIcon"
             class="v-form-input-search__close-icon"
           />
-        </div>
+        </button>
       </template>
     </VFormInput>
   </div>
@@ -61,11 +61,13 @@ watch(() => props.modelValue, () => {
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-form-input-search {
   &__search-icon {
     width: 20px;
     color: colors.$gray-70;
   }
+
   &__close-icon {
     width: 10px !important;
     color: colors.$gray-80;

@@ -149,6 +149,7 @@ const getImageType = () => {
     align-items: center;
     margin-bottom: 28px;
     gap: 12px;
+
     &::before {
       content: '';
       position: absolute;
@@ -179,6 +180,7 @@ const getImageType = () => {
 
   &__text {
     margin-top: 20px;
+
     &.is--ellipsis {
       display: -webkit-box;
       -webkit-line-clamp: 6;

@@ -114,6 +114,7 @@ const getStarted = theme.navigation.getStarted.data;
     padding: 130px;
     gap: 80px;
     background-color: $black;
+
     @include media-lte(tablet) {
       padding: 40px;
     }
@@ -125,6 +126,7 @@ const getStarted = theme.navigation.getStarted.data;
     align-items: center;
     gap: 80px;
     align-self: stretch;
+
     @include media-lte(tablet) {
       flex-direction: column;
       gap: 60px;

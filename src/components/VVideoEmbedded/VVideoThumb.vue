@@ -97,6 +97,7 @@ onMounted(() => {
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-video-thumb{
   max-height: 100%;
   height: 100%;
@@ -111,7 +112,7 @@ onMounted(() => {
   &__play-icon{
     width: 20px;
     height: 20px;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgb(0 0 0 / 60%);
     border-radius: 100px;
     position: absolute;
     left: 50%;

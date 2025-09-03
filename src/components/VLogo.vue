@@ -48,7 +48,8 @@ const componentName = computed(() => {
     width: 111px;
     max-width: 111px;
     height: 37px;
-    @media screen and (max-width: 1024px) {
+
+    @media screen and (width <= 1024px) {
       display: none;
     }
   }
@@ -56,7 +57,8 @@ const componentName = computed(() => {
   &__mobile {
     width: 47px;
     height: auto;
-    @media screen and (min-width: 1024px) {
+
+    @media screen and (width >= 1024px) {
       display: none;
     }
   }

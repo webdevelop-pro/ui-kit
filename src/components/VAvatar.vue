@@ -66,6 +66,7 @@ withDefaults(defineProps<{
     width: 24px;
   }
 }
+
 .is--x-large {
   .v-avatar-default__icon {
     height: 60px;

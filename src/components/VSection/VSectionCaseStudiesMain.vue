@@ -104,6 +104,7 @@ const getStarted = theme.navigation.getStarted.data;
     p {
       opacity: 0.9;
     }
+
     a {
       text-decoration-style: dashed;
       text-decoration-line: underline;

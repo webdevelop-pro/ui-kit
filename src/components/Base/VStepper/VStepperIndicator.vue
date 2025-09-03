@@ -35,6 +35,7 @@ const forwarded = useForwardProps(delegatedProps);
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-stepper-indicator {
   position: relative;
   z-index: 1;

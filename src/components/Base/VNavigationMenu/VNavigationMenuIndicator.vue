@@ -23,6 +23,7 @@ const forwardedProps = useForwardProps(delegatedProps);
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
+
 .v-navigation-menu-indicator {
   display: flex;
   align-items: flex-end;
@@ -33,9 +34,11 @@ const forwardedProps = useForwardProps(delegatedProps);
   z-index: 1;
   transition: width, transform 250ms ease;
 }
+
 .v-navigation-menu-indicator[data-state='visible'] {
   animation: fadeIn 200ms ease;
 }
+
 .v-navigation-menu-indicator[data-state='hidden'] {
   animation: fadeOut 200ms ease;
 }

@@ -62,6 +62,7 @@ const isError = computed(() => (errorText.value?.length > 0));
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-form-group {
   display: flex;
   flex-direction: column;
@@ -74,6 +75,7 @@ const isError = computed(() => (errorText.value?.length > 0));
     text-align: left;
     align-items: center;
     margin-bottom: 7px;
+
     &.is--dark {
       color: colors.$white;
     }
@@ -96,6 +98,7 @@ const isError = computed(() => (errorText.value?.length > 0));
     color: colors.$red-dark;
     transition: all 0.3s ease;
     transform: translateY(-5px);
+
     &.is--error{
       height: auto;
       transition: all 0.3s ease;

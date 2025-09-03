@@ -47,8 +47,9 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 @use 'UiKit/styles/_transitions.scss' as *;
 @use 'UiKit/styles/_variables.scss' as *;
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-dialog-overlay {
-  background: rgba(18, 22, 31, 0.40);
+  background: rgb(18 22 31 / 40%);
   position: fixed;
   inset: 0;
   animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -56,7 +57,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 }
 
 .v-dialog-content {
-  padding-bottom: 15px;
   background: colors.$white;
   box-shadow: $box-shadow-medium;
   position: fixed;

@@ -1,6 +1,7 @@
 
 @use 'UiKit/styles/_colors.scss' as *;
 @use 'UiKit/styles/_mixins.scss' as *;
+
 a {
   font-weight: 800;
   font-size: inherit;
@@ -10,6 +11,7 @@ a {
   color: $primary;
   cursor: pointer;
   display: inline-block;
+
   &:hover{
     text-decoration: none;
   }
@@ -23,6 +25,7 @@ a {
   transition: 0.3s all  ease-in-out;
   color: $primary;
   cursor: pointer;
+
   &:hover{
     text-decoration: none;
     }
@@ -36,6 +39,7 @@ font-weight: 800;
   transition: 0.3s all  ease-in-out;
   color: $primary;
   cursor: pointer;
+
   &:hover{
     text-decoration: none;
 }
@@ -49,6 +53,7 @@ font-weight: 800;
   transition: 0.3s all  ease-in-out;
   color: $primary;
   cursor: pointer;
+
   &:hover{
     text-decoration: none;
 }
@@ -70,6 +75,7 @@ font-weight: 800;
     transition: all 0.8s ease;
     color: inherit;
     margin: 0;
+
     &:hover{
         text-decoration-line: none;
         background-image: linear-gradient(to bottom, #444fe520 0%, #444fe520 100%);

@@ -65,13 +65,16 @@ const stepIndex = defineModel<number>();
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as *;
+
 .v-stepper {
     &__text-wrap {
         text-align: start;
+
         @media screen and (max-width: $tablet){
           text-align: center;
         }
     }
+
     &__trigger {
         display: flex;
         gap: 8px;

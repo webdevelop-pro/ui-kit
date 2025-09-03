@@ -3,15 +3,12 @@
 @use 'UiKit/styles/_variables.scss' as *;
 @use 'UiKit/styles/_mixins.scss' as *;
 
-
-
 .is--tags-inline{
     display: flex;
     align-content: center;
     gap: 12px;
     align-self: stretch;
     flex-wrap: wrap;
-    -webkit-align-content: center;
 }
 
 .is--tags-inline + *{

@@ -13,6 +13,7 @@
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-breadcrumb-list {
   list-style: none;
   padding: 0;

@@ -34,6 +34,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
 @use 'UiKit/styles/_transitions' as *;
+
 .v-toast {
   position: relative;
   display: flex;
@@ -46,7 +47,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   border-left: 2px solid transparent;
   box-shadow: variables.$box-shadow-medium;
 
-  @media screen and (max-width: 768px){
+  @media screen and (width <= 768px){
     width: 100%;
     min-height: auto;
     margin-bottom: 0;
@@ -64,19 +65,24 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     border-color: colors.$secondary;
   }
 }
+
 .ToastRoot[data-state='open'] {
   animation: slideIn 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .ToastRoot[data-state='closed'] {
   animation: hide 100ms ease-in;
 }
+
 .ToastRoot[data-swipe='move'] {
   transform: translateX(var(--radix-toast-swipe-move-x));
 }
+
 .ToastRoot[data-swipe='cancel'] {
   transform: translateX(0);
   transition: transform 200ms ease-out;
 }
+
 .ToastRoot[data-swipe='end'] {
   animation: swipeOut 100ms ease-out;
 }

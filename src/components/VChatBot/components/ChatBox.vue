@@ -234,6 +234,7 @@ watchThrottled(() => props.messages, () => {
     &.is--chat-start {
       .chat-bubble__avatar {
         visibility: hidden;
+
         @include media-lte(tablet) {
           display: none;
         }
@@ -243,6 +244,7 @@ watchThrottled(() => props.messages, () => {
     &.is--show-avatar {
       .chat-bubble__avatar {
         visibility: visible !important;
+
         @include media-lte(tablet) {
           display: flex;
         }

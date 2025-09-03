@@ -46,6 +46,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
 @use 'UiKit/styles/_variables.scss' as variables;
+
 .v-popover-content {
   background-color: colors.$gray-10;
   border: solid 1px colors.$gray-20;
@@ -56,23 +57,29 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
+
 .v-popover-content[data-state='open'][data-side='top'] {
   animation-name: slideDownAndFade;
 }
+
 .v-popover-content[data-state='open'][data-side='right'] {
   animation-name: slideLeftAndFade;
 }
+
 .v-popover-content[data-state='open'][data-side='bottom'] {
   animation-name: slideUpAndFade;
 }
+
 .v-popover-content[data-state='open'][data-side='left'] {
   animation-name: slideRightAndFade;
 }
+
 @keyframes slideUpAndFade {
   from {
     opacity: 0;
     transform: translateY(2px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -84,6 +91,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     opacity: 0;
     transform: translateX(-2px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -95,6 +103,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     opacity: 0;
     transform: translateY(-2px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -106,6 +115,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     opacity: 0;
     transform: translateX(2px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);

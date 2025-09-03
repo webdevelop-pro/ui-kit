@@ -51,6 +51,7 @@ const delegatedProps = computed(() => {
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-progressbar {
   width: 100%;
   display: flex;

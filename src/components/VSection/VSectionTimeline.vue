@@ -124,6 +124,7 @@ const buttonText = computed(() => {
     width: 100%;
     justify-content: flex-end;
     display: flex;
+
     @include media-lte(tablet) {
       padding-left: 60px;
     }

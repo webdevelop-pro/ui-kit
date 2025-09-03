@@ -51,6 +51,7 @@ defineProps({
     text-align: center;
     margin-bottom: 30px;
     color: $gray-70;
+
     @include media-lte(tablet) {
       margin-bottom: 20px;
     }
@@ -63,11 +64,13 @@ defineProps({
     min-width: 75px;
     max-width: 175px;
     max-height: 40px;
+
     @include media-lte(tablet) {
       max-height: 23px;
     }
+
     @include media-gt(tablet) {
-      margin: 0 15px 0;
+      margin: 0 15px;
     }
   }
 

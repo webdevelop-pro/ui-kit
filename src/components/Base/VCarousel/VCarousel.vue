@@ -1,4 +1,3 @@
-<!-- eslint-disable vuejs-accessibility/no-static-element-interactions -->
 <script setup lang="ts">
 import type { CarouselEmits, CarouselProps } from './interface';
 import { useProvideCarousel } from './useCarousel';
@@ -44,6 +43,7 @@ function onKeyDown(event: KeyboardEvent) {
 </script>
 
 <template>
+  <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
   <div
     role="region"
     aria-roledescription="carousel"

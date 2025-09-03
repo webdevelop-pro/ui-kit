@@ -41,6 +41,7 @@ defineProps<IVCardFeatures>();
 @use 'UiKit/styles/_colors.scss' as *;
 @use 'UiKit/styles/_variables.scss' as *;
 @use 'UiKit/styles/_hover.scss' as *;
+
 .v-card-features {
   $root: &;
 
@@ -91,10 +92,7 @@ defineProps<IVCardFeatures>();
 
   &__link{
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
   }
 }
 </style>

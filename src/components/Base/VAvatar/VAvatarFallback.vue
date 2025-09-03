@@ -15,6 +15,7 @@ const props = defineProps<AvatarFallbackProps>();
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-avatar-fallback {
   width: 100%;
   height: 100%;

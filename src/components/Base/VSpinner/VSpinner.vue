@@ -75,10 +75,7 @@ const circleSizeAttrs = computed(() => {
   position: absolute;
   width: 100%;
   height: 100%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  inset: 0;
   content: '';
   z-index: 9999;
   display: flex;
@@ -101,7 +98,7 @@ const circleSizeAttrs = computed(() => {
 
       svg {
         circle {
-          stroke-width: 3.8095238095238093;
+          stroke-width: 3.8095;
         }
       }
     }
@@ -131,14 +128,11 @@ const circleSizeAttrs = computed(() => {
     height: 100%;
     margin: auto;
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
     z-index: 0;
 
     circle {
-      stroke-width: 5.714285714285714;
+      stroke-width: 5.7143;
     }
   }
 
@@ -147,7 +141,7 @@ const circleSizeAttrs = computed(() => {
     stroke-linecap: round;
     stroke-dasharray: 80, 200;
     stroke-dashoffset: 0;
-    stroke: currentColor;
+    stroke: currentcolor;
     z-index: 2;
     transition: all 0.6s ease-in-out;
   }
@@ -156,7 +150,7 @@ const circleSizeAttrs = computed(() => {
 @keyframes progress-circular-dash {
   0% {
     stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0px;
+    stroke-dashoffset: 0;
   }
 
   50% {

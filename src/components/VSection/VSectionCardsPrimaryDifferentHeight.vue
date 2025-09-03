@@ -66,6 +66,7 @@ defineProps({
     display: flex;
     align-items: flex-start;
     gap: 31px;
+
     @include media-lte(tablet) {
       flex-direction: column;
     }
@@ -73,6 +74,7 @@ defineProps({
 
   &__card {
     width: 33%;
+
     @include media-lte(tablet) {
       width: 100%;
     }

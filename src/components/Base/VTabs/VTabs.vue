@@ -104,6 +104,7 @@ watch(
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .with-default-distance .v-tabs,
 .v-tabs.with-default-distance {
   margin-top: 40px;
@@ -117,6 +118,7 @@ watch(
     background: colors.$gray-20;
     padding: 4px;
   }
+
   &.is--full-width {
     width: 100%;
   }

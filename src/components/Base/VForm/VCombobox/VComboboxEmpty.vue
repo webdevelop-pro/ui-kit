@@ -15,8 +15,9 @@ const props = defineProps<ComboboxEmptyProps>();
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-combobox-empty {
-  font-family: 'Avenir';
+  font-family: Avenir;
     color: colors.$black;
     padding: 12px;
     cursor: pointer;

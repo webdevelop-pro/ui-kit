@@ -138,8 +138,10 @@ defineProps({
 
     &:not(.is--bordered ) {
       margin-top: 30px;
+
       & + & {
         margin-top: 80px;
+
         @include media-lte(tablet) {
           margin-top: 60px;
         }
@@ -159,6 +161,7 @@ defineProps({
     &.is--centered {
       align-self: center;
     }
+
     @include media-lte(tablet) {
       &.is--mobile-reverse {
         order: 1;

@@ -2,6 +2,7 @@
 
 *{
   box-sizing: border-box;
+
   &::before, &::after{
     box-sizing: border-box;
   }
@@ -12,6 +13,7 @@
 body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd{
   margin: 0;
 }
+
 a{
   text-decoration: none;
 }
@@ -20,6 +22,7 @@ a{
 ul[role="list"], ol[role="list"]{
   list-style: none;
 }
+
 ul{
   margin: 0;
 }
@@ -27,7 +30,7 @@ ul{
 
 body{
   min-height: 100vh;
-  text-rendering: optimizeSpeed;
+  text-rendering: optimizespeed;
   line-height: 1.5;
 }
 
@@ -54,11 +57,13 @@ input, button, textarea, select{
   html:focus-within{
     scroll-behavior: auto;
   }
+
   *{
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+
     &::before, &::after{
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
@@ -67,13 +72,13 @@ input, button, textarea, select{
     }
   }
 }
+
 button{
   border: none;
   margin: 0;
   padding: 0;
   width: auto;
   overflow: visible;
-
   background: transparent;
 
   /* inherit font & color from ancestor */
@@ -88,8 +93,9 @@ button{
   -moz-osx-font-smoothing: inherit;
 
   /* Corrects inability to style clickable `input` types in iOS */
-  -webkit-appearance: none;
+  appearance: none;
 }
+
 *:focus{
   -webkit-tap-highlight-color: transparent;
   outline: none;

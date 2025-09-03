@@ -37,6 +37,7 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+
 .v-form-textarea{
   color: colors.$black;
   caret-color: colors.$black;
@@ -44,19 +45,22 @@ const modelValue = useVModel(props, 'modelValue', emits, {
   font-size: 16px;
   line-height: 26px;
   font-weight: 400;
-  font-family: 'Avenir';
-  -webkit-appearance: none;
+  font-family: Avenir;
+  appearance: none;
   border: solid 1px colors.$gray-40;
   border-radius: 2px;
   padding: 12px;
   width: 100%;
+
   &:focus {
     border-color: colors.$primary;
     outline: none;
   }
+
   &.is--error {
     border-color: colors.$red;
   }
+
   &::placeholder{
     opacity: 1;
     color: colors.$gray-60;
