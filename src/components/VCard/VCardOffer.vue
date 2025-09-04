@@ -2,12 +2,17 @@
 import { IOfferFormatted } from 'InvestCommon/types/offer';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VBadge from 'UiKit/components/Base/VBadge/VBadge.vue';
-import { PropType } from 'vue';
+import { PropType, computed } from 'vue';
 import VInfoSlot from 'UiKit/components/VInfo/VInfoSlot.vue';
 import VImage from 'UiKit/components/Base/VImage/VImage.vue';
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
 import { VCard, VCardContent } from 'UiKit/components/Base/VCard';
 
+interface InfoItem {
+  label: string;
+  value: string | undefined;
+  show: boolean;
+}
 
 const props = defineProps({
   offer: {
@@ -25,6 +30,52 @@ const props = defineProps({
 //   'E-Commerce',
 //   'Network Security',
 // ]));
+
+// Generate information items dynamically
+const infoItems = computed((): InfoItem[] => {
+  if (!props.offer) return [];
+  
+  const items: InfoItem[] = [
+    {
+      label: 'Min investment:',
+      value: props.offer.minInvestmentFormatted,
+      show: true,
+    },
+    {
+      label: props.offer.valuationLabel,
+      value: props.offer.valuationFormatted,
+      show: true,
+    },
+    {
+      label: 'Security Type:',
+      value: props.offer.securityTypeFormatted,
+      show: true,
+    },
+    {
+      label: 'Interest Rate:',
+      value: props.offer.interestRateFormatted,
+      show: !!(props.offer.interestRateFormatted
+        && (props.offer.isSecurityTypeDebt || props.offer.isSecurityTypeConvertibleDebt)),
+    },
+    {
+      label: 'Voting Rights:',
+      value: props.offer.votingRightsFormatted,
+      show: !!(props.offer.votingRightsFormatted
+      && (props.offer.isSecurityTypeEquity || props.offer.isSecurityTypePreferredEquity)),
+    },
+  ];
+  
+  return items.filter(item => item.show);
+});
+
+// Group items into chunks of 2 for display
+const infoItemGroups = computed(() => {
+  const groups: InfoItem[][] = [];
+  for (let i = 0; i < infoItems.value.length; i += 2) {
+    groups.push(infoItems.value.slice(i, i + 2));
+  }
+  return groups;
+});
 </script>
 
 <template>
@@ -90,44 +141,36 @@ const props = defineProps({
           >
             {{ offer?.seo_description }}
           </div>
-          <VInfoSlot
-            v-if="!funded"
-            size="small"
-            class="v-offer-card__info"
-          >
-            <div class="v-offer-card__info-wrap">
-              <div class="v-offer-card__details is--small-2">
-                Min investment:
-                <span
-                  v-if="offer"
-                  class="v-offer-card__details-number is--h6__title"
+          <template v-if="!funded">
+            <VInfoSlot
+              v-for="(group, groupIndex) in infoItemGroups"
+              :key="groupIndex"
+              size="small"
+              class="v-offer-card__info"
+            >
+              <div class="v-offer-card__info-wrap">
+                <div
+                  v-for="(item, itemIndex) in group"
+                  :key="itemIndex"
+                  class="v-offer-card__details is--small-2"
                 >
-                  {{ offer?.minInvestmentFormatted }}
-                </span>
-                <VSkeleton
-                  v-else
-                  height="21px"
-                  width="50px"
-                  class="v-offer-card__details-number is--h6__title"
-                />
+                  {{ item.label }}
+                  <span
+                    v-if="offer"
+                    class="v-offer-card__details-number is--h6__title"
+                  >
+                    {{ item.value }}
+                  </span>
+                  <VSkeleton
+                    v-else
+                    height="21px"
+                    width="50px"
+                    class="v-offer-card__details-number is--h6__title"
+                  />
+                </div>
               </div>
-              <div class="v-offer-card__details is--small-2">
-                {{ offer?.valuationLabel }}
-                <span
-                  v-if="props.offer"
-                  class="v-offer-card__details-number is--h6__title"
-                >
-                  {{ offer?.valuationFormatted }}
-                </span>
-                <VSkeleton
-                  v-else
-                  height="21px"
-                  width="50px"
-                  class="v-offer-card__details-number is--h6__title"
-                />
-              </div>
-            </div>
-          </VInfoSlot>
+            </VInfoSlot>
+          </template>
           <!-- <div
             v-if="props.offer"
             class="v-offer-card__tag-info-wrap"
@@ -261,7 +304,9 @@ const props = defineProps({
   }
 
   &__info {
-    border-top: 1px solid $gray-20;
+    &:first-of-type {
+      border-top: 1px solid $gray-20;
+    }
   }
 
   &__info-wrap {
