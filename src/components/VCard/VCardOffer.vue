@@ -2,7 +2,7 @@
 import { IOfferFormatted } from 'InvestCommon/types/offer';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VBadge from 'UiKit/components/Base/VBadge/VBadge.vue';
-import { PropType, computed } from 'vue';
+import { PropType } from 'vue';
 import VInfoSlot from 'UiKit/components/VInfo/VInfoSlot.vue';
 import VImage from 'UiKit/components/Base/VImage/VImage.vue';
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
@@ -20,11 +20,11 @@ const props = defineProps({
     default: 'lazy',
   },
 });
-const infoTags = computed(() => ([
-  'Fintech',
-  'E-Commerce',
-  'Network Security',
-]));
+// const infoTags = computed(() => ([
+//   'Fintech',
+//   'E-Commerce',
+//   'Network Security',
+// ]));
 </script>
 
 <template>
@@ -128,7 +128,7 @@ const infoTags = computed(() => ([
               </div>
             </div>
           </VInfoSlot>
-          <div
+          <!-- <div
             v-if="props.offer"
             class="v-offer-card__tag-info-wrap"
           >
@@ -149,7 +149,7 @@ const infoTags = computed(() => ([
             height="18px"
             width="100%"
             class="v-offer-card__tag-info-wrap"
-          />
+          /> -->
         </div>
         <VButton
           v-if="!funded"
@@ -212,6 +212,7 @@ const infoTags = computed(() => ([
     border-radius: 2px;
     color: $black;
     height: 100%;
+    justify-content: space-between;
   }
 
   &__title {
@@ -237,8 +238,6 @@ const infoTags = computed(() => ([
   &__inner-bottom {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
   }
 
   &__description {

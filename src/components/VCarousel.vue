@@ -217,7 +217,7 @@ watchOnce(emblaMainApi, (value) => {
 
     img:not(.is--default-image){
       display: block;
-      object-fit: contain;
+      object-fit: cover;
       margin: 0 auto;
       max-width: 100%;
       max-height: 100%;

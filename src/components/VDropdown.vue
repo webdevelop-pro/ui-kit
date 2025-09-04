@@ -10,6 +10,7 @@ export interface IDropdown {
     href?: string;
     text: string;
     active?: boolean;
+    class?: string;
 }
 
 defineProps({
@@ -50,6 +51,7 @@ const toggleState = ref(false);
       <VDropdownMenuItem
         v-for="menuItem in menu"
         :key="menuItem.text"
+        :class="menuItem.class"
       >
         <component
           :is="getComponentName(menuItem)"
