@@ -28,6 +28,7 @@ defineProps({
   &__wrap {
     width: 100%;
     overflow: auto;
+    padding: 1px 0;
   }
 }
 </style>
