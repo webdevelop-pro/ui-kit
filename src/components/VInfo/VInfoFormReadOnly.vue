@@ -13,6 +13,7 @@ defineProps({
   data: Object as PropType<IReadOnlyForm>,
   review: Boolean,
   loading: Boolean,
+  readonly: Boolean,
 });
 
 const emit = defineEmits(['edit']);
@@ -38,7 +39,7 @@ const onEditClick = () => {
         Review
       </VButton>
       <VButton
-        v-else
+        v-else-if="!readonly"
         size="small"
         variant="link"
         icon-placement="left"

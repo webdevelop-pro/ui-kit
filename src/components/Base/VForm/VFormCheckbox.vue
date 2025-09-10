@@ -32,7 +32,11 @@ const modelValue = defineModel<boolean>();
 <template>
   <div
     class="VFormCheckbox v-form-checkbox"
-    :class="props.class"
+    :class="[props.class, {
+      'is--readonly': readonly,
+      'is--disabled': disabled,
+      'is--error': isError,
+    }]"
   >
     <VCheckbox
       v-bind="forwarded"
@@ -41,6 +45,7 @@ const modelValue = defineModel<boolean>();
       @update:checked="modelValue = $event"
     />
     <VFormLabel
+      v-bind="forwarded"
       :for="inputId"
       :has-asterisk="hasAsterisk"
     >
@@ -56,5 +61,16 @@ const modelValue = defineModel<boolean>();
   $root: &;
 
   display: flex;
+
+  &.is--readonly {
+    pointer-events: none;
+  }
+
+  &.is--disabled {
+    pointer-events: none;
+    #{$root}__icon-wrap {
+      opacity: .3;
+    }
+  }
 }
 </style>
