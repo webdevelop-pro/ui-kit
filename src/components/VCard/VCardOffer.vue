@@ -33,35 +33,35 @@ const props = defineProps({
 
 // Generate information items dynamically
 const infoItems = computed((): InfoItem[] => {
-  if (!props.offer) return [];
+  // if (!props.offer) return [];
   
   const items: InfoItem[] = [
     {
       label: 'Min investment:',
-      value: props.offer.minInvestmentFormatted,
+      value: props.offer?.minInvestmentFormatted,
       show: true,
     },
     {
-      label: props.offer.valuationLabel,
-      value: props.offer.valuationFormatted,
+      label: props.offer?.valuationLabel,
+      value: props.offer?.valuationFormatted,
       show: true,
     },
     {
       label: 'Security Type:',
-      value: props.offer.securityTypeFormatted,
+      value: props.offer?.securityTypeFormatted,
       show: true,
     },
     {
       label: 'Interest Rate:',
-      value: props.offer.interestRateFormatted,
-      show: !!(props.offer.interestRateFormatted
-        && (props.offer.isSecurityTypeDebt || props.offer.isSecurityTypeConvertibleDebt)),
+      value: props.offer?.interestRateFormatted,
+      show: !!(props.offer?.interestRateFormatted
+        && (props.offer?.isSecurityTypeDebt || props.offer?.isSecurityTypeConvertibleDebt)),
     },
     {
       label: 'Voting Rights:',
-      value: props.offer.votingRightsFormatted,
-      show: !!(props.offer.votingRightsFormatted
-      && (props.offer.isSecurityTypeEquity || props.offer.isSecurityTypePreferredEquity)),
+      value: props.offer?.votingRightsFormatted,
+      show: !!(props.offer?.votingRightsFormatted
+      && (props.offer?.isSecurityTypeEquity || props.offer?.isSecurityTypePreferredEquity)),
     },
   ];
   
@@ -154,7 +154,14 @@ const infoItemGroups = computed(() => {
                   :key="itemIndex"
                   class="v-offer-card__details is--small-2"
                 >
-                  {{ item.label }}
+                  <span v-if="item.label">
+                    {{ item.label }}
+                  </span>
+                  <VSkeleton
+                    v-else
+                    height="17px"
+                    width="50px"
+                  />
                   <span
                     v-if="offer"
                     class="v-offer-card__details-number is--h6__title"
@@ -276,6 +283,7 @@ const infoItemGroups = computed(() => {
 
   &__details-number {
     color: $gray-80;
+    margin-top: 0 !important;
   }
 
   &__inner-bottom {
