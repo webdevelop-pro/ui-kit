@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {
-  defineAsyncComponent, ref,
+  defineAsyncComponent, PropType, ref,
   watchPostEffect,
 } from 'vue';
 import { useWindowScroll } from '@vueuse/core';
 import VLogo from 'UiKit/components/VLogo.vue';
-import VHeaderNavigation from './VHeaderNavigation.vue';
+import VHeaderNavigation, { MenuItem } from './VHeaderNavigation.vue';
 import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
 import { storeToRefs } from 'pinia';
 
@@ -24,6 +24,9 @@ defineProps({
   logoHref: {
     type: String,
     default: '/',
+  },
+  menu: {
+    type: Array as PropType<MenuItem[]>,
   },
 });
 
@@ -57,6 +60,7 @@ watchPostEffect(() => {
         <VHeaderNavigation
           v-if="showNavigation"
           :path="path"
+          :menu="menu"
           class="is--gt-desktop-md-show"
           @click="emit('click')"
         />
@@ -69,6 +73,7 @@ watchPostEffect(() => {
           <VHeaderMobile
             v-if="!isDesktopMD"
             v-model="isMobileSidebarOpen"
+            :menu="menu"
             class="is--lt-desktop-md-show"
           >
             <slot name="mobile" />

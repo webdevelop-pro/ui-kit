@@ -1,7 +1,5 @@
-// import { env } from '@/config/env';
-import env from 'InvestCommon/domain/config/env';
-
-const { HUBSPOTFORM, HUBSPOTPORTAL_ID } = env;
+const HUBSPOTFORM = import.meta.env.VITE_HUBSPOTFORM as string;
+const HUBSPOTPORTAL_ID = import.meta.env.VITE_HUBSPOTPORTAL_ID as string;
 
 export const fetchHubspotForm = (hubspotFormId: string, data: object) => {
   const path = `${HUBSPOTFORM}/${HUBSPOTPORTAL_ID}/${hubspotFormId}`;

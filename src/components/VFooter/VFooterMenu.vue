@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { useRoute } from 'vitepress';
-import { MENU_FOOTER } from 'InvestCommon/domain/config/menu';
+import { PropType } from 'vue';
+
+type MenuItem = {
+  to?: string;
+  href?: string;
+  active?: boolean;
+  text: string;
+  children?: MenuItem[];
+}
 
 const route = useRoute();
 
@@ -12,17 +20,22 @@ const getActive = (name: string) => {
 };
 
 const emit = defineEmits(['click']);
+defineProps({
+  menu: {
+    type: Array as PropType<MenuItem[]>,
+  },
+});
 </script>
 
 <template>
   <!-- eslint-disable vue/no-multiple-template-root -->
   <nav
-    v-if="MENU_FOOTER"
-    class="AppLayoutDefaultFooterMenu app-layout-default-footer-menu"
+    v-if="menu"
+    class="VFooterMenu app-layout-default-footer-menu"
   >
     <ul class="app-layout-default-footer-menu__menu-list">
       <li
-        v-for="menuItem in MENU_FOOTER"
+        v-for="menuItem in menu"
         :key="menuItem.text"
         class="app-layout-default-footer-menu__menu-item"
       >

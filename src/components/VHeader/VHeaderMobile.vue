@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { defineAsyncComponent, hydrateOnVisible } from 'vue';
+import { defineAsyncComponent, hydrateOnVisible, PropType } from 'vue';
 import {
   VSheet, VSheetContent, VSheetTrigger, VSheetHeader, VSheetTitle,
   VSheetDescription,
 } from '../Base/VSheet';
 import VMenuBurger from 'UiKit/components/VHeader/VMenuBurger.vue';
 import VHeaderNavigationListItem from './VHeaderNavigationListItem.vue';
-import { MENU_HEADER_RIGHT } from 'InvestCommon/domain/config/menu';
+import { MenuItem } from './VHeaderNavigation.vue';
 import { VisuallyHidden } from 'radix-vue';
 
 const VNavigationMenuLink = defineAsyncComponent({
@@ -15,6 +15,12 @@ const VNavigationMenuLink = defineAsyncComponent({
 });
 
 const open = defineModel<boolean>();
+
+defineProps({
+  menu: {
+    type: Array as PropType<MenuItem[]>,
+  },
+});
 </script>
 
 <template>
@@ -40,7 +46,7 @@ const open = defineModel<boolean>();
       </VisuallyHidden>
       <nav class="v-header-mobile__navigation">
         <ul
-          v-for="(menuItem, index) in MENU_HEADER_RIGHT"
+          v-for="(menuItem, index) in menu"
           :id="index"
           :key="JSON.stringify(menuItem)"
           class="v-header-mobile__list"

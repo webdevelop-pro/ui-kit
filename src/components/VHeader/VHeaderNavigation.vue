@@ -1,54 +1,57 @@
 <script setup lang="ts">
-import { MENU_HEADER_RIGHT } from 'InvestCommon/domain/config/menu';
-import { defineAsyncComponent, hydrateOnVisible, ref } from 'vue';
+import { defineAsyncComponent, hydrateOnVisible, PropType, ref } from 'vue';
 import VHeaderNavigationListItem from './VHeaderNavigationListItem.vue';
 
 const VNavigationMenu = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenu.vue'),
-
   hydrate: hydrateOnVisible(),
 });
 
 const VNavigationMenuList = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuList.vue'),
-
   hydrate: hydrateOnVisible(),
 });
 
 const VNavigationMenuItem = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuItem.vue'),
-
   hydrate: hydrateOnVisible(),
 });
 
 const VNavigationMenuTrigger = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuTrigger.vue'),
-
   hydrate: hydrateOnVisible(),
 });
 
 const VNavigationMenuContent = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuContent.vue'),
-
   hydrate: hydrateOnVisible(),
 });
 
 const VNavigationMenuLink = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuLink.vue'),
-
   hydrate: hydrateOnVisible(),
 });
 
 const VHeaderNavigationCardDark = defineAsyncComponent({
   loader: () => import('./VHeaderNavigationCardDark.vue'),
-
   hydrate: hydrateOnVisible(),
 });
+
+export type MenuItem = {
+  to?: string;
+  href?: string;
+  active?: boolean;
+  text: string;
+  children?: MenuItem[];
+}
 
 const currentTrigger = ref('');
 
 defineProps({
   path: String,
+  menu: {
+    type: Array as PropType<MenuItem[]>,
+  },
 });
 
 const emit = defineEmits(['click']);
@@ -56,13 +59,13 @@ const emit = defineEmits(['click']);
 
 <template>
   <VNavigationMenu
-    v-if="MENU_HEADER_RIGHT"
+    v-if="menu"
     v-model="currentTrigger"
     class="VHeaderNavigation v-header-navigation"
   >
     <VNavigationMenuList class="v-header-navigation__list">
       <VNavigationMenuItem
-        v-for="(menuItem, index) in MENU_HEADER_RIGHT"
+        v-for="(menuItem, index) in menu"
         :id="index"
         :key="JSON.stringify(menuItem)"
       >
