@@ -94,7 +94,7 @@ export function useFormValidation<T extends object>(
   schemaFrontend: JSONSchemaType<T> | Ref<JSONSchemaType<T>>,
   schemaBackend: JSONSchemaType<T> | Ref<JSONSchemaType<T>> | undefined,
   initialModel: T,
-  fieldsPaths: string[],
+  fieldsPaths: string[] | Ref<string[]>,
 ): FormValidationReturn<T> {
   const model = reactive<T>({ ...initialModel });
   const validation = ref<unknown>();
@@ -125,7 +125,7 @@ export function useFormValidation<T extends object>(
   // Create compiled validator with memoization
   const compiledValidator = computed(() => ajv.compile(currentSchema.value));
 
-  const isValid = computed(() => !formErrors.hasFormErrors(validation.value, fieldsPaths));
+  const isValid = computed(() => !formErrors.hasFormErrors(validation.value, unref(fieldsPaths)));
 
   // Shared helpers for $ref resolution and path traversal
   const resolveRef = (schemaNode: any, rootSchema: any): any => {

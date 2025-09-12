@@ -152,9 +152,17 @@ export function useFormErrors() {
   }
 
   const hasFormErrors = (errors, fieldPaths) => {
-    return fieldPaths.some(path => {
+    const containsStringError = (node: any): boolean => {
+      if (node == null) return false;
+      if (typeof node === 'string') return node.trim() !== '';
+      if (Array.isArray(node)) return node.some(containsStringError);
+      if (typeof node === 'object') return Object.values(node).some(containsStringError);
+      return false;
+    };
+
+    return fieldPaths.some((path: string) => {
       const value = get(errors, path);
-      return value && typeof value === 'string' && value.trim() !== '';
+      return containsStringError(value);
     });
   };
 
