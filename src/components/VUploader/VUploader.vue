@@ -1,9 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import VButton from 'UiKit/components/Base/VButton/VButton.vue';
-import uploadIcon from 'UiKit/assets/images/upload.svg';
-import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
+import { computed, ref, watch } from 'vue';
+import VButton from '../Base/VButton/VButton.vue';
+import uploadIcon from '../../assets/images/upload.svg';
+import VSkeleton from '../Base/VSkeleton/VSkeleton.vue';
 import VUploaderPreviewCard from './VUploaderPreviewCard.vue';
+
+interface PreloadedItem {
+  id?: string | number;
+  name: string;
+  url: string;
+  mimeType?: string;
+  thumbnailUrl?: string;
+}
 
 interface Props {
   isError?: boolean;
@@ -21,6 +29,9 @@ interface Props {
   showMaxSizeInfo?: boolean;
   customClass?: string;
   multiple?: boolean;
+  preloadedItems?: PreloadedItem[]; // new: initial items (e.g., from API)
+  canUpload?: boolean; // new: controls visibility and availability of upload interactions
+  canRemove?: boolean; // new: allows hiding removal in preview
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -39,11 +50,16 @@ const props = withDefaults(defineProps<Props>(), {
   showMaxSizeInfo: true,
   customClass: '',
   multiple: false,
+  preloadedItems: () => [],
+  canUpload: true,
+  canRemove: true,
 });
 
 const emit = defineEmits<{
   'update:files': [files: File[]];
+  'update:items': [items: PreloadedItem[]];
   'remove': [index: number];
+  'removePreloaded': [payload: { index: number; id?: string | number }];
   'error': [message: string];
   'click': [index: number];
 }>();
@@ -52,6 +68,17 @@ const filesUploadError = ref('');
 const isDragging = ref(false);
 const refFiles = ref<HTMLInputElement>();
 const allFiles = ref<File[]>([]);
+const allPreloaded = ref<PreloadedItem[]>([...props.preloadedItems]);
+
+watch(
+  () => props.preloadedItems,
+  (val) => {
+    if (Array.isArray(val)) {
+      allPreloaded.value = [...val];
+    }
+  },
+  { deep: true }
+);
 
 // Ensure unique association between label and input for accessibility
 const inputId = `v-uploader-file-${Math.random().toString(36).slice(2, 10)}`;
@@ -66,19 +93,27 @@ const validateFileSize = (files: File[]): string | null => {
 };
 
 const validateFileCount = (incomingFiles: File[]): string | null => {
-  if (incomingFiles.length + allFiles.value.length > props.maxFiles) {
+  const currentCount = allFiles.value.length + allPreloaded.value.length;
+  if (incomingFiles.length + currentCount > props.maxFiles) {
     return `You are only allowed to upload a maximum of ${props.maxFiles} files at a time`;
   }
   return null;
 };
 
 const validateDuplicateFiles = (incomingFiles: File[]): string | null => {
-  const hasDuplicates = allFiles.value.some(existingFile => 
+  const hasDuplicateWithExistingFiles = allFiles.value.some(existingFile => 
     incomingFiles.some(newFile => 
       newFile.name === existingFile.name && newFile.size === existingFile.size
     )
   );
-  return hasDuplicates ? 'New upload contains files that already exist' : null;
+
+  const hasDuplicateWithPreloaded = allPreloaded.value.some(existingItem =>
+    incomingFiles.some(newFile => newFile.name === existingItem.name)
+  );
+
+  return (hasDuplicateWithExistingFiles || hasDuplicateWithPreloaded)
+    ? 'New upload contains files that already exist'
+    : null;
 };
 
 const setError = (message: string) => {
@@ -88,8 +123,10 @@ const setError = (message: string) => {
 
 const onFileChange = () => {
   const fileList = refFiles.value?.files as FileList;
-  const incomingFiles = Array.from(fileList);
+  const incomingFiles = Array.from(fileList || []);
   filesUploadError.value = '';
+
+  if (incomingFiles.length === 0) return;
 
   // Validate file size
   const sizeError = validateFileSize(incomingFiles);
@@ -98,10 +135,15 @@ const onFileChange = () => {
     return;
   }
 
-  // Single file mode - replace existing files
+  // If not multiple, replace all content with the new selection
   if (!props.multiple) {
-    allFiles.value = incomingFiles;
+    allFiles.value = incomingFiles.slice(0, 1);
+    // In single mode, keep preloaded items unless maxFiles is 1
+    if (props.maxFiles === 1) {
+      allPreloaded.value = [];
+    }
     emit('update:files', allFiles.value);
+    emit('update:items', allPreloaded.value);
     return;
   }
 
@@ -127,20 +169,20 @@ const onFileChange = () => {
 };
 
 const triggerFileInput = () => {
-  if (!props.isDisabled && !props.isLoading) {
+  if (props.canUpload && !props.isDisabled && !props.isLoading) {
     refFiles.value?.click();
   }
 };
 
 const handleDragEvent = (e: DragEvent, isEntering: boolean) => {
-  if (!props.isDisabled && !props.isLoading) {
+  if (props.canUpload && !props.isDisabled && !props.isLoading) {
     e.preventDefault();
     isDragging.value = isEntering;
   }
 };
 
 const drop = (e: DragEvent) => {
-  if (!props.isDisabled && !props.isLoading) {
+  if (props.canUpload && !props.isDisabled && !props.isLoading) {
     e.preventDefault();
     const files = e.dataTransfer?.files as FileList;
     if (refFiles.value) refFiles.value.files = files;
@@ -149,12 +191,47 @@ const drop = (e: DragEvent) => {
   }
 };
 
-const removeFile = (index: number) => {
-  allFiles.value.splice(index, 1);
+const removeUnified = (index: number) => {
+  const item = unifiedItems.value[index];
+  if (!item) return;
   filesUploadError.value = '';
-  emit('update:files', allFiles.value);
-  emit('remove', index);
+
+  if (item.kind === 'file') {
+    const fileIndex = item.fileIndex;
+    if (fileIndex != null) {
+      allFiles.value.splice(fileIndex, 1);
+      emit('update:files', allFiles.value);
+      emit('remove', fileIndex);
+    }
+  } else {
+    const preIndex = item.preloadedIndex;
+    if (preIndex != null) {
+      const removed = allPreloaded.value.splice(preIndex, 1)[0];
+      emit('update:items', allPreloaded.value);
+      emit('removePreloaded', { index: preIndex, id: removed?.id });
+    }
+  }
 };
+
+const unifiedItems = computed(() => {
+  const preloadedMapped = allPreloaded.value.map((p, idx) => ({
+    kind: 'preloaded' as const,
+    preloaded: p,
+    preloadedIndex: idx,
+    file: undefined,
+    fileIndex: undefined,
+    key: `preloaded-${p.id ?? p.url}-${idx}`,
+  }));
+  const filesMapped = allFiles.value.map((f, idx) => ({
+    kind: 'file' as const,
+    preloaded: undefined,
+    preloadedIndex: undefined,
+    file: f,
+    fileIndex: idx,
+    key: `file-${f.name}-${f.size}-${idx}`,
+  }));
+  return [...preloadedMapped, ...filesMapped];
+});
 </script>
 
 <template>
@@ -169,7 +246,8 @@ const removeFile = (index: number) => {
         'is--error': filesUploadError || isError,
         'is--disabled': isDisabled,
         'is--loading': isLoading,
-        'is--files': allFiles?.length > 0,
+        'is--files': unifiedItems?.length > 0,
+        'is--can-upload': canUpload,
       }"
       role="button"
       tabindex="0"
@@ -182,6 +260,7 @@ const removeFile = (index: number) => {
       @keydown.space.prevent="triggerFileInput"
     >
       <label
+        v-if="canUpload"
         class="v-uploader__label"
         :for="inputId"
         :class="{ disabled: isDisabled || isLoading }"
@@ -199,13 +278,13 @@ const removeFile = (index: number) => {
         {{ dragDropText }}
       </label>
       <VSkeleton
-        v-if="isLoading"
+        v-if="isLoading && canUpload"
         width="200px"
         height="28px"
         class="v-uploader__file-button"
       />
       <VButton
-        v-else
+        v-else-if="canUpload"
         size="small"
         variant="outlined"
         class="v-uploader__file-button"
@@ -220,15 +299,17 @@ const removeFile = (index: number) => {
       </VButton>
       
       <div
-        v-if="allFiles?.length && showFilePreview"
+        v-if="unifiedItems?.length && showFilePreview"
         class="v-uploader__preview"
       >
         <VUploaderPreviewCard
-          v-for="(file, index) in allFiles"
-          :key="`${file.name}-${index}`"
-          :file="file"
+          v-for="(item, index) in unifiedItems"
+          :key="item.key"
+          :file="item.file"
+          :preloaded="item.preloaded"
           :index="index"
-          @remove="removeFile"
+          :can-remove="canRemove"
+          @remove="removeUnified"
           @click="emit('click', index)"
         />
       </div>
@@ -289,13 +370,22 @@ const removeFile = (index: number) => {
       border-color: colors.$red;
     }
 
-    &.is--files{
+    &.is--files:not(.is--can-upload){
+      padding: 12px 12px 12px;
+    }
+
+    &.is--can-upload.is--files{
       padding: 32px 12px 12px;
     }
 
     &.is--disabled{
       opacity: 0.3;
       pointer-events: none;
+      // Allow interactions in preview area so items can still be removed
+      #{$root}__preview,
+      #{$root}__preview * {
+        pointer-events: auto;
+      }
     }
 
     &.is--loading{
@@ -322,8 +412,11 @@ const removeFile = (index: number) => {
     text-align: center;
   }
 
-  &__file-button{
+  & &__file-button{
     margin-top: 12px;
+  }
+
+  &__file-button{
     #{$root}__dropzone.is--files &{
       margin-bottom: 32px;
     }

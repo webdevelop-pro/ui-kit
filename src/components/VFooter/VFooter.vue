@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { defineAsyncComponent, hydrateOnVisible, ref } from 'vue';
+import { defineAsyncComponent, hydrateOnVisible, PropType, ref } from 'vue';
 import { useHubspotForm } from 'UiKit/composables/useHubspotForm';
 import { env } from '@/config/env';
 import { useData } from 'vitepress';
 import { socials } from 'UiKit/utils/socials';
 import { useToast } from '../Base/VToast/use-toast';
 import { useGlobalLoader } from 'UiKit/store/useGlobalLoader';
+import { MenuItem } from './VFooterMenu.vue';
 
 const VSocialLinks = defineAsyncComponent({
   loader: () => import('UiKit/components/VSocialLinks/VSocialLinks.vue'),
@@ -27,12 +28,15 @@ const VFooterBottom = defineAsyncComponent({
   hydrate: hydrateOnVisible(),
 });
 
+defineProps({
+  menu: Array as PropType<MenuItem[]>,
+  menuLegal: Array as PropType<MenuItem[]>,
+});
+
 const { theme } = useData();
 
 const SOCIAL_LIST = [
-
   socials?.facebook, socials?.instagram,
-
   socials?.linkedin, socials?.github,
 ];
 
@@ -88,12 +92,15 @@ const onClickMenu = () => {
         </div>
         <VFooterMenu
           class="v-footer__menu"
+          :menu="menu"
           @click="onClickMenu"
         />
       </div>
     </div>
   </div>
-  <VFooterBottom />
+  <VFooterBottom
+    :items="menuLegal"
+  />
 </template>
 
 <style lang="scss">

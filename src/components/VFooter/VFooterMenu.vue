@@ -2,7 +2,7 @@
 import { useRoute } from 'vitepress';
 import { PropType } from 'vue';
 
-type MenuItem = {
+export type MenuItem = {
   to?: string;
   href?: string;
   active?: boolean;
@@ -115,7 +115,7 @@ defineProps({
   &__children {
     display: flex;
     flex-flow: column wrap;
-    gap: 0 40px;
+    gap: 0 80px;
 
     @include media-lte(tablet) {
       gap: 0;
