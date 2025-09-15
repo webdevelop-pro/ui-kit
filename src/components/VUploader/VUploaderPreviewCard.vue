@@ -58,7 +58,7 @@ const previewSrc = computed(() => {
 
 watch(
   () => props.file,
-  (newFile, oldFile) => {
+  (newFile) => {
     if (objectUrl.value) {
       URL.revokeObjectURL(objectUrl.value);
       objectUrl.value = null;

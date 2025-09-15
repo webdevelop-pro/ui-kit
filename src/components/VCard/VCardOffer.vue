@@ -55,7 +55,7 @@ const infoItems = computed((): InfoItem[] => {
       label: 'Interest Rate:',
       value: props.offer?.interestRateFormatted,
       show: !!(props.offer?.interestRateFormatted
-        && (props.offer?.isSecurityTypeDebt || props.offer?.isSecurityTypeConvertibleDebt)),
+        && (props.offer?.isSecurityTypeDebt || props.offer?.isSecurityTypeConvertibleDebt || props.offer?.isSecurityTypeConvertibleNote)),
     },
     {
       label: 'Voting Rights:',
