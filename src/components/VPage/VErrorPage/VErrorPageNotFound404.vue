@@ -3,7 +3,10 @@ import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import imageBg from './illustration-404.svg?url';
 import { useGlobalLoader } from 'UiKit/store/useGlobalLoader';
 
-useGlobalLoader().hide();
+
+setTimeout(() => {
+  useGlobalLoader().hide();
+}, 2000);
 </script>
 
 <template v-once>
