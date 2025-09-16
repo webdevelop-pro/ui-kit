@@ -8,12 +8,23 @@ import {
   FUTURE_DATE_ERROR_MESSAGE, FUTURE_DATE_VALIDATOR_NAME, ZIP_REGEX_VALIDATOR_NAME,
   ZIP_REGEX_ERROR_MESSAGE, CHECKBOX_TRUE_VALIDATOR_NAME, CHECKBOX_TRUE_ERROR_MESSAGE,
   NOT_ZERO_VALIDATOR_NAME, NOT_ZERO_ERROR_MESSAGE, MUST_BE_US_VALIDATOR_NAME, MUST_BE_US_ERROR_MESSAGE,
+  MAX_FILE_SIZE_VALIDATOR_NAME,
 } from './constants';
 
 const ajv = new Ajv({ allErrors: true, allowMatchingProperties: true, $data: true });
 
 ajvErrors(ajv);
 addFormats(ajv, ['date', 'time', 'float', 'email']);
+
+// Accept backend "file" format as a string (no-op validation)
+try {
+  ajv.addFormat('file', {
+    type: 'string',
+    validate: () => true,
+  } as any);
+} catch (_e) {
+  // ignore if already defined
+}
 
 // Small helper to reduce boilerplate when adding simple validators with a static error message
 function addKeywordWithMessage(
@@ -125,6 +136,9 @@ addKeywordWithMessage(
 // add dummy to remove error
 ajv.addKeyword({
   keyword: ENUM_NAMES_VALIDATOR_NAME,
+});
+ajv.addKeyword({
+  keyword: MAX_FILE_SIZE_VALIDATOR_NAME,
 });
 
 export {

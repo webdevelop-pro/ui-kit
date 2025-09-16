@@ -371,7 +371,7 @@ const unifiedItems = computed(() => {
     }
 
     &.is--files:not(.is--can-upload){
-      padding: 12px 12px 12px;
+      padding: 12px;
     }
 
     &.is--can-upload.is--files{

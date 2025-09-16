@@ -117,9 +117,29 @@ export function useFormValidation<T extends object>(
     
     // Remove all required arrays from backend schema before merging
     const cleanedBackend = backend ? removeRequiredFromDefinitions(backend) : backend;
+
+    // Minimal sanitization: drop invalid keyword values that break Ajv (recursive)
+    const sanitizeInvalidKeywordValues = (schema: any) => {
+      const visit = (node: any) => {
+        if (!node || typeof node !== 'object') return;
+        if (Array.isArray(node)) { node.forEach(visit); return; }
+        if ('contentMediaType' in node && typeof node.contentMediaType !== 'string') delete node.contentMediaType;
+         if (node.properties && typeof node.properties === 'object') Object.values(node.properties).forEach(visit);
+        if (node.items) visit(node.items);
+        if (Array.isArray(node.allOf)) node.allOf.forEach(visit);
+        if (Array.isArray(node.anyOf)) node.anyOf.forEach(visit);
+        if (Array.isArray(node.oneOf)) node.oneOf.forEach(visit);
+        if (node.not) visit(node.not);
+        const defs = node.definitions || node.$defs;
+        if (defs && typeof defs === 'object') Object.values(defs).forEach(visit);
+      };
+      visit(schema);
+      return schema;
+    };
+    const sanitizedBackend = cleanedBackend ? sanitizeInvalidKeywordValues(cleanedBackend) : cleanedBackend;
     
     // If both exist, merge them (backend takes precedence, then frontend)
-    const mergedSchema = merge({}, cleanedBackend, frontend);
+    const mergedSchema: any = merge({}, sanitizedBackend, frontend);
     return mergedSchema as JSONSchemaType<T>;
   });
   // Create compiled validator with memoization
@@ -289,6 +309,7 @@ export function useFormValidation<T extends object>(
     validation,
     isValid,
     onValidate,
+    schemaObject: currentSchema,
     resetValidation,
     formErrors,
     isFieldRequired,
