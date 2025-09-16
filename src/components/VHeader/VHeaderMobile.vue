@@ -1,43 +1,50 @@
 <script setup lang="ts">
-import { defineAsyncComponent, hydrateOnVisible, PropType } from 'vue';
 import {
-  VSheet, VSheetContent, VSheetTrigger, VSheetHeader, VSheetTitle,
+  defineAsyncComponent,
+  hydrateOnVisible,
+  ref,
+  onBeforeMount,
+} from "vue";
+import {
+  VSheet,
+  VSheetContent,
+  VSheetTrigger,
+  VSheetHeader,
+  VSheetTitle,
   VSheetDescription,
-} from '../Base/VSheet';
-import VMenuBurger from 'UiKit/components/VHeader/VMenuBurger.vue';
-import VHeaderNavigationListItem from './VHeaderNavigationListItem.vue';
-import { MenuItem } from './VHeaderNavigation.vue';
-import { VisuallyHidden } from 'radix-vue';
-
+} from "../Base/VSheet";
+import VMenuBurger from "UiKit/components/VHeader/VMenuBurger.vue";
+import VMenuProfileLink from "UiKit/components/VHeader/VMenuProfileLink.vue";
+import VHeaderNavigationListItem from "./VHeaderNavigationListItem.vue";
+import { MENU_HEADER_RIGHT } from "InvestCommon/domain/config/menu";
+import { VisuallyHidden } from "radix-vue";
+import { isPwaMobile } from "InvestCommon/domain/pwa/pwaDetector";
 const VNavigationMenuLink = defineAsyncComponent({
-  loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuLink.vue'),
+  loader: () =>
+    import("UiKit/components/Base/VNavigationMenu/VNavigationMenuLink.vue"),
   hydrate: hydrateOnVisible(),
 });
-
-const open = defineModel<boolean>();
-
-defineProps({
-  menu: {
-    type: Array as PropType<MenuItem[]>,
-  },
+const isMobilePWA = ref(false);
+onBeforeMount(() => {
+  isMobilePWA.value = isPwaMobile();
 });
+const open = defineModel<boolean>();
 </script>
 
 <template>
+  <VMenuProfileLink v-if="isMobilePWA" />
   <VSheet
+    v-else-if="!isMobilePWA"
     v-model:open="open"
     class="VHeaderMobile v-header-mobile"
   >
-    <VSheetTrigger 
+    <VSheetTrigger
       v-bind="{ ...$attrs }"
       :aria-label="open ? 'Close mobile menu' : 'Open mobile menu'"
     >
       <VMenuBurger :model-value="open" />
     </VSheetTrigger>
-    <VSheetContent
-      with-header
-      hide-close
-    >
+    <VSheetContent with-header hide-close>
       <VisuallyHidden>
         <VSheetHeader>
           <VSheetTitle>Mobile Menu</VSheetTitle>
@@ -46,8 +53,8 @@ defineProps({
       </VisuallyHidden>
       <nav class="v-header-mobile__navigation">
         <ul
-          v-for="(menuItem, index) in menu"
-          :id="index"
+          v-for="(menuItem, index) in MENU_HEADER_RIGHT"
+          :id="String(index)"
           :key="JSON.stringify(menuItem)"
           class="v-header-mobile__list"
         >
@@ -59,10 +66,7 @@ defineProps({
             >
               {{ menuItem.text }}
             </VNavigationMenuLink>
-            <span
-              v-else
-              class="is--h5__title v-header-mobile__title"
-            >
+            <span v-else class="is--h5__title v-header-mobile__title">
               {{ menuItem.text }}
             </span>
             <ul
@@ -89,8 +93,7 @@ defineProps({
 </template>
 
 <style lang="scss">
-@use 'UiKit/styles/_colors.scss' as colors;
-
+@use "UiKit/styles/_colors.scss" as colors;
 .v-header-mobile {
   &__item {
     height: auto;
@@ -100,22 +103,18 @@ defineProps({
     display: flex;
     flex-direction: column;
   }
-
   &__list {
     list-style: none;
     padding: 0;
     margin: 0;
   }
-
   &__navigation > &__list + &__list {
     border-top: 1px solid colors.$gray-40;
     margin-top: 20px;
   }
-
-  &__title + &__list{
+  &__title + &__list {
     margin: 10px 0 0;
   }
-
   &__data {
     border-top: 1px solid colors.$gray-40;
     padding: 20px;
