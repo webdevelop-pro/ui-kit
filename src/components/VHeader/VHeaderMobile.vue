@@ -32,7 +32,9 @@ const open = defineModel<boolean>();
 </script>
 
 <template>
-  <VMenuProfileLink v-if="isMobilePWA" />
+  <VMenuProfileLink 
+    v-if="isMobilePWA" 
+  />
   <VSheet
     v-else-if="!isMobilePWA"
     v-model:open="open"
@@ -44,7 +46,10 @@ const open = defineModel<boolean>();
     >
       <VMenuBurger :model-value="open" />
     </VSheetTrigger>
-    <VSheetContent with-header hide-close>
+    <VSheetContent
+      with-header
+      hide-close
+    >
       <VisuallyHidden>
         <VSheetHeader>
           <VSheetTitle>Mobile Menu</VSheetTitle>
@@ -66,7 +71,10 @@ const open = defineModel<boolean>();
             >
               {{ menuItem.text }}
             </VNavigationMenuLink>
-            <span v-else class="is--h5__title v-header-mobile__title">
+            <span
+              v-else
+              class="is--h5__title v-header-mobile__title"
+            >
               {{ menuItem.text }}
             </span>
             <ul
