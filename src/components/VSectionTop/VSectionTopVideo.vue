@@ -2,6 +2,15 @@
 import ArrowRight from 'UiKit/assets/images/arrow-right.svg';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
+import { useSessionStore } from 'InvestCommon/domain/session/store/useSession';
+import { useAppStateStore } from 'InvestCommon/domain/pwa/store/useAppStateStore';
+import { urlSignin, urlSignup } from 'InvestCommon/domain/config/links';
+import { storeToRefs } from 'pinia';
+
+const sessionStore = useSessionStore();
+const appStore = useAppStateStore();
+const { userLoggedIn } = storeToRefs(sessionStore);
+const { isPwa, isMobile } = storeToRefs(appStore);
 
 const props = defineProps({
   title: String,
@@ -21,8 +30,9 @@ const emit = defineEmits(['click']);
 
 <template>
   <VSection
-    class="VSectionTopVideo v-section-top-video"
-    :class="{ 'is--full-height': fullHeight }"
+    class="VSectionTopVideo v-section-top-video "
+    :class="{ 'is--full-height': fullHeight, 
+              'v-section-top-video-unauthenticated' : (!userLoggedIn && isPwa && isMobile) }"
     :style="{ '--video-cover': `url(${videoCoverImage})` }"
   >
     <video
@@ -42,6 +52,28 @@ const emit = defineEmits(['click']);
       :class="[contentClass]"
     >
       <slot>
+        <div
+          v-if="!userLoggedIn && isPwa && isMobile"
+          class=" is--margin-bottom-120 signs-buttons"
+        >
+          <VButton
+            as="a"
+            :href="encodeURI(urlSignin)"
+            size="large"
+            
+            @click="emit('click')"
+          >
+            Sign In
+          </VButton>
+          <VButton
+            as="a"
+            :href="encodeURI(urlSignup)"
+            size="large"
+            @click="emit('click')"
+          >
+            Sign Up
+          </VButton>
+        </div>
         <h5>
           {{ text }}
         </h5>
@@ -51,8 +83,9 @@ const emit = defineEmits(['click']);
         <p
           v-if="subTitle"
           class="is--subheading-1 is--margin-top-15 is--color-black"
-          v-html="subTitle"
-        />
+        >
+          {{ subTitle }}
+        </p>
         <VButton
           v-if="props.buttonHref"
           as="a"
@@ -131,6 +164,32 @@ const emit = defineEmits(['click']);
   h5 {
     color: $primary;
     text-transform: uppercase;
+  }
+}
+
+.v-section-top-video-unauthenticated {
+  align-items: flex-start;
+
+  
+  padding: 70px 0;
+  &.is--full-height {
+    padding: 150px 0;
+    min-height: 600px;
+    height: 100vh;
+
+    @include media-lte(desktop) {
+      min-height: 730px;
+    }
+  }
+
+  .signs-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .is--margin-bottom-120 {
+    margin-bottom:120px!important;
   }
 }
 </style>
