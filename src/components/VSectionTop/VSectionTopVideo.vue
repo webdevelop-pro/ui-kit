@@ -2,15 +2,7 @@
 import ArrowRight from 'UiKit/assets/images/arrow-right.svg';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
-import { useSessionStore } from 'InvestCommon/domain/session/store/useSession';
-import { useAppStateStore } from 'InvestCommon/domain/pwa/store/useAppStateStore';
-import { urlSignin, urlSignup } from 'InvestCommon/domain/config/links';
-import { storeToRefs } from 'pinia';
 
-const sessionStore = useSessionStore();
-const appStore = useAppStateStore();
-const { userLoggedIn } = storeToRefs(sessionStore);
-const { isPwa, isMobile } = storeToRefs(appStore);
 
 const props = defineProps({
   title: String,
@@ -23,6 +15,11 @@ const props = defineProps({
   contentClass: String,
   fullHeight: Boolean,
   videoCoverImage: String,
+  userLoggedIn: Boolean,
+  isPwa: Boolean,
+  isMobile: Boolean,
+  urlSignin: String,
+  urlSignup: String,
 });
 
 const emit = defineEmits(['click']);
