@@ -32,6 +32,10 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  showProfileLink: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(['click']);
@@ -79,6 +83,7 @@ watchPostEffect(() => {
             v-model="isMobileSidebarOpen"
             :menu="menu"
             :is-mobile-p-w-a="isMobilePWA"
+            :show-profile-link="showProfileLink"
             class="is--lt-desktop-md-show"
           >
             <slot name="mobile" />

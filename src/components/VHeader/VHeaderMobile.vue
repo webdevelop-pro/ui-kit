@@ -13,7 +13,6 @@ import {
   VSheetDescription,
 } from "../Base/VSheet";
 import VMenuBurger from "UiKit/components/VHeader/VMenuBurger.vue";
-import VMenuProfileLink from "UiKit/components/VHeader/VMenuProfileLink.vue";
 import VHeaderNavigationListItem from "./VHeaderNavigationListItem.vue";
 import { VisuallyHidden } from "radix-vue";
 import { MenuItem } from './VHeaderNavigation.vue';
@@ -26,6 +25,10 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  showProfileLink: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const VNavigationMenuLink = defineAsyncComponent({
@@ -33,12 +36,16 @@ const VNavigationMenuLink = defineAsyncComponent({
     import("UiKit/components/Base/VNavigationMenu/VNavigationMenuLink.vue"),
   hydrate: hydrateOnVisible(),
 });
+const VMenuProfileLink = defineAsyncComponent({
+  loader: () =>
+    import("UiKit/components/VHeader/VMenuProfileLink.vue"),
+});
 const open = defineModel<boolean>();
 </script>
 
 <template>
   <VMenuProfileLink 
-    v-if="isMobilePWA" 
+    v-if="isMobilePWA && showProfileLink" 
   />
   <VSheet
     v-else-if="!isMobilePWA"
