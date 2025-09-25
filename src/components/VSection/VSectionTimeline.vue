@@ -93,7 +93,7 @@ const buttonText = computed(() => {
     >
       <VButton
         as="a"
-        :href="encodeURI(`/get-started.html?topic=${topic}&text=Leave Us Your Email`)"
+        :href="encodeURI(`/book-a-call.html?topic=${topic}&text=Leave Us Your Email`)"
         variant="outlined"
         size="large"
         block

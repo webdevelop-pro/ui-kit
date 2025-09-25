@@ -39,7 +39,7 @@ const route = useRoute();
       as="a"
       :href="getStarted.url"
     >
-      Get Started
+      Request a Demo
     </VButton>
     <template #mobile>
       <VButton
@@ -48,7 +48,7 @@ const route = useRoute();
         block
         size="large"
       >
-        Get Started
+        Request a Demo
       </VButton>
     </template>
   </VHeader>
