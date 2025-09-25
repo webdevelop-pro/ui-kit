@@ -2,8 +2,7 @@
 import {
   defineAsyncComponent,
   hydrateOnVisible,
-  ref,
-  onBeforeMount,
+  PropType,
 } from "vue";
 import {
   VSheet,
@@ -16,17 +15,23 @@ import {
 import VMenuBurger from "UiKit/components/VHeader/VMenuBurger.vue";
 import VMenuProfileLink from "UiKit/components/VHeader/VMenuProfileLink.vue";
 import VHeaderNavigationListItem from "./VHeaderNavigationListItem.vue";
-import { MENU_HEADER_RIGHT } from "InvestCommon/domain/config/menu";
 import { VisuallyHidden } from "radix-vue";
-import { isPwaMobile } from "InvestCommon/domain/pwa/pwaDetector";
+import { MenuItem } from './VHeaderNavigation.vue';
+
+defineProps({
+  menu: {
+    type: Array as PropType<MenuItem[]>,
+  },
+  isMobilePWA: {
+    type: Boolean,
+    default: false,
+  },
+});
+
 const VNavigationMenuLink = defineAsyncComponent({
   loader: () =>
     import("UiKit/components/Base/VNavigationMenu/VNavigationMenuLink.vue"),
   hydrate: hydrateOnVisible(),
-});
-const isMobilePWA = ref(false);
-onBeforeMount(() => {
-  isMobilePWA.value = isPwaMobile();
 });
 const open = defineModel<boolean>();
 </script>
@@ -58,7 +63,7 @@ const open = defineModel<boolean>();
       </VisuallyHidden>
       <nav class="v-header-mobile__navigation">
         <ul
-          v-for="(menuItem, index) in MENU_HEADER_RIGHT"
+          v-for="(menuItem, index) in menu"
           :id="String(index)"
           :key="JSON.stringify(menuItem)"
           class="v-header-mobile__list"

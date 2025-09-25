@@ -28,6 +28,10 @@ defineProps({
   menu: {
     type: Array as PropType<MenuItem[]>,
   },
+  isMobilePWA: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(['click']);
@@ -74,6 +78,7 @@ watchPostEffect(() => {
             v-if="!isDesktopMD"
             v-model="isMobileSidebarOpen"
             :menu="menu"
+            :is-mobile-p-w-a="isMobilePWA"
             class="is--lt-desktop-md-show"
           >
             <slot name="mobile" />
