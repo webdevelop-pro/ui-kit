@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import userIcon from 'UiKit/assets/images/user.svg';
-import { urlProfile } from 'InvestCommon/domain/config/links';
-import { useSessionStore } from 'InvestCommon/domain/session/store/useSession';
 import { navigateWithQueryParams } from 'UiKit/helpers/general';
-import { storeToRefs } from 'pinia';
 
-const sessionStore = useSessionStore();
-const { userLoggedIn } = storeToRefs(sessionStore);
+defineProps({
+  urlProfile: {
+    type: String,
+  },
+  userLoggedIn: {
+    type: Boolean,
+    default: false,
+  },
+});
 
 </script>
 
@@ -15,7 +19,7 @@ const { userLoggedIn } = storeToRefs(sessionStore);
     :is="userIcon"
     v-if="userLoggedIn"
     class="VMenuProfileLink v-menu-profile"
-    @click="navigateWithQueryParams(urlProfile());"
+    @click="navigateWithQueryParams(urlProfile);"
   />
 </template>
 

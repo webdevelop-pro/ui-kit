@@ -21,14 +21,6 @@ defineProps({
   menu: {
     type: Array as PropType<MenuItem[]>,
   },
-  isMobilePWA: {
-    type: Boolean,
-    default: false,
-  },
-  showProfileLink: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 const VNavigationMenuLink = defineAsyncComponent({
@@ -36,19 +28,11 @@ const VNavigationMenuLink = defineAsyncComponent({
     import("UiKit/components/Base/VNavigationMenu/VNavigationMenuLink.vue"),
   hydrate: hydrateOnVisible(),
 });
-const VMenuProfileLink = defineAsyncComponent({
-  loader: () =>
-    import("UiKit/components/VHeader/VMenuProfileLink.vue"),
-});
 const open = defineModel<boolean>();
 </script>
 
 <template>
-  <VMenuProfileLink 
-    v-if="isMobilePWA && showProfileLink" 
-  />
   <VSheet
-    v-else-if="!isMobilePWA"
     v-model:open="open"
     class="VHeaderMobile v-header-mobile"
   >

@@ -14,6 +14,10 @@ const { isDesktopMD } = storeToRefs(useBreakpoints());
 const VHeaderMobile = defineAsyncComponent({
   loader: () => import('./VHeaderMobile.vue'),
 });
+const VMenuProfileLink = defineAsyncComponent({
+  loader: () =>
+    import("UiKit/components/VHeader/VMenuProfileLink.vue"),
+});
 
 defineProps({
   showNavigation: {
@@ -33,6 +37,13 @@ defineProps({
     default: false,
   },
   showProfileLink: {
+    type: Boolean,
+    default: false,
+  },
+  urlProfile: {
+    type: String,
+  },
+  userLoggedIn: {
     type: Boolean,
     default: false,
   },
@@ -78,12 +89,17 @@ watchPostEffect(() => {
             <slot />
           </div>
 
+
+          <VMenuProfileLink 
+            v-if="isMobilePWA && showProfileLink" 
+            :user-logged-in="userLoggedIn"
+            :url-profile="urlProfile"
+          />
+
           <VHeaderMobile
-            v-if="!isDesktopMD"
+            v-if="!isMobilePWA && !isDesktopMD"
             v-model="isMobileSidebarOpen"
             :menu="menu"
-            :is-mobile-p-w-a="isMobilePWA"
-            :show-profile-link="showProfileLink"
             class="is--lt-desktop-md-show"
           >
             <slot name="mobile" />
