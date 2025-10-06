@@ -7,7 +7,17 @@ defineProps({
   subtitle: String,
   text: String,
   image: String,
-  getInTouchUrl: String,
+  tagText: String,
+  secondaryUrl: String,
+  secondaryText: {
+    type: String,
+    default: 'Learn More in Use Cases',
+  },
+  mainUrl: String,
+  mainText: {
+    type: String,
+    default: 'Get In Touch',
+  },
 });
 </script>
 
@@ -16,7 +26,11 @@ defineProps({
     :title="title"
     :subtitle="subtitle"
     :text="text"
-    :get-in-touch-url="getInTouchUrl"
+    :main-url="mainUrl"
+    :tag-text="tagText"
+    :secondary-url="secondaryUrl"
+    :main-text="mainText"
+    :secondary-text="secondaryText"
     class="SectionTopProducts section-top-products"
   >
     <template #right>

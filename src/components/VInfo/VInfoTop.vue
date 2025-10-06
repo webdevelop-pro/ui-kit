@@ -8,8 +8,16 @@ defineProps({
   subtitle: String,
   text: String,
   tagText: String,
-  getInTouchUrl: String,
-  useCaseUrl: String,
+  secondaryUrl: String,
+  secondaryText: {
+    type: String,
+    default: 'Learn More in Use Cases',
+  },
+  mainUrl: String,
+  mainText: {
+    type: String,
+    default: 'Get In Touch',
+  },
 });
 </script>
 
@@ -40,22 +48,22 @@ defineProps({
       <div class="v-info-top__button-wrap">
         <slot name="buttons">
           <VButton
-            v-if="getInTouchUrl"
+            v-if="mainUrl"
             as="a"
-            :href="encodeURI(getInTouchUrl)"
+            :href="encodeURI(mainUrl)"
             size="large"
           >
-            Get In Touch
+            {{ mainText }}
           </VButton>
           <VButton
-            v-if="useCaseUrl"
+            v-if="secondaryUrl"
             as="a"
-            :href="encodeURI(useCaseUrl)"
+            :href="encodeURI(secondaryUrl)"
             size="large"
             variant="link"
             class="is--margin-top-0"
           >
-            Learn More in Use Cases
+            {{ secondaryText }}
             <component :is="arrowIcon" />
           </VButton>
         </slot>

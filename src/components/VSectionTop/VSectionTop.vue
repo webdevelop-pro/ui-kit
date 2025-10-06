@@ -6,9 +6,17 @@ defineProps({
   title: String,
   text: String,
   subtitle: String,
-  getInTouchUrl: String,
   tagText: String,
-  useCaseUrl: String,
+  secondaryUrl: String,
+  secondaryText: {
+    type: String,
+    default: 'Learn More in Use Cases',
+  },
+  mainUrl: String,
+  mainText: {
+    type: String,
+    default: 'Get In Touch',
+  },
 });
 </script>
 
@@ -21,9 +29,11 @@ defineProps({
             :title="title"
             :subtitle="subtitle"
             :text="text"
-            :get-in-touch-url="getInTouchUrl"
+            :main-url="mainUrl"
             :tag-text="tagText"
-            :use-case-url="useCaseUrl"
+            :secondary-url="secondaryUrl"
+            :main-text="mainText"
+            :secondary-text="secondaryText"
           />
         </slot>
       </div>
