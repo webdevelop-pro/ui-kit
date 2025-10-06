@@ -6,7 +6,6 @@ const props = defineProps({
 });
 
 const getInit = () => {
-  // eslint-disable-next-line
   const disqus_config = function () {
 
     this.page.url = `${props.frontendUrl}${window.location.pathname}`; // Replace PAGE_URL with your page's canonical URL variable

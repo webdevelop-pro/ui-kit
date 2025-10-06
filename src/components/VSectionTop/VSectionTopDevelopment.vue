@@ -4,7 +4,7 @@ import VSectionTop from 'UiKit/components/VSectionTop/VSectionTop.vue';
 
 <script setup lang="ts">
 
-defineProps({
+const props = defineProps({
   title: String,
   text: String,
   subtitle: String,
@@ -34,7 +34,7 @@ defineProps({
     :main-url="mainUrl"
     :main-text="mainText"
     class="VSectionTopDevelopment development-top"
-    :class="class"
+    :class="props.class"
   >
     <template #right>
       <img

@@ -11,19 +11,19 @@ export function localDataPlugin(md: MarkdownIt): void {
   const defaultRender = md.render.bind(md)
   
   md.render = function(src: string, env: any): string {
-    // Extract frontmatter-style blocks in partials; skip the very first block at position 0 (top-level page FM)
+    // If the document starts with frontmatter, treat it as a top-level page and do not process here
+    // We only want to process frontmatter-style blocks (--- ... ---) that appear inside included partials
+    if (/^\s*---\s*\n/.test(src)) {
+      return defaultRender(src, env)
+    }
+
+    // Extract frontmatter-style blocks in partials (not at the very start of the page)
     const dataBlockRegex = /^---\s*\n([\s\S]*?)\n---/gm
     let match: RegExpExecArray | null
     let cleanedSrc = src
     const extractedData: any[] = []
-
-    console.log(src)
     
     while ((match = dataBlockRegex.exec(src)) !== null) {
-      // Skip the first frontmatter block if it starts at the beginning of the document
-      // if (match.index === 0) {
-      //   continue
-      // }
       try {
         const yamlContent = match[1]
         const data = yaml.load(yamlContent)
@@ -32,7 +32,7 @@ export function localDataPlugin(md: MarkdownIt): void {
         // Remove the data block from source
         cleanedSrc = cleanedSrc.replace(match[0], '')
       } catch (e) {
-        console.error('Error parsing partial frontmatter block:', e)
+        console.error('Error parsing ---data block:', e)
       }
     }
 
