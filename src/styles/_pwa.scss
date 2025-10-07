@@ -5,13 +5,20 @@
   }
 }
 
-@mixin pwa-scope {
+@mixin pwa-scope($root: false) {
   // Share PWA-specific behavior across standalone display modes and forced PWA wrappers
   @media (display-mode: standalone), (display-mode: fullscreen), (display-mode: minimal-ui) {
     @content;
-  }  
-  body.pwa-mobile & {
-    @content;
+  }
+
+  @if $root {
+    body.pwa-mobile {
+      @content;
+    }
+  } @else {
+    body.pwa-mobile & {
+      @content;
+    }
   }
   html { 
     // Default to smooth scrolling when navigating within the PWA shell
@@ -26,7 +33,7 @@
   }
 }
 
-@include pwa-scope {
+@include pwa-scope($root: true) {
 
   // Mirror native app interaction defaults when the PWA skin is active
   html, body {
