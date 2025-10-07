@@ -61,7 +61,7 @@ export const getReferenceType = (schema?: any): string => {
   const refType = refPath.split('/').pop(); // Gets 'Individual', 'Entity', 'Trust', etc.
   
   // Map to supported types or fallback to Individual
-  const supportedTypes = ['Individual', 'Entity', 'Trust', 'Sdira', 'Solo401k'];
+  const supportedTypes = ['Individual', 'Entity', 'Trust', 'Sdira', 'Solo401k', 'SdiraEdit'];
   return supportedTypes.includes(refType) ? refType : 'Individual';
 };
 
