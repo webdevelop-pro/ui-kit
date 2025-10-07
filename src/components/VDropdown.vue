@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { DropdownMenuContentProps } from 'radix-vue/dist/DropdownMenu/DropdownMenuContent';
+import {
+  type DropdownMenuContentProps,
+} from 'radix-vue';
 import {
   VDropdownMenu, VDropdownMenuTrigger, VDropdownMenuContent, VDropdownMenuItem,
 } from 'UiKit/components/Base/VDropdownMenu';
