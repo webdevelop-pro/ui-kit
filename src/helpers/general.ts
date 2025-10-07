@@ -1,7 +1,6 @@
 import { IFrontmatter } from 'UiKit/types/types';
 import groupBy from 'lodash/groupBy';
 import lodashIsEmpty from 'lodash/isEmpty';
-import uniqBy from 'lodash/uniqBy';
 import startCase from 'lodash/startCase';
 import toLower from 'lodash/toLower';
 import unionBy from 'lodash/unionBy';
@@ -84,9 +83,28 @@ export function getLastModifiedDate(filePath: string): string | null {
 }
 
 export function getUniqueCapitalizedTags(items: { tags?: string[] | null }[]): string[] {
-  const tags = items.flatMap((item) => item.tags || []).filter(Boolean) as string[];
-  const unique = uniqBy(tags, (t) => toLower(t));
-  return unique.map((t) => startCase(toLower(t)));
+  const seen = new Set<string>();
+  const result: string[] = [];
+
+  items.forEach((item) => {
+    const tags = (item.tags || []).filter(Boolean) as string[];
+    tags.forEach((rawTag) => {
+      const trimmed = rawTag.trim();
+      if (!trimmed) return;
+      const key = toLower(trimmed);
+      if (seen.has(key)) return;
+      seen.add(key);
+      // Preserve common separators like '/' while capitalizing parts
+      if (key.includes('/')) {
+        const formatted = key.split('/').map((part) => startCase(part)).join('/');
+        result.push(formatted);
+      } else {
+        result.push(startCase(key));
+      }
+    });
+  });
+
+  return result;
 }
 
 export function combineTags(
@@ -101,10 +119,10 @@ export function filterItemsByTag<T extends { tags?: string[] }>(
   activeTag: string,
 ): T[] {
   if (activeTag !== '') {
-    return items.filter((item) => {
-      const tags = item.tags?.map((tag) => tag.toLowerCase());
-      return tags?.includes(activeTag.toLowerCase());
-    });
+    const normalize = (s: string) => kebabCase(toLower(s.trim()));
+    const active = normalize(activeTag);
+    return items.filter((item) => (item.tags || [])
+      .some((tag) => normalize(tag) === active));
   }
   return items;
 }

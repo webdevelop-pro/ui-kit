@@ -16,10 +16,11 @@ const delegatedProps = computed(() => {
 </script>
 
 <template>
-  <div :class="{ 'is--container': withContainer }">
+  <div>
     <Separator
       v-bind="delegatedProps"
       class="VSeparator v-separator"
+      :class="{ 'is--container': withContainer }"
     >
       <span
         v-if="props.label"

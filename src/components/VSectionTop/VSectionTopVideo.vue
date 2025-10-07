@@ -166,9 +166,8 @@ const emit = defineEmits(['click']);
 
 .v-section-top-video-unauthenticated {
   align-items: flex-start;
-
-  
   padding: 70px 0;
+
   &.is--full-height {
     padding: 150px 0;
     min-height: 600px;

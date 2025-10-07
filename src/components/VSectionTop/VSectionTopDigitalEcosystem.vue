@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropType, ref } from 'vue';
+import { ref } from 'vue';
 import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
 import { storeToRefs } from 'pinia';
 import VImage from 'UiKit/components/Base/VImage/VImage.vue';
@@ -7,22 +7,16 @@ import VSectionTop from 'UiKit/components/VSectionTop/VSectionTop.vue';
 
 const { isDesktopLG } = storeToRefs(useBreakpoints());
 
-interface IDigitalTop {
-  tagText?: string;
-  title?: string;
-  subtitle?: string;
-  imageMobile?: string;
-  image?: string;
-  text?: string;
-}
 
 const props = defineProps({
-  data: {
-    type: Object as PropType<IDigitalTop>,
-    required: true,
-  },
-  getInTouchUrl: String,
-  useCaseUrl: String,
+  tagText: String,
+  title: String,
+  subtitle: String,
+  imageMobile: String,
+  image: String,
+  text: String,
+  mainUrl: String,
+  secondaryUrl: String,
 });
 
 const isLoadingImage = ref(true);
@@ -31,12 +25,12 @@ const isLoadingImage = ref(true);
 <template>
   <div class="VSectionTopDigitalEcosystem v-section-top-digital-ecosystem__wrap-top">
     <VSectionTop
-      :tag-text="data.tagText"
-      :title="data.title"
-      :subtitle="data.subtitle"
-      :text="data.text"
-      :get-in-touch-url="getInTouchUrl"
-      :use-case-url="useCaseUrl"
+      :tag-text="tagText"
+      :title="title"
+      :subtitle="subtitle"
+      :text="text"
+      :main-url="mainUrl"
+      :secondary-url="secondaryUrl"
       class="v-section-top-digital-ecosystem"
     >
       <template #right>
@@ -46,7 +40,7 @@ const isLoadingImage = ref(true);
         >
           <ClientOnly>
             <VImage
-              :src="!isDesktopLG ? props.data.imageMobile : props.data.image"
+              :src="!isDesktopLG ? props.imageMobile : props.image"
               alt="digital ecosystem image"
               :width="isDesktopLG ? '313' : '352'"
               :height="isDesktopLG ? '1246' : '380'"

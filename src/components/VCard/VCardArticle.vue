@@ -22,6 +22,7 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
 <template>
   <VCard
     v-bind="$attrs"
+    :key="data.url"
     :href="data.url"
     class="VCardArticle v-card-article"
     :class="{ 'is--small': small }"

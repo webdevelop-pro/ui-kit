@@ -1,46 +1,48 @@
 <script lang="ts">
-import { PropType } from 'vue';
-import { useData } from 'vitepress';
 import VSectionTop from 'UiKit/components/VSectionTop/VSectionTop.vue';
 </script>
 
 <script setup lang="ts">
-interface IDevelopmentTop {
-  title: string;
-  text: string;
-  subtitle: string;
-  getInTouchUrl: string;
-  image: string;
-  class: string;
-}
 
-defineProps({
-  data: {
-    type: Object as PropType<IDevelopmentTop>,
-    required: true,
-  },
+const props = defineProps({
+  title: String,
+  text: String,
+  subtitle: String,
+  image: String,
+  class: String,
   topic: String,
+  mainUrl: {
+    type: String,
+    default: '/book-a-call',
+  },
+  mainText: {
+    type: String,
+    default: 'Get In Touch',
+  },
+  classImage: {
+    type: String,
+    default: '',
+  },
 });
-
-const { theme } = useData();
-const getStarted = theme.navigation.getStarted.data;
 </script>
 
 <template>
   <VSectionTop
-    :title="data.title"
-    :subtitle="data.subtitle"
-    :text="data.text"
-    :get-in-touch-url="`${getStarted.url}?topic=${topic}`"
+    :title="title"
+    :subtitle="subtitle"
+    :text="text"
+    :main-url="mainUrl"
+    :main-text="mainText"
     class="VSectionTopDevelopment development-top"
+    :class="props.class"
   >
     <template #right>
       <img
         loading="lazy"
-        :src="data.image"
+        :src="image"
         alt="Products top background"
         class="development-top__background"
-        :class="data.class"
+        :class="classImage"
       >
     </template>
   </VSectionTop>

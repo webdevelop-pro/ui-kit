@@ -80,7 +80,7 @@
     padding: 0;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
     border: 0;
 }
 
@@ -90,6 +90,12 @@
     @media screen and (max-width: $tablet){
         padding: 100px 0;
     }
+}
+
+
+
+.is--paddings-60{
+    padding: 60px 0;
 }
 
   
@@ -361,7 +367,6 @@ pre{
 
 .is--link-text-hidden{
     border: 0;
-    clip: rect(1px, 1px, 1px, 1px);
     clip-path: inset(50%);
     height: 1px;
     margin: -1px;
@@ -369,7 +374,7 @@ pre{
     padding: 0;
     position: absolute !important;
     width: 1px;
-    word-wrap: normal !important;
+    overflow-wrap: normal !important;
     word-break: normal;
 }
 

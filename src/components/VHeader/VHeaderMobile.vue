@@ -98,6 +98,7 @@ const open = defineModel<boolean>();
 
 <style lang="scss">
 @use "UiKit/styles/_colors.scss" as colors;
+
 .v-header-mobile {
   &__item {
     height: auto;
@@ -107,18 +108,22 @@ const open = defineModel<boolean>();
     display: flex;
     flex-direction: column;
   }
+
   &__list {
     list-style: none;
     padding: 0;
     margin: 0;
   }
+
   &__navigation > &__list + &__list {
     border-top: 1px solid colors.$gray-40;
     margin-top: 20px;
   }
+
   &__title + &__list {
     margin: 10px 0 0;
   }
+
   &__data {
     border-top: 1px solid colors.$gray-40;
     padding: 20px;
