@@ -63,9 +63,18 @@ const open = defineModel<boolean>();
             <VNavigationMenuLink
               v-if="!menuItem.children"
               :href="menuItem.href"
+              class="v-header-mobile__link"
               @click="open = false"
             >
-              {{ menuItem.text }}
+              <component
+                :is="menuItem.icon"
+                v-if="menuItem.icon"
+                class="v-header-mobile__icon"
+                aria-hidden="true"
+              />
+              <span class="v-header-mobile__label">
+                {{ menuItem.text }}
+              </span>
             </VNavigationMenuLink>
             <span
               v-else
@@ -107,6 +116,23 @@ const open = defineModel<boolean>();
     gap: 9px;
     display: flex;
     flex-direction: column;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: colors.$gray-50;
+  }
+
+  &__label {
+    flex: 1;
   }
 
   &__list {

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineAsyncComponent, hydrateOnVisible, PropType, ref } from 'vue';
+import type { Component } from 'vue';
 import VHeaderNavigationListItem from './VHeaderNavigationListItem.vue';
 
 const VNavigationMenu = defineAsyncComponent({
@@ -43,6 +44,9 @@ export type MenuItem = {
   active?: boolean;
   text: string;
   children?: MenuItem[];
+  icon?: Component;
+  class?: string;
+  card?: unknown;
 }
 
 const currentTrigger = ref('');
@@ -72,14 +76,33 @@ const emit = defineEmits(['click']);
         <VNavigationMenuLink
           v-if="!menuItem.children"
           :href="menuItem.href"
-          :class="{ 'router-link-active': path?.includes(menuItem.href) }"
+          :class="[
+            'v-header-navigation__link',
+            { 'router-link-active': path?.includes(menuItem.href) },
+          ]"
           @click.stop="emit('click')"
         >
-          {{ menuItem.text }}
+          <component
+            :is="menuItem.icon"
+            v-if="menuItem.icon"
+            class="v-header-navigation__icon"
+            aria-hidden="true"
+          />
+          <span class="v-header-navigation__label">
+            {{ menuItem.text }}
+          </span>
         </VNavigationMenuLink>
         <div v-else>
-          <VNavigationMenuTrigger>
-            {{ menuItem.text }}
+          <VNavigationMenuTrigger class="v-header-navigation__trigger">
+            <component
+              :is="menuItem.icon"
+              v-if="menuItem.icon"
+              class="v-header-navigation__icon"
+              aria-hidden="true"
+            />
+            <span class="v-header-navigation__label">
+              {{ menuItem.text }}
+            </span>
           </VNavigationMenuTrigger>
           <VNavigationMenuContent>
             <div class="v-header-navigation__wrap">
@@ -115,6 +138,39 @@ const emit = defineEmits(['click']);
 
 .v-header-navigation {
   $root: &;
+
+  &__link,
+  &__trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &__trigger {
+    cursor: pointer;
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: colors.$gray-50;
+
+    path{
+      fill: currentColor;
+    }
+
+    path[stroke] {
+      stroke: currentColor;
+    }
+  }
+
+  &__label {
+    display: inline-flex;
+    align-items: center;
+  }
 
   &__wrap {
     display: flex;
