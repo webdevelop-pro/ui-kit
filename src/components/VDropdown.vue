@@ -5,14 +5,16 @@ import {
 import {
   VDropdownMenu, VDropdownMenuTrigger, VDropdownMenuContent, VDropdownMenuItem,
 } from 'UiKit/components/Base/VDropdownMenu';
+import type { Component } from 'vue';
 import { PropType, ref } from 'vue';
 
 export interface IDropdown {
-    to?: string;
-    href?: string;
-    text: string;
-    active?: boolean;
-    class?: string;
+  to?: string;
+  href?: string;
+  text: string;
+  active?: boolean;
+  class?: string;
+  icon?: Component;
 }
 
 defineProps({
@@ -61,7 +63,15 @@ const toggleState = ref(false);
           class="v-dropdown__item"
           :class="{ 'is--active': menuItem.active }"
         >
-          {{ menuItem.text }}
+          <component
+            :is="menuItem.icon"
+            v-if="menuItem.icon"
+            class="v-dropdown__icon"
+            aria-hidden="true"
+          />
+          <span class="v-dropdown__label">
+            {{ menuItem.text }}
+          </span>
         </component>
       </VDropdownMenuItem>
       <slot name="content" />
@@ -70,10 +80,42 @@ const toggleState = ref(false);
 </template>
 
 <style lang="scss">
+@use 'UiKit/styles/_colors.scss' as colors;
+
 .v-dropdown {
   &__item {
     padding: 8px 12px;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: inherit;
+    text-decoration: none;
+
+    .v-dropdown-menu-item.is--border-top & {
+      border-top: 1px solid colors.$gray-30;
+      margin-top: 8px;
+      padding-top: 16px;
+      padding-bottom: 12px;
+    }
+  }
+
+  &__icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: colors.$gray-50;
+
+    path{
+      fill: currentColor;
+    }
+
+    path[stroke] {
+      stroke: currentColor;
+    }
+  }
+
+  &__label {
+    flex: 1;
   }
 }
 </style>
