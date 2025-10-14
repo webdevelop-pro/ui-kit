@@ -156,6 +156,7 @@ const emit = defineEmits(['click']);
     width: 20px;
     height: 20px;
     flex-shrink: 0;
+    display: none;
     color: colors.$gray-50;
 
     path{
