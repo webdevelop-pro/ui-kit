@@ -218,6 +218,11 @@
 .is--align-self-center{
     align-self: center;
 }
+
+.is--justify-space-between {
+    display: flex;
+    justify-content: space-between;
+}
         
 .is--page{
     width: 100%;

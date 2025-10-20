@@ -15,11 +15,14 @@
     body.pwa-mobile {
       @content;
     }
-  } @else {
+  }
+
+ @else {
     body.pwa-mobile & {
       @content;
     }
   }
+
   html { 
     // Default to smooth scrolling when navigating within the PWA shell
     scroll-behavior: smooth;
@@ -88,5 +91,6 @@
   a, button, [role="button"], input[type="button"], input[type="submit"], label, select {
     touch-action: manipulation;
   }
+
   a, button { -webkit-tap-highlight-color: transparent; }
 }

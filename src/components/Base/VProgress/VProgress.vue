@@ -32,10 +32,22 @@ const delegatedProps = computed(() => {
     :class="props.class"
   >
     <div
-      v-if="withText"
-      class="v-progressbar__top is--h5__title"
+      v-if="$slots['top-start'] || $slots['top-end'] || withText"
+      class="v-progressbar__top"
     >
-      {{ modelValue }}% Funded
+      <template v-if="$slots['top-start'] || $slots['top-end']">
+        <div class="v-progressbar__top-start">
+          <slot name="top-start" />
+        </div>
+        <div class="v-progressbar__top-end">
+          <slot name="top-end" />
+        </div>
+      </template>
+      <template v-else>
+        <div class="is--h5__title">
+          {{ modelValue }}% Funded
+        </div>
+      </template>
     </div>
     <ProgressRoot
       v-bind="delegatedProps"
@@ -61,7 +73,11 @@ const delegatedProps = computed(() => {
   gap: 8px;
 
   &__top {
-    color: colors.$secondary-dark
+    color: colors.$secondary-dark;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   &__progress {

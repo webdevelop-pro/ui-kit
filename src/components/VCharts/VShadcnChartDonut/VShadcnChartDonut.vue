@@ -33,6 +33,7 @@ const props = withDefaults(defineProps<Pick<BaseChartProps<T>, 'data' | 'colors'
   customTooltip?: Component;
   showCenter?: boolean;
   title?: string;
+  subtitle?: string;
 }>(), {
   margin: () => ({
     top: 0, bottom: 0, left: 0, right: 0,
@@ -48,8 +49,9 @@ const props = withDefaults(defineProps<Pick<BaseChartProps<T>, 'data' | 'colors'
 type KeyOfT = Extract<keyof T, string>
 type Data = typeof props.data[number]
 
-const category = computed(() => props.category);
-const index = computed(() => props.index);
+const valueFormatter = props.valueFormatter ?? ((tick: number) => `${tick}`)
+const category = computed(() => props.category as KeyOfT)
+const index = computed(() => props.index as KeyOfT)
 
 const isMounted = useMounted();
 const activeSegmentKey = ref<string>();
@@ -65,6 +67,7 @@ const legendItems = computed(() => props.data.map((item, i) => ({
 })));
 
 const totalValue = computed(() => props.data.reduce((prev, curr) => prev + curr[props.category], 0));
+const noData = computed(() => props.data.length === 0)
 </script>
 
 <template>
@@ -75,10 +78,15 @@ const totalValue = computed(() => props.data.reduce((prev, curr) => prev + curr[
     >
       {{ title }}
     </h3>
+    <p v-if="subtitle">
+      {{ subtitle }}
+    </p>
     <VisSingleContainer
+      v-if="!noData"
       :style="{ height: isMounted ? '100%' : 'auto' }"
       :margin="{ left: 20, right: 20 }"
       :data="data"
+      class="is--margin-top-10"
     >
       <VChartSingleTooltip
         :selector="Donut.selectors.segment"
@@ -113,6 +121,14 @@ const totalValue = computed(() => props.data.reduce((prev, curr) => prev + curr[
 
       <slot />
     </VisSingleContainer>
+    <p
+      v-else
+      class="is--no-data"
+    >
+      <slot name="no-data">
+        No data available
+      </slot>
+    </p>
   </div>
 </template>
 
