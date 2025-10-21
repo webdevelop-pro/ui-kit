@@ -57,10 +57,6 @@ const onSubmit = async (emailLocal: string) => {
   loadingSubmitting.value = false;
   toast(TOAST_OPTIONS);
 };
-
-const onClickMenu = () => {
-  useGlobalLoader().show();
-};
 </script>
 
 <template>
@@ -93,7 +89,6 @@ const onClickMenu = () => {
         <VFooterMenu
           class="v-footer__menu"
           :menu="menu"
-          @click="onClickMenu"
         />
       </div>
     </div>

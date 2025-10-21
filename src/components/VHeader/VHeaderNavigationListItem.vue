@@ -7,6 +7,7 @@ interface IHeaderNavigation {
   frontmatter?: IFrontmatter;
   text?: string;
   menuIcon?: string;
+  target?: string;
 }
 
 const props = defineProps({
@@ -34,6 +35,7 @@ const getSvgComponent = (data) => {
     <a
       v-if="data?.href && data.text"
       :href="data.href"
+      :target="data.target ? data.target : '_self'"
       class="v-header-navigation-list-item__item is--h6__title is--link"
       :class="{ 'is--active': isActive }"
       @click="emit('click')"

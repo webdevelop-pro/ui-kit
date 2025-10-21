@@ -21,10 +21,6 @@ defineProps({
   },
 });
 
-const onClick = () => {
-  useGlobalLoader().show();
-};
-
 const route = useRoute();
 </script>
 
@@ -33,7 +29,6 @@ const route = useRoute();
     :path="route.path"
     :menu="menu"
     class="VHeaderGetStarted v-header-get-started"
-    @click="onClick"
   >
     <VButton
       as="a"
