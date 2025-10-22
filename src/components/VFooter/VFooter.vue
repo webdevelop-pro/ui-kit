@@ -5,7 +5,6 @@ import { env } from '@/config/env';
 import { useData } from 'vitepress';
 import { socials } from 'UiKit/utils/socials';
 import { useToast } from '../Base/VToast/use-toast';
-import { useGlobalLoader } from 'UiKit/store/useGlobalLoader';
 import { MenuItem } from './VFooterMenu.vue';
 
 const VSocialLinks = defineAsyncComponent({

@@ -2,7 +2,6 @@
 import { defineAsyncComponent, hydrateOnVisible, PropType } from 'vue';
 import { useData, useRoute } from 'vitepress';
 import VHeader from 'UiKit/components/VHeader/VHeader.vue';
-import { useGlobalLoader } from 'UiKit/store/useGlobalLoader';
 import { MenuItem } from './VHeaderNavigation.vue';
 </script>
 

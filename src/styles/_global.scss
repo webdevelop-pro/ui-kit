@@ -14,6 +14,12 @@
         display: block !important;
     }
 }
+
+.is--lt-tablet-hide{
+    @media screen and (max-width: $tablet){
+        display: none !important;
+    }
+}
   
 
 .is--gt-desktop-lg-show{
