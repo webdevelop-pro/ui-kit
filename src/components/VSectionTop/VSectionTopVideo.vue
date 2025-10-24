@@ -60,7 +60,7 @@ const emit = defineEmits(['click']);
             
             @click="emit('click')"
           >
-            Sign In
+            Log In
           </VButton>
           <VButton
             as="a"

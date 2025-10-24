@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useRoute } from 'vitepress';
 import { PropType } from 'vue';
 
 export type MenuItem = {
@@ -10,68 +9,70 @@ export type MenuItem = {
   children?: MenuItem[];
 }
 
-const route = useRoute();
-
-const getActive = (name: string) => {
-  if (route.path.includes(name)) {
-    return 'is--active';
-  }
-  return '';
-};
-
 const emit = defineEmits(['click']);
 defineProps({
   menu: {
     type: Array as PropType<MenuItem[]>,
   },
+  isColumn: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+const getComponentName = (item: MenuItem) => {
+  if (item.to) return 'router-link';
+  if (item.href) return 'a';
+  return 'div';
+};
+const getComponentClass = (item: MenuItem) => {
+  if (item.to || item.href) return 'v-footer-menu__item  is--h6__title';
+  return 'v-footer-menu__item-not-link is--h5__title';
+};
 </script>
 
 <template>
   <!-- eslint-disable vue/no-multiple-template-root -->
   <nav
     v-if="menu"
-    class="VFooterMenu app-layout-default-footer-menu"
+    class="VFooterMenu v-footer-menu"
   >
-    <ul class="app-layout-default-footer-menu__menu-list">
+    <ul
+      class="v-footer-menu__menu-list"
+      :class="{ 'is--row': !isColumn, 'is--column': isColumn }"
+    >
       <li
         v-for="menuItem in menu"
         :key="menuItem.text"
-        class="app-layout-default-footer-menu__menu-item"
+        class="v-footer-menu__menu-item"
       >
-        <a
-          v-if="menuItem.href"
+        <component
+          :is="getComponentName(menuItem)"
           :href="menuItem.href"
-          :class="[getActive(menuItem.href)]"
-          class="app-layout-default-footer-menu__item is--h6__title"
+          :to="menuItem.to"
+          :class="[getComponentClass(menuItem), { 'is--active': menuItem.active }]"
           @click="emit('click')"
         >
           {{ menuItem.text }}
-        </a>
-        <div
-          v-if="!menuItem.href"
-          class="app-layout-default-footer-menu__item-not-link is--h5__title"
-        >
-          {{ menuItem.text }}
-        </div>
+        </component>
         <div
           v-if="menuItem.children && menuItem.children.length > 0"
-          class="app-layout-default-footer-menu__children"
+          class="v-footer-menu__children"
           :class="{ 'is--two-col': menuItem.children.length > 8 }"
         >
           <template
             v-for="childItem in menuItem.children"
             :key="childItem.text"
           >
-            <a
-              v-if="childItem.href"
+            <component
+              :is="getComponentName(menuItem)"
               :href="childItem.href"
-              :class="[getActive(childItem.href)]"
-              class="app-layout-default-footer-menu__item is--h6__title"
+              :to="childItem.to"
+              :class="[getComponentClass(childItem), { 'is--active': menuItem.active }]"
               @click="emit('click')"
             >
               {{ childItem.text }}
-            </a>
+            </component>
           </template>
         </div>
       </li>
@@ -80,7 +81,7 @@ defineProps({
 </template>
 
 <style lang="scss">
-.app-layout-default-footer-menu {
+.v-footer-menu {
   $root: &;
 
   ul {
@@ -135,21 +136,33 @@ defineProps({
 
   &__menu-list {
     display: flex;
-    gap: 48px;
     list-style-type: none;
 
-    @include media-lte(desktop-lg) {
-      gap: 24px;
+    &.is--row {
+      gap: 48px;
+
+      @include media-lte(desktop-lg) {
+        gap: 24px;
+      }
+
+      @include media-lte(desktop) {
+        gap: 24px;
+        flex-direction: column;
+      }
+
+      @include media-lte(tablet) {
+        flex-direction: column;
+        gap: 24px;
+      }
     }
 
-    @include media-lte(desktop) {
-      gap: 24px;
+    &.is--column {
       flex-direction: column;
-    }
+      gap: 16px;
 
-    @include media-lte(tablet) {
-      flex-direction: column;
-      gap: 24px;
+      @include media-lte(tablet) {
+        padding-left: 0;
+      }
     }
   }
 }

@@ -342,6 +342,10 @@ const btnClasses = computed(() => ({
   .with-default-distance &,
   &.with-default-distance {
     margin-top: 40px;
+
+    @media screen and (max-width: $tablet){
+      margin-top: 25px;
+    }
   }
 }
 </style>

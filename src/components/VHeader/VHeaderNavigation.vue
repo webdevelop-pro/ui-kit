@@ -52,7 +52,6 @@ export type MenuItem = {
 const currentTrigger = ref('');
 
 defineProps({
-  path: String,
   menu: {
     type: Array as PropType<MenuItem[]>,
   },
@@ -78,7 +77,7 @@ const emit = defineEmits(['click']);
           :href="menuItem.href"
           :class="[
             'v-header-navigation__link',
-            { 'router-link-active': path?.includes(menuItem.href) },
+            { 'router-link-active': menuItem.active },
           ]"
           @click.stop="emit('click')"
         >
@@ -115,7 +114,6 @@ const emit = defineEmits(['click']);
                     v-for="(childItem, childIndex) in childGroup"
                     :key="childIndex"
                     :data="childItem"
-                    :path="path"
                     @click="currentTrigger = ''; emit('click');"
                   />
                 </ul>

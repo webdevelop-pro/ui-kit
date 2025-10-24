@@ -24,7 +24,6 @@ defineProps({
     type: Boolean,
     default: true,
   },
-  path: String,
   logoHref: {
     type: String,
     default: '/',
@@ -78,7 +77,6 @@ watchPostEffect(() => {
       <div class="v-header__right ">
         <VHeaderNavigation
           v-if="showNavigation"
-          :path="path"
           :menu="menu"
           class="is--gt-desktop-md-show"
           @click="emit('click')"

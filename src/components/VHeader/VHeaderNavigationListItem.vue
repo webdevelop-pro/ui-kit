@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { IFrontmatter } from 'UiKit/types/types';
-import { computed, PropType } from 'vue';
+import { PropType } from 'vue';
 
 interface IHeaderNavigation {
   href?: string;
@@ -8,16 +8,14 @@ interface IHeaderNavigation {
   text?: string;
   menuIcon?: string;
   target?: string;
+  active?: boolean;
 }
 
-const props = defineProps({
+defineProps({
   data: Object as PropType<IHeaderNavigation>,
-  path: String,
 });
 
 const emit = defineEmits(['click']);
-
-const isActive = computed(() => props.path?.includes(props.data.href));
 
 const iconMap = import.meta.glob('@/assets/images/menu/**/*.svg', { eager: true, import: 'default' });
 
@@ -37,7 +35,7 @@ const getSvgComponent = (data) => {
       :href="data.href"
       :target="data.target ? data.target : '_self'"
       class="v-header-navigation-list-item__item is--h6__title is--link"
-      :class="{ 'is--active': isActive }"
+      :class="{ 'is--active': data.active }"
       @click="emit('click')"
     >
       <div

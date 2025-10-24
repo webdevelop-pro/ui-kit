@@ -30,6 +30,10 @@ const VFooterBottom = defineAsyncComponent({
 defineProps({
   menu: Array as PropType<MenuItem[]>,
   menuLegal: Array as PropType<MenuItem[]>,
+  isColumnMenu: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const { theme } = useData();
@@ -88,6 +92,7 @@ const onSubmit = async (emailLocal: string) => {
         <VFooterMenu
           class="v-footer__menu"
           :menu="menu"
+          :is-column="isColumnMenu"
         />
       </div>
     </div>

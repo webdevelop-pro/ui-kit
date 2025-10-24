@@ -63,7 +63,10 @@ const open = defineModel<boolean>();
             <VNavigationMenuLink
               v-if="!menuItem.children"
               :href="menuItem.href"
-              class="v-header-mobile__link"
+              :class="[
+                'v-header-mobile__link',
+                { 'router-link-active': menuItem.active || path?.includes(menuItem.href) }
+              ]"
               @click="open = false"
             >
               <component
