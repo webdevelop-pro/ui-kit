@@ -19,7 +19,7 @@ const delegatedProps = computed(() => {
 </script>
 
 <template>
-  <AccordionHeader class="flex">
+  <AccordionHeader class="flex v-accordion-header">
     <AccordionTrigger
       v-bind="delegatedProps"
       class="VAccordionTrigger v-accordion-trigger"
@@ -50,6 +50,7 @@ const delegatedProps = computed(() => {
 .v-accordion-trigger[data-state="open"] {
   background-color: colors.$gray-10;
   transition: transform 0.3s ease;
+  margin: 0;
 
   &.is--white {
     background-color: colors.$white;
@@ -76,5 +77,9 @@ const delegatedProps = computed(() => {
     background-color: colors.$gray-10;
     transition: transform 0.3s ease;
   }
+}
+
+.v-accordion-header {
+  margin: 0 !important;
 }
 </style>

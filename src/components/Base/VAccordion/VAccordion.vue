@@ -25,6 +25,6 @@ const forwarded = useForwardPropsEmits(props, emits);
 <style lang="scss">
 .v-accordion {
   width: 100%;
-  padding-left: 0;
+  padding-left: 0 !important;
 }
 </style>
