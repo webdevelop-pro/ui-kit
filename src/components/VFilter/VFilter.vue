@@ -145,6 +145,7 @@ watch(() => props.items, () => {
 
 .v-filter{
   --v-filter-dropdown-min-width: 150px;
+  --v-form-checkbox-group-item--padding: 12px;
 
   position: relative;
 
@@ -191,11 +192,9 @@ watch(() => props.items, () => {
     width: 100%;
 
     .v-form-checkbox{
-      &.is--checked{
-        .v-form-checkbox__text{
-          color: colors.$primary;
-          font-weight: 600;
-        }
+      .is--checked{
+        color: colors.$primary;
+        font-weight: 600;
       }
     }
   }

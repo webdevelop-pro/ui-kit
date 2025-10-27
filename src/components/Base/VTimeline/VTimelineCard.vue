@@ -206,6 +206,7 @@ const btnClasses = computed(() => {
 
   &.is--type-not-complete{
     opacity: 0.3;
+    pointer-events: none;
   }
 
   &.is--type-complete{

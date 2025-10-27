@@ -1,9 +1,25 @@
 <script setup lang="ts">
+/**
+ * VUploaderPreviewCard - File preview component for VUploader
+ * 
+ * This component displays a preview card for uploaded files, handling both
+ * new file uploads and preloaded items. It supports image previews with
+ * CSP-compliant data URLs and fallback file icons for non-image files.
+ * 
+ * Key features:
+ * - CSP compliant (uses data URLs instead of blob URLs)
+ * - Image preview for supported file types
+ * - File icon fallback for non-images
+ * - Individual file removal
+ * - Memory cleanup on unmount
+ */
+
 import fileIcon from '../../assets/images/file.svg';
 import closeIcon from '../../assets/images/close.svg?component';
-import { computed, onBeforeUnmount, ref, watch } from 'vue';
-import VImage from 'UiKit/components/Base/VImage/VImage.vue';
+import { computed, onUnmounted, ref, watch } from 'vue';
+import VImage from '../Base/VImage/VImage.vue';
 
+// Interface for preloaded items (e.g., from API)
 interface PreloadedItem {
   id?: string | number;
   name: string;
@@ -12,29 +28,35 @@ interface PreloadedItem {
   thumbnailUrl?: string;
 }
 
+// Component props
 interface Props {
-  file?: File;
-  preloaded?: PreloadedItem;
-  index: number;
-  canRemove?: boolean;
+  file?: File;           // Newly uploaded file
+  preloaded?: PreloadedItem;  // Pre-existing item
+  index: number;          // Index in the file list
+  canRemove?: boolean;    // Whether the file can be removed
 }
 
 const props = withDefaults(defineProps<Props>(), {
   canRemove: true,
 });
 
+// Component events
 const emit = defineEmits<{
-  'remove': [index: number];
-  'click': [index: number];
+  'remove': [index: number];  // Emitted when file is removed
+  'click': [index: number];   // Emitted when card is clicked
 }>();
 
+// Event handlers
 const removeFile = (index: number) => {
   emit('remove', index);
 };
 
-const objectUrl = ref<string | null>(null);
+// Reactive state
+const dataUrl = ref<string | null>(null); // CSP-compliant data URL for image previews
 
+// Computed properties
 const isImage = computed(() => {
+  // Check if current file is an image based on MIME type or file extension
   if (props.file) return props.file.type?.startsWith('image/');
   if (props.preloaded?.mimeType) return props.preloaded.mimeType.startsWith('image/');
   const url = props.preloaded?.thumbnailUrl || props.preloaded?.url || '';
@@ -42,43 +64,68 @@ const isImage = computed(() => {
 });
 
 const displayName = computed(() => {
+  // Get display name from file or preloaded item
   if (props.file) return props.file.name;
   return props.preloaded?.name || '';
 });
 
 const previewSrc = computed(() => {
-  if (props.file && isImage.value) {
-    return objectUrl.value;
+  // Return preview source for images only
+  if (props.file && isImage.value && dataUrl.value) {
+    return dataUrl.value; // Use converted data URL for new files
   }
   if (props.preloaded && isImage.value) {
-    return props.preloaded.thumbnailUrl || props.preloaded.url;
+    return props.preloaded.thumbnailUrl || props.preloaded.url; // Use existing URL for preloaded items
   }
   return null;
 });
 
+// Utility functions
+/**
+ * Convert file to data URL to avoid CSP blob URL issues
+ * This ensures compatibility with Content Security Policy that blocks blob: URLs
+ */
+const fileToDataUrl = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+};
+
+// Watchers
+/**
+ * Watch for file changes and convert images to data URLs
+ * This handles the conversion from File objects to CSP-compliant data URLs
+ */
 watch(
   () => props.file,
-  (newFile) => {
-    if (objectUrl.value) {
-      URL.revokeObjectURL(objectUrl.value);
-      objectUrl.value = null;
-    }
+  async (newFile) => {
+    dataUrl.value = null; // Reset previous data URL
+    
     if (newFile && newFile.type?.startsWith('image/')) {
-      objectUrl.value = URL.createObjectURL(newFile);
+      try {
+        dataUrl.value = await fileToDataUrl(newFile);
+      } catch (error) {
+        console.error('Error converting file to data URL:', error);
+      }
     }
   },
   { immediate: true }
 );
 
-onBeforeUnmount(() => {
-  if (objectUrl.value) {
-    URL.revokeObjectURL(objectUrl.value);
-    objectUrl.value = null;
-  }
+// Lifecycle hooks
+/**
+ * Cleanup on component unmount to prevent memory leaks
+ */
+onUnmounted(() => {
+  dataUrl.value = null;
 });
 </script>
 
 <template>
+  <!-- File preview card container -->
   <div 
     class="VUploaderPreviewCard v-uploader__preview-card"
     :class="{ 'is--image': isImage }"
@@ -88,7 +135,9 @@ onBeforeUnmount(() => {
     @keydown.enter.stop="emit('click', index)"
     @keydown.space.prevent.stop="emit('click', index)"
   >
+    <!-- File preview content -->
     <div class="v-uploader__preview-card-info">
+      <!-- Image preview for supported file types -->
       <template v-if="isImage && previewSrc">
         <VImage
           alt="preview"
@@ -96,6 +145,7 @@ onBeforeUnmount(() => {
           class="v-uploader__preview-card-thumb is--margin-top-0"
         />
       </template>
+      <!-- File icon fallback for non-image files -->
       <template v-else>
         <component
           :is="fileIcon"
@@ -106,6 +156,8 @@ onBeforeUnmount(() => {
         </span>
       </template>
     </div>
+    
+    <!-- Remove button (conditionally shown) -->
     <button
       v-if="canRemove"
       type="button"
@@ -128,9 +180,11 @@ onBeforeUnmount(() => {
 .v-uploader {
   $root: &;
 
+  /* Preview card container styles */
   &__preview-card {
     transition: background-color 0.2s ease;
 
+    /* Non-image file layout (horizontal) */
     &:not(.is--image) {
       width: 100%;
       display: flex;
@@ -141,6 +195,7 @@ onBeforeUnmount(() => {
       justify-content: space-between;
     }
 
+    /* Image file layout (square thumbnail) */
     &.is--image {
       padding: 4px;
       width: fit-content;
@@ -148,12 +203,14 @@ onBeforeUnmount(() => {
       display: inline-block;
     }
 
+    /* Hover effect */
     &:hover {
       background-color: colors.$gray-20;
       transition: background-color 0.2s ease;
     }
   }
 
+  /* File info container */
   &__preview-card-info {
     display: flex;
     align-items: center;
@@ -161,11 +218,13 @@ onBeforeUnmount(() => {
     color: colors.$gray-80;
   }
 
+  /* Remove button */
   &__preview-card-remove {
     cursor: pointer;
     display: flex;
   }
 
+  /* Remove button positioning for images */
   &__preview-card.is--image  &__preview-card-remove {
       position: absolute;
       top: 0;
@@ -175,11 +234,13 @@ onBeforeUnmount(() => {
       border-radius: 2px;
   }
 
+  /* File icon */
   &__preview-card-icon {
     width: 16px;
     flex-shrink: 0;
   }
 
+  /* Image thumbnail */
   &__preview-card-thumb {
     width: 80px;
     height: 80px;
@@ -188,6 +249,7 @@ onBeforeUnmount(() => {
     flex-shrink: 0;
   }
 
+  /* Close icon */
   &__close-icon {
     width: 15px;
     height: 15px;

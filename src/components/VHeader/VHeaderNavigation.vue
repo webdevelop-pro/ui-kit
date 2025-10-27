@@ -77,7 +77,7 @@ const emit = defineEmits(['click']);
           :href="menuItem.href"
           :class="[
             'v-header-navigation__link',
-            { 'router-link-active': menuItem.active },
+            { 'is--active': menuItem.active },
           ]"
           @click.stop="emit('click')"
         >
@@ -158,11 +158,11 @@ const emit = defineEmits(['click']);
     color: colors.$gray-50;
 
     path{
-      fill: currentColor;
+      fill: currentcolor;
     }
 
     path[stroke] {
-      stroke: currentColor;
+      stroke: currentcolor;
     }
   }
 

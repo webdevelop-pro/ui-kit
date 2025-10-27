@@ -27,6 +27,21 @@ const delegatedProps = computed(() => {
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 const modelValue = defineModel<boolean>();
+
+const handleClick = () => {
+  if (!props.disabled && !props.readonly) {
+    modelValue.value = !modelValue.value;
+  }
+};
+
+const handleKeydown = (event: KeyboardEvent) => {
+  if (!props.disabled && !props.readonly) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      if (event.key === ' ') event.preventDefault();
+      modelValue.value = !modelValue.value;
+    }
+  }
+};
 </script>
 
 <template>
@@ -37,6 +52,12 @@ const modelValue = defineModel<boolean>();
       'is--disabled': disabled,
       'is--error': isError,
     }]"
+    role="checkbox"
+    :aria-checked="modelValue"
+    :aria-disabled="disabled || readonly"
+    tabindex="0"
+    @click="handleClick"
+    @keydown="handleKeydown"
   >
     <VCheckbox
       v-bind="forwarded"
@@ -48,6 +69,8 @@ const modelValue = defineModel<boolean>();
       v-bind="forwarded"
       :for="inputId"
       :has-asterisk="hasAsterisk"
+      :class="{ 'is--checked': modelValue }"
+      class="v-form-checkbox__label"
     >
       <slot />
     </VFormLabel>
@@ -71,6 +94,10 @@ const modelValue = defineModel<boolean>();
     #{$root}__icon-wrap {
       opacity: .3;
     }
+  }
+
+  &__label {
+    cursor: pointer;
   }
 }
 </style>

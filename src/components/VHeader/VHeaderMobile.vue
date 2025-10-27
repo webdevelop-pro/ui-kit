@@ -65,7 +65,7 @@ const open = defineModel<boolean>();
               :href="menuItem.href"
               :class="[
                 'v-header-mobile__link',
-                { 'router-link-active': menuItem.active || path?.includes(menuItem.href) }
+                { 'is--active': menuItem.active }
               ]"
               @click="open = false"
             >

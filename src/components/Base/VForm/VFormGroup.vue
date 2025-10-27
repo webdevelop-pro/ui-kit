@@ -26,7 +26,7 @@ const isError = computed(() => (errorText.value?.length > 0));
       class="v-form-group__label is--h6__title"
       :class="{ 'is--dark': dark }"
     >
-      <span class="v-form-group__label-text">{{ label }}</span>
+      {{ label }}
       <span
         v-if="required"
         class="v-form-group__label-required"
@@ -69,11 +69,9 @@ const isError = computed(() => (errorText.value?.length > 0));
   position: relative;
 
   &__label {
-    display: inline-flex;
     position: relative;
     color: colors.$gray-70;
     text-align: left;
-    align-items: center;
     margin-bottom: 7px;
 
     &.is--dark {

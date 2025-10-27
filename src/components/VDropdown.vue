@@ -106,11 +106,11 @@ const toggleState = ref(false);
     color: colors.$gray-50;
 
     path{
-      fill: currentColor;
+      fill: currentcolor;
     }
 
     path[stroke] {
-      stroke: currentColor;
+      stroke: currentcolor;
     }
   }
 

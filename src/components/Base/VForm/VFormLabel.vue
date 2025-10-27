@@ -12,13 +12,15 @@ defineProps({
     class="VFormlabel v-form-label"
     :class="{ 'is--disabled': disabled }"
   >
-    <slot />
-
-    <span
-      v-if="hasAsterisk"
-      class="v-form-label__required"
-    >
-      *
+    <span class="v-form-label__content">
+      <slot />
+    
+      <span
+        v-if="hasAsterisk"
+        class="v-form-label__required"
+      >
+        *
+      </span>
     </span>
   </label>
 </template>
@@ -34,8 +36,20 @@ defineProps({
   display: inline-block;
   position: relative;
 
+  &__content {
+    display: inline;
+    white-space: normal;
+  }
+
+  &__content::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+  }
+
   &__required {
     color: colors.$red;
+    margin-left: 0.2em;
   }
 
   &.is--disabled {
