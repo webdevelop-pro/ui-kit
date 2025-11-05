@@ -6,6 +6,7 @@ import { computed, useSlots, Comment } from 'vue';
 const props = defineProps({
   title: String,
   subTitle: String,
+  subTitle2: String,
   noData: Boolean,
   noContainer: Boolean,
   buttonHref: String,
@@ -39,6 +40,7 @@ const showInfoShort = computed(() => (
         v-if="showInfoShort"
         :title="title"
         :subtitle="subTitle"
+        :subtitle2="subTitle2"
         :link-href="linkHref"
         :link-text="linkText"
       >

@@ -3,6 +3,11 @@
 @use 'UiKit/styles/_mixins.scss' as *;
 @use 'UiKit/styles/_variables.scss' as *;
 
+// Utility: max-width classes
+@include generate-max-width-utilities(10, 1600, px);
+// Utility: max-height classes
+@include generate-max-height-utilities(10, 1600, px);
+
 .is--uppercase{
     text-transform: uppercase;
 }
@@ -94,7 +99,7 @@
     padding: 130px 0;
 
     @media screen and (max-width: $tablet){
-        padding: 80px 0;
+        padding: 100px 0;
     }
 }
 
@@ -147,6 +152,7 @@
 }
 
 .is--two-col-grid{
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px 30px;
@@ -155,6 +161,20 @@
         // grid-template-columns: repeat(1, 1fr);
         display: flex;
         flex-direction: column;
+    }
+
+    // Optional: content-based column that respects child's max-width
+    // Apply `is--max-width-{n}` to the child in the content-based column
+    &.is--cols-auto-left{
+        @media screen and (min-width: $tablet){
+            grid-template-columns: max-content 1fr;
+        }
+    }
+
+    &.is--cols-auto-right{
+        @media screen and (min-width: $tablet){
+            grid-template-columns: 1fr max-content;
+        }
     }
 
     &.is--three{
@@ -196,7 +216,7 @@
     gap: 80px;
 
     @media screen and (max-width: $tablet){
-        gap: 60px;
+        gap: 40px;
     }
 }
 
@@ -263,7 +283,7 @@
 //     @include media-lte(tablet)
 //         padding-bottom: 100px
 .is--page > .is--container:last-child{
-    padding-bottom: 60px;
+    padding-bottom: 130px;
 }
 
 .is--page > .is--container + .is--container{
@@ -316,6 +336,10 @@ pre{
     margin-top: 20px !important;
 }
 
+.is--margin-bottom-20{
+    margin-bottom: 20px !important;
+}
+
 .is--margin-top-24{
     margin-top: 24px !important;
 }
@@ -327,9 +351,9 @@ pre{
 .is--margin-top-40{
     margin-top: 40px !important;
 
-    @media screen and (max-width: $tablet){
-        margin-top: 25px !important;
-    }
+    // @media screen and (max-width: $tablet){
+    //     margin-top: 25px !important;
+    // }
 }
 
 .is--margin-bottom-40{
@@ -364,7 +388,7 @@ pre{
     margin-top: 130px;
 
     @media screen and (max-width: $tablet){
-        margin-top: 80px;
+        margin-top: 100px;
     }
 }
 
@@ -373,7 +397,8 @@ pre{
     padding-bottom: 130px !important;
 
     @media screen and (max-width: $tablet){
-        padding-bottom: 80px !important;
+        // padding-bottom: 80px !important;
+        padding-bottom: 100px !important;
     }
 }
 

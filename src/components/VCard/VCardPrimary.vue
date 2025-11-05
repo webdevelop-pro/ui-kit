@@ -13,6 +13,7 @@ export interface ICardPrimary {
   bodyImg?: string;
   title?: string;
   subtitle?: string;
+  subTitle?: string;
   text: string;
   url?: string;
 }
@@ -24,6 +25,7 @@ defineProps({
   },
   descriptionWithHtml: Boolean,
   ellipsis: Boolean,
+  showButton: Boolean,
 });
 
 const getImageType = () => {
@@ -69,14 +71,15 @@ const getImageType = () => {
         </div>
         <VCardTitle
           v-if="data.title"
+          class="is--margin-top-0"
         >
           {{ data.title }}
         </VCardTitle>
         <VCardDescription
-          v-if="data.subtitle"
+          v-if="data.subtitle || data.subTitle"
           itemprop="description"
         >
-          {{ data.subtitle }}
+          {{ data.subtitle || data.subTitle }}
         </VCardDescription>
       </VCardHeader>
       <VCardContent
@@ -92,7 +95,7 @@ const getImageType = () => {
     </div>
     <VCardFooter
       v-if="data.url || data.bodyImg || $slots.button"
-      class="is--margin-top-30"
+      class="v-card-primary__footer is--margin-top-30"
     >
       <VImage
         v-if="data.bodyImg"
@@ -103,11 +106,12 @@ const getImageType = () => {
       />
       <slot name="button">
         <VButton
-          v-if="data.url && !data.bodyImg"
+          v-if="data.url && showButton"
           as="a"
           variant="tetriary"
           color="primary"
           :href="encodeURI(data.url)"
+          class="is--margin-top-0"
         >
           <slot name="buttonText">
             Discover More
@@ -201,6 +205,13 @@ const getImageType = () => {
     left: 0;
     width: 100%;
     opacity: 0;
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: flex-start;
   }
 }
 

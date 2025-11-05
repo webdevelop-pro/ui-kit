@@ -2,6 +2,7 @@
 import { defineAsyncComponent, hydrateOnVisible, PropType, ref } from 'vue';
 import type { Component } from 'vue';
 import VHeaderNavigationListItem from './VHeaderNavigationListItem.vue';
+import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 
 const VNavigationMenu = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenu.vue'),
@@ -47,6 +48,10 @@ export type MenuItem = {
   icon?: Component;
   class?: string;
   card?: unknown;
+  button?: {
+    text: string;
+    href?: string;
+  };
 }
 
 const currentTrigger = ref('');
@@ -106,17 +111,29 @@ const emit = defineEmits(['click']);
           <VNavigationMenuContent>
             <div class="v-header-navigation__wrap">
               <div class="v-header-navigation__dropdown-left">
-                <ul
-                  v-for="(childGroup, childGroupIndex) in menuItem.children"
-                  :key="childGroupIndex"
+                <div class="v-header-navigation__dropdown-list">
+                  <ul
+                    v-for="(childGroup, childGroupIndex) in menuItem.children"
+                    :key="childGroupIndex"
+                  >
+                    <VHeaderNavigationListItem
+                      v-for="(childItem, childIndex) in childGroup"
+                      :key="childIndex"
+                      :data="childItem"
+                      @click="currentTrigger = ''; emit('click');"
+                    />
+                  </ul>
+                </div>
+                <VButton
+                  v-if="menuItem?.button"
+                  as="a"
+                  :href="menuItem?.button.href"
+                  variant="link"
+                  size="small"
+                  class="v-header-navigation__cta"
                 >
-                  <VHeaderNavigationListItem
-                    v-for="(childItem, childIndex) in childGroup"
-                    :key="childIndex"
-                    :data="childItem"
-                    @click="currentTrigger = ''; emit('click');"
-                  />
-                </ul>
+                  {{ menuItem?.button.text }}
+                </VButton>
               </div>
               <VHeaderNavigationCardDark
                 v-if="menuItem?.card"
@@ -176,9 +193,8 @@ const emit = defineEmits(['click']);
     justify-content: space-between;
   }
 
-  &__dropdown-left {
+  &__dropdown-list {
     display: flex;
-    padding: 20px 16px;
     align-items: flex-start;
     gap: 24px;
 
@@ -193,6 +209,18 @@ const emit = defineEmits(['click']);
       padding: 19px;
       gap: 9px;
     }
+  }
+
+  &__dropdown-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 16px 28px;
+    gap: 16px;
+  }
+
+  &__cta {
+    align-self: center;
   }
 
   ul {

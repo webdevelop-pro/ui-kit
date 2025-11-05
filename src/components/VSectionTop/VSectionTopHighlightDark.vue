@@ -115,7 +115,7 @@ const getStarted = theme.navigation.getStarted.data;
     gap: 80px;
     background-color: $black;
 
-    @include media-lte(tablet) {
+    @media screen and (width < $desktop) {
       padding: 40px;
     }
   }
@@ -127,7 +127,7 @@ const getStarted = theme.navigation.getStarted.data;
     gap: 80px;
     align-self: stretch;
 
-    @include media-lte(tablet) {
+    @media screen and (width < $desktop) {
       flex-direction: column;
       gap: 60px;
     }
@@ -160,9 +160,8 @@ const getStarted = theme.navigation.getStarted.data;
     width: 100%;
     border-radius: 2px;
 
-    @include media-lte(tablet) {
-      min-height: 380px;
-      height: 380px;
+    @media screen and (width < $desktop) {
+      min-height: auto;
     }
   }
 }

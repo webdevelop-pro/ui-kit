@@ -1,24 +1,25 @@
 <script setup lang="ts">
 import haveQuestion from './haveQuestion.png';
-import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 import VImage from 'UiKit/components/Base/VImage/VImage.vue';
+import VTextBlock from 'UiKit/components/VText/VTextBlock.vue';
+import { computed } from 'vue';
+import { VTextBlockConfig } from '../VText/types';
 
-defineProps({
-  title: String,
-  subtitle: String,
-  buttonHref: String,
-  buttonText: {
-    type: String,
-    default: 'Chat with Assistant',
-  },
-  imageUrl: {
-    type: String,
-    default: haveQuestion,
-  },
-  noImage: Boolean,
+export interface VHaveQuestionsConfig {
+  imageUrl?: string;
+  noImage?: boolean;
+}
+const props = withDefaults(defineProps<VTextBlockConfig & VHaveQuestionsConfig>(), {
+  imageUrl: haveQuestion,
+  buttons: () => [],
 });
-const emit = defineEmits(['click']);
+
+const textBlockProps = computed(() => {
+  const { imageUrl, noImage, ...delegated  } = props;
+
+  return delegated;
+});
 </script>
 
 <template>
@@ -28,27 +29,9 @@ const emit = defineEmits(['click']);
   >
     <div class="v-have-questions__container">
       <div class="v-have-questions__content  with-default-distance">
-        <slot>
-          <h2 v-if="title">
-            {{ title }}
-          </h2>
-          <p
-            v-if="subtitle"
-            class="is--subheading-2"
-          >
-            {{ subtitle }}
-          </p>
-        </slot>
-        <VButton
-          v-if="buttonHref"
-          as="a"
-          :href="encodeURI(buttonHref)"
-          size="large"
-          class="v-have-questions__button"
-          @click="emit('click')"
-        >
-          {{ buttonText }}
-        </VButton>
+        <VTextBlock
+          v-bind="textBlockProps"
+        />
       </div>
       <div class="v-have-questions__img">
         <VImage
@@ -67,21 +50,35 @@ const emit = defineEmits(['click']);
   $root: &;
 
   &__container {
+    position: relative;
     overflow: hidden;
     display: flex;
     width: 100%;
-    padding: 130px 196px;
+    padding: 130px;
     align-items: center;
     gap: 88px;
     justify-content: space-between;
     border-radius: 2px;
     border: 1px solid $gray-20;
-    background: $primary-light;
+    background: linear-gradient(102deg, #F0F4FF 2.63%, #D3E0FF 100%);
+    z-index: 1;
 
     @include media-lte(tablet) {
       padding: 40px;
       flex-direction: column;
       gap: 60px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 53%;
+      height: 57%;
+      background: url('./haveQuestionBg.svg') no-repeat center;
+      background-size: contain;
+      z-index: 0;
     }
   }
 
@@ -106,7 +103,7 @@ const emit = defineEmits(['click']);
   &__content {
     position: relative;
     flex-shrink: 0;
-    width: 62%;
+    width: 48%;
 
     @include media-lte(tablet) {
       width: 100%;
@@ -121,6 +118,8 @@ const emit = defineEmits(['click']);
     border-radius: 10.958px;
     background: $white;
     box-shadow: 0 8.818px 10.287px -5.878px rgb(18 22 31 / 5%), 0 14.696px 47.028px 5.878px rgb(18 22 31 / 10%);
+    position: relative;
+    z-index: 1;
 
     @include media-lte(tablet) {
       width: 100%;

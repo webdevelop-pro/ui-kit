@@ -41,6 +41,7 @@ defineProps({
         :key="index"
         :data="item"
         description-with-html
+        show-button
         class="v-section-card-primary-different-height__card"
       >
         <template #button>

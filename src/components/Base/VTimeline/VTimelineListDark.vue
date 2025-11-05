@@ -71,6 +71,7 @@ defineProps({
 
   &__item-title {
     margin-top: 12px !important;
+    color: $white;
   }
 
   &__item-text {

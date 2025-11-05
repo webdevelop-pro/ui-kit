@@ -83,6 +83,7 @@ export function getLastModifiedDate(filePath: string): string | null {
 }
 
 export function getUniqueCapitalizedTags(items: { tags?: string[] | null }[]): string[] {
+  if (!items || items.length === 0) return [];
   const seen = new Set<string>();
   const result: string[] = [];
 

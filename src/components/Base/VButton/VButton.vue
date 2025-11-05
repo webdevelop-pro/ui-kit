@@ -1,22 +1,10 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import VSpinner from 'UiKit/components/Base/VSpinner/VSpinner.vue';
-import { Primitive, type PrimitiveProps } from 'radix-vue';
+import { Primitive } from 'radix-vue';
+import { ButtonProps } from './types';
 
-interface Props extends PrimitiveProps {
-    as?: 'button' | 'a' | 'router-link';
-    size?: 'large' | 'medium' | 'small';
-    variant?: 'default' | 'outlined' | 'link' | 'tetriary';
-    color?: 'primary' | 'secondary' | 'red';
-    block?: boolean;
-    disabled?: boolean;
-    loading?: boolean;
-    squared?: boolean;
-    pill?: boolean;
-    iconOnly?: boolean;
-}
-
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<ButtonProps>(), {
   size: 'medium',
   variant: 'default',
   color: 'primary',
@@ -38,9 +26,6 @@ const btnClasses = computed(() => ({
   'is--squared': props.squared && !props.pill,
   'is--pill': props.pill && !props.squared,
 }));
-
-// const asChild = computed(() => props.as !== 'button');
-
 </script>
 
 <template>
@@ -342,10 +327,6 @@ const btnClasses = computed(() => ({
   .with-default-distance &,
   &.with-default-distance {
     margin-top: 40px;
-
-    @media screen and (max-width: $tablet){
-      margin-top: 25px;
-    }
   }
 }
 </style>

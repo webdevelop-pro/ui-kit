@@ -65,7 +65,7 @@ const getComponentClass = (item: MenuItem) => {
             :key="childItem.text"
           >
             <component
-              :is="getComponentName(menuItem)"
+              :is="getComponentName(childItem)"
               :href="childItem.href"
               :to="childItem.to"
               :class="[getComponentClass(childItem), { 'is--active': menuItem.active }]"

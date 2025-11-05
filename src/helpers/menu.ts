@@ -8,13 +8,18 @@ export function formatMenu(data: IFrontmatter[]) {
   }));
 }
 
-export function formatItemsBySubfolder(items: IFrontmatter[]) {
-  const groupedUseCases = {};
+type MenuItem = { frontmatter: IFrontmatter; href: string; text: string };
+
+export function formatItemsBySubfolder(items: IFrontmatter[], filterByNav = false) {
+  const groupedUseCases: Record<string, MenuItem[]> = {};
 
   // Iterate over the use cases and group them by subfolder
   items.forEach((item: IFrontmatter) => {
-    const parts = item.rawUrl?.split('/');
-    const subfolder = parts[2].toUpperCase();
+    // Optionally skip items that are not marked for menu
+    if (filterByNav && item.nav !== true) return;
+
+    const parts = item.rawUrl?.split('/') || [];
+    const subfolder = (parts[2] || '').toUpperCase();
 
     if (!groupedUseCases[subfolder]) {
       groupedUseCases[subfolder] = [];
@@ -28,10 +33,12 @@ export function formatItemsBySubfolder(items: IFrontmatter[]) {
   });
 
   // Format the grouped use cases into the desired structure
-  const formattedArray = Object.entries(groupedUseCases).map(([key, value]) => [
-    { text: key.replace('-', ' ') },
-    ...value,
-  ]);
+  const formattedArray = Object.entries(groupedUseCases)
+    .filter(([, value]) => value.length > 0) // Skip groups with no items
+    .map(([key, value]) => [
+      { text: key.replace('-', ' ') },
+      ...value,
+    ]);
 
   return formattedArray;
 }

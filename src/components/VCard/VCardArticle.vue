@@ -79,6 +79,10 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
   position: relative;
   transition: all 0.2s ease;
 
+  @media screen and (width < $desktop) {
+    padding: 20px;
+  }
+
   @media screen and (width >= 767px) {
     &:hover {
       background-color: colors.$white;

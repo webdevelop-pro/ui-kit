@@ -20,6 +20,7 @@ defineProps({
     >
       <VCardPrimary
         :data="slide"
+        :show-button="!slide.bodyImg"
       />
     </VCarouselItem>
   </VSlider>

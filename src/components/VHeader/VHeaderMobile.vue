@@ -16,6 +16,7 @@ import VMenuBurger from "UiKit/components/VHeader/VMenuBurger.vue";
 import VHeaderNavigationListItem from "./VHeaderNavigationListItem.vue";
 import { VisuallyHidden } from "radix-vue";
 import { MenuItem } from './VHeaderNavigation.vue';
+import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 
 defineProps({
   menu: {
@@ -97,6 +98,16 @@ const open = defineModel<boolean>();
                 @click="open = false"
               />
             </ul>
+            <VButton
+              v-if="menuItem?.button"
+              as="a"
+              :href="menuItem?.button.href"
+              variant="link"
+              size="small"
+              class="v-header-mobile__cta"
+            >
+              {{ menuItem?.button.text }}
+            </VButton>
           </li>
         </ul>
       </nav>
@@ -158,6 +169,10 @@ const open = defineModel<boolean>();
     padding: 20px;
     width: 100%;
     margin-top: 20px;
+  }
+
+  &__cta {
+    align-self: baseline;
   }
 }
 </style>

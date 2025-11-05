@@ -1,6 +1,5 @@
 <script lang="ts">
 import { PropType } from 'vue';
-import { useData } from 'vitepress';
 import VSectionTop from 'UiKit/components/VSectionTop/VSectionTop.vue';
 </script>
 
@@ -8,8 +7,8 @@ import VSectionTop from 'UiKit/components/VSectionTop/VSectionTop.vue';
 export interface IDevelopmentStagesTop {
   image: string;
   title: string;
-  isGetInTouch?: boolean;
   class: string;
+  mainUrl?: string;
 }
 
 defineProps({
@@ -18,16 +17,15 @@ defineProps({
     required: true,
   },
   topic: String,
+
 });
 
-const { theme } = useData();
-const getStarted = theme.navigation.getStarted.data;
 </script>
 
 <template>
   <VSectionTop
     :title="data.title"
-    :get-in-touch-url="`${getStarted.url}?topic=${topic}`"
+    :main-url="data.mainUrl"
     class="VSectionTopDevelopmentStages development-stages-top with-default-distance"
   >
     <template #right>
@@ -65,7 +63,7 @@ const getStarted = theme.navigation.getStarted.data;
 
       @include media-gt(tablet) {
         max-width: 372px;
-        max-height: 350px;
+        max-height: 300px;
         right: 2%;
         bottom: -170px;
       }
@@ -74,14 +72,14 @@ const getStarted = theme.navigation.getStarted.data;
         max-width: 472px;
         max-height: 450px;
         right: 0;
-        bottom: -80%;
+        bottom: -207px;
       }
 
       @include media-gt(wide) {
         max-width: 472px;
         max-height: 450px;
         right: 0;
-        bottom: -80%;
+        bottom: -207px;
       }
     }
   }

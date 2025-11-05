@@ -21,3 +21,41 @@
   font-style: normal;
   font-weight: $weight;
 }
+
+// Generate utility classes: .is--max-width-{n}
+// Usage: @include generate-max-width-utilities(100, 1600, px);
+// - Generates classes from min..max, inclusive, with specified unit (px|rem|%)
+// - Each class sets width: 100% and max-width accordingly
+@mixin generate-max-width-utilities($min: 10, $max: 1600, $unit: px){
+  @for $i from $min through $max {
+    .is--max-width-#{$i}{
+      width: 100%;
+      @if $unit == px {
+        max-width: #{$i}px;
+      } @else if $unit == rem {
+        max-width: sizeInRem($i);
+      } @else {
+        max-width: #{$i}#{$unit};
+      }
+    }
+  }
+}
+
+// Generate utility classes: .is--max-height-{n}
+// Usage: @include generate-max-height-utilities(100, 1600, px);
+// - Generates classes from min..max, inclusive, with specified unit (px|rem|%)
+// - Each class sets height: 100% and max-height accordingly
+@mixin generate-max-height-utilities($min: 10, $max: 1600, $unit: px){
+  @for $i from $min through $max {
+    .is--max-height-#{$i}{
+      height: 100%;
+      @if $unit == px {
+        max-height: #{$i}px;
+      } @else if $unit == rem {
+        max-height: sizeInRem($i);
+      } @else {
+        max-height: #{$i}#{$unit};
+      }
+    }
+  }
+}

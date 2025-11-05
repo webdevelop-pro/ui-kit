@@ -11,6 +11,7 @@
   "dependencies": {
     "@vue/compiler-core": "^3.5.13",
     "@vueuse/core": "^12.8.2",
+    "vue-dompurify-html": "^5.0.2",
     "sass": "^1.85.1",
     "vite-svg-loader": "^5.1.0",
     "vue": "^3.5.13",

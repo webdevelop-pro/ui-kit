@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
-import imageBg from './illustration-404.svg?url';
+import VImage from 'UiKit/components/Base/VImage/VImage.vue';
+import imageBg from './404.svg?url';
 import { useGlobalLoader } from 'UiKit/store/useGlobalLoader';
 
 
@@ -31,12 +32,12 @@ setTimeout(() => {
           Back to Homepage
         </VButton>
       </div>
-      <img
+      <VImage
         loading="lazy"
         :src="imageBg"
         alt="Products top background"
         class="errors-404__background "
-      >
+      />
     </div>
   </div>
 </template>

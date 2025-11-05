@@ -85,7 +85,6 @@ const onFocus = () => {
 };
 // do not change, otherwise not working search
 // have to wirk with filteredOptions
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const filterFunction = (list: [], _) => list;
 </script>
 

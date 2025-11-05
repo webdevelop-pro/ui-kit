@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import imageBg from './illustration-404.svg?url';
+import imageBg from './500.svg?url';
 import { useGlobalLoader } from 'UiKit/store/useGlobalLoader';
+import VImage from 'UiKit/components/Base/VImage/VImage.vue';
 
 setTimeout(() => {
   useGlobalLoader().hide();
@@ -23,12 +24,12 @@ setTimeout(() => {
           Server promises not to snooze for long! 
         </p>
       </div>
-      <img
+      <VImage
         loading="lazy"
         :src="imageBg"
         alt="Server error illustration"
         class="errors-500__background"
-      >
+      />
     </div>
   </div>
 </template>

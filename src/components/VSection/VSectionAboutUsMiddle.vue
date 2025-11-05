@@ -53,7 +53,7 @@ const careers = filterPages(allPages as IFrontmatter[], 'slug', 'careers');
         <VButton
           v-if="item.showCareersButton"
           as="a"
-          :href="encodeURI(careers[0].url)"
+          :href="encodeURI(careers[0]?.url)"
           size="large"
           variant="link"
           class="is--margin-top-40"
@@ -96,6 +96,11 @@ const careers = filterPages(allPages as IFrontmatter[], 'slug', 'careers');
     display: flex;
     flex-direction: column;
     flex: 1; // Add this line
+    padding-bottom: 40px;
+    
+    @media screen and (width < $tablet) {
+      padding-bottom: 20px;
+    }
   }
 
   &__image-wrap {
@@ -105,11 +110,11 @@ const careers = filterPages(allPages as IFrontmatter[], 'slug', 'careers');
     overflow: hidden;
     position: relative;
 
-    @include media-gt(tablet) {
+    @media screen and (width > $tablet) {
       flex: 1; // Adjusted
     }
 
-    @include media-lte(tablet) {
+    @media screen and (width < $tablet) {
       height: 477px;
     }
   }

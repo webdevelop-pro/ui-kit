@@ -2,6 +2,7 @@
 defineProps({
   title: String,
   subtitle: String,
+  subtitle2: String,
   linkHref: String,
   linkText: String,
 });
@@ -11,13 +12,20 @@ defineProps({
   <div class="VInfoShort v-info-short with-default-distance">
     <div class="is--short-block">
       <slot>
-        <h2 v-if="title">
+        <h2
+          v-if="title"
+        >
           {{ title }}
         </h2>
         <p
           v-if="subtitle"
+          v-dompurify-html="subtitle"
           class="is--subheading-1 is--color-black"
-          v-html="subtitle"
+        />
+        <p
+          v-if="subtitle2"
+          v-dompurify-html="subtitle2"
+          class="is--subheading-2 is--color-black"
         />
         <a
           v-if="linkText && linkHref"
