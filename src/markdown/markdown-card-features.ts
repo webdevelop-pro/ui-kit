@@ -28,10 +28,10 @@ const createContainer = (
         if (href) props += ` href="${href}"`;
         if (to) props += ` :to="'${to}'"`;
         
-        return `<VCardFeatures${props}>`;
+        return `<VCardFeaturesHover${props}>`;
       }
       // Closing tag
-      return '</VCardFeatures>\n';
+      return '</VCardFeaturesHover>\n';
     },
   },
 ];

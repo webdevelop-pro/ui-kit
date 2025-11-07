@@ -61,7 +61,10 @@ const handleButtonClick = (index: number, button: VTextButtonConfig) => {
           v-dompurify-html="text"
         />
       </slot>
-      <div class="v-text-block__button-wrap is--margin-top-40">
+      <div
+        v-if="buttons && buttons.length"
+        class="v-text-block__button-wrap is--margin-top-40"
+      >
         <slot name="buttons">
           <template
             v-for="(btn, idx) in filteredButtons"

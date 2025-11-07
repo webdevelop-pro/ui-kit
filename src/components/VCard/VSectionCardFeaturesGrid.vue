@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, PropType } from 'vue';
 import VSection from 'UiKit/components/VSection/VSection.vue';
-import VCardFeatures, { IVCardFeatures } from 'UiKit/components/VCard/VCardFeatures.vue';
+import VCardFeaturesHover, { IVCardFeaturesHover } from 'UiKit/components/VCard/VCardFeaturesHover.vue';
 
 const props = defineProps({
   title: String,
   subTitle: String,
-  items: Array as PropType<IVCardFeatures[]>,
+  items: Array as PropType<IVCardFeaturesHover[]>,
   buttonHref: String,
   buttonText: String,
 });
@@ -30,7 +30,7 @@ const noData = computed(() => props.items?.length === 0);
     <div
       class="is--three-col-grid"
     >
-      <VCardFeatures
+      <VCardFeaturesHover
         v-for="(item, i) in items"
         :key="i"
         :href="encodeURI(item.url)"
@@ -40,7 +40,7 @@ const noData = computed(() => props.items?.length === 0);
         <h3>
           {{ item.title }}
         </h3>
-      </VCardFeatures>
+      </VCardFeaturesHover>
     </div>
   </VSection>
 </template>

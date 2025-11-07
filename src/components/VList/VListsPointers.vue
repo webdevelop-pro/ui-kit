@@ -2,6 +2,7 @@
 import { PropType } from 'vue';
 import infoIcon from 'UiKit/assets/images/circle-info.svg';
 import VSvgIcon from 'UiKit/components/Base/VSvgIcon/VSvgIcon.vue';
+import VTooltip from 'UiKit/components/VTooltip.vue';
 
 interface IListsPointers {
   tooltip?: string;
@@ -14,42 +15,48 @@ defineProps({
     type: Object as PropType<IListsPointers[]>,
     required: true,
   },
+  layout: {
+    type: String as PropType<'one' | 'two'>,
+    default: 'one',
+  },
 });
 </script>
 
 <template>
-  <div class="VListsPointers v-list-pointers">
-    <ul>
-      <li
-        v-for="(caption, index) in items"
-        :key="index"
+  <ul
+    class="VListsPointers v-list-pointers"
+    :class="`is--${layout}-col-grid`"
+  >
+    <li
+      v-for="(caption, index) in items"
+      :key="index"
+    >
+      <VTooltip
+        v-if="caption.tooltip"
+        :disabled="!caption.tooltip"
       >
-        <VTooltip
-          :disabled="!caption.tooltip"
-        >
-          <VSvgIcon
-            :icon="infoIcon"
-            class="v-list-pointers__icon"
-          />
-          <template #content>
-            <div v-dompurify-html="caption.tooltip" />
-          </template>
-        </VTooltip>
-        <span class="v-list-pointers__content">
-          <span
-            v-if="caption.title"
-            v-dompurify-html="caption.title"
-            class="is--h5__title"
-          />
-          &nbsp;
-          <span
-            v-if="caption.text"
-            v-dompurify-html="caption.text"
-          />
-        </span>
-      </li>
-    </ul>
-  </div>
+        <VSvgIcon
+          :icon="infoIcon"
+          class="v-list-pointers__icon"
+        />
+        <template #content>
+          <div v-dompurify-html="caption.tooltip" />
+        </template>
+      </VTooltip>
+      <span class="v-list-pointers__content">
+        <span
+          v-if="caption.title"
+          v-dompurify-html="caption.title"
+          class="is--h5__title"
+        />
+        {{ ' ' }}
+        <span
+          v-if="caption.text"
+          v-dompurify-html="caption.text"
+        />
+      </span>
+    </li>
+  </ul>
 </template>
 
 <style lang="scss">
@@ -57,6 +64,23 @@ defineProps({
 
 .v-list-pointers {
   width: 100%;
+  padding-left: 0;
+  list-style: none;
+  max-width: auto;
+
+  &.is--one-col-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+  }
+
+  &.is--two-col-grid {
+    gap: 20px 80px;
+
+    @media screen and (width < $tablet) {
+      gap: 20px;
+    }
+  }
 
   &__icon {
     width: 16px;
@@ -73,17 +97,6 @@ defineProps({
     // align-items: center;
     // gap: 4px;
     margin: 0;
-  }
-
-  ul {
-    width: 100%;
-    padding-left: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 19px;
-    list-style: none;
-    margin: 0;
-    max-width: auto;
   }
 
   li {

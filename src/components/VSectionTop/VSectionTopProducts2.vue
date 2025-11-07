@@ -82,20 +82,22 @@ const textBlockProps = computed(() => {
       bottom: -69px;
       width: 100%;
       height: 100%;
-      background: url('/images/svg/matrix_blue_edgefade.svg') no-repeat center;
+      background: url('/images/svg/matrix_blue_edgefade.svg') no-repeat;
       background-size: contain;
+      background-position: left bottom;
       z-index: 0;
       opacity: 0.3;
     }
 
     @media screen and (width < $desktop) {
       padding-left: 0;
+      padding-bottom: 30px;
     }
   }
 
   &__image {
     width: 628px;
-    height: 332px;
+    aspect-ratio: 157/83;
     display: inline-flex;
     padding: 4px;
     flex-direction: column;

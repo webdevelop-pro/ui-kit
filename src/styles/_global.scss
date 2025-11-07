@@ -216,7 +216,13 @@
     gap: 80px;
 
     @media screen and (max-width: $tablet){
-        gap: 40px;
+        gap: 60px;
+    }
+}
+
+.is--mobile-gap-40{
+    @media screen and (max-width: $tablet){
+        gap: 40px !important;
     }
 }
 

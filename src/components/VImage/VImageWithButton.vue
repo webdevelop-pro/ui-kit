@@ -78,9 +78,9 @@ const handleButtonClick = (event: MouseEvent) => {
 .v-image-with-button {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 16px;
+  gap: 20px;
   width: 100%;
+  
 
   @media screen and (width < $desktop) {
     gap: 20px;
@@ -88,16 +88,21 @@ const handleButtonClick = (event: MouseEvent) => {
 
   &.is--align-start {
     align-items: flex-start;
+    justify-content: flex-start;
   }
   &.is--align-center {
     align-items: center;
+    justify-content: center;
   }
   &.is--align-end {
     align-items: flex-end;
+    justify-content: flex-end;
   }
 
   &__image {
     border-radius: 0;
+    aspect-ratio: 233/191;
+    object-fit: cover;
   }
 }
 </style>

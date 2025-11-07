@@ -15,17 +15,17 @@ defineProps<IVCardFeaturesHover>();
   <VCard
     :href="href"
     :to="to"
-    class="VCardFeatures v-card-features"
+    class="VCardFeaturesHover v-card-features-hover is--hover-elevate-up is--hover-visible-elevate-up-wrapper"
   >
-    <div class="v-card-features__card">
-      <VCardContent class="v-card-features__content">
+    <div class="v-card-features-hover__card">
+      <VCardContent class="v-card-features-hover__content is--hover-visible-elevate-up-content">
         <slot />
 
         <VButton
           v-if="buttonText"
           size="small"
           variant="link"
-          class="v-card-features__button"
+          class="v-card-features-hover__button is--hover-visible-elevate-up-component "
         >
           {{ buttonText }}
           <component
@@ -42,7 +42,7 @@ defineProps<IVCardFeaturesHover>();
 @use 'UiKit/styles/_variables.scss' as *;
 @use 'UiKit/styles/_hover.scss' as *;
 
-.v-card-features {
+.v-card-features-hover {
   $root: &;
 
   padding: 8px;
@@ -52,18 +52,33 @@ defineProps<IVCardFeaturesHover>();
   transition: all 0.3s ease;
   color: inherit;
   margin: 0;
-  box-shadow: $box-shadow-medium;
+
+  &:hover {
+    box-shadow: $box-shadow-medium;
+    border-color: transparent;
+    transition: all 0.3s ease;
+  }
 
   &__card{
     display: flex;
+    min-height: 190px;
     padding: 20px;
     width: 100%;
     height: 100%;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex: 1 0 0;
     align-self: stretch;
     border-radius: 2px;
     background: $primary-light;
+    #{$root}:hover & {
+      padding-bottom: 36px;
+    }
+  }
+
+  &__content{
+    text-align: center;
   }
 
   &__button{

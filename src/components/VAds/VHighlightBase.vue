@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import VSection from 'UiKit/components/VSection/VSection.vue';
+
+defineProps<{
+  fullWidth?: boolean;
+}>();
 </script>
 
 <template>
-  <VSection class="VHighlightBase v-highlight-base">
+  <VSection
+    class="VHighlightBase v-highlight-base"
+    :class="{ 'is--full-width': fullWidth }"
+  >
     <div class="v-highlight-base__container with-default-distance">
       <slot />
     </div>
@@ -15,7 +22,27 @@ import VSection from 'UiKit/components/VSection/VSection.vue';
 @use 'UiKit/styles/_variables.scss' as *;
 
 .v-highlight-base {
+  $root: &;
+
   width: 100%;
+
+  &.is--full-width {
+    padding: 130px 0;
+    background: linear-gradient(107deg, rgba(0, 66, 212, 0.95) -11.26%, rgba(1, 47, 150, 0.95) 8.01%, rgba(1, 33, 102, 0.95) 42.66%, rgba(2, 22, 67, 0.95) 99.14%);
+
+    @media screen and (max-width: $tablet) {
+      padding: 100px 0;
+    }
+  }
+
+  &:not(.is--full-width) &__container{
+    padding: 130px;
+    background: linear-gradient(107deg, rgba(0, 66, 212, 0.95) -11.26%, rgba(1, 47, 150, 0.95) 8.01%, rgba(1, 33, 102, 0.95) 42.66%, rgba(2, 22, 67, 0.95) 99.14%);
+
+    @media screen and (max-width: $tablet) {
+      padding: 40px;
+    }
+  }
 
   &__container {
     display: flex;
@@ -23,13 +50,7 @@ import VSection from 'UiKit/components/VSection/VSection.vue';
     align-items: flex-start;
     flex-shrink: 0;
     position: relative;
-    padding: 130px;
-    background: linear-gradient(107deg, rgba(0, 66, 212, 0.95) -11.26%, rgba(1, 47, 150, 0.95) 8.01%, rgba(1, 33, 102, 0.95) 42.66%, rgba(2, 22, 67, 0.95) 99.14%);
     color: $white;
-
-    @media screen and (max-width: $tablet) {
-      padding: 40px;
-    }
   }
 
 
@@ -54,10 +75,6 @@ import VSection from 'UiKit/components/VSection/VSection.vue';
   ul {
     color: inherit;
     margin: 32px 0 0;
-
-    @media screen and (min-width: $tablet) {
-      max-width: 562px;
-    }
   }
 
   li {

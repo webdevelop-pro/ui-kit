@@ -80,14 +80,14 @@ const props = defineProps({
         max-width: 472px;
         max-height: 450px;
         right: 0;
-        bottom: -55%;
+        bottom: -240px;
       }
 
       @include media-gt(wide) {
         max-width: 472px;
         max-height: 450px;
         right: -95px;
-        bottom: -55%;
+        bottom: -240px;
       }
     }
 
@@ -96,14 +96,14 @@ const props = defineProps({
         max-width: 472px;
         max-height: 450px;
         right: 15px;
-        bottom: -42%;
+        bottom: -190px;
       }
 
       @include media-gt(desktop) {
         max-width: 472px;
         max-height: 450px;
-        right: 0;
-        bottom: -42%;
+        right: 15px;
+        bottom: -190px;
       }
 
       @include media-lte(desktop) {
