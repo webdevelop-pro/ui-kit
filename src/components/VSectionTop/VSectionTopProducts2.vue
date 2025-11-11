@@ -11,10 +11,14 @@ import { computed } from 'vue';
 export interface VSectionTopProductsConfig {
   classImage?: string;
   image?: string;
+  imageBg?: boolean;
+  srcset?: string;
 }
 const props = withDefaults(defineProps<VTextBlockConfig & VSectionTopProductsConfig>(), {
   classImage: '',
   image: '',
+  srcset: '',
+  imageBg: true,
   buttons: () => [],
 });
 
@@ -33,12 +37,16 @@ const textBlockProps = computed(() => {
         class="v-section-top-products__text is--max-width-508"
       />
       <div class="v-section-top-products__background ">
-        <div class="v-section-top-products__image">
+        <div
+          class="v-section-top-products__image"
+          :class="{'is--no-bg': !imageBg}"
+        >
           <VImage
-            loading="lazy"
             :src="image"
             alt="Products top visual"
             :class="classImage"
+            fetchpriority="high"
+            :srcset="srcset"
           />
         </div>
       </div>
@@ -82,7 +90,7 @@ const textBlockProps = computed(() => {
       bottom: -69px;
       width: 100%;
       height: 100%;
-      background: url('/images/svg/matrix_blue_edgefade.svg') no-repeat;
+      background: url('/images/matrix_blue_edgefade.svg') no-repeat;
       background-size: contain;
       background-position: left bottom;
       z-index: 0;
@@ -99,17 +107,18 @@ const textBlockProps = computed(() => {
     width: 628px;
     aspect-ratio: 157/83;
     display: inline-flex;
-    padding: 4px;
     flex-direction: column;
     align-items: flex-start;
     gap: 3.728px;
     border-radius: 7.456px;
-    background: $white;
-    box-shadow: $box-shadow-large;
     z-index: 1;
     position: relative;
 
-
+    &:not(.is--no-bg) {
+      padding: 4px;
+      background: $white;
+      box-shadow: $box-shadow-large;
+    }
 
     @media screen and (width < $desktop) {
       width: 100%;

@@ -199,12 +199,15 @@ const emit = defineEmits(['click']);
     gap: 24px;
 
     @media screen and (max-width: variables.$desktop-lg) {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      display: flex;
+      flex-wrap: wrap;
       gap: 20px 24px;
+      max-height: calc(100vh - variables.$header-height - 100px);
+      overflow-y: auto;
     }
 
     @media screen and (max-width: variables.$desktop-md){
+      display: grid;
       grid-template-columns: repeat(1, minmax(0, 1fr));
       padding: 19px;
       gap: 9px;

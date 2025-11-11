@@ -28,6 +28,7 @@ const onHideSideBar = () => {
       size="small"
       variant="link"
       class="chat-side__hide-button "
+      aria-label="Hide sidebar"
       @click="onHideSideBar"
     >
       <CloseIcon

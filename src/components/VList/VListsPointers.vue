@@ -38,6 +38,8 @@ defineProps({
         <VSvgIcon
           :icon="infoIcon"
           class="v-list-pointers__icon"
+          role="img"
+          :aria-label="caption.title ? `${caption.title} - additional information` : 'Additional information'"
         />
         <template #content>
           <div v-dompurify-html="caption.tooltip" />

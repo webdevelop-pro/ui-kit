@@ -13,6 +13,7 @@ const { canScrollNext, scrollNext } = useCarousel();
     size="large"
     :disabled="!canScrollNext"
     class="VCarouselNext v-carousel-next"
+    aria-label="Next slide"
     @click="scrollNext"
   >
     <slot>

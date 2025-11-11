@@ -39,8 +39,15 @@ export function ensureHeaderAnchors(options: UseHeaderAnchorsOptions = {}): void
       if (existing.getAttribute('href') !== `#${id}`) {
         existing.setAttribute('href', `#${id}`);
       }
-      if (existing.getAttribute('aria-hidden') !== 'true') {
-        existing.setAttribute('aria-hidden', 'true');
+      // Remove aria-hidden to fix accessibility issue - anchor links are focusable
+      existing.removeAttribute('aria-hidden');
+      // Add tabindex="-1" to keep it out of tab order but allow programmatic focus
+      if (existing.getAttribute('tabindex') !== '-1') {
+        existing.setAttribute('tabindex', '-1');
+      }
+      // Add aria-label for better accessibility
+      if (!existing.getAttribute('aria-label')) {
+        existing.setAttribute('aria-label', `Link to this section: ${heading.textContent?.trim() || ''}`);
       }
       return;
     }
@@ -48,7 +55,8 @@ export function ensureHeaderAnchors(options: UseHeaderAnchorsOptions = {}): void
     const a = document.createElement('a');
     a.className = 'header-anchor';
     a.setAttribute('href', `#${id}`);
-    a.setAttribute('aria-hidden', 'true');
+    a.setAttribute('tabindex', '-1');
+    a.setAttribute('aria-label', `Link to this section: ${heading.textContent?.trim() || ''}`);
     heading.insertBefore(a, heading.firstChild);
   });
 }

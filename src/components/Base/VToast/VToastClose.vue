@@ -21,11 +21,13 @@ const delegatedProps = computed(() => {
     v-bind="delegatedProps"
     :class="props.class"
     class="VToastClose v-toast-close"
+    aria-label="Close message"
   >
     <VButton
       icon-only
       variant="link"
       size="small"
+      aria-label="Close message"
     >
       <closeIcon class="v-toast-close__icon" />
     </VButton>

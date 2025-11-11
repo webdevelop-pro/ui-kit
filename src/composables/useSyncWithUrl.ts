@@ -20,14 +20,16 @@ export function useSyncWithUrl<T = string>({
   parse = (val: string | null) => val as T,
   serialize = (val: T) => String(val),
 }: UseSyncWithUrlOptions<T>) {
+  const isClient = typeof window !== 'undefined';
   // Use a reactive ref to track URL changes
-  const urlSearchParams = ref(new URLSearchParams(window.location.search));
+  const urlSearchParams = ref(new URLSearchParams(isClient ? window.location.search : ''));
   
   const paramValue = computed(() => urlSearchParams.value.get(key));
 
   const state: Ref<T> = ref(defaultValue) as Ref<T>;
 
   const updateUrl = (value: T) => {
+    if (!isClient) return;
     const url = new URL(window.location.href);
     const stringVal = serialize(value);
     if (stringVal === serialize(defaultValue)) {
@@ -42,6 +44,7 @@ export function useSyncWithUrl<T = string>({
 
   // Listen for browser navigation events
   const handlePopState = () => {
+    if (!isClient) return;
     urlSearchParams.value = new URLSearchParams(window.location.search);
   };
 

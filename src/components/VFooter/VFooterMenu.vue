@@ -122,12 +122,12 @@ const getComponentClass = (item: MenuItem) => {
       gap: 0;
     }
 
-    &.is--two-col {
-      @include media-gte(mobile) {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
+    // &.is--two-col {
+    //   @include media-gte(mobile) {
+    //     display: grid;
+    //     grid-template-columns: repeat(2, minmax(0, 1fr));
+    //   }
+    // }
 
     #{$root}__item {
       padding: 8px 0;

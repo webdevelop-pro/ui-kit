@@ -13,6 +13,7 @@ const { canScrollPrev, scrollPrev } = useCarousel();
     icon-only
     size="large"
     class="VCarouselPrev v-carousel-prev"
+    aria-label="Previous slide"
     @click="scrollPrev"
   >
     <slot>

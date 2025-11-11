@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
-import VSvgIcon from 'UiKit/components/Base/VSvgIcon/VSvgIcon.vue';
 import VCardFeatures from 'UiKit/components/VCard/VCardFeatures.vue';
 
 interface IListsLeftBorderTitle {
@@ -23,7 +22,7 @@ defineProps({
       v-for="(caption, index) in items"
       :key="index"
     >
-      <VCardFeatures>
+      <VCardFeatures class="v-list-card-features-step__card-features">
         <h5 class="is--color-primary">
           STEP {{ index + 1 }}
         </h5>
@@ -83,6 +82,11 @@ defineProps({
     color: $gray-80;
     opacity: 0.9;
     margin-top: 12px;
+  }
+
+  &__card-features {
+    width: 100%;
+    height: 100%;
   }
 }
 </style>

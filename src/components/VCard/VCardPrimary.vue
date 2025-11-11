@@ -196,6 +196,10 @@ const getImageType = () => {
 
   &__body-image {
     width: 100%;
+
+    img {
+      border: 1px solid colors.$gray-20;
+    }
   }
 
   &__cover-link {

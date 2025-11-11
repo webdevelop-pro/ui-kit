@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import haveQuestion from './haveQuestion.png';
+import haveQuestion from './haveQuestion.webp';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 import VImage from 'UiKit/components/Base/VImage/VImage.vue';
 import VTextBlock from 'UiKit/components/VText/VTextBlock.vue';
@@ -128,10 +128,11 @@ const textBlockProps = computed(() => {
   }
 
   &__img-icon {
-    width: 100%;
     border-radius: 4.853px;
     border: 0.607px solid $gray-20;
     margin-top: 0 !important;
+    height: 100%;
+    width: auto;
   }
 
   &.is--no-image {

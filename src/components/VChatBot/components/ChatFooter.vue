@@ -46,6 +46,7 @@ const onClick = () => {
         size="large"
         :disabled="disabledButton"
         class="chat-footer__send-icon "
+        aria-label="Send message"
         @click="onClick"
       >
         <component

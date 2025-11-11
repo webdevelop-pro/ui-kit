@@ -107,7 +107,7 @@ const getSvgComponent = (data) => {
   &__icon {
     color: inherit;
     width: 16px;
-    height: auto;
+    height: 16px;
     flex-shrink: 0;
   }
 }

@@ -1,12 +1,23 @@
 import { acceptHMRUpdate, defineStore } from 'pinia';
 
+// Type declaration for window.analytics
+declare global {
+  interface Window {
+    analytics?: any;
+  }
+}
+
 export const useSegment = defineStore('segment', () => {
   const analyticsTrack = (event: string, options?: object) => {
-    analytics.track(event, options);
+    if (typeof window !== 'undefined' && window.analytics && typeof window.analytics.track === 'function') {
+      window.analytics.track(event, options);
+    }
   };
 
   const analyticsPage = (name: string, options?: object) => {
-    analytics.page(name, options);
+    if (typeof window !== 'undefined' && window.analytics && typeof window.analytics.page === 'function') {
+      window.analytics.page(name, options);
+    }
   };
 
   return {

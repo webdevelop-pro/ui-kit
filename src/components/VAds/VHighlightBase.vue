@@ -51,6 +51,12 @@ defineProps<{
     flex-shrink: 0;
     position: relative;
     color: $white;
+    // Reserve space to prevent layout shift during async component hydration
+    min-height: 300px;
+    
+    @media screen and (max-width: $tablet) {
+      min-height: 250px;
+    }
   }
 
 

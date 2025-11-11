@@ -41,6 +41,7 @@ const SOCIAL_LIST = [
           variant="outlined"
           icon-only
           class="is--margin-top-0"
+          :aria-label="`Share article on ${button.name}`"
         >
           <component
             :is="button.icon"
