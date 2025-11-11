@@ -45,7 +45,7 @@ defineProps({
         </span>
       </span>
       <template #content>
-        <div v-html="tooltip" />
+        <div v-dompurify-html="tooltip" />
       </template>
     </VTooltip>
     <div

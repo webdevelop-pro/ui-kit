@@ -47,7 +47,7 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
         v-if="data.summary || data.description"
         class="v-card-article__excerpt is--body"
         itemprop="description"
-        v-html="data.summary || data.description"
+        v-dompurify-html="data.summary || data.description"
       />
     </VCardContent>
     <VImage

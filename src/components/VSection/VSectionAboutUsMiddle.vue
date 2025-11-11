@@ -48,7 +48,7 @@ const careers = filterPages(allPages as IFrontmatter[], 'slug', 'careers');
           {{ item.title }}
         </h3>
         <p
-          v-html="item.text"
+          v-dompurify-html="item.text"
         />
         <VButton
           v-if="item.showCareersButton"

@@ -12,12 +12,12 @@ export interface VSectionTopProductsConfig {
   classImage?: string;
   image?: string;
   imageBg?: boolean;
-  srcset?: string;
+  srcsetProp?: string;
 }
 const props = withDefaults(defineProps<VTextBlockConfig & VSectionTopProductsConfig>(), {
   classImage: '',
   image: '',
-  srcset: '',
+  srcsetProp: '',
   imageBg: true,
   buttons: () => [],
 });
@@ -46,7 +46,6 @@ const textBlockProps = computed(() => {
             alt="Products top visual"
             :class="classImage"
             fetchpriority="high"
-            :srcset="srcset"
           />
         </div>
       </div>

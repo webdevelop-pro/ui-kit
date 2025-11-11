@@ -38,7 +38,7 @@ const filteredHeader = computed(() => (
         </h3>
         <p
           class="is--subheading-2"
-          v-html="data.subtitle"
+          v-dompurify-html="data.subtitle"
         />
       </slot>
     </template>
@@ -64,7 +64,7 @@ const filteredHeader = computed(() => (
             class="v-section-table-large-cell__cell"
           >
             <p
-              v-html="rowItem"
+              v-dompurify-html="rowItem"
             />
           </VTableCell>
         </VTableRow>

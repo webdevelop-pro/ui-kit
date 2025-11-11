@@ -35,7 +35,7 @@ defineProps({
         class="v-accordion-list-default__content is--body"
       >
         <p
-          v-html="item.description"
+          v-dompurify-html="item.description"
         />
       </VAccordionContent>
     </VAccordionItem>

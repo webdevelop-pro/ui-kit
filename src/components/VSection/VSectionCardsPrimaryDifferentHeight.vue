@@ -31,7 +31,7 @@ defineProps({
         </h3>
         <p
           class="is--subheading-2"
-          v-html="data.subtitle"
+          v-dompurify-html="data.subtitle"
         />
       </slot>
     </template>

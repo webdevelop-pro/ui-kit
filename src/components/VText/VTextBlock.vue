@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<VTextBlockConfig>(), {
   buttons: () => [],
 });
 
-const keysToRemove = ['cover', 'head', 'url', 'slug', 'summary', 'draft', 'text'];
+const keysToRemove = ['cover', 'head', 'url', 'slug', 'summary', 'draft', 'text', 'icon'];
 
 const filteredButtons = computed(() => (
   props.buttons?.map((btn) => 
@@ -77,7 +77,7 @@ const handleButtonClick = (index: number, button: VTextButtonConfig) => {
             >
               {{ buttons[idx].text }}
               <VSvgIcon
-                :icon="btn.icon"
+                :icon=" buttons[idx].icon"
                 icon-size="20px"
                 class="v-text-block__button-icon"
               />

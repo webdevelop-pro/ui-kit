@@ -66,7 +66,6 @@ const stringIconStyle = computed(() => {
     width: props.iconSize,
     height: props.iconSize,
     backgroundColor: props.iconColor || 'currentColor',
-    WebkitMaskImage: url,
     maskImage: url,
   } as Record<string, string>;
 });
@@ -92,7 +91,7 @@ const stringIconStyle = computed(() => {
   />
 
   <!-- Case 3: icon is a raw string url, render via CSS mask -->
-  <div
+  <span
     v-else-if="props.icon && isStringIcon"
     class="VSvgIcon v-svg-icon v-svg-icon__background"
     :style="stringIconStyle"

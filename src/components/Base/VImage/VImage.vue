@@ -12,6 +12,7 @@ const props = withDefaults(defineProps<{
   clientOnly?: boolean;
   isFullWidth?: boolean;
   isLoading?: boolean;
+  fetchpriority?: 'high' | 'low' | 'auto';
 }>(), {
   fit: 'none',
   loading: 'eager',
@@ -52,6 +53,7 @@ watch(() => isLoadingLocal.value, () => {
         :src="src || defaulImage"
         :alt="alt"
         :loading="loading"
+        :fetchpriority="fetchpriority"
         class="v-image__image"
         :class="[`is--${fit}`, { 'is--default-image': !src }]"
       >

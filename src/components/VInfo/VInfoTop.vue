@@ -43,7 +43,7 @@ defineProps({
       </div>
       <p
         v-if="text"
-        v-html="text"
+        v-dompurify-html="text"
       />
       <div class="v-info-top__button-wrap">
         <slot name="buttons">

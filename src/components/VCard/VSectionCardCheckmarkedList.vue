@@ -24,7 +24,7 @@ defineProps({
           <div
             v-if="subtitle"
             class="is--subheading-2"
-            v-html="subtitle"
+            v-dompurify-html="subtitle"
           />
           <a
             v-if="linkUrl && linkText"
@@ -36,7 +36,7 @@ defineProps({
           <p
             v-if="text"
             class="is--margin-top-24"
-            v-html="text"
+            v-dompurify-html="text"
           />
         </div>
       </slot>

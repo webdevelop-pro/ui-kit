@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineAsyncComponent, hydrateOnVisible, PropType } from 'vue';
-import { useData, useRoute } from 'vitepress';
+import { useData } from 'vitepress';
 import VHeader from 'UiKit/components/VHeader/VHeader.vue';
 import { MenuItem } from './VHeaderNavigation.vue';
 </script>
@@ -19,13 +19,10 @@ defineProps({
     type: Array as PropType<MenuItem[]>,
   },
 });
-
-const route = useRoute();
 </script>
 
 <template>
   <VHeader
-    :path="route.path"
     :menu="menu"
     class="VHeaderGetStarted v-header-get-started"
   >

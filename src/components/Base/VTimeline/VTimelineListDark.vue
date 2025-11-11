@@ -44,7 +44,7 @@ defineProps({
           <p
             class="v-timeline-list-dark__item-text"
             :class="textClass"
-            v-html="item.text"
+            v-dompurify-html="item.text"
           />
         </div>
       </VTimelineItem>

@@ -43,7 +43,7 @@ defineProps({
             <p
               v-if="right?.text"
               class="is--subheading-2 is--margin-top-10 is--color-black"
-              v-html="right?.text"
+              v-dompurify-html="right?.text"
             />
           </div>
         </slot>

@@ -20,7 +20,7 @@ defineProps({
       <slot name="infoShort" />
     </template>
     <div class="is--two-col-text">
-      <div v-html="text" />
+      <div v-dompurify-html="text" />
       <VButton
         v-if="buttonHref && buttonText"
         as="a"

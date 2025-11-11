@@ -89,7 +89,7 @@ const getImageType = () => {
         itemprop="text"
       >
         <p
-          v-html="descriptionWithHtml ? data.text : stripHtml(data.text)"
+          v-dompurify-html="descriptionWithHtml ? data.text : stripHtml(data.text)"
         />
       </VCardContent>
     </div>

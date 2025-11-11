@@ -54,7 +54,7 @@ const isPrimary = computed(() => props.color === 'primary');
             </h2>
             <p
               v-if="item.text"
-              v-html="item.text"
+              v-dompurify-html="item.text"
             />
             <ol
               v-if="item.list"
