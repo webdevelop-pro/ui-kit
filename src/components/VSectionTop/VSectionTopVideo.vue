@@ -44,11 +44,11 @@ const emit = defineEmits(['click']);
         type="video/mp4"
       >
     </video>
-    <div
-      class="v-section-top-video__content"
-      :class="[contentClass]"
-    >
-      <slot>
+    <slot>
+      <div
+        class="v-section-top-video__content"
+        :class="[contentClass]"
+      >
         <div
           v-if="!userLoggedIn && isPwa && isMobile"
           class=" is--margin-bottom-120 signs-buttons"
@@ -98,8 +98,8 @@ const emit = defineEmits(['click']);
             />
           </slot>
         </VButton>
-      </slot>
-    </div>
+      </div>
+    </slot>
   </VSection>
 </template>
 
@@ -116,8 +116,7 @@ const emit = defineEmits(['click']);
 
   &.is--full-height {
     padding: 70px 0;
-    min-height: 600px;
-    height: 100vh;
+    min-height: max(600px, 100vh);
 
     @include media-lte(desktop) {
       min-height: 730px;

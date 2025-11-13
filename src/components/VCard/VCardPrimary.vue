@@ -103,6 +103,7 @@ const getImageType = () => {
         :src="data.bodyImg"
         alt="slider bosy image"
         itemprop="image"
+        loading="lazy"
       />
       <slot name="button">
         <VButton

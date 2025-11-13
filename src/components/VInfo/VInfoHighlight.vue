@@ -27,8 +27,8 @@ defineProps({
     </h6>
     <p
       v-if="data.text"
-      class="is--small"
       v-dompurify-html="data.text"
+      class="is--small"
     />
   </div>
 </template>

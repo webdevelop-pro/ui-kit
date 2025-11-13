@@ -71,8 +71,8 @@ defineProps({
         </h3>
         <p
           v-if="itemCol.subtitle"
-          :class="{ 'is--subheading-2': itemCol.isSubheading }"
           v-dompurify-html="itemCol.subtitle"
+          :class="{ 'is--subheading-2': itemCol.isSubheading }"
         />
         <div
           v-if="itemCol.cardItems"

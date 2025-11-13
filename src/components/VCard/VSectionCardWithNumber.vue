@@ -44,8 +44,8 @@ const isPositionOther = computed(() => ((props.position === 'left') ? 'right' : 
           </h2>
           <div
             v-if="subtitle"
-            class="is--subheading-2"
             v-dompurify-html="subtitle"
+            class="is--subheading-2"
           />
           <a
             v-if="linkHref && linkText"

@@ -30,8 +30,8 @@ defineProps({
           {{ data.title }}
         </h3>
         <p
-          class="is--subheading-2"
           v-dompurify-html="data.subtitle"
+          class="is--subheading-2"
         />
       </slot>
     </template>

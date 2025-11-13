@@ -6,6 +6,10 @@ import VCarouselItem from 'UiKit/components/Base/VCarousel/VCarouselItem.vue';
 
 defineProps({
   data: Array as PropType<ICardPrimary[]>,
+  showButton: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>
 
@@ -20,7 +24,7 @@ defineProps({
     >
       <VCardPrimary
         :data="slide"
-        :show-button="!slide.bodyImg"
+        :show-button="!slide.bodyImg || showButton"
       />
     </VCarouselItem>
   </VSlider>

@@ -42,9 +42,9 @@ defineProps({
             {{ item.title }}
           </div>
           <p
+            v-dompurify-html="item.text"
             class="v-timeline-list-dark__item-text"
             :class="textClass"
-            v-dompurify-html="item.text"
           />
         </div>
       </VTimelineItem>

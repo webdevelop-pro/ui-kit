@@ -107,6 +107,7 @@ defineProps({
     gap: 10px;
     margin: 0 !important;
     padding: 12px 0;
+    border-bottom: 1px solid;
     border-color: $primary !important;
     align-items: flex-start;
 

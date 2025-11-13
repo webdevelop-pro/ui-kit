@@ -138,15 +138,15 @@ watch(() => props.message?.message?.value, () => {
       <slot>
         <button
           v-if="props.message?.user === bot"
+          v-dompurify-html="botText"
           class="chat-bubble__markdown"
           @click="handleClick"
-          v-dompurify-html="botText"
         />
         <button
           v-else
+          v-dompurify-html="marked.parse(props.message?.message?.value)"
           class="chat-bubble__markdown"
           @click="handleClick"
-          v-dompurify-html="marked.parse(props.message?.message?.value)"
         />
 
         <ChatEmbedCode

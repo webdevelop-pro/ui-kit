@@ -232,6 +232,7 @@ const emit = defineEmits(['click']);
     border: 0.603px solid $gray-20;
     // object-fit: contain;
     background-color: $white;
+    aspect-ratio: 560/309;
 
     @include media-gte(tablet) {
       border-radius: 10.958px;

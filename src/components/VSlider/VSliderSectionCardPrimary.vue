@@ -20,7 +20,10 @@ defineProps({
   },
   topic: {
     type: String,
-    required: true,
+  },
+  showButton: {
+    type: Boolean,
+    default: false,
   },
 });
 </script>
@@ -35,6 +38,7 @@ defineProps({
   >
     <VSliderCardPrimary
       :data="data"
+      :show-button="showButton"
     />
   </VSection>
 </template>

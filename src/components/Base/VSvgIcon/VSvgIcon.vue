@@ -37,10 +37,10 @@ const resolveKey = (p?: string) => {
 // When icon is an object with frontmatter.menuIcon or a string path, try to map to an imported svg component
 const getSvgComponent = (data: unknown) => {
   // case: passed a Vue component already
-  if (data && typeof data === 'object' && !('frontmatter' in (data as any))) {
+  if (data && typeof data === 'object' && !('frontmatter' in (data as unknown))) {
     return null;
   }
-  const iconPath = (data as any)?.frontmatter?.menuIcon as string | undefined;
+  const iconPath = (data as unknown)?.frontmatter?.menuIcon as string | undefined;
   if (iconPath) {
     const resolved = resolveKey(iconPath);
     if (resolved && iconMap[resolved]) return iconMap[resolved];

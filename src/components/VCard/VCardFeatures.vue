@@ -79,5 +79,9 @@ defineProps<IVCardFeaturesHover>();
     position: absolute;
     inset: 0;
   }
+
+  &__content{
+    height: 100%;
+  }
 }
 </style>

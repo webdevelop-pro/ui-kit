@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import VSection from 'UiKit/components/VSection/VSection.vue';
 
-defineProps<{
+withDefaults(defineProps<{
   fullWidth?: boolean;
-}>();
+  color?: 'default' | 'black';
+}>(), {
+  color: 'default',
+});
 </script>
 
 <template>
   <VSection
     class="VHighlightBase v-highlight-base"
-    :class="{ 'is--full-width': fullWidth }"
+    :class="[{ 'is--full-width': fullWidth }, `is--color-${color}`]"
   >
     <div class="v-highlight-base__container with-default-distance">
       <slot />
@@ -24,11 +27,17 @@ defineProps<{
 .v-highlight-base {
   $root: &;
 
+  --highlight-base-color: #{$gradient-blue};
+
   width: 100%;
+
+  &.is--color-black {
+    --highlight-base-color: #{$black};
+  }
 
   &.is--full-width {
     padding: 130px 0;
-    background: linear-gradient(107deg, rgba(0, 66, 212, 0.95) -11.26%, rgba(1, 47, 150, 0.95) 8.01%, rgba(1, 33, 102, 0.95) 42.66%, rgba(2, 22, 67, 0.95) 99.14%);
+    background: var(--highlight-base-color);
 
     @media screen and (max-width: $tablet) {
       padding: 100px 0;
@@ -37,7 +46,7 @@ defineProps<{
 
   &:not(.is--full-width) &__container{
     padding: 130px;
-    background: linear-gradient(107deg, rgba(0, 66, 212, 0.95) -11.26%, rgba(1, 47, 150, 0.95) 8.01%, rgba(1, 33, 102, 0.95) 42.66%, rgba(2, 22, 67, 0.95) 99.14%);
+    background: var(--highlight-base-color);
 
     @media screen and (max-width: $tablet) {
       padding: 40px;
@@ -85,7 +94,7 @@ defineProps<{
 
   li {
     color: inherit;
-    border-bottom: 1px solid $white !important;
+    // border-bottom: 1px solid $white !important;
   }
 
   .is--cols-auto-left{

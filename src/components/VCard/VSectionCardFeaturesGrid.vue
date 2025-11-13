@@ -2,6 +2,7 @@
 import { computed, PropType } from 'vue';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 import VCardFeaturesHover, { IVCardFeaturesHover } from 'UiKit/components/VCard/VCardFeaturesHover.vue';
+import VCardFeatures from 'UiKit/components/VCard/VCardFeatures.vue';
 
 const props = defineProps({
   title: String,
@@ -28,19 +29,34 @@ const noData = computed(() => props.items?.length === 0);
       <slot name="infoShort" />
     </template>
     <div
-      class="is--three-col-grid"
+      class="is--list-features"
     >
-      <VCardFeaturesHover
+      <template 
         v-for="(item, i) in items"
         :key="i"
-        :href="encodeURI(item.url)"
-        button-text="Read More"
-        @click="emit('click')"
       >
-        <h3>
-          {{ item.title }}
-        </h3>
-      </VCardFeaturesHover>
+        <VCardFeaturesHover
+          v-if="item.url"
+          :href="encodeURI(item.url)"
+          button-text="Read More"
+          @click="emit('click')"
+        >
+          <h3>
+            {{ item.title }}
+          </h3>
+        </VCardFeaturesHover>
+
+        <VCardFeatures
+          v-else
+          class="v-section-card-features-grid__card"
+        >
+          <div class="v-section-card-features-grid__card-content">
+            <h3>
+              {{ item.title }}
+            </h3>
+          </div>
+        </VCardFeatures>
+      </template>
     </div>
   </VSection>
 </template>
@@ -48,5 +64,17 @@ const noData = computed(() => props.items?.length === 0);
 <style lang="scss">
 .v-section-card-features-grid {
   width: 100%;
+
+  &__card {
+    min-height: 200px;
+    text-align: center;
+  }
+
+  &__card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
 }
 </style>

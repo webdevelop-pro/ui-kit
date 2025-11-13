@@ -13,7 +13,7 @@ interface IVPartners {
 defineProps({
   title: String, // Title to display at the top of the section
   items: {
-    type: Array as PropType<IVPartners[]>,
+    type: Array as PropType<IVPartners[] | unknown[]>,
     required: true,
   },
 });
@@ -29,17 +29,23 @@ defineProps({
     </h2>
     <ul class="v-section-partners__slider">
       <li
-        v-for="item in items"
-        :key="item.id"
+        v-for="(item, index) in items"
+        :key="(item as IVPartners).id || index"
         class="v-section-partners__slider-item"
       >
-        <VImage
-          :src="item.icon"
-          alt="Partner logo"
-          fit="contain"
-          loading="lazy"
-          class="v-section-partners__image"
-        />
+        <slot
+          :item="item as IVPartners"
+          :index="index"
+        >
+          <VImage
+            v-if="(item as IVPartners).icon"
+            :src="(item as IVPartners).icon"
+            alt="Partner logo"
+            fit="contain"
+            loading="lazy"
+            class="v-section-partners__image"
+          />
+        </slot>
       </li>
     </ul>
   </VSection>
