@@ -4,7 +4,7 @@
 @use 'UiKit/styles/_variables.scss' as *;
 
 // Utility: max-width classes
-@include generate-max-width-utilities(10, 1600, px);
+@include generate-max-width-utilities(10, 1600, px, (tablet, desktop, desktop-lg, mobile));
 // Utility: max-height classes
 @include generate-max-height-utilities(10, 1600, px);
 

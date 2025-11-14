@@ -47,6 +47,7 @@ function template(d: object, i: number, elements: (HTMLElement | SVGElement)[]) 
       const omittedData = [{ name: data.name, value: valueFormatter(data[props.index]), color: style.fill }]
       const componentDiv = document.createElement("div")
       const TooltipComponent = props.customTooltip ?? VChartTooltip
+      // eslint-disable-next-line vue/one-component-per-file
       createApp(TooltipComponent, { title: d[props.index], data: omittedData }).mount(componentDiv)
       wm.set(d, componentDiv.innerHTML)
       return componentDiv.innerHTML

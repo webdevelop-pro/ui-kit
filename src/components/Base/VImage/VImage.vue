@@ -89,7 +89,7 @@ watch(() => isLoadingLocal.value, () => {
   &__image {
     height: 100%;
     width: 100%;
-    margin-top: 0 !important;
+    margin: 0 auto !important;
 
     &.is--cover{
       object-fit: cover;

@@ -42,6 +42,7 @@ const textBlockProps = computed(() => {
           :class="{'is--no-bg': !imageBg}"
         >
           <VImage
+            v-if="image"
             :src="image"
             alt="Products top visual"
             :class="classImage"

@@ -31,7 +31,7 @@ const textBlockProps = computed(() => {
     <VTextBlock
       v-bind="textBlockProps"
       class="v-block-two-col__text"
-      :class="'is--max-width-' + leftColWidth"
+      :class="'is--max-width-gt-desktop-' + leftColWidth"
     />
     <div class="v-block-two-col__background ">
       <div

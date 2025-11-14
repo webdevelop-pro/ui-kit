@@ -1,4 +1,5 @@
 @use "UiKit/styles/_variables" as variables;
+@use "UiKit/styles/mixins/mixin-media" as media;
 
 @forward "UiKit/styles/mixins/mixin-media";
   
@@ -22,23 +23,64 @@
   font-weight: $weight;
 }
 
+// Helper function to calculate size value based on unit
+@function get-size-value($value, $unit) {
+  @if $unit == px {
+    @return #{$value}px;
+  } @else if $unit == rem {
+    @return sizeInRem($value);
+  } @else {
+    @return #{$value}#{$unit};
+  }
+}
+
+// Helper mixin to apply max-width styles
+@mixin apply-max-width($value, $unit) {
+  width: 100%;
+  max-width: get-size-value($value, $unit);
+}
+
 // Generate utility classes: .is--max-width-{n}
 // Usage: @include generate-max-width-utilities(100, 1600, px);
+//        @include generate-max-width-utilities(100, 1600, px, (tablet, desktop, desktop-lg));
 // - Generates classes from min..max, inclusive, with specified unit (px|rem|%)
 // - Each class sets width: 100% and max-width accordingly
-@mixin generate-max-width-utilities($min: 10, $max: 1600, $unit: px){
+// - If $breakpoints is provided (list of breakpoint names), generates:
+//   .is--max-width-gt-{breakpoint}-{n} and .is--max-width-lt-{breakpoint}-{n} for each breakpoint
+@mixin generate-max-width-utilities($min: 10, $max: 1600, $unit: px, $breakpoints: null){
   @for $i from $min through $max {
-    .is--max-width-#{$i}{
-      width: 100%;
-      @if $unit == px {
-        max-width: #{$i}px;
-      } @else if $unit == rem {
-        max-width: sizeInRem($i);
-      } @else {
-        max-width: #{$i}#{$unit};
+    // Base class: .is--max-width-{n}
+    .is--max-width-#{$i} {
+      @include apply-max-width($i, $unit);
+    }
+
+    // Generate breakpoint variants if breakpoints list is provided
+    @if $breakpoints {
+      @each $breakpoint in $breakpoints {
+        // Greater than breakpoint variant: applies max-width only when screen width > breakpoint
+        .is--max-width-gt-#{$breakpoint}-#{$i} {
+          width: 100%;
+          @include media.media-gt($breakpoint) {
+            max-width: get-size-value($i, $unit);
+          }
+        }
+
+        // Less than breakpoint variant: applies max-width only when screen width < breakpoint
+        .is--max-width-lt-#{$breakpoint}-#{$i} {
+          width: 100%;
+          @include media.media-lt($breakpoint) {
+            max-width: get-size-value($i, $unit);
+          }
+        }
       }
     }
   }
+}
+
+// Helper mixin to apply max-height styles
+@mixin apply-max-height($value, $unit) {
+  height: 100%;
+  max-height: get-size-value($value, $unit);
 }
 
 // Generate utility classes: .is--max-height-{n}
@@ -47,15 +89,8 @@
 // - Each class sets height: 100% and max-height accordingly
 @mixin generate-max-height-utilities($min: 10, $max: 1600, $unit: px){
   @for $i from $min through $max {
-    .is--max-height-#{$i}{
-      height: 100%;
-      @if $unit == px {
-        max-height: #{$i}px;
-      } @else if $unit == rem {
-        max-height: sizeInRem($i);
-      } @else {
-        max-height: #{$i}#{$unit};
-      }
+    .is--max-height-#{$i} {
+      @include apply-max-height($i, $unit);
     }
   }
 }
