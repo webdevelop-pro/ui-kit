@@ -3,6 +3,11 @@
 @use 'UiKit/styles/_variables.scss' as *;
 @use 'UiKit/styles/_mixins.scss' as *;
 
+.v-table__wrap {
+    width: 100%;
+    overflow: auto;
+}
+
 table{
     border-spacing: 0;
     border-collapse: collapse;

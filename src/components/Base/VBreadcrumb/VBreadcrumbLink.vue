@@ -36,6 +36,7 @@ const componentProps = computed(() => {
   color: inherit;
   text-decoration: none;
   line-height: inherit;
+  display: inline;
 
   span {
     color: inherit;

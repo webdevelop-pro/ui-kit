@@ -1,5 +1,5 @@
 <script lang="ts">
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRoute, useData } from 'vitepress';
 
 import VCardArticle from 'UiKit/components/VCard/VCardArticle.vue';
@@ -10,6 +10,8 @@ const { frontmatter, theme } = useData();
 
 const postsRandom = ref();
 const route = useRoute();
+const renderKey = ref(0);
+onMounted(() => { renderKey.value += 1; });
 
 const getRandomPosts = () => {
   // todo
@@ -31,7 +33,7 @@ watch(() => route.path, () => {
     <div class="is--three-col-grid ">
       <VCardArticle
         v-for="item in postsRandom"
-        :key="item.slug"
+        :key="item.slug + renderKey"
         :data="item"
         small
       />

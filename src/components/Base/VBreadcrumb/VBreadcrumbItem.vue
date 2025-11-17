@@ -16,8 +16,7 @@
 @use 'UiKit/styles/_colors.scss' as colors;
 
 .v-breadcumb-item {
-    gap: 8px;
-    display: flex;
+    display: inline;
     margin: 0 !important;
 
     a[href=""],

@@ -18,10 +18,15 @@
 
 .v-breadcrumb-separator {
   color: colors.$gray-50;
+  display: inline;
   margin-top: 0 !important;
 
   &:last-of-type {
     display: none;
+  }
+
+  @media screen and (width < $tablet) {
+    margin: 0 8px!important;
   }
 }
 </style>

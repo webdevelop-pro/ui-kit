@@ -20,9 +20,13 @@
   margin: 0;
   overflow-wrap: break-word;
   align-items: center;
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   gap: 8px;
   color: colors.$black;
+
+  @media screen and (width < $tablet) {
+    display: inline;
+  }
 }
 </style>

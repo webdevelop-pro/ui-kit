@@ -43,7 +43,7 @@ const delegatedProps = computed(() => {
 
 .v-accordion-content[data-state="open"] {
   animation: slideDown 0.3s ease;
-  padding: 16px;
+  padding: 0 16px 24px;
 }
 
 .v-accordion-content[data-state="closed"] {

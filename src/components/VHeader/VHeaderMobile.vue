@@ -105,6 +105,7 @@ const open = defineModel<boolean>();
               variant="link"
               size="small"
               class="v-header-mobile__cta"
+              @click="open = false"
             >
               {{ menuItem?.button.text }}
             </VButton>
