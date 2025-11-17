@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@vue/compiler-core": "^3.5.13",
-    "@vueuse/core": "^12.8.2",
+    "@vueuse/core": "^14.0.0",
     "sass": "^1.85.1",
     "vite-svg-loader": "^5.1.0",
     "vue": "^3.5.13",
@@ -18,10 +18,10 @@
     "vue-select": "^4.0.0-beta.6"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue": "^6.0.1",
     "typescript": "^5.8.2",
     "vite": "^7.1.9",
     "vite-plugin-purgecss": "^0.2.13",
-    "vue-tsc": "^2.2.8"
+    "vue-tsc": "^3.1.4"
   }
 }
