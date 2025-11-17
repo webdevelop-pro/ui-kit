@@ -16,6 +16,7 @@ const props = withDefaults(defineProps<VTextBlockConfig & VHaveQuestionsConfig>(
 });
 
 const textBlockProps = computed(() => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { imageUrl, noImage, ...delegated  } = props;
 
   return delegated;
