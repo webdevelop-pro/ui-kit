@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<VTextBlockConfig & VSectionTopProductsCon
 });
 
 const textBlockProps = computed(() => {
-  const { classImage, image, ...delegated  } = props;
+  const { classImage, image, leftColWidth, ...delegated  } = props;
 
   return delegated;
 });
