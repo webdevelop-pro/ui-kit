@@ -5,7 +5,7 @@ import {
 } from 'UiKit/components/Base/VTable';
 
 
-const props = defineProps({
+defineProps({
   headers: {
     type: Array as PropType<string[]>,
     required: true,
