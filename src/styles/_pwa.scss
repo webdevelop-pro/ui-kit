@@ -53,8 +53,10 @@
     touch-action: manipulation;
 
     // Reduce accidental long-press behaviors that conflict with app patterns
+    /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-user-select: none;
     user-select: none;
+    /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-touch-callout: none;
   }
 

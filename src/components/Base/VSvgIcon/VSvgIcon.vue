@@ -110,10 +110,13 @@ const stringIconStyle = computed(() => {
   }
 
   &__background {
+    /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
+    /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-mask-position: center;
     mask-position: center;
+    /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-mask-size: contain;
     mask-size: contain;
     background-repeat: no-repeat;

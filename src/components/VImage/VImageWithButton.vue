@@ -90,10 +90,12 @@ const handleButtonClick = (event: MouseEvent) => {
     align-items: flex-start;
     justify-content: flex-start;
   }
+
   &.is--align-center {
     align-items: center;
     justify-content: center;
   }
+
   &.is--align-end {
     align-items: flex-end;
     justify-content: flex-end;

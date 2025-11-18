@@ -45,8 +45,7 @@ defineProps({
   width: 100%;
     padding-left: 0;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     gap: 40px;
     list-style: none;
     margin: 0;
