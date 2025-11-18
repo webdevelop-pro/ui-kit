@@ -78,7 +78,7 @@ const componentIcon = computed(() => {
 .v-alert-default {
     $root: &;
 
-    @media screen and (max-width: $mobile-xs) {
+    @media screen and (max-width: $tablet) {
       flex-direction: column;
       align-items: flex-start;
 
@@ -97,6 +97,10 @@ const componentIcon = computed(() => {
     &__content {
         display: flex;
         gap:8px;
+
+      @media screen and (width < $tablet) {
+        flex-direction: column;
+      }
     }
 
     &.is--error {
