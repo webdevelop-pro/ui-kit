@@ -4,6 +4,8 @@ import VSection from 'UiKit/components/VSection/VSection.vue';
 import VTextBlock from 'UiKit/components/VText/VTextBlock.vue';
 import { VTextBlockConfig } from '../VText/types';
 import { computed } from 'vue';
+import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
+import { storeToRefs } from 'pinia';
 </script>
 
 <script setup lang="ts">
@@ -11,6 +13,7 @@ import { computed } from 'vue';
 export interface VSectionTopProductsConfig {
   classImage?: string;
   image?: string;
+  imageMobile?: string;
   imageBg?: boolean;
   imageBgImage?: boolean;
   srcsetProp?: string;
@@ -18,16 +21,28 @@ export interface VSectionTopProductsConfig {
 const props = withDefaults(defineProps<VTextBlockConfig & VSectionTopProductsConfig>(), {
   classImage: '',
   image: '',
+  imageMobile: '',
   srcsetProp: '',
   imageBg: true,
   imageBgImage: true,
   buttons: () => [],
 });
 
+const { isDesktop } = storeToRefs(useBreakpoints());
+
 const textBlockProps = computed(() => {
   const { classImage, image, imageBg, imageBgImage,  ...delegated  } = props;
 
   return delegated;
+});
+
+const showImage = computed(() => {
+  return props.image || props.imageMobile;
+});
+
+const imageSrc = computed(() => {
+  if (!isDesktop.value && props.imageMobile) return props.imageMobile
+  return props.image;
 });
 </script>
 
@@ -36,7 +51,7 @@ const textBlockProps = computed(() => {
     <div class="v-section-top-products__container is--gap-80">
       <VTextBlock
         v-bind="textBlockProps"
-        class="v-section-top-products__text is--max-width-508"
+        class="v-section-top-products__text is--max-width-gt-desktop-508"
       />
       <div
         class="v-section-top-products__background "
@@ -47,8 +62,8 @@ const textBlockProps = computed(() => {
           :class="{'is--no-bg': !imageBg }"
         >
           <VImage
-            v-if="image"
-            :src="image"
+            v-if="showImage"
+            :src="imageSrc"
             alt="Products top visual"
             :class="classImage"
             fetchpriority="high"
@@ -73,6 +88,7 @@ const textBlockProps = computed(() => {
     @media screen and (width < $desktop) {
       flex-direction: column;
       align-items: flex-start;
+      gap: 40px;
     }
   }
 
@@ -89,6 +105,13 @@ const textBlockProps = computed(() => {
 
     &.is--bg-image {
       padding-left: 85px;
+      padding-right: 85px;
+
+      @media screen and (width < $desktop) {
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 30px;
+      }
     }
     
     &.is--bg-image::before {
@@ -103,11 +126,15 @@ const textBlockProps = computed(() => {
       background-position: left bottom;
       z-index: 0;
       opacity: 0.3;
+
+      @media screen and (width < $desktop) {
+        bottom: -26px;
+      }
     }
 
+
     @media screen and (width < $desktop) {
-      padding-left: 0;
-      padding-bottom: 30px;
+      margin: 0 auto;
     }
   }
 
@@ -131,6 +158,16 @@ const textBlockProps = computed(() => {
     @media screen and (width < $desktop) {
       width: 100%;
       height: auto;
+    }
+  }
+
+  .v-image.is--image-mobile {
+    @media screen and (width > $desktop) {
+      position: absolute;
+      top: -60px;
+      left: 39px;
+      width: 412.49px;
+      height: 477.274px;
     }
   }
 }
