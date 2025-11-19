@@ -12,6 +12,7 @@ export interface VSectionTopProductsConfig {
   classImage?: string;
   image?: string;
   imageBg?: boolean;
+  imageBgImage?: boolean;
   srcsetProp?: string;
 }
 const props = withDefaults(defineProps<VTextBlockConfig & VSectionTopProductsConfig>(), {
@@ -19,11 +20,12 @@ const props = withDefaults(defineProps<VTextBlockConfig & VSectionTopProductsCon
   image: '',
   srcsetProp: '',
   imageBg: true,
+  imageBgImage: true,
   buttons: () => [],
 });
 
 const textBlockProps = computed(() => {
-  const { classImage, image, ...delegated  } = props;
+  const { classImage, image, imageBg, imageBgImage,  ...delegated  } = props;
 
   return delegated;
 });
@@ -36,10 +38,13 @@ const textBlockProps = computed(() => {
         v-bind="textBlockProps"
         class="v-section-top-products__text is--max-width-508"
       />
-      <div class="v-section-top-products__background ">
+      <div
+        class="v-section-top-products__background "
+        :class="{'is--bg-image': imageBgImage }"
+      >
         <div
           class="v-section-top-products__image"
-          :class="{'is--no-bg': !imageBg}"
+          :class="{'is--no-bg': !imageBg }"
         >
           <VImage
             v-if="image"
@@ -80,10 +85,13 @@ const textBlockProps = computed(() => {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 85px;
     flex-shrink: 0;
+
+    &.is--bg-image {
+      padding-left: 85px;
+    }
     
-    &::before {
+    &.is--bg-image::before {
       content: '';
       position: absolute;
       left: 0;

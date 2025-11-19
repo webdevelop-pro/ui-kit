@@ -144,7 +144,7 @@ const filteredButtons = computed<IListsLeftBorder[]>(() => {
     gap: 40px;
     list-style: none;
     margin: 0;
-    max-width: auto;
+    max-width: none;
   }
 
   &__item {

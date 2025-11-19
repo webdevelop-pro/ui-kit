@@ -49,7 +49,7 @@ defineProps({
     gap: 40px;
     list-style: none;
     margin: 0;
-    max-width: auto;
+    max-width: none;
 
   @media screen and (width < $tablet) {
     gap: 20px;

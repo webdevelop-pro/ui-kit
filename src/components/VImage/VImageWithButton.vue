@@ -5,24 +5,27 @@ import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VSvgIcon from 'UiKit/components/Base/VSvgIcon/VSvgIcon.vue';
 
 const props = withDefaults(defineProps<{
-  showButton?: boolean;
-  buttonText?: string;
   align?: 'start' | 'center' | 'end';
   imageClass?: string;
-  buttonClass?: string;
   withDefaultDistance?: boolean;
   imageProps?: Record<string, unknown>;
-  buttonProps?: Record<string, unknown>;
-  buttonIcon?: string | Component;
+  buttons?: unknown[];
 }>(), {
-  showButton: true,
-  buttonText: 'Action',
   align: 'center',
   withDefaultDistance: false,
   imageProps: () => ({}),
-  buttonProps: () => ({}),
+  buttons: () => [],
 });
 
+const keysToRemove = ['cover', 'head', 'url', 'slug', 'summary', 'draft', 'text', 'icon'];
+
+const filteredButtons = computed(() => (
+  props.buttons?.map((btn) => 
+    Object.fromEntries(
+      Object.entries(btn).filter(([key]) => !keysToRemove.includes(key))
+    )
+  ) ?? []
+));
 
 const alignClass = computed(() => {
   if (props.align === 'start') return 'is--align-start';
@@ -34,8 +37,8 @@ const emit = defineEmits<{
   buttonClick: [event: MouseEvent]
 }>();
 
-const handleButtonClick = (event: MouseEvent) => {
-  emit('buttonClick', event);
+const handleButtonClick = (index: number, button: unknown) => {
+  emit('buttonClick', index, button);
 };
 </script>
 
@@ -51,25 +54,24 @@ const handleButtonClick = (event: MouseEvent) => {
         v-bind="imageProps"
       />
     </slot>
-
-    <slot
-      v-if="showButton"
-      name="button"
-    >
-      <VButton
-        class="v-image-with-button__button"
-        :class="buttonClass"
-        v-bind="buttonProps"
-        @click="handleButtonClick"
+    <slot name="buttons">
+      <template
+        v-for="(btn, idx) in filteredButtons"
+        :key="idx"
       >
-        <slot>{{ buttonText || 'Action' }}</slot>
-
-        <VSvgIcon
-          v-if="buttonIcon"
-          :icon="buttonIcon"
-          class="v-text-block__button-icon"
-        />
-      </VButton>
+        <VButton
+          class="v-text-block__button is--margin-top-0"
+          v-bind="btn"
+          @click="handleButtonClick(idx, btn)"
+        >
+          {{ buttons[idx].text }}
+          <VSvgIcon
+            :icon=" buttons[idx].icon"
+            icon-size="20px"
+            class="v-text-block__button-icon"
+          />
+        </VButton>
+      </template>
     </slot>
   </div>
 </template>

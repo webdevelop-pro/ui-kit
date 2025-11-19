@@ -68,7 +68,7 @@ defineProps({
   width: 100%;
   padding-left: 0;
   list-style: none;
-  max-width: auto;
+  max-width: none;
 
   &.is--one-col-grid {
     display: flex;

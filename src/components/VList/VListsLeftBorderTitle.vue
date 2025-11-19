@@ -80,7 +80,7 @@ defineProps({
     gap: 40px;
     list-style: none;
     margin: 0;
-    max-width: auto;
+    max-width: none;
   }
 
   li {
