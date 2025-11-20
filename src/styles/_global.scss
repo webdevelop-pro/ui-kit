@@ -265,7 +265,7 @@
 }
 
 .is--page > *:not(.is--page-content, .is--no-padding),
-.is--page-content > div > *{
+.is--page-content > div > *:not(.is--no-padding){
     padding-top: 130px;
 
     @media screen and (max-width: $tablet){
