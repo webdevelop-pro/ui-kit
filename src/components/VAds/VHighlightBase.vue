@@ -4,6 +4,7 @@ import VSection from 'UiKit/components/VSection/VSection.vue';
 withDefaults(defineProps<{
   fullWidth?: boolean;
   color?: 'default' | 'black';
+  background?: 'cells';
 }>(), {
   color: 'default',
 });
@@ -12,7 +13,7 @@ withDefaults(defineProps<{
 <template>
   <VSection
     class="VHighlightBase v-highlight-base"
-    :class="[{ 'is--full-width': fullWidth }, `is--color-${color}`]"
+    :class="[{ 'is--full-width': fullWidth }, `is--color-${color}`, `is--background-${background}`]"
   >
     <div class="v-highlight-base__container with-default-distance">
       <slot />
@@ -44,6 +45,48 @@ withDefaults(defineProps<{
     }
   }
 
+  &.is--background-cells {
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 462px;
+      height: 501px;
+      aspect-ratio: 154/167;
+      background-size: contain;
+      background-repeat: no-repeat;
+      z-index: 1;
+      pointer-events: none;
+
+      @media screen and (max-width: $tablet) {
+        width: 375px;
+        height: 407px;
+        aspect-ratio: 375/407;
+      }
+    }
+
+    &::before {
+      background-image: url('UiKit/assets/images/backgrounds/cell-bottom-left.svg');
+      background-position: left bottom;
+      bottom: 0;
+      left: 0;
+    }
+
+    &::after {
+      background-image: url('UiKit/assets/images/backgrounds/cell-top-right.svg');
+      background-position: right top;
+      top: 0;
+      right: 0;
+    }
+
+    &__container {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
   &:not(.is--full-width) &__container{
     padding: 130px;
     background: var(--highlight-base-color);
@@ -61,7 +104,7 @@ withDefaults(defineProps<{
     position: relative;
     color: $white;
     // Reserve space to prevent layout shift during async component hydration
-    min-height: 300px;
+    min-height: 245px;
     
     @media screen and (max-width: $tablet) {
       min-height: 250px;

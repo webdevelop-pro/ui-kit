@@ -1,24 +1,25 @@
 import { IFrontmatter } from 'UiKit/types/types';
 
-export function formatMenu(data: IFrontmatter[]) {
+export function formatMenu(data: IFrontmatter[], path?: string) {
   return data.map((item: IFrontmatter) => ({
     href: item.url,
     text: item.title,
     frontmatter: item,
+    active: path ? item.url === path : false,
   }));
 }
 
-type MenuItem = { frontmatter: IFrontmatter; href: string; text: string };
+type MenuItem = { frontmatter: IFrontmatter; href: string; text: string; active?: boolean };
 
-export function formatItemsBySubfolder(items: IFrontmatter[], filterByNav = false) {
+export function formatItemsBySubfolder(items: IFrontmatter[], filterByNav = false, path?: string) {
   const groupedUseCases: Record<string, MenuItem[]> = {};
 
   // Iterate over the use cases and group them by subfolder
-  items.forEach((item: IFrontmatter) => {
+  items.forEach((item: IFrontmatter & { nav?: boolean; rawUrl?: string }) => {
     // Optionally skip items that are not marked for menu
     if (filterByNav && item.nav !== true) return;
 
-    const parts = item.rawUrl?.split('/') || [];
+    const parts = (item.rawUrl || item.url || '').split('/');
     const subfolder = (parts[2] || '').toUpperCase();
 
     if (!groupedUseCases[subfolder]) {
@@ -27,8 +28,9 @@ export function formatItemsBySubfolder(items: IFrontmatter[], filterByNav = fals
 
     groupedUseCases[subfolder].push({
       frontmatter: item,
-      href: item.url,
+      href: item.url || '',
       text: item.title,
+      active: path ? item.url === path : false,
     });
   });
 

@@ -92,7 +92,7 @@ const filteredButtons = computed<IListsLeftBorder[]>(() => {
             <h3 class="is--color-primary">
               {{ caption.title }}
             </h3>
-            <p class="is--color-gray-80 is--margin-top-0">
+            <p class="is--color-gray-80">
               {{ caption.text }}
             </p>
             <slot :item="caption" />
@@ -104,6 +104,11 @@ const filteredButtons = computed<IListsLeftBorder[]>(() => {
           class="is--margin-top-30"
         >
           {{ processedItems[index]?.button?.text }}
+          <VSvgIcon
+            :icon="processedItems[index]?.button?.icon"
+            icon-size="16px"
+            class="v-list-left-border__button-icon"
+          />
         </VButton>
       </li>
     </ul>
@@ -118,6 +123,10 @@ const filteredButtons = computed<IListsLeftBorder[]>(() => {
 
   &.is--border-color-primary {
     --list-left-border-color: #{$primary};
+
+    p {
+      margin-top: 10px;
+    }
   }
 
   &.is--border-color-secondary {
@@ -132,7 +141,6 @@ const filteredButtons = computed<IListsLeftBorder[]>(() => {
   &__content {
     display: flex;
     flex-direction: column;
-    gap: 12px;
     opacity: 0.9;
   }
 
@@ -154,9 +162,18 @@ const filteredButtons = computed<IListsLeftBorder[]>(() => {
     flex-direction: column;
     align-items: flex-start;
     margin: 0 !important;
-    padding: 20px;
+    padding: 19px;
     border-left: 2px solid var(--list-left-border-color);
     justify-content: space-between;
+
+
+    ul {
+      margin-top: 25px;
+    }
+
+    li + li {
+      margin-top: 0;
+    }
   }
 
   &__item-content {

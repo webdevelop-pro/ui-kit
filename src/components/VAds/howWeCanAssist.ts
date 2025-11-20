@@ -7,13 +7,13 @@ const developmentStages = filterPages(allPages as IFrontmatter[], 'slug', 'devel
 const howWeCanAssistData = filterPages(allPages as IFrontmatter[], 'slug', 'how-can-we-assist');
 export const HowCanWeAssistItems = [
   {
-    image: '/images/assist-group-1.svg',
+    image: '/howWeCanAssist/gear.svg',
     title: developmentStages[0].title,
     description: 'Navigate through our developmental stages, tracing the journey from concept to fruition.',
     url: developmentStages[0]?.url,
   },
   {
-    image: '/images/assist-group-2.svg',
+    image: '/howWeCanAssist/timeline.svg',
     title: ourProcess[0].title,
     description: 'Explore our pipelines, revealing diverse pathways shaping our future offerings.',
     url: ourProcess[0]?.url,

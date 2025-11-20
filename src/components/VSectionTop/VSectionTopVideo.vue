@@ -162,6 +162,21 @@ const emit = defineEmits(['click']);
     color: $primary;
     text-transform: uppercase;
   }
+
+  .v-block-two-col__image {
+    @media screen and (width > $desktop) {
+      max-height: min(calc(100vh - 140px), 750px);
+    }
+    @media screen and (width < $tablet) {
+      margin-bottom: -70px;
+    }
+  }
+
+  .v-block-two-col__container {
+    @media screen and (width < $tablet) {
+      gap: 40px;
+    }
+  }
 }
 
 .v-section-top-video-unauthenticated {

@@ -5,6 +5,8 @@ import { PropType } from 'vue';
 import { howWeCanAssist } from 'UiKit/components/VAds/howWeCanAssist';
 import ArrowRight from 'UiKit/assets/images/arrow-right.svg';
 import VSection from 'UiKit/components/VSection/VSection.vue';
+import VHighlightBase from './VHighlightBase.vue';
+import VSvgIcon from 'UiKit/components/Base/VSvgIcon/VSvgIcon.vue';
 
 interface IHowWeCanAssistYou {
   title: string;
@@ -30,13 +32,19 @@ const emit = defineEmits(['click']);
 </script>
 
 <template>
-  <VSection class="HowWeCanAssistYou how-we-can-assist-you">
-    <div class="how-we-can-assist-you__wrapper">
+  <VHighlightBase
+    class="HowWeCanAssistYou how-we-can-assist-you"
+    full-width
+  >
+    <div class="how-we-can-assist-you__wrapper is--gap-80">
       <div class="how-we-can-assist-you__left">
         <h2 v-if="data?.title ">
           {{ data?.title }}
         </h2>
-        <p v-if="data?.description">
+        <p
+          v-if="data?.description"
+          class="is--subheading-2"
+        >
           {{ data?.description }}
         </p>
         <VButton
@@ -44,6 +52,7 @@ const emit = defineEmits(['click']);
           as="a"
           :href="encodeURI(data?.url)"
           size="large"
+          variant="tetriary"
           @click="emit('click')"
         >
           {{ data.buttonText }}
@@ -55,22 +64,22 @@ const emit = defineEmits(['click']);
 
       <div
         v-if="data?.items"
-        class="how-we-can-assist-you__right is--two-col-grid"
+        class="how-we-can-assist-you__right"
       >
         <div
           v-for="item in data?.items"
           :key="item.title"
           class="how-we-can-assist-you__item"
         >
-          <img
-            v-if="item.image"
-            loading="lazy"
-            :src="item.image"
+          <VSvgIcon
+            :icon="item.image"
+            icon-size="24px"
             :alt="item.title"
-          >
+            class="how-we-can-assist-you__icon"
+          />
           <h3
             v-if="item.title"
-            class="is--h4__title"
+            class="is--h4__title is--margin-top-12"
           >
             {{ item.title }}
           </h3>
@@ -81,6 +90,7 @@ const emit = defineEmits(['click']);
             v-if="item.url"
             :href="encodeURI(item.url)"
             :aria-label="item.title"
+            class="is--link-1 is--color-primary"
             @click="emit('click')"
           >
             Learn More
@@ -89,33 +99,23 @@ const emit = defineEmits(['click']);
             </span>
           </a>
         </div>
-
-        <div
-          class="how-we-can-assist-you__background"
-        >
-          <img
-            :src="backgroundImage || bg"
-            loading="lazy"
-            alt="How we can assist bg image of code"
-            class="how-we-can-assist-you__background-image"
-          >
-        </div>
       </div>
     </div>
-  </VSection>
+  </VHighlightBase>
 </template>
 
 <style lang="scss">
 
 .how-we-can-assist-you {
   &__wrapper {
-    overflow: hidden;
-    border-radius: 2px;
-    border: 1px solid $gray-20;
-    background: $gray-10;
-    padding: 40px;
+    // overflow: hidden;
+    // border-radius: 2px;
+    // border: 1px solid $gray-20;
+    // background: $gray-10;
+    // padding: 40px;
     display: flex;
-    gap: 40px;
+    align-self: center;
+    // gap: 40px;
 
     @include media-lte(desktop) {
       flex-direction: column;
@@ -124,40 +124,18 @@ const emit = defineEmits(['click']);
 
   &__left {
     width: 100%;
-    max-width: 409px;
-    margin-right: 48px;
-    padding: 48px 0;
-
-    @include media-lte(desktop) {
-      margin-right: 0;
-      max-width: 100%;
-      margin-bottom: 20px;
-      padding: 0;
-    }
+    max-width: 457px;
 
     p {
-      margin-top: 8px;
+      max-width: 409px;
 
-      // @extend .is--subheading-2;
-      @include font(350);
-
-      font-size: 20px;
-      line-height: 30px;
-      font-style: normal;
+      @include media-lte(desktop) {
+        max-width: 100%;
+      }
     }
 
-    .v-button {
-      margin-top: 40px;
-    }
-
-    @include media-lte(tablet) {
-      .v-button {
-        margin-top: 24px;
-      }
-
-      p {
-        margin-top: 4px;
-      }
+    @include media-lte(desktop) {
+      max-width: 100%;
     }
   }
 
@@ -168,13 +146,7 @@ const emit = defineEmits(['click']);
 
     a {
       display: block;
-      margin-top: 16px;
-
-      // @extend .is--link-1;
-      @include font(800);
-
-      font-size: 16px;
-      line-height: 26px;
+      margin-top: 20px;
       text-decoration: underline;
       transition: 0.3s all  ease-in-out;
       color: $primary;
@@ -192,50 +164,17 @@ const emit = defineEmits(['click']);
 
   &__right {
     position: relative;
-    gap: 40px;
     margin-top: 0;
     padding-bottom: 0;
+    padding-right: 30px;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    flex: 1 0 0;
+    align-self: stretch;
 
-    @include media-lte(desktop) {
-      padding-bottom: 120px;
-    }
-
-    @include media-lte(tablet) {
-      padding-bottom: 0;
-    }
-  }
-
-  &__background {
-    margin-top: 20px;
-    width: 100%;
-    padding: 1.597px;
-    border-radius: 3.194px;
-    box-shadow: $box-shadow-large;
-    background-color: $white;
-    min-height: 150px;
-
-    @include media-gte(tablet) {
-      position: absolute;
-      padding: 5.479px;
-      border-radius: 10.958px;
-      margin-top: 0;
-      top: calc(100% - 85px);
-      height: 100%;
-      min-height: 319px;
-    }
-  }
-
-  &__background-image {
-    width: 100%;
-    // height: 100%;
-    border-radius: 2.332px;
-    border: 0.603px solid $gray-20;
-    // object-fit: contain;
-    background-color: $white;
-    aspect-ratio: 560/309;
-
-    @include media-gte(tablet) {
-      border-radius: 10.958px;
+    @media screen and (max-width: $tablet) {
+      flex-direction: column;
     }
   }
 }

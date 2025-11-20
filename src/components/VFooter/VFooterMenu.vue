@@ -68,7 +68,7 @@ const getComponentClass = (item: MenuItem) => {
               :is="getComponentName(childItem)"
               :href="childItem.href"
               :to="childItem.to"
-              :class="[getComponentClass(childItem), { 'is--active': menuItem.active }]"
+              :class="[getComponentClass(childItem), { 'is--active': childItem.active }]"
               @click="emit('click')"
             >
               {{ childItem.text }}

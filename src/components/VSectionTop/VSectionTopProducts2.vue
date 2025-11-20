@@ -4,8 +4,6 @@ import VSection from 'UiKit/components/VSection/VSection.vue';
 import VTextBlock from 'UiKit/components/VText/VTextBlock.vue';
 import { VTextBlockConfig } from '../VText/types';
 import { computed } from 'vue';
-import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
-import { storeToRefs } from 'pinia';
 </script>
 
 <script setup lang="ts">
@@ -21,14 +19,11 @@ export interface VSectionTopProductsConfig {
 const props = withDefaults(defineProps<VTextBlockConfig & VSectionTopProductsConfig>(), {
   classImage: '',
   image: '',
-  imageMobile: '',
   srcsetProp: '',
   imageBg: true,
   imageBgImage: true,
   buttons: () => [],
 });
-
-const { isDesktop } = storeToRefs(useBreakpoints());
 
 const textBlockProps = computed(() => {
   const { classImage, image, imageBg, imageBgImage,  ...delegated  } = props;
@@ -40,9 +35,8 @@ const showImage = computed(() => {
   return props.image || props.imageMobile;
 });
 
-const imageSrc = computed(() => {
-  if (!isDesktop.value && props.imageMobile) return props.imageMobile
-  return props.image;
+const hasMobileImage = computed(() => {
+  return !!props.imageMobile;
 });
 </script>
 
@@ -61,11 +55,20 @@ const imageSrc = computed(() => {
           class="v-section-top-products__image"
           :class="{'is--no-bg': !imageBg }"
         >
+          <!-- Desktop image - shown on desktop, or on both if no mobile image -->
           <VImage
-            v-if="showImage"
-            :src="imageSrc"
+            v-if="showImage && image"
+            :src="image"
             alt="Products top visual"
-            :class="classImage"
+            :class="[classImage, hasMobileImage ? 'v-section-top-products__image-desktop' : 'v-section-top-products__image-both']"
+            fetchpriority="high"
+          />
+          <!-- Mobile image - only shown if provided -->
+          <VImage
+            v-if="showImage && imageMobile"
+            :src="imageMobile"
+            alt="Products top visual"
+            :class="[classImage, 'v-section-top-products__image-mobile']"
             fetchpriority="high"
           />
         </div>
@@ -88,7 +91,6 @@ const imageSrc = computed(() => {
     @media screen and (width < $desktop) {
       flex-direction: column;
       align-items: flex-start;
-      gap: 40px;
     }
   }
 
@@ -159,6 +161,26 @@ const imageSrc = computed(() => {
       width: 100%;
       height: auto;
     }
+  }
+
+  &__image-desktop {
+    display: none;
+
+    @media screen and (width >= $desktop) {
+      display: block;
+    }
+  }
+
+  &__image-mobile {
+    display: block;
+
+    @media screen and (width >= $desktop) {
+      display: none;
+    }
+  }
+
+  &__image-both {
+    display: block;
   }
 
   .v-image.is--image-mobile {
