@@ -58,15 +58,27 @@ defineProps({
 .v-table-comparison {
   width: 100%;
 
+  .v-table {
+    table-layout: fixed;
+  }
+
   &__head {
+    &:first-child {
+        @media screen and (width > $tablet) {
+            width: 180px;
+        }
+    }
+
     &:nth-child(2) {
         background-color: $gray-10;
         color: $black;
+        width: calc(50% - 90px);
     }
 
     &:nth-child(3) {
         background-color: $primary-light;
         color: $primary;
+        width: calc(50% - 90px);
     }
   }
 
