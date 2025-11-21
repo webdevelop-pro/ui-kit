@@ -7,7 +7,9 @@ import { testimonials } from 'UiKit/components/VWhatOurClientsSay/utils';
 </script>
 
 <script setup lang="ts">
-defineProps({
+import { computed } from 'vue';
+
+const props = defineProps({
   prev: String,
   next: String,
   topic: String,
@@ -20,8 +22,20 @@ defineProps({
   sideText: String,
 });
 
-const { theme } = useData();
+const { theme, frontmatter } = useData();
 const getStarted = theme.navigation.getStarted.data;
+
+const currentPage = computed(() => (
+  theme.navigation.root.getPageByURL(frontmatter.value.url)
+));
+
+const prevUrl = computed(() => 
+  props.prev || currentPage.value?.prev()?.data?.url
+);
+
+const nextUrl = computed(() => 
+  props.next || currentPage.value?.next()?.data?.url
+);
 </script>
 
 <template>
@@ -81,9 +95,9 @@ const getStarted = theme.navigation.getStarted.data;
           <slot />
 
           <CaseStudiesNavigation
-            v-if="prev || next"
-            :prev="prev"
-            :next="next"
+            v-if="prevUrl || nextUrl"
+            :prev="prevUrl"
+            :next="nextUrl"
             class="is--margin-top-60 is--width-100"
           />
         </div>

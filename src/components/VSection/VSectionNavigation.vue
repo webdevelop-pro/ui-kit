@@ -18,7 +18,7 @@ defineProps({
 </script>
 
 <template>
-  <section class="VSectionNavigation case-studies-navigation is--background-gray-10 ">
+  <section class="VSectionNavigation case-studies-navigation ">
     <VButton
       v-if="prev"
       as="a"
