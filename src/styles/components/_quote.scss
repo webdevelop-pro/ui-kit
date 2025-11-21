@@ -6,7 +6,7 @@
     
     
 blockquote,
-q{
+q {
     border: 1px solid $gray-20;
     background: $gray-10;
     display: flex;
@@ -46,4 +46,11 @@ q{
     *{
         z-index: 1;
     }
+}
+
+.with-default-distance blockquote,
+.with-default-distance q,
+blockquote.with-default-distance,
+q.with-default-distance {
+  margin: 60px auto;
 }
