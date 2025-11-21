@@ -79,10 +79,9 @@ const emit = defineEmits(['click']);
         </h1>
         <p
           v-if="subTitle"
+          v-dompurify-html="subTitle"
           class="is--subheading-1 is--margin-top-15 is--color-black"
-        >
-          {{ subTitle }}
-        </p>
+        />
         <VButton
           v-if="props.buttonHref"
           as="a"
