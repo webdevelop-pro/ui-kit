@@ -74,11 +74,11 @@ const classes = computed(() => {
 
   &.is--badge-color-secondary {
     background-color: colors.$secondary;
-    color: colors.$black;
 
     &.is--active,
     &.is--hover:hover {
       background-color: colors.$secondary-dark;
+      color: colors.$black;
     }
   }
 
@@ -88,6 +88,7 @@ const classes = computed(() => {
     &.is--active,
     &.is--hover:hover {
       background-color: colors.$secondary;
+      color: colors.$black;
     }
   }
 
