@@ -32,7 +32,7 @@ defineProps({
   <VSection
     :title="dataTitle.title"
     :sub-title="dataTitle?.subtitle"
-    :link-href="encodeURI(`${dataTitle?.link}?topic=${topic}`)"
+    :link-href="encodeURI(dataTitle?.link || '')"
     :link-text="dataTitle?.linkText"
     class="VSliderSectionCardPrimary v-slider-section-card-primary"
   >

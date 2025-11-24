@@ -119,7 +119,7 @@ const nextUrl = computed(() =>
       opacity: 0.9;
     }
 
-    a {
+    a:not(.v-button) {
       text-decoration-style: dashed;
       text-decoration-line: underline;
       cursor: pointer;
