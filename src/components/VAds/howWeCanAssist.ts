@@ -13,7 +13,7 @@ export const HowCanWeAssistItems = [
     url: developmentStages[0]?.url,
   },
   {
-    image: '/howWeCanAssist/timeline.svg',
+    image: '/howWeCanAssist/puzzle.svg',
     title: ourProcess[0].title,
     description: 'Explore our pipelines, revealing diverse pathways shaping our future offerings.',
     url: ourProcess[0]?.url,

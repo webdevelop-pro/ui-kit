@@ -144,7 +144,7 @@ const emit = defineEmits(['click']);
       margin-top: 12px;
     }
 
-    a {
+    a.is--link-1 {
       display: block;
       margin-top: 20px;
       text-decoration: underline;
