@@ -170,10 +170,6 @@ const buttonHrefFormatted = computed(() => props.buttonHref || encodeURI(`${getS
   ul {
     color: inherit;
     margin: 32px 0 0;
-
-    @media screen and (min-width: $tablet) {
-      max-width: 562px;
-    }
   }
 
   li {
