@@ -51,6 +51,7 @@ const modelValue = useVModel(props, 'modelValue', emits, {
   border-radius: 2px;
   padding: 12px;
   width: 100%;
+  resize: vertical;
 
   &:focus {
     border-color: colors.$primary;

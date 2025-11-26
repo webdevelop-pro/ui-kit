@@ -1,13 +1,14 @@
 <script lang="ts">
 import { defineAsyncComponent, hydrateOnVisible, PropType } from 'vue';
-import { useData } from 'vitepress';
 import VHeader from 'UiKit/components/VHeader/VHeader.vue';
 import { MenuItem } from './VHeaderNavigation.vue';
+import { filterPages } from 'UiKit/helpers/allData';
+import { data as allPages } from '@/store/all.data';
+import { IFrontmatter } from 'UiKit/types/types';
 </script>
 
 <script setup lang="ts">
-const { theme } = useData();
-const getStarted = theme.navigation.getStarted.data;
+const contactUs = filterPages(allPages as IFrontmatter[], 'layout', 'contact-us');
 
 const VButton = defineAsyncComponent({
   loader: () => import('UiKit/components/Base/VButton/VButton.vue'),
@@ -28,14 +29,14 @@ defineProps({
   >
     <VButton
       as="a"
-      :href="getStarted.url"
+      :href="contactUs[0]?.url"
     >
       Get Started
     </VButton>
     <template #mobile>
       <VButton
         as="a"
-        :href="getStarted.url"
+        :href="contactUs[0]?.url"
         block
         size="large"
       >

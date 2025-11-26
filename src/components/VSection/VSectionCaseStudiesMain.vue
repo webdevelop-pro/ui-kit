@@ -44,23 +44,8 @@ const nextUrl = computed(() =>
       <div class="is--flex-row">
         <div class="case-studies-main__side is--gt-tablet-show is--width-30">
           <div class="is--side-block is--sticky">
-            <div v-if="slug === 'secondary-market-for-alternative-assets'">
-              <h3>
-                Table of contents
-              </h3>
-              <ol class="is--margin-top-20">
-                <li><a href="#smooth-transaction-settlement-and-clearing">Smooth Transaction Settlement</a></li>
-                <li><a href="#user-experience-and-accessibility">User Experience and Accessibility</a></li>
-                <li><a href="#cybersecurity-requirements">Cybersecurity Requirements</a></li>
-                <li><a href="#real-time-monitoring-and-reporting">Real-Time Monitoring and Reporting</a></li>
-                <li><a href="#data-protection-requirements">Data Protection Requirements</a></li>
-                <li><a href="#valuation-and-price-discovery">Valuation and Price Discovery</a></li>
-                <li><a href="#liquidity-and-market-efficiency">Liquidity and Market Efficiency</a></li>
-                <li><a href="#platform-scalability-and-performance">Platform Scalability and Performance</a></li>
-                <li><a href="#regulatory-compliance">Regulatory Compliance</a></li>
-                <li><h5><a href="#how-we-can-help">How we can help</a></h5></li>
-              </ol>
-            </div>
+            <slot name="sidebar" />
+           
             <h3>
               {{ sideTitle }}
             </h3>

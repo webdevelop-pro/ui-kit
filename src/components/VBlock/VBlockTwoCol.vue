@@ -10,19 +10,29 @@ import { computed } from 'vue';
 export interface VSectionTopProductsConfig {
   classImage?: string;
   image?: string;
+  imageMobile?: string;
   leftColWidth?: string;
 }
 const props = withDefaults(defineProps<VTextBlockConfig & VSectionTopProductsConfig>(), {
   classImage: '',
   image: '',
+  imageMobile: '',
   leftColWidth: '508',
   buttons: () => [],
 });
 
 const textBlockProps = computed(() => {
-  const { classImage, image, leftColWidth, ...delegated  } = props;
+  const { classImage, image, imageMobile, leftColWidth, ...delegated  } = props;
 
   return delegated;
+});
+
+const showImage = computed(() => {
+  return props.image || props.imageMobile;
+});
+
+const hasMobileImage = computed(() => {
+  return !!props.imageMobile;
 });
 </script>
 
@@ -37,10 +47,20 @@ const textBlockProps = computed(() => {
       <div
         class="v-block-two-col__image"
       >
+        <!-- Desktop image - shown on desktop, or on both if no mobile image -->
         <VImage
+          v-if="showImage && image"
           :src="image"
           alt="Products top visual"
-          :class="classImage"
+          :class="[classImage, hasMobileImage ? 'v-block-two-col__image-desktop' : 'v-block-two-col__image-both']"
+          fetchpriority="high"
+        />
+        <!-- Mobile image - only shown if provided -->
+        <VImage
+          v-if="showImage && imageMobile"
+          :src="imageMobile"
+          alt="Products top visual"
+          :class="[classImage, 'v-block-two-col__image-mobile']"
           fetchpriority="high"
         />
       </div>
@@ -93,6 +113,26 @@ const textBlockProps = computed(() => {
       width: 100%;
       height: auto;
     }
+  }
+
+  &__image-desktop {
+    display: none;
+
+    @media screen and (width >= $tablet) {
+      display: block;
+    }
+  }
+
+  &__image-mobile {
+    display: block;
+
+    @media screen and (width >= $tablet) {
+      display: none;
+    }
+  }
+
+  &__image-both {
+    display: block;
   }
 }
 </style>

@@ -142,7 +142,12 @@ const onSubmit = async () => {
   });
 
   toast(TOAST_OPTIONS);
-  Object.assign(model, {} as FormModelContactUs);
+  Object.assign(model, {
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  } as FormModelContactUs);
   emit('close');
 };
 </script>
