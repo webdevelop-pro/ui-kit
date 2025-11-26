@@ -177,6 +177,13 @@ const emit = defineEmits(['click']);
       gap: 40px;
     }
   }
+
+  .signs-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+  }
 }
 
 .v-section-top-video-unauthenticated {
@@ -191,12 +198,6 @@ const emit = defineEmits(['click']);
     @include media-lte(desktop) {
       min-height: 730px;
     }
-  }
-
-  .signs-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
   }
 
   .is--margin-bottom-120 {
