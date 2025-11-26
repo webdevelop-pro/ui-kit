@@ -148,7 +148,10 @@ const onSubmit = async () => {
 </script>
 
 <template>
-  <div class="contact-us-form__wrap is--bg-image">
+  <div
+    class="contact-us-form__wrap"
+    :class="{'is--bg-image': !isInDialog}"
+  >
     <form
       class="VFormContactUs contact-us-form"
       :class="{ 'is--in-dialog': isInDialog }"

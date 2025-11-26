@@ -166,6 +166,7 @@ const emit = defineEmits(['click']);
     @media screen and (width > $desktop) {
       max-height: min(calc(100vh - 140px), 750px);
     }
+
     @media screen and (width < $tablet) {
       margin-bottom: -70px;
     }
