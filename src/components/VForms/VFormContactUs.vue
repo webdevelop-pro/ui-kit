@@ -47,12 +47,12 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  SELECT_SUBJECT: {
+  selectSubject: {
     type: Array,
   },
 });
 
-const selectSubjectOptions = computed(() => props.SELECT_SUBJECT || SELECT_SUBJECT);
+const selectSubjectOptions = computed(() => props.selectSubject || SELECT_SUBJECT);
 
 const emit = defineEmits(['close']);
 

@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
-import bg from '/images/assist-bg.png';
 import { PropType } from 'vue';
 import { howWeCanAssist } from 'UiKit/components/VAds/howWeCanAssist';
 import ArrowRight from 'UiKit/assets/images/arrow-right.svg';
-import VSection from 'UiKit/components/VSection/VSection.vue';
 import VHighlightBase from './VHighlightBase.vue';
 import VSvgIcon from 'UiKit/components/Base/VSvgIcon/VSvgIcon.vue';
 

@@ -174,6 +174,7 @@ const parseEventData = (data: unknown) => {
     }
     try {
       return JSON.parse(data);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       return null;
     }
