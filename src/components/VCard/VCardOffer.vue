@@ -59,6 +59,11 @@ const infoItems = computed((): InfoItem[] => {
         || props.offer?.isSecurityTypeConvertibleNote)),
     },
     {
+      label: 'Dividend Rate:',
+      value: props.offer?.dividendRateFormatted,
+      show: !!(props.offer?.dividendRateFormatted),
+    },
+    {
       label: 'Voting Rights:',
       value: props.offer?.votingRightsFormatted,
       show: !!(props.offer?.votingRightsFormatted
