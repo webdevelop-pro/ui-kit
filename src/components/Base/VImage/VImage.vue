@@ -2,7 +2,7 @@
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
 import defaulImage from 'UiKit/assets/images/default.svg?url';
 import { useImage } from '@vueuse/core';
-import { computed, watch } from 'vue';
+import { computed, watch, ref } from 'vue';
 
 const props = withDefaults(defineProps<{
   src: string | undefined;
@@ -20,6 +20,15 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits(['loading:src']);
 
+const hasError = ref(false);
+const currentSrc = computed(() => {
+  if (hasError.value || !props.src) {
+    return defaulImage;
+  }
+  return props.src;
+});
+
+// Use original src for loading detection, but display currentSrc (which may be fallback)
 const { isLoading } = useImage({ src: props.src || '' });
 
 const isLoadingLocal = computed(() => props.isLoading || isLoading.value);
@@ -27,6 +36,18 @@ const isLoadingLocal = computed(() => props.isLoading || isLoading.value);
 watch(() => isLoadingLocal.value, () => {
   emit('loading:src', isLoadingLocal.value);
 }, { immediate: true });
+
+watch(() => props.src, () => {
+  hasError.value = false;
+});
+
+const handleImageError = () => {
+  // Only set error if we're not already showing the default image
+  // This prevents infinite error loops if the default image itself fails
+  if (!hasError.value && props.src) {
+    hasError.value = true;
+  }
+};
 </script>
 
 <template>
@@ -50,12 +71,13 @@ watch(() => isLoadingLocal.value, () => {
         v-show="!isLoadingLocal"
         v-bind="$attrs"
         :key="src"
-        :src="src || defaulImage"
+        :src="currentSrc"
         :alt="alt"
         :loading="loading"
         :fetchpriority="fetchpriority"
         class="v-image__image"
-        :class="[`is--${fit}`, { 'is--default-image': !src }]"
+        :class="[`is--${fit}`, { 'is--default-image': hasError || !src }]"
+        @error="handleImageError"
       >
     </component>
   </div>
@@ -84,6 +106,9 @@ watch(() => isLoadingLocal.value, () => {
     height: 100%;
     width: 100%;
     min-height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__image {
@@ -111,10 +136,10 @@ watch(() => isLoadingLocal.value, () => {
   .is--default-image {
     max-height: 45%;
     width: auto;
-    left: 50%;
-    top: 50%;
+    // left: 50%;
+    // top: 50%;
     position: relative;
-    transform: translate(-50%, -50%);
+    // transform: translate(-50%, -50%);
   }
 }
 </style>
