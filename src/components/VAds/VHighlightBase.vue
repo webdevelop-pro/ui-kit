@@ -68,14 +68,14 @@ withDefaults(defineProps<{
     }
 
     &::before {
-      background-image: url('UiKit/assets/images/backgrounds/cell-bottom-left.svg');
+      background-image: url('UiKit/assets/images/backgrounds/cell-bottom-left.webp');
       background-position: left bottom;
       bottom: 0;
       left: 0;
     }
 
     &::after {
-      background-image: url('UiKit/assets/images/backgrounds/cell-top-right.svg');
+      background-image: url('UiKit/assets/images/backgrounds/cell-top-right.webp');
       background-position: right top;
       top: 0;
       right: 0;
