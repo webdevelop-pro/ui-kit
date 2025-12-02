@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { computed, type PropType } from 'vue';
 import userIcon from 'UiKit/assets/images/user.svg';
 import { navigateWithQueryParams } from 'UiKit/helpers/general';
 
-defineProps({
+const props = defineProps({
   urlProfile: {
-    type: String,
+    type: [String, Function] as PropType<string | (() => string)>,
+    default: '',
   },
   userLoggedIn: {
     type: Boolean,
@@ -12,14 +14,33 @@ defineProps({
   },
 });
 
+const profileHref = computed(() => {
+  if (typeof props.urlProfile === 'function') {
+    try {
+      return props.urlProfile();
+    } catch (error) {
+      console.error('[VMenuProfileLink] Failed to resolve urlProfile()', error);
+      return '';
+    }
+  }
+  return props.urlProfile ?? '';
+});
+
+function handleClick() {
+  if (!profileHref.value) {
+    return;
+  }
+  navigateWithQueryParams(profileHref.value);
+}
+
 </script>
 
 <template>
   <component
     :is="userIcon"
-    v-if="userLoggedIn"
+    v-if="userLoggedIn && profileHref"
     class="VMenuProfileLink v-menu-profile"
-    @click="navigateWithQueryParams(urlProfile);"
+    @click="handleClick"
   />
 </template>
 
