@@ -46,6 +46,10 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  showMobileSidebar: {
+    type: Boolean,
+    default: true,
+  }
 });
 
 const emit = defineEmits(['click']);
@@ -83,7 +87,10 @@ watchPostEffect(() => {
         />
 
         <ClientOnly>
-          <div class="is--gt-desktop-md-show v-header__data">
+          <div
+            class="v-header__data"
+            :class="{ 'is--gt-desktop-md-show': showMobileSidebar}"
+          >
             <slot />
           </div>
 
@@ -95,10 +102,10 @@ watchPostEffect(() => {
           />
 
           <VHeaderMobile
-            v-if="!isMobilePWA && !isDesktopMD"
+            v-if="!isMobilePWA && !isDesktopMD && showMobileSidebar"
             v-model="isMobileSidebarOpen"
             :menu="menu"
-            class="is--lt-desktop-md-show"
+            :class="{ 'is--gt-desktop-md-hide': showMobileSidebar }"
           >
             <slot name="mobile" />
           </VHeaderMobile>
