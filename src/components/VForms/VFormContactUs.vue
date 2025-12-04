@@ -28,6 +28,10 @@ const SELECT_SUBJECT = [
     label: 'I have a question',
   },
   {
+    value: 'Account deactivation',
+    label: 'Account deactivation',
+  },
+  {
     value: 'other',
     label: 'Other',
   },
