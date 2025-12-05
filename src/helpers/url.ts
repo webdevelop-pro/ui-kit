@@ -33,3 +33,13 @@ export function urlSearchParamsToObject(params: URLSearchParams): Record<string,
   });
   return obj;
 }
+
+export function downloadURI(uri: string, name: string) 
+{
+    // Download the file
+    const link = document.createElement("a");
+    link.download = name;
+    link.href = uri;
+    link.rel = 'noopener noreferrer';
+    link.click();
+}
