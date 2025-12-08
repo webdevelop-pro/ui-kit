@@ -15,11 +15,6 @@ const props = defineProps({
   contentClass: String,
   fullHeight: Boolean,
   videoCoverImage: String,
-  userLoggedIn: Boolean,
-  isPwa: Boolean,
-  isMobile: Boolean,
-  urlSignin: String,
-  urlSignup: String,
 });
 
 const emit = defineEmits(['click']);
@@ -28,8 +23,7 @@ const emit = defineEmits(['click']);
 <template>
   <VSection
     class="VSectionTopVideo v-section-top-video "
-    :class="{ 'is--full-height': fullHeight, 
-              'v-section-top-video-unauthenticated' : (!userLoggedIn && isPwa && isMobile) }"
+    :class="{ 'is--full-height': fullHeight }"
     :style="{ '--video-cover': `url(${videoCoverImage})` }"
   >
     <video
@@ -49,28 +43,6 @@ const emit = defineEmits(['click']);
         class="v-section-top-video__content"
         :class="[contentClass]"
       >
-        <div
-          v-if="!userLoggedIn && isPwa && isMobile"
-          class=" is--margin-bottom-120 signs-buttons"
-        >
-          <VButton
-            as="a"
-            :href="encodeURI(urlSignin)"
-            size="large"
-            
-            @click="emit('click')"
-          >
-            Log In
-          </VButton>
-          <VButton
-            as="a"
-            :href="encodeURI(urlSignup)"
-            size="large"
-            @click="emit('click')"
-          >
-            Sign Up
-          </VButton>
-        </div>
         <h5>
           {{ text }}
         </h5>
@@ -119,7 +91,7 @@ const emit = defineEmits(['click']);
 
     @include media-lte(desktop) {
       min-height: 730px;
-      padding-top: 100px;
+      padding-top: 0;
     }
   }
 
@@ -178,30 +150,5 @@ const emit = defineEmits(['click']);
     }
   }
 
-  .signs-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    width: 100%;
-  }
-}
-
-.v-section-top-video-unauthenticated {
-  align-items: flex-start;
-  padding: 70px 0;
-
-  &.is--full-height {
-    padding: 150px 0;
-    min-height: 600px;
-    height: 100vh;
-
-    @include media-lte(desktop) {
-      min-height: 730px;
-    }
-  }
-
-  .is--margin-bottom-120 {
-    margin-bottom:120px!important;
-  }
 }
 </style>

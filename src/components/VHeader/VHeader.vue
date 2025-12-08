@@ -94,6 +94,13 @@ watchPostEffect(() => {
             <slot />
           </div>
 
+          <div
+            v-if="isMobilePWA && $slots.pwa"
+            class="v-header__data v-header__data--pwa"
+          >
+            <slot name="pwa" />
+          </div>
+
 
           <VMenuProfileLink 
             v-if="isMobilePWA && showProfileLink" 
@@ -167,6 +174,10 @@ watchPostEffect(() => {
     display: flex;
     align-items: center;
     gap: 12px;
+  }
+
+  &__data--pwa {
+    gap: 8px;
   }
 }
 </style>
