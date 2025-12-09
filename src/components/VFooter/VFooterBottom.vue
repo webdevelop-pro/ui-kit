@@ -15,12 +15,15 @@ defineProps({
 
 <template>
   <div class="VFooterBottom v-footer-bottom">
-    <p class="is--container is--small">
+    <p class="is--container is--small v-footer-bottom__container">
       <template
         v-for="(item, index) in items"
         :key="index"
       >
-        <a :href="item.href">{{ item.text }}</a> |
+        <a :href="item.href">{{ item.text }}</a>
+        <span>
+          |
+        </span>
       </template>
       © {{ currentYear }} Pro Webdevelop, LLC.
     </p>
@@ -38,6 +41,13 @@ defineProps({
 
     p {
       color: $gray-50;
+    }
+
+    &__container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
     }
 }
 </style>

@@ -1,12 +1,14 @@
 import { IFrontmatter } from 'UiKit/types/types';
 
 export function formatMenu(data: IFrontmatter[], path?: string) {
-  return data.map((item: IFrontmatter) => ({
-    href: item.url,
-    text: item.title,
-    frontmatter: item,
-    active: path ? item.url === path : false,
-  }));
+  return data
+    .filter((item: IFrontmatter & { footerNav?: boolean }) => item.footerNav !== false)
+    .map((item: IFrontmatter) => ({
+      href: item.url,
+      text: item.title,
+      frontmatter: item,
+      active: path ? item.url === path : false,
+    }));
 }
 
 type MenuItem = { frontmatter: IFrontmatter; href: string; text: string; active?: boolean };

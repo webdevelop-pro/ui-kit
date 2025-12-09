@@ -7,6 +7,10 @@ const props = defineProps({
   disabled: Boolean,
   href: String,
   routeName: String,
+  showDesktop: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const componentName = computed(() => {
@@ -28,10 +32,12 @@ const componentName = computed(() => {
     <component
       :is="logoIcon"
       class="v-logo__desktop"
+      :class="{ 'is--show-desktop': showDesktop }"
     />
     <component
       :is="logoMobIcon"
       class="v-logo__mobile"
+      :class="{ 'is--show-desktop': showDesktop }"
     />
   </component>
 </template>
@@ -39,6 +45,7 @@ const componentName = computed(() => {
 <style lang="scss">
 .v-logo {
   flex-shrink: 0;
+  color: inherit;
 
   &.is--link {
     cursor: pointer;
@@ -49,14 +56,20 @@ const componentName = computed(() => {
     max-width: 111px;
     height: 37px;
 
-    @media screen and (width <= 1024px) {
-      display: none;
+    &:not(.is--show-desktop) {
+      @media screen and (width <= 1024px) {
+        display: none;
+      }
     }
   }
 
   &__mobile {
     width: 47px;
     height: auto;
+
+    &.is--show-desktop {
+      display: none;
+    }
 
     @media screen and (width >= 1024px) {
       display: none;

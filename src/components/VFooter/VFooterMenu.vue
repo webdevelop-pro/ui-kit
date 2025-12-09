@@ -6,6 +6,7 @@ export type MenuItem = {
   href?: string;
   active?: boolean;
   text: string;
+  target?: string;
   children?: MenuItem[];
 }
 
@@ -27,7 +28,7 @@ const getComponentName = (item: MenuItem) => {
 };
 const getComponentClass = (item: MenuItem) => {
   if (item.to || item.href) return 'v-footer-menu__item  is--h6__title';
-  return 'v-footer-menu__item-not-link is--h5__title';
+  return 'v-footer-menu__item-not-link is--small-2';
 };
 </script>
 
@@ -50,6 +51,7 @@ const getComponentClass = (item: MenuItem) => {
           :is="getComponentName(menuItem)"
           :href="menuItem.href"
           :to="menuItem.to"
+          :target="menuItem.target ? menuItem.target : '_self'"
           :class="[getComponentClass(menuItem), { 'is--active': menuItem.active }]"
           @click="emit('click')"
         >
@@ -68,6 +70,7 @@ const getComponentClass = (item: MenuItem) => {
               :is="getComponentName(childItem)"
               :href="childItem.href"
               :to="childItem.to"
+              :target="childItem.target ? childItem.target : '_self'"
               :class="[getComponentClass(childItem), { 'is--active': childItem.active }]"
               @click="emit('click')"
             >
@@ -96,6 +99,7 @@ const getComponentClass = (item: MenuItem) => {
 
   &__item-not-link {
     color: $gray-60;
+    text-transform: uppercase;
   }
 
   &__item {

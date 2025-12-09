@@ -12,6 +12,7 @@ import { useHubspotForm } from 'UiKit/composables/useHubspotForm';
 import { emailRule, errorMessageRule, firstNameRule } from 'UiKit/helpers/validation/rules';
 import { JSONSchemaType } from 'ajv/dist/types/json-schema';
 import { useToast } from 'UiKit/components/Base/VToast/use-toast';
+import { useSyncWithUrl } from 'UiKit/composables/useSyncWithUrl';
 
 
 const SELECT_SUBJECT = [
@@ -111,6 +112,37 @@ const {
   fieldsPaths
 );
 
+// Sync form fields with URL query parameters
+const syncFieldWithUrl = <K extends keyof FormModelContactUs>(key: K) => {
+  const urlValue = useSyncWithUrl({
+    key,
+    defaultValue: '',
+  });
+
+  // Sync URL → Model
+  watch(urlValue, (newVal) => {
+    if (newVal && model[key] !== newVal) {
+      model[key] = newVal as FormModelContactUs[K];
+    }
+  }, { immediate: true });
+
+  // Sync Model → URL
+  watch(() => model[key], (newVal) => {
+    if (urlValue.value !== newVal) {
+      urlValue.value = newVal;
+    }
+  });
+
+  return urlValue;
+};
+
+const [nameFromUrl, emailFromUrl, subjectFromUrl, messageFromUrl] = [
+  syncFieldWithUrl('name'),
+  syncFieldWithUrl('email'),
+  syncFieldWithUrl('subject'),
+  syncFieldWithUrl('message'),
+];
+
 const isDisabledButton = computed(() => (!isValid.value));
 
 watch(() => [props.userSessionTraits?.first_name, props.userSessionTraits?.last_name], () => {
@@ -152,6 +184,10 @@ const onSubmit = async () => {
     subject: '',
     message: '',
   } as FormModelContactUs);
+  // Clear URL parameters when form is reset
+  [nameFromUrl, emailFromUrl, subjectFromUrl, messageFromUrl].forEach((ref) => {
+    ref.value = '';
+  });
   emit('close');
 };
 </script>
