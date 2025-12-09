@@ -296,6 +296,8 @@ const onSubmit = async () => {
         </VButton>
       </div>
 
+      <slot />
+
       <div class="contact-us-form__info">
         <div>
           +1 609 733 7724
