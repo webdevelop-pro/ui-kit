@@ -49,6 +49,7 @@ const getComponentClass = (item: MenuItem) => {
       >
         <component
           :is="getComponentName(menuItem)"
+          v-if="menuItem.text"
           :href="menuItem.href"
           :to="menuItem.to"
           :target="menuItem.target ? menuItem.target : '_self'"
@@ -134,7 +135,13 @@ const getComponentClass = (item: MenuItem) => {
     // }
 
     #{$root}__item {
+      &:not(:first-child) {
       padding: 8px 0;
+      }
+  
+      &:first-child {
+        margin-bottom: 8px;
+      }
     }
   }
 
