@@ -23,12 +23,9 @@ q {
     flex-direction: column; 
     color: $black-2;
 
-    p{
-        margin: 0;
-    }
-
     p {
         font-style: italic;
+        margin: 0;
 
         & + * {
             margin-top: 0;
@@ -45,17 +42,14 @@ q {
     &::before{
         content: "";
         position: absolute;
+        left: 40px;
+        top: 40px;
         width: 32px;
         height: 22.6px;
         z-index: 0;
         border: none;
         background-image: url("UiKit/assets/images/sign-left.svg");
         background-size: cover;
-    }
-
-    &::before{
-        left: 40px;
-        top: 40px;
     }
 
     *{
