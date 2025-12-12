@@ -91,7 +91,7 @@ const emit = defineEmits(['click']);
 
     @include media-lte(desktop) {
       min-height: 730px;
-      padding-top: 0;
+      padding-top: 160px;
     }
   }
 

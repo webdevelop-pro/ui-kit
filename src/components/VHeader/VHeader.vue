@@ -75,6 +75,7 @@ watchPostEffect(() => {
     <div class="is--container v-header__container">
       <VLogo
         :href="logoHref"
+        :show-desktop="false"
         class="v-header__logo"
       />
 

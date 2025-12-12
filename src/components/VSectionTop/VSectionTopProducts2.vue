@@ -91,6 +91,7 @@ const hasMobileImage = computed(() => {
     @media screen and (width < $desktop) {
       flex-direction: column;
       align-items: flex-start;
+      padding-top: 25px;
     }
   }
 
