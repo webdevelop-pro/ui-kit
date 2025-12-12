@@ -28,7 +28,7 @@ defineProps({
     <p
       v-if="data.text"
       v-dompurify-html="data.text"
-      class="is--small"
+      class="is--small is--margin-top-4"
     />
   </div>
 </template>

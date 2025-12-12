@@ -22,13 +22,22 @@ p{
         margin-top: 20px;
     }
 
+    h4 + p,
+    .is--h4__title + p{
+        margin-top: 12px;
+    }
+
     .is--subheading-1 + p{
-        margin-top: 28px;
+        margin-top: 32px;
+    }
+
+    .is--subheading-2 + p{
+        margin-top: 24px;
     }
 
     ul + p,
     ol + p{
-        margin-top: 20px;
+        margin-top: 16px;
     }
 }
 
@@ -46,11 +55,21 @@ h3 + p.with-default-distance,
         margin-top: 20px;
     }
 
+h4 + p.with-default-distance,
+.is--h4__title + p.with-default-distance{
+        margin-top: 12px;
+    }
+
 .is--subheading-1 + p.with-default-distance{
-        margin-top: 28px;
+        margin-top: 32px;
+    }
+
+
+.is--subheading-2 + p.with-default-distance{
+        margin-top: 24px;
     }
 
 ul + p.with-default-distance,
 ol + p.with-default-distance{
-        margin-top: 20px;
+        margin-top: 16px;
     }

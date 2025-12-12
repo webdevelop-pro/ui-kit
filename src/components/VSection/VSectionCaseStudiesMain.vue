@@ -42,7 +42,7 @@ const nextUrl = computed(() =>
   <section class="VSectionCaseStudiesMain case-studies-main">
     <div class="is--container">
       <div class="is--flex-row">
-        <div class="case-studies-main__side is--gt-tablet-show is--width-30">
+        <div class="case-studies-main__side is--gt-tablet-show is--width-27">
           <div class="is--side-block is--sticky">
             <slot name="sidebar" />
            
@@ -50,7 +50,8 @@ const nextUrl = computed(() =>
               {{ sideTitle }}
             </h3>
             <div
-              class=" is--side-block__content"
+              v-if="sideSubtitle || sideText"
+              class="is--side-block__content"
             >
               <p class="is--color-primary is--h1__title">
                 {{ sideSubtitle }}
@@ -72,18 +73,18 @@ const nextUrl = computed(() =>
             <WhatOurClientsSaySidebar
               v-if="testimonials"
               :slider="testimonials"
-              class="is--margin-top-50"
+              class="is--margin-top-40"
             />
           </div>
         </div>
-        <div class="case-studies-main__main is--width-70 with-default-distance">
+        <div class="case-studies-main__main is--width-73 with-default-distance">
           <slot />
 
           <CaseStudiesNavigation
             v-if="prevUrl || nextUrl"
             :prev="prevUrl"
             :next="nextUrl"
-            class="is--margin-top-60 is--width-100"
+            class="is--margin-top-40 is--width-100"
           />
         </div>
       </div>

@@ -50,10 +50,9 @@ const handleButtonClick = (index: number, button: VTextButtonConfig) => {
       <slot name="subtitle2">
         <div
           v-if="subtitle2"
+          v-dompurify-html="subtitle2"
           class="is--subheading-2"
-        >
-          {{ subtitle2 }}
-        </div>
+        />
       </slot>
       <slot name="text">
         <p

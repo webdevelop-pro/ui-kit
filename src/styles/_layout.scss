@@ -40,3 +40,19 @@
     width: 100%;
   }
 }
+
+.is--width-27{
+  width: 27%;
+
+  @media screen and (max-width: $tablet){
+    width: 100%;
+  }
+}
+
+.is--width-73{
+  width: 73%;
+
+  @media screen and (max-width: $tablet){
+    width: 100%;
+  }
+}

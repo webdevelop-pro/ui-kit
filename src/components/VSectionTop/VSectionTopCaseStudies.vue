@@ -43,8 +43,9 @@ const highlight = computed(() => [
         <VBadgeClickToBlogInline
           v-if="data.tags"
           :data="data.tags"
+          class="is--margin-top-15"
         />
-        <div class="is--gt-tablet-show is--margin-top-40">
+        <div class="is--gt-tablet-show is--margin-top-50">
           <VHighlightInfo
             v-for="(item, index) in highlight"
             :key="index"

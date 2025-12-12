@@ -165,19 +165,35 @@ h6 {
 
 // SPACINGS
 .with-default-distance {
-  h1:not(:first-child),
-  h2:not(:first-child),
-  h3:not(:first-child),
-  h4:not(:first-child),
-  h5:not(:first-child),
-  h6:not(:first-child),
-  .is--h1__title:not(:first-child),
-  .is--h2__title:not(:first-child),
-  .is--h3__title:not(:first-child),
-  .is--h4__title:not(:first-child),
-  .is--h5__title:not(:first-child),
-  .is--h6__title:not(:first-child) {
+  // h1:not(:first-child),
+  // h2:not(:first-child),
+  // h3:not(:first-child),
+  // h4:not(:first-child),
+  // h5:not(:first-child),
+  // h6:not(:first-child),
+  // .is--h1__title:not(:first-child),
+  // .is--h2__title:not(:first-child),
+  // .is--h3__title:not(:first-child),
+  // .is--h4__title:not(:first-child),
+  // .is--h5__title:not(:first-child),
+  // .is--h6__title:not(:first-child) {
+  //   margin-top: 40px;
+  // }
+
+  *:not(hr) + h2:not(:first-child),
+  *:not(hr) + .is--h2__title:not(:first-child) {
     margin-top: 40px;
+  }
+
+
+  * + h3,
+  * + .is--h3__title {
+    margin-top: 24px;
+  }
+
+  * + h4,
+  * + .is--h4__title {
+    margin-top: 22px;
   }
 
 
@@ -186,12 +202,12 @@ h6 {
     margin-top: 12px;
   }
 
-  h2 + *,
-  .is--h2__title + *,
-  h3 + *,
-  .is--h3__title + * {
-    margin-top: 8px;
-  }
+  // h2 + *,
+  // .is--h2__title + *,
+  // h3 + *,
+  // .is--h3__title + * {
+  //   margin-top: 8px;
+  // }
 
   h4 + *,
   .is--h4__title + *,

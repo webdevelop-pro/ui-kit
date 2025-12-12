@@ -5,13 +5,13 @@
 
 ol {
     list-style: decimal;
-    padding-left: 25px;
+    padding-left: 23px;
     color: $gray-80;
 }
 
 ul {
     list-style: disc;
-    padding-left: 25px;
+    padding-left: 23px;
     color: $gray-80;
 }
 
@@ -33,12 +33,14 @@ li {
     }
 
     ul,
-    ol{
-        margin-top: 25px;
+    ol,
+    ul + *,
+    ol + *{
+        margin-top: 15px;
     }
 
     li + li{
-        margin-top: 16px;
+        margin-top: 7px;
     }
 
     .is--container li + li{
@@ -63,7 +65,7 @@ ol.with-default-distance{
 }
 
 li.with-default-distance + li.with-default-distance{
-    margin-top: 16px;;
+    margin-top: 7px;
 }
 
 .is--container li.with-default-distance + li.with-default-distance{
