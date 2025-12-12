@@ -121,6 +121,7 @@ const textBlockProps = computed(() => {
     box-shadow: 0 8.818px 10.287px -5.878px rgb(18 22 31 / 5%), 0 14.696px 47.028px 5.878px rgb(18 22 31 / 10%);
     position: relative;
     z-index: 1;
+    aspect-ratio: 570/320;
 
     @include media-lte(tablet) {
       width: 100%;
@@ -128,12 +129,18 @@ const textBlockProps = computed(() => {
     }
   }
 
-  &__img-icon {
+  &__img-icon.v-image {
     border-radius: 4.853px;
     border: 0.607px solid $gray-20;
     margin-top: 0 !important;
     height: 100%;
     width: auto;
+  }
+
+  .v-image__image {
+    width: auto;
+    height: auto;
+    align-self: baseline;
   }
 
   &.is--no-image {
