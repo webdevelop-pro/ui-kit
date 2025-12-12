@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import { defineAsyncComponent, hydrateOnVisible, PropType, ref } from 'vue';
-import { useHubspotForm } from 'UiKit/composables/useHubspotForm';
-import { env } from '@/config/env';
+import { defineAsyncComponent, hydrateOnVisible, PropType } from 'vue';
 import { useData } from 'vitepress';
 import { socials } from 'UiKit/utils/socials';
-import { useToast } from '../Base/VToast/use-toast';
 import { MenuItem } from './VFooterMenu.vue';
 import VLogo from 'UiKit/components/VLogo.vue';
 
@@ -42,24 +39,6 @@ const SOCIAL_LIST = [
   socials?.facebook, socials?.instagram,
   socials?.linkedin, socials?.github,
 ];
-
-const { toast } = useToast();
-
-const TOAST_OPTIONS = {
-  title: 'Submitted!',
-  variant: 'error',
-};
-
-const loadingSubmitting = ref(false);
-const onSubmit = async (emailLocal: string) => {
-  loadingSubmitting.value = true;
-  const { submitFormToHubspot } = useHubspotForm(env.HUBSPOT_FORM_ID_RECEIVE_LATEST_NEWS);
-  await submitFormToHubspot({
-    email: emailLocal,
-  });
-  loadingSubmitting.value = false;
-  toast(TOAST_OPTIONS);
-};
 </script>
 
 <template>
