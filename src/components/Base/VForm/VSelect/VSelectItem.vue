@@ -45,7 +45,10 @@ const forwardedProps = useForwardProps(delegatedProps);
 
 .v-select-item[data-disabled] {
   pointer-events: none;
-  opacity: 0.3;
+
+  &:not(.is--disabled-slot) {
+    opacity: 0.3;
+  }
 }
 
 .v-select-item[data-highlighted] {

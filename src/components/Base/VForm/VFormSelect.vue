@@ -83,6 +83,7 @@ watch(() => [props.options?.length, modelValue.value], () => {
           :key="item[itemValue] + index"
           :value="item[itemValue]"
           :disabled="item.disabled"
+          :class="{ 'is--disabled-slot': item.disabled && $slots.item }"
         >
           <slot
             name="item"
@@ -142,9 +143,13 @@ watch(() => [props.options?.length, modelValue.value], () => {
     }
   }
 
-  &.is--disabled{
-    opacity: 0.3;
+  &.is--disabled,
+  .is--disabled {
     pointer-events: none;
+
+    &:not(.is--disabled-slot) {
+      opacity: 0.3;
+    }
   }
 
   &.is--readonly{
