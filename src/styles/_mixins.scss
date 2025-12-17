@@ -13,7 +13,10 @@
 }
 
 @function isImportant($important){
-  @return #{if($important, '!important', '')};
+  @if $important {
+    @return '!important';
+  }
+  @return '';
 }
 
 
