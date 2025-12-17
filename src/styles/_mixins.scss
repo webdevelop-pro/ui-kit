@@ -16,6 +16,7 @@
   @if $important {
     @return '!important';
   }
+
   @return '';
 }
 
