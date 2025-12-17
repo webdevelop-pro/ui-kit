@@ -15,15 +15,24 @@ interface IStepper {
     description: string;
 }
 
-defineProps({
+const props = defineProps({
   steps: Array as PropType<IStepper[]>,
   defaultValue: {
     type: Number,
     default: 1,
   },
+  maxAvailableStep: {
+    type: Number,
+    default: undefined,
+  },
 });
 
 const stepIndex = defineModel<number>();
+
+const generateStepState = (step: number) => {
+  if (props.maxAvailableStep && (step < props.maxAvailableStep) && (step !== stepIndex.value)) return true;
+  return false;
+};
 </script>
 
 <template>
@@ -31,13 +40,15 @@ const stepIndex = defineModel<number>();
     v-model="stepIndex"
     :default-value="defaultValue"
     :orientation="isTablet ? 'horizontal' : 'vertical'"
+    :linear="false"
     class="VStepper v-stepper"
   >
     <VStepperItem
       v-for="step in steps"
       :key="step.step"
       :step="step.step"
-      :disabled="step.step >= stepIndex"
+      :disabled="step.step > (maxAvailableStep ?? stepIndex)"
+      :completed="generateStepState(step.step)"
       class="v-stepper__item"
     >
       <VStepperSeparator
