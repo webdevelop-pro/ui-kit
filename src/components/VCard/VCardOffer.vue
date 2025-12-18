@@ -42,9 +42,17 @@ const infoItems = computed((): InfoItem[] => {
       show: true,
     },
     {
-      label: props.offer?.valuationLabel,
-      value: props.offer?.valuationFormatted,
-      show: true,
+      label: 'Funding Goal:',
+      value: props.offer?.targetRaiseFormatted,
+      show: !!(props.offer?.targetRaiseFormatted
+        && (props.offer?.isSecurityTypeDebt || props.offer?.isSecurityTypeConvertibleDebt
+        || props.offer?.isSecurityTypeConvertibleNote)),
+    },
+    {
+      label: 'Target Raise:',
+      value: props.offer?.targetRaiseFormatted,
+      show: !!(props.offer?.targetRaiseFormatted
+        && (props.offer?.isSecurityTypeEquity || props.offer?.isSecurityTypePreferredEquity)),
     },
     {
       label: 'Security Type:',
