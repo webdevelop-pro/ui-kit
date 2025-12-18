@@ -83,14 +83,14 @@ watchPostEffect(() => {
         <VHeaderNavigation
           v-if="showNavigation"
           :menu="menu"
-          class="is--gt-desktop-md-show"
+          class="is--gte-desktop-md-show"
           @click="emit('click')"
         />
 
         <ClientOnly>
           <div
             class="v-header__data"
-            :class="{ 'is--gt-desktop-md-show': showMobileSidebar}"
+            :class="{ 'is--gte-desktop-md-show': showMobileSidebar}"
           >
             <slot />
           </div>

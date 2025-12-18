@@ -39,25 +39,31 @@
 
 
 .is--lt-desktop-lg-show{
-    // display: block !important;
-
     @media screen and (min-width: $desktop-lg){
         display: none !important;
     }
 }
     
 .is--gt-desktop-md-show{
-    // display: block !important;
-
     @media screen and (max-width: $desktop-md){
         display: none !important;
     }
 }
 
-.is--lt-desktop-md-show{
-    // display: block !important;
+.is--gte-desktop-md-show{
+    @media screen and (width < $desktop-md){
+        display: none !important;
+    }
+}
 
+.is--lt-desktop-md-show{
     @media screen and (min-width: $desktop-md){
+        display: none !important;
+    }
+}
+
+.is--lte-desktop-md-show{
+    @media screen and (width >= $desktop-md){
         display: none !important;
     }
 }

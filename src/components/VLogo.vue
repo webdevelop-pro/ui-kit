@@ -71,7 +71,7 @@ const componentName = computed(() => {
       display: none;
     }
 
-    @media screen and (width >= 1024px) {
+    @media screen and (width > 1024px) {
       display: none;
     }
   }
