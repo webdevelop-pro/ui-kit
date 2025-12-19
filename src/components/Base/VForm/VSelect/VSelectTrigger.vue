@@ -105,10 +105,11 @@ const forwardedProps = useForwardProps(delegatedProps);
 
 .v-select-trigger[data-placeholder] {
   opacity: 1;
-      color: colors.$gray-60;
-      font-size: inherit;
-      font-weight: inherit;
-      font-family: inherit;
-      line-height: inherit;
+  color: colors.$gray-60;
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  text-align: inherit;
 }
 </style>

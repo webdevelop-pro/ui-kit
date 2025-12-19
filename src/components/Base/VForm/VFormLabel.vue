@@ -1,7 +1,45 @@
 <script lang="ts" setup>
-defineProps({
+import { onMounted, ref } from 'vue';
+
+const props = defineProps({
   hasAsterisk: Boolean,
   disabled: Boolean,
+});
+
+// We manipulate only the rendered text node inside the label so that
+// the last word and the required asterisk are always kept together
+// (they will wrap to the next line as a pair, never separately).
+const contentEl = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+  // If label is not required or ref is missing – do nothing.
+  if (!props.hasAsterisk || !contentEl.value) return;
+
+  const el = contentEl.value;
+  if (!el) return;
+
+  // Take only plain text content from the slot.
+  const text = el.textContent?.trim() || '';
+  if (!text) return;
+
+  // Find the last space to split "before" and "last word".
+  const lastSpaceIndex = text.lastIndexOf(' ');
+
+  const before = lastSpaceIndex === -1 ? '' : text.slice(0, lastSpaceIndex);
+  const lastWord = lastSpaceIndex === -1 ? text : text.slice(lastSpaceIndex + 1);
+
+  // Clear original content and rebuild: text before + span for last word.
+  el.textContent = '';
+
+  if (before) {
+    el.appendChild(document.createTextNode(before + ' '));
+  }
+
+  const lastWordSpan = document.createElement('span');
+  lastWordSpan.className = 'v-form-label__last-word';
+  lastWordSpan.textContent = lastWord;
+
+  el.appendChild(lastWordSpan);
 });
 </script>
 
@@ -12,15 +50,11 @@ defineProps({
     class="VFormlabel v-form-label"
     :class="{ 'is--disabled': disabled }"
   >
-    <span class="v-form-label__content">
+    <span
+      ref="contentEl"
+      class="v-form-label__content"
+    >
       <slot />
-    
-      <span
-        v-if="hasAsterisk"
-        class="v-form-label__required"
-      >
-        *
-      </span>
     </span>
   </label>
 </template>
@@ -41,15 +75,13 @@ defineProps({
     white-space: normal;
   }
 
-  &__content::after {
-    content: '';
-    display: inline-block;
-    width: 0;
-  }
+  &__last-word {
+    white-space: nowrap;
 
-  &__required {
-    color: colors.$red;
-    margin-left: 0.2em;
+    &::after {
+      content: ' *';
+      color: colors.$red;
+    }
   }
 
   &.is--disabled {
