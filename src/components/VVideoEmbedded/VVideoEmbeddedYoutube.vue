@@ -13,7 +13,7 @@ const readyPromise = new Promise<void>((resolve) => {
   readyResolver = resolve;
 });
 
-const src = computed(() => `https://www.youtube.com/embed/${props.id}?showinfo=0&enablejsapi=1&version=3&playerapiid=ytplayer`);
+const src = computed(() => `https://www.youtube.com/embed/${props.id}?autoplay=1&mute=1&loop=1&enablejsapi=1`);
 
 const play = async () => {
   await readyPromise;
@@ -60,6 +60,7 @@ defineExpose({
     webkitallowfullscreen
     mozallowfullscreen
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
     class="VVideoEmbeddedYoutube"
     @load="onLoad"
   />
