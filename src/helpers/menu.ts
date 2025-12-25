@@ -13,7 +13,7 @@ export function formatMenu(data: IFrontmatter[], path?: string) {
 
 type MenuItem = { frontmatter: IFrontmatter; href: string; text: string; active?: boolean };
 
-export function formatItemsBySubfolder(items: IFrontmatter[], filterByNav = false, path?: string) {
+export function formatItemsBySubfolder(items: IFrontmatter[], filterByNav = false, path?: string, columnOrder?: string[]) {
   const groupedUseCases: Record<string, MenuItem[]> = {};
 
   // Iterate over the use cases and group them by subfolder
@@ -36,13 +36,28 @@ export function formatItemsBySubfolder(items: IFrontmatter[], filterByNav = fals
     });
   });
 
+  // Get all folders that have items
+  const allFolders = Object.keys(groupedUseCases).filter(key => groupedUseCases[key].length > 0);
+
+  // If columnOrder is provided, use it to order columns
+  let orderedFolders: string[];
+  if (columnOrder && columnOrder.length > 0) {
+    // Normalize columnOrder to uppercase for comparison
+    const normalizedOrder = columnOrder.map(f => f.toUpperCase());
+    // Use the provided order, but only include folders that actually exist
+    orderedFolders = normalizedOrder.filter(folder => allFolders.includes(folder));
+    // Add any remaining folders that weren't in the order list
+    const remainingFolders = allFolders.filter(folder => !normalizedOrder.includes(folder));
+    orderedFolders = [...orderedFolders, ...remainingFolders];
+  } else {
+    orderedFolders = allFolders;
+  }
+
   // Format the grouped use cases into the desired structure
-  const formattedArray = Object.entries(groupedUseCases)
-    .filter(([, value]) => value.length > 0) // Skip groups with no items
-    .map(([key, value]) => [
-      { text: key.replace('-', ' ') },
-      ...value,
-    ]);
+  const formattedArray = orderedFolders.map((key) => [
+    { text: key.replace('-', ' ') },
+    ...groupedUseCases[key],
+  ]);
 
   return formattedArray;
 }

@@ -7,6 +7,7 @@ interface IHeaderNavigation {
   text?: string;
   href?: string;
   background?: string;
+  buttonText?: string;
   items?: IHeaderNavigation[];
 }
 
@@ -64,7 +65,7 @@ const backgroundImageLocal = computed(() => (props.data?.background ? `url(${pro
       size="small"
       :aria-label="data?.title"
     >
-      Learn More
+      {{ data.buttonText || 'Learn More' }}
       <component
         :is="arrowIcon"
       />
