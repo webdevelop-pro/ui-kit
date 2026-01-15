@@ -13,7 +13,12 @@ export function formatMenu(data: IFrontmatter[], path?: string) {
 
 type MenuItem = { frontmatter: IFrontmatter; href: string; text: string; active?: boolean };
 
-export function formatItemsBySubfolder(items: IFrontmatter[], filterByNav = false, path?: string, columnOrder?: string[]) {
+export function formatItemsBySubfolder(
+  items: IFrontmatter[],
+  filterByNav = false,
+  path?: string,
+  columnOrder?: string[],
+) {
   const groupedUseCases: Record<string, MenuItem[]> = {};
 
   // Iterate over the use cases and group them by subfolder
