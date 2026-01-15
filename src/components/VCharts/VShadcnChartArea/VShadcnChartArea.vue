@@ -192,6 +192,7 @@ function handleLegendItemClick(d: BulletLegendItemInterface, i: number) {
   &__container {
     width: 100%;
     height: 300px;
+    display: flex !important;
   }
 }
 </style>
