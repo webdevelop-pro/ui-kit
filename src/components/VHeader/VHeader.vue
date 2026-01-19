@@ -8,6 +8,7 @@ import VLogo from 'UiKit/components/VLogo.vue';
 import VHeaderNavigation, { MenuItem } from './VHeaderNavigation.vue';
 import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
 import { storeToRefs } from 'pinia';
+import ClientOnly from 'UiKit/components/ClientOnly.vue';
 
 const { isDesktopMD } = storeToRefs(useBreakpoints());
 
@@ -40,7 +41,7 @@ defineProps({
     default: false,
   },
   urlProfile: {
-    type: String,
+    type: [String, Function] as PropType<string | (() => string)>,
   },
   userLoggedIn: {
     type: Boolean,
@@ -70,14 +71,19 @@ watchPostEffect(() => {
 <template>
   <header
     class="VHeader v-header"
-    :class="{ 'is--fixed': isFixed }"
+    :class="{ 'is--fixed': isFixed, 'is--pwa': isMobilePWA }"
   >
     <div class="is--container v-header__container">
-      <VLogo
-        :href="logoHref"
-        :show-desktop="false"
-        class="v-header__logo"
-      />
+      <div class="v-header__left">
+        <slot name="leading" />
+        <slot name="logo">
+          <VLogo
+            :href="logoHref"
+            :show-desktop="false"
+            class="v-header__logo"
+          />
+        </slot>
+      </div>
 
       <div class="v-header__right ">
         <VHeaderNavigation
@@ -149,6 +155,12 @@ watchPostEffect(() => {
     position: relative;
   }
 
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
   &__logo {
     display: flex;
     align-items: center;
@@ -179,6 +191,29 @@ watchPostEffect(() => {
 
   &__data--pwa {
     gap: 8px;
+  }
+
+  &.is--pwa {
+    @media screen and (width <= 768px) {
+      .v-header__container {
+        position: relative;
+      }
+
+      .v-header__right {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        padding-right: 12px;
+      }
+
+      .v-header__logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-right: 0;
+      }
+    }
   }
 }
 </style>
