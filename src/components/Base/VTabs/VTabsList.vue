@@ -38,7 +38,8 @@ const delegatedProps = computed(() => {
     position: relative;
     gap: 20px;
 
-  &.is--varinat-primary {
+  &.is--varinat-primary,
+  &.is--variant-primary {
     height: 48px;
 
     &::after {

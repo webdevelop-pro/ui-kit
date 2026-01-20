@@ -43,6 +43,8 @@ const delegatedProps = computed(() => {
 
 .v-accordion-chevron {
   width: 18px;
+  height: 18px;
+  flex-shrink: 0;
   color: inherit;
   transition: transform 0.3s ease;
 }
