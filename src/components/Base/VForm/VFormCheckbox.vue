@@ -27,21 +27,6 @@ const delegatedProps = computed(() => {
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 const modelValue = defineModel<boolean>();
-
-const handleClick = () => {
-  if (!props.disabled && !props.readonly) {
-    modelValue.value = !modelValue.value;
-  }
-};
-
-const handleKeydown = (event: KeyboardEvent) => {
-  if (!props.disabled && !props.readonly) {
-    if (event.key === 'Enter' || event.key === ' ') {
-      if (event.key === ' ') event.preventDefault();
-      modelValue.value = !modelValue.value;
-    }
-  }
-};
 </script>
 
 <template>
@@ -52,12 +37,6 @@ const handleKeydown = (event: KeyboardEvent) => {
       'is--disabled': disabled,
       'is--error': isError,
     }]"
-    role="checkbox"
-    :aria-checked="modelValue"
-    :aria-disabled="disabled || readonly"
-    tabindex="0"
-    @click="handleClick"
-    @keydown="handleKeydown"
   >
     <VCheckbox
       v-bind="forwarded"

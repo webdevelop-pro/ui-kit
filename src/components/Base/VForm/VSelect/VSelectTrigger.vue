@@ -44,6 +44,7 @@ const forwardedProps = useForwardProps(delegatedProps);
   justify-content: space-between;
   gap: 8px;
   width: 100%;
+  overflow: hidden;
   font-size: 16px;
   font-family: Avenir;
   font-weight: 400;
@@ -82,8 +83,17 @@ const forwardedProps = useForwardProps(delegatedProps);
     pointer-events: none;
   }
 
+  .v-select-value {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   &__icon {
     width: 14px;
+    flex-shrink: 0;
     color: colors.$gray-70;
     transition: all 0.3s;
     transform-origin: center;

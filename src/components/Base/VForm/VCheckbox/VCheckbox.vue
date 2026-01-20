@@ -1,31 +1,28 @@
 <script lang="ts" setup>
-import { computed } from 'vue';
-import type { CheckboxRootEmits, CheckboxRootProps } from 'radix-vue';
-import { CheckboxIndicator, CheckboxRoot, useForwardPropsEmits } from 'radix-vue';
+import type { CheckboxRootEmits, CheckboxRootProps } from 'reka-ui';
+import { CheckboxIndicator, CheckboxRoot, useForwardPropsEmits } from 'reka-ui';
 import check from 'UiKit/assets/images/check.svg';
+import type { HTMLAttributes } from "vue";
+import { reactiveOmit } from "@vueuse/core";
 
 const props = defineProps<CheckboxRootProps & {
   isError?: boolean;
   readonly?: boolean;
   disabled?: boolean;
-  class?: HTMLAttributes['class'];
+  class?: HTMLAttributes["class"];
 }>();
+const emits = defineEmits<CheckboxRootEmits>()
 
-const emits = defineEmits<CheckboxRootEmits>();
+const delegatedProps = reactiveOmit(props, "class")
 
-const delegatedProps = computed(() => {
-  const { class: unused, ...delegated } = props;
-  void unused; // Explicitly mark as intentionally unused
-
-  return delegated;
-});
-
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
   <CheckboxRoot
+    v-slot="slotProps"
     v-bind="forwarded"
+    data-slot="checkbox"
     :class="[props.class, {
       'is--readonly': readonly,
       'is--disabled': disabled,
@@ -33,8 +30,11 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     }]"
     class="VCheckbox v-checkbox"
   >
-    <CheckboxIndicator class="v-checkbox__indicator">
-      <slot>
+    <CheckboxIndicator
+      data-slot="checkbox-indicator"
+      class="v-checkbox__indicator"
+    >
+      <slot v-bind="slotProps">
         <check
           alt="check icon"
           class="v-checkbox__icon"
@@ -59,6 +59,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     position: relative;
     top: 5px;
     overflow: hidden;
+    cursor: pointer;
 
   &__indicator {
     width: 100%;
