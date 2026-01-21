@@ -11,7 +11,7 @@ export default defineConfig({
   ],
   test: {
     globals: true,
-    environment: 'jsdom',
+    environment: 'node',
     coverage: {
       provider: 'v8',
     },
@@ -19,9 +19,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-       
       UiKit: path.resolve(__dirname, './src'),
-      
     },
   },
 });

@@ -1,7 +1,7 @@
 import { JSONSchemaType } from 'ajv/dist/types/json-schema';
-import cloneDeep from 'lodash/cloneDeep';
-import defaults from 'lodash/defaults';
-import pick from 'lodash/pick';
+import cloneDeep from 'lodash-es/cloneDeep';
+import defaults from 'lodash-es/defaults';
+import pick from 'lodash-es/pick';
 import type { Ref } from 'vue';
 import { capitalizeFirstLetter } from './text';
 

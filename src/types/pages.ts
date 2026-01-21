@@ -1,5 +1,5 @@
-import set from 'lodash/set';
-import get from 'lodash/get';
+import set from 'lodash-es/set.js';
+import get from 'lodash-es/get.js';
 
 import { IFrontmatter } from './types';
 import { filterByKeyVal } from '../helpers/allData';

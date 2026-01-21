@@ -1,6 +1,25 @@
 import { stripHtmlAndMarkdown } from './text';
-import { getFirst200Characters } from './general';
 import { urlFormat } from './url';
+
+const getFirst200Characters = (text: string) => {
+  let textLocal = text;
+  const lastDelimiterIndex = textLocal.lastIndexOf('---');
+  if (lastDelimiterIndex !== -1) {
+    textLocal = textLocal.slice(lastDelimiterIndex + 3);
+  }
+
+  textLocal = textLocal.replace(/^\n+/, '');
+  const nextNewlineIndex = textLocal.indexOf('\n');
+
+  let extractedText = '';
+  if (nextNewlineIndex !== -1) {
+    extractedText = textLocal.slice(0, nextNewlineIndex).trim();
+  } else {
+    extractedText = textLocal.trim();
+  }
+
+  return extractedText;
+};
 
 export function getSlugFromURL(url: string) {
   return url.split('/')?.pop()?.replace('.html', '').trim();

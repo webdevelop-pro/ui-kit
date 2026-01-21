@@ -5,8 +5,9 @@ export type ButtonVariant = 'default' | 'outlined' | 'link' | 'tetriary';
 export type ButtonColor = 'primary' | 'secondary' | 'red';
 export type ButtonAs = 'button' | 'a' | 'router-link';
 
-export interface ButtonProps extends PrimitiveProps {
+export interface ButtonProps extends /* @vue-ignore */ PrimitiveProps {
   as?: ButtonAs;
+  asChild?: boolean;
   size?: ButtonSize;
   variant?: ButtonVariant;
   color?: ButtonColor;

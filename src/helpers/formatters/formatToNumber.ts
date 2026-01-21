@@ -1,4 +1,4 @@
-import trimEnd from 'lodash/trimEnd';
+import trimEnd from 'lodash-es/trimEnd';
 
 /**
  * when round === Infinity -> 1000.0000123 convert to 1,000.000123

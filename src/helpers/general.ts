@@ -1,10 +1,10 @@
 import { IFrontmatter } from 'UiKit/types/types';
-import groupBy from 'lodash/groupBy';
-import lodashIsEmpty from 'lodash/isEmpty';
-import startCase from 'lodash/startCase';
-import toLower from 'lodash/toLower';
-import unionBy from 'lodash/unionBy';
-import kebabCase from 'lodash/kebabCase';
+import groupBy from 'lodash-es/groupBy';
+import lodashIsEmpty from 'lodash-es/isEmpty';
+import startCase from 'lodash-es/startCase';
+import toLower from 'lodash-es/toLower';
+import unionBy from 'lodash-es/unionBy';
+import kebabCase from 'lodash-es/kebabCase';
 
 export function isEmpty(obj: object) {
   return lodashIsEmpty(obj);

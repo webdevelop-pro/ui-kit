@@ -1,9 +1,9 @@
 import { JSONSchemaType } from 'ajv/dist/types/json-schema';
-import set from 'lodash/set';
-import cloneDeep from 'lodash/cloneDeep';
+import set from 'lodash-es/set.js';
+import cloneDeep from 'lodash-es/cloneDeep';
 import { computed } from 'vue';
-import get from 'lodash/get';
-import pick from 'lodash/pick';
+import get from 'lodash-es/get.js';
+import pick from 'lodash-es/pick';
 
 interface FilteredObjectElement {
   enum?: Array<any>;

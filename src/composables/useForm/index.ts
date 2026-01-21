@@ -1,6 +1,6 @@
 import { computed, Ref, unref, watch, ref } from 'vue';
-import isEqual from 'lodash/isEqual';
-import cloneDeep from 'lodash/cloneDeep';
+import isEqual from 'lodash-es/isEqual';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 /**
  * Normalizes values for comparison (handles undefined, null, empty strings)

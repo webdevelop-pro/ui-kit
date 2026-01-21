@@ -5,7 +5,7 @@ import { ajv } from './ajv';
 import { useFormErrors } from './useFormErrors';
 import type { JSONSchemaType } from 'ajv/dist/types/json-schema';
 import type { ErrorObject } from 'ajv';
-import merge from 'lodash/merge';
+import merge from 'lodash-es/merge';
 
 // Define the type for the return value of useFormErrors
 interface FormErrors {

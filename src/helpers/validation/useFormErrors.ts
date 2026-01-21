@@ -1,8 +1,8 @@
 import { computed, readonly, ref } from 'vue';
 import type { ErrorObject } from 'ajv';
 import { REQUIRED_ERROR_MESSAGE } from './constants';
-import toPath from 'lodash/toPath';
-import get from 'lodash/get';
+import toPath from 'lodash-es/toPath';
+import get from 'lodash-es/get.js';
 import type { ValidationError, ErrorSchema } from './types';
 
 function lastPropertySegment(path?: string): string {
@@ -178,5 +178,4 @@ export function useFormErrors() {
     hasFormErrors,
   };
 }
-
 
