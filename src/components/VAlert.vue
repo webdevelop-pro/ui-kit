@@ -47,16 +47,36 @@ const componentIcon = computed(() => {
     :class="[`is--${variant}`]"
   >
     <div class="VAlertDefault v-alert-default__content">
+      <template v-if="$slots.title">
+        <div class="v-alert-default__title-group">
+          <component
+            :is="componentIcon"
+            class="v-alert-default__icon"
+          />
+          <VAlertTitle>
+            <slot name="title" />
+          </VAlertTitle>
+        </div>
+        <VAlertDescription v-if="$slots.description">
+          <slot name="description" />
+        </VAlertDescription>
+      </template>
+      <template v-else-if="$slots.description">
+        <div class="v-alert-default__description-group">
+          <component
+            :is="componentIcon"
+            class="v-alert-default__icon"
+          />
+          <VAlertDescription>
+            <slot name="description" />
+          </VAlertDescription>
+        </div>
+      </template>
       <component
         :is="componentIcon"
+        v-else
         class="v-alert-default__icon"
       />
-      <VAlertTitle v-if="$slots.title">
-        <slot name="title" />
-      </VAlertTitle>
-      <VAlertDescription v-if="$slots.description">
-        <slot name="description" />
-      </VAlertDescription>
     </div>
 
     <VButton
@@ -90,7 +110,7 @@ const componentIcon = computed(() => {
     &__icon {
         width: 20px;
         height: 20px;
-        margin-top: 3px;
+        margin-top: 1px;
         flex-shrink: 0;
     }
 
@@ -100,6 +120,26 @@ const componentIcon = computed(() => {
 
       @media screen and (width < $tablet) {
         flex-direction: column;
+      }
+    }
+
+    &__title-group,
+    &__description-group {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    // On desktop, ungroup the icon from title/description and reorder
+    @media screen and (min-width: $tablet) {
+      &__title-group,
+      &__description-group {
+        display: contents;
+      }
+
+      &__title-group .v-alert-default__icon,
+      &__description-group .v-alert-default__icon {
+        order: -1;
       }
     }
 

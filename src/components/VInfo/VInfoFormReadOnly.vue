@@ -75,7 +75,6 @@ const onEditClick = () => {
 
   &__header {
     display: flex;
-    align-items: center;
     gap: 12px;
     align-self: stretch;
   }
@@ -86,6 +85,10 @@ const onEditClick = () => {
 
   &__content {
     width: 100%;
+  }
+
+  &__edit {
+    margin-top: 2px;
   }
 }
 </style>

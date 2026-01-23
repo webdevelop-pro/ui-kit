@@ -25,13 +25,13 @@ const props = defineProps({
 const emits = defineEmits(['apply']);
 
 const showDropdown = ref(false);
-const target = ref(null);
+const target = ref<HTMLElement | null>(null);
 const selectedFilters = ref(0);
 const itemsInner = ref();
 
 const updateFilters = () => {
   selectedFilters.value = 0;
-  itemsInner.value?.reduce((countLocal, item) => {
+  itemsInner.value?.reduce((countLocal: number, item: IVFilter) => {
     selectedFilters.value += item.model?.length;
     return selectedFilters.value;
   }, 0);
@@ -45,14 +45,25 @@ const close = () => {
   showDropdown.value = false;
 };
 
+const scrollToFilterButton = () => {
+  if (target.value) {
+    target.value.scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'center',
+      inline: 'nearest'
+    });
+  }
+};
+
 const onApplyClick = () => {
   emits('apply', itemsInner.value);
   updateFilters();
   close();
+  scrollToFilterButton();
 };
 
 const onClear = () => {
-  itemsInner.value?.forEach((item) => { item.model = []; });
+  itemsInner.value?.forEach((item: IVFilter) => { item.model = []; });
 };
 
 const onClearClick = () => {
@@ -60,6 +71,7 @@ const onClearClick = () => {
   updateFilters();
   emits('apply', itemsInner.value);
   close();
+  scrollToFilterButton();
 };
 
 onClickOutside(target, () => close());
