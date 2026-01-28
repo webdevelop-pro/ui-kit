@@ -113,7 +113,7 @@ const id = useId();
 
   &.is--row {
     align-items: center;
-    flex-direction: row;
+    flex-flow: row wrap;
 
     #{$root}__item{
       margin: 0 30px 0 0;

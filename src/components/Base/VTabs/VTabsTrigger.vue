@@ -82,6 +82,7 @@ const forwardedProps = useForwardProps(delegatedProps);
     align-self: stretch;
     border-radius: 2px;
     transition: all 0.3s ease;
+    min-height: 24px;
 
     &:hover {
       background-color: colors.$white;

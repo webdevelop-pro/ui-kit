@@ -161,7 +161,6 @@ onUnmounted(() => {
     display: none;
   }
 
-  &.is--varinat-primary,
   &.is--variant-primary {
     height: 48px;
 
@@ -175,8 +174,11 @@ onUnmounted(() => {
   }
 
   &.is--variant-secondary {
-    height: 24px;
     gap: 4px;
+    border-radius: 2px;
+    background: colors.$gray-20;
+    padding: 4px;
+    width: fit-content;
   }
 }
 

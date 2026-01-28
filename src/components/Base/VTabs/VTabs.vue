@@ -96,7 +96,7 @@ watch(
     v-bind="forwarded"
     v-model="selectedTab"
     class="VTabs v-tabs"
-    :class="[props.class, `is--variant-${variant}`, { 'is--full-width': fullWidth }]"
+    :class="[props.class, { 'is--full-width': fullWidth }]"
   >
     <slot />
   </TabsRoot>
@@ -112,13 +112,6 @@ watch(
 }
 
 .v-tabs {
-  &.is--variant-secondary {
-    gap: 4px;
-    border-radius: 2px;
-    background: colors.$gray-20;
-    padding: 4px;
-  }
-
   &.is--full-width {
     width: 100%;
   }
