@@ -74,6 +74,9 @@ const delegatedProps = computed(() => {
   cursor: pointer;
   padding: 16px;
   text-align: inherit;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
 
   &:hover{
     background-color: colors.$gray-10;

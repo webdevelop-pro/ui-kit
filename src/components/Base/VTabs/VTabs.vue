@@ -2,7 +2,7 @@
 import type { TabsRootEmits, TabsRootProps } from 'radix-vue';
 import { TabsRoot, useForwardPropsEmits } from 'radix-vue';
 import {
-  computed, HTMLAttributes, watch,
+  computed, HTMLAttributes, onUnmounted, watch,
 } from 'vue';
 import { useSyncWithUrl } from 'UiKit/composables/useSyncWithUrl';
 // todo: if multiple tabs on page? how to differentiate
@@ -77,18 +77,17 @@ watch(
   { immediate: true },
 );
 
-// Sync with query parameter when it changes
-// watch(
-//   () => queryTab.value,
-//   (newQuery) => {
-//     if (newQuery) {
-//       selectedTab.value = newQuery;
-//     } else {
-//       selectedTab.value = props.defaultValue || '';
-//     }
-//   },
-//   { immediate: true },
-// );
+// Remove tab query parameter from URL on unmount
+onUnmounted(() => {
+  if (props.tabsToUrl && typeof window !== 'undefined') {
+    const queryKey = props.queryKey || 'tab';
+    const url = new URL(window.location.href);
+    if (url.searchParams.has(queryKey)) {
+      url.searchParams.delete(queryKey);
+      window.history.replaceState(null, '', url.toString());
+    }
+  }
+});
 </script>
 
 <template>
@@ -112,6 +111,7 @@ watch(
 }
 
 .v-tabs {
+
   &.is--full-width {
     width: 100%;
   }

@@ -488,3 +488,21 @@ pre{
         flex: 1 1 340px;
     }
 }
+
+// Prevent text selection/highlighting on labels and accordion triggers on iOS
+label {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+// Global scrollbar hiding utility
+.is--hide-scrollbar {
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE and Edge
+
+  // Hide scrollbar for Chrome, Safari and Opera
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -71,8 +71,10 @@ const forwardedProps = useForwardProps(delegatedProps);
     gap: 8px;
     border-bottom: 2px solid transparent;
 
-    &:hover {
-      color: colors.$primary;
+    @media screen and (width > $tablet) {
+      &:hover {
+        color: colors.$primary;
+      }
     }
   }
 
@@ -84,10 +86,12 @@ const forwardedProps = useForwardProps(delegatedProps);
     transition: all 0.3s ease;
     min-height: 24px;
 
-    &:hover {
-      background-color: colors.$white;
-      color: colors.$black;
-      box-shadow: variables.$box-shadow-small;
+    @media screen and (width > $tablet) {
+      &:hover {
+        background-color: colors.$white;
+        color: colors.$black;
+        box-shadow: variables.$box-shadow-small;
+      }
     }
   }
 }

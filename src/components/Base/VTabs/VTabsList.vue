@@ -3,7 +3,7 @@ import { TabsList, type TabsListProps } from 'radix-vue';
 import {
   computed, nextTick, onMounted, onUnmounted, ref, type HTMLAttributes,
 } from 'vue';
-import ChevronDown from 'UiKit/assets/images/chevron-down.svg?component';
+import debounce from 'lodash/debounce';
 
 const props = withDefaults(defineProps<TabsListProps & {
   class?: HTMLAttributes['class'];
@@ -22,11 +22,10 @@ const delegatedProps = computed(() => {
 const wrapperRef = ref<HTMLElement | null>(null);
 const scrollElementRef = ref<HTMLElement | null>(null);
 let resizeObserver: ResizeObserver | null = null;
+let mutationObserver: MutationObserver | null = null;
 const showLeftGradient = ref(false);
 const showRightGradient = ref(false);
-const showLeftArrow = ref(false);
-const showRightArrow = ref(false);
-
+const borderWidth = ref<string>('100%');
 
 function updateScrollElement() {
   if (!wrapperRef.value) {
@@ -48,40 +47,91 @@ function checkScrollPosition() {
 
   showLeftGradient.value = canScroll && !isAtStart;
   showRightGradient.value = canScroll && !isAtEnd;
-  showLeftArrow.value = canScroll && !isAtStart;
-  showRightArrow.value = canScroll && !isAtEnd;
+  
+  // Update border width to match scrollable width
+  borderWidth.value = `${scrollWidth}px`;
 }
 
-function scrollLeft() {
+function scrollToActiveTab() {
   const element = scrollElementRef.value;
   if (!element) return;
-  const scrollAmount = element.clientWidth * 0.8;
-  element.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+
+  const activeTab = element.querySelector('[data-state="active"]') as HTMLElement | null;
+  if (!activeTab) return;
+
+  const tabRect = activeTab.getBoundingClientRect();
+  const containerWidth = element.clientWidth;
+  const tabWidth = tabRect.width;
+  const tabOffsetLeft = activeTab.offsetLeft;
+
+  // Calculate center position: tab center should align with container center
+  const tabCenter = tabOffsetLeft + tabWidth / 2;
+  const containerCenter = containerWidth / 2;
+  const targetScrollLeft = tabCenter - containerCenter;
+
+  // Ensure we don't scroll beyond bounds
+  const maxScroll = element.scrollWidth - containerWidth;
+  const clampedScrollLeft = Math.max(0, Math.min(targetScrollLeft, maxScroll));
+
+  // Only scroll if the tab is not already centered (with some tolerance)
+  const currentScrollLeft = element.scrollLeft;
+  const scrollDifference = Math.abs(currentScrollLeft - clampedScrollLeft);
+
+  if (scrollDifference > 1) {
+    element.scrollTo({
+      left: clampedScrollLeft,
+      behavior: 'smooth',
+    });
+  }
 }
 
-function scrollRight() {
-  const element = scrollElementRef.value;
-  if (!element) return;
-  const scrollAmount = element.clientWidth * 0.8;
-  element.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-}
+const scrollToActiveTabDebounced = debounce(scrollToActiveTab, 50);
 
 onMounted(async () => {
   await nextTick();
   updateScrollElement();
   checkScrollPosition();
-  
+
   const element = scrollElementRef.value;
-  if (element) {
-    element.addEventListener('scroll', checkScrollPosition);
-    // Check on resize
-    if (typeof ResizeObserver !== 'undefined') {
-      resizeObserver = new ResizeObserver(() => {
-        updateScrollElement();
-        checkScrollPosition();
+  if (!element) return;
+
+  element.addEventListener('scroll', checkScrollPosition);
+
+  // Scroll to active tab on mount (after layout settles)
+  await nextTick();
+  scrollToActiveTab();
+
+  // Watch for changes to active tab state using MutationObserver
+  if (typeof MutationObserver !== 'undefined') {
+    mutationObserver = new MutationObserver((mutations) => {
+      const hasActiveChange = mutations.some((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-state') {
+          const target = mutation.target as HTMLElement;
+          return target.getAttribute('data-state') === 'active';
+        }
+        return false;
       });
-      resizeObserver.observe(element);
-    }
+
+      if (hasActiveChange) {
+        scrollToActiveTabDebounced();
+      }
+    });
+
+    mutationObserver.observe(element, {
+      attributes: true,
+      attributeFilter: ['data-state'],
+      subtree: true,
+    });
+  }
+
+  // Check on resize
+  if (typeof ResizeObserver !== 'undefined') {
+    resizeObserver = new ResizeObserver(() => {
+      updateScrollElement();
+      checkScrollPosition();
+      scrollToActiveTabDebounced();
+    });
+    resizeObserver.observe(element);
   }
 });
 
@@ -94,6 +144,11 @@ onUnmounted(() => {
     resizeObserver.disconnect();
     resizeObserver = null;
   }
+  if (mutationObserver) {
+    mutationObserver.disconnect();
+    mutationObserver = null;
+  }
+  scrollToActiveTabDebounced.cancel();
 });
 </script>
 
@@ -103,30 +158,15 @@ onUnmounted(() => {
     class="v-tabs-list-wrapper"
     :class="`is--variant-${variant}`"
   >
-    <button
-      v-if="showLeftArrow"
-      class="v-tabs-list__scroll-button v-tabs-list__scroll-button--left"
-      aria-label="Scroll left"
-      @click="scrollLeft"
-    >
-      <ChevronDown class="v-tabs-list__scroll-icon v-tabs-list__scroll-icon--left" />
-    </button>
     <TabsList
       ref="tabsListRef"
       v-bind="delegatedProps"
-      :class="[props.class, `is--variant-${variant}`]"
+      :class="[props.class, `is--variant-${variant}`, 'is--hide-scrollbar']"
       class="VTabsList v-tabs-list"
+      :style="variant === 'primary' ? { '--border-width': borderWidth } : undefined"
     >
       <slot />
     </TabsList>
-    <button
-      v-if="showRightArrow"
-      class="v-tabs-list__scroll-button v-tabs-list__scroll-button--right"
-      aria-label="Scroll right"
-      @click="scrollRight"
-    >
-      <ChevronDown class="v-tabs-list__scroll-icon v-tabs-list__scroll-icon--right" />
-    </button>
     <div
       v-if="showLeftGradient"
       class="v-tabs-list__gradient v-tabs-list__gradient--left"
@@ -150,16 +190,9 @@ onUnmounted(() => {
   display: flex;
   flex-direction: row;
   width: 100%;
-  overflow: auto hidden;
   position: relative;
   gap: 20px;
-  scrollbar-width: none; // Firefox
-  -ms-overflow-style: none; // IE and Edge
-
-  // Hide scrollbar for Chrome, Safari and Opera
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  overflow: auto hidden;
 
   &.is--variant-primary {
     height: 48px;
@@ -168,8 +201,9 @@ onUnmounted(() => {
       content: '';
       position: absolute;
       bottom: 0;
+      left: 0;
       border-bottom: 2px solid colors.$gray-30;
-      width: 100%;
+      width: var(--border-width, 100%);
     }
   }
 
@@ -178,58 +212,6 @@ onUnmounted(() => {
     border-radius: 2px;
     background: colors.$gray-20;
     padding: 4px;
-    width: fit-content;
-  }
-}
-
-.v-tabs-list__scroll-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  background: transparent;
-  border: none;
-  border-radius: 999px;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 0;
-  transition: background-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
-  color: colors.$gray-60;
-  opacity: 0.9;
-
-  &:hover {
-    background: rgba(colors.$gray-20, 0.5);
-    opacity: 1;
-  }
-
-  &:active {
-    transform: translateY(-50%) scale(0.96);
-  }
-
-  &--left {
-    left: 0;
-  }
-
-  &--right {
-    right: 0;
-  }
-}
-
-.v-tabs-list__scroll-icon {
-  width: 16px;
-  height: 16px;
-  color: currentcolor;
-
-  &--left {
-    transform: rotate(90deg);
-  }
-
-  &--right {
-    transform: rotate(-90deg);
   }
 }
 
@@ -259,33 +241,6 @@ onUnmounted(() => {
       rgb(255 255 255 / 80%) 50%,
       transparent 100%
     );
-  }
-}
-
-// Adjust gradients for secondary variant background
-.v-tabs-list-wrapper.is--variant-secondary {
-  .v-tabs-list__gradient {
-    &--left {
-      background: linear-gradient(
-        to right,
-        colors.$gray-20 0%,
-        rgb(233 236 239 / 80%) 50%,
-        transparent 100%
-      );
-    }
-
-    &--right {
-      background: linear-gradient(
-        to left,
-        colors.$gray-20 0%,
-        rgb(233 236 239 / 80%) 50%,
-        transparent 100%
-      );
-    }
-  }
-
-  .v-tabs-list__scroll-button {
-    background: transparent;
   }
 }
 </style>
