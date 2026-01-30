@@ -56,6 +56,11 @@ const setImgUrl = () => {
 };
 
 const checkImage = (url: string) => {
+  // Only run in browser (SSR-safe)
+  if (typeof window === 'undefined' || typeof Image === 'undefined') {
+    return;
+  }
+  
   const image = new Image();
   image.addEventListener('error', () => {
     imageFallback.value = true;
@@ -67,7 +72,9 @@ const checkImage = (url: string) => {
 watch(videoMeta, setImgUrl);
 watch(imageFallback, setImgUrl);
 watch(() => props.url, (newUrl) => {
-  checkImage(newUrl);
+  if (newUrl) {
+    checkImage(newUrl);
+  }
 }, { immediate: true });
 
 onMounted(() => {

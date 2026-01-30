@@ -57,7 +57,7 @@ defineProps({
       }
     }
 
-    @media screen and (width < $desktop) {
+    @media screen and (width < $tablet) {
       flex-direction: column;
       gap: 20px !important;
     }
@@ -65,7 +65,7 @@ defineProps({
 
   .v-image-with-button {
     &__image {
-      @media screen and (width < $desktop) {
+      @media screen and (width < $tablet) {
         max-height: 288px;
       }
     }

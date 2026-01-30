@@ -13,7 +13,7 @@ interface IListsLeftBorder {
 const props = defineProps({
   items: {
     type: Array as PropType<unknown[]>,
-    required: true,
+    default: () => [],
   },
   color: {
     type: String as PropType<'primary' | 'secondary'>,
@@ -25,6 +25,9 @@ const props = defineProps({
 
 // Separate button-* keys from other keys
 const processedItems = computed(() => {
+  if (!props.items || !Array.isArray(props.items)) {
+    return [];
+  }
   return props.items.map((item) => {
     if (!item) return item;
     
