@@ -12,14 +12,17 @@ interface Props {
     fade?: boolean;
     autoplayChangeTime?: number;
     options?: object;
+    showButtons?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   autoplayChangeTime: 6000,
   variant: 'default',
+  showButtons: true,
 });
 
 const isAutoplay = computed(() => props.variant === 'autoplay');
+const shouldShowButtons = computed(() => props.showButtons && !isAutoplay.value);
 
 const plugins = [];
 if (props.autoplay || isAutoplay.value) {
@@ -28,7 +31,8 @@ if (props.autoplay || isAutoplay.value) {
     stopOnInteraction: false,
   }));
 }
-if (props.fade || isAutoplay.value) {
+// Only use fade if explicitly enabled via fade prop
+if (props.fade) {
   plugins.push(Fade());
 }
 </script>
@@ -42,10 +46,16 @@ if (props.fade || isAutoplay.value) {
     }"
     :plugins="plugins"
     orientation="horizontal"
-    :class="{ 'is--autoplay': isAutoplay }"
+    :class="{ 'is--autoplay': isAutoplay, 'is--no-buttons': !shouldShowButtons }"
   >
-    <VCarouselPrevious class="v-slider__prev" />
-    <VCarouselNext class="v-slider__next" />
+    <VCarouselPrevious
+      v-if="shouldShowButtons"
+      class="v-slider__prev"
+    />
+    <VCarouselNext
+      v-if="shouldShowButtons"
+      class="v-slider__next"
+    />
     <VCarouselContent class="v-slider__content">
       <slot />
     </VCarouselContent>
@@ -58,7 +68,7 @@ if (props.fade || isAutoplay.value) {
 
   width: 100%;
 
-  &:not(.is--autoplay) {
+  &:not(.is--autoplay, .is--no-buttons) {
     margin-top: 10px;
 
     @media screen and (width <= 767px) {
@@ -66,7 +76,8 @@ if (props.fade || isAutoplay.value) {
     }
   }
 
-  &.is--autoplay {
+  &.is--autoplay,
+  &.is--no-buttons {
     #{$root}__prev,
     #{$root}__next {
       display: none;

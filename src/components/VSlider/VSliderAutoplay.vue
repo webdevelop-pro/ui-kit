@@ -7,21 +7,14 @@ import { CarouselApi } from '../Base/VCarousel';
 // yarn add embla-carousel-autoplay
 // yarn add embla-carousel-fade
 
-interface ISliderAutpoplay {
-  id: number;
-  testimonials?: {
-    text: string;
-    author: string;
-  }[];
-}
 const props = defineProps({
   dataInterface: Object,
-  data: Array as PropType<ISliderAutpoplay[]>,
+  data: Array as PropType<unknown[]>,
   autoplay: {
     type: Boolean,
     default: true,
   },
-  activecolor: {
+  activeColor: {
     type: String,
     default: '#F1AF32',
   },
@@ -33,10 +26,22 @@ const props = defineProps({
     type: Number,
     default: 6000,
   },
+  fade: {
+    type: Boolean,
+    default: true,
+  },
+  options: {
+    type: Object,
+    default: () => ({}),
+  },
+  passItemData: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const api = ref<CarouselApi>();
-const active = ref(props.data[0]);
+const active = ref(props.data?.[0]);
 
 function setApi(val: CarouselApi) {
   api.value = val;
@@ -44,7 +49,9 @@ function setApi(val: CarouselApi) {
 const activeElementId = ref(0);
 
 const setActiveElement = () => {
-  active.value = props.data[activeElementId.value];
+  if (props.data && props.data[activeElementId.value]) {
+    active.value = props.data[activeElementId.value];
+  }
 };
 
 const changeSlide = (index: number) => {
@@ -68,17 +75,23 @@ watch(api, (value) => {
   <div class="VSliderAutpoplay v-slider-autoplay">
     <VSlider
       variant="autoplay"
+      :autoplay="autoplay"
+      :fade="fade"
       :autoplay-change-time="autoplayChangeTime"
-      :options="{ containScroll: 'trimSnaps' }"
+      :options="{
+        align: 'start',
+        containScroll: 'trimSnaps',
+        ...options,
+      }"
       class="v-slider-autoplay__slider"
       @init-api="setApi"
     >
       <VCarouselItem
-        v-for="(_, index) in data"
+        v-for="(item, index) in data"
         :key="index"
         class="v-slider-autoplay__item"
       >
-        <slot v-bind="active" />
+        <slot :active="passItemData ? item : active" />
       </VCarouselItem>
     </VSlider>
     <div
@@ -130,7 +143,8 @@ watch(api, (value) => {
     display: block;
 
     &.is--active {
-      background-color: v-bind(activecolor);
+      /* stylelint-disable-next-line value-keyword-case */
+      background-color: v-bind(activeColor);
     }
   }
 
