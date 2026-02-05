@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {
   VCarouselContent, VCarousel, VCarouselPrevious, VCarouselNext,
+  CarouselApi,
 } from '../Base/VCarousel';
 import Autoplay from 'embla-carousel-autoplay';
 import Fade from 'embla-carousel-fade';
@@ -20,6 +21,10 @@ const props = withDefaults(defineProps<Props>(), {
   variant: 'default',
   showButtons: true,
 });
+
+const emit = defineEmits<{
+  'init-api': [api: CarouselApi];
+}>();
 
 const isAutoplay = computed(() => props.variant === 'autoplay');
 const shouldShowButtons = computed(() => props.showButtons && !isAutoplay.value);
@@ -47,6 +52,7 @@ if (props.fade) {
     :plugins="plugins"
     orientation="horizontal"
     :class="{ 'is--autoplay': isAutoplay, 'is--no-buttons': !shouldShowButtons }"
+    @init-api="emit('init-api', $event)"
   >
     <VCarouselPrevious
       v-if="shouldShowButtons"

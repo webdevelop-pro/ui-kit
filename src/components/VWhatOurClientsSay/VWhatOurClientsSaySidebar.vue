@@ -16,7 +16,7 @@ const props = defineProps({
 
 const sliderFormatted = computed(() => props.slider.map((item, index) => ({
   ...item,
-  id: index + 1, // Add id as index + 1 to each item
+  id: index + 1,
 })));
 
 </script>
@@ -24,28 +24,22 @@ const sliderFormatted = computed(() => props.slider.map((item, index) => ({
 <template>
   <VSliderAutoplay
     v-if="sliderFormatted"
-    v-slot="active"
-    :data="slider"
+    v-slot="{ active }"
+    :data="sliderFormatted"
     :show-pagination="false"
     :autoplay-change-time="60000"
     autoplay
     class="what-our-clients-say-sidebar"
   >
     <div
-      :key="active.id"
+      v-if="active"
       class="what-our-clients-say-sidebar__item"
     >
-      <p
-        :key="active.id"
-        class="what-our-clients-say-sidebar__text"
-      >
-        {{ active?.text }}
+      <p class="what-our-clients-say-sidebar__text">
+        {{ (active as IWhatOurClientsSaySlider).text }}
       </p>
-      <div
-        :key="active.id"
-        class="what-our-clients-say-sidebar__author is--h5__title"
-      >
-        {{ active?.author }}
+      <div class="what-our-clients-say-sidebar__author is--h5__title">
+        {{ (active as IWhatOurClientsSaySlider).author }}
       </div>
     </div>
   </VSliderAutoplay>

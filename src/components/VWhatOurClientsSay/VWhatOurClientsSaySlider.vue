@@ -18,32 +18,25 @@ defineProps({
 
 <template>
   <VSliderAutoplay
-    v-slot="active"
+    v-slot="{ active }"
     :data="slider"
     autoplay
     class="VWhatOurClientsSaySlider what-our-clients-say-slider"
   >
-    <div class="what-our-clients-say-slider__item is--card">
+    <div
+      v-if="active"
+      class="what-our-clients-say-slider__item is--card"
+    >
       <div
-        v-for="(item, itemIndex) in active.testimonials"
+        v-for="(item, itemIndex) in (active as IWhatOurClientsSaySlider).testimonials"
         :key="itemIndex"
         class="what-our-clients-say-slider__item-card"
       >
-        <div
-          :key="active.id"
-        >
-          <p
-            :key="active.id"
-            class="what-our-clients-say-slider__text"
-          >
-            {{ item.text }}
-          </p>
-          <div
-            :key="active.id"
-            class="what-our-clients-say-slider__author is--h5__title"
-          >
-            {{ item.author }}
-          </div>
+        <p class="what-our-clients-say-slider__text">
+          {{ item.text }}
+        </p>
+        <div class="what-our-clients-say-slider__author is--h5__title">
+          {{ item.author }}
         </div>
       </div>
     </div>
