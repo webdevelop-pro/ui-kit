@@ -52,6 +52,8 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   will-change: transform, opacity;
   max-width: 270px;
   width: 100%;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .v-tooltip-content[data-state='delayed-open'][data-side='top'] {

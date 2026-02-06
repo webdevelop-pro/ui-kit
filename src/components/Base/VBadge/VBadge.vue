@@ -72,6 +72,15 @@ const classes = computed(() => {
     }
   }
 
+  &.is--badge-color-primary-light {
+    background-color: colors.$primary-light;
+
+    &.is--active,
+    &.is--hover:hover {
+      background-color: colors.$primary;
+    }
+  }
+
   &.is--badge-color-secondary {
     background-color: colors.$secondary;
 
