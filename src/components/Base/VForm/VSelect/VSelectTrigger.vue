@@ -39,6 +39,8 @@ const forwardedProps = useForwardProps(delegatedProps);
 @use 'UiKit/styles/_colors.scss' as colors;
 
 .v-select-trigger {
+  $root: &;
+
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -101,6 +103,10 @@ const forwardedProps = useForwardProps(delegatedProps);
     transform: rotate(0);
     margin-left: 9px;
     margin-top: 0 !important;
+
+    #{$root}.is--readonly & {
+      display: none;
+    }
   }
 }
 

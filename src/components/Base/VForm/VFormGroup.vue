@@ -6,6 +6,7 @@ import VTooltip from 'UiKit/components/VTooltip.vue';
 const props = defineProps<{
   label?: string;
   errorText?: string[];
+  helperText?: string;
   required?: boolean;
   dark?: boolean;
 }>();
@@ -57,6 +58,12 @@ const isError = computed(() => (errorText.value?.length > 0));
         {{ errorText }}
       </slot>
     </div>
+    <div
+      v-if="helperText"
+      class="v-form-group__helper is--small"
+    >
+      {{ helperText }}
+    </div>
   </div>
 </template>
 
@@ -102,6 +109,11 @@ const isError = computed(() => (errorText.value?.length > 0));
       transition: all 0.3s ease;
       transform: translateY(0);
     }
+  }
+
+  &__helper {
+    margin-top: 4px;
+    color: colors.$gray-70;
   }
 
   &__input {
