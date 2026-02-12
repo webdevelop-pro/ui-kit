@@ -32,8 +32,8 @@ const unitText = computed(() => (props.unit ?? '').toString());
   >
     <VSkeleton
       v-if="loading"
-      height="1.2em"
-      width="100%"
+      height="64px"
+      width="100px"
       class="v-text-currency-with-unit__skeleton"
     />
     <template v-else>

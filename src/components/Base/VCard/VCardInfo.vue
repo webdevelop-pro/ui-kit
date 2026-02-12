@@ -66,27 +66,19 @@ const secondaryValueSign = computed(() => {
     :style="minWidth ? { minWidth } : undefined"
   >
     <div
-      v-if="showTitle || loading"
+      v-if="showTitle"
       class="v-card-info__title is--h6__title"
     >
-      <VSkeleton
-        v-if="loading"
-        height="14px"
-        width="60%"
-        class="v-card-info__skeleton"
-      />
-      <template v-else>
-        <slot name="title">
-          {{ title }}
-        </slot>
-      </template>
+      <slot name="title">
+        {{ title }}
+      </slot>
     </div>
 
     <div class="v-card-info__value">
       <VSkeleton
         v-if="loading"
         height="28px"
-        width="70%"
+        width="100px"
         class="v-card-info__skeleton"
       />
       <template v-else>
@@ -97,13 +89,13 @@ const secondaryValueSign = computed(() => {
     </div>
 
     <div
-      v-if="showSecondary || loading"
+      v-if="showSecondary"
       class="v-card-info__secondary is--small"
     >
       <VSkeleton
         v-if="loading"
         height="12px"
-        width="40%"
+        width="150px"
         class="v-card-info__skeleton"
       />
       <template v-else>
