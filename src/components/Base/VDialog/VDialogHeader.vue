@@ -9,8 +9,17 @@ const props = defineProps<{
 <template>
   <div
     :class="props.class"
-    class="VDialogheader v-dialog-header"
+    class="VDialogHeader v-dialog-header"
   >
     <slot />
   </div>
 </template>
+
+
+<style lang="scss">  
+.v-dialog-header {
+  @media screen and (width < $tablet){
+    padding-right: 54px;
+  }
+} 
+</style>  

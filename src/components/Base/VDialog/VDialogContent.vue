@@ -72,7 +72,8 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   z-index: 1100;
 
   @media screen and (max-width: $tablet){
-    padding: 50px 10px 10px;
+    // padding: 50px 10px 10px;
+    padding: 15px 10px 10px;
     max-width: 100%;
     height: 100%;
   }

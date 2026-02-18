@@ -65,55 +65,56 @@ const secondaryValueSign = computed(() => {
     class="VCardInfo v-card-info"
     :style="minWidth ? { minWidth } : undefined"
   >
-    <div
-      v-if="showTitle"
-      class="v-card-info__title is--h6__title"
-    >
-      <slot name="title">
-        {{ title }}
-      </slot>
-    </div>
-
-    <div class="v-card-info__value">
-      <VSkeleton
-        v-if="loading"
-        height="28px"
-        width="100px"
-        class="v-card-info__skeleton"
-      />
-      <template v-else>
-        <slot v-bind="mergedValueProps">
-          <VTextCurrencyWithUnit v-bind="mergedValueProps" />
+    <div class="v-card-info__wrap">
+      <div
+        v-if="showTitle"
+        class="v-card-info__title is--h6__title"
+      >
+        <slot name="title">
+          {{ title }}
         </slot>
-      </template>
-    </div>
+      </div>
 
-    <div
-      v-if="showSecondary"
-      class="v-card-info__secondary is--small"
-    >
-      <VSkeleton
-        v-if="loading"
-        height="12px"
-        width="150px"
-        class="v-card-info__skeleton"
-      />
-      <template v-else>
-        <slot name="secondary">
-          <template v-if="hasSecondaryFromProps">
-            <span
-              v-if="secondaryValue"
-              class="v-card-info__secondary-value"
-              :class="secondaryValueSign && `is--${secondaryValueSign}`"
-            >
-              {{ secondaryValue }}
-            </span>
-            <span class="v-card-info__secondary-text">{{ secondaryText }}</span>
-          </template>
-        </slot>
-      </template>
-    </div>
+      <div class="v-card-info__value">
+        <VSkeleton
+          v-if="loading"
+          height="28px"
+          width="100px"
+          class="v-card-info__skeleton"
+        />
+        <template v-else>
+          <slot v-bind="mergedValueProps">
+            <VTextCurrencyWithUnit v-bind="mergedValueProps" />
+          </slot>
+        </template>
+      </div>
 
+      <div
+        v-if="showSecondary"
+        class="v-card-info__secondary is--small"
+      >
+        <VSkeleton
+          v-if="loading"
+          height="12px"
+          width="150px"
+          class="v-card-info__skeleton"
+        />
+        <template v-else>
+          <slot name="secondary">
+            <template v-if="hasSecondaryFromProps">
+              <span
+                v-if="secondaryValue"
+                class="v-card-info__secondary-value"
+                :class="secondaryValueSign && `is--${secondaryValueSign}`"
+              >
+                {{ secondaryValue }}
+              </span>
+              <span class="v-card-info__secondary-text">{{ secondaryText }}</span>
+            </template>
+          </slot>
+        </template>
+      </div>
+    </div>
     <div
       v-if="showAction || loading"
       class="v-card-info__action"
@@ -159,11 +160,18 @@ const secondaryValueSign = computed(() => {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;
   width: 100%;
   padding: 20px 24px;
   background-color: colors.$white;
   box-shadow: variables.$box-shadow-medium;
   border-radius: 2px;
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
   &__title {
     color: colors.$gray-70;
