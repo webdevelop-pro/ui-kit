@@ -18,6 +18,16 @@ onMounted(() => {
   const el = contentEl.value;
   if (!el) return;
 
+  // When slot contains HTML (e.g. links), do not replace content – just append asterisk.
+  const hasElementChildren = el.children.length > 0;
+  if (hasElementChildren) {
+    const asteriskSpan = document.createElement('span');
+    asteriskSpan.className = 'v-form-label__asterisk';
+    asteriskSpan.textContent = ' *';
+    el.appendChild(asteriskSpan);
+    return;
+  }
+
   // Take only plain text content from the slot.
   const text = el.textContent?.trim() || '';
   if (!text) return;
@@ -82,6 +92,10 @@ onMounted(() => {
       content: ' *';
       color: colors.$red;
     }
+  }
+
+  &__asterisk {
+    color: colors.$red;
   }
 
   &.is--disabled {
