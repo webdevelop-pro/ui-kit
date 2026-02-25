@@ -59,6 +59,13 @@ const props = defineProps({
 
 const selectSubjectOptions = computed(() => props.selectSubject || SELECT_SUBJECT);
 
+const isSubjectOption = (value: string) => (
+  value !== ''
+  && selectSubjectOptions.value.some(
+    (opt) => (opt as { value: string }).value?.toLowerCase() === value?.toLowerCase()
+  )
+);
+
 const emit = defineEmits(['close']);
 
 const { toast } = useToast();
@@ -121,7 +128,13 @@ const syncFieldWithUrl = <K extends keyof FormModelContactUs>(key: K) => {
 
   // Sync URL → Model
   watch(urlValue, (newVal) => {
-    if (newVal && model[key] !== newVal) {
+    if (key === 'subject') {
+      if (newVal && isSubjectOption(newVal) && model[key] !== newVal) {
+        model[key] = newVal as FormModelContactUs[K];
+      } else if (newVal && !isSubjectOption(newVal)) {
+        urlValue.value = '';
+      }
+    } else if (newVal && model[key] !== newVal) {
       model[key] = newVal as FormModelContactUs[K];
     }
   }, { immediate: true });
@@ -158,7 +171,7 @@ watch(() => props.userSessionTraits?.email, () => {
 }, { deep: true, immediate: true });
 
 watch(() => props.subject, () => {
-  if (props.subject) {
+  if (props.subject && isSubjectOption(props.subject)) {
     model.subject = props.subject;
   }
 }, { immediate: true });
