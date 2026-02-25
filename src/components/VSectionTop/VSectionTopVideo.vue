@@ -2,6 +2,7 @@
 import ArrowRight from 'UiKit/assets/images/arrow-right.svg';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
+import { computed, getCurrentInstance } from 'vue';
 
 
 const props = defineProps({
@@ -18,6 +19,19 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['click']);
+const instance = getCurrentInstance();
+
+const buttonHrefEncoded = computed(() => (props.buttonHref ? encodeURI(props.buttonHref) : ''));
+const isInternalRoute = computed(() => (
+  Boolean(buttonHrefEncoded.value)
+  && buttonHrefEncoded.value.startsWith('/')
+  && !buttonHrefEncoded.value.startsWith('//')
+));
+const hasRouterLink = computed(() => {
+  const appComponents = instance?.appContext.components ?? {};
+  return Boolean(appComponents.RouterLink || appComponents['router-link'] || instance?.appContext.config.globalProperties.$router);
+});
+const useRouterLink = computed(() => isInternalRoute.value && hasRouterLink.value);
 </script>
 
 <template>
@@ -56,8 +70,9 @@ const emit = defineEmits(['click']);
         />
         <VButton
           v-if="props.buttonHref"
-          as="a"
-          :href="encodeURI(props.buttonHref)"
+          :as="useRouterLink ? 'router-link' : 'a'"
+          :to="useRouterLink ? buttonHrefEncoded : undefined"
+          :href="!useRouterLink ? buttonHrefEncoded : undefined"
           size="large"
           class="is--margin-top-40"
           @click="emit('click')"

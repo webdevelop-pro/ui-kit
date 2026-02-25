@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VInfoShort from 'UiKit/components/VInfo/VInfoShort.vue';
-import { computed, useSlots, Comment } from 'vue';
+import { computed, useSlots, Comment, getCurrentInstance } from 'vue';
 
 const props = defineProps({
   title: String,
@@ -16,6 +16,7 @@ const props = defineProps({
 });
 
 const slots = useSlots();
+const instance = getCurrentInstance();
 // Check if the `infoShort` slot contains meaningful content
 const hasSlotContent = computed(() => {
   const slotContent = slots.infoShort?.();
@@ -31,6 +32,17 @@ const hasSlotContent = computed(() => {
 });
 const showInfoShort = computed(() => (
   props.title || props.subTitle || (props.linkText && props.linkHref) || hasSlotContent.value));
+const buttonHrefEncoded = computed(() => (props.buttonHref ? encodeURI(props.buttonHref) : ''));
+const isInternalRoute = computed(() => (
+  Boolean(buttonHrefEncoded.value)
+  && buttonHrefEncoded.value.startsWith('/')
+  && !buttonHrefEncoded.value.startsWith('//')
+));
+const hasRouterLink = computed(() => {
+  const appComponents = instance?.appContext.components ?? {};
+  return Boolean(appComponents.RouterLink || appComponents['router-link'] || instance?.appContext.config.globalProperties.$router);
+});
+const useRouterLink = computed(() => isInternalRoute.value && hasRouterLink.value);
 </script>
 
 <template>
@@ -57,8 +69,9 @@ const showInfoShort = computed(() => (
 
       <VButton
         v-if="buttonText && buttonHref && !noData"
-        as="a"
-        :href="encodeURI(buttonHref)"
+        :as="useRouterLink ? 'router-link' : 'a'"
+        :to="useRouterLink ? buttonHrefEncoded : undefined"
+        :href="!useRouterLink ? buttonHrefEncoded : undefined"
         size="large"
         variant="link"
         class="v-section__button "
