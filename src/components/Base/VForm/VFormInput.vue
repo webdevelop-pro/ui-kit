@@ -326,7 +326,7 @@ watch(() => props.modelValue, () => onInput(props.modelValue));
     svg {
       width: 20px;
       height: 20px;
-      fill: inherit;
+      color: inherit;
     }
   }
 
