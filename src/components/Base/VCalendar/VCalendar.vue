@@ -165,7 +165,10 @@ function onSelect(date: { year: number; month: number; day: number }) {
           </div>
         </div>
       </template>
-      <CalendarHeading v-else class="v-calendar__heading" />
+      <CalendarHeading
+        v-else
+        class="v-calendar__heading"
+      />
       <CalendarNext as-child>
         <VButton
           type="button"
