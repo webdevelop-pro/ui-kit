@@ -53,7 +53,9 @@ const open = defineModel<boolean>();
           <VSheetDescription>Mobile Menu</VSheetDescription>
         </VSheetHeader>
       </VisuallyHidden>
-      <nav class="v-header-mobile__navigation">
+      <nav
+        class="v-header-mobile__navigation"
+      >
         <ul
           v-for="(menuItem, index) in menu"
           :id="String(index)"
@@ -113,7 +115,10 @@ const open = defineModel<boolean>();
         </ul>
       </nav>
 
-      <div class="v-header-mobile__data">
+      <div
+        class="v-header-mobile__data"
+        :class="{ 'is--border': (menu?.length || 0) > 0 }"
+      >
         <slot />
       </div>
     </VSheetContent>
@@ -166,10 +171,13 @@ const open = defineModel<boolean>();
   }
 
   &__data {
-    border-top: 1px solid colors.$gray-40;
     padding: 20px;
     width: 100%;
-    margin-top: 20px;
+
+    &.is--border {
+      border-top: 1px solid colors.$gray-40;
+      margin-top: 20px;
+    }
   }
 
   &__cta {

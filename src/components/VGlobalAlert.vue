@@ -43,7 +43,7 @@ const {
   position: fixed;
   bottom: -20px;
   z-index: 11;
-  background: rgba($color: $white, $alpha: 0.6);
+  background: rgba($color: $white, $alpha: 60%);
 
   &__alert {
     width: 100%;
