@@ -53,9 +53,7 @@ const open = defineModel<boolean>();
           <VSheetDescription>Mobile Menu</VSheetDescription>
         </VSheetHeader>
       </VisuallyHidden>
-      <nav
-        class="v-header-mobile__navigation"
-      >
+      <nav class="v-header-mobile__navigation">
         <ul
           v-for="(menuItem, index) in menu"
           :id="String(index)"
