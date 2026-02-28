@@ -113,13 +113,12 @@ const filterFunction = (list: [], _) => list;
       :disabled="disabled"
       :focused="focus"
     >
-      <VComboboxTrigger>
-        <VComboboxInput
-          :placeholder="placeholder"
-          @focus="onFocus"
-          @blur="onBlur"
-        />
-      </VComboboxTrigger>
+      <VComboboxInput
+        :placeholder="placeholder"
+        @focus="onFocus"
+        @blur="onBlur"
+      />
+      <VComboboxTrigger />
     </VComboboxAnchor>
     <VComboboxContent>
       <VComboboxEmpty />

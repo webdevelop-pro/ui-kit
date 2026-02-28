@@ -39,7 +39,6 @@ const forwardedProps = useForwardProps(delegatedProps);
 .v-combobox-trigger {
   display: flex;
   align-items: center;
-  width: 100%;
 
   &__icon {
     width: 14px;
