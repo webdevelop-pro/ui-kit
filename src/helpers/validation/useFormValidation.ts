@@ -192,8 +192,6 @@ export function useFormValidation<T extends object>(
   const onValidate = () => {
     const validator = compiledValidator.value;
     const formData = undefinedEmptyProp(model);
-    console.log('currentSchema', currentSchema.value)
-    console.log('formData', formData)
     
     // Validate the form data
     validator(formData);
@@ -205,7 +203,6 @@ export function useFormValidation<T extends object>(
     // Process errors via useFormErrors and store validation result
     formErrors.setErrors(rawErrors || []);
     validation.value = formErrors.fieldErrors.value;
-    console.log('validation.value', validation.value)
   };
 
   const resetValidation = () => {

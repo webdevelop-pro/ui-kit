@@ -21,7 +21,6 @@ const props = defineProps({
   },
 });
 
-// console.log('props.items', props.items);
 
 // Separate button-* keys from other keys
 const processedItems = computed(() => {

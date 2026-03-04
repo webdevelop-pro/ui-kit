@@ -9,6 +9,12 @@ const props = defineProps({
 });
 
 onMounted(() => {
+  // Avoid injecting invalid JSON-LD (e.g. `null`) which can break
+  // consumers that expect an object and access r['@context'].
+  if (!props.data || typeof props.data !== 'object') {
+    return;
+  }
+
   const script = document.createElement('script');
   script.type = 'application/ld+json';
   script.innerHTML = JSON.stringify(props.data);

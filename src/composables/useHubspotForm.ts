@@ -22,7 +22,7 @@ export const useHubspotForm = (formId: string) => {
 
   const submitFormToHubspot = async (model: object) => {
     await fetchHubspotForm(hubspotFormId.value, getRequestData(model)).catch((error) => {
-      console.log(error);
+      // error
     });
   };
 
