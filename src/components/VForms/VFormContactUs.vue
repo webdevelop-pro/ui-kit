@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {
-  watch, computed, nextTick,
+  watch, computed, nextTick, ref,
 } from 'vue';
 import { useFormValidation } from 'UiKit/helpers/validation/useFormValidation';
 import VFormGroup from 'UiKit/components/Base/VForm/VFormGroup.vue';
@@ -158,6 +158,8 @@ const [nameFromUrl, emailFromUrl, subjectFromUrl, messageFromUrl] = [
 
 const isDisabledButton = computed(() => (!isValid.value));
 
+const isSubmitting = ref(false);
+
 watch(() => [props.userSessionTraits?.first_name, props.userSessionTraits?.last_name], () => {
   if (props.userSessionTraits?.first_name || props.userSessionTraits?.last_name) {
     model.name = `${props.userSessionTraits?.first_name} ${props.userSessionTraits?.last_name}`;
@@ -183,25 +185,30 @@ const onSubmit = async () => {
     return;
   }
 
-  await useHubspotForm(props.hubspotFormId).submitFormToHubspot({
-    ...model,
-    first_name: model.name,
-    email: model.email,
-    message: model.message,
-  });
+  isSubmitting.value = true;
+  try {
+    await useHubspotForm(props.hubspotFormId).submitFormToHubspot({
+      ...model,
+      first_name: model.name,
+      email: model.email,
+      message: model.message,
+    });
 
-  toast(TOAST_OPTIONS);
-  Object.assign(model, {
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  } as FormModelContactUs);
-  // Clear URL parameters when form is reset
-  [nameFromUrl, emailFromUrl, subjectFromUrl, messageFromUrl].forEach((ref) => {
-    ref.value = '';
-  });
-  emit('close');
+    toast(TOAST_OPTIONS);
+    Object.assign(model, {
+      name: '',
+      email: '',
+      subject: '',
+      message: '',
+    } as FormModelContactUs);
+    // Clear URL parameters when form is reset
+    [nameFromUrl, emailFromUrl, subjectFromUrl, messageFromUrl].forEach((ref) => {
+      ref.value = '';
+    });
+    emit('close');
+  } finally {
+    isSubmitting.value = false;
+  }
 };
 </script>
 
@@ -216,80 +223,85 @@ const onSubmit = async () => {
       novalidate
       @submit.prevent="onSubmit"
     >
-      <VFormGroup
-        v-slot="VFormGroupProps"
-        :required="isFieldRequired('name')"
-        :error-text="getErrorText('name')"
-        label="Your Name"
-        class="contact-us-form__input"
+      <div
+        class="contact-us-form__content"
+        :class="{ 'is--loading': isSubmitting }"
       >
-        <VFormInput
-          :model-value="model.name"
-          :is-error="VFormGroupProps.isFieldError"
-          placeholder="Your Name"
-          name="name"
-          size="large"
-          data-testid="name"
-          type="text"
-          @update:model-value="model.name = $event"
-        />
-      </VFormGroup>
+        <VFormGroup
+          v-slot="VFormGroupProps"
+          :required="isFieldRequired('name')"
+          :error-text="getErrorText('name')"
+          label="Your Name"
+          class="contact-us-form__input"
+        >
+          <VFormInput
+            :model-value="model.name"
+            :is-error="VFormGroupProps.isFieldError"
+            placeholder="Your Name"
+            name="name"
+            size="large"
+            data-testid="name"
+            type="text"
+            @update:model-value="model.name = $event"
+          />
+        </VFormGroup>
 
-      <VFormGroup
-        v-slot="VFormGroupProps"
-        :required="isFieldRequired('email')"
-        :error-text="getErrorText('email')"
-        label="Email Address"
-        class="contact-us-form__input"
-      >
-        <VFormInput
-          :model-value="model.email"
-          :is-error="VFormGroupProps.isFieldError"
-          placeholder="Email Address"
-          name="email"
-          data-testid="email"
-          size="large"
-          type="text"
-          @update:model-value="model.email = $event"
-        />
-      </VFormGroup>
+        <VFormGroup
+          v-slot="VFormGroupProps"
+          :required="isFieldRequired('email')"
+          :error-text="getErrorText('email')"
+          label="Email Address"
+          class="contact-us-form__input"
+        >
+          <VFormInput
+            :model-value="model.email"
+            :is-error="VFormGroupProps.isFieldError"
+            placeholder="Email Address"
+            name="email"
+            data-testid="email"
+            size="large"
+            type="text"
+            @update:model-value="model.email = $event"
+          />
+        </VFormGroup>
 
-      <VFormGroup
-        v-slot="VFormGroupProps"
-        :required="isFieldRequired('subject')"
-        :error-text="getErrorText('subject')"
-        label="Subject"
-        class="contact-us-form__input"
-      >
-        <VFormSelect
-          v-model="model.subject"
-          item-label="label"
-          item-value="value"
-          placeholder="Select"
-          :is-error="VFormGroupProps.isFieldError"
-          name="subject"
-          data-testid="subject"
-          size="large"
-          :options="selectSubjectOptions"
-          :loading="(selectSubjectOptions.length === 0)"
-        />
-      </VFormGroup>
+        <VFormGroup
+          v-slot="VFormGroupProps"
+          :required="isFieldRequired('subject')"
+          :error-text="getErrorText('subject')"
+          label="Subject"
+          class="contact-us-form__input"
+        >
+          <VFormSelect
+            v-model="model.subject"
+            item-label="label"
+            item-value="value"
+            placeholder="Select"
+            :is-error="VFormGroupProps.isFieldError"
+            name="subject"
+            data-testid="subject"
+            size="large"
+            :options="selectSubjectOptions"
+            :loading="(selectSubjectOptions.length === 0)"
+          />
+        </VFormGroup>
 
-      <VFormGroup
-        v-slot="VFormGroupProps"
-        class="contact-us-form__input"
-        :required="isFieldRequired('message')"
-        :error-text="getErrorText('message')"
-        label="Message"
-      >
-        <VFormTextarea
-          :model-value="model.message"
-          rows="3"
-          placeholder="Enter your message"
-          :is-error="VFormGroupProps.isFieldError"
-          @update:model-value="model.message = $event"
-        />
-      </VFormGroup>
+        <VFormGroup
+          v-slot="VFormGroupProps"
+          class="contact-us-form__input"
+          :required="isFieldRequired('message')"
+          :error-text="getErrorText('message')"
+          label="Message"
+        >
+          <VFormTextarea
+            :model-value="model.message"
+            rows="3"
+            placeholder="Enter your message"
+            :is-error="VFormGroupProps.isFieldError"
+            @update:model-value="model.message = $event"
+          />
+        </VFormGroup>
+      </div>
       <div class="contact-us-form__buttons is--margin-top-40">
         <VButton
           v-if="isInDialog"
@@ -303,7 +315,8 @@ const onSubmit = async () => {
           size="large"
           :block="!isInDialog"
           data-testid="button"
-          :disabled="isDisabledButton"
+          :disabled="isDisabledButton || isSubmitting"
+          :loading="isSubmitting"
         >
           Submit
         </VButton>
@@ -332,6 +345,12 @@ const onSubmit = async () => {
     padding: 40px;
     background: $white;
     box-shadow: $box-shadow-medium;
+  }
+
+  &__content.is--loading {
+    cursor: wait !important;
+    opacity: 0.5;
+    pointer-events: none;
   }
 
   &__info {

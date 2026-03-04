@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IOffer } from 'InvestCommon/types/api/offers';
+import { IOffer } from 'InvestCommon/data/offer/offer.types';
 import {
   computed, PropType, ref, watchEffect,
 } from 'vue';

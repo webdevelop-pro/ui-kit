@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import VSliderCardoffer from './VSliderCardOffer.vue';
 import { PropType } from 'vue';
-import { IOffer } from 'InvestCommon/types/api/offers';
+import { IOffer } from 'InvestCommon/data/offer/offer.types';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 
 interface ITitleSlider {

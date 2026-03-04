@@ -3,7 +3,7 @@ import VSlider from './VSlider.vue';
 import VCardOffer from 'UiKit/components/VCard/VCardOffer.vue';
 import { PropType } from 'vue';
 import VCarouselItem from 'UiKit/components/Base/VCarousel/VCarouselItem.vue';
-import { IOffer } from 'InvestCommon/types/api/offers';
+import { IOffer } from 'InvestCommon/data/offer/offer.types';
 
 defineProps({
   items: Array as PropType<IOffer[]>,

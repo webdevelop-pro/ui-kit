@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useIntersectionObserver } from '@vueuse/core';
 import { defineAsyncComponent, hydrateOnVisible, ref } from 'vue';
-import { IOffer } from 'InvestCommon/types/api/offers';
+import { IOffer } from 'InvestCommon/data/offer/offer.types';
 import { urlOfferSingle } from 'InvestCommon/domain/config/links';
 
 const VCardOfferAsync = defineAsyncComponent({
