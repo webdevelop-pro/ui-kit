@@ -33,7 +33,7 @@ withDefaults(defineProps<{
       :src="src"
       :alt="alt"
     />
-    <VAvatarFallback>
+    <VAvatarFallback v-else>
       <slot>
         <user
           class="v-avatar-default__icon"
