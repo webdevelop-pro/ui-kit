@@ -16,5 +16,6 @@ const props = defineProps<TooltipTriggerProps>();
 <style lang="scss">
 .v-tooltip-trigger {
   cursor: default;
+  vertical-align: middle;
 }
 </style>
