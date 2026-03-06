@@ -156,6 +156,7 @@ watch(() => props.modelValue, () => { /* sync external changes */ });
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+@use 'UiKit/styles/_variables.scss' as variables;
 
 .v-form-date-picker {
   cursor: pointer;
@@ -202,7 +203,7 @@ watch(() => props.modelValue, () => { /* sync external changes */ });
   font-size: 16px;
   line-height: 26px;
   font-weight: 400;
-  font-family: Avenir, sans-serif;
+  font-family: variables.$familyValue;
   padding: 0 12px;
   margin: 0;
   appearance: none;

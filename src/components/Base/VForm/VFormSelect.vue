@@ -105,7 +105,7 @@ watch(() => [props.options?.length, modelValue.value], () => {
 .v-select{
   width: 100%;
   font-size: 16px;
-  font-family: Avenir;
+  font-family: variables.$familyValue;
   font-weight: 400;
   background: colors.$gray-10;
   position: relative;
@@ -271,7 +271,7 @@ watch(() => [props.options?.length, modelValue.value], () => {
   }
 
   .vs__dropdown-option{
-    font-family: Avenir;
+    font-family: variables.$familyValue;
     color: colors.$black;
     padding: 12px;
     cursor: pointer;

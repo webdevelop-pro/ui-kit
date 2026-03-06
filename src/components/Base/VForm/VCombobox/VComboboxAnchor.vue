@@ -35,6 +35,7 @@ const delegatedProps = computed(() => {
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+@use 'UiKit/styles/_variables.scss' as variables;
 
 .v-combobox-anchor {
   color: colors.$black;
@@ -43,7 +44,7 @@ const delegatedProps = computed(() => {
   font-size: 16px;
   line-height: 26px;
   font-weight: 400;
-  font-family: Avenir;
+  font-family: variables.$familyValue;
   padding: 0 12px;
   margin: 0;
   appearance: none;
