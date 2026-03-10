@@ -23,25 +23,22 @@ withDefaults(defineProps<{
         <component
           :is="titleTag"
           v-if="title"
-        >
-          {{ title }}
-        </component>
+          v-dompurify-html="title"
+        />
       </slot>
       <slot name="subtitle">
         <div
           v-if="subtitle"
+          v-dompurify-html="subtitle"
           class="is--subheading-1"
-        >
-          {{ subtitle }}
-        </div>
+        />
       </slot>
       <slot name="subtitle2">
         <div
           v-if="subtitle2"
+          v-dompurify-html="subtitle2"
           class="is--subheading-2"
-        >
-          {{ subtitle2 }}
-        </div>
+        />
       </slot>
       <slot name="text">
         <p
@@ -53,10 +50,9 @@ withDefaults(defineProps<{
         <div class="is--margin-top-40">
           <p
             v-if="itemsText"
+            v-dompurify-html="itemsText"
             class="is--margin-bottom-20"
-          >
-            {{ itemsText }}
-          </p>
+          />
           <VListCheckmarks
             v-if="items?.length"
             :items="items"
@@ -68,10 +64,9 @@ withDefaults(defineProps<{
       <slot name="summary">
         <div
           v-if="summary"
+          v-dompurify-html="summary"
           class="v-text-block-with-checkmarks__summary is--h5__title"
-        >
-          {{ summary }}
-        </div>
+        />
       </slot>
     </slot>
   </div>

@@ -21,10 +21,9 @@ defineProps({
         />
       </span>
       <span
+        v-dompurify-html="text"
         class="is--color-gray-80"
-      >
-        {{ text }}
-      </span>
+      />
     </li>
   </ul>
 </template>

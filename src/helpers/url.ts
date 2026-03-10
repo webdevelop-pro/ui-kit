@@ -1,5 +1,7 @@
 import { IFrontmatter } from '@/types/types';
 
+const dynamicRemoveFolders: string[] = [];
+
 export const urlFormat = (url: string, data: IFrontmatter[]) => {
   if (data !== undefined) {
     // data.forEach((data, idx) => {
@@ -16,9 +18,22 @@ export const urlFormat = (url: string, data: IFrontmatter[]) => {
     'SECURITY & COMPLIANCE/',
     'FINANCIAL ECOSYSTEM/',
     'INTELLIGENT ECOSYSTEM/',
+    'BLOCKCHAIN/',
   ];
   let cleanUrl = url;
-  removeFolders.forEach((path) => {
+
+  // Detect duplicated last segment like /tokenization-engine/tokenization-engine
+  const duplicateMatch = cleanUrl.match(/\/([^/]+)\/\1(?:\/|$)/i);
+  if (duplicateMatch && duplicateMatch[1]) {
+    const folder = `${duplicateMatch[1]}/`;
+    if (dynamicRemoveFolders.includes(folder) === false) {
+      dynamicRemoveFolders.push(folder);
+    }
+  }
+
+  const effectiveRemoveFolders = [...removeFolders, ...dynamicRemoveFolders];
+
+  effectiveRemoveFolders.forEach((path) => {
     cleanUrl = cleanUrl.replace(path, '');
     cleanUrl = cleanUrl.replace(path.toLowerCase(), '');
   });
