@@ -2,6 +2,33 @@ import {
   ref, watch, computed, Ref, onMounted, onUnmounted,
 } from 'vue';
 
+const LOCATION_CHANGE_EVENT = 'codex:locationchange';
+let isHistoryPatched = false;
+
+const dispatchLocationChange = () => {
+  window.dispatchEvent(new Event(LOCATION_CHANGE_EVENT));
+};
+
+const ensureHistoryPatched = () => {
+  if (isHistoryPatched || typeof window === 'undefined') return;
+
+  const { pushState, replaceState } = window.history;
+
+  window.history.pushState = function pushStatePatched(...args) {
+    const result = pushState.apply(this, args);
+    dispatchLocationChange();
+    return result;
+  };
+
+  window.history.replaceState = function replaceStatePatched(...args) {
+    const result = replaceState.apply(this, args);
+    dispatchLocationChange();
+    return result;
+  };
+
+  isHistoryPatched = true;
+};
+
 interface UseSyncWithUrlOptions<T = string> {
   key: string;
   defaultValue: T;
@@ -32,14 +59,21 @@ export function useSyncWithUrl<T = string>({
     if (!isClient) return;
     const url = new URL(window.location.href);
     const stringVal = serialize(value);
+    const currentValue = url.searchParams.get(key);
+
+    if (
+      (stringVal === serialize(defaultValue) && currentValue === null)
+      || currentValue === stringVal
+    ) {
+      return;
+    }
+
     if (stringVal === serialize(defaultValue)) {
       url.searchParams.delete(key);
     } else {
       url.searchParams.set(key, stringVal);
     }
     window.history.replaceState(null, '', url.toString());
-    // Update our reactive ref
-    urlSearchParams.value = new URLSearchParams(window.location.search);
   };
 
   // Listen for browser navigation events
@@ -49,31 +83,20 @@ export function useSyncWithUrl<T = string>({
   };
 
   onMounted(() => {
+    ensureHistoryPatched();
     window.addEventListener('popstate', handlePopState);
-    // Also listen for pushstate/replacestate (these don't trigger popstate)
-    const originalPushState = history.pushState;
-    const originalReplaceState = history.replaceState;
-    
-    history.pushState = function(...args) {
-      originalPushState.apply(history, args);
-      handlePopState();
-    };
-    
-    history.replaceState = function(...args) {
-      originalReplaceState.apply(history, args);
-      handlePopState();
-    };
+    window.addEventListener(LOCATION_CHANGE_EVENT, handlePopState);
   });
 
   onUnmounted(() => {
     window.removeEventListener('popstate', handlePopState);
+    window.removeEventListener(LOCATION_CHANGE_EVENT, handlePopState);
   });
 
   watch(paramValue, (newQuery) => {
-    if (syncToUrl) {
-      state.value = parse(newQuery) ?? defaultValue;
-    } else {
-      state.value = defaultValue;
+    const nextValue = syncToUrl ? (parse(newQuery) ?? defaultValue) : defaultValue;
+    if (state.value !== nextValue) {
+      state.value = nextValue;
     }
   }, { immediate: true });
 

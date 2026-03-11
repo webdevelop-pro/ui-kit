@@ -23,6 +23,7 @@ const wrapperRef = ref<HTMLElement | null>(null);
 const scrollElementRef = ref<HTMLElement | null>(null);
 let resizeObserver: ResizeObserver | null = null;
 let mutationObserver: MutationObserver | null = null;
+let scrollRafId = 0;
 const showLeftGradient = ref(false);
 const showRightGradient = ref(false);
 const borderWidth = ref<string>('100%');
@@ -52,6 +53,14 @@ function checkScrollPosition() {
   borderWidth.value = `${scrollWidth}px`;
 }
 
+function scheduleCheckScrollPosition() {
+  if (scrollRafId) return;
+  scrollRafId = requestAnimationFrame(() => {
+    scrollRafId = 0;
+    checkScrollPosition();
+  });
+}
+
 function scrollToActiveTab() {
   const element = scrollElementRef.value;
   if (!element) return;
@@ -59,9 +68,8 @@ function scrollToActiveTab() {
   const activeTab = element.querySelector('[data-state="active"]') as HTMLElement | null;
   if (!activeTab) return;
 
-  const tabRect = activeTab.getBoundingClientRect();
   const containerWidth = element.clientWidth;
-  const tabWidth = tabRect.width;
+  const tabWidth = activeTab.offsetWidth;
   const tabOffsetLeft = activeTab.offsetLeft;
 
   // Calculate center position: tab center should align with container center
@@ -95,7 +103,7 @@ onMounted(async () => {
   const element = scrollElementRef.value;
   if (!element) return;
 
-  element.addEventListener('scroll', checkScrollPosition);
+  element.addEventListener('scroll', scheduleCheckScrollPosition, { passive: true });
 
   // Scroll to active tab on mount (after layout settles)
   await nextTick();
@@ -128,7 +136,7 @@ onMounted(async () => {
   if (typeof ResizeObserver !== 'undefined') {
     resizeObserver = new ResizeObserver(() => {
       updateScrollElement();
-      checkScrollPosition();
+      scheduleCheckScrollPosition();
       scrollToActiveTabDebounced();
     });
     resizeObserver.observe(element);
@@ -138,7 +146,11 @@ onMounted(async () => {
 onUnmounted(() => {
   const element = scrollElementRef.value;
   if (element) {
-    element.removeEventListener('scroll', checkScrollPosition);
+    element.removeEventListener('scroll', scheduleCheckScrollPosition);
+  }
+  if (scrollRafId) {
+    cancelAnimationFrame(scrollRafId);
+    scrollRafId = 0;
   }
   if (resizeObserver) {
     resizeObserver.disconnect();

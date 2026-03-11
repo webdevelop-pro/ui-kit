@@ -27,6 +27,10 @@ defineProps({
     type: Number,
     default: 6000,
   },
+  options: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 </script>
 
@@ -39,6 +43,7 @@ defineProps({
       :show-pagination="showPagination"
       :active-color="activeColor"
       :autoplay-change-time="autoplayChangeTime"
+      :options="options"
       :pass-item-data="true"
       class="v-slider-cards__slider"
     >

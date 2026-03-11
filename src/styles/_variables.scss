@@ -15,5 +15,19 @@ $wide: 1366px !default;
 $header-height: 64px;
 
 $v-size: 16;
-$familyValue: 'Avenir', 'Nunito', 'Lato', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+$familyValue:
+  'Avenir',
+  'Avenir Next',
+  system-ui,
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Roboto,
+  'Noto Sans',
+  Ubuntu,
+  Cantarell,
+  'Helvetica Neue',
+  Helvetica,
+  Arial,
+  sans-serif;
 

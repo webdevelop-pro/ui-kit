@@ -63,7 +63,7 @@ const btnClasses = computed(() => ({
   justify-content: center;
   align-items: center;
   border: unset;
-  font-family: Avenir;
+  font-family: variables.$familyValue;
   font-weight: 700;
   flex-shrink: 0;
   background-color: transparent;

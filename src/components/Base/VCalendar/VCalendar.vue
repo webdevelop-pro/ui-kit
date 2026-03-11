@@ -226,6 +226,7 @@ function onSelect(date: { year: number; month: number; day: number }) {
 
 <style lang="scss" scoped>
 @use 'UiKit/styles/_colors.scss' as colors;
+@use 'UiKit/styles/_variables.scss' as variables;
 
 .v-calendar {
   width: 100%;
@@ -265,7 +266,7 @@ function onSelect(date: { year: number; month: number; day: number }) {
     padding: 4px 0;
     font-size: 12px;
     font-weight: 500;
-    font-family: Avenir, sans-serif;
+    font-family: variables.$familyValue;
     color: colors.$gray-60;
     text-align: center;
   }
@@ -289,7 +290,7 @@ function onSelect(date: { year: number; month: number; day: number }) {
     height: 32px;
     margin: 0 auto;
     font-size: 14px;
-    font-family: Avenir, sans-serif;
+    font-family: variables.$familyValue;
     font-weight: 400;
     color: colors.$black;
     cursor: pointer;

@@ -37,6 +37,7 @@ const forwardedProps = useForwardProps(delegatedProps);
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+@use 'UiKit/styles/_variables.scss' as variables;
 
 .v-select-trigger {
   $root: &;
@@ -48,7 +49,7 @@ const forwardedProps = useForwardProps(delegatedProps);
   width: 100%;
   overflow: hidden;
   font-size: 16px;
-  font-family: Avenir;
+  font-family: variables.$familyValue;
   font-weight: 400;
   background: colors.$gray-10;
   position: relative;
