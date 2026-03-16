@@ -12,27 +12,43 @@
   }
 
   @if $root {
+    html.pwa-mobile,
     body.pwa-mobile {
       @content;
     }
   }
 
  @else {
+    html.pwa-mobile &,
     body.pwa-mobile & {
       @content;
     }
   }
+}
 
-  html { 
-    // Default to smooth scrolling when navigating within the PWA shell
+@media (display-mode: standalone), (display-mode: fullscreen), (display-mode: minimal-ui) {
+  // Default to smooth scrolling when navigating within the PWA shell
+  html {
     scroll-behavior: smooth;
   }
+}
 
-  @media (prefers-reduced-motion: reduce) {
-    // Respect OS accessibility settings by disabling smooth scrolling animations
-    html {
-      scroll-behavior: auto;
-    }
+html.pwa-mobile {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  // Respect OS accessibility settings by disabling smooth scrolling animations
+  html.pwa-mobile {
+    scroll-behavior: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (display-mode: standalone),
+  (prefers-reduced-motion: reduce) and (display-mode: fullscreen),
+  (prefers-reduced-motion: reduce) and (display-mode: minimal-ui) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
