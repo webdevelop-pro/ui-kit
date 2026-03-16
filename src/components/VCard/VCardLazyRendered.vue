@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import { useIntersectionObserver } from '@vueuse/core';
-import { defineAsyncComponent, hydrateOnVisible, ref } from 'vue';
+import { ref } from 'vue';
 import { IOffer } from 'InvestCommon/data/offer/offer.types';
 import { urlOfferSingle } from 'InvestCommon/domain/config/links';
-
-const VCardOfferAsync = defineAsyncComponent({
-  loader: () => import(/* webpackChunkName: "VCardOfferAsync" */ 'UiKit/components/VCard/VCardOffer.vue'),
-  hydrate: hydrateOnVisible(),
-});
+import VCardOffer from 'UiKit/components/VCard/VCardOffer.vue';
 
 defineProps<{
   offer: IOffer;
@@ -16,20 +12,25 @@ defineProps<{
 const show = ref(false);
 const el = ref<HTMLElement | null>(null);
 
-useIntersectionObserver(
+const { stop } = useIntersectionObserver(
   el,
   ([{ isIntersecting }]) => {
-    if (isIntersecting) show.value = true;
+    if (!isIntersecting) {
+      return;
+    }
+
+    show.value = true;
+    stop();
   },
   {
-    rootMargin: '0px', // loads earlier for smoother UX
+    rootMargin: '200px 0px',
   },
 );
 </script>
 
 <template>
   <component
-    :is="show ? VCardOfferAsync : 'div'"
+    :is="show ? VCardOffer : 'div'"
     ref="el"
     v-bind="show ? {
       offer,

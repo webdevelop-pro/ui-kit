@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { IOffer } from 'InvestCommon/data/offer/offer.types';
 import {
-  computed, PropType, ref, watchEffect,
+  computed, PropType,
 } from 'vue';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 import VCardOffer from 'UiKit/components/VCard/VCardOffer.vue';
@@ -18,7 +18,6 @@ const props = defineProps({
 });
 
 const noData = computed(() => (props.items?.length === 0) && !props.loading);
-const loadingLocal = ref(true);
 const arrayEager = computed(() => {
   const items = props.items || [];
   return items.slice(0, 6);
@@ -26,12 +25,6 @@ const arrayEager = computed(() => {
 const arrayLazy = computed(() => {
   const items = props.items || [];
   return items.slice(6);
-});
-
-watchEffect(() => {
-  setTimeout(() => {
-    loadingLocal.value = props.loading;
-  }, 1000);
 });
 </script>
 
@@ -52,7 +45,7 @@ watchEffect(() => {
         class="v-section-card-offer-grid__list-wrap"
       >
         <div
-          v-if="!loadingLocal"
+          v-if="!loading"
           class="is--three-col-grid"
         >
           <VCardOffer
