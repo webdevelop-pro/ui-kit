@@ -79,6 +79,13 @@ const componentIcon = computed(() => {
       />
     </div>
 
+    <div
+      v-if="$slots.default"
+      class="v-alert-default__actions"
+    >
+      <slot />
+    </div>
+
     <VButton
       v-if="buttonText"
       size="small"
@@ -130,6 +137,13 @@ const componentIcon = computed(() => {
       align-items: flex-start;
     }
 
+    &__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-left: auto;
+    }
+
     // On desktop, ungroup the icon from title/description and reorder
     @media screen and (min-width: $tablet) {
       &__title-group,
@@ -140,6 +154,13 @@ const componentIcon = computed(() => {
       &__title-group .v-alert-default__icon,
       &__description-group .v-alert-default__icon {
         order: -1;
+      }
+    }
+
+    @media screen and (max-width: $tablet) {
+      &__actions {
+        width: 100%;
+        margin-left: 0;
       }
     }
 
