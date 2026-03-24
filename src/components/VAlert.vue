@@ -4,19 +4,29 @@ import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import errorIcon from 'UiKit/assets/images/circle-exclamation.svg';
 import infoIcon from 'UiKit/assets/images/circle-info.svg';
 import checkIcon from 'UiKit/assets/images/circle-check.svg';
+import closeIcon from 'UiKit/assets/images/close.svg?component';
 import { computed } from 'vue';
 
 const props = withDefaults(defineProps<{
     variant?: 'error' | 'success' | 'info';
     buttonText?: string;
+    showClose?: boolean;
 }>(), {
   variant: 'info',
+  showClose: false,
 });
 
-const emit = defineEmits(['click']);
+const emit = defineEmits<{
+  click: [];
+  close: [];
+}>();
 
 const onClick = () => {
   emit('click');
+};
+
+const onClose = () => {
+  emit('close');
 };
 
 const buttonColor = computed(() => {
@@ -44,7 +54,7 @@ const componentIcon = computed(() => {
   <VAlert
     :variant="variant"
     class="VAlertDefault v-alert-default"
-    :class="[`is--${variant}`]"
+    :class="[{ 'has-close': showClose }, `is--${variant}`]"
   >
     <div class="VAlertDefault v-alert-default__content">
       <template v-if="$slots.title">
@@ -80,20 +90,37 @@ const componentIcon = computed(() => {
     </div>
 
     <div
-      v-if="$slots.default"
-      class="v-alert-default__actions"
+      v-if="$slots.default || buttonText"
+      class="v-alert-default__controls"
     >
-      <slot />
+      <div
+        v-if="$slots.default"
+        class="v-alert-default__actions"
+      >
+        <slot />
+      </div>
+
+      <VButton
+        v-if="buttonText"
+        size="small"
+        :color="buttonColor"
+        class="v-alert-default__button is--margin-top-0"
+        @click="onClick"
+      >
+        {{ buttonText }}
+      </VButton>
     </div>
 
     <VButton
-      v-if="buttonText"
+      v-if="showClose"
+      icon-only
+      variant="link"
       size="small"
-      :color="buttonColor"
-      class="v-alert-default__button is--margin-top-0"
-      @click="onClick"
+      aria-label="Close alert"
+      class="v-alert-default__close is--margin-top-0"
+      @click="onClose"
     >
-      {{ buttonText }}
+      <closeIcon class="v-alert-default__close-icon" />
     </VButton>
   </VAlert>
 </template>
@@ -105,6 +132,8 @@ const componentIcon = computed(() => {
 .v-alert-default {
     $root: &;
 
+    position: relative;
+
     @media screen and (max-width: $tablet) {
       flex-direction: column;
       align-items: flex-start;
@@ -112,6 +141,10 @@ const componentIcon = computed(() => {
       .v-alert-default__button {
         width: 100%;
       }
+    }
+
+    &.has-close {
+      padding-right: 56px;
     }
 
     &__icon {
@@ -124,10 +157,20 @@ const componentIcon = computed(() => {
     &__content {
         display: flex;
         gap:8px;
+        flex: 1 1 auto;
 
       @media screen and (width < $tablet) {
         flex-direction: column;
       }
+    }
+
+    &__controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-left: auto;
+      flex-shrink: 0;
     }
 
     &__title-group,
@@ -141,7 +184,6 @@ const componentIcon = computed(() => {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-left: auto;
     }
 
     // On desktop, ungroup the icon from title/description and reorder
@@ -158,10 +200,30 @@ const componentIcon = computed(() => {
     }
 
     @media screen and (max-width: $tablet) {
-      &__actions {
+      &__controls {
         width: 100%;
         margin-left: 0;
       }
+
+      &__actions {
+        width: 100%;
+      }
+
+      &__button {
+        width: 100%;
+      }
+    }
+
+    &__close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+    }
+
+    &__close-icon {
+      width: 14px;
+      height: 14px;
+      color: colors.$gray-80;
     }
 
     &.is--error {
