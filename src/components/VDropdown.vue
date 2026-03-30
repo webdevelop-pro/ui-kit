@@ -6,7 +6,7 @@ import {
   VDropdownMenu, VDropdownMenuTrigger, VDropdownMenuContent, VDropdownMenuItem,
 } from 'UiKit/components/Base/VDropdownMenu';
 import type { Component } from 'vue';
-import { PropType, ref } from 'vue';
+import { PropType } from 'vue';
 
 export interface IDropdown {
   to?: string;
@@ -23,6 +23,8 @@ defineProps({
   contentProps: Object as PropType<DropdownMenuContentProps>,
 });
 
+const open = defineModel<boolean>('open', { default: false });
+
 const getComponentName = (item: IDropdown) => {
   if (item.to) return 'router-link';
   if (item.href) return 'a';
@@ -34,13 +36,11 @@ const getComponentProps = (item: IDropdown) => {
   if (item.href) return { href: encodeURI(item.href) };
   return {};
 };
-
-const toggleState = ref(false);
 </script>
 
 <template>
   <VDropdownMenu
-    v-model:open="toggleState"
+    v-model:open="open"
     class="VDropdown v-dropdown"
   >
     <VDropdownMenuTrigger
@@ -52,6 +52,7 @@ const toggleState = ref(false);
     <VDropdownMenuContent
       v-bind="contentProps"
     >
+      <slot name="content-start" />
       <VDropdownMenuItem
         v-for="menuItem in menu"
         :key="menuItem.text"
