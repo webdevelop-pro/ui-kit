@@ -1,15 +1,17 @@
 import type { Component } from 'vue';
+import type { RouteLocationRaw } from 'vue-router';
 import type { SidebarCollapsible, SidebarSide } from 'UiKit/components/Base/VSidebar';
 
 export interface SidebarNavItem {
   id?: string;
   title: string;
   href?: string;
-  to?: string | Record<string, unknown>;
+  to?: RouteLocationRaw;
   icon?: Component;
   badge?: string | number;
   active?: boolean;
   disabled?: boolean;
+  queryOnly?: boolean;
   items?: SidebarNavItem[];
 }
 

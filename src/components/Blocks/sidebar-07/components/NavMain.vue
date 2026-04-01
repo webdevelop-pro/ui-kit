@@ -28,20 +28,28 @@ const emit = defineEmits<{
 
 const sidebar = useSidebar();
 
+interface SelectOptions {
+  closeSidebarOnMobile?: boolean;
+}
+
 function resolveLinkTag(item: SidebarNavItem) {
+  if (item.queryOnly) return 'button';
   if (item.to) return 'router-link';
   if (item.href) return 'a';
   return 'button';
 }
 
 function resolveLinkProps(item: SidebarNavItem) {
+  if (item.queryOnly) return { type: 'button' };
   if (item.to) return { to: item.to };
   if (item.href) return { href: item.href };
   return { type: 'button' };
 }
 
-function handleSelect(item: SidebarNavItem) {
-  if (sidebar.isMobile.value && (item.to || item.href)) {
+function handleSelect(item: SidebarNavItem, options: SelectOptions = {}) {
+  const { closeSidebarOnMobile = true } = options;
+
+  if (closeSidebarOnMobile && sidebar.isMobile.value && (item.to || item.href)) {
     sidebar.setMobileOpen(false);
   }
 
@@ -73,7 +81,7 @@ function handleSelect(item: SidebarNavItem) {
                 as="button"
                 class="nav-main__button justify-between"
                 type="button"
-                @click="handleSelect(item)"
+                @click="handleSelect(item, { closeSidebarOnMobile: false })"
               >
                 <span class="flex min-w-0 items-center gap-3">
                   <component
@@ -103,7 +111,7 @@ function handleSelect(item: SidebarNavItem) {
                     :is="resolveLinkTag(child)"
                     v-bind="resolveLinkProps(child)"
                     :class="cn(
-                      'nav-main__subitem',
+                      'nav-main__subitem is--h6__title',
                       child.active ? 'is--active' : '',
                       child.disabled ? 'is--disabled' : '',
                     )"
@@ -158,14 +166,17 @@ function handleSelect(item: SidebarNavItem) {
 
 <style scoped lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+@use 'UiKit/styles/_variables.scss' as variables;
 
 .nav-main {
   &__trigger {
     display: block;
+    width: 100%;
   }
 
   &__button {
     text-decoration: none !important;
+    width: 100%;
   }
 
   &__submenu {
@@ -185,17 +196,21 @@ function handleSelect(item: SidebarNavItem) {
   &__subitem {
     display: flex;
     align-items: center;
-    min-height: 32px;
+    min-height: 40px;
     gap: 8px;
-    padding: 0 8px;
+    width: 100%;
+    border: 1px solid transparent;
     border-radius: 2px;
+    background: transparent;
+    padding: 0 16px;
+    box-shadow: none;
     color: colors.$gray-70;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.35;
     text-decoration: none !important;
+    cursor: pointer;
     transition:
       background-color 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
       color 0.2s ease;
 
     &:hover {
@@ -204,7 +219,6 @@ function handleSelect(item: SidebarNavItem) {
     }
 
     &.is--active {
-      background: colors.$primary-light;
       color: colors.$primary;
     }
 
@@ -223,6 +237,20 @@ function handleSelect(item: SidebarNavItem) {
     font-size: 10px;
     font-weight: 700;
     line-height: 1.2;
+  }
+
+  &__subitem.is--active &__subitem-badge {
+    background: rgba(colors.$primary, 0.12);
+    color: colors.$primary;
+  }
+
+  &__subitem.is--active:hover &__subitem-badge {
+    background: rgba(colors.$white, 0.18);
+    color: colors.$white;
+  }
+
+  :deep(.v-button__content) {
+    justify-content: flex-start;
   }
 }
 </style>

@@ -46,7 +46,7 @@ const buttonSize = computed(() => {
     )"
     :icon-only="sidebar.isCollapsed.value"
     :size="buttonSize"
-    :variant="props.isActive ? 'default' : 'link'"
+    :variant="props.isActive ? 'tetriary' : 'link'"
     v-bind="$attrs"
   >
     <slot />

@@ -4,6 +4,7 @@ import {
   sidebarContextKey,
 } from 'UiKit/components/Base/VSidebar/useSidebar';
 import { VSidebarTrigger } from 'UiKit/components/Base/VSidebar';
+import VAvatarIdentity from 'UiKit/components/VAvatarIdentity.vue';
 import VHeaderAuthorized from 'UiKit/components/VHeader/VHeaderAuthorized.vue';
 import VHeaderGuest from 'UiKit/components/VHeader/VHeaderGuest.vue';
 import { computed, provide } from 'vue';
@@ -111,8 +112,22 @@ provide(sidebarContextKey, sidebar);
           :user-logged-in="true"
         >
           <template #leading>
-            <div class="is--lt-desktop-md-show">
-              <VSidebarTrigger />
+            <div
+              v-if="props.user"
+              class="is--lt-desktop-md-show"
+            >
+              <VSidebarTrigger
+                class="app-sidebar__mobile-trigger"
+              >
+                <VAvatarIdentity
+                  v-if="sidebar.isMobile.value"
+                  size="small"
+                  :src="props.user.avatarSrc"
+                  alt="avatar image"
+                  :avatar-text="props.user.avatarText"
+                  :label="props.user.name"
+                />
+              </VSidebarTrigger>
             </div>
           </template>
         </VHeaderAuthorized>
@@ -140,3 +155,9 @@ provide(sidebarContextKey, sidebar);
     </main>
   </div>
 </template>
+
+<style scoped lang="scss">
+.app-sidebar__mobile-trigger {
+  max-width: min(220px, calc(100vw - 120px));
+}
+</style>

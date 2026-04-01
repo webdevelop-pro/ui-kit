@@ -119,6 +119,8 @@ describe('Sidebar07/AppSidebar', () => {
     window.dispatchEvent(new Event('resize'));
     await nextTick();
 
+    expect(wrapper.find('.v-avatar-identity').exists()).toBe(true);
+
     await wrapper.get('[data-sidebar-trigger]').trigger('click');
     await nextTick();
 
@@ -155,6 +157,71 @@ describe('Sidebar07/AppSidebar', () => {
     await nextTick();
 
     expect(wrapper.get('.v-sidebar-mobile .v-sidebar').classes()).toContain('-translate-x-full');
+  });
+
+  it('keeps the mobile drawer open when a grouped navigation trigger is clicked', async () => {
+    Object.defineProperty(window, 'innerWidth', {
+      configurable: true,
+      writable: true,
+      value: 390,
+    });
+
+    const wrapper = mount(AppSidebar, {
+      props: {
+        mainNav: [
+          {
+            title: 'Portfolio',
+            href: '#portfolio',
+            items: [{ title: 'Positions', href: '#positions' }],
+          },
+        ],
+        user: { name: 'Avery Stone', email: 'avery@acme.test' },
+      },
+    });
+
+    window.dispatchEvent(new Event('resize'));
+    await nextTick();
+
+    await wrapper.get('[data-sidebar-trigger]').trigger('click');
+    await nextTick();
+
+    await wrapper.get('.nav-main__button').trigger('click');
+    await nextTick();
+
+    expect(wrapper.get('.v-sidebar-mobile .v-sidebar').classes()).toContain('translate-x-0');
+    expect(wrapper.text()).toContain('Positions');
+  });
+
+  it('renders query-only items as buttons and still emits select', async () => {
+    const wrapper = mount(AppSidebar, {
+      props: {
+        defaultOpen: true,
+        mainNav: [
+          {
+            title: 'Summary',
+            to: '/dashboard?tab=summary',
+            queryOnly: true,
+          },
+        ],
+        user: { name: 'Avery Stone', email: 'avery@acme.test' },
+      },
+    });
+
+    const queryButton = wrapper.get('.nav-main__button');
+
+    expect(queryButton.element.tagName).toBe('BUTTON');
+
+    await queryButton.trigger('click');
+
+    expect(wrapper.emitted('select')).toEqual([
+      [
+        expect.objectContaining({
+          title: 'Summary',
+          to: '/dashboard?tab=summary',
+          queryOnly: true,
+        }),
+      ],
+    ]);
   });
 
   it('closes the mobile drawer after selecting a user dropdown action', async () => {

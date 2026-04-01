@@ -31,6 +31,12 @@ const selectedTab = useSyncWithUrl({
   defaultValue: props.defaultValue || '',
   syncToUrl: props.tabsToUrl,
 });
+const queryKey = props.queryKey || 'tab';
+let shouldSkipInitialModelSync = Boolean(
+  props.tabsToUrl
+  && typeof window !== 'undefined'
+  && new URLSearchParams(window.location.search).has(queryKey),
+);
 // const selectedTab = ref(props.defaultValue || '');
 
 // const queryTab = computed(() => new URLSearchParams(window.location.search).get('tab'));
@@ -70,6 +76,11 @@ watch(
 watch(
   () => props.modelValue,
   (newValue) => {
+    if (shouldSkipInitialModelSync) {
+      shouldSkipInitialModelSync = false;
+      return;
+    }
+
     if (newValue !== undefined && newValue !== selectedTab.value) {
       selectedTab.value = newValue;
     }
@@ -80,7 +91,6 @@ watch(
 // Remove tab query parameter from URL on unmount
 onUnmounted(() => {
   if (props.tabsToUrl && typeof window !== 'undefined') {
-    const queryKey = props.queryKey || 'tab';
     const url = new URL(window.location.href);
     if (url.searchParams.has(queryKey)) {
       url.searchParams.delete(queryKey);
