@@ -1,33 +1,10 @@
 import {
   ref, watch, computed, Ref, onMounted, onUnmounted,
 } from 'vue';
-
-const LOCATION_CHANGE_EVENT = 'codex:locationchange';
-let isHistoryPatched = false;
-
-const dispatchLocationChange = () => {
-  window.dispatchEvent(new Event(LOCATION_CHANGE_EVENT));
-};
-
-const ensureHistoryPatched = () => {
-  if (isHistoryPatched || typeof window === 'undefined') return;
-
-  const { pushState, replaceState } = window.history;
-
-  window.history.pushState = function pushStatePatched(...args) {
-    const result = pushState.apply(this, args);
-    dispatchLocationChange();
-    return result;
-  };
-
-  window.history.replaceState = function replaceStatePatched(...args) {
-    const result = replaceState.apply(this, args);
-    dispatchLocationChange();
-    return result;
-  };
-
-  isHistoryPatched = true;
-};
+import {
+  ensureLocationChangeHistoryPatched,
+  LOCATION_CHANGE_EVENT,
+} from './locationChange';
 
 interface UseSyncWithUrlOptions<T = string> {
   key: string;
@@ -83,7 +60,7 @@ export function useSyncWithUrl<T = string>({
   };
 
   onMounted(() => {
-    ensureHistoryPatched();
+    ensureLocationChangeHistoryPatched();
     window.addEventListener('popstate', handlePopState);
     window.addEventListener(LOCATION_CHANGE_EVENT, handlePopState);
   });
