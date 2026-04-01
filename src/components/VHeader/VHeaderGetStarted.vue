@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineAsyncComponent, hydrateOnVisible, PropType } from 'vue';
-import VHeader from 'UiKit/components/VHeader/VHeader.vue';
+import VHeaderGuest from 'UiKit/components/VHeader/VHeaderGuest.vue';
 import { MenuItem } from './VHeaderNavigation.vue';
 import { filterPages } from 'UiKit/helpers/allData';
 import { data as allPages } from '@/store/all.data';
@@ -23,7 +23,7 @@ defineProps({
 </script>
 
 <template>
-  <VHeader
+  <VHeaderGuest
     :menu="menu"
     class="VHeaderGetStarted v-header-get-started"
   >
@@ -43,5 +43,5 @@ defineProps({
         Get Started
       </VButton>
     </template>
-  </VHeader>
+  </VHeaderGuest>
 </template>

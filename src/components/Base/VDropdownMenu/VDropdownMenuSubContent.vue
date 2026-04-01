@@ -45,5 +45,70 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   animation-duration: 0.2s;
   animation-timing-function: ease-out;
   max-height: min(var(--radix-dropdown-menu-content-available-height), 80vh);
+  will-change: opacity, transform;
+}
+
+.v-dropdown-menu-sub-content[data-side="top"] {
+  animation-name: dropdownMenuSubSlideUp;
+}
+
+.v-dropdown-menu-sub-content[data-side="bottom"] {
+  animation-name: dropdownMenuSubSlideDown;
+}
+
+.v-dropdown-menu-sub-content[data-side="left"] {
+  animation-name: dropdownMenuSubSlideLeft;
+}
+
+.v-dropdown-menu-sub-content[data-side="right"] {
+  animation-name: dropdownMenuSubSlideRight;
+}
+
+@keyframes dropdownMenuSubSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdownMenuSubSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdownMenuSubSlideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes dropdownMenuSubSlideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 </style>

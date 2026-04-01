@@ -7,6 +7,7 @@ import {
   useForwardPropsEmits,
 } from 'radix-vue';
 import { computed, type HTMLAttributes } from 'vue';
+import { cn } from 'UiKit/lib/utils';
 
 const props = withDefaults(
   defineProps<DropdownMenuContentProps & { class?: HTMLAttributes['class'] }>(),
@@ -30,7 +31,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   <DropdownMenuPortal>
     <DropdownMenuContent
       v-bind="forwarded"
-      class="VDropdownMenuContent v-dropdown-menu-content"
+      :class="cn('VDropdownMenuContent v-dropdown-menu-content', props.class)"
     >
       <slot />
     </DropdownMenuContent>
@@ -55,20 +56,29 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   max-height: var(--radix-dropdown-menu-content-available-height);
   animation-duration: 0.6s;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 1;
+  z-index: 1101;
   max-width: 100%;
   min-width: var(--radix-dropdown-menu-trigger-width);
+  will-change: opacity, transform;
 }
 
 .v-dropdown-menu-content[data-side="top"] {
-  animation-name: slideUp;
+  animation-name: dropdownMenuSlideUp;
 }
 
 .v-dropdown-menu-content[data-side="bottom"] {
-  animation-name: slideDown;
+  animation-name: dropdownMenuSlideDown;
 }
 
-@keyframes slideUp {
+.v-dropdown-menu-content[data-side="left"] {
+  animation-name: dropdownMenuSlideLeft;
+}
+
+.v-dropdown-menu-content[data-side="right"] {
+  animation-name: dropdownMenuSlideRight;
+}
+
+@keyframes dropdownMenuSlideUp {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -80,7 +90,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   }
 }
 
-@keyframes slideDown {
+@keyframes dropdownMenuSlideDown {
   from {
     opacity: 0;
     transform: translateY(-10px);
@@ -89,6 +99,30 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes dropdownMenuSlideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes dropdownMenuSlideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 </style>

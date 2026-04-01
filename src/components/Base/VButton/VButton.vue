@@ -80,12 +80,6 @@ const btnClasses = computed(() => ({
     box-shadow: none;
   }
 
-  svg,
-  img {
-    width: 18px;
-    height: 18px;
-  }
-
   &__content {
     transition: opacity .3s;
     display: flex;
@@ -94,6 +88,12 @@ const btnClasses = computed(() => ({
     flex-shrink: 0;
     width: 100%;
     gap: 6px;
+
+    > :is(svg, img) {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
   }
 
   &.is--block {
@@ -140,8 +140,7 @@ const btnClasses = computed(() => ({
     font-size: 12px;
     line-height: 28px;
 
-    svg,
-    img {
+    #{$root}__content > :is(svg, img) {
       width: 15px;
       height: 15px;
     }

@@ -1,0 +1,404 @@
+<script setup lang="ts">
+import { ChevronsUpDown, Plus } from 'lucide-vue-next';
+import type { Component } from 'vue';
+import {
+  VDropdownMenu,
+  VDropdownMenuContent,
+  VDropdownMenuItem,
+  VDropdownMenuTrigger,
+} from 'UiKit/components/Base/VDropdownMenu';
+import {
+  VSidebarMenu,
+  VSidebarMenuButton,
+  VSidebarMenuItem,
+  useSidebar,
+} from 'UiKit/components/Base/VSidebar';
+import VAvatar from 'UiKit/components/VAvatar.vue';
+import { computed, ref } from 'vue';
+import type { SidebarTeam } from '../types';
+
+const DROPDOWN_ALIGN = 'start';
+const DROPDOWN_LABEL = 'Profiles';
+
+const props = withDefaults(defineProps<{
+  dropdownComponent?: Component;
+  dropdownProps?: Record<string, unknown>;
+  teams?: SidebarTeam[];
+  title?: string;
+  subtitle?: string;
+}>(), {
+  dropdownComponent: undefined,
+  dropdownProps: undefined,
+  teams: () => [],
+  title: 'Workspace',
+  subtitle: 'Sidebar block',
+});
+
+const emit = defineEmits<{
+  select: [team: SidebarTeam];
+  create: [];
+}>();
+
+const sidebar = useSidebar();
+const isDropdownOpen = ref(false);
+const activeTeam = computed(() => (
+  props.teams.find((team) => team.active) ?? props.teams[0]
+));
+const activeTeamTitle = computed(() => (
+  activeTeam.value?.title ?? props.title
+));
+const activeTeamSubtitle = computed(() => (
+  activeTeam.value ? activeTeam.value.subtitle : props.subtitle
+));
+const dropdownSide = computed(() => {
+  if (sidebar.isMobile.value) {
+    return 'bottom';
+  }
+
+  return sidebar.isCollapsed.value ? 'right' : 'bottom';
+});
+const dropdownSideOffset = computed(() => {
+  if (sidebar.isMobile.value) {
+    return 8;
+  }
+
+  return sidebar.isCollapsed.value ? 16 : 6;
+});
+const dropdownAlignOffset = computed(() => (
+  sidebar.isCollapsed.value ? 8 : 0
+));
+const triggerSize = computed(() => (
+  sidebar.isCollapsed.value ? 'default' : 'sm'
+));
+
+function getTeamInitials(team?: Pick<SidebarTeam, 'title' | 'avatarText'> | null) {
+  if (!team) {
+    return 'WS';
+  }
+
+  const avatarText = team.avatarText?.trim();
+
+  if (avatarText) {
+    return avatarText.slice(0, 2).toUpperCase();
+  }
+
+  return team.title
+    .split(' ')
+    .map((part) => part[0] ?? '')
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+}
+
+function getTriggerAvatarText(team?: Pick<SidebarTeam, 'title' | 'avatarText'> | null) {
+  const avatarText = team?.avatarText?.trim();
+
+  if (avatarText) {
+    return avatarText.charAt(0).toUpperCase();
+  }
+
+  return team?.title?.trim().charAt(0).toUpperCase() || 'W';
+}
+
+function handleTeamSelect(team: SidebarTeam) {
+  isDropdownOpen.value = false;
+  emit('select', team);
+}
+
+function handleCreate() {
+  isDropdownOpen.value = false;
+  emit('create');
+}
+
+function handleCustomSelect(value: string | number) {
+  const nextTeam = props.teams.find((team) => String(team.id) === String(value));
+
+  if (nextTeam) {
+    handleTeamSelect(nextTeam);
+    return;
+  }
+
+  if (String(value) === 'new') {
+    handleCreate();
+  }
+}
+</script>
+
+<template>
+  <VSidebarMenu class="team-switcher">
+    <VSidebarMenuItem>
+      <VDropdownMenu v-model:open="isDropdownOpen">
+        <VDropdownMenuTrigger
+          as-child
+          :with-chevron="false"
+        >
+          <VSidebarMenuButton
+            as="button"
+            class="team-switcher__trigger"
+            :size="triggerSize"
+            type="button"
+          >
+            <VAvatar
+              size="small"
+              :alt="`${activeTeamTitle} avatar`"
+              class="team-switcher__avatar"
+              :src="activeTeam?.avatarSrc"
+            >
+              <span>{{ getTriggerAvatarText(activeTeam ?? { title: props.title }) }}</span>
+            </VAvatar>
+
+            <template v-if="!sidebar.isCollapsed.value">
+              <div
+                class="team-switcher__copy"
+                :class="{ 'is--single-line': !activeTeamSubtitle }"
+              >
+                <p class="team-switcher__title">
+                  {{ activeTeamTitle }}
+                </p>
+                <p
+                  v-if="activeTeamSubtitle"
+                  class="team-switcher__subtitle"
+                >
+                  {{ activeTeamSubtitle }}
+                </p>
+              </div>
+
+              <ChevronsUpDown class="team-switcher__chevron" />
+            </template>
+          </VSidebarMenuButton>
+        </VDropdownMenuTrigger>
+
+        <VDropdownMenuContent
+          :align="DROPDOWN_ALIGN"
+          :align-offset="dropdownAlignOffset"
+          class="team-switcher__content"
+          :side="dropdownSide"
+          :side-offset="dropdownSideOffset"
+        >
+          <div class="team-switcher__content-label">
+            {{ DROPDOWN_LABEL }}
+          </div>
+
+          <template v-if="props.dropdownComponent">
+            <component
+              :is="props.dropdownComponent"
+              v-bind="props.dropdownProps"
+              @select="handleCustomSelect"
+            />
+          </template>
+
+          <template v-else>
+            <VDropdownMenuItem
+              v-for="team in props.teams"
+              :key="team.id"
+              class="team-switcher__item v-dropdown__item"
+              :class="{ 'is--active': team.active }"
+              @select="handleTeamSelect(team)"
+            >
+              <VAvatar
+                size="small"
+                :alt="`${team.title} avatar`"
+                class="team-switcher__item-avatar"
+                :src="team.avatarSrc"
+              >
+                <span>{{ getTeamInitials(team) }}</span>
+              </VAvatar>
+
+              <div class="team-switcher__item-copy">
+                <p class="team-switcher__item-title">
+                  {{ team.title }}
+                </p>
+                <p
+                  v-if="team.subtitle"
+                  class="team-switcher__item-subtitle"
+                >
+                  {{ team.subtitle }}
+                </p>
+              </div>
+            </VDropdownMenuItem>
+
+            <div class="team-switcher__separator" />
+
+            <VDropdownMenuItem
+              class="team-switcher__item v-dropdown__item is--create"
+              @select="handleCreate"
+            >
+              <div class="team-switcher__item-avatar team-switcher__item-avatar--create">
+                <Plus class="h-4 w-4" />
+              </div>
+              <span class="team-switcher__item-title">Add profile</span>
+            </VDropdownMenuItem>
+          </template>
+        </VDropdownMenuContent>
+      </VDropdownMenu>
+    </VSidebarMenuItem>
+  </VSidebarMenu>
+</template>
+
+<style lang="scss">
+@use 'UiKit/styles/_colors.scss' as colors;
+
+.team-switcher {
+  &__trigger {
+    width: 100%;
+    min-height: 40px;
+    padding: 10px 14px;
+    border-radius: 2px;
+
+    &[data-state='open'] {
+      background: colors.$gray-10;
+    }
+  }
+
+  &__avatar,
+  &__item-avatar {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: colors.$gray-20;
+    color: colors.$gray-70;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: none;
+  }
+
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    background: colors.$gray-10;
+    color: colors.$gray-80;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  [data-state='collapsed'] &__trigger {
+    min-height: 40px;
+    padding: 0;
+  }
+
+  &__item-avatar--create {
+    background: colors.$gray-20;
+    color: colors.$gray-60;
+    box-shadow: none;
+  }
+
+  &__copy,
+  &__item-copy {
+    min-width: 0;
+    flex: 1;
+    text-align: left;
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+
+    &.is--single-line {
+      gap: 0;
+    }
+  }
+
+  &__title,
+  &__item-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: colors.$black;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  &__copy.is--single-line &__title {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  &__subtitle,
+  &__item-subtitle {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: colors.$gray-60;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  &__chevron {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: colors.$gray-60;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  &__content {
+    min-width: 296px;
+    padding: 8px 0;
+    z-index: 1120;
+  }
+
+  &__content-label {
+    padding: 4px 12px 8px;
+    color: colors.$gray-50;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  &__item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    color: colors.$black;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+
+    &:hover {
+      background: colors.$gray-10;
+    }
+
+    &.is--active {
+      background: colors.$gray-10;
+
+      .team-switcher__item-title {
+        color: colors.$primary;
+      }
+
+      .team-switcher__item-subtitle {
+        color: colors.$gray-70;
+      }
+    }
+
+    &.is--create {
+      margin-top: 8px;
+      padding-top: 16px;
+
+      &:hover {
+        background: colors.$gray-10;
+      }
+
+      .team-switcher__item-title {
+        color: colors.$gray-70;
+      }
+    }
+  }
+
+  &__separator {
+    height: 1px;
+    margin: 4px 0;
+    background: colors.$gray-20;
+  }
+}
+</style>

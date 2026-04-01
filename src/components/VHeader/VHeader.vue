@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import {
-  defineAsyncComponent, PropType, ref,
-  watchPostEffect,
+  computed,
+  defineAsyncComponent,
 } from 'vue';
 import { useWindowScroll } from '@vueuse/core';
 import VLogo from 'UiKit/components/VLogo.vue';
-import VHeaderNavigation, { MenuItem } from './VHeaderNavigation.vue';
+import VHeaderNavigation from './VHeaderNavigation.vue';
 import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
 import { storeToRefs } from 'pinia';
 import ClientOnly from 'UiKit/components/ClientOnly.vue';
+import type { VHeaderProps } from './types';
 
 const { isDesktopMD } = storeToRefs(useBreakpoints());
 
@@ -17,68 +18,56 @@ const VHeaderMobile = defineAsyncComponent({
 });
 const VMenuProfileLink = defineAsyncComponent({
   loader: () =>
-    import("UiKit/components/VHeader/VMenuProfileLink.vue"),
+    import('UiKit/components/VHeader/VMenuProfileLink.vue'),
 });
 
-defineProps({
-  showNavigation: {
-    type: Boolean,
-    default: true,
-  },
-  logoHref: {
-    type: String,
-    default: '/',
-  },
-  menu: {
-    type: Array as PropType<MenuItem[]>,
-  },
-  isMobilePWA: {
-    type: Boolean,
-    default: false,
-  },
-  showProfileLink: {
-    type: Boolean,
-    default: false,
-  },
-  urlProfile: {
-    type: [String, Function] as PropType<string | (() => string)>,
-  },
-  userLoggedIn: {
-    type: Boolean,
-    default: false,
-  },
-  showMobileSidebar: {
-    type: Boolean,
-    default: true,
-  }
+const props = withDefaults(defineProps<VHeaderProps>(), {
+  showNavigation: true,
+  logoHref: '/',
+  menu: undefined,
+  isMobilePWA: false,
+  showProfileLink: false,
+  urlProfile: undefined,
+  userLoggedIn: false,
+  showMobileSidebar: true,
+  variant: 'guest',
 });
 
-const emit = defineEmits(['click']);
+const emit = defineEmits<{
+  click: [];
+}>();
 
 const { y } = useWindowScroll();
-const isFixed = ref(false);
 const isMobileSidebarOpen = defineModel<boolean>();
-
-watchPostEffect(() => {
-  if (y.value > 0) {
-    isFixed.value = true;
-  } else {
-    isFixed.value = false;
-  }
-});
+const isFixed = computed(() => y.value > 0);
+const shouldShowProfileLink = computed(
+  () => props.variant === 'authorized' && props.showProfileLink,
+);
+const shouldShowMobileSidebar = computed(
+  () => !isDesktopMD.value && props.showMobileSidebar,
+);
+const headerClasses = computed(() => ({
+  'is--fixed': isFixed.value,
+  'is--pwa': props.isMobilePWA,
+  [`is--variant-${props.variant}`]: true,
+}));
+const headerDataClasses = computed(() => ({
+  'is--gte-desktop-md-show': props.showMobileSidebar,
+}));
 </script>
 
 <template>
   <header
     class="VHeader v-header"
-    :class="{ 'is--fixed': isFixed, 'is--pwa': isMobilePWA }"
+    :class="headerClasses"
+    :data-variant="props.variant"
   >
     <div class="is--container v-header__container">
       <div class="v-header__left">
         <slot name="leading" />
         <slot name="logo">
           <VLogo
-            :href="logoHref"
+            :href="props.logoHref"
             :show-desktop="false"
             class="v-header__logo"
           />
@@ -87,8 +76,8 @@ watchPostEffect(() => {
 
       <div class="v-header__right ">
         <VHeaderNavigation
-          v-if="showNavigation"
-          :menu="menu"
+          v-if="props.showNavigation"
+          :menu="props.menu"
           class="is--gte-desktop-md-show"
           @click="emit('click')"
         />
@@ -96,30 +85,30 @@ watchPostEffect(() => {
         <ClientOnly>
           <div
             class="v-header__data"
-            :class="{ 'is--gte-desktop-md-show': showMobileSidebar}"
+            :class="headerDataClasses"
           >
             <slot />
           </div>
 
           <div
-            v-if="isMobilePWA && $slots.pwa"
+            v-if="props.isMobilePWA && $slots.pwa"
             class="v-header__data v-header__data--pwa"
           >
             <slot name="pwa" />
           </div>
 
 
-          <VMenuProfileLink 
-            v-if="isMobilePWA && showProfileLink" 
-            :user-logged-in="userLoggedIn"
-            :url-profile="urlProfile"
+          <VMenuProfileLink
+            v-if="props.isMobilePWA && shouldShowProfileLink"
+            :user-logged-in="props.userLoggedIn"
+            :url-profile="props.urlProfile"
           />
 
           <VHeaderMobile
-            v-if="!isMobilePWA && !isDesktopMD && showMobileSidebar"
+            v-if="shouldShowMobileSidebar"
             v-model="isMobileSidebarOpen"
-            :menu="menu"
-            :class="{ 'is--gt-desktop-md-hide': showMobileSidebar }"
+            :menu="props.menu"
+            :class="{ 'is--gt-desktop-md-hide': props.showMobileSidebar }"
           >
             <slot name="mobile" />
           </VHeaderMobile>
@@ -191,6 +180,12 @@ watchPostEffect(() => {
 
   &__data--pwa {
     gap: 8px;
+  }
+
+  &.is--variant-authorized {
+    .v-header__data {
+      gap: 16px;
+    }
   }
 
   &.is--pwa {
