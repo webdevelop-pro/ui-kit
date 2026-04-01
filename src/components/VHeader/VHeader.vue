@@ -6,6 +6,7 @@ import {
 import { useWindowScroll } from '@vueuse/core';
 import VLogo from 'UiKit/components/VLogo.vue';
 import VHeaderNavigation from './VHeaderNavigation.vue';
+import VMenuProfileLink from 'UiKit/components/VHeader/VMenuProfileLink.vue';
 import { useBreakpoints } from 'UiKit/composables/useBreakpoints';
 import { storeToRefs } from 'pinia';
 import ClientOnly from 'UiKit/components/ClientOnly.vue';
@@ -15,10 +16,6 @@ const { isDesktopMD } = storeToRefs(useBreakpoints());
 
 const VHeaderMobile = defineAsyncComponent({
   loader: () => import('./VHeaderMobile.vue'),
-});
-const VMenuProfileLink = defineAsyncComponent({
-  loader: () =>
-    import('UiKit/components/VHeader/VMenuProfileLink.vue'),
 });
 
 const props = withDefaults(defineProps<VHeaderProps>(), {

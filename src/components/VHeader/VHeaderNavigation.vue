@@ -1,40 +1,23 @@
 <script setup lang="ts">
-import { defineAsyncComponent, hydrateOnVisible, PropType, ref } from 'vue';
+import {
+  defineAsyncComponent,
+  hydrateOnVisible,
+  PropType,
+  shallowRef,
+} from 'vue';
 import type { Component } from 'vue';
+import {
+  VNavigationMenu,
+  VNavigationMenuContent,
+  VNavigationMenuItem,
+  VNavigationMenuLink,
+  VNavigationMenuList,
+  VNavigationMenuTrigger,
+} from 'UiKit/components/Base/VNavigationMenu';
 import VHeaderNavigationListItem from './VHeaderNavigationListItem.vue';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 
-const VNavigationMenu = defineAsyncComponent({
-  loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenu.vue'),
-  hydrate: hydrateOnVisible(),
-});
-
-const VNavigationMenuList = defineAsyncComponent({
-  loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuList.vue'),
-  hydrate: hydrateOnVisible(),
-});
-
-const VNavigationMenuItem = defineAsyncComponent({
-  loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuItem.vue'),
-  hydrate: hydrateOnVisible(),
-});
-
-const VNavigationMenuTrigger = defineAsyncComponent({
-  loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuTrigger.vue'),
-  hydrate: hydrateOnVisible(),
-});
-
-const VNavigationMenuContent = defineAsyncComponent({
-  loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuContent.vue'),
-  hydrate: hydrateOnVisible(),
-});
-
-const VNavigationMenuLink = defineAsyncComponent({
-  loader: () => import('UiKit/components/Base/VNavigationMenu/VNavigationMenuLink.vue'),
-  hydrate: hydrateOnVisible(),
-});
-
-const VHeaderNavigationCardDark = defineAsyncComponent({
+const LazyVHeaderNavigationCardDark = defineAsyncComponent({
   loader: () => import('./VHeaderNavigationCardDark.vue'),
   hydrate: hydrateOnVisible(),
 });
@@ -54,7 +37,7 @@ export type MenuItem = {
   };
 }
 
-const currentTrigger = ref('');
+const currentTrigger = shallowRef('');
 
 defineProps({
   menu: {
@@ -135,7 +118,7 @@ const emit = defineEmits(['click']);
                   {{ menuItem?.button.text }}
                 </VButton>
               </div>
-              <VHeaderNavigationCardDark
+              <LazyVHeaderNavigationCardDark
                 v-if="menuItem?.card"
                 :data="menuItem?.card"
               />

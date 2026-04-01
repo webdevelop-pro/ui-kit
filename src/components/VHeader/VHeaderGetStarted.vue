@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineAsyncComponent, hydrateOnVisible, PropType } from 'vue';
+import { PropType } from 'vue';
 import VHeaderGuest from 'UiKit/components/VHeader/VHeaderGuest.vue';
 import { MenuItem } from './VHeaderNavigation.vue';
 import { filterPages } from 'UiKit/helpers/allData';
@@ -8,12 +8,9 @@ import { IFrontmatter } from 'UiKit/types/types';
 </script>
 
 <script setup lang="ts">
-const contactUs = filterPages(allPages as IFrontmatter[], 'layout', 'contact-us');
+import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 
-const VButton = defineAsyncComponent({
-  loader: () => import('UiKit/components/Base/VButton/VButton.vue'),
-  hydrate: hydrateOnVisible(),
-});
+const contactUs = filterPages(allPages as IFrontmatter[], 'layout', 'contact-us');
 
 defineProps({
   menu: {

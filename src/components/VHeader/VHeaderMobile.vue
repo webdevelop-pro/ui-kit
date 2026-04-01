@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import {
-  defineAsyncComponent,
-  hydrateOnVisible,
-  PropType,
-} from "vue";
+import { PropType } from "vue";
 import {
   VSheet,
   VSheetContent,
@@ -12,6 +8,7 @@ import {
   VSheetTitle,
   VSheetDescription,
 } from "../Base/VSheet";
+import VNavigationMenuLink from "UiKit/components/Base/VNavigationMenu/VNavigationMenuLink.vue";
 import VMenuBurger from "UiKit/components/VHeader/VMenuBurger.vue";
 import VHeaderNavigationListItem from "./VHeaderNavigationListItem.vue";
 import { VisuallyHidden } from "radix-vue";
@@ -22,12 +19,6 @@ defineProps({
   menu: {
     type: Array as PropType<MenuItem[]>,
   },
-});
-
-const VNavigationMenuLink = defineAsyncComponent({
-  loader: () =>
-    import("UiKit/components/Base/VNavigationMenu/VNavigationMenuLink.vue"),
-  hydrate: hydrateOnVisible(),
 });
 const open = defineModel<boolean>();
 </script>
