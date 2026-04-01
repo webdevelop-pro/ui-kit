@@ -140,6 +140,14 @@ const open = defineModel<boolean>();
     display: flex;
     align-items: center;
     gap: 15px;
+
+    &.is--active {
+      color: colors.$primary;
+
+      .v-header-mobile__icon {
+        color: currentcolor;
+      }
+    }
   }
 
   &__icon {

@@ -167,6 +167,11 @@ const emit = defineEmits(['click']);
     cursor: pointer;
   }
 
+  &__link.is--active,
+  &__trigger.is--active {
+    color: colors.$primary;
+  }
+
   &__icon {
     width: 20px;
     height: 20px;
