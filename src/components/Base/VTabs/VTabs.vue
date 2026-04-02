@@ -94,7 +94,11 @@ onUnmounted(() => {
     const url = new URL(window.location.href);
     if (url.searchParams.has(queryKey)) {
       url.searchParams.delete(queryKey);
-      window.history.replaceState(null, '', url.toString());
+      window.history.replaceState(
+        window.history.state,
+        '',
+        `${url.pathname}${url.search}${url.hash}`,
+      );
     }
   }
 });

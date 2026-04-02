@@ -2,10 +2,19 @@
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VFormCheckboxGroup from 'UiKit/components/Base/VForm/VFormCheckboxGroup.vue';
 import {
-  PropType, watch, ref,
+  computed,
+  ref,
+  watch,
 } from 'vue';
 import { onClickOutside } from '@vueuse/core';
 import filterIcon from 'UiKit/assets/images/filter.svg';
+import { useSyncFilterItemsWithUrl } from 'UiKit/composables/useSyncFilterItemsWithUrl';
+import type {
+  UseSyncWithUrlAdapter,
+  UseSyncWithUrlNavigationMode,
+  UseSyncWithUrlRouteLike,
+  UseSyncWithUrlRouterLike,
+} from 'UiKit/composables/useSyncWithUrl';
 
 export interface IVFilter {
   value: string;
@@ -14,73 +23,123 @@ export interface IVFilter {
   model: string[];
 }
 
-const props = defineProps({
-  items: {
-    type: Array as PropType<IVFilter[]>,
-    required: true,
-  },
-  disabled: Boolean,
+interface VFilterProps {
+  items: IVFilter[];
+  disabled?: boolean;
+  filtersToUrl?: boolean;
+  queryKey?: string;
+  urlSyncAdapter?: UseSyncWithUrlAdapter;
+  urlSyncNavigationMode?: UseSyncWithUrlNavigationMode;
+  route?: UseSyncWithUrlRouteLike | null;
+  router?: UseSyncWithUrlRouterLike | null;
+}
+
+const props = withDefaults(defineProps<VFilterProps>(), {
+  disabled: false,
+  filtersToUrl: false,
+  queryKey: 'filter',
+  urlSyncAdapter: 'auto',
+  urlSyncNavigationMode: 'replace',
 });
 
-const emits = defineEmits(['apply']);
+const emit = defineEmits<{
+  apply: [items: IVFilter[]];
+}>();
 
 const showDropdown = ref(false);
 const target = ref<HTMLElement | null>(null);
-const selectedFilters = ref(0);
-const itemsInner = ref();
+const draftItems = ref<IVFilter[]>([]);
 
-const updateFilters = () => {
-  selectedFilters.value = 0;
-  itemsInner.value?.reduce((countLocal: number, item: IVFilter) => {
-    selectedFilters.value += item.model?.length;
-    return selectedFilters.value;
-  }, 0);
-};
+const {
+  cloneItems,
+  items: appliedItems,
+  setItems: setAppliedItems,
+} = useSyncFilterItemsWithUrl<IVFilter>({
+  items: () => props.items,
+  syncToUrl: () => props.filtersToUrl,
+  queryKey: () => props.queryKey,
+  adapter: () => props.urlSyncAdapter,
+  navigationMode: () => props.urlSyncNavigationMode,
+  route: () => props.route,
+  router: () => props.router,
+  onSyncFromUrl: (items) => {
+    emit('apply', items);
+  },
+});
+
+const selectedFilters = computed(() => appliedItems.value.reduce(
+  (count, item) => count + item.model.length,
+  0,
+));
 
 const onFilterButtonClick = () => {
-  showDropdown.value = !showDropdown.value;
+  if (props.disabled) {
+    return;
+  }
+
+  if (showDropdown.value) {
+    close();
+    return;
+  }
+
+  draftItems.value = cloneItems(appliedItems.value);
+  showDropdown.value = true;
 };
 
 const close = () => {
+  draftItems.value = cloneItems(appliedItems.value);
   showDropdown.value = false;
 };
 
 const scrollToFilterButton = () => {
   if (target.value) {
-    target.value.scrollIntoView({ 
-      behavior: 'smooth', 
+    target.value.scrollIntoView({
+      behavior: 'smooth',
       block: 'center',
-      inline: 'nearest'
+      inline: 'nearest',
     });
   }
 };
 
+const emitApply = (items: IVFilter[]) => {
+  const nextItems = cloneItems(items);
+
+  setAppliedItems(nextItems);
+  emit('apply', cloneItems(nextItems));
+};
+
 const onApplyClick = () => {
-  emits('apply', itemsInner.value);
-  updateFilters();
+  emitApply(draftItems.value);
   close();
   scrollToFilterButton();
 };
 
 const onClear = () => {
-  itemsInner.value?.forEach((item: IVFilter) => { item.model = []; });
+  draftItems.value = draftItems.value.map((item) => ({
+    ...item,
+    options: [...item.options],
+    model: [],
+  }));
 };
 
 const onClearClick = () => {
   onClear();
-  updateFilters();
-  emits('apply', itemsInner.value);
+  emitApply(draftItems.value);
   close();
   scrollToFilterButton();
 };
 
 onClickOutside(target, () => close());
 
-watch(() => props.items, () => {
-  itemsInner.value = props.items;
-  selectedFilters.value = 0;
-  updateFilters();
-}, { immediate: true, deep: true });
+watch(() => props.disabled, (disabled) => {
+  if (disabled && showDropdown.value) {
+    close();
+  }
+});
+
+watch(appliedItems, (items) => {
+  draftItems.value = cloneItems(items);
+}, { immediate: true });
 </script>
 
 <template>
@@ -113,8 +172,8 @@ watch(() => props.items, () => {
         class="v-filter__dropdown"
       >
         <div
-          v-for="(item, index) in itemsInner"
-          :key="index"
+          v-for="item in draftItems"
+          :key="item.value"
           class="v-filter__group"
         >
           <div class="v-filter__title is--h6__title">
