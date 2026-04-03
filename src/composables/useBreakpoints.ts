@@ -1,4 +1,4 @@
-import { ref, onBeforeMount, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const BREAKPOINTS = {
   TABLET: 768,
@@ -21,7 +21,7 @@ export const useBreakpoints = () => {
     isDesktopLG.value = window?.innerWidth >= BREAKPOINTS.DESKTOP_LG;
   };
 
-  onBeforeMount(() => {
+  onMounted(() => {
     count += 1;
     if (count > 1) return;
 
