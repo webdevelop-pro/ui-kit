@@ -96,6 +96,16 @@ provide(sidebarContextKey, sidebar);
       </template>
 
       <template
+        v-if="$slots['pre-footer']"
+        #pre-footer="slotProps"
+      >
+        <slot
+          name="pre-footer"
+          v-bind="slotProps"
+        />
+      </template>
+
+      <template
         v-if="$slots.user"
         #user="slotProps"
       >

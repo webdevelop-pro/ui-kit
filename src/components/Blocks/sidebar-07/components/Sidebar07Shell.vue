@@ -81,6 +81,11 @@ const showSidebarHeader = computed(() => (
       </slot>
     </VSidebarContent>
 
+    <slot
+      name="pre-footer"
+      :collapsed="sidebar.isCollapsed.value"
+    />
+
     <VSidebarFooter>
       <slot
         name="footer"
