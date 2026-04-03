@@ -1,45 +1,101 @@
 <script lang="ts" setup>
+defineOptions({
+  inheritAttrs: false,
+});
+
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
-import defaulImage from 'UiKit/assets/images/default.svg?url';
-import { useImage } from '@vueuse/core';
-import { computed, watch, ref } from 'vue';
+import defaultImage from 'UiKit/assets/images/default.svg?url';
+import { computed, shallowRef, useAttrs, watch } from 'vue';
 
 const props = withDefaults(defineProps<{
   src: string | undefined;
+  srcset?: string;
+  sizes?: string;
   alt: string;
-  fit?: 'cover' | 'contain' | 'none';
+  fit?: 'cover' | 'contain' | 'inherit' | 'none';
   loading?: 'lazy' | 'eager' | undefined;
   clientOnly?: boolean;
   isFullWidth?: boolean;
   isLoading?: boolean;
+  decoding?: 'async' | 'sync' | 'auto';
   fetchpriority?: 'high' | 'low' | 'auto';
 }>(), {
   fit: 'none',
   loading: 'eager',
+  decoding: 'async',
 });
 
-const emit = defineEmits(['loading:src']);
+const emit = defineEmits<{
+  'loading:src': [isLoading: boolean];
+}>();
 
-const hasError = ref(false);
+const attrs = useAttrs();
+const hasError = shallowRef(false);
+const isImageLoading = shallowRef(Boolean(props.src));
+const isFallbackImage = computed(() => hasError.value || !props.src);
 const currentSrc = computed(() => {
-  if (hasError.value || !props.src) {
-    return defaulImage;
+  if (isFallbackImage.value) {
+    return defaultImage;
   }
+
   return props.src;
 });
 
-// Use original src for loading detection, but display currentSrc (which may be fallback)
-const { isLoading } = useImage({ src: props.src || '' });
+const currentSrcset = computed(() => {
+  if (isFallbackImage.value) {
+    return undefined;
+  }
 
-const isLoadingLocal = computed(() => props.isLoading || isLoading.value);
+  return props.srcset;
+});
+
+const currentSizes = computed(() => {
+  if (isFallbackImage.value) {
+    return undefined;
+  }
+
+  return props.sizes;
+});
+
+const imageKey = computed(() => [currentSrc.value, currentSrcset.value ?? '', currentSizes.value ?? ''].join('::'));
+const isLoadingLocal = computed(() => Boolean(props.isLoading) || isImageLoading.value);
+
+const rootClasses = computed(() => [
+  `is--${props.fit}`,
+  {
+    'is--bg': !props.src,
+    'is--full-width': props.isFullWidth,
+  },
+]);
+
+const imageClasses = computed(() => [
+  `is--${props.fit}`,
+  {
+    'is--default-image': isFallbackImage.value,
+    'is--loading': isLoadingLocal.value,
+  },
+]);
+
+const getImageAttrs = () => {
+  const imageAttrs = { ...attrs };
+  delete imageAttrs.class;
+  delete imageAttrs.style;
+
+  return imageAttrs;
+};
 
 watch(() => isLoadingLocal.value, () => {
   emit('loading:src', isLoadingLocal.value);
 }, { immediate: true });
 
-watch(() => props.src, () => {
+watch(() => [props.src, props.srcset, props.sizes], () => {
   hasError.value = false;
-});
+  isImageLoading.value = Boolean(props.src);
+}, { immediate: true });
+
+const handleImageLoad = () => {
+  isImageLoading.value = false;
+};
 
 const handleImageError = () => {
   // Only set error if we're not already showing the default image
@@ -47,13 +103,16 @@ const handleImageError = () => {
   if (!hasError.value && props.src) {
     hasError.value = true;
   }
+
+  isImageLoading.value = false;
 };
 </script>
 
 <template>
   <div
     class="VImage v-image"
-    :class="[`is--${fit}`, { 'is--bg': !src, 'is--full-width': isFullWidth }]"
+    :class="[$attrs.class, rootClasses]"
+    :style="$attrs.style"
     itemscope
     itemtype="https://schema.org/ImageObject"
   >
@@ -68,15 +127,18 @@ const handleImageError = () => {
         class="v-image__skeleton"
       />
       <img
-        v-show="!isLoadingLocal"
-        v-bind="$attrs"
-        :key="src"
+        v-bind="getImageAttrs()"
+        :key="imageKey"
         :src="currentSrc"
+        :srcset="currentSrcset"
+        :sizes="currentSizes"
         :alt="alt"
         :loading="loading"
+        :decoding="decoding"
         :fetchpriority="fetchpriority"
         class="v-image__image"
-        :class="[`is--${fit}`, { 'is--default-image': hasError || !src }]"
+        :class="[$attrs.class, imageClasses]"
+        @load="handleImageLoad"
         @error="handleImageError"
       >
     </component>
@@ -109,12 +171,18 @@ const handleImageError = () => {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
   }
 
   &__image {
     height: 100%;
     width: 100%;
     margin: 0 auto !important;
+    display: block;
+
+    &.is--loading {
+      opacity: 0;
+    }
 
     &.is--cover{
       object-fit: cover;
@@ -131,15 +199,15 @@ const handleImageError = () => {
 
   &__skeleton{
     min-height: inherit;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
   }
 
   .is--default-image {
     max-height: 45%;
     width: auto;
-    // left: 50%;
-    // top: 50%;
     position: relative;
-    // transform: translate(-50%, -50%);
   }
 }
 </style>

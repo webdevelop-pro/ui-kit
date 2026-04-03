@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { IOfferFormatted } from 'InvestCommon/types/offer';
+import { usePublicFilerImage } from 'InvestCommon/shared/composables/usePublicFilerImage';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import VBadge from 'UiKit/components/Base/VBadge/VBadge.vue';
 import { PropType, computed } from 'vue';
@@ -25,6 +26,20 @@ const props = defineProps({
     default: 'lazy',
   },
 });
+
+const {
+  src: offerImageSrc,
+  srcset: offerImageSrcset,
+  sizes: offerImageSizes,
+} = usePublicFilerImage({
+  fileId: computed(() => props.offer?.image_link_id),
+  fallbackSrc: computed(() => props.offer?.imageMedium),
+  preset: 'offerCard',
+});
+
+const offerImageFetchpriority = computed(() => (
+  props.imageLoading === 'eager' ? 'high' : 'auto'
+));
 // const infoTags = computed(() => ([
 //   'Fintech',
 //   'E-Commerce',
@@ -111,10 +126,13 @@ const infoItemGroups = computed(() => {
       class="v-offer-card__img-wrap"
     >
       <VImage
-        :src="offer?.imageMedium"
+        :src="offerImageSrc"
+        :srcset="offerImageSrcset || undefined"
+        :sizes="offerImageSizes || undefined"
         :alt="offer?.slug || 'offer image'"
         itemprop="image"
         :loading="imageLoading"
+        :fetchpriority="offerImageFetchpriority"
         class="v-offer-card__img is--margin-top-0"
         :class="{ 'is--default-image': offer?.isDefaultImage }"
       />
@@ -246,7 +264,7 @@ const infoItemGroups = computed(() => {
 
   &__img-wrap {
     width: 100%;
-    min-height: 190px;
+    aspect-ratio: 16 / 9;
     background-color: $primary-light;
     display: flex;
     justify-content: center;
@@ -254,18 +272,15 @@ const infoItemGroups = computed(() => {
   }
 
   &__img {
-    height: 190px;
+    height: auto;
     width: 100%;
     max-width: 100%;
     object-fit: cover;
+    aspect-ratio: 16 / 9;
 
     &.is--default-image {
       max-width: 120px;
       max-height: 120px;
-    }
-
-    &.is--img-skeleton {
-      min-height: 190px;
     }
   }
 

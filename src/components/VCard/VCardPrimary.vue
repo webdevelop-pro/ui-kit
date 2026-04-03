@@ -197,6 +197,8 @@ const getImageType = () => {
 
   &__body-image {
     width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
 
     img {
       border: 1px solid colors.$gray-20;

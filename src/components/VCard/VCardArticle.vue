@@ -173,7 +173,8 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
     margin-left: auto;
     margin-right: 20px;
     width: 168px;
-    height: 125px;
+    aspect-ratio: 16 / 9;
+    height: auto;
     flex-shrink: 0;
     margin-top: 0 !important;
 
@@ -181,7 +182,8 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
       order: 1;
       width: 100%;
       margin-bottom: 20px;
-      height: 122px;
+      aspect-ratio: 16 / 9;
+      height: auto;
       min-width: 100%;
     }
 
@@ -189,7 +191,8 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
       order: 1;
       width: 100%;
       margin-bottom: 23px;
-      height: 122px;
+      aspect-ratio: 16 / 9;
+      height: auto;
       min-width: 100%;
     }
   }

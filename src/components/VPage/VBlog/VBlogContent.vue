@@ -60,6 +60,8 @@ defineProps({
     object-fit: cover;
     object-position: center;
     width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
     min-height: 400px;
 
     .v-image__skeleton {

@@ -59,6 +59,7 @@ const hasMobileImage = computed(() => {
           <VImage
             v-if="showImage && image"
             :src="image"
+            :srcset="srcsetProp || undefined"
             alt="Products top visual"
             :class="[classImage, hasMobileImage ? 'v-section-top-products__image-desktop' : 'v-section-top-products__image-both']"
             fetchpriority="high"
