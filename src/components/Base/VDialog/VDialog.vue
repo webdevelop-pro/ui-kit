@@ -2,8 +2,17 @@
 import {
   DialogRoot, type DialogRootEmits, type DialogRootProps, useForwardPropsEmits,
 } from 'radix-vue';
-import { useSyncWithUrl } from 'UiKit/composables/useSyncWithUrl';
-import { watch, ref, nextTick } from 'vue';
+import {
+  computed,
+  onMounted,
+  onUnmounted,
+  shallowRef,
+  watch,
+} from 'vue';
+import {
+  ensureLocationChangeHistoryPatched,
+  LOCATION_CHANGE_EVENT,
+} from 'UiKit/composables/locationChange';
 
 const props = defineProps<DialogRootProps & {
   queryKey?: string;
@@ -12,52 +21,106 @@ const props = defineProps<DialogRootProps & {
 
 const emits = defineEmits<DialogRootEmits>();
 
-const forwarded = useForwardPropsEmits(props, emits);
+const delegatedProps = computed(() => {
+  const {
+    queryKey: unusedQueryKey,
+    queryValue: unusedQueryValue,
+    ...delegated
+  } = props;
 
-// Generate a unique fallback key if queryKey is not provided
-const queryKey = props.queryKey || 'dialog';
+  void unusedQueryKey;
+  void unusedQueryValue;
 
-// Check if URL has the query parameter on initial load (read synchronously)
-const initialUrlHasValue = (() => {
+  return delegated;
+});
+
+const forwarded = useForwardPropsEmits(delegatedProps, emits);
+
+const isClient = typeof window !== 'undefined';
+const resolvedQueryKey = computed(() => props.queryKey || 'dialog');
+const resolvedQueryValue = computed(() => props.queryValue ?? 'true');
+const buildRelativeUrl = (url: URL) => `${url.pathname}${url.search}${url.hash}`;
+
+const readOpenFromUrl = () => {
+  if (!isClient) {
+    return false;
+  }
+
   const urlParams = new URLSearchParams(window.location.search);
-  const urlValue = urlParams.get(queryKey);
-  return urlValue === (props.queryValue ?? 'true');
-})();
+  return urlParams.get(resolvedQueryKey.value) === resolvedQueryValue.value;
+};
 
-// Set up URL syncing for the dialog open state
-const open = useSyncWithUrl<boolean>({
-  key: queryKey,
-  defaultValue: false,
-  syncToUrl: true,
-  parse: (val) => val === (props.queryValue ?? 'true'),
-  serialize: (val) => (val ? (props.queryValue ?? 'true') : ''),
-});
+const writeOpenToUrl = (isOpen: boolean) => {
+  if (!isClient) {
+    return;
+  }
 
-// Track if initial sync from URL has completed
-const hasInitializedFromUrl = ref(false);
+  const url = new URL(window.location.href);
+  const currentValue = url.searchParams.get(resolvedQueryKey.value);
 
-// After nextTick, mark that URL initialization is complete
-nextTick(() => {
-  hasInitializedFromUrl.value = true;
-});
+  if (isOpen) {
+    if (currentValue === resolvedQueryValue.value) {
+      return;
+    }
 
-// Emit updates to the parent via v-model
+    url.searchParams.set(resolvedQueryKey.value, resolvedQueryValue.value);
+  } else {
+    // Shared popup dialogs must only clear query values they own.
+    if (currentValue !== resolvedQueryValue.value) {
+      return;
+    }
+
+    url.searchParams.delete(resolvedQueryKey.value);
+  }
+
+  window.history.replaceState(window.history.state, '', buildRelativeUrl(url));
+};
+
+const open = shallowRef<boolean>(readOpenFromUrl() || Boolean(props.open));
+
+const syncOpenFromUrl = () => {
+  const nextOpen = readOpenFromUrl();
+
+  if (open.value !== nextOpen) {
+    open.value = nextOpen;
+  }
+};
+
 watch(open, (newVal) => {
   emits('update:open', newVal);
+  writeOpenToUrl(newVal);
 }, { immediate: true });
 
-// Sync external open prop with internal open state
-// On initial load, if URL has a value, let it take precedence
-// After initialization, sync normally from props
 watch(() => props.open, (newVal) => {
-  // If URL had a value on initial load and we haven't initialized yet, don't override
-  // This ensures that popup=contact-us in URL opens the dialog even on page refresh
-  if (hasInitializedFromUrl.value || !initialUrlHasValue) {
-    if (open.value !== newVal) {
-      open.value = newVal;
-    }
+  if (typeof newVal !== 'boolean' || open.value === newVal) {
+    return;
   }
-}, { immediate: true });
+
+  open.value = newVal;
+});
+
+watch([resolvedQueryKey, resolvedQueryValue], () => {
+  syncOpenFromUrl();
+});
+
+onMounted(() => {
+  if (!isClient) {
+    return;
+  }
+
+  ensureLocationChangeHistoryPatched();
+  window.addEventListener('popstate', syncOpenFromUrl);
+  window.addEventListener(LOCATION_CHANGE_EVENT, syncOpenFromUrl);
+});
+
+onUnmounted(() => {
+  if (!isClient) {
+    return;
+  }
+
+  window.removeEventListener('popstate', syncOpenFromUrl);
+  window.removeEventListener(LOCATION_CHANGE_EVENT, syncOpenFromUrl);
+});
 </script>
 
 <template>
