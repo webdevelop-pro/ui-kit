@@ -5,6 +5,7 @@ export interface IFrontmatter {
   publishDate: string;
   cover: {
     image: string;
+    srcset?: string;
   };
   slug?: string;
   author?: string;

@@ -1,5 +1,6 @@
 import { stripHtmlAndMarkdown } from './text';
 import { getFirst200Characters } from './general';
+import { getFilerImageSrcset } from './filerImage';
 import { urlFormat } from './url';
 
 export function getSlugFromURL(url: string) {
@@ -32,4 +33,5 @@ export function normalizeFrontmatter(pageData) {
     pageData.frontmatter.cover = { image: '' };
   }
   pageData.frontmatter.cover.image = getImage(pageData.frontmatter.cover?.image);
+  pageData.frontmatter.cover.srcset = getFilerImageSrcset(pageData.frontmatter.cover?.image);
 }

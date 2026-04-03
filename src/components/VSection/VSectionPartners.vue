@@ -1,46 +1,43 @@
 <script setup lang="ts">
-import { PropType } from 'vue';
 import VImage from 'UiKit/components/Base/VImage/VImage.vue';
 import VSection from 'UiKit/components/VSection/VSection.vue';
 
 // TODO: add option to load as svg
 
-interface IVPartners {
-  id: number;
-  icon: string;
+interface VPartnerItem {
+  id?: number | string;
+  icon?: string;
+  alt?: string;
 }
 
-defineProps({
-  title: String, // Title to display at the top of the section
-  items: {
-    type: Array as PropType<IVPartners[] | unknown[]>,
-    required: true,
-  },
-});
+const props = defineProps<{
+  title?: string;
+  items: VPartnerItem[];
+}>();
 </script>
 
 <template>
-  <VSection class="VSectionPartners v-section-partners ">
+  <VSection class="VSectionPartners v-section-partners">
     <h2
-      v-if="title"
+      v-if="props.title"
       class="is--h6__title"
     >
-      {{ title }}
+      {{ props.title }}
     </h2>
     <ul class="v-section-partners__slider">
       <li
-        v-for="(item, index) in items"
-        :key="(item as IVPartners).id || index"
+        v-for="(item, index) in props.items"
+        :key="item.id ?? `partner-${index}`"
         class="v-section-partners__slider-item"
       >
         <slot
-          :item="item as IVPartners"
+          :item="item"
           :index="index"
         >
           <VImage
-            v-if="(item as IVPartners).icon"
-            :src="(item as IVPartners).icon"
-            alt="Partner logo"
+            v-if="item.icon"
+            :src="item.icon"
+            :alt="item.alt || 'Partner logo'"
             fit="contain"
             loading="lazy"
             class="v-section-partners__image"
@@ -67,39 +64,36 @@ defineProps({
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 75px;
-    max-width: 175px;
-    max-height: 40px;
+    width: 100%;
+    min-width: 0;
+    max-width: 220px;
+    height: 40px;
 
     @include media-lte(tablet) {
-      max-height: 23px;
-    }
-
-    @include media-gt(tablet) {
-      margin: 0 15px;
+      max-width: 180px;
+      height: 38px;
     }
   }
 
   &__slider {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 26px 18px;
     width: 100%;
-    justify-content: space-between;
+    align-items: center;
+    list-style: none;
     margin: 0;
     padding: 0;
 
-    @include media-lte(desktop) {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+    @include media-lte(tablet) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 14px;
     }
   }
 
   &__image {
-    max-width: 100%;
-    max-height: 100%;
+    display: flex;
+    width: 100%;
     height: 100%;
     filter: grayscale(100%);
     filter: grayscale(1);

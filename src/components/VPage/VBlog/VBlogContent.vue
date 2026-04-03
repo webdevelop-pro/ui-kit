@@ -41,6 +41,7 @@ defineProps({
       <VImage
         v-if="currentPost?.cover?.image"
         :src="currentPost.cover?.image"
+        :srcset="currentPost.cover?.srcset || undefined"
         alt="blog image"
         class="v-blog-content__image is--margin-top-0"
       />

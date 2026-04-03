@@ -33,6 +33,8 @@ const year = computed(() => String(new Date(props.data?.publishDate).getFullYear
         <VImage
           :alt="author?.title || ''"
           :src="author?.cover?.image"
+          :srcset="author?.cover?.srcset || undefined"
+          sizes="65px"
           class="v-blog-header__author-image is--margin-top-0"
         />
         <a

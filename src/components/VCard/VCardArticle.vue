@@ -55,6 +55,8 @@ const year = computed(() => String(new Date(props.data.publishDate).getFullYear(
       loading="lazy"
       fit="cover"
       :src="data.cover?.image"
+      :srcset="data.cover?.srcset || undefined"
+      :sizes="small ? '100vw' : '(max-width: 767px) 100vw, 168px'"
       :alt="`article ${data.title} image`"
       class="v-card-article__image "
       itemprop="image"
