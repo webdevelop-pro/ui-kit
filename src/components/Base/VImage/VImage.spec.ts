@@ -1,9 +1,28 @@
 import { mount } from '@vue/test-utils';
-import { describe, expect, it } from 'vitest';
+import { nextTick } from 'vue';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import VImage from './VImage.vue';
 
+const initialCompleteDescriptor = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'complete');
+const initialNaturalWidthDescriptor = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'naturalWidth');
+
+const restoreImageDescriptors = () => {
+  if (initialCompleteDescriptor) {
+    Object.defineProperty(HTMLImageElement.prototype, 'complete', initialCompleteDescriptor);
+  }
+
+  if (initialNaturalWidthDescriptor) {
+    Object.defineProperty(HTMLImageElement.prototype, 'naturalWidth', initialNaturalWidthDescriptor);
+  }
+};
+
+afterEach(() => {
+  restoreImageDescriptors();
+  vi.restoreAllMocks();
+});
+
 describe('VImage', () => {
-  it('keeps the img element mounted while a lazy image is loading', () => {
+  it('keeps the img element mounted without display:none while a lazy image is loading', () => {
     const wrapper = mount(VImage, {
       props: {
         src: 'https://example.com/image.jpg',
@@ -28,9 +47,37 @@ describe('VImage', () => {
       },
     });
 
-    await wrapper.get('img').trigger('load');
+    const image = wrapper.get('img');
 
-    expect(wrapper.get('img').classes()).not.toContain('is--loading');
+    await image.trigger('load');
+
+    expect(image.classes()).not.toContain('is--loading');
+    expect(wrapper.emitted('loading:src')).toEqual([[true], [false]]);
+  });
+
+  it('clears the skeleton for an already-complete image on mount', async () => {
+    Object.defineProperty(HTMLImageElement.prototype, 'complete', {
+      configurable: true,
+      get: () => true,
+    });
+    Object.defineProperty(HTMLImageElement.prototype, 'naturalWidth', {
+      configurable: true,
+      get: () => 100,
+    });
+
+    const wrapper = mount(VImage, {
+      props: {
+        src: 'https://example.com/image.jpg',
+        alt: 'Example image',
+      },
+    });
+
+    await nextTick();
+    await nextTick();
+
+    const image = wrapper.get('img');
+
+    expect(image.classes()).not.toContain('is--loading');
     expect(wrapper.emitted('loading:src')).toEqual([[true], [false]]);
   });
 });

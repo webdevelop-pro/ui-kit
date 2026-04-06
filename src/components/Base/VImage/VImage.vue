@@ -5,7 +5,14 @@ defineOptions({
 
 import VSkeleton from 'UiKit/components/Base/VSkeleton/VSkeleton.vue';
 import defaultImage from 'UiKit/assets/images/default.svg?url';
-import { computed, shallowRef, useAttrs, watch } from 'vue';
+import {
+  computed,
+  nextTick,
+  onMounted,
+  shallowRef,
+  useAttrs,
+  watch,
+} from 'vue';
 
 const props = withDefaults(defineProps<{
   src: string | undefined;
@@ -30,6 +37,7 @@ const emit = defineEmits<{
 }>();
 
 const attrs = useAttrs();
+const imageElement = shallowRef<HTMLImageElement | null>(null);
 const hasError = shallowRef(false);
 const isImageLoading = shallowRef(Boolean(props.src));
 const isFallbackImage = computed(() => hasError.value || !props.src);
@@ -106,6 +114,28 @@ const handleImageError = () => {
 
   isImageLoading.value = false;
 };
+
+const syncImageState = () => {
+  if (!isImageLoading.value || !imageElement.value?.complete) {
+    return;
+  }
+
+  if (imageElement.value.naturalWidth > 0) {
+    handleImageLoad();
+    return;
+  }
+
+  handleImageError();
+};
+
+watch(imageKey, async () => {
+  await nextTick();
+  syncImageState();
+}, { flush: 'post' });
+
+onMounted(() => {
+  syncImageState();
+});
 </script>
 
 <template>
@@ -128,6 +158,7 @@ const handleImageError = () => {
       />
       <img
         v-bind="getImageAttrs()"
+        ref="imageElement"
         :key="imageKey"
         :src="currentSrc"
         :srcset="currentSrcset"
@@ -182,6 +213,7 @@ const handleImageError = () => {
 
     &.is--loading {
       opacity: 0;
+      visibility: hidden;
     }
 
     &.is--cover{
