@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<{
   disabled?: boolean;
   placeholder?: string;
   loading?: boolean;
+  class?: string;
 }>(), {
   itemLabel: 'label',
   itemValue: 'value',
@@ -72,7 +73,7 @@ watch(() => [props.options?.length, modelValue.value], () => {
     <VSelectTrigger
       :size="size"
       :disabled="disabled || readonly"
-      :class="{ 'is--disabled': disabled, 'is--readonly': readonly, 'is--error': isError }"
+      :class="[{ 'is--disabled': disabled, 'is--readonly': readonly, 'is--error': isError }, props.class]"
     >
       <VSelectValue :placeholder="placeholder" />
     </VSelectTrigger>
