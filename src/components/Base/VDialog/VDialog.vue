@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import {
-  DialogRoot, type DialogRootEmits, type DialogRootProps, useForwardPropsEmits,
-} from 'radix-vue';
+  DialogRoot, type DialogRootEmits, type DialogRootProps,
+} from 'reka-ui';
 import {
   computed,
+  getCurrentInstance,
   onMounted,
   onUnmounted,
   shallowRef,
@@ -14,12 +15,13 @@ import {
   LOCATION_CHANGE_EVENT,
 } from 'UiKit/composables/locationChange';
 
-const props = defineProps<DialogRootProps & {
+const props = defineProps</* @vue-ignore */ DialogRootProps & {
   queryKey?: string;
   queryValue?: string;
 }>();
 
-const emits = defineEmits<DialogRootEmits>();
+const emits = defineEmits</* @vue-ignore */ DialogRootEmits>();
+const instance = getCurrentInstance();
 
 const delegatedProps = computed(() => {
   const {
@@ -33,8 +35,6 @@ const delegatedProps = computed(() => {
 
   return delegated;
 });
-
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 const isClient = typeof window !== 'undefined';
 const resolvedQueryKey = computed(() => props.queryKey || 'dialog');
@@ -76,7 +76,14 @@ const writeOpenToUrl = (isOpen: boolean) => {
   window.history.replaceState(window.history.state, '', buildRelativeUrl(url));
 };
 
-const open = shallowRef<boolean>(readOpenFromUrl() || Boolean(props.open));
+const hasControlledOpen = () => {
+  const vnodeProps = instance?.vnode.props;
+  return vnodeProps != null && ('open' in vnodeProps || 'onUpdate:open' in vnodeProps);
+};
+
+const open = shallowRef<boolean>(
+  readOpenFromUrl() || (hasControlledOpen() && Boolean(props.open)),
+);
 
 const syncOpenFromUrl = () => {
   const nextOpen = readOpenFromUrl();
@@ -86,13 +93,21 @@ const syncOpenFromUrl = () => {
   }
 };
 
+const handleOpenChange = (nextOpen: boolean) => {
+  if (open.value === nextOpen) {
+    return;
+  }
+
+  open.value = nextOpen;
+};
+
 watch(open, (newVal) => {
   emits('update:open', newVal);
   writeOpenToUrl(newVal);
 }, { immediate: true });
 
 watch(() => props.open, (newVal) => {
-  if (typeof newVal !== 'boolean' || open.value === newVal) {
+  if (!hasControlledOpen() || typeof newVal !== 'boolean' || open.value === newVal) {
     return;
   }
 
@@ -108,6 +123,7 @@ onMounted(() => {
     return;
   }
 
+  syncOpenFromUrl();
   ensureLocationChangeHistoryPatched();
   window.addEventListener('popstate', syncOpenFromUrl);
   window.addEventListener(LOCATION_CHANGE_EVENT, syncOpenFromUrl);
@@ -125,8 +141,9 @@ onUnmounted(() => {
 
 <template>
   <DialogRoot
-    v-bind="forwarded"
+    v-bind="delegatedProps"
     :open="open"
+    @update:open="handleOpenChange"
     class="VDialog v-dialog"
   >
     <slot />

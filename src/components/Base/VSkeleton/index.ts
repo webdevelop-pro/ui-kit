@@ -1,1 +1,1 @@
-export * from './VSkeleton.vue';
+export { default as VSkeleton } from './VSkeleton.vue';

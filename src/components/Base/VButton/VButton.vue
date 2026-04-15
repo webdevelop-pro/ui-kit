@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import VSpinner from 'UiKit/components/Base/VSpinner/VSpinner.vue';
-import { Primitive } from 'radix-vue';
-import { ButtonProps } from './types';
+import { Primitive } from 'reka-ui';
+import type { ButtonProps } from './types';
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   size: 'medium',
@@ -30,12 +30,12 @@ const btnClasses = computed(() => ({
 
 <template>
   <component
-    :is="(as === 'router-link') ? as : Primitive"
-    :as="as"
-    :as-child="asChild"
+    :is="(props.as === 'router-link') ? props.as : Primitive"
+    :as="props.as"
+    :as-child="props.asChild"
     class="VButton v-button"
     :class="[btnClassesProps, btnClasses]"
-    :disabled="loading"
+    :disabled="props.loading"
     v-bind="$attrs"
   >
     <span
@@ -44,7 +44,7 @@ const btnClasses = computed(() => ({
       <slot>Button</slot>
     </span>
     <VSpinner
-      v-if="loading"
+      v-if="props.loading"
       show
       small
       class="v-button__spinner"

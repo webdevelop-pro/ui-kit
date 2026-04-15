@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { StepperItemProps } from 'radix-vue';
-import { StepperItem, useForwardProps } from 'radix-vue';
+import type { StepperItemProps } from 'reka-ui';
+import { StepperItem, useForwardProps } from 'reka-ui';
 
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = defineProps<StepperItemProps & { class?: HTMLAttributes['class'] }>();
+const props = defineProps</* @vue-ignore */ StepperItemProps & { class?: HTMLAttributes['class'] }>();
 
 const delegatedProps = computed(() => {
   const { class: unused, ...delegated } = props;

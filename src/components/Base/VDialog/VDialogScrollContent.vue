@@ -6,12 +6,12 @@ import {
   DialogOverlay,
   DialogPortal,
   useForwardPropsEmits,
-} from 'radix-vue';
+} from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 import VDialogClose from './VDialogClose.vue';
 
-const props = defineProps<DialogContentProps & { class?: HTMLAttributes['class'] }>();
-const emits = defineEmits<DialogContentEmits>();
+const props = defineProps</* @vue-ignore */ DialogContentProps & { class?: HTMLAttributes['class'] }>();
+const emits = defineEmits</* @vue-ignore */ DialogContentEmits>();
 
 const delegatedProps = computed(() => {
   const { class: unused, ...delegated } = props;

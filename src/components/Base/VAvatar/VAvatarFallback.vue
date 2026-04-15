@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { AvatarFallback, type AvatarFallbackProps } from 'radix-vue';
+import { AvatarFallback, type AvatarFallbackProps } from 'reka-ui';
 
-const props = defineProps<AvatarFallbackProps & { class?: string }>();
+const props = defineProps</* @vue-ignore */ AvatarFallbackProps & { class?: string }>();
 </script>
 
 <template>

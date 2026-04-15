@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { NavigationMenuItem, type NavigationMenuItemProps } from 'radix-vue';
+import { NavigationMenuItem, type NavigationMenuItemProps } from 'reka-ui';
 
-const props = defineProps<NavigationMenuItemProps>();
+const props = defineProps</* @vue-ignore */ NavigationMenuItemProps>();
 </script>
 
 <template>

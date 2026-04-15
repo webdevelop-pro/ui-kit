@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { DialogDescription, type DialogDescriptionProps } from 'radix-vue';
+import { DialogDescription, type DialogDescriptionProps } from 'reka-ui';
 
-const props = defineProps<DialogDescriptionProps>();
+const props = defineProps</* @vue-ignore */ DialogDescriptionProps>();
 </script>
 
 <template>

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { StepperIndicatorProps } from 'radix-vue';
-import { StepperIndicator, useForwardProps } from 'radix-vue';
+import type { StepperIndicatorProps } from 'reka-ui';
+import { StepperIndicator, useForwardProps } from 'reka-ui';
 import checkIcon from 'UiKit/assets/images/check.svg?component';
 
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = defineProps<StepperIndicatorProps & { class?: HTMLAttributes['class'] }>();
+const props = defineProps</* @vue-ignore */ StepperIndicatorProps & { class?: HTMLAttributes['class'] }>();
 
 const delegatedProps = computed(() => {
   const { class: unused, ...delegated } = props;

@@ -3,10 +3,10 @@ import {
   NavigationMenuViewport,
   type NavigationMenuViewportProps,
   useForwardProps,
-} from 'radix-vue';
+} from 'reka-ui';
 import { computed } from 'vue';
 
-const props = defineProps<NavigationMenuViewportProps>();
+const props = defineProps</* @vue-ignore */ NavigationMenuViewportProps>();
 
 const delegatedProps = computed(() => {
   const { ...delegated } = props;

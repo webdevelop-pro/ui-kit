@@ -3,10 +3,10 @@ import {
   NavigationMenuTrigger,
   type NavigationMenuTriggerProps,
   useForwardProps,
-} from 'radix-vue';
+} from 'reka-ui';
 import { computed } from 'vue';
 
-const props = defineProps<NavigationMenuTriggerProps>();
+const props = defineProps</* @vue-ignore */ NavigationMenuTriggerProps>();
 
 const delegatedProps = computed(() => {
   const { ...delegated } = props;
@@ -27,6 +27,8 @@ const forwardedProps = useForwardProps(delegatedProps);
 </template>
 
 <style lang="scss">
+@use 'UiKit/styles/_variables.scss' as *;
+
 .v-navigation-menu-trigger {
   height: $header-height;
 }

@@ -13,6 +13,7 @@
 
 <style lang="scss">
 @use 'UiKit/styles/_colors.scss' as colors;
+@use 'UiKit/styles/_variables.scss' as *;
 
 .v-breadcrumb-list {
   list-style: none;

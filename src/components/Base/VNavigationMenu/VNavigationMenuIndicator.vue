@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { NavigationMenuIndicator, type NavigationMenuIndicatorProps, useForwardProps } from 'radix-vue';
+import { NavigationMenuIndicator, type NavigationMenuIndicatorProps, useForwardProps } from 'reka-ui';
 import { computed } from 'vue';
 
-const props = defineProps<NavigationMenuIndicatorProps>();
+const props = defineProps</* @vue-ignore */ NavigationMenuIndicatorProps>();
 
 const delegatedProps = computed(() => {
   const { ...delegated } = props;

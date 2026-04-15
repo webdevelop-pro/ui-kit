@@ -3,9 +3,9 @@ import {
   CollapsibleContent,
   type CollapsibleContentProps,
   useForwardProps,
-} from 'radix-vue';
+} from 'reka-ui';
 
-const props = defineProps<CollapsibleContentProps>();
+const props = defineProps</* @vue-ignore */ CollapsibleContentProps>();
 
 const forwarded = useForwardProps(props);
 </script>

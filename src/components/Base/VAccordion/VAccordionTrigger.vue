@@ -1,21 +1,16 @@
 <script setup lang="ts">
+import { reactiveOmit } from '@vueuse/core';
 import {
   AccordionHeader,
   AccordionTrigger,
   type AccordionTriggerProps,
-} from 'radix-vue';
-import { computed } from 'vue';
-import chevronDownIcon from 'UiKit/assets/images/chevron-down.svg';
+} from 'reka-ui';
 
-const props = defineProps<AccordionTriggerProps & {
+const props = defineProps</* @vue-ignore */ AccordionTriggerProps & {
   isWhite?: boolean;
 }>();
 
-const delegatedProps = computed(() => {
-  const { ...delegated } = props;
-
-  return delegated;
-});
+const delegatedProps = reactiveOmit(props, 'isWhite');
 </script>
 
 <template>
@@ -23,15 +18,21 @@ const delegatedProps = computed(() => {
     <AccordionTrigger
       v-bind="delegatedProps"
       class="VAccordionTrigger v-accordion-trigger"
-      :class="{ 'is--white': isWhite }"
+      :class="{ 'is--white': props.isWhite }"
       itemprop="name"
     >
       <slot />
       <slot name="icon">
-        <component
-          :is="chevronDownIcon"
+        <svg
+          aria-hidden="true"
           class="VAccordionChevron v-accordion-chevron"
-        />
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 17.909L12.9524 16.9566L21.0434 8.86557L22 7.90898L20.091 6L19.1386 6.95238L12 14.091L4.86136 6.95659L3.90898 6L2 7.90898L2.95238 8.86136L11.0434 16.9524L12 17.909Z"
+            fill="currentColor"
+          />
+        </svg>
       </slot>
     </AccordionTrigger>
   </AccordionHeader>

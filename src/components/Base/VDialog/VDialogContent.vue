@@ -1,40 +1,47 @@
 <script setup lang="ts">
 import {
   DialogContent,
-  type DialogContentEmits,
   type DialogContentProps,
   DialogOverlay,
   DialogPortal,
-  useForwardPropsEmits,
-} from 'radix-vue';
+} from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 import VDialogClose from './VDialogClose.vue';
 
-const props = defineProps<DialogContentProps & {
+defineOptions({
+  inheritAttrs: false,
+});
+
+const props = defineProps</* @vue-ignore */ DialogContentProps & {
   class?: HTMLAttributes['class'];
   ariaDescribedby?: string;
   fullScreen?: boolean;
 }>();
-const emits = defineEmits<DialogContentEmits>();
 
 const delegatedProps = computed(() => {
-  const { class: unused, ...delegated } = props;
-  void unused; // Explicitly mark as intentionally unused
+  const {
+    ariaDescribedby: unusedAriaDescribedby,
+    class: unusedClass,
+    fullScreen: unusedFullScreen,
+    ...delegated
+  } = props;
+
+  void unusedAriaDescribedby;
+  void unusedClass;
+  void unusedFullScreen;
 
   return delegated;
 });
-
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </script>
 
 <template>
   <DialogPortal>
     <DialogOverlay class="v-dialog-overlay" />
     <DialogContent
-      v-bind="forwarded"
-      :aria-describedby="ariaDescribedby"
+      v-bind="{ ...delegatedProps, ...$attrs }"
+      :aria-describedby="props.ariaDescribedby"
       class="v-dialog-content"
-      :class="[props.class, { 'is--full-screen': fullScreen }]"
+      :class="[props.class, { 'is--full-screen': props.fullScreen }]"
     >
       <slot />
 

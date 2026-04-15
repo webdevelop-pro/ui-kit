@@ -4,10 +4,10 @@ import {
   type NavigationMenuLinkEmits,
   type NavigationMenuLinkProps,
   useForwardPropsEmits,
-} from 'radix-vue';
+} from 'reka-ui';
 
-const props = defineProps<NavigationMenuLinkProps>();
-const emits = defineEmits<NavigationMenuLinkEmits>();
+const props = defineProps</* @vue-ignore */ NavigationMenuLinkProps>();
+const emits = defineEmits</* @vue-ignore */ NavigationMenuLinkEmits>();
 
 const forwarded = useForwardPropsEmits(props, emits);
 </script>

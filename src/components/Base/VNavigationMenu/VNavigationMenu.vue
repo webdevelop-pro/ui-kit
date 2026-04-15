@@ -4,13 +4,13 @@ import {
   type NavigationMenuRootEmits,
   type NavigationMenuRootProps,
   useForwardPropsEmits,
-} from 'radix-vue';
+} from 'reka-ui';
 import { computed } from 'vue';
 import NavigationMenuViewport from './VNavigationMenuViewport.vue';
 
-const props = defineProps<NavigationMenuRootProps>();
+const props = defineProps</* @vue-ignore */ NavigationMenuRootProps>();
 
-const emits = defineEmits<NavigationMenuRootEmits>();
+const emits = defineEmits</* @vue-ignore */ NavigationMenuRootEmits>();
 
 const delegatedProps = computed(() => {
   const { ...delegated } = props;

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Separator, type SeparatorProps } from 'radix-vue';
+import { Separator, type SeparatorProps } from 'reka-ui';
 import { computed } from 'vue';
 
 const props = defineProps<
-  SeparatorProps & { label?: string; withContainer?: boolean }
+  /* @vue-ignore */ SeparatorProps & { label?: string; withContainer?: boolean }
 >();
 
 const delegatedProps = computed(() => {
@@ -33,8 +33,7 @@ const delegatedProps = computed(() => {
 </template>
 
 <style lang="scss">
-@use 'UiKit/styles/_colors.scss' as colors;
-@use 'UiKit/styles/_variables.scss' as variables;
+@use 'UiKit/styles/_colors.scss' as *;
 
 .v-separator {
   background-color: $gray-40;

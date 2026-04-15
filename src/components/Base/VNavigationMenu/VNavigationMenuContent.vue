@@ -4,12 +4,12 @@ import {
   type NavigationMenuContentEmits,
   type NavigationMenuContentProps,
   useForwardPropsEmits,
-} from 'radix-vue';
+} from 'reka-ui';
 import { computed } from 'vue';
 
-const props = defineProps<NavigationMenuContentProps>();
+const props = defineProps</* @vue-ignore */ NavigationMenuContentProps>();
 
-const emits = defineEmits<NavigationMenuContentEmits>();
+const emits = defineEmits</* @vue-ignore */ NavigationMenuContentEmits>();
 
 const delegatedProps = computed(() => {
   const { ...delegated } = props;

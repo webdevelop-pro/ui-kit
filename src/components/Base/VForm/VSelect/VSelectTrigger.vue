@@ -2,10 +2,10 @@
 import ChevronDown from 'UiKit/assets/images/chevron-down.svg?component';
 import {
   SelectIcon, SelectTrigger, type SelectTriggerProps, useForwardProps,
-} from 'radix-vue';
+} from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = withDefaults(defineProps<SelectTriggerProps & {
+const props = withDefaults(defineProps</* @vue-ignore */ SelectTriggerProps & {
   class?: HTMLAttributes['class'],
   size?: 'large' | 'medium';
 }>(), {

@@ -2,18 +2,18 @@
 import {
   TooltipContent, type TooltipContentEmits, type TooltipContentProps, TooltipPortal, useForwardPropsEmits,
   TooltipArrow,
-} from 'radix-vue';
+} from 'reka-ui';
 import { computed } from 'vue';
 
 defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<TooltipContentProps>(), {
+const props = withDefaults(defineProps</* @vue-ignore */ TooltipContentProps>(), {
   sideOffset: 4,
 });
 
-const emits = defineEmits<TooltipContentEmits>();
+const emits = defineEmits</* @vue-ignore */ TooltipContentEmits>();
 
 const delegatedProps = computed(() => {
   const { ...delegated } = props;

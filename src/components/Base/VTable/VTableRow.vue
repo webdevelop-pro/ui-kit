@@ -14,6 +14,9 @@ defineProps({
 </template>
 
 <style lang="scss">
+@use 'UiKit/styles/_colors.scss' as *;
+@use 'UiKit/styles/_variables.scss' as *;
+
 .v-table-body {
   .v-table-row {
     border-top: 1px solid $gray-20;

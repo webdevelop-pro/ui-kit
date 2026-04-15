@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { DialogClose, type DialogCloseProps } from 'radix-vue';
+import { DialogClose, type DialogCloseProps } from 'reka-ui';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
-import closeIcon from 'UiKit/assets/images/close.svg?component';
 
-const props = defineProps<DialogCloseProps>();
+const props = defineProps</* @vue-ignore */ DialogCloseProps>();
 </script>
 
 <template>
@@ -18,7 +17,19 @@ const props = defineProps<DialogCloseProps>();
         variant="link"
         size="large"
       >
-        <closeIcon class="v-dialog-close__icon" />
+        <svg
+          class="v-dialog-close__icon"
+          viewBox="0 0 20 20"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M15 5L5 15M5 5L15 15"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+        </svg>
       </VButton>
     </slot>
   </DialogClose>

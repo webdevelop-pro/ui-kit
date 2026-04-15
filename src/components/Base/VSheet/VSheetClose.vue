@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { DialogClose, type DialogCloseProps } from 'radix-vue';
+import { DialogClose, type DialogCloseProps } from 'reka-ui';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import closeIcon from 'UiKit/assets/images/close.svg?component';
 
-const props = defineProps<DialogCloseProps>();
+const props = defineProps</* @vue-ignore */ DialogCloseProps>();
 </script>
 
 <template>

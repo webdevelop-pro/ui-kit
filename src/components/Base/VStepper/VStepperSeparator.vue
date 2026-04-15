@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { StepperSeparatorProps } from 'radix-vue';
-import { StepperSeparator, useForwardProps } from 'radix-vue';
+import type { StepperSeparatorProps } from 'reka-ui';
+import { StepperSeparator, useForwardProps } from 'reka-ui';
 
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = defineProps<StepperSeparatorProps & { class?: HTMLAttributes['class'] }>();
+const props = defineProps</* @vue-ignore */ StepperSeparatorProps & { class?: HTMLAttributes['class'] }>();
 
 const delegatedProps = computed(() => {
   const { class: unused, ...delegated } = props;

@@ -16,7 +16,7 @@ import {
 } from 'vue';
 import VDialog from './VDialog.vue';
 
-vi.mock('radix-vue', () => ({
+vi.mock('reka-ui', () => ({
   DialogRoot: defineComponent({
     name: 'DialogRoot',
     props: {
@@ -94,6 +94,23 @@ describe('VDialog', () => {
     expect(logoutOpen.value).toBe(true);
     expect(contactUsOpen.value).toBe(false);
     expect(window.location.search).toBe('?popup=log-out');
+
+    wrapper.unmount();
+  });
+
+  it('updates local state when the dialog root requests an open change', async () => {
+    const wrapper = mount(VDialog, {
+      slots: {
+        default: '<span>Dialog content</span>',
+      },
+    });
+
+    wrapper.getComponent({ name: 'DialogRoot' }).vm.$emit('update:open', true);
+    await flushWatchers();
+
+    expect(wrapper.get('.dialog-root').attributes('data-open')).toBe('true');
+    expect(wrapper.emitted('update:open')).toEqual([[false], [true]]);
+    expect(window.location.search).toBe('?dialog=true');
 
     wrapper.unmount();
   });

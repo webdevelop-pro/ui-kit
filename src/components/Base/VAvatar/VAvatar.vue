@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AvatarRoot } from 'radix-vue';
+import { AvatarRoot } from 'reka-ui';
 
 const props = withDefaults(defineProps<{
   size?: 'x-large' | 'large' | 'medium' | 'small' | 'x-small';

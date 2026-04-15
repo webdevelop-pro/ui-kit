@@ -10,6 +10,9 @@
 </template>
 
 <style lang="scss">
+@use 'UiKit/styles/_colors.scss' as *;
+@use 'UiKit/styles/_variables.scss' as *;
+
 .v-table-head {
   color: $gray-60;
   gap: 2px;

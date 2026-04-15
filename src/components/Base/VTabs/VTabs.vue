@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { TabsRootEmits, TabsRootProps } from 'radix-vue';
-import { TabsRoot, useForwardPropsEmits } from 'radix-vue';
+import type { TabsRootEmits, TabsRootProps } from 'reka-ui';
+import { TabsRoot, useForwardPropsEmits } from 'reka-ui';
 import {
   computed, HTMLAttributes, onUnmounted, watch,
 } from 'vue';
 import { useSyncWithUrl } from 'UiKit/composables/useSyncWithUrl';
 // todo: if multiple tabs on page? how to differentiate
-const props = withDefaults(defineProps<TabsRootProps & {
+const props = withDefaults(defineProps</* @vue-ignore */ TabsRootProps & {
   class?: HTMLAttributes['class'];
   tabsToUrl?: boolean;
   variant?: 'primary' | 'secondary';
@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<TabsRootProps & {
 }>(), {
   variant: 'primary',
 });
-const emits = defineEmits<TabsRootEmits>();
+const emits = defineEmits</* @vue-ignore */ TabsRootEmits>();
 
 const delegatedProps = computed(() => {
   const { class: unused, tabsToUrl, ...delegated } = props;

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {
   TabsTrigger, type TabsTriggerProps, useForwardProps,
-} from 'radix-vue';
+} from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 import VBadge from 'UiKit/components/Base/VBadge/VBadge.vue';
 
-const props = withDefaults(defineProps<TabsTriggerProps & {
+const props = withDefaults(defineProps</* @vue-ignore */ TabsTriggerProps & {
   class?: HTMLAttributes['class'];
   variant?: 'primary' | 'secondary';
 }>(), {
@@ -71,7 +71,7 @@ const forwardedProps = useForwardProps(delegatedProps);
     gap: 8px;
     border-bottom: 2px solid transparent;
 
-    @media screen and (width > $tablet) {
+    @media screen and (width > variables.$tablet) {
       &:hover {
         color: colors.$primary;
       }
@@ -86,7 +86,7 @@ const forwardedProps = useForwardProps(delegatedProps);
     transition: all 0.3s ease;
     min-height: 24px;
 
-    @media screen and (width > $tablet) {
+    @media screen and (width > variables.$tablet) {
       &:hover {
         background-color: colors.$white;
         color: colors.$black;

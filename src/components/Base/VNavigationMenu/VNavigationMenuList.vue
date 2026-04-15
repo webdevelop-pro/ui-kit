@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { NavigationMenuList, type NavigationMenuListProps, useForwardProps } from 'radix-vue';
+import { NavigationMenuList, type NavigationMenuListProps, useForwardProps } from 'reka-ui';
 
-const props = defineProps<NavigationMenuListProps>();
+const props = defineProps</* @vue-ignore */ NavigationMenuListProps>();
 
 const forwardedProps = useForwardProps(props);
 </script>

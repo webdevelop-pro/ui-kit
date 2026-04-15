@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { DropdownMenuItem, type DropdownMenuItemProps, useForwardProps } from 'radix-vue';
+import { DropdownMenuItem, type DropdownMenuItemProps, useForwardProps } from 'reka-ui';
 import { type HTMLAttributes } from 'vue';
 
-const props = defineProps<DropdownMenuItemProps & { class?: HTMLAttributes['class']; inset?: boolean }>();
+const props = defineProps</* @vue-ignore */ DropdownMenuItemProps & { class?: HTMLAttributes['class']; inset?: boolean }>();
 
 const forwardedProps = useForwardProps(props);
 </script>
@@ -17,7 +17,7 @@ const forwardedProps = useForwardProps(props);
 </template>
 
 <style lang="scss">
-@use 'UiKit/styles/_colors.scss' as colors;
+@use 'UiKit/styles/_colors.scss' as *;
 @use 'UiKit/styles/_variables.scss' as variables;
 
 .v-dropdown-menu-item {

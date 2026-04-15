@@ -6,11 +6,11 @@ import {
   DialogOverlay,
   DialogPortal,
   useForwardPropsEmits,
-} from 'radix-vue';
+} from 'reka-ui';
 import { computed } from 'vue';
 import VSheetClose from './VSheetClose.vue';
 
-interface SheetContentProps extends DialogContentProps {
+interface SheetContentProps extends /* @vue-ignore */ DialogContentProps {
   side?: 'top' | 'bottom' | 'left' | 'right';
   withHeader?: boolean;
   hideClose?: boolean;
@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<SheetContentProps>(), {
   side: 'right',
 });
 
-const emits = defineEmits<DialogContentEmits>();
+const emits = defineEmits</* @vue-ignore */ DialogContentEmits>();
 
 const delegatedProps = computed(() => {
   const { side, ariaDescribedby, ...delegated } = props;
@@ -58,6 +58,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </template>
 
 <style lang="scss">
+@use 'UiKit/styles/_colors.scss' as *;
 @use 'UiKit/styles/_variables.scss' as variables;
 @use 'UiKit/styles/_transitions.scss' as *;
 $z-index-menu-bg: 100;
@@ -79,7 +80,7 @@ $z-index-menu-burger: $z-index-menu + 1;
   background: rgb(0 0 0 / 33%);
 
   &.is--with-header {
-    top: $header-height;
+    top: variables.$header-height;
   }
 }
 
@@ -147,8 +148,8 @@ $z-index-menu-burger: $z-index-menu + 1;
     max-width: 367px;
 
     &.is--with-header {
-      top: $header-height;
-      height: calc(100% - $header-height);
+      top: variables.$header-height;
+      height: calc(100% - variables.$header-height);
     }
   }
 
@@ -171,8 +172,8 @@ $z-index-menu-burger: $z-index-menu + 1;
     max-width: 367px;
 
     &.is--with-header {
-      top: $header-height;
-      height: calc(100% - $header-height);
+      top: variables.$header-height;
+      height: calc(100% - variables.$header-height);
     }
   }
 

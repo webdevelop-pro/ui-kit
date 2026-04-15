@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { SelectGroup, type SelectGroupProps } from 'radix-vue';
+import { SelectGroup, type SelectGroupProps } from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = defineProps<SelectGroupProps & { class?: HTMLAttributes['class'] }>();
+const props = defineProps</* @vue-ignore */ SelectGroupProps & { class?: HTMLAttributes['class'] }>();
 
 const delegatedProps = computed(() => {
   const { class: unused, ...delegated } = props;

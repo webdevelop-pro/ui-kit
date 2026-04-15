@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import ChevronDown from 'UiKit/assets/images/chevron-down.svg?component';
-import { SelectScrollDownButton, type SelectScrollDownButtonProps, useForwardProps } from 'radix-vue';
+import { SelectScrollDownButton, type SelectScrollDownButtonProps, useForwardProps } from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = defineProps<SelectScrollDownButtonProps & { class?: HTMLAttributes['class'] }>();
+const props = defineProps</* @vue-ignore */ SelectScrollDownButtonProps & { class?: HTMLAttributes['class'] }>();
 const delegatedProps = computed(() => {
   const { class: unused, ...delegated } = props;
   void unused; // Explicitly mark as intentionally unused

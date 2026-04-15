@@ -5,7 +5,7 @@ import {
   type PopoverContentProps,
   PopoverPortal,
   useForwardPropsEmits,
-} from 'radix-vue';
+} from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 
 defineOptions({
@@ -13,13 +13,13 @@ defineOptions({
 });
 
 const props = withDefaults(
-  defineProps<PopoverContentProps & { class?: HTMLAttributes['class'] }>(),
+  defineProps</* @vue-ignore */ PopoverContentProps & { class?: HTMLAttributes['class'] }>(),
   {
     align: 'center',
     sideOffset: 4,
   },
 );
-const emits = defineEmits<PopoverContentEmits>();
+const emits = defineEmits</* @vue-ignore */ PopoverContentEmits>();
 
 const delegatedProps = computed(() => {
   const { class: unused, ...delegated } = props;
@@ -52,7 +52,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   border: solid 1px colors.$gray-20;
   box-shadow: variables.$box-shadow-medium;
   border-radius: 2px;
-  width: var(--radix-popover-trigger-width);
+  width: var(--reka-popover-trigger-width);
   animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;

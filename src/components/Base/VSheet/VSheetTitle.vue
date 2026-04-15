@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { DialogTitle, type DialogTitleProps } from 'radix-vue';
+import { DialogTitle, type DialogTitleProps } from 'reka-ui';
 
-const props = defineProps<DialogTitleProps>();
+const props = defineProps</* @vue-ignore */ DialogTitleProps>();
 </script>
 
 <template>

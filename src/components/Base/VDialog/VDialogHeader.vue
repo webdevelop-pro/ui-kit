@@ -16,10 +16,12 @@ const props = defineProps<{
 </template>
 
 
-<style lang="scss">  
+<style lang="scss">
+@use 'UiKit/styles/_variables.scss' as *;
+
 .v-dialog-header {
   @media screen and (width < $tablet){
     padding-right: 54px;
   }
-} 
-</style>  
+}
+</style>

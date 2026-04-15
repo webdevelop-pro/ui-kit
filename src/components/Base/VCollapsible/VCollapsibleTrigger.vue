@@ -3,9 +3,9 @@ import {
   CollapsibleTrigger,
   type CollapsibleTriggerProps,
   useForwardProps,
-} from 'radix-vue';
+} from 'reka-ui';
 
-const props = defineProps<CollapsibleTriggerProps>();
+const props = defineProps</* @vue-ignore */ CollapsibleTriggerProps>();
 
 const forwarded = useForwardProps(props);
 </script>

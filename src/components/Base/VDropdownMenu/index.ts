@@ -6,4 +6,4 @@ export { default as VDropdownMenuSub } from './VDropdownMenuSub.vue';
 export { default as VDropdownMenuSubContent } from './VDropdownMenuSubContent.vue';
 export { default as VDropdownMenuSubTrigger } from './VDropdownMenuSubTrigger.vue';
 export { default as VDropdownMenuTrigger } from './VDropdownMenuTrigger.vue';
-export { DropdownMenuPortal } from 'radix-vue';
+export { DropdownMenuPortal } from 'reka-ui';

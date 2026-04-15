@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { AccordionContent, type AccordionContentProps } from 'radix-vue';
+import { AccordionContent, type AccordionContentProps } from 'reka-ui';
 import { computed } from 'vue';
 
-const props = defineProps<AccordionContentProps>();
+const props = defineProps</* @vue-ignore */ AccordionContentProps>();
 
 const delegatedProps = computed(() => {
   const { ...delegated } = props;
@@ -17,7 +17,9 @@ const delegatedProps = computed(() => {
     class="VAccordionContent v-accordion-content"
     itemprop="description"
   >
-    <slot />
+    <div class="v-accordion-content__inner">
+      <slot />
+    </div>
   </AccordionContent>
 </template>
 
@@ -41,13 +43,15 @@ const delegatedProps = computed(() => {
   }
 }
 
+.v-accordion-content__inner {
+  padding: 0 16px 24px;
+}
+
 .v-accordion-content[data-state="open"] {
   animation: slideDown 0.3s ease;
-  padding: 0 16px 24px;
 }
 
 .v-accordion-content[data-state="closed"] {
   animation: slideUp 0.3s ease;
-  padding: 0 16px;
 }
 </style>

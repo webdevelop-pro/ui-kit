@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { DialogRootEmits, DialogRootProps } from 'radix-vue';
+import type { DialogRootEmits, DialogRootProps } from 'reka-ui';
 import { VDialog, VDialogContent } from 'UiKit/components/Base/VDialog';
-import { useForwardPropsEmits } from 'radix-vue';
+import { useForwardPropsEmits } from 'reka-ui';
 import Command from './VCommand.vue';
 
-const props = defineProps<DialogRootProps>();
-const emits = defineEmits<DialogRootEmits>();
+const props = defineProps</* @vue-ignore */ DialogRootProps>();
+const emits = defineEmits</* @vue-ignore */ DialogRootEmits>();
 
 const forwarded = useForwardPropsEmits(props, emits);
 </script>

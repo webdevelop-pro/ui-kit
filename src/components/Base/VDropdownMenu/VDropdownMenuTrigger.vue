@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { DropdownMenuTrigger, type DropdownMenuTriggerProps, useForwardProps } from 'radix-vue';
+import { DropdownMenuTrigger, type DropdownMenuTriggerProps, useForwardProps } from 'reka-ui';
 import ChevronDown from 'UiKit/assets/images/chevron-down.svg?component';
 
-const props = defineProps<DropdownMenuTriggerProps & {
+const props = defineProps</* @vue-ignore */ DropdownMenuTriggerProps & {
   withChevron: boolean;
 }>();
 

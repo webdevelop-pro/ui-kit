@@ -14,7 +14,7 @@ import {
   CalendarNext,
   CalendarPrev,
   CalendarRoot,
-} from 'radix-vue';
+} from 'reka-ui';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import ArrowLeft from 'UiKit/assets/images/arrow-left.svg?component';
 import ArrowRight from 'UiKit/assets/images/arrow-right.svg?component';

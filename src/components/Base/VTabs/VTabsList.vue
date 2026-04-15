@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { TabsList, type TabsListProps } from 'radix-vue';
+import { TabsList, type TabsListProps } from 'reka-ui';
 import {
   computed, nextTick, onMounted, onUnmounted, ref, type HTMLAttributes,
 } from 'vue';
 import debounce from 'lodash/debounce';
 
-const props = withDefaults(defineProps<TabsListProps & {
+const props = withDefaults(defineProps</* @vue-ignore */ TabsListProps & {
   class?: HTMLAttributes['class'];
   variant?: 'primary' | 'secondary';
 }>(), {
