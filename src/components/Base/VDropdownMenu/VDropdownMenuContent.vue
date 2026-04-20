@@ -10,12 +10,14 @@ import { computed, type HTMLAttributes } from 'vue';
 import { cn } from 'UiKit/lib/utils';
 
 const props = withDefaults(
-  defineProps</* @vue-ignore */ DropdownMenuContentProps & { class?: HTMLAttributes['class'] }>(),
+  defineProps<{ class?: HTMLAttributes['class'] } & /* @vue-ignore */ DropdownMenuContentProps>(),
   {
     sideOffset: 4,
   },
 );
 const emits = defineEmits</* @vue-ignore */ DropdownMenuContentEmits>();
+
+defineOptions({ inheritAttrs: false });
 
 const delegatedProps = computed(() => {
   const { class: unused, ...delegated } = props;
@@ -30,7 +32,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 <template>
   <DropdownMenuPortal>
     <DropdownMenuContent
-      v-bind="forwarded"
+      v-bind="{ ...forwarded, ...$attrs }"
       :class="cn('VDropdownMenuContent v-dropdown-menu-content', props.class)"
     >
       <slot />

@@ -5,10 +5,10 @@ import {
 } from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = withDefaults(defineProps</* @vue-ignore */ SelectTriggerProps & {
-  class?: HTMLAttributes['class'],
+const props = withDefaults(defineProps<{
+  class?: HTMLAttributes['class'];
   size?: 'large' | 'medium';
-}>(), {
+} & /* @vue-ignore */ SelectTriggerProps>(), {
   size: 'large',
 });
 

@@ -2,9 +2,9 @@
 import { DropdownMenuTrigger, type DropdownMenuTriggerProps, useForwardProps } from 'reka-ui';
 import ChevronDown from 'UiKit/assets/images/chevron-down.svg?component';
 
-const props = defineProps</* @vue-ignore */ DropdownMenuTriggerProps & {
+const props = defineProps<{
   withChevron: boolean;
-}>();
+} & /* @vue-ignore */ DropdownMenuTriggerProps>();
 
 const forwardedProps = useForwardProps(props);
 </script>

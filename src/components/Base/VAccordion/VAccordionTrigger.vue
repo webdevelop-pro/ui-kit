@@ -6,9 +6,9 @@ import {
   type AccordionTriggerProps,
 } from 'reka-ui';
 
-const props = defineProps</* @vue-ignore */ AccordionTriggerProps & {
+const props = defineProps<{
   isWhite?: boolean;
-}>();
+} & /* @vue-ignore */ AccordionTriggerProps>();
 
 const delegatedProps = reactiveOmit(props, 'isWhite');
 </script>

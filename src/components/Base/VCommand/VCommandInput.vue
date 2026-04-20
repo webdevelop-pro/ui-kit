@@ -6,10 +6,10 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps</* @vue-ignore */ ComboboxInputProps & {
+const props = withDefaults(defineProps<{
   class?: HTMLAttributes['class'];
   size?: 'large' | 'medium' | 'small';
-}>(), {
+} & /* @vue-ignore */ ComboboxInputProps>(), {
   size: 'medium',
 });
 

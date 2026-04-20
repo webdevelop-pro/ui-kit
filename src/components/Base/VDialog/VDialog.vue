@@ -15,21 +15,24 @@ import {
   LOCATION_CHANGE_EVENT,
 } from 'UiKit/composables/locationChange';
 
-const props = defineProps</* @vue-ignore */ DialogRootProps & {
+const props = defineProps<{
+  open?: boolean;
   queryKey?: string;
   queryValue?: string;
-}>();
+} & /* @vue-ignore */ DialogRootProps>();
 
 const emits = defineEmits</* @vue-ignore */ DialogRootEmits>();
 const instance = getCurrentInstance();
 
 const delegatedProps = computed(() => {
   const {
+    open: unusedOpen,
     queryKey: unusedQueryKey,
     queryValue: unusedQueryValue,
     ...delegated
   } = props;
 
+  void unusedOpen;
   void unusedQueryKey;
   void unusedQueryValue;
 
@@ -143,8 +146,8 @@ onUnmounted(() => {
   <DialogRoot
     v-bind="delegatedProps"
     :open="open"
-    @update:open="handleOpenChange"
     class="VDialog v-dialog"
+    @update:open="handleOpenChange"
   >
     <slot />
   </DialogRoot>

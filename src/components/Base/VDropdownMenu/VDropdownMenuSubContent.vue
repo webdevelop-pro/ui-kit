@@ -7,7 +7,7 @@ import {
 } from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = defineProps</* @vue-ignore */ DropdownMenuSubContentProps & { class?: HTMLAttributes['class'] }>();
+const props = defineProps<{ class?: HTMLAttributes['class'] } & /* @vue-ignore */ DropdownMenuSubContentProps>();
 const emits = defineEmits</* @vue-ignore */ DropdownMenuSubContentEmits>();
 
 const delegatedProps = computed(() => {

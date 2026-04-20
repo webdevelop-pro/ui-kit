@@ -2,7 +2,7 @@
 import { TabsContent, type TabsContentProps } from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = defineProps</* @vue-ignore */ TabsContentProps & { class?: HTMLAttributes['class'] }>();
+const props = defineProps<{ class?: HTMLAttributes['class'] } & /* @vue-ignore */ TabsContentProps>();
 
 const delegatedProps = computed(() => {
   const { class: unused, ...delegated } = props;

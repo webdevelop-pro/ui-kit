@@ -6,21 +6,27 @@ import {
 } from 'vue';
 import { useSyncWithUrl } from 'UiKit/composables/useSyncWithUrl';
 // todo: if multiple tabs on page? how to differentiate
-const props = withDefaults(defineProps</* @vue-ignore */ TabsRootProps & {
+const props = withDefaults(defineProps<{
   class?: HTMLAttributes['class'];
   tabsToUrl?: boolean;
   variant?: 'primary' | 'secondary';
   fullWidth?: boolean;
   queryKey?: string;
-}>(), {
+  modelValue?: string;
+  defaultValue?: string;
+} & /* @vue-ignore */ TabsRootProps>(), {
   variant: 'primary',
 });
 const emits = defineEmits</* @vue-ignore */ TabsRootEmits>();
 
 const delegatedProps = computed(() => {
-  const { class: unused, tabsToUrl, ...delegated } = props;
-  void unused; // Explicitly mark as intentionally unused
-  void tabsToUrl; // Explicitly mark as intentionally unused
+  const {
+    class: unused, tabsToUrl, modelValue: unusedModelValue, defaultValue: unusedDefaultValue, ...delegated
+  } = props;
+  void unused;
+  void tabsToUrl;
+  void unusedModelValue;
+  void unusedDefaultValue;
 
   return delegated;
 });

@@ -7,7 +7,7 @@ import {
 import ChevronRight from 'UiKit/assets/images/chevron-right.svg?component';
 import { type HTMLAttributes } from 'vue';
 
-const props = defineProps</* @vue-ignore */ DropdownMenuSubTriggerProps & { class?: HTMLAttributes['class'] }>();
+const props = defineProps<{ class?: HTMLAttributes['class'] } & /* @vue-ignore */ DropdownMenuSubTriggerProps>();
 
 const forwardedProps = useForwardProps(props);
 </script>

@@ -10,7 +10,9 @@ import {
 import { computed, type HTMLAttributes } from 'vue';
 import VDialogClose from './VDialogClose.vue';
 
-const props = defineProps</* @vue-ignore */ DialogContentProps & { class?: HTMLAttributes['class'] }>();
+defineOptions({ inheritAttrs: false });
+
+const props = defineProps<{ class?: HTMLAttributes['class'] } & /* @vue-ignore */ DialogContentProps>();
 const emits = defineEmits</* @vue-ignore */ DialogContentEmits>();
 
 const delegatedProps = computed(() => {
@@ -31,7 +33,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
       <DialogContent
         :class="props.class"
         class="VDialogScrollContent v-dialog-scroll-content"
-        v-bind="forwarded"
+        v-bind="{ ...forwarded, ...$attrs }"
         @pointer-down-outside="(event) => {
           const originalEvent = event.detail.originalEvent;
           const target = originalEvent.target as HTMLElement;

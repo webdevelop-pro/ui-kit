@@ -5,7 +5,7 @@ import checkIcon from 'UiKit/assets/images/check.svg?component';
 
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = defineProps</* @vue-ignore */ StepperIndicatorProps & { class?: HTMLAttributes['class'] }>();
+const props = defineProps<{ class?: HTMLAttributes['class'] } & /* @vue-ignore */ StepperIndicatorProps>();
 
 const delegatedProps = computed(() => {
   const { class: unused, ...delegated } = props;

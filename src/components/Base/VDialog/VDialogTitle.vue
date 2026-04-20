@@ -2,7 +2,7 @@
 import { DialogTitle, type DialogTitleProps, useForwardProps } from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = defineProps</* @vue-ignore */ DialogTitleProps & { class?: HTMLAttributes['class'] }>();
+const props = defineProps<{ class?: HTMLAttributes['class'] } & /* @vue-ignore */ DialogTitleProps>();
 
 const delegatedProps = computed(() => {
   const { class: unused, ...delegated } = props;

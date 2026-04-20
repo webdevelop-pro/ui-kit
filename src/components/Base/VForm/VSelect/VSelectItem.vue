@@ -7,7 +7,7 @@ import {
 } from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = defineProps</* @vue-ignore */ SelectItemProps & { class?: HTMLAttributes['class'] }>();
+const props = defineProps<{ class?: HTMLAttributes['class']; disabled?: boolean } & /* @vue-ignore */ SelectItemProps>();
 
 const delegatedProps = computed(() => {
   const { class: unused, ...delegated } = props;

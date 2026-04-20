@@ -4,7 +4,7 @@ import { StepperRoot, useForwardPropsEmits } from 'reka-ui';
 
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = defineProps</* @vue-ignore */ StepperRootProps & { class?: HTMLAttributes['class'] }>();
+const props = defineProps<{ class?: HTMLAttributes['class'] } & /* @vue-ignore */ StepperRootProps>();
 const emits = defineEmits</* @vue-ignore */ StepperRootEmits>();
 
 const delegatedProps = computed(() => {

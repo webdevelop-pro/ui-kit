@@ -7,11 +7,12 @@ import {
 import { computed, type HTMLAttributes } from 'vue';
 
 const props = withDefaults(
-  defineProps</* @vue-ignore */ ProgressRootProps & {
+  defineProps<{
     class?: HTMLAttributes['class'];
     style?: HTMLAttributes['style'];
     withText?: boolean;
-  }>(),
+    modelValue?: number | null;
+  } & /* @vue-ignore */ ProgressRootProps>(),
   {
     modelValue: 0,
   },

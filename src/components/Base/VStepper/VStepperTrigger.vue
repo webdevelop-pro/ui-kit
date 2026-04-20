@@ -4,7 +4,7 @@ import { StepperTrigger, useForwardProps } from 'reka-ui';
 
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = defineProps</* @vue-ignore */ StepperTriggerProps & { class?: HTMLAttributes['class'] }>();
+const props = defineProps<{ class?: HTMLAttributes['class'] } & /* @vue-ignore */ StepperTriggerProps>();
 
 const delegatedProps = computed(() => {
   const { class: unused, ...delegated } = props;

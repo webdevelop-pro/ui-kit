@@ -8,7 +8,7 @@ import {
 } from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = defineProps</* @vue-ignore */ SwitchRootProps & { class?: HTMLAttributes['class'] }>();
+const props = defineProps<{ class?: HTMLAttributes['class'] } & /* @vue-ignore */ SwitchRootProps>();
 
 const emits = defineEmits</* @vue-ignore */ SwitchRootEmits>();
 

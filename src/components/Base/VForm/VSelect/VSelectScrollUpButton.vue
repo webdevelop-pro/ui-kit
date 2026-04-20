@@ -3,7 +3,7 @@ import ChevronUp from 'UiKit/assets/images/chevron-up.svg?component';
 import { SelectScrollUpButton, type SelectScrollUpButtonProps, useForwardProps } from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = defineProps</* @vue-ignore */ SelectScrollUpButtonProps & { class?: HTMLAttributes['class'] }>();
+const props = defineProps<{ class?: HTMLAttributes['class'] } & /* @vue-ignore */ SelectScrollUpButtonProps>();
 
 const delegatedProps = computed(() => {
   const { class: unused, ...delegated } = props;

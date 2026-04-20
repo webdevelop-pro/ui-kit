@@ -5,10 +5,10 @@ import {
 } from 'vue';
 import debounce from 'lodash/debounce';
 
-const props = withDefaults(defineProps</* @vue-ignore */ TabsListProps & {
+const props = withDefaults(defineProps<{
   class?: HTMLAttributes['class'];
   variant?: 'primary' | 'secondary';
-}>(), {
+} & /* @vue-ignore */ TabsListProps>(), {
   variant: 'primary',
 });
 

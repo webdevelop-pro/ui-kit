@@ -4,9 +4,9 @@ import { StepperTitle, useForwardProps } from 'reka-ui';
 
 import { computed, type HTMLAttributes } from 'vue';
 
-const props = defineProps</* @vue-ignore */ StepperTitleProps & {
+const props = defineProps<{
   class?: HTMLAttributes['class'];
-}>();
+} & /* @vue-ignore */ StepperTitleProps>();
 
 const delegatedProps = computed(() => {
   const { class: unused, ...delegated } = props;

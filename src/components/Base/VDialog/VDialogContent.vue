@@ -12,11 +12,11 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = defineProps</* @vue-ignore */ DialogContentProps & {
+const props = defineProps<{
   class?: HTMLAttributes['class'];
   ariaDescribedby?: string;
   fullScreen?: boolean;
-}>();
+} & /* @vue-ignore */ DialogContentProps>();
 
 const delegatedProps = computed(() => {
   const {

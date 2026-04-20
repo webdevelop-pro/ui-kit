@@ -15,7 +15,7 @@ import {
 } from 'vue';
 import VTabs from './VTabs.vue';
 
-vi.mock('radix-vue', () => ({
+vi.mock('reka-ui', () => ({
   TabsRoot: defineComponent({
     name: 'TabsRoot',
     props: {
