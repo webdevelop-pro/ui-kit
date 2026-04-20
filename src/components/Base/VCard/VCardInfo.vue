@@ -128,7 +128,7 @@ const secondaryValueSign = computed(() => {
       <template v-else>
         <slot name="action">
           <a
-            v-if="action"
+            v-if="action && action.href"
             :href="action.href"
             target="_blank"
             rel="noopener noreferrer"
