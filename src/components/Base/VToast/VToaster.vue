@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { isVNode } from 'vue';
-import {
-  VToast, VToastClose, VToastDescription, VToastProvider, VToastTitle, VToastViewport,
-  VToastAction,
-} from './index';
+import VToast from './VToast.vue';
+import VToastAction from './VToastAction.vue';
+import VToastClose from './VToastClose.vue';
+import VToastDescription from './VToastDescription.vue';
+import VToastProvider from './VToastProvider.vue';
+import VToastTitle from './VToastTitle.vue';
 import { useToast } from './use-toast';
+import VToastViewport from './VToastViewport.vue';
 import errorIcon from 'UiKit/assets/images/circle-exclamation.svg';
 import infoIcon from 'UiKit/assets/images/circle-info.svg';
 import checkIcon from 'UiKit/assets/images/circle-check.svg';
