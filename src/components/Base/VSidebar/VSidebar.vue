@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import { X } from 'lucide-vue-next';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import { cn } from 'UiKit/lib/utils';
+
 import { type SidebarCollapsible, type SidebarSide, useSidebar } from './useSidebar';
 
 const props = withDefaults(defineProps<{
@@ -27,20 +28,13 @@ const resolvedCollapsible = computed(() => props.collapsible ?? sidebar.collapsi
       v-if="sidebar.isMobile.value"
       class="VSidebarMobile v-sidebar-mobile md:hidden"
     >
-      <VButton
+      <button
         v-if="sidebar.mobileOpen.value"
-        as="button"
         aria-label="Close sidebar overlay"
-        class="fixed inset-0 z-[130] border-none bg-slate-950/40 p-0 shadow-none"
-        color="secondary"
-        icon-only
-        size="small"
+        class="VSidebarOverlay v-sidebar-overlay fixed inset-0 z-[130] cursor-default border-none bg-slate-950/40 p-0"
         type="button"
-        variant="tetriary"
         @click="sidebar.setMobileOpen(false)"
-      >
-        <span class="sr-only">Close sidebar overlay</span>
-      </VButton>
+      />
 
       <aside
         :class="cn(
