@@ -52,9 +52,9 @@ const componentName = computed(() => {
   }
 
   &__desktop {
-    width: 111px;
-    max-width: 111px;
-    height: 37px;
+    width: 36px;
+    max-width: 36px;
+    height: 36px;
 
     &:not(.is--show-desktop) {
       @media screen and (width <= 1024px) {
@@ -64,8 +64,8 @@ const componentName = computed(() => {
   }
 
   &__mobile {
-    width: 47px;
-    height: auto;
+    width: 30px;
+    height: 30px;
 
     &.is--show-desktop {
       display: none;
