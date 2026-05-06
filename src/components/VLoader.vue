@@ -56,5 +56,10 @@ defineProps({
     align-items: center;
     justify-content: center;
   }
+
+  &__logo {
+    width: 80px;
+    height: 80px;
+  }
 }
 </style>
