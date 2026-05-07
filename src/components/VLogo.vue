@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import logoIcon from 'UiKit/assets/images/logo.svg';
-import logoMobIcon from 'UiKit/assets/images/logo-mob.svg';
+import TorqueLogo from 'UiKit/assets/images/logo.svg';
+import TorqueWordmark from 'UiKit/assets/images/wordmark.svg';
 
 const props = defineProps({
   disabled: Boolean,
@@ -29,31 +29,49 @@ const componentName = computed(() => {
     aria-label="Site logo"
     :class="{ 'is--link': href || routeName }"
   >
-    <component
-      :is="logoIcon"
+    <span
       class="v-logo__desktop"
       :class="{ 'is--show-desktop': showDesktop }"
-    />
+    >
+      <component
+        :is="TorqueLogo"
+        class="v-logo__mark"
+        aria-hidden="true"
+        focusable="false"
+      />
+      <component
+        :is="TorqueWordmark"
+        class="v-logo__wordmark"
+        aria-hidden="true"
+        focusable="false"
+      />
+    </span>
     <component
-      :is="logoMobIcon"
+      :is="TorqueLogo"
       class="v-logo__mobile"
       :class="{ 'is--show-desktop': showDesktop }"
+      aria-hidden="true"
+      focusable="false"
     />
   </component>
 </template>
 
 <style lang="scss">
 .v-logo {
+  display: inline-flex;
+  align-items: center;
   flex-shrink: 0;
   color: inherit;
+  text-decoration: none;
 
   &.is--link {
     cursor: pointer;
   }
 
   &__desktop {
-    width: 36px;
-    max-width: 36px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     height: 36px;
 
     &:not(.is--show-desktop) {
@@ -63,9 +81,21 @@ const componentName = computed(() => {
     }
   }
 
+  &__mark {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  &__wordmark {
+    width: auto;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
   &__mobile {
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
 
     &.is--show-desktop {
       display: none;
@@ -73,6 +103,16 @@ const componentName = computed(() => {
 
     @media screen and (width > 1024px) {
       display: none;
+    }
+  }
+
+  &__mark,
+  &__wordmark,
+  &__mobile {
+    [fill="#FFFFFF"],
+    [fill="#F5F5F5"],
+    [fill="black"] {
+      fill: currentcolor;
     }
   }
 }

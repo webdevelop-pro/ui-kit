@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import logoIcon from 'UiKit/assets/images/logo.svg';
+import VLogo from 'UiKit/components/VLogo.vue';
 
 defineProps({
   hide: Boolean,
@@ -14,8 +14,7 @@ defineProps({
   >
     <div class="the-loader__circle">
       <div class="the-loader__wrap">
-        <component
-          :is="logoIcon"
+        <VLogo
           class="the-loader__logo"
         />
       </div>
@@ -45,7 +44,6 @@ defineProps({
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 120px;
     height: 120px;
   }
 
@@ -58,8 +56,22 @@ defineProps({
   }
 
   &__logo {
-    width: 80px;
-    height: 80px;
+    color: #2e2e33;
+
+    .v-logo__mark,
+    .v-logo__mobile {
+      width: 64px;
+      height: 64px;
+    }
+
+    .v-logo__wordmark {
+      height: 40px;
+    }
+
+    .v-logo__desktop {
+      gap: 18px;
+      height: auto;
+    }
   }
 }
 </style>
