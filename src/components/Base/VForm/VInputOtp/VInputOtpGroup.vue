@@ -12,5 +12,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  flex: 1;
+  min-width: 0;
+
+  &:first-of-type {
+    justify-content: end;
+  }
 }
 </style>

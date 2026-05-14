@@ -118,7 +118,13 @@ watch(() => props.open, (newVal) => {
 });
 
 watch([resolvedQueryKey, resolvedQueryValue], () => {
-  syncOpenFromUrl();
+  if (open.value) {
+    // Dialog is already open (e.g. props.open watcher just set it true in the same tick).
+    // Update the URL to reflect the new query value instead of reading stale URL state.
+    writeOpenToUrl(true);
+  } else {
+    syncOpenFromUrl();
+  }
 });
 
 onMounted(() => {

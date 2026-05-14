@@ -42,6 +42,7 @@ const emit = defineEmits<{
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 100%;
 
   &.is--error .v-input-otp-slot {
     border-color: colors.$red;
@@ -51,6 +52,8 @@ const emit = defineEmits<{
     display: flex;
     align-items: center;
     gap: 8px;
+    flex: 1;
+    min-width: 0;
   }
 }
 </style>
