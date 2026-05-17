@@ -124,7 +124,6 @@ describe('Sidebar07/AppSidebar', () => {
     await wrapper.get('[data-sidebar-trigger]').trigger('click');
     await nextTick();
 
-    expect(wrapper.find('[data-sidebar-close]').exists()).toBe(true);
     expect(wrapper.text()).toContain('Overview');
     expect(wrapper.text()).toContain('Avery Stone');
     expect(wrapper.text()).not.toContain('Acme');

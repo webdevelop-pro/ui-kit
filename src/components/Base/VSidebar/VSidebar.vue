@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { X } from 'lucide-vue-next';
-import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import { cn } from 'UiKit/lib/utils';
 
 import { type SidebarCollapsible, type SidebarSide, useSidebar } from './useSidebar';
@@ -39,7 +37,7 @@ const resolvedCollapsible = computed(() => props.collapsible ?? sidebar.collapsi
       <aside
         :class="cn(
           'VSidebar v-sidebar',
-          'fixed inset-y-0 z-[140] flex h-svh w-72 flex-col border-slate-200 bg-white/95 shadow-2xl backdrop-blur transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform',
+          'fixed inset-y-0 z-[140] flex h-svh w-72 max-w-[calc(100vw-10px)] flex-col border-slate-200 bg-white/95 shadow-2xl backdrop-blur transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform',
           resolvedSide === 'left' ? 'left-0 border-r' : 'right-0 border-l',
           sidebar.mobileOpen.value
             ? 'translate-x-0'
@@ -50,26 +48,7 @@ const resolvedCollapsible = computed(() => props.collapsible ?? sidebar.collapsi
         )"
       >
         <div class="flex h-full min-h-0 flex-col">
-          <div class="flex items-center justify-end border-b border-slate-200 px-3 py-3">
-            <VButton
-              as="button"
-              aria-label="Close sidebar"
-              class="v-sidebar__mobile-close"
-              color="secondary"
-              data-sidebar-close
-              icon-only
-              size="small"
-              type="button"
-              variant="link"
-              @click="sidebar.setMobileOpen(false)"
-            >
-              <X class="h-4 w-4 is--color-gray-70" />
-            </VButton>
-          </div>
-
-          <div class="flex min-h-0 flex-1 flex-col">
-            <slot />
-          </div>
+          <slot />
         </div>
       </aside>
     </div>
