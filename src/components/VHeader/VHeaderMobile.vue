@@ -11,7 +11,7 @@ import {
 import VNavigationMenuLink from "UiKit/components/Base/VNavigationMenu/VNavigationMenuLink.vue";
 import VMenuBurger from "UiKit/components/VHeader/VMenuBurger.vue";
 import VHeaderNavigationListItem from "./VHeaderNavigationListItem.vue";
-import { VisuallyHidden } from "radix-vue";
+import { VisuallyHidden } from "reka-ui";
 import { MenuItem } from './VHeaderNavigation.vue';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 

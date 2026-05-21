@@ -6,7 +6,7 @@ import { Area, Line } from '@unovis/ts';
 import {
   VisArea, VisAxis, VisLine, VisXYContainer,
 } from '@unovis/vue';
-import { useId } from 'radix-vue';
+import { useId } from 'reka-ui';
 import { type Component, computed, ref } from 'vue';
 
 // yarn add @unovis/ts

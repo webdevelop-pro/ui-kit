@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
-import { ComboboxInput, type ComboboxInputProps } from 'radix-vue';
+import { ComboboxInput, type ComboboxInputProps } from 'reka-ui';
 
 const props = defineProps<ComboboxInputProps & { class?: HTMLAttributes['class'] }>();
 </script>

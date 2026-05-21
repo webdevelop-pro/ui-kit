@@ -2,8 +2,8 @@
 import { computed, useId } from 'vue';
 import VFormLabel from 'UiKit/components/Base/VForm/VFormLabel.vue';
 import VCheckbox from 'UiKit/components/Base/VForm/VCheckbox/VCheckbox.vue';
-import type { CheckboxRootEmits, CheckboxRootProps } from 'radix-vue';
-import { useForwardPropsEmits } from 'radix-vue';
+import type { CheckboxRootEmits, CheckboxRootProps } from 'reka-ui';
+import { useForwardPropsEmits } from 'reka-ui';
 
 const props = defineProps<CheckboxRootProps & {
   hasAsterisk?: boolean;

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {
   type DropdownMenuContentProps,
-} from 'radix-vue';
+} from 'reka-ui';
 import {
   VDropdownMenu, VDropdownMenuTrigger, VDropdownMenuContent, VDropdownMenuItem,
 } from 'UiKit/components/Base/VDropdownMenu';

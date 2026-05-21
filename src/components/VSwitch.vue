@@ -6,7 +6,7 @@ import {
   type SwitchRootEmits,
   type SwitchRootProps,
   useForwardPropsEmits,
-} from 'radix-vue';
+} from 'reka-ui';
 
 const props = defineProps<SwitchRootProps & { class?: HTMLAttributes['class'] }>();
 

@@ -2,7 +2,7 @@
 import ChevronDown from 'UiKit/assets/images/chevron-down.svg?component';
 import {
   ComboboxTrigger, type ComboboxTriggerProps, useForwardProps,
-} from 'radix-vue';
+} from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 
 const props = withDefaults(defineProps<ComboboxTriggerProps & {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {
   RadioGroupRoot, type RadioGroupRootEmits, type RadioGroupRootProps, useForwardPropsEmits,
-} from 'radix-vue';
+} from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 
 const props = defineProps<RadioGroupRootProps & { class?: HTMLAttributes['class'] }>();

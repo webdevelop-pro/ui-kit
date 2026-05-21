@@ -6,7 +6,7 @@ import {
   ComboboxPortal,
   ComboboxViewport,
   useForwardPropsEmits,
-} from 'radix-vue';
+} from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 
 defineOptions({

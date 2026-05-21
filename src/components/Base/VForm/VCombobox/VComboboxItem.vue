@@ -3,7 +3,7 @@ import {
   ComboboxItem,
   type ComboboxItemProps,
   useForwardProps,
-} from 'radix-vue';
+} from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 
 const props = defineProps<ComboboxItemProps & { class?: HTMLAttributes['class'] }>();

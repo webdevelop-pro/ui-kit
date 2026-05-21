@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ComboboxEmpty, type ComboboxEmptyProps } from 'radix-vue';
+import { ComboboxEmpty, type ComboboxEmptyProps } from 'reka-ui';
 
 const props = defineProps<ComboboxEmptyProps>();
 </script>

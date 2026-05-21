@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ToastClose, type ToastCloseProps } from 'radix-vue';
+import { ToastClose, type ToastCloseProps } from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 import VButton from 'UiKit/components/Base/VButton/VButton.vue';
 import closeIcon from 'UiKit/assets/images/close.svg?component';
