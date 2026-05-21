@@ -59,7 +59,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     max-height: 222px;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
-    width: var(--radix-combobox-trigger-width);
+    width: var(--reka-combobox-trigger-width);
     z-index: 10;
     display: flex;
     touch-action: pan-y;

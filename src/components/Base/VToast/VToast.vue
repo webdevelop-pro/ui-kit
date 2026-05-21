@@ -75,7 +75,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 }
 
 .ToastRoot[data-swipe='move'] {
-  transform: translateX(var(--radix-toast-swipe-move-x));
+  transform: translateX(var(--reka-toast-swipe-move-x));
 }
 
 .ToastRoot[data-swipe='cancel'] {

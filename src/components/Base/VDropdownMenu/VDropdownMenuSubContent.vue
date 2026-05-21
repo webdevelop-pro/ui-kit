@@ -39,12 +39,12 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
   background: colors.$white;
   box-shadow: variables.$box-shadow-medium;
   z-index: 1;
-  min-width: var(--radix-dropdown-menu-trigger-width);
+  min-width: var(--reka-dropdown-menu-trigger-width);
   max-width: 100%;
   overflow: auto;
   animation-duration: 0.2s;
   animation-timing-function: ease-out;
-  max-height: min(var(--radix-dropdown-menu-content-available-height), 80vh);
+  max-height: min(var(--reka-dropdown-menu-content-available-height), 80vh);
   will-change: opacity, transform;
 }
 
