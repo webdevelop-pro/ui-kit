@@ -1,0 +1,9 @@
+export { default as VTable } from './VTable.vue';
+export { default as VTableBody } from './VTableBody.vue';
+export { default as VTableCaption } from './VTableCaption.vue';
+export { default as VTableCell } from './VTableCell.vue';
+export { default as VTableEmpty } from './VTableEmpty.vue';
+export { default as VTableFooter } from './VTableFooter.vue';
+export { default as VTableHead } from './VTableHead.vue';
+export { default as VTableHeader } from './VTableHeader.vue';
+export { default as VTableRow } from './VTableRow.vue';

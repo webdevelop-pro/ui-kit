@@ -1,0 +1,9 @@
+export { default as VDropdownMenu } from './VDropdownMenu.vue';
+
+export { default as VDropdownMenuContent } from './VDropdownMenuContent.vue';
+export { default as VDropdownMenuItem } from './VDropdownMenuItem.vue';
+export { default as VDropdownMenuSub } from './VDropdownMenuSub.vue';
+export { default as VDropdownMenuSubContent } from './VDropdownMenuSubContent.vue';
+export { default as VDropdownMenuSubTrigger } from './VDropdownMenuSubTrigger.vue';
+export { default as VDropdownMenuTrigger } from './VDropdownMenuTrigger.vue';
+export { DropdownMenuPortal } from 'reka-ui';

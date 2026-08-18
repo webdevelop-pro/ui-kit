@@ -1,0 +1,173 @@
+<script setup lang="ts">
+import {
+  createSidebarState,
+  sidebarContextKey,
+} from 'UiKit/components/Base/VSidebar/useSidebar';
+import { VSidebarTrigger } from 'UiKit/components/Base/VSidebar';
+import VAvatarIdentity from 'UiKit/components/VAvatarIdentity.vue';
+import VHeaderAuthorized from 'UiKit/components/VHeader/VHeaderAuthorized.vue';
+import VHeaderGuest from 'UiKit/components/VHeader/VHeaderGuest.vue';
+import { computed, provide } from 'vue';
+import Sidebar07Shell from './Sidebar07Shell.vue';
+import type { Sidebar07Props, SidebarNavItem, SidebarTeam } from '../types';
+
+const props = withDefaults(defineProps<Sidebar07Props>(), {
+  title: 'Workspace',
+  subtitle: 'Sidebar block',
+  mainNav: () => [],
+  projects: () => [],
+  user: null,
+  collapsible: 'icon',
+  side: 'left',
+  defaultOpen: false,
+  showHeaderOnMobile: true,
+});
+
+const emit = defineEmits<{
+  select: [item: SidebarNavItem];
+  teamSelect: [team: SidebarTeam];
+  teamCreate: [];
+  userAction: [action: 'settings' | 'password' | 'logout'];
+}>();
+
+const sidebar = createSidebarState({
+  defaultOpen: props.defaultOpen,
+  collapsible: computed(() => props.collapsible),
+  side: computed(() => props.side),
+});
+const isAuthorized = computed(() => Boolean(props.user));
+
+provide(sidebarContextKey, sidebar);
+</script>
+
+<template>
+  <div
+    v-if="isAuthorized"
+    class="AppSidebar app-sidebar group/sidebar-wrapper flex min-h-screen w-full text-slate-950"
+    :data-state="sidebar.open.value ? 'expanded' : 'collapsed'"
+    :data-collapsible="sidebar.collapsible.value"
+    :data-side="sidebar.side.value"
+  >
+    <Sidebar07Shell
+      v-bind="props"
+      @select="emit('select', $event)"
+      @team-create="emit('teamCreate')"
+      @team-select="emit('teamSelect', $event)"
+      @user-action="emit('userAction', $event)"
+    >
+      <template
+        v-if="$slots.header"
+        #header="slotProps"
+      >
+        <slot
+          name="header"
+          v-bind="slotProps"
+        />
+      </template>
+
+      <template
+        v-if="$slots['main-nav']"
+        #main-nav="slotProps"
+      >
+        <slot
+          name="main-nav"
+          v-bind="slotProps"
+        />
+      </template>
+
+      <template
+        v-if="$slots.projects"
+        #projects="slotProps"
+      >
+        <slot
+          name="projects"
+          v-bind="slotProps"
+        />
+      </template>
+
+      <template
+        v-if="$slots.footer"
+        #footer="slotProps"
+      >
+        <slot
+          name="footer"
+          v-bind="slotProps"
+        />
+      </template>
+
+      <template
+        v-if="$slots['pre-footer']"
+        #pre-footer="slotProps"
+      >
+        <slot
+          name="pre-footer"
+          v-bind="slotProps"
+        />
+      </template>
+
+      <template
+        v-if="$slots.user"
+        #user="slotProps"
+      >
+        <slot
+          name="user"
+          v-bind="slotProps"
+        />
+      </template>
+
+      <slot name="authorized-header">
+        <VHeaderAuthorized
+          :show-navigation="false"
+          :show-mobile-sidebar="false"
+          :user-logged-in="true"
+        >
+          <template #leading>
+            <div
+              v-if="props.user"
+              class="is--lt-desktop-md-show"
+            >
+              <VSidebarTrigger
+                class="app-sidebar__mobile-trigger"
+              >
+                <VAvatarIdentity
+                  v-if="sidebar.isMobile.value"
+                  size="small"
+                  :src="props.user.avatarSrc"
+                  alt="avatar image"
+                  :avatar-text="props.user.avatarText"
+                  :label="props.user.name"
+                />
+              </VSidebarTrigger>
+            </div>
+          </template>
+        </VHeaderAuthorized>
+      </slot>
+
+      <div class="flex min-h-0 flex-1 flex-col pt-16">
+        <slot />
+      </div>
+    </Sidebar07Shell>
+  </div>
+
+  <div
+    v-else
+    class="AppSidebar app-sidebar flex min-h-screen w-full flex-col bg-slate-100/70 text-slate-950"
+  >
+    <slot name="guest-header">
+      <VHeaderGuest
+        :show-navigation="false"
+        :show-mobile-sidebar="false"
+      />
+    </slot>
+
+    <main class="flex min-h-0 flex-1 flex-col pt-16">
+      <slot />
+    </main>
+  </div>
+</template>
+
+<style scoped lang="scss">
+.app-sidebar__mobile-trigger {
+  max-width: min(220px, calc(100vw - 120px));
+}
+</style>

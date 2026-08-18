@@ -15,10 +15,13 @@ export const stateRule = {
 
 export const countryRule = {
   mustBeUS: true,
-  onlyLetters: true,
   title: 'country',
-  type: 'string',
-  // maxLength: 2,
+  minLength: 2,
+};
+
+export const countryRuleObject = {
+  mustBeUS: true,
+  title: 'country',
   minLength: 2,
 };
 
@@ -139,6 +142,26 @@ export const routingNumbeRuler = {
 export const relationshipTypeRule = {
   type: 'string',
   minLength: 2,
+};
+
+export const typeProfileRule = {
+  type: 'string',
+  minLength: 3,
+};
+
+export const identificationTypeRule = {
+  type: 'string',
+  minLength: 3,
+};
+
+export const identificationNumberRule = {
+  minLength: 3,
+};
+
+export const documentRule = {
+  errorMessage: {
+    minimum: 'Please provide a document',
+  },
 };
 
 // ERROR MESSAGE

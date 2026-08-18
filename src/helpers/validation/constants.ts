@@ -5,6 +5,7 @@ export const REQUIRED_ERROR_MESSAGE = 'Please complete';
 export const MUST_BE_CITIZEN_VALIDATOR_NAME = 'mustBeCitizen';
 export const MUST_BE_CITIZEN_ERROR_MESSAGE = 'Sorry, non-resident cannot invest at this moment';
 export const ENUM_NAMES_VALIDATOR_NAME = 'enumNames';
+export const MAX_FILE_SIZE_VALIDATOR_NAME = 'maxFileSize';
 export const ONLY_LETTERS_VALIDATOR_NAME = 'onlyLetters';
 export const ONLY_LETTERS_ERROR_MESSAGE = 'Must contain only letters.';
 export const UNDER_AGE_VALIDATOR_NAME = 'underAge';

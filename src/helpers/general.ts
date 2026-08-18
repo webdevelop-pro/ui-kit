@@ -1,11 +1,13 @@
+import { IFrontmatter } from 'UiKit/types/types';
+import groupBy from 'lodash/groupBy';
+import lodashIsEmpty from 'lodash/isEmpty';
+import startCase from 'lodash/startCase';
+import toLower from 'lodash/toLower';
+import unionBy from 'lodash/unionBy';
+import kebabCase from 'lodash/kebabCase';
 
 export function isEmpty(obj: object) {
-  // eslint-disable-next-line
-  for (const prop of Object.keys(obj)) {
-    return false;
-  }
-
-  return true;
+  return lodashIsEmpty(obj);
 }
 
 export function formatPhoneNumber(phoneNumber: string | undefined): string | undefined {
@@ -29,7 +31,6 @@ export function formatPhoneNumber(phoneNumber: string | undefined): string | und
 
   return formattedPhoneNumber;
 }
-
 
 export function booleanFormatToString(value: boolean | undefined) {
   if (value === undefined) return undefined;
@@ -56,28 +57,212 @@ export function checkObjectAndDeleteNotRequiredFields(
 }
 
 export function urlize(input: string): string {
-  // Convert the input string to lowercase and replace spaces with hyphens
-  let urlFriendlyString = input.toLowerCase().replace(/\s+/g, '-');
-
-  // Remove any characters that are not alphanumeric or hyphens
-  // eslint-disable-next-line
-  urlFriendlyString = urlFriendlyString.replace(/[^a-z0-9\-]/g, '');
-
-  // Remove any consecutive hyphens
-  urlFriendlyString = urlFriendlyString.replace(/-{2,}/g, '-');
-
-  // Trim leading and trailing hyphens
-  urlFriendlyString = urlFriendlyString.replace(/^-+|-+$/g, '');
-
-  return urlFriendlyString;
+  return kebabCase(input);
 }
 
+export function navigateWithQueryParams(url: string, params?: Record<string, string>): void {
+  const urlObj = new URL(url, window.location.origin); // Create a URL object
 
-export function stripHtml(html: string) {
-  if (typeof document !== 'undefined') {
-    const tmp = document.createElement('DIV');
-    tmp.innerHTML = html;
-    return tmp.textContent || tmp.innerText || '';
+  if (params) {
+    // Add each query parameter to the URL using forEach
+    Object.entries(params).forEach(([key, value]) => {
+      urlObj.searchParams.set(key, value);
+    });
   }
-  return html;
+
+  window.location.href = urlObj.toString(); // Navigate to the new URL
 }
+
+export function getLastModifiedDate(filePath: string): string | null {
+  try {
+    const stats = fs.statSync(filePath);
+    return stats.mtime.toISOString().split('T')[0];// Returns date in YYYY-MM-DD format
+  } catch (err) {
+    return null;
+  }
+}
+
+export function getUniqueCapitalizedTags(items: { tags?: string[] | null }[]): string[] {
+  if (!items || items.length === 0) return [];
+  const seen = new Set<string>();
+  const result: string[] = [];
+
+  items.forEach((item) => {
+    const tags = (item.tags || []).filter(Boolean) as string[];
+    tags.forEach((rawTag) => {
+      const trimmed = rawTag.trim();
+      if (!trimmed) return;
+      const key = toLower(trimmed);
+      if (seen.has(key)) return;
+      seen.add(key);
+      // Preserve common separators like '/' while capitalizing parts
+      if (key.includes('/')) {
+        const formatted = key.split('/').map((part) => startCase(part)).join('/');
+        result.push(formatted);
+      } else {
+        result.push(startCase(key));
+      }
+    });
+  });
+
+  return result;
+}
+
+export function combineTags(
+  tagsArray1: string[],
+  tagsArray2: string[],
+): string[] {
+  return unionBy(tagsArray1, tagsArray2, (t) => toLower(t));
+}
+
+export function filterItemsByTag<T extends { tags?: string[] }>(
+  items: T[],
+  activeTag: string,
+): T[] {
+  if (activeTag !== '') {
+    const normalize = (s: string) => kebabCase(toLower(s.trim()));
+    const active = normalize(activeTag);
+    return items.filter((item) => (item.tags || [])
+      .some((tag) => normalize(tag) === active));
+  }
+  return items;
+}
+export function getFirst200Characters(text: string) {
+  let textLocal = text;
+  // Find the last occurrence of '---' and cut the text from that point onward
+  const lastDelimiterIndex = textLocal.lastIndexOf('---');
+  if (lastDelimiterIndex !== -1) {
+    textLocal = textLocal.slice(lastDelimiterIndex + 3); // +3 to skip the delimiter itself
+  }
+
+  // Remove leading newlines until the first non-newline character
+  textLocal = textLocal.replace(/^\n+/, '');
+
+  // Find the index of the next newline character
+  const nextNewlineIndex = textLocal.indexOf('\n');
+
+  // Extract the text up to the next newline
+  let extractedText = '';
+  if (nextNewlineIndex !== -1) {
+    extractedText = textLocal.slice(0, nextNewlineIndex).trim();
+  } else {
+    // If there is no additional newline, use the entire remaining text
+    extractedText = textLocal.trim();
+  }
+
+  // Return the first 200 characters from the extracted text
+  return extractedText;
+}
+
+export function findPagesByParentFolder(pages: IFrontmatter[], url: string) {
+  const res: IFrontmatter[] = [];
+
+  // Find the page with the given URL
+  const currentPage = pages.find((el) => el.url === url);
+
+  // If the current page is not main, adjust the URL to the parent
+  if (currentPage && !currentPage.is_main) {
+    const parentUrl = url.substring(0, url.lastIndexOf('/'));
+    url = parentUrl;
+  }
+
+  pages.forEach((el) => {
+    if (url && el.url?.startsWith(url)) {
+      res.push(el);
+    }
+  });
+
+  return res;
+}
+
+export function groupItemsByRawUrl(data: IFrontmatter[], url:string) {
+  if (!data) return;
+  const parent = `/${url.split('/').slice(0, -1).join('/')}`; // remove last element
+
+  const res = groupBy(data, (item) => {
+    const parts = item.url?.split('/');
+    return parts.slice(0, -1).join('/'); // Full directory path
+  });
+
+  const filtered = Object.keys(res)
+    .filter((key) => key.includes(parent)) // Apply the filter function to the keys
+    .reduce((result, key) => {
+      result[key] = res[key]; // Rebuild the filtered object
+      return result;
+    }, {});
+  return filtered;
+}
+
+export function groupRelatedPagesFormat(pages: IFrontmatter[], data: Record<string, any>) {
+  return Object.keys(data).map((key) => {
+    // Find the page object with the matching URL for the current key
+    const page = pages.find((p) => p.url === key);
+
+    if (page) {
+      return {
+        groupBy: page,
+        items: data[key],
+      };
+    }
+
+    return null; // Return null if no matching URL is found
+  }).filter((item) => item !== null); // Filter out null values
+}
+
+// Define interfaces for the expected object structure
+interface EntityValue {
+  [key: string]: any;
+}
+
+interface TopLevelValue {
+  entities: Record<string, EntityValue>;
+}
+
+interface MergedObject {
+  [key: string]: TopLevelValue;
+}
+
+export function mergeObjects(obj1: any, obj2: any): MergedObject {
+  if (!obj1 || !obj2) return {};
+  const merged = { ...obj1 };
+
+  Object.entries(obj2).forEach(([topKey, topValue]) => {
+    // Ensure topValue is an object with entities property
+    if (topValue && typeof topValue === 'object' && 'entities' in topValue) {
+      merged[topKey] = merged[topKey] || { entities: {} };
+      merged[topKey].entities = merged[topKey].entities || {};
+
+      // Ensure topValue.entities is an object before iterating
+      if (typeof topValue.entities === 'object' && topValue.entities !== null) {
+        Object.entries(topValue.entities).forEach(([entityKey, entityValue]) => {
+          // Ensure entityValue is an object before spreading
+          if (entityValue && typeof entityValue === 'object') {
+            merged[topKey].entities[entityKey] = {
+              ...merged[topKey].entities[entityKey],
+              ...entityValue,
+            };
+          } else {
+            // If entityValue is not an object, just assign it directly
+            merged[topKey].entities[entityKey] = entityValue;
+          }
+        });
+      }
+    }
+  });
+
+  return merged;
+}
+
+export const transformedArray = (mergedObj) => {
+  if (!mergedObj || Object.keys(mergedObj).length === 0) return [];
+  return (Object.keys(mergedObj)?.map((topKey) => {
+    if (!mergedObj[topKey]?.entities) return [];
+    return (
+      Object.keys(mergedObj[topKey]?.entities).map((entityKey) => ({
+        name: mergedObj[topKey].entities[entityKey].original_filename || mergedObj[topKey].entities[entityKey].filename,
+        'object-type': topKey, // This will be the top-level key, e.g., companyA
+        updated_at: mergedObj[topKey].entities[entityKey].updated_at,
+        url: mergedObj[topKey].entities[entityKey].url,
+      })));
+  }).flat());
+};

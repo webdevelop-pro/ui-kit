@@ -1,0 +1,44 @@
+<script lang="ts" setup>
+import type { StepperDescriptionProps } from 'reka-ui';
+import { StepperDescription, useForwardProps } from 'reka-ui';
+
+import { computed, type HTMLAttributes } from 'vue';
+
+const props = defineProps<{ class?: HTMLAttributes['class'] } & /* @vue-ignore */ StepperDescriptionProps>();
+
+const delegatedProps = computed(() => {
+  const { class: unused, ...delegated } = props;
+  void unused; // Explicitly mark as intentionally unused
+
+  return delegated;
+});
+
+const forwarded = useForwardProps(delegatedProps);
+</script>
+
+<template>
+  <StepperDescription
+    v-slot="slotProps"
+    v-bind="forwarded"
+    :class="props.class"
+    class="VStepperDescription v-stepper-description is--h5__title"
+  >
+    <slot v-bind="slotProps" />
+  </StepperDescription>
+</template>
+
+<style lang="scss">
+@use 'UiKit/styles/_colors.scss' as colors;
+
+.v-stepper-description {
+  color: colors.$gray-60;
+
+  .v-stepper-item[data-state="active"] & {
+    color: colors.$black;
+  }
+
+  .v-stepper-item[data-state="completed"] & {
+    color: colors.$gray-80;
+  }
+}
+</style>

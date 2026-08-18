@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { UiKit } from "UiKit/components/UiKit";
+import Sidebar07Page from 'UiKit/components/Blocks/sidebar-07/page.vue';
 </script>
 
 <template>
-  <UiKit />
+  <Sidebar07Page />
 </template>
 
-<style lang="sass">
-@import 'styles/index.scss'
+<style lang="scss">
+@import url('styles/index.scss');
 </style>

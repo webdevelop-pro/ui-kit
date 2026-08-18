@@ -1,4 +1,3 @@
-
 // https://stackoverflow.com/a/13382873
 const getScrollbarWidth = () => {
   const outer = document.createElement('div');
@@ -16,11 +15,9 @@ const getScrollbarWidth = () => {
   return scrollbarWidth;
 };
 
-
 const scrollbarVisible = (element: HTMLElement) => (
   element.scrollHeight > element.clientHeight
 );
-
 
 // from https://css-tricks.com/prevent-page-scrolling-when-a-modal-is-open/
 

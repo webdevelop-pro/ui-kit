@@ -1,0 +1,67 @@
+<script lang="ts" setup>
+import { ref, computed, defineProps } from 'vue';
+
+const props = defineProps<{
+  id: string | number;
+}>();
+
+const emit = defineEmits(['ready']);
+
+const video = ref<HTMLIFrameElement | null>(null);
+let readyResolver: () => void;
+const readyPromise = new Promise<void>((resolve) => {
+  readyResolver = resolve;
+});
+
+const src = computed(() => `https://www.youtube.com/embed/${props.id}?autoplay=1&mute=1&loop=1&enablejsapi=1`);
+
+const play = async () => {
+  await readyPromise;
+  video.value?.contentWindow?.postMessage(
+    JSON.stringify({ event: 'command', func: 'playVideo', args: '' }),
+    '*',
+  );
+};
+
+const pause = async () => {
+  await readyPromise;
+  video.value?.contentWindow?.postMessage(
+    JSON.stringify({ event: 'command', func: 'pauseVideo', args: '' }),
+    '*',
+  );
+};
+
+const mute = async () => {
+  await readyPromise;
+  video.value?.contentWindow?.postMessage(
+    JSON.stringify({ event: 'command', func: 'mute', args: '' }),
+    '*',
+  );
+};
+
+const onLoad = () => {
+  readyResolver();
+  emit('ready');
+};
+
+defineExpose({
+  play,
+  pause,
+  mute,
+});
+</script>
+
+<template>
+  <iframe
+    ref="video"
+    :src="src"
+    :title="`YouTube video player ${props.id}`"
+    allowfullscreen
+    webkitallowfullscreen
+    mozallowfullscreen
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    class="VVideoEmbeddedYoutube"
+    @load="onLoad"
+  />
+</template>

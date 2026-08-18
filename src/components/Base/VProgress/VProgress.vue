@@ -1,0 +1,103 @@
+<script setup lang="ts">
+import {
+  ProgressIndicator,
+  ProgressRoot,
+  type ProgressRootProps,
+} from 'reka-ui';
+import { computed, type HTMLAttributes } from 'vue';
+
+const props = withDefaults(
+  defineProps<{
+    class?: HTMLAttributes['class'];
+    style?: HTMLAttributes['style'];
+    withText?: boolean;
+    modelValue?: number | null;
+  } & /* @vue-ignore */ ProgressRootProps>(),
+  {
+    modelValue: 0,
+  },
+);
+
+const delegatedProps = computed(() => {
+  const { class: _, withText, ...delegated } = props;
+  void _; // Explicitly mark as intentionally unused
+  void withText; // Explicitly mark as intentionally unused
+
+  return delegated;
+});
+</script>
+
+<template>
+  <div
+    class="VProgressBar v-progressbar"
+    :class="props.class"
+  >
+    <div
+      v-if="$slots['top-start'] || $slots['top-end'] || withText"
+      class="v-progressbar__top"
+    >
+      <template v-if="$slots['top-start'] || $slots['top-end']">
+        <div class="v-progressbar__top-start">
+          <slot name="top-start" />
+        </div>
+        <div class="v-progressbar__top-end">
+          <slot name="top-end" />
+        </div>
+      </template>
+      <template v-else>
+        <div class="is--h5__title">
+          {{ modelValue }}% Funded
+        </div>
+      </template>
+    </div>
+    <ProgressRoot
+      v-bind="delegatedProps"
+      class="v-progressbar__progress"
+    >
+      <ProgressIndicator
+        class="v-progressbar__progress-bar"
+        :style="[`transform: translateX(-${100 - (props.modelValue ?? 0)}%);`, props.style]"
+      />
+    </ProgressRoot>
+  </div>
+</template>
+
+<style lang="scss">
+@use 'UiKit/styles/_colors.scss' as colors;
+
+.v-progressbar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 8px;
+
+  &__top {
+    color: colors.$secondary-dark;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__progress {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    align-self: stretch;
+    height: 3px;
+    border-radius: 2px;
+    background: colors.$gray-30;
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__progress-bar{
+    width: 100%;
+    height: 100%;
+    transition: transform 660ms cubic-bezier(0.65, 0, 0.35, 1);
+    background: colors.$secondary;
+  }
+}
+</style>

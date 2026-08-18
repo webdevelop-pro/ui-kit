@@ -46,6 +46,7 @@ function vimeo(url) {
   let id;
   let arr;
 
+  // eslint-disable-next-line vue/max-len
   if (/https?:\/\/vimeo\.com\/[0-9]+$|https?:\/\/player\.vimeo\.com\/video\/[0-9]+$|https?:\/\/vimeo\.com\/channels|groups|album/igm.test(str)) {
     arr = str.split('/');
     if (arr && arr.length) {
